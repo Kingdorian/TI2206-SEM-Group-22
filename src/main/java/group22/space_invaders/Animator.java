@@ -1,4 +1,4 @@
-package application;
+package group22.space_invaders;
 import javafx.animation.AnimationTimer;
 
 public class Animator extends AnimationTimer {

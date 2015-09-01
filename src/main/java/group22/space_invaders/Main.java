@@ -1,4 +1,4 @@
-package application;
+package group22.space_invaders;
 	
 import javafx.animation.KeyFrame;
 import javafx.application.Application;
@@ -32,7 +32,7 @@ public class Main extends Application {
 			stage.setScene(scene);
 			Canvas canvas = new Canvas(900, 900);
 			root.getChildren().add(canvas);
-			GraphicsContext gc = canvas.getGraphicsContext2D();
+			final GraphicsContext gc = canvas.getGraphicsContext2D();
 			gc.setFill(Color.BLACK);
 			gc.setStroke(Color.BLACK);
 			gc.setLineWidth(0);
@@ -43,7 +43,7 @@ public class Main extends Application {
 			 Timeline gameLoop = new Timeline();
 		     gameLoop.setCycleCount( Timeline.INDEFINITE );
 		        
-			Image player = new Image("testplayer.gif", 100, 0, false, false);
+			final Image player = new Image("testplayer.gif", 100, 0, false, false);
 			final long timeStart = System.currentTimeMillis();
 		    KeyFrame frame = new KeyFrame(
 		    		Duration.seconds(0.017),                // 60 FPS
