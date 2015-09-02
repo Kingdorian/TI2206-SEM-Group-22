@@ -9,15 +9,11 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.animation.Timeline;
 
-import javafx.animation.Timeline;
-import javafx.animation.KeyFrame;
-import javafx.util.Duration;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 
@@ -26,7 +22,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) {
 		try {
-			stage.setTitle("Templerun");
+			stage.setTitle("Space Invaders");
 			Group root = new Group();
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
@@ -37,8 +33,8 @@ public class Main extends Application {
 			gc.setStroke(Color.BLACK);
 			gc.setLineWidth(0);
 			gc.setFont(Font.font("Times New Roman", FontWeight.BOLD, 48));
-			gc.fillText("TempleRun", 50, 50);
-			gc.strokeText("TempleRun", 50, 50);
+			gc.fillText("Space Invaders", 50, 50);
+			gc.strokeText("Space Invaders", 50, 50);
 			
 			 Timeline gameLoop = new Timeline();
 		     gameLoop.setCycleCount( Timeline.INDEFINITE );
