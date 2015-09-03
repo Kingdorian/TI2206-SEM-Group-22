@@ -34,4 +34,10 @@ public class Game {
 	public boolean isInProgress() {
 		return inProgress;
 	}
+	/**
+	 * Will update all the objects in the game.
+	 */
+	public void tick() {
+		
+	}
 }
