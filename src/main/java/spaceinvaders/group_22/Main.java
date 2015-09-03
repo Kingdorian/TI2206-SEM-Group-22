@@ -14,7 +14,7 @@ public class Main extends Application {
 	public final void start(final Stage stage) {
 		
 		SpaceInvadersUI userInterface = new SpaceInvadersUI(stage);
-		userInterface.loadUIScreen("Game.fxml");
+		userInterface.loadUIScreen("GameUI.fxml");
 		userInterface.launch();
 	}
 	
