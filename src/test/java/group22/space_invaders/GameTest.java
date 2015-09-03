@@ -16,13 +16,13 @@ public class GameTest {
 		Assert.assertFalse(game.isInProgress());
 	}
 	/**
-	 * Tests if the testInProgress method returns false if the game is not in progress.
+	 * Tests if the testInProgress method returns true if the game is in progress.
 	 */
 	@Test
 	public void testIsNotInprogress(){
 		Game game = new Game();
 		// Start game
-		game.start();
+		game.Start();
 		Assert.assertTrue(game.isInProgress());
 	}
 }
