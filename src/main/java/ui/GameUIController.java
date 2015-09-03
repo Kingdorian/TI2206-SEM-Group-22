@@ -124,7 +124,7 @@ public class GameUIController
         double spriteWidth = 50;
         double spriteHeight = 50;
         
-        double interval = ((canvasWidth - 2 * borderDist) - spriteAmount * spriteWidth) / (spriteAmount + 1);  
+        double interval = (canvasWidth - 2 * borderDist - spriteAmount * spriteWidth) / (spriteAmount + 1);  
         double startPosition = borderDist + interval;
         
         for (int i = 0; i < spriteAmount; i++) {
