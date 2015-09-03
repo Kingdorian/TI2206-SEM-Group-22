@@ -8,17 +8,11 @@ package ui;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.util.Duration;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-
-import javafx.event.EventHandler;
+import javafx.scene.paint.Color;
 
 /**
  * Controller for the GameUI.fxml file,
@@ -65,40 +59,78 @@ public class GameUIController
     }
     
     /**
-     * Draws a simple animation onto the canvas.
-     */
-	@SuppressWarnings("checkstyle:magicnumber")    
-    public final void simpleAnimation() {
-		final GraphicsContext gc = canvas.getGraphicsContext2D();
-		
-		Timeline gameLoop = new Timeline();
-	    gameLoop.setCycleCount(Timeline.INDEFINITE);
-	        
-		final Image player = new Image("testplayer.gif", 100, 0, true, false);
-		final long timeStart = System.currentTimeMillis();
-		
-	    KeyFrame frame = new KeyFrame(Duration.seconds(framerate),
-	            new EventHandler<ActionEvent>()
-	            {
-	                public void handle(final ActionEvent ae) {
-	                
-	                    double t = (System.currentTimeMillis() - timeStart) / 1000.0; 
-	                    // Clear the canvas
-	                    gc.clearRect(0, 0, canvasWidth, canvasHeight);
-	                    gc.drawImage(player, canvasWidth / 2 - 10 * t, canvasHeight / 2);
-	                }
-        });
-	    
-        gameLoop.getKeyFrames().add(frame);
-        gameLoop.play();
-    }
-    
-    /**
      * Method to set the framerate of the animation.
      * @param fps The amount of frames per second.
      */
     public final void setFramerate(final int fps) {
     	framerate = 1.0 / fps;
     }
+    
+    /**
+     * Draws a simple animation onto the canvas.
+     */
+	@SuppressWarnings("checkstyle:magicnumber")    
+    public final void simpleAnimation() {
+		final GraphicsContext gc = canvas.getGraphicsContext2D();
+		
+		drawPlayer(gc);
+		drawAlienGrid(4, gc);
+		
+    }
+ 
+    /**
+     * Method to draw the Players Spaceship.
+     * @param gc The GraphicsContext of the canvas to draw on.
+     */  
+	@SuppressWarnings("checkstyle:magicnumber")	
+    public final void drawPlayer(final GraphicsContext gc) {
+        gc.setFill(Color.BLUE);
+        
+        double playerWidth = 50;
+        double playerHeight = 50;
+        
+        // Position the player in the middle, on the bottom of the screen.
+    	gc.fillRect(canvasWidth / 2 - 0.5 * playerWidth, canvasHeight - 100, playerWidth, playerHeight);
+    }
+    
+    /**
+     * Method to draw a grid of Aliens.
+     * @param lines The amount of lines the grid should have.
+     * @param gc The GraphicsContext of the canvas to draw on.
+     */
+	@SuppressWarnings("checkstyle:magicnumber")    
+    public final void drawAlienGrid(final int lines, final GraphicsContext gc) {
+        gc.setFill(Color.WHITE);
+ 
+        double distance = 75;
+        
+        for (int i = 0; i < lines; i++) {
+        	drawAlienLine(10, distance, gc);
+
+        	distance += 75;
+        }
+        
+    }
+	
+	/**
+	 * Method to draw a line of Aliens.
+	 * @param spriteAmount Amount of sprites per line.
+	 * @param spacing Spacing between lines.
+     * @param gc The GraphicsContext of the canvas to draw on.
+	 */
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void drawAlienLine(final int spriteAmount, final double spacing, final GraphicsContext gc) {
+        double borderDist = 100;
+        double spriteWidth = 50;
+        double spriteHeight = 50;
+        
+        double interval = ((canvasWidth - 2 * borderDist) - spriteAmount * spriteWidth) / (spriteAmount + 1);  
+        double startPosition = borderDist + interval;
+        
+        for (int i = 0; i < spriteAmount; i++) {
+        	gc.fillRect(startPosition, spacing, spriteWidth, spriteHeight);
+        	startPosition = startPosition + spriteWidth + interval;
+        }
+	}
 
 }

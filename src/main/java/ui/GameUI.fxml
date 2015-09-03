@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.shape.*?>
 <?import java.lang.*?>
@@ -10,5 +12,15 @@
    <children>
       <Region layoutX="140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1000.0" styleClass="canvas" />
       <Canvas fx:id="canvas" height="720.0" layoutX="140.0" styleClass="canvas" width="1000.0" />
+      <Label layoutX="160.0" prefHeight="77.0" prefWidth="200.0" text="Score:" textFill="WHITE">
+         <font>
+            <Font name="Phosphate Inline" size="36.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="920.0" prefHeight="77.0" prefWidth="200.0" text=":LIVES" textAlignment="RIGHT" textFill="WHITE">
+         <font>
+            <Font name="Phosphate Inline" size="36.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
