@@ -25,4 +25,41 @@ public class GameTest {
 		game.start();
 		Assert.assertTrue(game.isInProgress());
 	}
+	/**
+	 * Tests if the gethighscore method works correctly.
+	 */
+	@Test
+	public void testGetHighscore(){
+		Game game = new Game();
+		Assert.assertEquals(0, game.getHighScore());
+	}
+	/**
+	 * Tests if the getHighScore sets the new highscore correctly.
+	 */
+	@Test
+	public void testSetHighScore() {
+		Game game = new Game();
+		game.setHighScore(100);
+		Assert.assertEquals(100, game.getHighScore());
+	}
+	/**
+	 * Test if proper exception is thrown when inputting a lower highscore.
+	*/
+	@Test(expected = AssertionError.class)
+	public void testIlligalNewScore() {
+		Game game = new Game();
+		//Setting a correct highscore
+		game.setHighScore(100);
+		// Setting highscore lower then current highscore
+		game.setHighScore(50);
+	}
+	/**
+	 * Test if proper exception is thrown when inputting a negative highscore.
+	 */
+	@Test(expected = AssertionError.class)
+	public void testNegativeNewScore() {
+		Game game = new Game();
+		game.setHighScore(-10);
+	}
+	
 }

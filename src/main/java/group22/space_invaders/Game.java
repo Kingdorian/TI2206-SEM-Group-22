@@ -10,6 +10,10 @@ public class Game {
 	 */
 	private Boolean inProgress = false;
 	/**
+	 * The highscore.
+	 */
+	private int highscore = 0;
+	/**
 	 * Creates a new instance of game.
 	 */
 	public Game() {
@@ -39,5 +43,21 @@ public class Game {
 	 */
 	public void tick() {
 		
+	}
+	/**
+	 * Returns the highscore.
+	 * @return current highscore
+	 */
+	public int getHighScore(){
+		return highscore;
+	}
+	/**
+	 * Sets highscore.
+	 * @param new highscore (int)
+	 * @throws IlligalArgumentException if the new highscore is less then the old highscore or highscore is negative.
+	 */
+	public void setHighScore(int newscore) {
+		assert newscore >= 0 && newscore > highscore;
+		highscore = newscore;
 	}
 }
