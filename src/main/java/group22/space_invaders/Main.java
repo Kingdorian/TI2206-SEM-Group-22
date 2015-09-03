@@ -19,6 +19,8 @@ import javafx.event.ActionEvent;
 
 
 public class Main extends Application {
+	
+	private Game game;
 	@Override
 	public void start(Stage stage) {
 		try {
@@ -38,6 +40,8 @@ public class Main extends Application {
 			
 			 Timeline gameLoop = new Timeline();
 		     gameLoop.setCycleCount( Timeline.INDEFINITE );
+		    
+		    game = new Game();
 		        
 			final Image player = new Image("testplayer.gif", 100, 0, false, false);
 			final long timeStart = System.currentTimeMillis();
@@ -47,10 +51,14 @@ public class Main extends Application {
 		            {
 		                public void handle(ActionEvent ae)
 		                {
+		                	// Update all the units in the game.
+		                    game.tick();
+		                    // Draw stuff here.
 		                    double t = (System.currentTimeMillis() - timeStart) / 1000.0; 
 		                    // Clear the canvas
 		                    gc.clearRect(0, 0, 900,900);
 		                    gc.drawImage( player, 400-10*t, 600 );
+		                    
 		                }
             });
 			
