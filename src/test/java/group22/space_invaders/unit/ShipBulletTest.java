@@ -8,7 +8,7 @@ package group22.space_invaders.unit;
 public class ShipBulletTest extends BulletTest{
 
 	@Override
-	public Unit createInstance(float X, float Y) {
+	public Unit createInstance(double X, double Y) {
 		return new ShipBullet(X,Y);
 	}
 

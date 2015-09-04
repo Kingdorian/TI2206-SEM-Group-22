@@ -8,7 +8,7 @@ package group22.space_invaders.unit;
 
 public class Alien extends Unit {
 	
-	public Alien(float X, float Y){
+	public Alien(double X, double Y){
 		super(X,Y);
 	}
 	

@@ -1,6 +1,8 @@
 package group22.space_invaders.unit;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,14 +16,14 @@ public abstract class UnitTest {
 	
 	private Unit unit;
 	
-	public abstract Unit createInstance(float X, float Y);
+	public abstract Unit createInstance(double X, double Y);
 	
 	/**
 	 * Setup the unit.
 	 */
 	@Before
 	public void setup() {
-		unit = createInstance(1.2f, 3);
+		unit = createInstance(1.2, 3);
 	}
 	
 	/**
@@ -62,7 +64,7 @@ public abstract class UnitTest {
 	@Test
 	public void TestMoveUnitVelocity0(){
 		unit.moveUnit();
-		assertTrue(unit.getXCoor() == 1);
+		assertTrue(unit.getXCoor() == 1.2);
 		assertTrue(unit.getYCoor() == 3);
 	}
 	
@@ -73,7 +75,7 @@ public abstract class UnitTest {
 	public void TestMoveUnit(){
 		unit.setVelX(1);
 		unit.moveUnit();
-		assertTrue(unit.getXCoor() == 2);
+		assertTrue(unit.getXCoor() == 2.2);
 		assertTrue(unit.getYCoor() == 3);
 	}
 	

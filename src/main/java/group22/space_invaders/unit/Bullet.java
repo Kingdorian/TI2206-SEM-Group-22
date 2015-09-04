@@ -8,7 +8,7 @@ package group22.space_invaders.unit;
 
 public abstract class Bullet extends Unit{
 
-	public Bullet(float X, float Y) {
+	public Bullet(double X, double Y) {
 		super(X, Y);
 	}
 

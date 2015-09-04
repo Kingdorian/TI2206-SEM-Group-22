@@ -8,7 +8,7 @@ package group22.space_invaders.unit;
 
 public class ShipBullet extends Bullet{
 
-	public ShipBullet(float X, float Y) {
+	public ShipBullet(double X, double Y) {
 		super(X, Y);
 	}
 

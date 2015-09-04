@@ -8,7 +8,7 @@ package group22.space_invaders.unit;
 
 public class SpaceShip extends Unit {
 
-	public SpaceShip(float X, float Y) {
+	public SpaceShip(double X, double Y) {
 		super(X, Y);
 	}
 	

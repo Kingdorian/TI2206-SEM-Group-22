@@ -12,7 +12,7 @@ import org.junit.Test;
 public class SpaceShipTest extends UnitTest {
 
 	@Override
-	public Unit createInstance(float X, float Y) {
+	public Unit createInstance(double X, double Y) {
 		return new SpaceShip(X, Y);
 	}
 	
