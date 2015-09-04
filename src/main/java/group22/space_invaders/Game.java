@@ -86,10 +86,10 @@ public class Game {
 		player = newPlayer;
 	}
 	/**
-	 * Gets the player that is playing this game.
+	 * Gets the player that is playing this game. 
 	 * @return player that is playing this game
 	 */
-	public final void getPlayer() {
+	public final Player getPlayer() {
 		return player;
 	}
 }
