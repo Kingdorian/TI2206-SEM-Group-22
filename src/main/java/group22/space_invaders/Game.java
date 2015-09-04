@@ -52,13 +52,13 @@ public class Game {
 	public void tick(ArrayList<KeyCode> pressedKeys) {
 		if (pressedKeys.size() != 0) {
 			if (pressedKeys.contains(KeyCode.SPACE)) {
-				//TODO Shoot bullet from spaceship
+			
 			}
 			if (pressedKeys.contains(KeyCode.A)) {
-				//TODO Decrease velX for the Spacship (move Left).
+				player.getSpaceShip().setVelX(-10);
 			}
 			if (pressedKeys.contains(KeyCode.D)) {
-				//TODO Increase velX for the spaceship (move right).
+				player.getSpaceShip().setVelX(10);
 			}
 		}
 	}
