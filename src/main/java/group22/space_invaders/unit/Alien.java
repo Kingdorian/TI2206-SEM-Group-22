@@ -16,9 +16,10 @@ public class Alien extends Unit {
 	 * Creates a bullet object on the place of the Alien and shoots it downwards.
 	 * @param velocity The speed of the Bullet
 	 */
-	public void shootBullet(int velocity){
+	public Bullet shootBullet(int velocity){
 		Bullet bullet = new AlienBullet(this.getXCoor(), this.getYCoor());
 		bullet.setVelY(-velocity);
+		return bullet;
 	}
 
 }
