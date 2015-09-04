@@ -8,11 +8,16 @@ package ui;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 /**
  * Controller for the GameUI.fxml file,
@@ -49,12 +54,11 @@ public class GameUIController
     @Override
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void initialize(final URL fxmlFileLocation, final ResourceBundle resources) {
-    	// Set the animation framerate.
-    	setFramerate(60);
+
     	canvasWidth = canvas.getWidth();
     	canvasHeight = canvas.getHeight();
     
-    	simpleAnimation();
+    	startAnimation();
 
     }
     
@@ -67,30 +71,59 @@ public class GameUIController
     }
     
     /**
-     * Draws a simple animation onto the canvas.
+     * Starts the animation of the canvas.
      */
 	@SuppressWarnings("checkstyle:magicnumber")    
-    public final void simpleAnimation() {
+    public final void startAnimation() {
 		final GraphicsContext gc = canvas.getGraphicsContext2D();
 		
-		drawPlayer(gc);
-		drawAlienGrid(4, gc);
+        double playerWidth = 50;
+        double playerHeight = 50;
 		
+		// Create the animation Timeline, responsible for updating the animation.
+		Timeline gameLoop = new Timeline();
+		gameLoop.setCycleCount(Timeline.INDEFINITE);
+		
+    	// Set the animation framerate.
+    	setFramerate(60);
+
+    	final long timeStart = System.currentTimeMillis();
+		KeyFrame frame = new KeyFrame(
+			Duration.seconds(framerate), 
+				new EventHandler<ActionEvent>()
+				{
+					public void handle(final ActionEvent ae) {
+						// Clear the canvas.
+						gc.clearRect(0, 0, canvasWidth, canvasHeight);
+						
+						// Testing animation using only the Player.
+	                    double testTranslation = (System.currentTimeMillis() - timeStart) / 10.0; 
+						
+				        // Position the player in the middle, on the bottom of the screen.
+						drawUnit(canvasWidth / 2 - 0.5 * playerWidth - testTranslation, canvasHeight - 100, 
+								playerWidth, playerHeight, gc);
+						drawAlienGrid(4, gc);
+					}
+				});
+		
+		 gameLoop.getKeyFrames().add(frame);
+		 gameLoop.play();
     }
  
     /**
      * Method to draw the Players Spaceship.
+     * @param x The horizontal position of the player to draw.
+     * @param y The vertical position of the player to draw.
+     * @param spriteWidth The width of the sprite to draw.
+     * @param spriteHeight The heifht of the sprite to draw.
      * @param gc The GraphicsContext of the canvas to draw on.
      */  
-	@SuppressWarnings("checkstyle:magicnumber")	
-    public final void drawPlayer(final GraphicsContext gc) {
+    public final void drawUnit(final double x, final double y, final double spriteWidth, 
+    		final double spriteHeight, final GraphicsContext gc) {
         gc.setFill(Color.BLUE);
         
-        double playerWidth = 50;
-        double playerHeight = 50;
-        
         // Position the player in the middle, on the bottom of the screen.
-    	gc.fillRect(canvasWidth / 2 - 0.5 * playerWidth, canvasHeight - 100, playerWidth, playerHeight);
+    	gc.fillRect(x, y, spriteWidth, spriteHeight);
     }
     
     /**
@@ -99,9 +132,7 @@ public class GameUIController
      * @param gc The GraphicsContext of the canvas to draw on.
      */
 	@SuppressWarnings("checkstyle:magicnumber")    
-    public final void drawAlienGrid(final int lines, final GraphicsContext gc) {
-        gc.setFill(Color.WHITE);
- 
+    public final void drawAlienGrid(final int lines, final GraphicsContext gc) { 
         double distance = 75;
         
         for (int i = 0; i < lines; i++) {
@@ -118,9 +149,10 @@ public class GameUIController
 	 * @param spacing Spacing between lines.
      * @param gc The GraphicsContext of the canvas to draw on.
 	 */
-	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void drawAlienLine(final int spriteAmount, final double spacing, final GraphicsContext gc) {
-        double borderDist = 100;
+        gc.setFill(Color.WHITE);
+		
+		double borderDist = 100;
         double spriteWidth = 50;
         double spriteHeight = 50;
         
@@ -128,7 +160,7 @@ public class GameUIController
         double startPosition = borderDist + interval;
         
         for (int i = 0; i < spriteAmount; i++) {
-        	gc.fillRect(startPosition, spacing, spriteWidth, spriteHeight);
+        	drawUnit(startPosition, spacing, spriteWidth, spriteHeight, gc);
         	startPosition = startPosition + spriteWidth + interval;
         }
 	}
