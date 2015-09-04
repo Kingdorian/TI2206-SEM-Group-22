@@ -1,5 +1,7 @@
-package group22.space_invaders;
-import group22.space_invaders.unit.SpaceShip;
+package spaceinvaders.group_22;
+
+import spaceinvaders.group_22.unit.SpaceShip;
+
 /**
  * Class for the player
  * @author dorian

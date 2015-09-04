@@ -1,4 +1,4 @@
-package ui;
+package spaceinvaders.group_22.ui;
 
 import java.io.IOException;
 

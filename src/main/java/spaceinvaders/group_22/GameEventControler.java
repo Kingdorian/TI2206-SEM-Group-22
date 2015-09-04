@@ -1,4 +1,4 @@
-package group22.space_invaders;
+package spaceinvaders.group_22;
 /**
  * Class to handle the incoming events from the UI.
  * @author dorian

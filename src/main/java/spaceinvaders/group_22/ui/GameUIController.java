@@ -1,9 +1,4 @@
-/**
- * Sample Skeleton for "simple.fxml" Controller Class
- * Use copy/paste to copy paste this code into your favorite IDE
- **/
-
-package ui;
+package spaceinvaders.group_22.ui;
 
 import java.net.URL;
 import java.util.ArrayList;

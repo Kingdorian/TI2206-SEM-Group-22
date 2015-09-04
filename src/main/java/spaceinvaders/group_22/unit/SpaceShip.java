@@ -1,4 +1,4 @@
-package group22.space_invaders.unit;
+package spaceinvaders.group_22.unit;
 
 /**
  * A SpaceShip in the game extends Unit.

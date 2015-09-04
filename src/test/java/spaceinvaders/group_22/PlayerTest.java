@@ -1,10 +1,11 @@
-package group22.space_invaders;
+package spaceinvaders.group_22;
 
 import static org.junit.Assert.*;
-import group22.space_invaders.unit.SpaceShip;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import spaceinvaders.group_22.unit.SpaceShip;
 
 public class PlayerTest {
 	

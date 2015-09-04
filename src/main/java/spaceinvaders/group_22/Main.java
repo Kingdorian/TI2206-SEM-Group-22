@@ -2,7 +2,7 @@ package spaceinvaders.group_22;
 	
 import javafx.application.Application;
 import javafx.stage.Stage;
-import ui.SpaceInvadersUI;
+import spaceinvaders.group_22.ui.SpaceInvadersUI;
 
 /**
  * Main controller of the application.

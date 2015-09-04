@@ -1,4 +1,4 @@
-package group22.space_invaders;
+package spaceinvaders.group_22;
 
 import javafx.scene.input.KeyCode;
 import java.util.ArrayList;
