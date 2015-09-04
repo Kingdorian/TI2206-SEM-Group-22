@@ -1,9 +1,11 @@
-package group22.space_invaders.unit;
+package spaceinvaders.group_22;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import spaceinvaders.group_22.unit.Unit;
 
 /**
  * Test the abstract unit class.

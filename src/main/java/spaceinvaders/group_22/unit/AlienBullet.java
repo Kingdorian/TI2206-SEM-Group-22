@@ -1,18 +1,19 @@
-package group22.space_invaders.unit;
+package spaceinvaders.group_22.unit;
 
 /**
  * An alienBullet in the game, extends Bullet.
+ * 
  * @author Ege de Bruin
  */
 
-public class ShipBullet extends Bullet {
+public class AlienBullet extends Bullet {
 
 	/**
-	 * Creates a ShipBullet.
+	 * Creates an AlienBullet.
 	 * @param x X Coordinate
 	 * @param y Y Coordinate
 	 */
-	public ShipBullet(final double x, final double y) {
+	public AlienBullet(final double x, final double y) {
 		super(x, y);
 	}
 
