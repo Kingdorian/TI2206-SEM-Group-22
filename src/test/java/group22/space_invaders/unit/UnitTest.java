@@ -1,6 +1,5 @@
 package group22.space_invaders.unit;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -14,15 +13,25 @@ import org.junit.Test;
  */
 public abstract class UnitTest {
 	
+	/**
+	 * The Unit we need to be testing.
+	 */
 	private Unit unit;
 	
-	public abstract Unit createInstance(double X, double Y);
+	/**
+	 * 
+	 * @param x X Coordinate
+	 * @param y Y Coordinate
+	 * @return The Unit
+	 */
+	public abstract Unit createInstance(double x, double y);
 	
 	/**
 	 * Setup the unit.
 	 */
 	@Before
-	public void setup() {
+	@SuppressWarnings("checkstyle:magicnumber")    
+	public final void setup() {
 		unit = createInstance(1.2, 3);
 	}
 	
@@ -30,7 +39,8 @@ public abstract class UnitTest {
 	 * Test the X coordinate of the unit.
 	 */
 	@Test
-	public void TestUnitXCoor(){
+	@SuppressWarnings("checkstyle:magicnumber")    
+	public final void testUnitXCoor() {
 		assertTrue(unit.getXCoor() == 1.2);
 	}
 	
@@ -38,15 +48,16 @@ public abstract class UnitTest {
 	 * Test the Y coordinate of the unit.
 	 */
 	@Test
-	public void TestUnitYCoor(){
+	@SuppressWarnings("checkstyle:magicnumber")    
+	public final void testUnitYCoor() {
 		assertTrue(unit.getYCoor() == 3);
 	}
 	
 	/**
-	 * Test the Velocity in the X direction
+	 * Test the Velocity in the X direction.
 	 */
 	@Test
-	public void TestUnintVelX(){
+	public final void testUnintVelX() {
 		assertTrue(unit.getVelX() == 0);
 	}
 	
@@ -54,7 +65,7 @@ public abstract class UnitTest {
 	 * Test the velocity in the Y direction.
 	 */
 	@Test
-	public void TestUnintVelY(){
+	public final void testUnintVelY() {
 		assertTrue(unit.getVelY() == 0);
 	}
 	
@@ -62,7 +73,8 @@ public abstract class UnitTest {
 	 * Test the move method with velocity 0 in X and Y.
 	 */
 	@Test
-	public void TestMoveUnitVelocity0(){
+	@SuppressWarnings("checkstyle:magicnumber")    
+	public final void testMoveUnitVelocity0() {
 		unit.moveUnit();
 		assertTrue(unit.getXCoor() == 1.2);
 		assertTrue(unit.getYCoor() == 3);
@@ -72,7 +84,8 @@ public abstract class UnitTest {
 	 * Test the move method with velocity 1 in the X direction.
 	 */
 	@Test
-	public void TestMoveUnit(){
+	@SuppressWarnings("checkstyle:magicnumber")    
+	public final void testMoveUnit() {
 		unit.setVelX(1);
 		unit.moveUnit();
 		assertTrue(unit.getXCoor() == 2.2);

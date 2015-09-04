@@ -8,15 +8,21 @@ package group22.space_invaders.unit;
 
 public class SpaceShip extends Unit {
 
-	public SpaceShip(double X, double Y) {
-		super(X, Y);
+	/**
+	 * Creates a SpaceShip.
+	 * @param x X Coordinate
+	 * @param y Y Coordinate
+	 */
+	public SpaceShip(final double x, final double y) {
+		super(x, y);
 	}
 	
 	/**
 	 * Creates a bullet object on the place of the Ship and shoots it upwards.
 	 * @param velocity The speed of the Bullet
+	 * @return The shot Bullet
 	 */
-	public Bullet shootBullet(int velocity){
+	public final Bullet shootBullet(final int velocity) {
 		Bullet bullet = new ShipBullet(this.getXCoor(), this.getYCoor());
 		bullet.setVelY(velocity);
 		return bullet;

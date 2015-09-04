@@ -9,33 +9,33 @@ package group22.space_invaders.unit;
 public abstract class Unit {
 	
 	/**
-	 * The X Coordinate of this unit
+	 * The X Coordinate of this unit.
 	 */
-	private double XCoor;
+	private double xCoor;
 	
 	/**
-	 * The Y Coordinate of this unit
+	 * The Y Coordinate of this unit.
 	 */
-	private double YCoor;
+	private double yCoor;
 	
 	/**
-	 * VelX is the velocity in the X direction
+	 * VelX is the velocity in the X direction.
 	 */
 	private int velX;
 	
 	/**
-	 * velY is the velocity in the Y direction
+	 * velY is the velocity in the Y direction.
 	 */
 	private int velY;
 	
 	/**
 	 * Creates a unit at Location X, Y with velocity 0 and direction north.
-	 * @param X Coordinate of this unit.
-	 * @param Y Coordinate of this unit.
+	 * @param x Coordinate of this unit.
+	 * @param y Coordinate of this unit.
 	 */
-	public Unit(double X, double Y){
-		this.setXCoor(X);
-		this.setYCoor(Y);
+	public Unit(final double x, final double y) {
+		this.setXCoor(x);
+		this.setYCoor(y);
 		this.setVelX(0);
 		this.setVelY(0);
 	}
@@ -43,7 +43,7 @@ public abstract class Unit {
 	/**
 	 * Move the unit in the direction of this unit and with his velocity.
 	 */
-	public void moveUnit(){
+	public final void moveUnit() {
 		setXCoor(this.getXCoor() + this.getVelX());
 		setYCoor(this.getYCoor() + this.getVelY());
 	}
@@ -52,64 +52,64 @@ public abstract class Unit {
 	 * Returns the current velocity in the X direction.
 	 * @return the current velocity in the X direction.
 	 */
-	public int getVelX() {
+	public final int getVelX() {
 		return velX;
 	}
 	
 	/**
 	 * Sets the current velocity in the X direction.
-	 * @param velX the velocity in the X direction to set.
+	 * @param newVelX the velocity in the X direction to set.
 	 */
-	public void setVelX(int velX) {
-		this.velX = velX;
+	public final void setVelX(final int newVelX) {
+		this.velX = newVelX;
 	}
 
 	/**
 	 * Returns the current Y coordinate of this unit.
 	 * @return the current Y coordinate of this unit.
 	 */
-	public double getYCoor() {
-		return YCoor;
+	public final double getYCoor() {
+		return yCoor;
 	}
 	
 	/**
 	 * Returns the current X coordinate of this unit.
 	 * @return the current Y coordinate of this unit.
 	 */
-	public double getXCoor() {
-		return XCoor;
+	public final double getXCoor() {
+		return xCoor;
 	}
 	
 	/**
-	 * Sets the current X coordinate of this unit
+	 * Sets the current X coordinate of this unit.
 	 * @param x the current X coordinate of this unit to set.
 	 */
-	private void setXCoor(double x) {
-		XCoor = x;
+	private void setXCoor(final double x) {
+		xCoor = x;
 	}
 	
 	/**
-	 * Sets the current Y coordinate of this unit
-	 * @param yCoor the current Y coordinate of this unit to set.
+	 * Sets the current Y coordinate of this unit.
+	 * @param y the current Y coordinate of this unit to set.
 	 */
-	private void setYCoor(double yCoor) {
-		YCoor = yCoor;
+	private void setYCoor(final double y) {
+		this.yCoor = y;
 	}
 	
 	/**
 	 * Returns the current velocity in the Y direction.
 	 * @return the current velocity in the Y direction.
 	 */
-	public int getVelY() {
+	public final int getVelY() {
 		return velY;
 	}
 	
 	/**
 	 * Sets the current velocity in the Y direction.
-	 * @param velY the velocity in the Y direction to set.
+	 * @param newVelY the velocity in the Y direction to set.
 	 */
-	public void setVelY(int velY) {
-		this.velY = velY;
+	public final void setVelY(final int newVelY) {
+		this.velY = newVelY;
 	}
 
 }

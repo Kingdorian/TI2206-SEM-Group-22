@@ -5,11 +5,11 @@ package group22.space_invaders.unit;
  * @author Ege
  *
  */
-public class ShipBulletTest extends BulletTest{
+public class ShipBulletTest extends BulletTest {
 
 	@Override
-	public Unit createInstance(double X, double Y) {
-		return new ShipBullet(X,Y);
+	public final Unit createInstance(final double x, final double y) {
+		return new ShipBullet(x, y);
 	}
 
 }

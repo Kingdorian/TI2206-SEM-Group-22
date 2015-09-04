@@ -1,15 +1,20 @@
 package group22.space_invaders.unit;
 
 /**
- * An alienBullet in the game, extends Bullet
+ * An alienBullet in the game, extends Bullet.
  * 
  * @author Ege de Bruin
  */
 
-public class AlienBullet extends Bullet{
+public class AlienBullet extends Bullet {
 
-	public AlienBullet(double X, double Y) {
-		super(X, Y);
+	/**
+	 * Creates an AlienBullet.
+	 * @param x X Coordinate
+	 * @param y Y Coordinate
+	 */
+	public AlienBullet(final double x, final double y) {
+		super(x, y);
 	}
 
 }
