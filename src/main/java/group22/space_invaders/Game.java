@@ -17,10 +17,14 @@ public class Game {
 	 */
 	private int highscore = 0;
 	/**
+	 * The player of this game
+	 */
+	private Player player;
+	/**
 	 * Creates a new instance of game.
 	 */
 	public Game() {
-		
+		player = new Player(this);
 	}
 	/**
 	 * Starts the game.
@@ -70,7 +74,7 @@ public class Game {
 	 * @param newscore highscore (int)
 	 * @throws IlligalArgumentException if the new highscore is less then the old highscore or highscore is negative.
 	 */
-	public final void setHighScore(final mint newscore) {
+	public final void setHighScore(final int newscore) {
 		assert newscore >= 0 && newscore > highscore;
 		highscore = newscore;
 	}
