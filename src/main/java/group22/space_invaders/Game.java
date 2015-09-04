@@ -78,4 +78,18 @@ public class Game {
 		assert newscore >= 0 && newscore > highscore;
 		highscore = newscore;
 	}
+	/**
+	 * Sets player for this game.
+	 * @param newPlayer new player
+	 */
+	public final void setPlayer(Player newPlayer) {
+		player = newPlayer;
+	}
+	/**
+	 * Gets the player that is playing this game.
+	 * @return player that is playing this game
+	 */
+	public final void getPlayer() {
+		return player;
+	}
 }
