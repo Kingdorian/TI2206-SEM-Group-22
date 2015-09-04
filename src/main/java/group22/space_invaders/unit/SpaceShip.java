@@ -11,5 +11,16 @@ public class SpaceShip extends Unit {
 	public SpaceShip(float X, float Y) {
 		super(X, Y);
 	}
+	
+	public boolean equals(SpaceShip that) {
+		if (that == null ) {
+			return false;
+		} else if(!(that instanceof SpaceShip)) {
+			return false;
+		}
+		return super.equals(that);
+	
+		
+	}
 
 }

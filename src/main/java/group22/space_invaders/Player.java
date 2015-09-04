@@ -8,7 +8,7 @@ import group22.space_invaders.unit.SpaceShip;
 public class Player {
 
 	/**
-	 * Spaceship the player is currently controling
+	 * Spaceship the player is currently controling.
 	 */
 	private SpaceShip ship;
 	
@@ -16,6 +16,7 @@ public class Player {
 	 * Creates new spaceship object.
 	 * @param game the game where the object is part of.
 	 */
+	@SuppressWarnings("checkstyle:magicnumber")
 	public Player(Game game) {
 		ship = new SpaceShip(10.0f, 10.0f);
 	}
@@ -29,9 +30,9 @@ public class Player {
 	}
 	/**
 	 * Sets a new spaceship this player controls.
-	 * @param the new spaceship.
+	 * @param newShip the new spaceship.
 	 */
-	public final void SetSpaceShip(SpaceShip newShip) {
+	public final void setSpaceShip(SpaceShip newShip) {
 		ship = newShip;
 	}
 	

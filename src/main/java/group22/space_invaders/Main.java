@@ -52,7 +52,7 @@ public class Main extends Application {
 		                public void handle(ActionEvent ae)
 		                {
 		                	// Update all the units in the game.
-		                    game.tick();
+		                    //game.tick()
 		                    // Draw stuff here.
 		                    double t = (System.currentTimeMillis() - timeStart) / 1000.0; 
 		                    // Clear the canvas
