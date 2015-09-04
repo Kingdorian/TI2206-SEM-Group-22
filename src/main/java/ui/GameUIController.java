@@ -149,6 +149,7 @@ public class GameUIController
 	 * @param spacing Spacing between lines.
      * @param gc The GraphicsContext of the canvas to draw on.
 	 */
+	@SuppressWarnings("checkstyle:magicnumber")  
 	public final void drawAlienLine(final int spriteAmount, final double spacing, final GraphicsContext gc) {
         gc.setFill(Color.WHITE);
 		
