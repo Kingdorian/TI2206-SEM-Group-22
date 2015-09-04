@@ -1,4 +1,4 @@
-package group22.space_invaders.unit;
+package spaceinvaders.group_22.unit;
 
 /**
  * A unit in the game that has a position and velocity.
