@@ -1,8 +1,9 @@
 package group22.space_invaders;
-
-import javafx.event.EventHandler;
-import javafx.scene.input.KeyEvent;
-
+/**
+ * Class to handle the incoming events from the UI.
+ * @author dorian
+ *
+ */
 public class GameEventControler {
 
 	 /**

@@ -44,4 +44,13 @@ public class KeboardInputTest {
 		game.tick(simulEvents);
 		Assert.assertEquals(game.getPlayer().getSpaceShip().getVelX(), 10);
 	}
+	/**
+	 * Test if a bullet is correctly launched when the player presses the space button. 
+	 */
+	@Test
+	public void testPressSpace() {
+		simulEvents.add(KeyCode.SPACE);
+		game.tick(simulEvents);
+		//TODO Assertion to check if a bullet is launched.
+	}
 }
