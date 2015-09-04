@@ -11,5 +11,14 @@ public class SpaceShip extends Unit {
 	public SpaceShip(float X, float Y) {
 		super(X, Y);
 	}
+	
+	/**
+	 * Creates a bullet object on the place of the Ship and shoots it upwards.
+	 * @param velocity The speed of the Bullet
+	 */
+	public void shootBullet(int velocity){
+		Bullet bullet = new ShipBullet(this.getXCoor(), this.getYCoor());
+		bullet.setVelY(velocity);
+	}
 
 }
