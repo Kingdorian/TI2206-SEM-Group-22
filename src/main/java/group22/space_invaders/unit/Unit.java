@@ -39,7 +39,20 @@ public abstract class Unit {
 		this.setVelX(0);
 		this.setVelY(0);
 	}
-	
+	/**
+	 * Compares two unit objects and returns if they are equal.
+	 * @param that the object to compare this object to
+	 * @return true if both objects are thesame.
+	 */
+	public boolean equals(Unit that) {
+		if (that != null && that instanceof Unit){
+			return this.XCoor == that.getXCoor()
+						&& this.getYCoor() == that.YCoor
+						&& this.velX == that.getVelX()
+						&& this.velY == that.getVelY();
+		}
+		return false;
+	}
 	/**
 	 * Move the unit in the direction of this unit and with his velocity.
 	 */

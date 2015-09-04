@@ -6,8 +6,12 @@
 package ui;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.ResourceBundle;
 
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyCode;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -53,7 +57,7 @@ public class GameUIController
     	setFramerate(60);
     	canvasWidth = canvas.getWidth();
     	canvasHeight = canvas.getHeight();
-    
+    	canvas.setFocusTraversable(true);
     	simpleAnimation();
 
     }
@@ -131,6 +135,14 @@ public class GameUIController
         	gc.fillRect(startPosition, spacing, spriteWidth, spriteHeight);
         	startPosition = startPosition + spriteWidth + interval;
         }
+	}
+	@FXML
+	public void handleKeyPressed(KeyEvent event) {
+		ArrayList<KeyCode> pressedKeys = new ArrayList<KeyCode>();
+        System.out.println(event.getCode() + " is pressed ");
+	    if(!pressedKeys.contains(event.getCode())) {
+	    	pressedKeys.add(event.getCode());
+	    }
 	}
 
 }
