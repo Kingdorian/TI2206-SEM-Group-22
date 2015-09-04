@@ -6,6 +6,8 @@
 package ui;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.ResourceBundle;
 
 import javafx.scene.input.KeyEvent;
@@ -136,9 +138,10 @@ public class GameUIController
 	}
 	@FXML
 	public void handleKeyPressed(KeyEvent event) {
+		ArrayList<KeyCode> pressedKeys = new ArrayList<KeyCode>();
         System.out.println(event.getCode() + " is pressed ");
-	    if (event.getCode() == KeyCode.A) {
-
+	    if(!pressedKeys.contains(event.getCode())) {
+	    	pressedKeys.add(event.getCode());
 	    }
 	}
 
