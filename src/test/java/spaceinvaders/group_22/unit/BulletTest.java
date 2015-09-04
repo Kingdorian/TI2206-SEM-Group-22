@@ -1,4 +1,4 @@
-package spaceinvaders.group_22;
+package spaceinvaders.group_22.unit;
 
 /**
  * Test for Bullet, extends UnitTest.

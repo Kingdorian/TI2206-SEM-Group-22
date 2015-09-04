@@ -1,4 +1,4 @@
-package spaceinvaders.group_22;
+package spaceinvaders.group_22.unit;
 
 import spaceinvaders.group_22.unit.ShipBullet;
 import spaceinvaders.group_22.unit.Unit;
