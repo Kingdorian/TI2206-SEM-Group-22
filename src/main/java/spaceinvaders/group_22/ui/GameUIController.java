@@ -1,17 +1,20 @@
+package spaceinvaders.group_22.ui;
 /**
  * Sample Skeleton for "simple.fxml" Controller Class
  * Use copy/paste to copy paste this code into your favorite IDE
  **/
 
-package ui;
-
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyCode;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -164,6 +167,15 @@ public class GameUIController
         	drawUnit(startPosition, spacing, spriteWidth, spriteHeight, gc);
         	startPosition = startPosition + spriteWidth + interval;
         }
+	}
+	
+	@FXML
+	public void handleKeyPressed(KeyEvent event) {
+		ArrayList<KeyCode> pressedKeys = new ArrayList<KeyCode>();
+        System.out.println(event.getCode() + " is pressed ");
+	    if(!pressedKeys.contains(event.getCode())) {
+	    	pressedKeys.add(event.getCode());
+	    }
 	}
 
 }

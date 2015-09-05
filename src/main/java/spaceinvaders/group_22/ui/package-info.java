@@ -5,4 +5,4 @@
  * @author Jochem
  *
  */
-package ui;
+package spaceinvaders.group_22.ui;

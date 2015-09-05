@@ -1,4 +1,4 @@
-package group22.space_invaders.unit;
+package spaceinvaders.group_22.unit;
 
 /**
  * A unit in the game that has a position and velocity.
@@ -11,12 +11,12 @@ public abstract class Unit {
 	/**
 	 * The X Coordinate of this unit
 	 */
-	private float XCoor;
+	private double XCoor;
 	
 	/**
 	 * The Y Coordinate of this unit
 	 */
-	private float YCoor;
+	private double YCoor;
 	
 	/**
 	 * VelX is the velocity in the X direction
@@ -33,13 +33,26 @@ public abstract class Unit {
 	 * @param X Coordinate of this unit.
 	 * @param Y Coordinate of this unit.
 	 */
-	public Unit(float X, float Y){
+	public Unit(double X, double Y){
 		this.setXCoor(X);
 		this.setYCoor(Y);
 		this.setVelX(0);
 		this.setVelY(0);
 	}
-	
+	/**
+	 * Compares two unit objects and returns if they are equal.
+	 * @param that the object to compare this object to
+	 * @return true if both objects are thesame.
+	 */
+	public boolean equals(Unit that) {
+		if (that != null && that instanceof Unit){
+			return this.XCoor == that.getXCoor()
+						&& this.getYCoor() == that.YCoor
+						&& this.velX == that.getVelX()
+						&& this.velY == that.getVelY();
+		}
+		return false;
+	}
 	/**
 	 * Move the unit in the direction of this unit and with his velocity.
 	 */
@@ -68,7 +81,7 @@ public abstract class Unit {
 	 * Returns the current Y coordinate of this unit.
 	 * @return the current Y coordinate of this unit.
 	 */
-	public float getYCoor() {
+	public double getYCoor() {
 		return YCoor;
 	}
 	
@@ -76,7 +89,7 @@ public abstract class Unit {
 	 * Returns the current X coordinate of this unit.
 	 * @return the current Y coordinate of this unit.
 	 */
-	public float getXCoor() {
+	public double getXCoor() {
 		return XCoor;
 	}
 	
@@ -84,7 +97,7 @@ public abstract class Unit {
 	 * Sets the current X coordinate of this unit
 	 * @param xCoor the current X coordinate of this unit to set.
 	 */
-	private void setXCoor(float xCoor) {
+	private void setXCoor(double xCoor) {
 		XCoor = xCoor;
 	}
 	
@@ -92,7 +105,7 @@ public abstract class Unit {
 	 * Sets the current Y coordinate of this unit
 	 * @param yCoor the current Y coordinate of this unit to set.
 	 */
-	private void setYCoor(float yCoor) {
+	private void setYCoor(double yCoor) {
 		YCoor = yCoor;
 	}
 	
