@@ -3,7 +3,7 @@ package spaceinvaders.group_22;
 import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
- * Class for the player
+ * Class for the player.
  * @author dorian
  *
  */
@@ -18,16 +18,25 @@ public class Player {
 	 */
 	private int score;
 	
-	//TODO Add Lives
+	/**
+	 * Amount of lives the player has left.
+	 */
+	private int lives;
+	/**
+	 * Game the player "lives" in.
+	 */
+	private Game game;
 	
 	/**
 	 * Creates new Player object.
-	 * @param game the game where the object is part of.
+	 * @param parentgame the game where the object is part of.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
-	public Player(Game game) {
+	public Player(final Game parentgame) {
+		game = parentgame;
 		ship = new SpaceShip(10.0f, 10.0f);
 		score  = 0;
+		lives = 3;
 	}
 	
 	/**
@@ -41,7 +50,7 @@ public class Player {
 	 * Sets a new spaceship this player controls.
 	 * @param newShip the new spaceship.
 	 */
-	public final void setSpaceShip(SpaceShip newShip) {
+	public final void setSpaceShip(final SpaceShip newShip) {
 		ship = newShip;
 	}
 	/**
@@ -53,10 +62,10 @@ public class Player {
 	}
 	/**
 	 * Adds an amount of points to the players score.
-	 * @param score the amount of points to add
+	 * @param points the amount of points to add
 	 */
-	public final void addScore(int score) {
-		this.score+=score;
+	public final void addScore(final int points) {
+		score += points;
 	}
 	/**
 	 * Resets the amount of points the player has.
@@ -64,6 +73,21 @@ public class Player {
 	public final void resetScore() {
 		score = 0;
 	}
-	
+	/**
+	 * When the player dies remove one of his lives.
+	 */
+	public final void die() {
+		lives--;
+		if (lives <= 0) {
+			game.stop();
+		}
+	}
+	/**
+	 * Get the amount of lives the player has left.
+	 * @return the amount of lives left for the player.
+	 */
+	public final int getLives() {
+		return lives;
+	}
 	
 }

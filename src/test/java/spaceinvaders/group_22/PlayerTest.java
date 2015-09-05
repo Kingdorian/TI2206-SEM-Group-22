@@ -45,4 +45,34 @@ public class PlayerTest {
 		player.addScore(-10);
 		Assert.assertEquals(-10, player.getScore());
 	}
+	/**
+	 * Tests the getLives method from the player class.
+	 */
+	@Test
+	public void testGetLives() {
+		Player player = new Player(new Game());
+		Assert.assertEquals(3, player.getLives());
+	}
+	/**
+	 * Tests the die method for the player class when the player has more then 1 live left.
+	 */
+	@Test
+	public void testDie() {
+		Player player = new Player(new Game());
+		player.die();
+		Assert.assertEquals(2, player.getLives());
+	}
+	/**
+	 * Tests the die method for te player when it has only one live left.
+	 */
+	@Test
+	public void testDieOutOfLives() {
+		Game game = new Game();
+		game.start();
+		Player player = new Player(game);
+		player.die();
+		player.die();
+		player.die();
+		
+	}
 }
