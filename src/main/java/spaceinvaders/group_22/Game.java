@@ -1,6 +1,7 @@
 package spaceinvaders.group_22;
 
 import javafx.scene.input.KeyCode;
+
 import java.util.ArrayList;
 /**
  * 
@@ -17,7 +18,7 @@ public class Game {
 	 */
 	private int highscore = 0;
 	/**
-	 * The player of this game
+	 * The player of this game.
 	 */
 	private Player player;
 	/**
@@ -49,10 +50,11 @@ public class Game {
 	 * Will update all the objects in the game.
 	 * @param pressedKeys the keys pressed since last tick
 	 */
-	public void tick(ArrayList<KeyCode> pressedKeys) {
+	@SuppressWarnings("checkstyle.magicnumber")
+	public final void tick(final ArrayList<KeyCode> pressedKeys) {
 		if (pressedKeys.size() != 0) {
 			if (pressedKeys.contains(KeyCode.SPACE)) {
-			
+				//TODO shoot bullet
 			}
 			if (pressedKeys.contains(KeyCode.A)) {
 				player.getSpaceShip().setVelX(-10);
@@ -66,7 +68,7 @@ public class Game {
 	 * Returns the highscore.
 	 * @return current highscore
 	 */
-	public int getHighScore(){
+	public final int getHighScore() {
 		return highscore;
 	}
 	/**
@@ -82,7 +84,7 @@ public class Game {
 	 * Sets player for this game.
 	 * @param newPlayer new player
 	 */
-	public final void setPlayer(Player newPlayer) {
+	public final void setPlayer(final Player newPlayer) {
 		player = newPlayer;
 	}
 	/**
