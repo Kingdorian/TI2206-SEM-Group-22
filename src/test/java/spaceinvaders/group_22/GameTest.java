@@ -2,24 +2,36 @@ package spaceinvaders.group_22;
 
 import static org.junit.Assert.assertFalse;
 
-
+import java.util.ArrayList;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import spaceinvaders.group_22.unit.Alien;
+
 /**
  * Test for the game class.
  * @author Dorian
  *
  */
 public class GameTest {
+	
+	/**
+	 * Static game used for testing;
+	 */
+	static Game game;
 
+	@Before
+	public final void setUpGame() {
+		game = new Game(200, 200);
+	}
+	
 	/**
 	 * Tests if the testInProgress method returns false if the game is not in progress.
 	 */
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testIsNotInProgress() {
-		Game game = new Game(200, 200);
 		Assert.assertFalse(game.isInProgress());
 	}
 	/**
@@ -28,7 +40,6 @@ public class GameTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testIsInProgress() {
-		Game game = new Game(200, 200);
 		// Start game
 		game.start();
 		Assert.assertTrue(game.isInProgress());
@@ -39,7 +50,6 @@ public class GameTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testGetHighscore() {
-		Game game = new Game(200, 200);
 		Assert.assertEquals(0, game.getHighScore());
 	}
 	/**
@@ -48,7 +58,6 @@ public class GameTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testSetHighScore() {
-		Game game = new Game(200 , 200);
 		game.setHighScore(100);
 		Assert.assertEquals(100, game.getHighScore());
 	}
@@ -57,8 +66,7 @@ public class GameTest {
 	*/
 	@Test(expected = AssertionError.class)
 	@SuppressWarnings("checkstyle:magicnumber")   
-	public final void testIlligalNewScore() {
-		Game game = new Game(200, 200);
+	public final void testIllegalNewScore() {
 		//Setting a correct highscore
 		game.setHighScore(100);
 		// Setting highscore lower then current highscore
@@ -70,8 +78,29 @@ public class GameTest {
 	@Test(expected = AssertionError.class)
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testNegativeNewScore() {
-		Game game = new Game(200, 200);
 		game.setHighScore(-10);
 	}
 	
+	/**
+	 * Tests if setAliens sets the ArrayList of aliens correctly.
+	 */
+	@Test
+	public final void testSetAliens() {
+		ArrayList<Alien> aliens = new ArrayList<Alien>();		
+		game.setAliens(aliens);
+		
+		Assert.assertEquals(new ArrayList<Alien>(), aliens);	
+		
+	}
+	
+	/**
+	 * Tests if getAliens gets the ArrayList of aliens correctly.
+	 */
+	@Test
+	public final void testGetAliens() {
+		ArrayList<Alien> aliens = new ArrayList<Alien>();		
+		game.setAliens(aliens);
+		
+		Assert.assertEquals(new ArrayList<Alien>(), game.getAliens());
+	}
 }

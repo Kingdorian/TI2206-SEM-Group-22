@@ -81,7 +81,7 @@ public class Game {
 	 * Will update all the objects in the game.
 	 * @param pressedKeys the keys pressed since last tick
 	 */
-	@SuppressWarnings("checkstyle.magicnumber")
+	@SuppressWarnings("checkstyle:magicnumber")
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
 		int velX = 0;
 		if (pressedKeys.contains(KeyCode.SPACE)) {
@@ -196,6 +196,13 @@ public class Game {
         }
             
 		return alienList;	
+	}
+	/**
+	 * Sets the list of Aliens currently in game.
+	 * @param alienList The ArrayList of aliens to set.
+	 */
+	public final void setAliens(final ArrayList<Alien> alienList) {
+		this.aliens = alienList;
 	}
 	/**
 	 * Gets the list of Aliens currently in game.
