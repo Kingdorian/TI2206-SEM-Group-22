@@ -41,7 +41,17 @@ public class Game {
      * The height of the canvas.
      */
     private double canvasHeight;
+    
+    /**
+     * If 0 the aliens don't have to move down.
+     */
+	private double alienMoveDown = 0;
 	
+	/**
+	 * Speed of the aliens in the X direction.
+	 */
+	private int alienVelX = 2;
+    
 	/**
 	 * Creates a new instance of game.
 	 * @param width of the canvas.
@@ -97,10 +107,11 @@ public class Game {
 				&& pressedKeys.contains(KeyCode.D)) {
 			velX = velX + 10;
 		}
-		
-		
+			
 		player.getSpaceShip().setVelX(velX);
 		player.getSpaceShip().moveUnit();
+		
+		moveAliens();
 		
 		//Check if all bullets are still visible
 		for (int i = 0; i < bullets.size(); i++) {
@@ -212,4 +223,41 @@ public class Game {
 		return aliens;
 	}
 	
+	/**
+	 * Method to move all the aliens in the right direction.
+	 */
+	@SuppressWarnings("checkstyle:magicnumber") 
+	public final void moveAliens() {
+		Boolean hitborder = false;
+		//check if all aliens are still able to move in the window
+		for (Alien unit : getAliens()) {
+			if ((unit.getXCoor() + 0.5 * unit.getWidth() >= canvasWidth 
+					|| unit.getXCoor() - 0.5 * unit.getWidth() <= 0) 
+					&& alienMoveDown == 0) {
+				hitborder = true;
+				alienMoveDown = 15;
+				alienVelX = alienVelX * -1;
+			}
+		}
+		if (alienMoveDown > 0) {
+			hitborder = true;
+			alienMoveDown = alienMoveDown - 1;
+		}
+		// move every alien
+		for (Alien unit : getAliens()) {
+			if (hitborder && alienMoveDown >= 5) {
+				unit.setVelY(1);
+				unit.setVelX(0);			
+			} else if (hitborder && alienMoveDown < 5) {
+				unit.setVelY(0);
+				unit.setVelX(alienVelX);
+			} else {
+				unit.setVelX(alienVelX);
+			}
+			if (unit.getYCoor() > canvasHeight - 100) {
+				this.stop();
+			}
+			unit.moveUnit();
+		}
+	}
 }

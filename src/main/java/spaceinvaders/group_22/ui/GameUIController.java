@@ -110,8 +110,10 @@ public class GameUIController
 						
 						// Testing animation using only the Player.
 	                    //double testTranslation = (System.currentTimeMillis() - timeStart) / 10.0; 
-						
-						game.tick(pressedKeys);
+						if (game.isInProgress()) {
+							
+							game.tick(pressedKeys);
+						}
 						for (int i = 0; i < game.getBullets().size(); i++) {
 							Bullet bullet = game.getBullets().get(i);
 							drawBullet(bullet.getXCoor(), bullet.getYCoor(), bullet.getWidth(), bullet.getHeight(), gc);
@@ -180,7 +182,9 @@ public class GameUIController
 	@FXML
 	public final void handleKeyPressed(final KeyEvent event) {
         System.out.println(event.getCode() + " is pressed ");
-	    if (!pressedKeys.contains(event.getCode())) {
+        if (event.getCode().equals(KeyCode.S)) {       	
+        	game.start();
+        } else if (!pressedKeys.contains(event.getCode())) {
 	    	pressedKeys.add(event.getCode());
 	    }
 	}
