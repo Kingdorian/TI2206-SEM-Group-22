@@ -1,9 +1,5 @@
 package spaceinvaders.group_22.unit;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-
 /**
  * A SpaceShip in the game extends Unit.
  * 
