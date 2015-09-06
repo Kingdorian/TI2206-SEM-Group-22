@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Bullet;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -119,13 +120,20 @@ public class GameUIController
 							Bullet bullet = game.getBullets().get(i);
 							drawBullet(bullet.getXCoor(), bullet.getYCoor(), bullet.getWidth(), bullet.getHeight(), gc);
 						}
-						
+												
 				        // Position the player in the middle, on the bottom of the screen.
 						drawUnit(game.getPlayer().getSpaceShip().getXCoor(), 
 								game.getPlayer().getSpaceShip().getYCoor(), 
 								game.getPlayer().getSpaceShip().getWidth(), 
 								game.getPlayer().getSpaceShip().getHeight(), gc);
-						drawAlienGrid(4, gc);
+
+						
+						for (Alien unit : game.getAliens()) {
+							unit.setWidth(50);
+							unit.setHeight(50);
+							drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(), unit.getHeight(), gc);
+							
+						}
 						
 						if (pressedKeys.contains(KeyCode.SPACE)) {
 					    	pressedKeys.remove(KeyCode.SPACE);
@@ -168,46 +176,6 @@ public class GameUIController
         // Draw the player with the X and Y coordinates as center
     	gc.fillRect(x - 0.5 * spriteWidth, y - 0.5 * spriteHeight, spriteWidth, spriteHeight);
     }
-    
-    /**
-     * Method to draw a grid of Aliens.
-     * @param lines The amount of lines the grid should have.
-     * @param gc The GraphicsContext of the canvas to draw on.
-     */
-	@SuppressWarnings("checkstyle:magicnumber")    
-    public final void drawAlienGrid(final int lines, final GraphicsContext gc) { 
-        double distance = 75;
-        
-        for (int i = 0; i < lines; i++) {
-        	drawAlienLine(10, distance, gc);
-
-        	distance += 75;
-        }
-        
-    }
-	
-	/**
-	 * Method to draw a line of Aliens.
-	 * @param spriteAmount Amount of sprites per line.
-	 * @param spacing Spacing between lines.
-     * @param gc The GraphicsContext of the canvas to draw on.
-	 */
-	@SuppressWarnings("checkstyle:magicnumber")  
-	public final void drawAlienLine(final int spriteAmount, final double spacing, final GraphicsContext gc) {
-        gc.setFill(Color.WHITE);
-		
-		double borderDist = 100;
-        double spriteWidth = 50;
-        double spriteHeight = 50;
-        
-        double interval = (canvasWidth - 2 * borderDist - spriteAmount * spriteWidth) / (spriteAmount + 1);  
-        double startPosition = borderDist + interval;
-        
-        for (int i = 0; i < spriteAmount; i++) {
-        	drawUnit(startPosition, spacing, spriteWidth, spriteHeight, gc);
-        	startPosition = startPosition + spriteWidth + interval;
-        }
-	}
 	
 	/**
 	 * Handles if a key is pressed.

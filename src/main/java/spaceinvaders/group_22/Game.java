@@ -4,6 +4,7 @@ import javafx.scene.input.KeyCode;
 
 import java.util.ArrayList;
 
+import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Bullet;
 /**
  * 
@@ -28,6 +29,10 @@ public class Game {
 	 */
 	private ArrayList<Bullet> bullets;
 	/**
+	 * List of bullets in the game.
+	 */
+	private ArrayList<Alien> aliens;	
+	/**
      * The width of the canvas.
      */
     private double canvasWidth;
@@ -43,10 +48,12 @@ public class Game {
 	 * @param height of the canvas.
 	 */
 	public Game(final double width, final double height) {
-		
-		bullets = new ArrayList<Bullet>();
 		canvasWidth = width;
 		canvasHeight = height;
+		
+		bullets = new ArrayList<Bullet>();
+		aliens = createAliens();
+
 		player = new Player(this);
 	}
 	/**
@@ -155,4 +162,44 @@ public class Game {
 	public final double getCanvasHeight() {
 		return canvasHeight;
 	}
+	
+	/**
+	 * Creates the aliens on the correct start positions.
+	 * @return an arraylist of Aliens drawn.
+	 */
+	@SuppressWarnings("checkstyle:magicnumber")    
+	public final ArrayList<Alien> createAliens() {
+		ArrayList<Alien> alienList = new ArrayList<Alien>();
+		
+		double borderDist = 100;
+        double spriteWidth = 50;
+        double spriteAmount = 10;
+        double lines = 4;
+        
+        // Distance to top of the screen.
+        double distance = 125;
+        
+        double interval = (canvasWidth - 2 * borderDist - spriteAmount * spriteWidth) / (spriteAmount + 1);  
+        double startPosition = borderDist + interval;
+       
+        // Drawing lines of Aliens.
+        for (int i = 0; i < lines; i++) {
+            for (int j = 0; j < spriteAmount; j++) {
+            	alienList.add(new Alien(startPosition, distance));
+            	startPosition += spriteWidth + interval;
+            }
+            distance += spriteWidth + 0.5 * spriteWidth;
+            startPosition = borderDist + interval;
+        }
+            
+		return alienList;	
+	}
+	/**
+	 * Gets the list of Aliens currently in game.
+	 * @return The list of aliens currently in game.
+	 */
+	public final ArrayList<Alien> getAliens() {
+		return aliens;
+	}
+	
 }
