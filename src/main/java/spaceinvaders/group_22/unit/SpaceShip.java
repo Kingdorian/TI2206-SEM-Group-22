@@ -1,5 +1,9 @@
 package spaceinvaders.group_22.unit;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 /**
  * A SpaceShip in the game extends Unit.
  * 
@@ -13,7 +17,7 @@ public class SpaceShip extends Unit {
 	 * @param x X Coordinate
 	 * @param y Y Coordinate
 	 */
-	public SpaceShip(double x, double y) {
+	public SpaceShip(final double x, final double y) {
 		super(x, y);
 	}
 	
@@ -29,13 +33,16 @@ public class SpaceShip extends Unit {
 
 	}
 	
-	public boolean equals(SpaceShip that) {
-		if (that == null ) {
-			return false;
-		} else if(!(that instanceof SpaceShip)) {
-			return false;
+	/**
+	 * Compares two objects and returns if they are equal.
+	 * @return true if both objects are the same.
+	 * @param other the object to compare.
+	 */
+	public final boolean equals(final Object other) {
+		if (other != null && other instanceof SpaceShip) {
+			return super.equals(other);
 		}
-		return super.equals(that);
+		return false;
 	}
 
 }

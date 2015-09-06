@@ -3,6 +3,8 @@ package spaceinvaders.group_22;
 import javafx.scene.input.KeyCode;
 
 import java.util.ArrayList;
+
+import spaceinvaders.group_22.unit.Bullet;
 /**
  * 
  * @author Dorian
@@ -22,9 +24,29 @@ public class Game {
 	 */
 	private Player player;
 	/**
-	 * Creates a new instance of game.
+	 * List of bullets in the game.
 	 */
-	public Game() {
+	private ArrayList<Bullet> bullets;
+	/**
+     * The width of the canvas.
+     */
+    private double canvasWidth;
+    
+    /**
+     * The height of the canvas.
+     */
+    private double canvasHeight;
+	
+	/**
+	 * Creates a new instance of game.
+	 * @param width of the canvas.
+	 * @param height of the canvas.
+	 */
+	public Game(final double width, final double height) {
+		
+		bullets = new ArrayList<Bullet>();
+		canvasWidth = width;
+		canvasHeight = height;
 		player = new Player(this);
 	}
 	/**
@@ -52,16 +74,34 @@ public class Game {
 	 */
 	@SuppressWarnings("checkstyle.magicnumber")
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
-		if (pressedKeys.size() != 0) {
-			if (pressedKeys.contains(KeyCode.SPACE)) {
-				//TODO shoot bullet
+		int velX = 0;
+		if (pressedKeys.contains(KeyCode.SPACE)) {
+			bullets.add(player.getSpaceShip().shootBullet(-2));
+		}
+		
+		// Check that the spaceship is still able to move without going off the screen.
+		if (player.getSpaceShip().getXCoor() - 0.5 * player.getSpaceShip().getWidth() > 0 
+				&& pressedKeys.contains(KeyCode.A)) {
+			velX = velX - 10;
+		}
+		if (player.getSpaceShip().getXCoor() + 0.5 * player.getSpaceShip().getWidth() < canvasWidth
+				&& pressedKeys.contains(KeyCode.D)) {
+			velX = velX + 10;
+		}
+		
+		
+		player.getSpaceShip().setVelX(velX);
+		player.getSpaceShip().moveUnit();
+		
+		//Check if all bullets are still visible
+		for (int i = 0; i < bullets.size(); i++) {
+			if (bullets.get(i).getXCoor() > canvasWidth || bullets.get(i).getYCoor() < 0) {
+				bullets.remove(i);
 			}
-			if (pressedKeys.contains(KeyCode.A)) {
-				player.getSpaceShip().setVelX(-10);
-			}
-			if (pressedKeys.contains(KeyCode.D)) {
-				player.getSpaceShip().setVelX(10);
-			}
+		}
+		//Move every bullet
+		for (int i = 0; i < bullets.size(); i++) {
+			bullets.get(i).moveUnit();
 		}
 	}
 	/**
@@ -88,10 +128,31 @@ public class Game {
 		player = newPlayer;
 	}
 	/**
+	 * Gets the bullets currently in this game.
+	 * @return Arraylist of bullets in the game.
+	 */
+	public final ArrayList<Bullet> getBullets() {
+		return bullets;
+	}
+	/**
 	 * Gets the player that is playing this game. 
 	 * @return player that is playing this game
 	 */
 	public final Player getPlayer() {
 		return player;
+	}
+	/**
+	 * Gets the canvas width.
+	 * @return width of the canvas.
+	 */
+	public final double getCanvasWidth() {
+		return canvasWidth;
+	}
+	/**
+	 * Gets the height of the canvas.
+	 * @return height of the canvas.
+	 */
+	public final double getCanvasHeight() {
+		return canvasHeight;
 	}
 }

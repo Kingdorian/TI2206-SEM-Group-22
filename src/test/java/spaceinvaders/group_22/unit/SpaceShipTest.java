@@ -1,12 +1,10 @@
 package spaceinvaders.group_22.unit;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
-
-import spaceinvaders.group_22.unit.Bullet;
-import spaceinvaders.group_22.unit.SpaceShip;
-import spaceinvaders.group_22.unit.Unit;
 
 /**
  * Test for the SpaceShip class which extends UnitTest.
@@ -35,5 +33,26 @@ public class SpaceShipTest extends UnitTest {
 		assertTrue(bullet.getXCoor() == spaceship.getXCoor());
 		assertTrue(bullet.getYCoor() == spaceship.getYCoor() + 1);
 	}
-
+	
+	/**
+	 * Test the Equals method.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testEqualsSpaceShip() {
+		SpaceShip ship2 = new SpaceShip(1.2, 3);
+		SpaceShip ship1 = new SpaceShip(1.2, 3);
+		assertEquals(ship1, ship2);
+	}
+	
+	/**
+	 * Test the Equals method.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testEquals2() {
+		SpaceShip ship2 = new SpaceShip(1, 3);
+		SpaceShip ship1 = new SpaceShip(1.2, 3);
+		assertNotEquals(ship1, ship2);
+	}
 }

@@ -1,11 +1,10 @@
 package spaceinvaders.group_22.unit;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import spaceinvaders.group_22.unit.Unit;
 
 /**
  * Test the abstract unit class.
@@ -92,6 +91,16 @@ public abstract class UnitTest {
 		unit.moveUnit();
 		assertTrue(unit.getXCoor() == 2.2);
 		assertTrue(unit.getYCoor() == 3);
+	}
+	
+	/**
+	 * Test the Equals method.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testEquals() {
+		Unit unit2 = createInstance(1.2, 3);
+		assertEquals(unit, unit2);
 	}
 	
 

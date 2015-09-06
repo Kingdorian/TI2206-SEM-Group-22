@@ -9,54 +9,69 @@ package spaceinvaders.group_22.unit;
 public abstract class Unit {
 	
 	/**
-	 * The X Coordinate of this unit
+	 * The X Coordinate of this unit.
 	 */
-	private double XCoor;
+	private double xCoor;
 	
 	/**
-	 * The Y Coordinate of this unit
+	 * The Y Coordinate of this unit.
 	 */
-	private double YCoor;
+	private double yCoor;
 	
 	/**
-	 * VelX is the velocity in the X direction
+	 * VelX is the velocity in the X direction.
 	 */
 	private int velX;
 	
 	/**
-	 * velY is the velocity in the Y direction
+	 * velY is the velocity in the Y direction.
 	 */
 	private int velY;
 	
 	/**
-	 * Creates a unit at Location X, Y with velocity 0 and direction north.
-	 * @param X Coordinate of this unit.
-	 * @param Y Coordinate of this unit.
+	 * height of this unit.
 	 */
-	public Unit(double X, double Y){
-		this.setXCoor(X);
-		this.setYCoor(Y);
+	private int height;
+	
+	/**
+	 * width of this unit.
+	 */
+	private int width;
+	
+	/**
+	 * Creates a unit at Location X, Y with velocity 0 and direction north.
+	 * @param x Coordinate of this unit.
+	 * @param y Coordinate of this unit.
+	 */
+	public Unit(final double x, final double y) {
+		this.setXCoor(x);
+		this.setYCoor(y);
 		this.setVelX(0);
 		this.setVelY(0);
+		this.setHeight(0);
+		this.setWidth(0);
 	}
 	/**
-	 * Compares two unit objects and returns if they are equal.
-	 * @param that the object to compare this object to
+	 * Compares two objects and returns if they are equal.
+	 * @param other the object to compare this object to
 	 * @return true if both objects are thesame.
 	 */
-	public boolean equals(Unit that) {
-		if (that != null && that instanceof Unit){
-			return this.XCoor == that.getXCoor()
-						&& this.getYCoor() == that.YCoor
+	public boolean equals(final Object other) {
+		if (other != null && other instanceof Unit) {
+			Unit that = (Unit) other;
+			return this.xCoor == that.getXCoor()
+						&& this.getYCoor() == that.yCoor
 						&& this.velX == that.getVelX()
-						&& this.velY == that.getVelY();
+						&& this.velY == that.getVelY()
+						&& this.getHeight() == that.getHeight()
+						&& this.getWidth() == that.getWidth();
 		}
 		return false;
 	}
 	/**
 	 * Move the unit in the direction of this unit and with his velocity.
 	 */
-	public void moveUnit(){
+	public final void moveUnit() {
 		setXCoor(this.getXCoor() + this.getVelX());
 		setYCoor(this.getYCoor() + this.getVelY());
 	}
@@ -65,64 +80,92 @@ public abstract class Unit {
 	 * Returns the current velocity in the X direction.
 	 * @return the current velocity in the X direction.
 	 */
-	public int getVelX() {
+	public final int getVelX() {
 		return velX;
 	}
 	
 	/**
 	 * Sets the current velocity in the X direction.
-	 * @param velX the velocity in the X direction to set.
+	 * @param newvelX the velocity in the X direction to set.
 	 */
-	public void setVelX(int velX) {
-		this.velX = velX;
+	public final void setVelX(final int newvelX) {
+		this.velX = newvelX;
 	}
 
 	/**
 	 * Returns the current Y coordinate of this unit.
 	 * @return the current Y coordinate of this unit.
 	 */
-	public double getYCoor() {
-		return YCoor;
+	public final double getYCoor() {
+		return yCoor;
 	}
 	
 	/**
 	 * Returns the current X coordinate of this unit.
 	 * @return the current Y coordinate of this unit.
 	 */
-	public double getXCoor() {
-		return XCoor;
+	public final double getXCoor() {
+		return xCoor;
 	}
 	
 	/**
-	 * Sets the current X coordinate of this unit
-	 * @param xCoor the current X coordinate of this unit to set.
+	 * Sets the current X coordinate of this unit.
+	 * @param newxCoor the current X coordinate of this unit to set.
 	 */
-	private void setXCoor(double xCoor) {
-		XCoor = xCoor;
+	private void setXCoor(final double newxCoor) {
+		this.xCoor = newxCoor;
 	}
 	
 	/**
-	 * Sets the current Y coordinate of this unit
-	 * @param yCoor the current Y coordinate of this unit to set.
+	 * Sets the current Y coordinate of this unit.
+	 * @param newyCoor the current Y coordinate of this unit to set.
 	 */
-	private void setYCoor(double yCoor) {
-		YCoor = yCoor;
+	private void setYCoor(final double newyCoor) {
+		this.yCoor = newyCoor;
 	}
 	
 	/**
 	 * Returns the current velocity in the Y direction.
 	 * @return the current velocity in the Y direction.
 	 */
-	public int getVelY() {
+	public final int getVelY() {
 		return velY;
 	}
 	
 	/**
 	 * Sets the current velocity in the Y direction.
-	 * @param velY the velocity in the Y direction to set.
+	 * @param newvelY the velocity in the Y direction to set.
 	 */
-	public void setVelY(int velY) {
-		this.velY = velY;
+	public final void setVelY(final int newvelY) {
+		this.velY = newvelY;
+	}
+	/**
+	 * Get the width of this unit.
+	 * @return the width of this unit.
+	 */
+	public final int getWidth() {
+		return width;
+	}
+	/**
+	 * Sets the width of this unit.
+	 * @param newWidth to set as width.
+	 */
+	public final void setWidth(final int newWidth) {
+		this.width = newWidth;
+	}
+	/**
+	 * Get the height of this unit.
+	 * @return the height of this unit.
+	 */
+	public final int getHeight() {
+		return height;
+	}
+	/**
+	 * Sets the height of this unit.
+	 * @param newheight the height to set.
+	 */
+	public final void setHeight(final int newheight) {
+		this.height = newheight;
 	}
 
 }
