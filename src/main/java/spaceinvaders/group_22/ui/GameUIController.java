@@ -92,9 +92,6 @@ public class GameUIController
 	@SuppressWarnings("checkstyle:magicnumber")    
     public final void startAnimation() {
 		final GraphicsContext gc = canvas.getGraphicsContext2D();
-
-        game.getPlayer().getSpaceShip().setHeight(20);
-		game.getPlayer().getSpaceShip().setWidth(70);
 		
 		// Create the animation Timeline, responsible for updating the animation.
 		Timeline gameLoop = new Timeline();
@@ -129,8 +126,6 @@ public class GameUIController
 
 						
 						for (Alien unit : game.getAliens()) {
-							unit.setWidth(50);
-							unit.setHeight(50);
 							drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(), unit.getHeight(), gc);
 							
 						}

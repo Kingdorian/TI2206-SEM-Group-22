@@ -172,7 +172,8 @@ public class Game {
 		ArrayList<Alien> alienList = new ArrayList<Alien>();
 		
 		double borderDist = 100;
-        double spriteWidth = 50;
+        int spriteWidth = 50;
+        int spriteHeight = 50;
         double spriteAmount = 10;
         double lines = 4;
         
@@ -185,7 +186,7 @@ public class Game {
         // Drawing lines of Aliens.
         for (int i = 0; i < lines; i++) {
             for (int j = 0; j < spriteAmount; j++) {
-            	alienList.add(new Alien(startPosition, distance));
+            	alienList.add(new Alien(startPosition, distance, spriteWidth, spriteHeight));
             	startPosition += spriteWidth + interval;
             }
             distance += spriteWidth + 0.5 * spriteWidth;
