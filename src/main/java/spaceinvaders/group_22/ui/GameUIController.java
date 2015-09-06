@@ -100,7 +100,6 @@ public class GameUIController
     	// Set the animation framerate.
     	setFramerate(60);
 
-    	final long timeStart = System.currentTimeMillis();
 		KeyFrame frame = new KeyFrame(
 			Duration.seconds(framerate), 
 				new EventHandler<ActionEvent>()
@@ -147,7 +146,8 @@ public class GameUIController
      * @param spriteWidth The width of the sprite to draw.
      * @param spriteHeight The heifht of the sprite to draw.
      * @param gc The GraphicsContext of the canvas to draw on.
-     */  
+     */ 
+	@SuppressWarnings("checkstyle:magicnumber")    
     public final void drawBullet(final double x, final double y, final double spriteWidth, 
     		final double spriteHeight, final GraphicsContext gc) {
         gc.setFill(Color.WHITE);
@@ -164,6 +164,7 @@ public class GameUIController
      * @param spriteHeight The heifht of the sprite to draw.
      * @param gc The GraphicsContext of the canvas to draw on.
      */  
+	@SuppressWarnings("checkstyle:magicnumber")    
     public final void drawUnit(final double x, final double y, final double spriteWidth, 
     		final double spriteHeight, final GraphicsContext gc) {
         gc.setFill(Color.BLUE);

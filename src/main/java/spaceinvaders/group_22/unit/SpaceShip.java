@@ -38,6 +38,7 @@ public class SpaceShip extends Unit {
 	 * @return true if both objects are the same.
 	 * @param other the object to compare.
 	 */
+	@Override
 	public final boolean equals(final Object other) {
 		if (other != null && other instanceof SpaceShip) {
 			return super.equals(other);

@@ -1,7 +1,5 @@
 package spaceinvaders.group_22;
 
-import static org.junit.Assert.assertFalse;
-
 import java.util.ArrayList;
 
 import org.junit.Assert;
@@ -17,11 +15,15 @@ import spaceinvaders.group_22.unit.Alien;
 public class GameTest {
 	
 	/**
-	 * Static game used for testing;
+	 * Static game used for testing.
 	 */
-	static Game game;
+	private static Game game;
 
+	/**
+	 * Class to set up a game before each test is executed.
+	 */
 	@Before
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void setUpGame() {
 		game = new Game(200, 200);
 	}
