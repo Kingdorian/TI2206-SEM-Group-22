@@ -93,7 +93,7 @@ public class GameUIController
 		final GraphicsContext gc = canvas.getGraphicsContext2D();
 
         game.getPlayer().getSpaceShip().setHeight(20);
-		game.getPlayer().getSpaceShip().setWidht(70);
+		game.getPlayer().getSpaceShip().setWidth(70);
 		
 		// Create the animation Timeline, responsible for updating the animation.
 		Timeline gameLoop = new Timeline();
@@ -117,13 +117,13 @@ public class GameUIController
 						game.tick(pressedKeys);
 						for (int i = 0; i < game.getBullets().size(); i++) {
 							Bullet bullet = game.getBullets().get(i);
-							drawBullet(bullet.getXCoor(), bullet.getYCoor(), bullet.getWidht(), bullet.getHeight(), gc);
+							drawBullet(bullet.getXCoor(), bullet.getYCoor(), bullet.getWidth(), bullet.getHeight(), gc);
 						}
 						
 				        // Position the player in the middle, on the bottom of the screen.
 						drawUnit(game.getPlayer().getSpaceShip().getXCoor(), 
 								game.getPlayer().getSpaceShip().getYCoor(), 
-								game.getPlayer().getSpaceShip().getWidht(), 
+								game.getPlayer().getSpaceShip().getWidth(), 
 								game.getPlayer().getSpaceShip().getHeight(), gc);
 						drawAlienGrid(4, gc);
 						

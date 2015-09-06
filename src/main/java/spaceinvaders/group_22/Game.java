@@ -80,11 +80,11 @@ public class Game {
 		}
 		
 		// Check that the spaceship is still able to move without going off the screen.
-		if (player.getSpaceShip().getXCoor() - 0.5 * player.getSpaceShip().getWidht() > 0 
+		if (player.getSpaceShip().getXCoor() - 0.5 * player.getSpaceShip().getWidth() > 0 
 				&& pressedKeys.contains(KeyCode.A)) {
 			velX = velX - 10;
 		}
-		if (player.getSpaceShip().getXCoor() + 0.5 * player.getSpaceShip().getWidht() < canvasWidth
+		if (player.getSpaceShip().getXCoor() + 0.5 * player.getSpaceShip().getWidth() < canvasWidth
 				&& pressedKeys.contains(KeyCode.D)) {
 			velX = velX + 10;
 		}
