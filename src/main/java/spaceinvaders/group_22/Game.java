@@ -47,12 +47,14 @@ public class Game {
 	 * @param width of the canvas.
 	 * @param height of the canvas.
 	 */
+	@SuppressWarnings("checkstyle:magicnumber")
 	public Game(final double width, final double height) {
 		canvasWidth = width;
 		canvasHeight = height;
 		
 		bullets = new ArrayList<Bullet>();
-		aliens = createAliens();
+		
+		aliens = createAliens(100, 50, 50, 10, 4);
 
 		player = new Player(this);
 	}
@@ -166,26 +168,26 @@ public class Game {
 	/**
 	 * Creates the aliens on the correct start positions.
 	 * @return an arraylist of Aliens drawn.
+	 * @param borderDist Distance to the left and right border.
+	 * @param spriteWidth Width of the sprite.
+	 * @param spriteHeight Height of the sprite.
+	 * @param alienAmount Amount of aliens per line.
+	 * @param lines Amount of alien lines.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")    
-	public final ArrayList<Alien> createAliens() {
+	public final ArrayList<Alien> createAliens(final double borderDist, final int spriteWidth, 
+			final int spriteHeight, final int alienAmount, final int lines) {
 		ArrayList<Alien> alienList = new ArrayList<Alien>();
-		
-		double borderDist = 100;
-        int spriteWidth = 50;
-        int spriteHeight = 50;
-        double spriteAmount = 10;
-        double lines = 4;
         
         // Distance to top of the screen.
         double distance = 125;
         
-        double interval = (canvasWidth - 2 * borderDist - spriteAmount * spriteWidth) / (spriteAmount + 1);  
+        double interval = (canvasWidth - 2 * borderDist - alienAmount * spriteWidth) / (alienAmount + 1);  
         double startPosition = borderDist + interval;
        
         // Drawing lines of Aliens.
         for (int i = 0; i < lines; i++) {
-            for (int j = 0; j < spriteAmount; j++) {
+            for (int j = 0; j < alienAmount; j++) {
             	alienList.add(new Alien(startPosition, distance, spriteWidth, spriteHeight));
             	startPosition += spriteWidth + interval;
             }
