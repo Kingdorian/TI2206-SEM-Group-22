@@ -12,6 +12,7 @@ public abstract class Bullet extends Unit {
 	 * @param x X Coordinate
 	 * @param y Y Coordinate
 	 */
+	@SuppressWarnings("checkstyle:magicnumber")    
 	public Bullet(final double x, final double y) {
 		super(x, y);
 		setHeight(7);

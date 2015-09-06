@@ -56,6 +56,7 @@ public abstract class Unit {
 	 * @param other the object to compare this object to
 	 * @return true if both objects are thesame.
 	 */
+	@Override
 	public boolean equals(final Object other) {
 		if (other != null && other instanceof Unit) {
 			Unit that = (Unit) other;
