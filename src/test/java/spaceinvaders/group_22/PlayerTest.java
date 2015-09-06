@@ -1,21 +1,25 @@
 package spaceinvaders.group_22;
 
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
 import org.junit.Test;
 
 import spaceinvaders.group_22.unit.SpaceShip;
 
+/**
+ * Test for the player class.
+ * @author Dorian
+ *
+ */
 public class PlayerTest {
 	
 	/**
 	 * Test behavior of the getSpaceShip method for the player.
 	 */
 	@Test
-	public void testGetSetSpaceShip() {
-		SpaceShip ship = new SpaceShip(10.0f, 10.0f);
-		Player player = new Player(new Game());
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testGetSetSpaceShip() {
+		SpaceShip ship = new SpaceShip(10.0, 10.0);
+		Player player = new Player(new Game(200 , 200));
 		player.setSpaceShip(ship);
 		Assert.assertEquals(ship, player.getSpaceShip());
 	}
@@ -23,16 +27,18 @@ public class PlayerTest {
 	 * Test behaviour of the getScore method for the player class.
 	 */
 	@Test
-	public void testGetScore () {
-		Player player = new Player(new Game());
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testGetScore() {
+		Player player = new Player(new Game(200 , 200));
 		Assert.assertEquals(0, player.getScore());
 	}
 	/**
 	 * Tests the behaviour of the addpoints method for the player class for positive amounts of points.
 	 */
 	@Test
-	public void testAddPositiveScore () {
-		Player player = new Player(new Game());
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testAddPositiveScore() {
+		Player player = new Player(new Game(200 , 200));
 		player.addScore(10);
 		Assert.assertEquals(10, player.getScore());
 	}
@@ -40,8 +46,9 @@ public class PlayerTest {
 	 * Tests the behaviour of the addPoints method when adding a negative amount of points to the players score.
 	 */
 	@Test
-	public void testAddNegativeScore () { 
-		Player player = new Player(new Game());
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testAddNegativeScore() { 
+		Player player = new Player(new Game(200 , 200));
 		player.addScore(-10);
 		Assert.assertEquals(-10, player.getScore());
 	}
@@ -49,16 +56,18 @@ public class PlayerTest {
 	 * Tests the getLives method from the player class.
 	 */
 	@Test
-	public void testGetLives() {
-		Player player = new Player(new Game());
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testGetLives() {
+		Player player = new Player(new Game(200 , 200));
 		Assert.assertEquals(3, player.getLives());
 	}
 	/**
 	 * Tests the die method for the player class when the player has more then 1 live left.
 	 */
 	@Test
-	public void testDie() {
-		Player player = new Player(new Game());
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testDie() {
+		Player player = new Player(new Game(200 , 200));
 		player.die();
 		Assert.assertEquals(2, player.getLives());
 	}
@@ -66,8 +75,9 @@ public class PlayerTest {
 	 * Tests the die method for te player when it has only one live left.
 	 */
 	@Test
-	public void testDieOutOfLives() {
-		Game game = new Game();
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testDieOutOfLives() {
+		Game game = new Game(200 , 200);
 		game.start();
 		Player player = new Player(game);
 		player.die();

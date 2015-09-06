@@ -8,8 +8,9 @@ public class GameEventControler {
 
 	 /**
      * Create eventhandlers.
+     * @param game object to control
      */
-    public GameEventControler(Game game) {
+    public GameEventControler(final Game game) {
     	/*game.getCanvas().addEventHandler(KeyEvent.KEY_PRESSED, 
                 new EventHandler<KeyEvent>() {
 					public void handle(KeyEvent e) {

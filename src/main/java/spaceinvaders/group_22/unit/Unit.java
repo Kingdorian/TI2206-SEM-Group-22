@@ -29,6 +29,16 @@ public abstract class Unit {
 	private int velY;
 	
 	/**
+	 * height of this unit.
+	 */
+	private int height;
+	
+	/**
+	 * width of this unit.
+	 */
+	private int widht;
+	
+	/**
 	 * Creates a unit at Location X, Y with velocity 0 and direction north.
 	 * @param X Coordinate of this unit.
 	 * @param Y Coordinate of this unit.
@@ -38,18 +48,23 @@ public abstract class Unit {
 		this.setYCoor(Y);
 		this.setVelX(0);
 		this.setVelY(0);
+		this.setHeight(0);
+		this.setWidht(0);
 	}
 	/**
-	 * Compares two unit objects and returns if they are equal.
+	 * Compares two objects and returns if they are equal.
 	 * @param that the object to compare this object to
 	 * @return true if both objects are thesame.
 	 */
-	public boolean equals(Unit that) {
-		if (that != null && that instanceof Unit){
+	public boolean equals(Object other) {
+		if (other != null && other instanceof Unit){
+			Unit that = (Unit) other;
 			return this.XCoor == that.getXCoor()
 						&& this.getYCoor() == that.YCoor
 						&& this.velX == that.getVelX()
-						&& this.velY == that.getVelY();
+						&& this.velY == that.getVelY()
+						&& this.getHeight() == that.getHeight()
+						&& this.getWidht() == that.getWidht();
 		}
 		return false;
 	}
@@ -123,6 +138,34 @@ public abstract class Unit {
 	 */
 	public void setVelY(int velY) {
 		this.velY = velY;
+	}
+	/**
+	 * Get the width of this unit.
+	 * @return the width of this unit.
+	 */
+	public int getWidht() {
+		return widht;
+	}
+	/**
+	 * Sets the width of this unit.
+	 * @param widht to set as width.
+	 */
+	public void setWidht(int widht) {
+		this.widht = widht;
+	}
+	/**
+	 * Get the height of this unit.
+	 * @return the height of this unit.
+	 */
+	public int getHeight() {
+		return height;
+	}
+	/**
+	 * Sets the height of this unit.
+	 * @param height the height to set.
+	 */
+	public void setHeight(int height) {
+		this.height = height;
 	}
 
 }

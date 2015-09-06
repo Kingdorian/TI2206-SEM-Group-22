@@ -14,6 +14,8 @@ public abstract class Bullet extends Unit {
 	 */
 	public Bullet(final double x, final double y) {
 		super(x, y);
+		setHeight(7);
+		setWidht(3);
 	}
 
 }
