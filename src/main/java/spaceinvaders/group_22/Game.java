@@ -5,7 +5,9 @@ import javafx.scene.input.KeyCode;
 import java.util.ArrayList;
 
 import spaceinvaders.group_22.unit.Alien;
+import spaceinvaders.group_22.unit.AlienBullet;
 import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.ShipBullet;
 /**
  * 
  * @author Dorian
@@ -259,5 +261,49 @@ public class Game {
 			}
 			unit.moveUnit();
 		}
+	}
+	
+	public void checkCollisions(){
+		int size = this.getBullets().size();
+		for(int i = 0; i < size; i++){
+			if(this.getBullets().get(i) instanceof ShipBullet){
+				Alien alien = this.checkShipBulletVsAliens(this.getBullets().get(i));
+				if(alien != null){
+					//TODO what if alien gets hit by bullet
+				}
+			}
+			if(this.getBullets().get(i) instanceof AlienBullet){
+				if(this.checkAliensBulletVsSpaceShip(this.getBullets().get(i))){
+					//TODO what if ship gets hit by bullet
+				}
+			}
+		}
+	}
+	
+	public Alien checkShipBulletVsAliens(Bullet bullet){
+		int size = this.getAliens().size();
+		double bulletX = bullet.getXCoor();
+		double bulletY = bullet.getYCoor();
+		for(int i = 0; i < size; i++){
+			double alienX = this.getAliens().get(i).getXCoor();
+			double alienY = this.getAliens().get(i).getYCoor();
+			if((bulletX - alienX >= -2) && (bulletX - alienX <= 2) && 
+				(bulletY - alienY >= -2) && (bulletY - alienY <= 2)){
+				return this.getAliens().get(i);
+			}
+		}
+		return null;
+	}
+	
+	public boolean checkAliensBulletVsSpaceShip(Bullet bullet){
+		double bulletX = bullet.getXCoor();
+		double bulletY = bullet.getYCoor();
+		double shipX = this.getPlayer().getSpaceShip().getXCoor();
+		double shipY = this.getPlayer().getSpaceShip().getYCoor();
+		if((bulletX - shipX >= -2) && (bulletX - shipX <= 2) && 
+				(bulletY - shipY >= -2) && (bulletY - shipY <= 2)){
+			return true;
+		}
+		return false;
 	}
 }
