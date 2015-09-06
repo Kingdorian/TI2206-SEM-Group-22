@@ -11,7 +11,9 @@ public class AlienTest extends UnitTest {
 
 	@Override
 	public final Unit createInstance(final double x, final double y) {
-		return new Alien(x, y);
+		int width = 1;
+		int height = 1;
+		return new Alien(x, y, width, height);
 	}
 	
 	/**
@@ -21,7 +23,9 @@ public class AlienTest extends UnitTest {
 	public final void shootBulletTest() {
 		float x = 1;
 		float y = 1;
-		Alien alien = new Alien(x, y);
+		int width = 1;
+		int height = 1;
+		Alien alien = new Alien(x, y, width, height);
 		Bullet bullet = alien.shootBullet(1);
 		assertTrue(bullet.getXCoor() == alien.getXCoor());
 		assertTrue(bullet.getYCoor() == alien.getYCoor());
