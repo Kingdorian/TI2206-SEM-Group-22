@@ -152,9 +152,7 @@ public class GameUIController
      */  
 	@SuppressWarnings("checkstyle:magicnumber")    
     public final void drawUnit(final double x, final double y, final double spriteWidth, 
-    		final double spriteHeight, final String spriteFilename, final GraphicsContext gc) {
-
-		Image sprite = new Image(spriteFilename);
+    		final double spriteHeight, final Image sprite, final GraphicsContext gc) {
         
         // Draw the player with the X and Y coordinates as center
 		gc.drawImage(sprite, x - 0.5 * spriteWidth, y - 0.5 * spriteHeight);
