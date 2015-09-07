@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Unit;
+import spaceinvaders.group_22.unit.AlienBullet;
 /**
  * 
  * @author Dorian
@@ -132,6 +133,7 @@ public class Game {
 		player.getSpaceShip().moveUnit();
 		
 		moveAliens();
+		shootAlienBullets();
 		
 		//Check if all bullets are still visible
 		for (int i = 0; i < bullets.size(); i++) {
@@ -278,5 +280,15 @@ public class Game {
 			}
 			unit.moveUnit();
 		}
+	}
+	/**
+	 * Shoots bullets for aliens.
+	 */
+	public final void shootAlienBullets() {
+		int shootIndex = (int)Math.random()*aliens.size();
+		double bulletX = aliens.get(shootIndex).getXCoor();
+		double bulletY = aliens.get(shootIndex).getYCoor();
+		bullets.add(new AlienBullet(bulletX, bulletY, "alienbullet.png"));
+		
 	}
 }
