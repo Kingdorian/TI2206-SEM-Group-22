@@ -4,8 +4,10 @@ package spaceinvaders.group_22.ui;
  * Use copy/paste to copy paste this code into your favorite IDE
  **/
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
@@ -65,6 +67,11 @@ public class GameUIController
     private Game game;
     
     /**
+     * Hashmap containing all sprites.
+     */
+    private HashMap<String, Image> sprites;
+    
+    /**
      * Called by the FXMLLoader. 
      */
     @Override
@@ -74,6 +81,7 @@ public class GameUIController
     	canvasWidth = canvas.getWidth();
     	canvasHeight = canvas.getHeight();
     	game = new Game(canvasWidth, canvasHeight);
+    	sprites = getSprites();
     
     	startAnimation();
     	canvas.setFocusTraversable(true);
@@ -85,6 +93,24 @@ public class GameUIController
      */
     public final void setFramerate(final int fps) {
     	framerate = 1.0 / fps;
+    }
+    
+    /**
+     * Creates a hashmap of all available sprite images.
+     * @return a hashmap containing all available sprite images.
+     */
+    public final HashMap<String, Image> getSprites() {
+    	HashMap<String, Image> spriteMap = new HashMap<String, Image>();
+    	
+    	File resources = new File("src/main/resources");
+    	System.out.println(resources.getAbsolutePath());
+    	for (File image : resources.listFiles()) {
+    		if (image.getName().endsWith(".png")) {
+    			spriteMap.put(image.getName(), new Image(image.getName()));
+    		}
+    	}
+    	
+    	return spriteMap;
     }
     
     /**
@@ -155,10 +181,11 @@ public class GameUIController
      */  
 	@SuppressWarnings("checkstyle:magicnumber")    
     public final void drawUnit(final double x, final double y, final double spriteWidth, 
-    		final double spriteHeight, final Image sprite, final GraphicsContext gc) {
+    		final double spriteHeight, final String sprite, final GraphicsContext gc) {
         
         // Draw the player with the X and Y coordinates as center
-		gc.drawImage(sprite, x - 0.5 * spriteWidth, y - 0.5 * spriteHeight);
+		Image spriteImage = sprites.get(sprite);
+		gc.drawImage(spriteImage, x - 0.5 * spriteWidth, y - 0.5 * spriteHeight);
     }
 	
 	/**

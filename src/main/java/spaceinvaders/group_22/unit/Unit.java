@@ -1,7 +1,5 @@
 package spaceinvaders.group_22.unit;
 
-import javafx.scene.image.Image;
-
 /**
  * A unit in the game that has a position and velocity.
  * 
@@ -43,7 +41,7 @@ public abstract class Unit {
 	/**
 	 * an Image object containing the sprite.
 	 */
-	private Image sprite;
+	private String sprite;
 	
 	/**
 	 * Creates a unit at Location X, Y with velocity 0 and direction north.
@@ -182,7 +180,7 @@ public abstract class Unit {
 	 * Get the filename of the sprite of this unit.
 	 * @return the filename of the sprite of this unit.
 	 */
-	public final Image getSprite() {
+	public final String getSprite() {
 		return sprite;
 	}
 	/**
@@ -190,7 +188,7 @@ public abstract class Unit {
 	 * @param newSprite the filename to set.
 	 */
 	public final void setSprite(final String newSprite) {
-		this.sprite = new Image(newSprite);
+		this.sprite = newSprite;
 	}
 
 }
