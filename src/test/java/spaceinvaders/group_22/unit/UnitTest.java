@@ -23,9 +23,10 @@ public abstract class UnitTest {
 	 * 
 	 * @param x X Coordinate
 	 * @param y Y Coordinate
+	 * @param spriteFile The filename of the sprite.
 	 * @return The Unit
 	 */
-	public abstract Unit createInstance(double x, double y);
+	public abstract Unit createInstance(double x, double y, String spriteFile);
 	
 	/**
 	 * Setup the unit.
@@ -33,7 +34,7 @@ public abstract class UnitTest {
 	@Before
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void setup() {
-		unit = createInstance(1.2, 3);
+		unit = createInstance(1.2, 3, "invader.png");
 	}
 	
 	/**
@@ -99,7 +100,7 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEquals() {
-		Unit unit2 = createInstance(1.2, 3);
+		Unit unit2 = createInstance(1.2, 3, "invader.png");
 		assertEquals(unit, unit2);
 	}
 	

@@ -14,10 +14,10 @@ import org.junit.Test;
 public class SpaceShipTest extends UnitTest {
 
 	@Override
-	public final Unit createInstance(final double x, final double y) {
+	public final Unit createInstance(final double x, final double y, final String spriteFile) {
 		int width = 1;
 		int height = 1;
-		return new SpaceShip(x, y, width, height);
+		return new SpaceShip(x, y, width, height, spriteFile);
 	}
 	
 	/**
@@ -29,7 +29,7 @@ public class SpaceShipTest extends UnitTest {
 		float y = 1;
 		int width = 1;
 		int height = 1;
-		SpaceShip spaceship = new SpaceShip(x, y, width, height);
+		SpaceShip spaceship = new SpaceShip(x, y, width, height, "spaceship.png");
 		Bullet bullet = spaceship.shootBullet(1);
 		assertTrue(bullet.getXCoor() == spaceship.getXCoor());
 		assertTrue(bullet.getYCoor() == spaceship.getYCoor());
@@ -44,8 +44,8 @@ public class SpaceShipTest extends UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEqualsSpaceShip() {
-		SpaceShip ship2 = new SpaceShip(1.2, 3, 1, 1);
-		SpaceShip ship1 = new SpaceShip(1.2, 3, 1, 1);
+		SpaceShip ship2 = new SpaceShip(1.2, 3, 1, 1, "spaceship.png");
+		SpaceShip ship1 = new SpaceShip(1.2, 3, 1, 1, "spaceship.png");
 		assertEquals(ship1, ship2);
 	}
 	
@@ -55,8 +55,8 @@ public class SpaceShipTest extends UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEquals2() {
-		SpaceShip ship2 = new SpaceShip(1, 3, 1, 1);
-		SpaceShip ship1 = new SpaceShip(1.2, 3, 1, 1);
+		SpaceShip ship2 = new SpaceShip(1, 3, 1, 1, "spaceship.png");
+		SpaceShip ship1 = new SpaceShip(1.2, 3, 1, 1, "spaceship.png");
 		assertNotEquals(ship1, ship2);
 	}
 }

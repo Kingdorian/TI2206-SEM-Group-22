@@ -18,7 +18,7 @@ public class PlayerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testGetSetSpaceShip() {
-		SpaceShip ship = new SpaceShip(10.0, 10.0, 10, 10);
+		SpaceShip ship = new SpaceShip(10.0, 10.0, 10, 10, "spaceship.png");
 		Player player = new Player(new Game(200 , 200));
 		player.setSpaceShip(ship);
 		Assert.assertEquals(ship, player.getSpaceShip());

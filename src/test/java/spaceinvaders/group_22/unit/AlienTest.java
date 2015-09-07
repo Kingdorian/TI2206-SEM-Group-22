@@ -10,10 +10,10 @@ import org.junit.Test;
 public class AlienTest extends UnitTest {
 
 	@Override
-	public final Unit createInstance(final double x, final double y) {
+	public final Unit createInstance(final double x, final double y, final String spriteFile) {
 		int width = 1;
 		int height = 1;
-		return new Alien(x, y, width, height);
+		return new Alien(x, y, width, height, spriteFile);
 	}
 	
 	/**
@@ -25,7 +25,7 @@ public class AlienTest extends UnitTest {
 		float y = 1;
 		int width = 1;
 		int height = 1;
-		Alien alien = new Alien(x, y, width, height);
+		Alien alien = new Alien(x, y, width, height, "invader.png");
 		Bullet bullet = alien.shootBullet(1);
 		assertTrue(bullet.getXCoor() == alien.getXCoor());
 		assertTrue(bullet.getYCoor() == alien.getYCoor());
