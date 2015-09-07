@@ -279,7 +279,8 @@ public class Game {
 			}
 			if (this.getBullets().get(i) instanceof AlienBullet) {
 				if (this.checkAliensBulletVsSpaceShip(this.getBullets().get(i))) {
-					//TODO what happens when ship gets hit by bullet
+					this.getPlayer().die();
+					this.getBullets().remove(i);
 				}
 			}
 		}
