@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.Unit;
 /**
  * 
  * @author Dorian
@@ -43,14 +44,33 @@ public class Game {
     private double canvasHeight;
     
     /**
-     * If 0 the aliens don't have to move down.
+     * Velocity of the spaceShip in pixels per second.
      */
-	private double alienMoveDown = 0;
+    private double spaceShipVelX = 250;
+    
+    /**
+     * Velocity of the bullets of the spaceShip in pixels per second.
+     */
+    private double spaceShipBulletVelX = 80;
+    
+    /**
+     * If 0 the aliens don't have to move any frame down.
+     */
+	private double alienFramesDown = 0;
 	
 	/**
-	 * Speed of the aliens in the X direction.
+	 * Speed of the aliens in the X direction in pixels per second.
 	 */
-	private int alienVelX = 2;
+	private int alienVelX = 40;
+	
+	/**
+	 * Speed of the aliens in the Y direction in pixels per second.
+	 */
+	private double alienVelY = 40;
+	/**
+	 * Amount of pixels the aliens go down per wave.
+	 */
+	private double alienFall = 10;
     
 	/**
 	 * Creates a new instance of game.
@@ -93,19 +113,19 @@ public class Game {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
-		int velX = 0;
+		double velX = 0;
 		if (pressedKeys.contains(KeyCode.SPACE)) {
-			bullets.add(player.getSpaceShip().shootBullet(-2));
+			bullets.add(player.getSpaceShip().shootBullet(-spaceShipBulletVelX));
 		}
 		
 		// Check that the spaceship is still able to move without going off the screen.
 		if (player.getSpaceShip().getXCoor() - 0.5 * player.getSpaceShip().getWidth() > 0 
 				&& pressedKeys.contains(KeyCode.A)) {
-			velX = velX - 10;
+			velX = velX - spaceShipVelX;
 		}
 		if (player.getSpaceShip().getXCoor() + 0.5 * player.getSpaceShip().getWidth() < canvasWidth
 				&& pressedKeys.contains(KeyCode.D)) {
-			velX = velX + 10;
+			velX = velX + spaceShipVelX;
 		}
 			
 		player.getSpaceShip().setVelX(velX);
@@ -228,30 +248,29 @@ public class Game {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void moveAliens() {
-		Boolean hitborder = false;
 		//check if all aliens are still able to move in the window
 		for (Alien unit : getAliens()) {
-			if ((unit.getXCoor() + 0.5 * unit.getWidth() >= canvasWidth 
-					|| unit.getXCoor() - 0.5 * unit.getWidth() <= 0) 
-					&& alienMoveDown == 0) {
-				hitborder = true;
-				alienMoveDown = 15;
+			if (unit.getXCoor() + 0.5 * unit.getWidth() >= canvasWidth 
+					&& alienVelX >= 0) {
+				alienFramesDown = (alienFall / alienVelY) * (1 / Unit.getFramerate());
+				alienVelX = alienVelX * -1;
+			}
+			if (unit.getXCoor() - 0.5 * unit.getWidth() <= 0
+					&& alienVelX <= 0) {
+				alienFramesDown = (alienFall / alienVelY) * (1 / Unit.getFramerate());
 				alienVelX = alienVelX * -1;
 			}
 		}
-		if (alienMoveDown > 0) {
-			hitborder = true;
-			alienMoveDown = alienMoveDown - 1;
+		if (alienFramesDown > 0) {
+			alienFramesDown = alienFramesDown - 1;
 		}
 		// move every alien
 		for (Alien unit : getAliens()) {
-			if (hitborder && alienMoveDown >= 5) {
-				unit.setVelY(1);
+			if (alienFramesDown > 0) {
+				unit.setVelY(alienVelY);
 				unit.setVelX(0);			
-			} else if (hitborder && alienMoveDown < 5) {
-				unit.setVelY(0);
-				unit.setVelX(alienVelX);
 			} else {
+				unit.setVelY(0);
 				unit.setVelX(alienVelX);
 			}
 			if (unit.getYCoor() > canvasHeight - 100) {

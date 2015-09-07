@@ -23,12 +23,12 @@ public class SpaceShip extends Unit {
 	
 	/**
 	 * Creates a bullet object on the place of the Ship and shoots it upwards.
-	 * @param velocity The speed of the Bullet
+	 * @param spaceShipBulletVelX The speed of the Bullet
 	 * @return The shot Bullet
 	 */
-	public final Bullet shootBullet(final int velocity) {
+	public final Bullet shootBullet(final double spaceShipBulletVelX) {
 		Bullet bullet = new ShipBullet(this.getXCoor(), this.getYCoor());
-		bullet.setVelY(velocity);
+		bullet.setVelY(spaceShipBulletVelX);
 		return bullet;
 
 	}
