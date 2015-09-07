@@ -6,10 +6,14 @@ package spaceinvaders.group_22.ui;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.SpaceShip;
+import spaceinvaders.group_22.unit.Unit;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -20,7 +24,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
 import javafx.util.Duration;
 
 /**
@@ -63,6 +67,11 @@ public class GameUIController
     private Game game;
     
     /**
+     * Hashmap containing all sprites.
+     */
+    private HashMap<String, Image> sprites;
+    
+    /**
      * Called by the FXMLLoader. 
      */
     @Override
@@ -72,6 +81,7 @@ public class GameUIController
     	canvasWidth = canvas.getWidth();
     	canvasHeight = canvas.getHeight();
     	game = new Game(canvasWidth, canvasHeight);
+    	sprites = getSprites();
     
     	startAnimation();
     	canvas.setFocusTraversable(true);
@@ -86,14 +96,34 @@ public class GameUIController
     }
     
     /**
+     * Creates a hashmap of all available sprite images.
+     * @return a hashmap containing all available sprite images.
+     */
+    public final HashMap<String, Image> getSprites() {
+    	HashMap<String, Image> spriteMap = new HashMap<String, Image>();
+    		
+    		spriteMap.put("alienbullet.png", 
+    				new Image(getClass().getClassLoader()
+    						.getResource("spaceinvaders/group_22/images/alienbullet.png").toString()));
+    		spriteMap.put("spaceshipbullet.png", 
+    				new Image(getClass().getClassLoader()
+    						.getResource("spaceinvaders/group_22/images/spaceshipbullet.png").toString()));
+    		spriteMap.put("invader.png", 
+    				new Image(getClass().getClassLoader()
+    						.getResource("spaceinvaders/group_22/images/invader.png").toString()));
+	    	spriteMap.put("spaceship.png", 
+	    			new Image(getClass().getClassLoader()
+	    					.getResource("spaceinvaders/group_22/images/spaceship.png").toString()));
+    		
+    	return spriteMap;
+    }
+    
+    /**
      * Starts the animation of the canvas.
      */
 	@SuppressWarnings("checkstyle:magicnumber")    
     public final void startAnimation() {
 		final GraphicsContext gc = canvas.getGraphicsContext2D();
-
-        game.getPlayer().getSpaceShip().setHeight(20);
-		game.getPlayer().getSpaceShip().setWidth(70);
 		
 		// Create the animation Timeline, responsible for updating the animation.
 		Timeline gameLoop = new Timeline();
@@ -101,8 +131,8 @@ public class GameUIController
 		
     	// Set the animation framerate.
     	setFramerate(60);
-
-    	final long timeStart = System.currentTimeMillis();
+    	Unit.setFramerate(framerate);
+    	
 		KeyFrame frame = new KeyFrame(
 			Duration.seconds(framerate), 
 				new EventHandler<ActionEvent>()
@@ -113,44 +143,37 @@ public class GameUIController
 						
 						// Testing animation using only the Player.
 	                    //double testTranslation = (System.currentTimeMillis() - timeStart) / 10.0; 
-						
-						game.tick(pressedKeys);
-						for (int i = 0; i < game.getBullets().size(); i++) {
-							Bullet bullet = game.getBullets().get(i);
-							drawBullet(bullet.getXCoor(), bullet.getYCoor(), bullet.getWidth(), bullet.getHeight(), gc);
+						if (game.isInProgress()) {
+							
+							game.tick(pressedKeys);
 						}
+									
+						SpaceShip spaceShip = game.getPlayer().getSpaceShip();
 						
 				        // Position the player in the middle, on the bottom of the screen.
-						drawUnit(game.getPlayer().getSpaceShip().getXCoor(), 
-								game.getPlayer().getSpaceShip().getYCoor(), 
-								game.getPlayer().getSpaceShip().getWidth(), 
-								game.getPlayer().getSpaceShip().getHeight(), gc);
-						drawAlienGrid(4, gc);
+						drawUnit(spaceShip.getXCoor(), spaceShip.getYCoor(), spaceShip.getWidth(), 
+								spaceShip.getHeight(), spaceShip.getSprite(), gc);
+
+						
+						for (Alien unit : game.getAliens()) {
+							drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(),
+									unit.getHeight(), unit.getSprite(), gc);
+							
+						}
 						
 						if (pressedKeys.contains(KeyCode.SPACE)) {
 					    	pressedKeys.remove(KeyCode.SPACE);
 					    }
+						
+						for (Bullet bullet : game.getBullets()) {
+							drawUnit(bullet.getXCoor(), bullet.getYCoor(), 
+									bullet.getWidth(), bullet.getHeight(), bullet.getSprite(), gc);
+						}
 					}
 				});
 		
 		 gameLoop.getKeyFrames().add(frame);
 		 gameLoop.play();
-    }
-	
-	 /**
-     * Method to draw a bullet.
-     * @param x The horizontal position of the bullet to draw.
-     * @param y The vertical position of the bullet to draw.
-     * @param spriteWidth The width of the sprite to draw.
-     * @param spriteHeight The heifht of the sprite to draw.
-     * @param gc The GraphicsContext of the canvas to draw on.
-     */  
-    public final void drawBullet(final double x, final double y, final double spriteWidth, 
-    		final double spriteHeight, final GraphicsContext gc) {
-        gc.setFill(Color.WHITE);
-        
-        // Draw the bullet with the X and Y coordinates as center
-    	gc.fillRect(x - 0.5 * spriteWidth, y - 0.5 * spriteHeight, spriteWidth, spriteHeight);
     }
  
     /**
@@ -159,55 +182,17 @@ public class GameUIController
      * @param y The vertical position of the player to draw.
      * @param spriteWidth The width of the sprite to draw.
      * @param spriteHeight The heifht of the sprite to draw.
+     * @param sprite Image containing the sprite to draw.
      * @param gc The GraphicsContext of the canvas to draw on.
      */  
+	@SuppressWarnings("checkstyle:magicnumber")    
     public final void drawUnit(final double x, final double y, final double spriteWidth, 
-    		final double spriteHeight, final GraphicsContext gc) {
-        gc.setFill(Color.BLUE);
+    		final double spriteHeight, final String sprite, final GraphicsContext gc) {
         
         // Draw the player with the X and Y coordinates as center
-    	gc.fillRect(x - 0.5 * spriteWidth, y - 0.5 * spriteHeight, spriteWidth, spriteHeight);
+		Image spriteImage = sprites.get(sprite);
+		gc.drawImage(spriteImage, x - 0.5 * spriteWidth, y - 0.5 * spriteHeight);
     }
-    
-    /**
-     * Method to draw a grid of Aliens.
-     * @param lines The amount of lines the grid should have.
-     * @param gc The GraphicsContext of the canvas to draw on.
-     */
-	@SuppressWarnings("checkstyle:magicnumber")    
-    public final void drawAlienGrid(final int lines, final GraphicsContext gc) { 
-        double distance = 75;
-        
-        for (int i = 0; i < lines; i++) {
-        	drawAlienLine(10, distance, gc);
-
-        	distance += 75;
-        }
-        
-    }
-	
-	/**
-	 * Method to draw a line of Aliens.
-	 * @param spriteAmount Amount of sprites per line.
-	 * @param spacing Spacing between lines.
-     * @param gc The GraphicsContext of the canvas to draw on.
-	 */
-	@SuppressWarnings("checkstyle:magicnumber")  
-	public final void drawAlienLine(final int spriteAmount, final double spacing, final GraphicsContext gc) {
-        gc.setFill(Color.WHITE);
-		
-		double borderDist = 100;
-        double spriteWidth = 50;
-        double spriteHeight = 50;
-        
-        double interval = (canvasWidth - 2 * borderDist - spriteAmount * spriteWidth) / (spriteAmount + 1);  
-        double startPosition = borderDist + interval;
-        
-        for (int i = 0; i < spriteAmount; i++) {
-        	drawUnit(startPosition, spacing, spriteWidth, spriteHeight, gc);
-        	startPosition = startPosition + spriteWidth + interval;
-        }
-	}
 	
 	/**
 	 * Handles if a key is pressed.
@@ -216,7 +201,9 @@ public class GameUIController
 	@FXML
 	public final void handleKeyPressed(final KeyEvent event) {
         System.out.println(event.getCode() + " is pressed ");
-	    if (!pressedKeys.contains(event.getCode())) {
+        if (event.getCode().equals(KeyCode.S)) {       	
+        	game.start();
+        } else if (!pressedKeys.contains(event.getCode())) {
 	    	pressedKeys.add(event.getCode());
 	    }
 	}

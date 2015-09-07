@@ -3,8 +3,12 @@ package spaceinvaders.group_22.unit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * Test the abstract unit class.
@@ -23,9 +27,13 @@ public abstract class UnitTest {
 	 * 
 	 * @param x X Coordinate
 	 * @param y Y Coordinate
+	 * @param spriteFile The filename of the sprite.
 	 * @return The Unit
 	 */
-	public abstract Unit createInstance(double x, double y);
+	public abstract Unit createInstance(double x, double y, String spriteFile);
+	
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 	
 	/**
 	 * Setup the unit.
@@ -33,7 +41,9 @@ public abstract class UnitTest {
 	@Before
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void setup() {
-		unit = createInstance(1.2, 3);
+		// testImage is a 1x1 png image. 
+		unit = createInstance(1.2, 3, "testimage.png");
+		Unit.setFramerate(1);
 	}
 	
 	/**
@@ -71,6 +81,39 @@ public abstract class UnitTest {
 	}
 	
 	/**
+	 * Test the unit width.
+	 */
+	@Test
+	public final void testUnitWidth() {
+		assertTrue(unit.getWidth() == 1);
+	}
+	
+	/**
+	 * Test the unit height.
+	 */
+	@Test
+	public final void testUnitHeight() {
+		assertTrue(unit.getHeight() == 1);
+	}
+	
+	/**
+	 * Test the unit height.
+	 */
+	@Test
+	public final void testUnitSprite() {
+		assertTrue(unit.getSprite() == "testimage.png");
+	}
+	
+	/**
+	 * Test creating an object with an invalid sprite()
+	 */
+	@SuppressWarnings("checkstyle:magicnumber")    
+	public final void testInvalidUnitSprite() {
+		thrown.expect(IOException.class);
+		createInstance(1.2, 3, "png.invalid");
+	}
+	
+	/**
 	 * Test the move method with velocity 0 in X and Y.
 	 */
 	@Test
@@ -99,7 +142,7 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEquals() {
-		Unit unit2 = createInstance(1.2, 3);
+		Unit unit2 = createInstance(1.2, 3, "testimage.png");
 		assertEquals(unit, unit2);
 	}
 	

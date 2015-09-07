@@ -34,7 +34,7 @@ public class Player {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public Player(final Game parentgame) {
 		game = parentgame;
-		ship = new SpaceShip(game.getCanvasWidth() / 2, game.getCanvasHeight() - 100);
+		ship = new SpaceShip(game.getCanvasWidth() / 2, game.getCanvasHeight() - 100, "spaceship.png");
 		score  = 0;
 		lives = 3;
 	}

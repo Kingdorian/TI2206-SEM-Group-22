@@ -12,9 +12,10 @@ public class Alien extends Unit {
 	 * Creates an Alien.
 	 * @param x X coordinate
 	 * @param y Y coordinate
+	 * @param spriteFile The filename of the sprite.
 	 */
-	public Alien(final double x, final double y) {
-		super(x, y);
+	public Alien(final double x, final double y, final String spriteFile) {
+		super(x, y, spriteFile);
 	}
 	
 	/**
@@ -23,7 +24,7 @@ public class Alien extends Unit {
 	 * @return The shot Bullet
 	 */
 	public final Bullet shootBullet(final int velocity) {
-		Bullet bullet = new AlienBullet(this.getXCoor(), this.getYCoor());
+		Bullet bullet = new AlienBullet(this.getXCoor(), this.getYCoor(), "alienbullet.png");
 		bullet.setVelY(-velocity);
 		return bullet;
 	}

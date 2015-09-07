@@ -1,5 +1,11 @@
 package spaceinvaders.group_22.unit;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
+
 /**
  * A unit in the game that has a position and velocity.
  * 
@@ -19,14 +25,14 @@ public abstract class Unit {
 	private double yCoor;
 	
 	/**
-	 * VelX is the velocity in the X direction.
+	 * VelX is the velocity in the X direction in pixels per second.
 	 */
-	private int velX;
+	private double velX;
 	
 	/**
-	 * velY is the velocity in the Y direction.
+	 * velY is the velocity in the Y direction in pixels per second.
 	 */
-	private int velY;
+	private double velY;
 	
 	/**
 	 * height of this unit.
@@ -39,23 +45,46 @@ public abstract class Unit {
 	private int width;
 	
 	/**
+	 * an Image object containing the sprite.
+	 */
+	private String sprite;
+	
+	/**
+	 * The framerate of the animation.
+	 */
+	private static double framerate;
+	
+	/**
 	 * Creates a unit at Location X, Y with velocity 0 and direction north.
 	 * @param x Coordinate of this unit.
 	 * @param y Coordinate of this unit.
+	 * @param spriteFile filename of the sprite of this unit.
 	 */
-	public Unit(final double x, final double y) {
+	public Unit(final double x, final double y, final String spriteFile) {
 		this.setXCoor(x);
 		this.setYCoor(y);
+		this.setSprite(spriteFile);
+		
+		try {
+			InputStream inputStream = 
+					getClass().getClassLoader().getResourceAsStream("spaceinvaders/group_22/images/" + spriteFile);
+			BufferedImage spriteImage = ImageIO.read(inputStream);
+			this.setHeight(spriteImage.getHeight());
+			this.setWidth(spriteImage.getWidth());	
+		} catch (IOException e) {
+			System.out.println("Unit sprite image name invalid");
+			e.printStackTrace();
+		}
+		
 		this.setVelX(0);
 		this.setVelY(0);
-		this.setHeight(0);
-		this.setWidth(0);
 	}
 	/**
 	 * Compares two objects and returns if they are equal.
 	 * @param other the object to compare this object to
 	 * @return true if both objects are thesame.
 	 */
+	@Override
 	public boolean equals(final Object other) {
 		if (other != null && other instanceof Unit) {
 			Unit that = (Unit) other;
@@ -72,23 +101,23 @@ public abstract class Unit {
 	 * Move the unit in the direction of this unit and with his velocity.
 	 */
 	public final void moveUnit() {
-		setXCoor(this.getXCoor() + this.getVelX());
-		setYCoor(this.getYCoor() + this.getVelY());
+		setXCoor(this.getXCoor() + (this.getVelX() * framerate));
+		setYCoor(this.getYCoor() + (this.getVelY() * framerate));
 	}
 	
 	/**
 	 * Returns the current velocity in the X direction.
-	 * @return the current velocity in the X direction.
+	 * @return the current velocity in the X direction in pixels per second.
 	 */
-	public final int getVelX() {
+	public final double getVelX() {
 		return velX;
 	}
 	
 	/**
 	 * Sets the current velocity in the X direction.
-	 * @param newvelX the velocity in the X direction to set.
+	 * @param newvelX the velocity in the X direction to set in pixels per second.
 	 */
-	public final void setVelX(final int newvelX) {
+	public final void setVelX(final double newvelX) {
 		this.velX = newvelX;
 	}
 
@@ -126,18 +155,18 @@ public abstract class Unit {
 	
 	/**
 	 * Returns the current velocity in the Y direction.
-	 * @return the current velocity in the Y direction.
+	 * @return the current velocity in the Y direction in pixels per second.
 	 */
-	public final int getVelY() {
+	public final double getVelY() {
 		return velY;
 	}
 	
 	/**
 	 * Sets the current velocity in the Y direction.
-	 * @param newvelY the velocity in the Y direction to set.
+	 * @param alienVelY the velocity in the Y direction to set in pixels per second.
 	 */
-	public final void setVelY(final int newvelY) {
-		this.velY = newvelY;
+	public final void setVelY(final double alienVelY) {
+		this.velY = alienVelY;
 	}
 	/**
 	 * Get the width of this unit.
@@ -166,6 +195,36 @@ public abstract class Unit {
 	 */
 	public final void setHeight(final int newheight) {
 		this.height = newheight;
+	}
+	
+	/**
+	 * Get the filename of the sprite of this unit.
+	 * @return the filename of the sprite of this unit.
+	 */
+	public final String getSprite() {
+		return sprite;
+	}
+	/**
+	 * Sets the filename of the sprite of this unit.
+	 * @param newSprite the filename to set.
+	 */
+	public final void setSprite(final String newSprite) {
+		this.sprite = newSprite;
+	}	
+
+	/**
+	 * Returns the current frame rate.
+	 * @return the current frame rate.
+	 */
+	public static double getFramerate() {
+		return framerate;
+	}
+	/**
+	 * Set the framerate for the movement.
+	 * @param newframerate of the animation.
+	 */
+	public static void setFramerate(final double newframerate) {
+		Unit.framerate = newframerate;
 	}
 
 }
