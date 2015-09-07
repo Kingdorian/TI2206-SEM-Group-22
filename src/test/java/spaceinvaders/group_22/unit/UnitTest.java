@@ -10,6 +10,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import spaceinvaders.group_22.Game;
+
 /**
  * Test the abstract unit class.
  * 
@@ -43,7 +45,7 @@ public abstract class UnitTest {
 	public final void setup() {
 		// testImage is a 1x1 png image. 
 		unit = createInstance(1.2, 3, "testimage.png");
-		Unit.setFramerate(1);
+		Game.setTickrate(1);
 	}
 	
 	/**

@@ -77,6 +77,10 @@ public class Game {
      */
 	private int bulletChance = 1;
 	/**
+	 * The tickrate of the animation.
+	 */
+	private static double tickrate;
+	/**
 	 * Creates a new instance of game.
 	 * @param width of the canvas.
 	 * @param height of the canvas.
@@ -159,8 +163,20 @@ public class Game {
 	/**
 	 * Sets highscore.
 	 * @param newscore highscore (int)
-	 * @throws IlligalArgumentException if the new highscore is less then the old highscore or highscore is negative.
+	/**
+	 * Returns the current frame rate.
+	 * @return the current frame rate.
 	 */
+	public static double getTickrate() {
+		return tickrate;
+	}
+	/**
+	 * Set the tickrate for the movement.
+	 * @param newtickrate of the animation.
+	 */
+	public static void setTickrate(final double newtickrate) {
+		tickrate = newtickrate;
+	}
 	public final void setHighScore(final int newscore) {
 		assert newscore >= 0 && newscore > highscore;
 		highscore = newscore;
@@ -172,6 +188,7 @@ public class Game {
 	public final void setPlayer(final Player newPlayer) {
 		player = newPlayer;
 	}
+	
 	/**
 	 * Gets the bullets currently in this game.
 	 * @return Arraylist of bullets in the game.
@@ -257,12 +274,12 @@ public class Game {
 		for (Alien unit : getAliens()) {
 			if (unit.getXCoor() + 0.5 * unit.getWidth() >= canvasWidth 
 					&& alienVelX >= 0) {
-				alienFramesDown = (alienFall / alienVelY) * (1 / Unit.getFramerate());
+				alienFramesDown = (alienFall / alienVelY) * (1 / tickrate);
 				alienVelX = alienVelX * -1;
 			}
 			if (unit.getXCoor() - 0.5 * unit.getWidth() <= 0
 					&& alienVelX <= 0) {
-				alienFramesDown = (alienFall / alienVelY) * (1 / Unit.getFramerate());
+				alienFramesDown = (alienFall / alienVelY) * (1 / tickrate);
 				alienVelX = alienVelX * -1;
 			}
 		}
@@ -287,9 +304,10 @@ public class Game {
 	/**
 	 * Shoots bullets for aliens.
 	 */
+	@SuppressWarnings("checkstyle:magicnumber")
 	public final void shootAlienBullets() {
-		if(Math.random()<bulletChance*Unit.getFramerate()){
-		int shootIndex = (int)(Math.random()*aliens.size());
+		if (Math.random() < bulletChance * tickrate)   {
+		int shootIndex = (int) (Math.random() * aliens.size());
 		double bulletX = aliens.get(shootIndex).getXCoor();
 		double bulletY = aliens.get(shootIndex).getYCoor();
 		AlienBullet bullet = new AlienBullet(bulletX, bulletY, "alienbullet.png");

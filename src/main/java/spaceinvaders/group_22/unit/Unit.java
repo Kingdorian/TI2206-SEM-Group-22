@@ -6,6 +6,8 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
+import spaceinvaders.group_22.Game;
+
 /**
  * A unit in the game that has a position and velocity.
  * 
@@ -49,10 +51,7 @@ public abstract class Unit {
 	 */
 	private String sprite;
 	
-	/**
-	 * The framerate of the animation.
-	 */
-	private static double framerate;
+
 	
 	/**
 	 * Creates a unit at Location X, Y with velocity 0 and direction north.
@@ -101,8 +100,8 @@ public abstract class Unit {
 	 * Move the unit in the direction of this unit and with his velocity.
 	 */
 	public final void moveUnit() {
-		setXCoor(this.getXCoor() + (this.getVelX() * framerate));
-		setYCoor(this.getYCoor() + (this.getVelY() * framerate));
+		setXCoor(this.getXCoor() + (this.getVelX() * Game.getTickrate()));
+		setYCoor(this.getYCoor() + (this.getVelY() * Game.getTickrate()));
 	}
 	
 	/**
@@ -212,19 +211,6 @@ public abstract class Unit {
 		this.sprite = newSprite;
 	}	
 
-	/**
-	 * Returns the current frame rate.
-	 * @return the current frame rate.
-	 */
-	public static double getFramerate() {
-		return framerate;
-	}
-	/**
-	 * Set the framerate for the movement.
-	 * @param newframerate of the animation.
-	 */
-	public static void setFramerate(final double newframerate) {
-		Unit.framerate = newframerate;
-	}
+
 
 }
