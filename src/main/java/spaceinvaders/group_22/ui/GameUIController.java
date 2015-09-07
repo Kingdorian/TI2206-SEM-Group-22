@@ -115,10 +115,6 @@ public class GameUIController
 							
 							game.tick(pressedKeys);
 						}
-						for (int i = 0; i < game.getBullets().size(); i++) {
-							Bullet bullet = game.getBullets().get(i);
-							drawUnit(bullet.getXCoor(), bullet.getYCoor(), bullet.getWidth(), bullet.getHeight(), bullet.getSprite(), gc);
-						}
 												
 				        // Position the player in the middle, on the bottom of the screen.
 						drawUnit(game.getPlayer().getSpaceShip().getXCoor(), 
@@ -135,6 +131,11 @@ public class GameUIController
 						if (pressedKeys.contains(KeyCode.SPACE)) {
 					    	pressedKeys.remove(KeyCode.SPACE);
 					    }
+						
+						for (int i = 0; i < game.getBullets().size(); i++) {
+							Bullet bullet = game.getBullets().get(i);
+							drawUnit(bullet.getXCoor(), bullet.getYCoor(), bullet.getWidth(), bullet.getHeight(), bullet.getSprite(), gc);
+						}
 					}
 				});
 		
