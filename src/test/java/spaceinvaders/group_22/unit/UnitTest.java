@@ -6,7 +6,9 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * Test the abstract unit class.
@@ -29,6 +31,9 @@ public abstract class UnitTest {
 	 * @return The Unit
 	 */
 	public abstract Unit createInstance(double x, double y, String spriteFile);
+	
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 	
 	/**
 	 * Setup the unit.
@@ -101,9 +106,10 @@ public abstract class UnitTest {
 	/**
 	 * Test creating an object with an invalid sprite()
 	 */
-	@Test(expected = IOException.class)
+	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void testInvalidUnitSprite() {
-		unit = createInstance(1.2, 3, "png.invalid");
+		thrown.expect(IOException.class);
+		createInstance(1.2, 3, "png.invalid");
 	}
 	
 	/**
