@@ -307,12 +307,8 @@ public class Game {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void shootAlienBullets() {
 		if (Math.random() < bulletChance * tickrate)   {
-		int shootIndex = (int) (Math.random() * aliens.size());
-		double bulletX = aliens.get(shootIndex).getXCoor();
-		double bulletY = aliens.get(shootIndex).getYCoor();
-		AlienBullet bullet = new AlienBullet(bulletX, bulletY, "alienbullet.png");
-		bullet.setVelY(60);
-		bullets.add(bullet);
+			int shootIndex = (int) (Math.random() * aliens.size());
+			bullets.add(aliens.get(shootIndex).shootBullet(60));
 		}
 	}
 }
