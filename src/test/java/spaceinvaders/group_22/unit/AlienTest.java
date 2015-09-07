@@ -27,7 +27,7 @@ public class AlienTest extends UnitTest {
 		assertTrue(bullet.getYCoor() == alien.getYCoor());
 		bullet.moveUnit();
 		assertTrue(bullet.getXCoor() == alien.getXCoor());
-		assertTrue(bullet.getYCoor() == alien.getYCoor() - 1);
+		assertTrue(bullet.getYCoor() == alien.getYCoor() + 1);
 	}
 
 }

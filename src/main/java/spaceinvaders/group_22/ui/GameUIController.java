@@ -13,7 +13,6 @@ import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.SpaceShip;
-import spaceinvaders.group_22.unit.Unit;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;

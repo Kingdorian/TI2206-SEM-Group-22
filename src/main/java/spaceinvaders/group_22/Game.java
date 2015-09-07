@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Bullet;
-import spaceinvaders.group_22.unit.Unit;
-import spaceinvaders.group_22.unit.AlienBullet;
 /**
  * 
  * @author Dorian
@@ -160,9 +158,7 @@ public class Game {
 	public final int getHighScore() {
 		return highscore;
 	}
-	/**
-	 * Sets highscore.
-	 * @param newscore highscore (int)
+	
 	/**
 	 * Returns the current frame rate.
 	 * @return the current frame rate.
@@ -177,6 +173,10 @@ public class Game {
 	public static void setTickrate(final double newtickrate) {
 		tickrate = newtickrate;
 	}
+	/**
+	 * Sets highscore.
+	 * @param newscore highscore (int)
+	 */
 	public final void setHighScore(final int newscore) {
 		assert newscore >= 0 && newscore > highscore;
 		highscore = newscore;
@@ -247,7 +247,6 @@ public class Game {
             distance += spriteHeight + 0.1 * spriteHeight;
             startPosition = borderDist + interval;
         }
-        System.out.println(alienList);
 		return alienList;	
 	}
 	/**
