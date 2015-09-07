@@ -299,8 +299,10 @@ public class Game {
 		for (int i = 0; i < size; i++) {
 			double alienX = this.getAliens().get(i).getXCoor();
 			double alienY = this.getAliens().get(i).getYCoor();
-			if ((bulletX - alienX >= -20) && (bulletX - alienX <= 20) 
-				&& (bulletY - alienY >= -20) && (bulletY - alienY <= 20)) {
+			if ((bulletX - alienX >= -(this.getAliens().get(i).getWidth()) / 2) 
+				&& (bulletX - alienX <= this.getAliens().get(i).getWidth() / 2) 
+				&& (bulletY - alienY >= -(this.getAliens().get(i).getHeight()) / 2) 
+				&& (bulletY - alienY <= this.getAliens().get(i).getHeight() / 2)) {
 				return this.getAliens().get(i);
 			}
 		}
@@ -318,8 +320,10 @@ public class Game {
 		double bulletY = bullet.getYCoor();
 		double shipX = this.getPlayer().getSpaceShip().getXCoor();
 		double shipY = this.getPlayer().getSpaceShip().getYCoor();
-		if ((bulletX - shipX >= -20) && (bulletX - shipX <= 20) 
-			&& (bulletY - shipY >= -5) && (bulletY - shipY <= 5)) {
+		if ((bulletX - shipX >= -(this.getPlayer().getSpaceShip().getWidth()) / 2) 
+			&& (bulletX - shipX <= this.getPlayer().getSpaceShip().getWidth() / 2) 
+			&& (bulletY - shipY >= -(this.getPlayer().getSpaceShip().getHeight()) / 2) 
+			&& (bulletY - shipY <= this.getPlayer().getSpaceShip().getHeight() / 2)) {
 			return true;
 		}
 		return false;
