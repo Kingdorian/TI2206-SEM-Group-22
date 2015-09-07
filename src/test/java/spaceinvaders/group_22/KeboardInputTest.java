@@ -33,6 +33,7 @@ public class KeboardInputTest {
 	public final void setup() {
 		game = new Game(200 , 200);
 		game.setPlayer(new Player(game));
+		
 		// Create simulated events
 		simulEvents = new ArrayList<KeyCode>();
 	}
@@ -64,7 +65,8 @@ public class KeboardInputTest {
 	@Test
 	public final void testPressSpace() {
 		simulEvents.add(KeyCode.SPACE);
-		game.tick(simulEvents);
-		assertTrue(game.getBullets().size() > 0);
+		int size = game.getAliens().size();
+		game.tick(simulEvents);	
+		assertTrue(size - 1 == game.getAliens().size());
 	}
 }

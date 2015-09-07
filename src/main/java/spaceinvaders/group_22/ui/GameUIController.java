@@ -13,7 +13,6 @@ import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.SpaceShip;
-import spaceinvaders.group_22.unit.Unit;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -24,6 +23,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 
@@ -72,6 +72,18 @@ public class GameUIController
     private HashMap<String, Image> sprites;
     
     /**
+     * Label to load the score of the player in.
+     */
+    @FXML
+	private Label scoreLabel;
+    
+    /**
+     * Label to load the amount of lives the player in.
+     */
+    @FXML
+	private Label livesLabel;
+    
+    /**
      * Called by the FXMLLoader. 
      */
     @Override
@@ -82,7 +94,8 @@ public class GameUIController
     	canvasHeight = canvas.getHeight();
     	game = new Game(canvasWidth, canvasHeight);
     	sprites = getSprites();
-    
+    	scoreLabel.setText("Score: " + game.getPlayer().getScore());
+    	livesLabel.setText("Lives: " + game.getPlayer().getLives());
     	startAnimation();
     	canvas.setFocusTraversable(true);
     }
@@ -131,7 +144,7 @@ public class GameUIController
 		
     	// Set the animation framerate.
     	setFramerate(60);
-    	Unit.setFramerate(framerate);
+    	Game.setTickrate(framerate);
     	
 		KeyFrame frame = new KeyFrame(
 			Duration.seconds(framerate), 
@@ -169,6 +182,8 @@ public class GameUIController
 							drawUnit(bullet.getXCoor(), bullet.getYCoor(), 
 									bullet.getWidth(), bullet.getHeight(), bullet.getSprite(), gc);
 						}
+						scoreLabel.setText("Score: " + game.getPlayer().getScore());
+						livesLabel.setText("Lives: " + game.getPlayer().getLives());
 					}
 				});
 		
@@ -201,8 +216,10 @@ public class GameUIController
 	@FXML
 	public final void handleKeyPressed(final KeyEvent event) {
         System.out.println(event.getCode() + " is pressed ");
-        if (event.getCode().equals(KeyCode.S)) {       	
+        if (event.getCode().equals(KeyCode.S) && game.getPlayer().getLives() > 0) {       	
         	game.start();
+        } else if (event.getCode().equals(KeyCode.P)) {
+        	game.stop();
         } else if (!pressedKeys.contains(event.getCode())) {
 	    	pressedKeys.add(event.getCode());
 	    }

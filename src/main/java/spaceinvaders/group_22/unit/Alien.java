@@ -25,7 +25,7 @@ public class Alien extends Unit {
 	 */
 	public final Bullet shootBullet(final int velocity) {
 		Bullet bullet = new AlienBullet(this.getXCoor(), this.getYCoor(), "alienbullet.png");
-		bullet.setVelY(-velocity);
+		bullet.setVelY(velocity);
 		return bullet;
 	}
 

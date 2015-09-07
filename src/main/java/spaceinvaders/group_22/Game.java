@@ -9,6 +9,7 @@ import spaceinvaders.group_22.unit.AlienBullet;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Unit;
 import spaceinvaders.group_22.unit.ShipBullet;
+
 /**
  * 
  * @author Dorian
@@ -32,7 +33,7 @@ public class Game {
 	 */
 	private ArrayList<Bullet> bullets;
 	/**
-	 * List of bullets in the game.
+	 * List of aliens in the game.
 	 */
 	private ArrayList<Alien> aliens;	
 	/**
@@ -73,7 +74,14 @@ public class Game {
 	 * Amount of pixels the aliens go down per wave.
 	 */
 	private double alienFall = 10;
-    
+    /**
+     * Roughly the amount of bullets that spawn per second.
+     */
+	private int bulletChance = 1;
+	/**
+	 * The tickrate of the animation.
+	 */
+	private static double tickrate;
 	/**
 	 * Creates a new instance of game.
 	 * @param width of the canvas.
@@ -134,6 +142,7 @@ public class Game {
 		player.getSpaceShip().moveUnit();
 		
 		moveAliens();
+		shootAlienBullets();
 		
 		//Check if all bullets are still visible
 		for (int i = 0; i < bullets.size(); i++) {
@@ -154,10 +163,24 @@ public class Game {
 	public final int getHighScore() {
 		return highscore;
 	}
+	
+	/**
+	 * Returns the current frame rate.
+	 * @return the current frame rate.
+	 */
+	public static double getTickrate() {
+		return tickrate;
+	}
+	/**
+	 * Set the tickrate for the movement.
+	 * @param newtickrate of the animation.
+	 */
+	public static void setTickrate(final double newtickrate) {
+		tickrate = newtickrate;
+	}
 	/**
 	 * Sets highscore.
 	 * @param newscore highscore (int)
-	 * @throws IlligalArgumentException if the new highscore is less then the old highscore or highscore is negative.
 	 */
 	public final void setHighScore(final int newscore) {
 		assert newscore >= 0 && newscore > highscore;
@@ -170,6 +193,7 @@ public class Game {
 	public final void setPlayer(final Player newPlayer) {
 		player = newPlayer;
 	}
+	
 	/**
 	 * Gets the bullets currently in this game.
 	 * @return Arraylist of bullets in the game.
@@ -228,7 +252,6 @@ public class Game {
             distance += spriteHeight + 0.1 * spriteHeight;
             startPosition = borderDist + interval;
         }
-            
 		return alienList;	
 	}
 	/**
@@ -255,12 +278,12 @@ public class Game {
 		for (Alien unit : getAliens()) {
 			if (unit.getXCoor() + 0.5 * unit.getWidth() >= canvasWidth 
 					&& alienVelX >= 0) {
-				alienFramesDown = (alienFall / alienVelY) * (1 / Unit.getFramerate());
+				alienFramesDown = (alienFall / alienVelY) * (1 / tickrate);
 				alienVelX = alienVelX * -1;
 			}
 			if (unit.getXCoor() - 0.5 * unit.getWidth() <= 0
 					&& alienVelX <= 0) {
-				alienFramesDown = (alienFall / alienVelY) * (1 / Unit.getFramerate());
+				alienFramesDown = (alienFall / alienVelY) * (1 / tickrate);
 				alienVelX = alienVelX * -1;
 			}
 		}
@@ -286,6 +309,7 @@ public class Game {
 	/**
 	 * Checks if there are collisions between bullets and other units.
 	 */
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void checkCollisions() {
 		for (int i = 0; i < this.getBullets().size(); i++) {
 			if (this.getBullets().get(i) instanceof ShipBullet) {
@@ -293,6 +317,7 @@ public class Game {
 				if (alien != null) {
 					this.getAliens().remove(alien);
 					this.getBullets().remove(i);
+					getPlayer().addScore(10);
 				}
 			} else if (this.getBullets().get(i) instanceof AlienBullet) {
 				if (this.checkAliensBulletVsSpaceShip(this.getBullets().get(i))) {
@@ -344,5 +369,16 @@ public class Game {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Shoots bullets for aliens.
+	 */
+	@SuppressWarnings("checkstyle:magicnumber")
+	public final void shootAlienBullets() {
+		if (Math.random() < bulletChance * tickrate)   {
+			int shootIndex = (int) (Math.random() * aliens.size());
+			bullets.add(aliens.get(shootIndex).shootBullet(60));
+		}
 	}
 }
