@@ -12,14 +12,10 @@ public class Alien extends Unit {
 	 * Creates an Alien.
 	 * @param x X coordinate
 	 * @param y Y coordinate
-	 * @param width The width of the sprite.
-	 * @param height The height of the sprite.
 	 * @param spriteFile The filename of the sprite.
 	 */
-	public Alien(final double x, final double y, final int width, final int height, final String spriteFile) {
+	public Alien(final double x, final double y, final String spriteFile) {
 		super(x, y, spriteFile);
-		this.setWidth(width);
-		this.setHeight(height);
 	}
 	
 	/**

@@ -12,14 +12,10 @@ public class SpaceShip extends Unit {
 	 * Creates a SpaceShip.
 	 * @param x X Coordinate
 	 * @param y Y Coordinate
-	 * @param width The width of the sprite.
-	 * @param height The height of the sprite.
 	 * @param spriteFile filename of the sprite of this unit.
 	 */
-	public SpaceShip(final double x, final double y, final int width, final int height, final String spriteFile) {
+	public SpaceShip(final double x, final double y, final String spriteFile) {
 		super(x, y, spriteFile);
-		this.setWidth(width);
-		this.setHeight(height);
 	}
 	
 	/**

@@ -16,8 +16,6 @@ public abstract class Bullet extends Unit {
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public Bullet(final double x, final double y, final String spriteFile) {
 		super(x, y, spriteFile);
-		setHeight(7);
-		setWidth(3);
 	}
 
 }

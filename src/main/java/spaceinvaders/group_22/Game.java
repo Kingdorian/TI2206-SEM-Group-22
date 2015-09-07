@@ -199,7 +199,7 @@ public class Game {
         // Drawing lines of Aliens.
         for (int i = 0; i < lines; i++) {
             for (int j = 0; j < alienAmount; j++) {
-            	alienList.add(new Alien(startPosition, distance, spriteWidth, spriteHeight, "invader.png"));
+            	alienList.add(new Alien(startPosition, distance, "invader.png"));
             	startPosition += spriteWidth + interval;
             }
             distance += spriteHeight + 0.1 * spriteHeight;

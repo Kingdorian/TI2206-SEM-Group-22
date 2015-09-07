@@ -1,5 +1,11 @@
 package spaceinvaders.group_22.unit;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 /**
  * A unit in the game that has a position and velocity.
  * 
@@ -53,10 +59,18 @@ public abstract class Unit {
 		this.setXCoor(x);
 		this.setYCoor(y);
 		this.setSprite(spriteFile);
+		
+		try {
+			BufferedImage spriteImage = ImageIO.read(new File("src/main/resources/" + spriteFile));
+			this.setHeight(spriteImage.getHeight());
+			this.setWidth(spriteImage.getWidth());
+		} catch (IOException e) {
+			System.out.println("Unit sprite image name invalid");
+			e.printStackTrace();
+		}
+		
 		this.setVelX(0);
 		this.setVelY(0);
-		this.setHeight(0);
-		this.setWidth(0);
 	}
 	/**
 	 * Compares two objects and returns if they are equal.
