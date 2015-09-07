@@ -10,6 +10,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import spaceinvaders.group_22.unit.Alien;
+
 /**
  * Test key events.
  * @author Dorian
@@ -65,8 +67,9 @@ public class KeboardInputTest {
 	@Test
 	public final void testPressSpace() {
 		simulEvents.add(KeyCode.SPACE);
-		int size = game.getAliens().size();
+		ArrayList<Alien> alienList = new ArrayList<Alien>();
+		game.setAliens(alienList);
 		game.tick(simulEvents);	
-		assertTrue(size - 1 == game.getAliens().size());
+		assertTrue(1 == game.getBullets().size());
 	}
 }
