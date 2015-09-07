@@ -15,8 +15,8 @@ public class Alien extends Unit {
 	 * @param width The width of the sprite.
 	 * @param height The height of the sprite.
 	 */
-	public Alien(final double x, final double y, final int width, final int height) {
-		super(x, y);
+	public Alien(final double x, final double y, final int width, final int height, final String spriteFile) {
+		super(x, y, spriteFile);
 		this.setWidth(width);
 		this.setHeight(height);
 	}
@@ -27,7 +27,7 @@ public class Alien extends Unit {
 	 * @return The shot Bullet
 	 */
 	public final Bullet shootBullet(final int velocity) {
-		Bullet bullet = new AlienBullet(this.getXCoor(), this.getYCoor());
+		Bullet bullet = new AlienBullet(this.getXCoor(), this.getYCoor(), "alienbullet.png");
 		bullet.setVelY(-velocity);
 		return bullet;
 	}

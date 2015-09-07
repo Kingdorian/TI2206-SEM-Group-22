@@ -21,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
@@ -116,18 +117,18 @@ public class GameUIController
 						}
 						for (int i = 0; i < game.getBullets().size(); i++) {
 							Bullet bullet = game.getBullets().get(i);
-							drawBullet(bullet.getXCoor(), bullet.getYCoor(), bullet.getWidth(), bullet.getHeight(), gc);
+							drawUnit(bullet.getXCoor(), bullet.getYCoor(), bullet.getWidth(), bullet.getHeight(), bullet.getSprite(), gc);
 						}
 												
 				        // Position the player in the middle, on the bottom of the screen.
 						drawUnit(game.getPlayer().getSpaceShip().getXCoor(), 
 								game.getPlayer().getSpaceShip().getYCoor(), 
 								game.getPlayer().getSpaceShip().getWidth(), 
-								game.getPlayer().getSpaceShip().getHeight(), gc);
+								game.getPlayer().getSpaceShip().getHeight(), game.getPlayer().getSpaceShip().getSprite(), gc);
 
 						
 						for (Alien unit : game.getAliens()) {
-							drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(), unit.getHeight(), gc);
+							drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(), unit.getHeight(), unit.getSprite(), gc);
 							
 						}
 						
@@ -140,23 +141,6 @@ public class GameUIController
 		 gameLoop.getKeyFrames().add(frame);
 		 gameLoop.play();
     }
-	
-	 /**
-     * Method to draw a bullet.
-     * @param x The horizontal position of the bullet to draw.
-     * @param y The vertical position of the bullet to draw.
-     * @param spriteWidth The width of the sprite to draw.
-     * @param spriteHeight The heifht of the sprite to draw.
-     * @param gc The GraphicsContext of the canvas to draw on.
-     */ 
-	@SuppressWarnings("checkstyle:magicnumber")    
-    public final void drawBullet(final double x, final double y, final double spriteWidth, 
-    		final double spriteHeight, final GraphicsContext gc) {
-        gc.setFill(Color.WHITE);
-        
-        // Draw the bullet with the X and Y coordinates as center
-    	gc.fillRect(x - 0.5 * spriteWidth, y - 0.5 * spriteHeight, spriteWidth, spriteHeight);
-    }
  
     /**
      * Method to draw the Players Spaceship.
@@ -168,11 +152,12 @@ public class GameUIController
      */  
 	@SuppressWarnings("checkstyle:magicnumber")    
     public final void drawUnit(final double x, final double y, final double spriteWidth, 
-    		final double spriteHeight, final GraphicsContext gc) {
-        gc.setFill(Color.BLUE);
+    		final double spriteHeight, final String spriteFilename, final GraphicsContext gc) {
+
+		Image sprite = new Image(spriteFilename);
         
         // Draw the player with the X and Y coordinates as center
-    	gc.fillRect(x - 0.5 * spriteWidth, y - 0.5 * spriteHeight, spriteWidth, spriteHeight);
+		gc.drawImage(sprite, x - 0.5 * spriteWidth, y - 0.5 * spriteHeight);
     }
 	
 	/**

@@ -39,13 +39,20 @@ public abstract class Unit {
 	private int width;
 	
 	/**
+	 * filename of the Unit's sprite.
+	 */
+	private String sprite;
+	
+	/**
 	 * Creates a unit at Location X, Y with velocity 0 and direction north.
 	 * @param x Coordinate of this unit.
 	 * @param y Coordinate of this unit.
+	 * @param spriteFile filename of the sprite of this unit.
 	 */
-	public Unit(final double x, final double y) {
+	public Unit(final double x, final double y, final String spriteFile) {
 		this.setXCoor(x);
 		this.setYCoor(y);
+		this.setSprite(spriteFile);
 		this.setVelX(0);
 		this.setVelY(0);
 		this.setHeight(0);
@@ -167,6 +174,21 @@ public abstract class Unit {
 	 */
 	public final void setHeight(final int newheight) {
 		this.height = newheight;
+	}
+	
+	/**
+	 * Get the filename of the sprite of this unit.
+	 * @return the filename of the sprite of this unit.
+	 */
+	public final String getSprite() {
+		return sprite;
+	}
+	/**
+	 * Sets the filename of the sprite of this unit.
+	 * @param newSprite the filename to set.
+	 */
+	public final void setSprite(final String newSprite) {
+		this.sprite = newSprite;
 	}
 
 }

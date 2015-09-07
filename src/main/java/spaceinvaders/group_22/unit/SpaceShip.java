@@ -14,9 +14,10 @@ public class SpaceShip extends Unit {
 	 * @param y Y Coordinate
 	 * @param width The width of the sprite.
 	 * @param height The height of the sprite.
+	 * @param spriteFile filename of the sprite of this unit.
 	 */
-	public SpaceShip(final double x, final double y, final int width, final int height) {
-		super(x, y);
+	public SpaceShip(final double x, final double y, final int width, final int height, final String spriteFile) {
+		super(x, y, spriteFile);
 		this.setWidth(width);
 		this.setHeight(height);
 	}
@@ -27,7 +28,7 @@ public class SpaceShip extends Unit {
 	 * @return The shot Bullet
 	 */
 	public final Bullet shootBullet(final int velocity) {
-		Bullet bullet = new ShipBullet(this.getXCoor(), this.getYCoor());
+		Bullet bullet = new ShipBullet(this.getXCoor(), this.getYCoor(), "spaceshipbullet.png");
 		bullet.setVelY(velocity);
 		return bullet;
 

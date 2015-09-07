@@ -11,10 +11,11 @@ public abstract class Bullet extends Unit {
 	 * Creates a Bullet.
 	 * @param x X Coordinate
 	 * @param y Y Coordinate
+	 * @param spriteFile filename of the sprite of this unit.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")    
-	public Bullet(final double x, final double y) {
-		super(x, y);
+	public Bullet(final double x, final double y, final String spriteFile) {
+		super(x, y, spriteFile);
 		setHeight(7);
 		setWidth(3);
 	}

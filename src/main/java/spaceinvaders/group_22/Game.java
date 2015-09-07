@@ -64,7 +64,7 @@ public class Game {
 		
 		bullets = new ArrayList<Bullet>();
 		
-		aliens = createAliens(100, 50, 50, 10, 4);
+		aliens = createAliens(100, 69, 60, 10, 4);
 
 		player = new Player(this);
 	}
@@ -199,10 +199,10 @@ public class Game {
         // Drawing lines of Aliens.
         for (int i = 0; i < lines; i++) {
             for (int j = 0; j < alienAmount; j++) {
-            	alienList.add(new Alien(startPosition, distance, spriteWidth, spriteHeight));
+            	alienList.add(new Alien(startPosition, distance, spriteWidth, spriteHeight, "invader.png"));
             	startPosition += spriteWidth + interval;
             }
-            distance += spriteWidth + 0.5 * spriteWidth;
+            distance += spriteHeight + 0.1 * spriteHeight;
             startPosition = borderDist + interval;
         }
             
