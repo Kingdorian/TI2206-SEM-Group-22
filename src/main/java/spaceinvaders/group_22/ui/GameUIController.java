@@ -13,6 +13,7 @@ import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.SpaceShip;
+import spaceinvaders.group_22.unit.Unit;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -130,7 +131,8 @@ public class GameUIController
 		
     	// Set the animation framerate.
     	setFramerate(60);
-
+    	Unit.setFramerate(framerate);
+    	
 		KeyFrame frame = new KeyFrame(
 			Duration.seconds(framerate), 
 				new EventHandler<ActionEvent>()

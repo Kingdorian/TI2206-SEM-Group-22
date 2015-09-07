@@ -25,14 +25,14 @@ public abstract class Unit {
 	private double yCoor;
 	
 	/**
-	 * VelX is the velocity in the X direction.
+	 * VelX is the velocity in the X direction in pixels per second.
 	 */
-	private int velX;
+	private double velX;
 	
 	/**
-	 * velY is the velocity in the Y direction.
+	 * velY is the velocity in the Y direction in pixels per second.
 	 */
-	private int velY;
+	private double velY;
 	
 	/**
 	 * height of this unit.
@@ -48,6 +48,11 @@ public abstract class Unit {
 	 * an Image object containing the sprite.
 	 */
 	private String sprite;
+	
+	/**
+	 * The framerate of the animation.
+	 */
+	private static double framerate;
 	
 	/**
 	 * Creates a unit at Location X, Y with velocity 0 and direction north.
@@ -96,23 +101,23 @@ public abstract class Unit {
 	 * Move the unit in the direction of this unit and with his velocity.
 	 */
 	public final void moveUnit() {
-		setXCoor(this.getXCoor() + this.getVelX());
-		setYCoor(this.getYCoor() + this.getVelY());
+		setXCoor(this.getXCoor() + (this.getVelX() * framerate));
+		setYCoor(this.getYCoor() + (this.getVelY() * framerate));
 	}
 	
 	/**
 	 * Returns the current velocity in the X direction.
-	 * @return the current velocity in the X direction.
+	 * @return the current velocity in the X direction in pixels per second.
 	 */
-	public final int getVelX() {
+	public final double getVelX() {
 		return velX;
 	}
 	
 	/**
 	 * Sets the current velocity in the X direction.
-	 * @param newvelX the velocity in the X direction to set.
+	 * @param newvelX the velocity in the X direction to set in pixels per second.
 	 */
-	public final void setVelX(final int newvelX) {
+	public final void setVelX(final double newvelX) {
 		this.velX = newvelX;
 	}
 
@@ -150,18 +155,18 @@ public abstract class Unit {
 	
 	/**
 	 * Returns the current velocity in the Y direction.
-	 * @return the current velocity in the Y direction.
+	 * @return the current velocity in the Y direction in pixels per second.
 	 */
-	public final int getVelY() {
+	public final double getVelY() {
 		return velY;
 	}
 	
 	/**
 	 * Sets the current velocity in the Y direction.
-	 * @param newvelY the velocity in the Y direction to set.
+	 * @param alienVelY the velocity in the Y direction to set in pixels per second.
 	 */
-	public final void setVelY(final int newvelY) {
-		this.velY = newvelY;
+	public final void setVelY(final double alienVelY) {
+		this.velY = alienVelY;
 	}
 	/**
 	 * Get the width of this unit.
@@ -205,6 +210,21 @@ public abstract class Unit {
 	 */
 	public final void setSprite(final String newSprite) {
 		this.sprite = newSprite;
+	}	
+
+	/**
+	 * Returns the current frame rate.
+	 * @return the current frame rate.
+	 */
+	public static double getFramerate() {
+		return framerate;
+	}
+	/**
+	 * Set the framerate for the movement.
+	 * @param newframerate of the animation.
+	 */
+	public static void setFramerate(final double newframerate) {
+		Unit.framerate = newframerate;
 	}
 
 }
