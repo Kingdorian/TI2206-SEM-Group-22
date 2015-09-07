@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.SpaceShip;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -115,16 +116,17 @@ public class GameUIController
 							
 							game.tick(pressedKeys);
 						}
-												
+									
+						SpaceShip spaceShip = game.getPlayer().getSpaceShip();
+						
 				        // Position the player in the middle, on the bottom of the screen.
-						drawUnit(game.getPlayer().getSpaceShip().getXCoor(), 
-								game.getPlayer().getSpaceShip().getYCoor(), 
-								game.getPlayer().getSpaceShip().getWidth(), 
-								game.getPlayer().getSpaceShip().getHeight(), game.getPlayer().getSpaceShip().getSprite(), gc);
+						drawUnit(spaceShip.getXCoor(), spaceShip.getYCoor(), spaceShip.getWidth(), 
+								spaceShip.getHeight(), spaceShip.getSprite(), gc);
 
 						
 						for (Alien unit : game.getAliens()) {
-							drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(), unit.getHeight(), unit.getSprite(), gc);
+							drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(),
+									unit.getHeight(), unit.getSprite(), gc);
 							
 						}
 						
@@ -132,9 +134,9 @@ public class GameUIController
 					    	pressedKeys.remove(KeyCode.SPACE);
 					    }
 						
-						for (int i = 0; i < game.getBullets().size(); i++) {
-							Bullet bullet = game.getBullets().get(i);
-							drawUnit(bullet.getXCoor(), bullet.getYCoor(), bullet.getWidth(), bullet.getHeight(), bullet.getSprite(), gc);
+						for (Bullet bullet : game.getBullets()) {
+							drawUnit(bullet.getXCoor(), bullet.getYCoor(), 
+									bullet.getWidth(), bullet.getHeight(), bullet.getSprite(), gc);
 						}
 					}
 				});
