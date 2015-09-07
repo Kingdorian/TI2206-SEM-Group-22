@@ -102,8 +102,7 @@ public class GameUIController
     public final HashMap<String, Image> getSprites() {
     	HashMap<String, Image> spriteMap = new HashMap<String, Image>();
     	
-    	File resources = new File("src/main/resources");
-    	System.out.println(resources.getAbsolutePath());
+    	File resources = new File(getClass().getResource("/").getFile());
     	for (File image : resources.listFiles()) {
     		if (image.getName().endsWith(".png")) {
     			spriteMap.put(image.getName(), new Image(image.getName()));

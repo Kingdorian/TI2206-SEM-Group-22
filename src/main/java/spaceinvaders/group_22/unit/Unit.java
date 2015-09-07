@@ -61,8 +61,7 @@ public abstract class Unit {
 		this.setSprite(spriteFile);
 		
 		try {
-			File imageFile = new File("src/main/resources/" + spriteFile);
-			BufferedImage spriteImage = ImageIO.read(imageFile);
+			BufferedImage spriteImage = ImageIO.read(getClass().getResource("/" + spriteFile));
 			this.setHeight(spriteImage.getHeight());
 			this.setWidth(spriteImage.getWidth());
 		} catch (IOException e) {
