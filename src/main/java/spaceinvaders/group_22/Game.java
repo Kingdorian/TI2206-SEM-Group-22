@@ -31,7 +31,7 @@ public class Game {
 	 */
 	private ArrayList<Bullet> bullets;
 	/**
-	 * List of bullets in the game.
+	 * List of aliens in the game.
 	 */
 	private ArrayList<Alien> aliens;	
 	/**
@@ -72,7 +72,10 @@ public class Game {
 	 * Amount of pixels the aliens go down per wave.
 	 */
 	private double alienFall = 10;
-    
+    /**
+     * Roughly the amount of bullets that spawn per second.
+     */
+	private int bulletChance = 1;
 	/**
 	 * Creates a new instance of game.
 	 * @param width of the canvas.
@@ -227,7 +230,7 @@ public class Game {
             distance += spriteHeight + 0.1 * spriteHeight;
             startPosition = borderDist + interval;
         }
-            
+        System.out.println(alienList);
 		return alienList;	
 	}
 	/**
@@ -285,10 +288,13 @@ public class Game {
 	 * Shoots bullets for aliens.
 	 */
 	public final void shootAlienBullets() {
-		int shootIndex = (int)Math.random()*aliens.size();
+		if(Math.random()<bulletChance*Unit.getFramerate()){
+		int shootIndex = (int)(Math.random()*aliens.size());
 		double bulletX = aliens.get(shootIndex).getXCoor();
 		double bulletY = aliens.get(shootIndex).getYCoor();
-		bullets.add(new AlienBullet(bulletX, bulletY, "alienbullet.png"));
-		
+		AlienBullet bullet = new AlienBullet(bulletX, bulletY, "alienbullet.png");
+		bullet.setVelY(60);
+		bullets.add(bullet);
+		}
 	}
 }
