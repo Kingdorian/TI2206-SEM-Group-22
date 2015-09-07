@@ -1,8 +1,8 @@
 package spaceinvaders.group_22.unit;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
@@ -61,9 +61,11 @@ public abstract class Unit {
 		this.setSprite(spriteFile);
 		
 		try {
-			BufferedImage spriteImage = ImageIO.read(getClass().getResource("/" + spriteFile));
+			InputStream inputStream = 
+					getClass().getClassLoader().getResourceAsStream("spaceinvaders/group_22/images/" + spriteFile);
+			BufferedImage spriteImage = ImageIO.read(inputStream);
 			this.setHeight(spriteImage.getHeight());
-			this.setWidth(spriteImage.getWidth());
+			this.setWidth(spriteImage.getWidth());	
 		} catch (IOException e) {
 			System.out.println("Unit sprite image name invalid");
 			e.printStackTrace();

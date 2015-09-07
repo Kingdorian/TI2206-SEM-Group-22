@@ -4,7 +4,6 @@ package spaceinvaders.group_22.ui;
  * Use copy/paste to copy paste this code into your favorite IDE
  **/
 
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -101,14 +100,20 @@ public class GameUIController
      */
     public final HashMap<String, Image> getSprites() {
     	HashMap<String, Image> spriteMap = new HashMap<String, Image>();
-    	
-    	File resources = new File(getClass().getResource("/").getFile());
-    	for (File image : resources.listFiles()) {
-    		if (image.getName().endsWith(".png")) {
-    			spriteMap.put(image.getName(), new Image(image.getName()));
-    		}
-    	}
-    	
+    		
+    		spriteMap.put("alienbullet.png", 
+    				new Image(getClass().getClassLoader()
+    						.getResource("spaceinvaders/group_22/images/alienbullet.png").toString()));
+    		spriteMap.put("spaceshipbullet.png", 
+    				new Image(getClass().getClassLoader()
+    						.getResource("spaceinvaders/group_22/images/spaceshipbullet.png").toString()));
+    		spriteMap.put("invader.png", 
+    				new Image(getClass().getClassLoader()
+    						.getResource("spaceinvaders/group_22/images/invader.png").toString()));
+	    	spriteMap.put("spaceship.png", 
+	    			new Image(getClass().getClassLoader()
+	    					.getResource("spaceinvaders/group_22/images/spaceship.png").toString()));
+    		
     	return spriteMap;
     }
     
