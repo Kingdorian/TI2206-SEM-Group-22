@@ -268,16 +268,14 @@ public class Game {
 	 * Checks if there are collisions between bullets and other units.
 	 */
 	public final void checkCollisions() {
-		int size = this.getBullets().size();
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < this.getBullets().size(); i++) {
 			if (this.getBullets().get(i) instanceof ShipBullet) {
 				Alien alien = this.checkShipBulletVsAliens(this.getBullets().get(i));
 				if (alien != null) {
 					this.getAliens().remove(alien);
 					this.getBullets().remove(i);
 				}
-			}
-			if (this.getBullets().get(i) instanceof AlienBullet) {
+			} else if (this.getBullets().get(i) instanceof AlienBullet) {
 				if (this.checkAliensBulletVsSpaceShip(this.getBullets().get(i))) {
 					this.getPlayer().die();
 					this.getBullets().remove(i);
