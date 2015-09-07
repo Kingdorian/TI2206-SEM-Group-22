@@ -43,6 +43,7 @@ public abstract class UnitTest {
 	public final void setup() {
 		// testImage is a 1x1 png image. 
 		unit = createInstance(1.2, 3, "testimage.png");
+		Unit.setFramerate(1);
 	}
 	
 	/**
