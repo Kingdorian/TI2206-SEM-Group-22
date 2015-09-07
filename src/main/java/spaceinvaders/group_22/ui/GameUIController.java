@@ -151,6 +151,7 @@ public class GameUIController
      * @param y The vertical position of the player to draw.
      * @param spriteWidth The width of the sprite to draw.
      * @param spriteHeight The heifht of the sprite to draw.
+     * @param sprite Image containing the sprite to draw.
      * @param gc The GraphicsContext of the canvas to draw on.
      */  
 	@SuppressWarnings("checkstyle:magicnumber")    

@@ -14,6 +14,7 @@ public class Alien extends Unit {
 	 * @param y Y coordinate
 	 * @param width The width of the sprite.
 	 * @param height The height of the sprite.
+	 * @param spriteFile The filename of the sprite.
 	 */
 	public Alien(final double x, final double y, final int width, final int height, final String spriteFile) {
 		super(x, y, spriteFile);
