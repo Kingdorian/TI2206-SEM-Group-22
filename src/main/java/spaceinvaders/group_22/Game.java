@@ -175,21 +175,21 @@ public class Game {
 	 * Returns the barricades in this game.
 	 * @return the barricades in this game.
 	 */
-	public ArrayList<Barricade> getBarricades() {
+	public final  ArrayList<Barricade> getBarricades() {
 		return barricades;
 	}
 	/**
 	 * Sets the barricades in this game.
 	 * @param barricade the new barricades for this game.
 	 */
-	public void setBarricades(ArrayList<Barricade> barricade) { 
+	public final void setBarricades(final ArrayList<Barricade> barricade) { 
 		barricades = barricade;
 	}
 	/**
 	 * Add a new barricade to this game.
 	 * @param barricade to add.
 	 */
-	public void addBarricade(Barricade barricade) {
+	public final void addBarricade(final Barricade barricade) {
 		barricades.add(barricade);
 	}
 	/**
