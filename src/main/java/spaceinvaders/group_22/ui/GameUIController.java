@@ -93,7 +93,18 @@ public class GameUIController
     /**
      * The game over screen.
      */
-    private static Node gameOver;
+    private Node screenGameOver;
+    
+    /**
+     * The game over screen.
+     */
+    private Node screenBeforePlay;
+    
+    
+    /**
+     * The paused screen.
+     */
+    private Node screenPaused;
     
     /**
      * Called by the FXMLLoader. 
@@ -102,9 +113,15 @@ public class GameUIController
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void initialize(final URL fxmlFileLocation, final ResourceBundle resources) {
     	
-    	// Get the gameOver screen.
+    	// Get the various screens.
     	// The order in the FXML file matters (!).
-    	gameOver = stackPane.getChildren().get(0);
+    	screenGameOver = stackPane.getChildren().get(0);
+    	screenBeforePlay = stackPane.getChildren().get(1);
+    	screenPaused = stackPane.getChildren().get(2);
+
+    	// Move press to play to front.
+    	screenBeforePlay.toFront();
+    	
     	
     	canvasWidth = canvas.getWidth();
     	canvasHeight = canvas.getHeight();
@@ -205,10 +222,10 @@ public class GameUIController
 						formatScore(game.getPlayer().getScore());
 						
 						if (game.hasEnded()) {
-							gameOver.toFront();
+							screenGameOver.toFront();
 							highScoreLabel.setText("Highscore: " + game.getHighScore());
 						} else {
-							gameOver.toBack();
+							screenGameOver.toBack();
 						}
 						
 					}
@@ -274,9 +291,14 @@ public class GameUIController
 	public final void handleKeyPressed(final KeyEvent event) {
         System.out.println(event.getCode() + " is pressed ");
         if (event.getCode().equals(KeyCode.S) && game.getPlayer().getLives() > 0) {       	
+        	screenBeforePlay.toBack();
+        	screenPaused.toBack();
         	game.start();
         } else if (event.getCode().equals(KeyCode.P)) {
-        	game.stop();
+        	if (game.isInProgress()) {
+            	screenPaused.toFront();
+            	game.stop();	
+        	}
         } else if (!pressedKeys.contains(event.getCode())) {
 	    	pressedKeys.add(event.getCode());
 	    }
