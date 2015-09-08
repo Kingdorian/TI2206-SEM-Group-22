@@ -75,6 +75,7 @@ public class GameTest {
 		ArrayList<Barricade> barricades = new ArrayList<Barricade>();
 		Barricade barricade = new Barricade(10, 10, "testimage.png");
 		barricades.add(barricade);
+		game.setBarricades(new ArrayList<Barricade>());
 		game.addBarricade(barricade);
 		Assert.assertEquals(barricades, game.getBarricades());
 	}
