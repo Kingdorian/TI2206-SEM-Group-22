@@ -44,12 +44,12 @@ public class Game {
 	/**
      * The width of the canvas.
      */
-    private double canvasWidth;
+    private int canvasWidth;
     
     /**
      * The height of the canvas.
      */
-    private double canvasHeight;
+    private int canvasHeight;
     
     /**
      * Velocity of the spaceShip in pixels per second.
@@ -93,17 +93,16 @@ public class Game {
 	 * @param height of the canvas.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
-	public Game(final double width, final double height) {
+	public Game(final int width, final int height) {
 		canvasWidth = width;
 		canvasHeight = height;
 		
 		bullets = new ArrayList<Bullet>();
-		
+		barricades = createBarricades();
 		aliens = createAliens(100, 69, 60, 10, 4);
 
 		player = new Player(this);
 		
-		barricades = new ArrayList<Barricade>();
 	}
 	/**
 	 * Starts the game.
@@ -410,5 +409,16 @@ public class Game {
 				bullets.add(aliens.get(shootIndex).shootBullet(60));
 			}
 		}
+	}
+	
+	private final ArrayList<Barricade> createBarricades() {
+		int barricadeCount = 4;
+		int interval = canvasWidth/(barricadeCount+1);
+		ArrayList<Barricade> bars = new ArrayList<Barricade>();
+		for(int i = 1; i <= barricadeCount; i++) {
+			System.out.println(interval*i);
+			bars.add(new Barricade(interval*i, canvasHeight-200, "invader.png"));
+		}
+		return bars;
 	}
 }

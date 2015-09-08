@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.unit.Alien;
+import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.SpaceShip;
 import javafx.animation.KeyFrame;
@@ -49,12 +50,12 @@ public class GameUIController
     /**
      * The width of the canvas.
      */
-    private double canvasWidth;
+    private int canvasWidth;
     
     /**
      * The height of the canvas.
      */
-    private double canvasHeight;
+    private int canvasHeight;
     
     /**
      * ArrayList of all the keys currently pressed.
@@ -90,8 +91,8 @@ public class GameUIController
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void initialize(final URL fxmlFileLocation, final ResourceBundle resources) {
     	
-    	canvasWidth = canvas.getWidth();
-    	canvasHeight = canvas.getHeight();
+    	canvasWidth = (int)canvas.getWidth();
+    	canvasHeight = (int)canvas.getHeight();
     	game = new Game(canvasWidth, canvasHeight);
     	sprites = getSprites();
     	scoreLabel.setText("Score: " + game.getPlayer().getScore());
@@ -167,11 +168,16 @@ public class GameUIController
 						drawUnit(spaceShip.getXCoor(), spaceShip.getYCoor(), spaceShip.getWidth(), 
 								spaceShip.getHeight(), spaceShip.getSprite(), gc);
 
-						
+						// Draw aliens
 						for (Alien unit : game.getAliens()) {
 							drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(),
 									unit.getHeight(), unit.getSprite(), gc);
-							
+						}
+						// Draw barricades
+						for (Barricade bar : game.getBarricades()) {
+							System.out.println(bar.getXCoor() + "  " + bar.getYCoor() + bar.getSprite());
+							drawUnit(bar.getXCoor(), bar.getYCoor(), bar.getWidth(),
+									bar.getHeight(), bar.getSprite(), gc);
 						}
 						
 						if (pressedKeys.contains(KeyCode.SPACE)) {
