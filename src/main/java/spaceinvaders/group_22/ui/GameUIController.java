@@ -175,7 +175,6 @@ public class GameUIController
 						}
 						// Draw barricades
 						for (Barricade bar : game.getBarricades()) {
-							System.out.println(bar.getXCoor() + "  " + bar.getYCoor() + bar.getSprite());
 							drawUnit(bar.getXCoor(), bar.getYCoor(), bar.getWidth(),
 									bar.getHeight(), bar.getSprite(), gc);
 						}
@@ -221,7 +220,6 @@ public class GameUIController
 	 */
 	@FXML
 	public final void handleKeyPressed(final KeyEvent event) {
-        System.out.println(event.getCode() + " is pressed ");
         if (event.getCode().equals(KeyCode.S) && game.getPlayer().getLives() > 0) {       	
         	game.start();
         } else if (event.getCode().equals(KeyCode.P)) {
