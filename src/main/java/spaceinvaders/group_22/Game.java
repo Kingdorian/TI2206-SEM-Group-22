@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.AlienBullet;
 import spaceinvaders.group_22.unit.Bullet;
-import spaceinvaders.group_22.unit.Unit;
 import spaceinvaders.group_22.unit.ShipBullet;
 
 /**
@@ -15,6 +14,7 @@ import spaceinvaders.group_22.unit.ShipBullet;
  * @author Dorian
  *
  */
+@SuppressWarnings("checkstyle:magicnumber")
 public class Game {
 	/**
 	 * Boolean that indicates if the game is inProgress.
@@ -122,8 +122,9 @@ public class Game {
 	 */
 	public final void gameOver() {
 		stop();
-		if (player.getScore() > highscore);
-		setHighScore(player.getScore());
+		if (player.getScore() > highscore) {
+			setHighScore(player.getScore());
+		}
 		hasEnded = true;
 	}
 	
