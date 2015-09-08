@@ -136,7 +136,6 @@ public class Game {
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
 		double velX = 0;
 		if (pressedKeys.contains(KeyCode.SPACE)) {
-			System.out.println(tickrate);
 			if (shootingAllowed) {
 				bullets.add(player.getSpaceShip().shootBullet(-spaceShipBulletVelX));
 				shootingAllowed = false;
