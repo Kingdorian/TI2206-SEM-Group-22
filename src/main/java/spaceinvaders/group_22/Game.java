@@ -80,8 +80,13 @@ public class Game {
 	private int bulletChance = 1;
 	/**
 	 * The tickrate of the animation.
-	 */
+	 */	
 	private static double tickrate;
+	/**
+	 * Marks if the game has been ended.
+	 */
+	private boolean hasEnded = false;
+	
 	/**
 	 * Creates a new instance of game.
 	 * @param width of the canvas.
@@ -103,6 +108,7 @@ public class Game {
 	 */
 	public final void start() {
 		inProgress = true;
+		hasEnded = false;
 	}
 	/**
 	 * Pauses the game.
@@ -110,12 +116,31 @@ public class Game {
 	public final void stop() {
 		inProgress = false;
 	}
+	
+	/**
+	 * Stops the game and marks the game as ended.
+	 */
+	public final void gameOver() {
+		stop();
+		if (player.getScore() > highscore);
+		setHighScore(player.getScore());
+		hasEnded = true;
+	}
+	
 	/**
 	 * Returns true if the game is in progress.
 	 * @return boolean if the game is in progress
 	 */
 	public final boolean isInProgress() {
 		return inProgress;
+	}
+	
+	/**
+	 * Returns true if the game has ended.
+	 * @return boolean if the game is ended.
+	 */
+	public final boolean hasEnded() {
+		return hasEnded;
 	}
 	/**
 	 * Will update all the objects in the game.

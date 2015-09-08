@@ -79,7 +79,7 @@ public class Player {
 	public final void die() {
 		lives--;
 		if (lives <= 0) {
-			game.stop();
+			game.gameOver();
 		}
 	}
 	/**

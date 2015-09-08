@@ -18,9 +18,11 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.input.KeyCode;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -40,6 +42,11 @@ public class GameUIController
 	 * Canvas corresponding to fxml id.
 	 */
     @FXML private Canvas canvas;
+    
+    /**
+     * Stackpane corresponding to fmxl id.
+     */
+    @FXML private StackPane stackPane;
 
     /**
      * The framerate of the animation.
@@ -78,11 +85,26 @@ public class GameUIController
 	private Label scoreLabel;
     
     /**
+     * Label to load the highscore in.
+     */
+    @FXML
+	private Label highScoreLabel;
+    
+    /**
+     * The game over screen.
+     */
+    private static Node gameOver;
+    
+    /**
      * Called by the FXMLLoader. 
      */
     @Override
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void initialize(final URL fxmlFileLocation, final ResourceBundle resources) {
+    	
+    	// Get the gameOver screen.
+    	// The order in the FXML file matters (!).
+    	gameOver = stackPane.getChildren().get(0);
     	
     	canvasWidth = canvas.getWidth();
     	canvasHeight = canvas.getHeight();
@@ -181,6 +203,14 @@ public class GameUIController
 						scoreLabel.setText("Score: " + game.getPlayer().getScore());
 						formatLives(game.getPlayer().getLives(), gc);
 						formatScore(game.getPlayer().getScore());
+						
+						if (game.hasEnded()) {
+							gameOver.toFront();
+							highScoreLabel.setText("Highscore: " + game.getHighScore());
+						} else {
+							gameOver.toBack();
+						}
+						
 					}
 				});
 		
