@@ -73,7 +73,7 @@ public class Game {
 	/**
 	 * Amount of pixels the aliens go down per wave.
 	 */
-	private double alienFall = 10;
+	private double alienFall = 60;
     /**
      * Roughly the amount of bullets that spawn per second.
      */
@@ -299,7 +299,8 @@ public class Game {
 				unit.setVelY(0);
 				unit.setVelX(alienVelX);
 			}
-			if (unit.getYCoor() > canvasHeight - 100) {
+			//Check if there is an alien at the height of the spaceship.
+			if (unit.getYCoor() >= (player.getSpaceShip().getYCoor() - (player.getSpaceShip().getHeight()))) {
 				this.stop();
 			}
 			unit.moveUnit();
