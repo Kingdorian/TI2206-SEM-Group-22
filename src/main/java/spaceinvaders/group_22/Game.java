@@ -64,7 +64,7 @@ public class Game {
 	/**
 	 * Speed of the aliens in the X direction in pixels per second.
 	 */
-	private int alienVelX = 40;
+	private double alienVelX = 40;
 	
 	/**
 	 * Speed of the aliens in the Y direction in pixels per second.
@@ -78,6 +78,10 @@ public class Game {
      * Roughly the amount of bullets that spawn per second.
      */
 	private int bulletChance = 1;
+	/**
+	 * What X direction the aliens are moving.
+	 */
+	private int alienYDir = 1;
 	/**
 	 * The tickrate of the animation.
 	 */
@@ -246,7 +250,9 @@ public class Game {
         // Drawing lines of Aliens.
         for (int i = 0; i < lines; i++) {
             for (int j = 0; j < alienAmount; j++) {
-            	alienList.add(new Alien(startPosition, distance, "invader.png"));
+            	Alien alien = new Alien(startPosition, distance, "invader.png");
+            	alien.setVelX(alienVelX);
+            	alienList.add(alien);
             	startPosition += spriteWidth + interval;
             }
             distance += spriteHeight + 0.1 * spriteHeight;
@@ -275,18 +281,30 @@ public class Game {
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void moveAliens() {
 		//check if all aliens are still able to move in the window
-		for (Alien unit : getAliens()) {
-			if (unit.getXCoor() + 0.5 * unit.getWidth() >= canvasWidth 
-					&& alienVelX >= 0) {
-				alienFramesDown = (alienFall / alienVelY) * (1 / tickrate);
-				alienVelX = alienVelX * -1;
+		if (alienFramesDown == 0) {
+			for (Alien unit : getAliens()) {
+				// When this alien is on the right side of the screen change the direction
+				if (unit.getXCoor() + 0.5 * unit.getWidth() >= canvasWidth) {
+					alienFramesDown = (alienFall / alienVelY) * (1 / tickrate);
+					// Increase speed
+					alienVelX += 4;
+					// Switch direction
+					alienVelX *= -1;
+					break;
+				}
+				// When this alien is at the left side of the screen change the direction
+				if (unit.getXCoor() - 0.5 * unit.getWidth() <= 0) {
+					alienFramesDown = (alienFall / alienVelY) * (1 / tickrate);
+					// Increase speed
+					alienVelX -= 4;
+					// Switch direction
+					alienVelX *= -1;
+					break;
+				}
 			}
-			if (unit.getXCoor() - 0.5 * unit.getWidth() <= 0
-					&& alienVelX <= 0) {
-				alienFramesDown = (alienFall / alienVelY) * (1 / tickrate);
-				alienVelX = alienVelX * -1;
-			}
+			
 		}
+		// Decrease the amount of frames the alien needs to be going down.
 		if (alienFramesDown > 0) {
 			alienFramesDown = alienFramesDown - 1;
 		}
@@ -299,7 +317,7 @@ public class Game {
 				unit.setVelY(0);
 				unit.setVelX(alienVelX);
 			}
-			if (unit.getYCoor() > canvasHeight - 100) {
+			if (unit.getYCoor() > player.getSpaceShip().getYCoor() - (player.getSpaceShip().getHeight() * 1.5)) {
 				this.stop();
 			}
 			unit.moveUnit();
