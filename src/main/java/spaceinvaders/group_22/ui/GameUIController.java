@@ -88,7 +88,7 @@ public class GameUIController
     	canvasHeight = canvas.getHeight();
     	game = new Game(canvasWidth, canvasHeight);
     	sprites = getSprites();
-    	scoreLabel.setText("Score: " + game.getPlayer().getScore());
+    	
     	startAnimation();
     	canvas.setFocusTraversable(true);
     }
@@ -180,6 +180,7 @@ public class GameUIController
 						}
 						scoreLabel.setText("Score: " + game.getPlayer().getScore());
 						formatLives(game.getPlayer().getLives(), gc);
+						formatScore(game.getPlayer().getScore());
 					}
 				});
 		
@@ -199,6 +200,23 @@ public class GameUIController
         	gc.drawImage(heartImage, canvas.getWidth() - 10 - heartImage.getWidth() * i, 10);
     	}
     }
+	
+	/**
+	 * Method to display the score on the screen.
+	 * @param score The score to be displayed.
+	 */
+	@SuppressWarnings("checkstyle:magicnumber")    
+	public final void formatScore(final int score) {
+    	int digitsBefore = 8 - Integer.toString(score).length();
+    	String scoreString = "";
+    	
+    	for (int i = 0; i < digitsBefore; i++) {
+    		scoreString += "0";
+    	}
+    	scoreString += score;
+    	
+    	scoreLabel.setText(scoreString);	
+	}
  
     /**
      * Method to draw the Players Spaceship.

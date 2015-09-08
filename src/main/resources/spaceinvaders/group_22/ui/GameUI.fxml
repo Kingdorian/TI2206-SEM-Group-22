@@ -18,9 +18,9 @@
          </image>
       </ImageView>
       <Canvas fx:id="canvas" height="720.0" layoutX="140.0" onKeyPressed="#handleKeyPressed" onKeyReleased="#handleKeyReleased" styleClass="canvas" width="1000.0" />
-      <Label fx:id="scoreLabel" layoutX="160.0" prefHeight="77.0" prefWidth="200.0" text="Score:" textFill="WHITE">
+      <Label fx:id="scoreLabel" layoutX="160.0" prefHeight="77.0" prefWidth="200.0" textFill="WHITE">
          <font>
-            <Font name="Phosphate Inline" size="36.0" />
+            <Font name="Impact" size="36.0" />
          </font>
       </Label>
    </children>
