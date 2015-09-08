@@ -11,8 +11,10 @@ import spaceinvaders.group_22.unit.Alien;
  */
 public class AlienController {
 	
+	/**
+	 * The game with the controller.
+	 */
 	private Game game;
-	
 	 /**
      * If 0 the aliens don't have to move any frame down.
      */
@@ -40,7 +42,11 @@ public class AlienController {
 	 */
 	private int alienYDir = 1;
 	
-	public AlienController(Game newGame){
+	/**
+	 * Creates a new alien controller.
+	 * @param newGame The Game where the AlienController comes.
+	 */
+	public AlienController(final Game newGame) {
 		game = newGame;
 	}
 	
