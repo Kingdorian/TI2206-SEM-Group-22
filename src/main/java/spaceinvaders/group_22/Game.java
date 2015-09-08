@@ -102,7 +102,7 @@ public class Game {
 		
 		alienController = new AlienController(this);
 		
-		aliens = alienController.createAliens(100, 69, 60, 10, 4);
+		aliens = alienController.createAlienWave(100, 69, 60, 10, 4);
 
 		player = new Player(this);
 	}
@@ -163,6 +163,12 @@ public class Game {
 			bullets.get(i).moveUnit();
 		}
 		checkCollisions();
+		
+		if (aliens.isEmpty()) {
+			this.stop();
+			aliens = alienController.createAlienWave(100, 69, 60, 10, 4);
+			this.getBullets().clear();
+		}
 	}
 	/**
 	 * Returns the highscore.

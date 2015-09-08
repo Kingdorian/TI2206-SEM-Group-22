@@ -54,7 +54,7 @@ public class AlienController {
 	 * @param lines Amount of alien lines.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")    
-	public final ArrayList<Alien> createAliens(final double borderDist, final int spriteWidth, 
+	public final ArrayList<Alien> createAlienWave(final double borderDist, final int spriteWidth, 
 			final int spriteHeight, final int alienAmount, final int lines) {
 		ArrayList<Alien> alienList = new ArrayList<Alien>();
         
