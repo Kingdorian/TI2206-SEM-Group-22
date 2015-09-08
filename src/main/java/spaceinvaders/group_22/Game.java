@@ -87,6 +87,14 @@ public class Game {
 	 */
 	private static double tickrate;
 	/**
+	 * To check if it is allowed to move.
+	 */
+	private boolean shootingAllowed;
+	/**
+	 * Counter until it is allowed to shoot.
+	 */
+	private int countToShoot;
+	/**
 	 * Creates a new instance of game.
 	 * @param width of the canvas.
 	 * @param height of the canvas.
@@ -101,6 +109,9 @@ public class Game {
 		aliens = createAliens(100, 69, 60, 10, 4);
 
 		player = new Player(this);
+		
+		shootingAllowed = true;
+		countToShoot = 0;
 	}
 	/**
 	 * Starts the game.
@@ -129,7 +140,18 @@ public class Game {
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
 		double velX = 0;
 		if (pressedKeys.contains(KeyCode.SPACE)) {
-			bullets.add(player.getSpaceShip().shootBullet(-spaceShipBulletVelX));
+			if (shootingAllowed) {
+				bullets.add(player.getSpaceShip().shootBullet(-spaceShipBulletVelX));
+				shootingAllowed = false;
+			}
+		}
+		if (!shootingAllowed) {
+			if (countToShoot < (1 / tickrate)) { 
+				countToShoot++; 
+			} else if (countToShoot == (1 / tickrate)) {
+				shootingAllowed = true;
+				countToShoot = 0;
+			}
 		}
 		
 		// Check that the spaceship is still able to move without going off the screen.
@@ -351,7 +373,6 @@ public class Game {
 	 * @param bullet The bullet to check
 	 * @return The Alien which gets hit, or null if no alien gets hit
 	 */
-	@SuppressWarnings("checkstyle:magicnumber") 
 	public final Alien checkShipBulletVsAliens(final Bullet bullet) {
 		int size = this.getAliens().size();
 		double bulletX = bullet.getXCoor();
@@ -374,7 +395,6 @@ public class Game {
 	 * @param bullet The bullet to check
 	 * @return True if there is a collision, false if there isn't
 	 */
-	@SuppressWarnings("checkstyle:magicnumber") 
 	public final boolean checkAliensBulletVsSpaceShip(final Bullet bullet) {
 		double bulletX = bullet.getXCoor();
 		double bulletY = bullet.getYCoor();
