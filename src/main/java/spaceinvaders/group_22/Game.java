@@ -82,6 +82,10 @@ public class Game {
 	 * The tickrate of the animation.
 	 */
 	private static double tickrate;
+	
+	private boolean shootingAllowed;
+	
+	private int countToShoot;
 	/**
 	 * Creates a new instance of game.
 	 * @param width of the canvas.
@@ -97,6 +101,9 @@ public class Game {
 		aliens = createAliens(100, 69, 60, 10, 4);
 
 		player = new Player(this);
+		
+		shootingAllowed = true;
+		countToShoot = 0;
 	}
 	/**
 	 * Starts the game.
@@ -125,7 +132,19 @@ public class Game {
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
 		double velX = 0;
 		if (pressedKeys.contains(KeyCode.SPACE)) {
-			bullets.add(player.getSpaceShip().shootBullet(-spaceShipBulletVelX));
+			if (shootingAllowed) {
+				bullets.add(player.getSpaceShip().shootBullet(-spaceShipBulletVelX));
+				shootingAllowed = false;
+			}
+		}
+		if (!shootingAllowed) {
+			if (countToShoot < 180) { 
+				countToShoot++; 
+			}
+			else if (countToShoot == 180) {
+				shootingAllowed = true;
+				countToShoot = 0;
+			}
 		}
 		
 		// Check that the spaceship is still able to move without going off the screen.
