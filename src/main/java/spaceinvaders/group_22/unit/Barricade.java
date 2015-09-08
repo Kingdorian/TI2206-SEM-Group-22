@@ -26,6 +26,12 @@ public class Barricade extends Unit{
 		health--;
 	}
 	/**
+	 * Return the amount of health the barricade has left.
+	 */
+	public int getHealth() {
+		return health;
+	}
+	/**
 	 * Checks if the provided object equeals this Barricade.
 	 * @param the object to compare to.
 	 * @return true if the both objects are thesame.

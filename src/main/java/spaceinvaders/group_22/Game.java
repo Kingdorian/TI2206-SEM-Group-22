@@ -161,6 +161,12 @@ public class Game {
 			bullets.get(i).moveUnit();
 		}
 		checkCollisions();
+		for (int i = 0; i < barricades.size(); i++) {
+			if (barricades.get(i).getHealth()==0){
+				barricades.remove(i);
+				i--;
+			}
+		}
 	}
 	/**
 	 * Returns the highscore.
@@ -387,7 +393,7 @@ public class Game {
 			double unitY = unit.getYCoor();
 			if ((checkX - unitX >= -((unit.getWidth()/ 2) + (checkingUnit.getWidth()/2))  
 				&& (checkX - unitX <= (unit.getWidth() / 2) + (checkingUnit.getWidth()/2))) 
-				&& (checkY - unitY >= -((unit.getHeight()) / 2) + (checkingUnit.getHeight()/2)) 
+				&& (checkY - unitY >= -(((unit.getHeight()) / 2) + (checkingUnit.getHeight()/2))) 
 				&& (checkY - unitY <= (unit.getHeight() / 2)  + (checkingUnit.getHeight()/2))){
 					return unit;
 			}
