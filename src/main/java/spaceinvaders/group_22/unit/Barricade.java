@@ -25,5 +25,24 @@ public class Barricade extends Unit{
 	public void hit() {
 		health--;
 	}
+	/**
+	 * Checks if the provided object equeals this Barricade.
+	 * @param the object to compare to.
+	 * @return true if the both objects are thesame.
+	 */
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Barricade other = (Barricade) obj;
+		if (health != other.health)
+			return false;
+		return true;
+	}
+	
+	
 
 }

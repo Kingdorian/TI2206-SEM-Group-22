@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.AlienBullet;
+import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Unit;
 import spaceinvaders.group_22.unit.ShipBullet;
@@ -35,7 +36,11 @@ public class Game {
 	/**
 	 * List of aliens in the game.
 	 */
-	private ArrayList<Alien> aliens;	
+	private ArrayList<Alien> aliens;
+	/**
+	 * Arraylist of all barricades in the game.
+	 */
+	private ArrayList<Barricade> barricades;
 	/**
      * The width of the canvas.
      */
@@ -97,6 +102,8 @@ public class Game {
 		aliens = createAliens(100, 69, 60, 10, 4);
 
 		player = new Player(this);
+		
+		barricades = new ArrayList<Barricade>();
 	}
 	/**
 	 * Starts the game.
@@ -164,6 +171,27 @@ public class Game {
 		return highscore;
 	}
 	
+	/**
+	 * Returns the barricades in this game.
+	 * @return the barricades in this game.
+	 */
+	public ArrayList<Barricade> getBarricades() {
+		return barricades;
+	}
+	/**
+	 * Sets the barricades in this game.
+	 * @param barricade the new barricades for this game.
+	 */
+	public void setBarricades(ArrayList<Barricade> barricade) { 
+		barricades = barricade;
+	}
+	/**
+	 * Add a new barricade to this game.
+	 * @param barricade to add.
+	 */
+	public void addBarricade(Barricade barricade) {
+		barricades.add(barricade);
+	}
 	/**
 	 * Returns the current frame rate.
 	 * @return the current frame rate.
