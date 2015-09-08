@@ -86,6 +86,8 @@ public class Game {
 	 * The tickrate of the animation.
 	 */
 	private static double tickrate;
+	
+	private AlienController alienController;
 	/**
 	 * Creates a new instance of game.
 	 * @param width of the canvas.
@@ -98,7 +100,9 @@ public class Game {
 		
 		bullets = new ArrayList<Bullet>();
 		
-		aliens = createAliens(100, 69, 60, 10, 4);
+		alienController = new AlienController(this);
+		
+		aliens = alienController.createAliens(100, 69, 60, 10, 4);
 
 		player = new Player(this);
 	}
@@ -145,8 +149,8 @@ public class Game {
 		player.getSpaceShip().setVelX(velX);
 		player.getSpaceShip().moveUnit();
 		
-		moveAliens();
-		shootAlienBullets();
+		alienController.moveAliens();
+		alienController.shootAlienBullets();
 		
 		//Check if all bullets are still visible
 		for (int i = 0; i < bullets.size(); i++) {
@@ -228,39 +232,6 @@ public class Game {
 	}
 	
 	/**
-	 * Creates the aliens on the correct start positions.
-	 * @return an arraylist of Aliens drawn.
-	 * @param borderDist Distance to the left and right border.
-	 * @param spriteWidth Width of the sprite.
-	 * @param spriteHeight Height of the sprite.
-	 * @param alienAmount Amount of aliens per line.
-	 * @param lines Amount of alien lines.
-	 */
-	@SuppressWarnings("checkstyle:magicnumber")    
-	public final ArrayList<Alien> createAliens(final double borderDist, final int spriteWidth, 
-			final int spriteHeight, final int alienAmount, final int lines) {
-		ArrayList<Alien> alienList = new ArrayList<Alien>();
-        
-        // Distance to top of the screen.
-        double distance = 125;
-        
-        double interval = (canvasWidth - 2 * borderDist - alienAmount * spriteWidth) / (alienAmount + 1);  
-        double startPosition = borderDist + interval;
-       
-        // Drawing lines of Aliens.
-        for (int i = 0; i < lines; i++) {
-            for (int j = 0; j < alienAmount; j++) {
-            	Alien alien = new Alien(startPosition, distance, "invader.png");
-            	alien.setVelX(alienVelX);
-            	alienList.add(alien);
-            	startPosition += spriteWidth + interval;
-            }
-            distance += spriteHeight + 0.1 * spriteHeight;
-            startPosition = borderDist + interval;
-        }
-		return alienList;	
-	}
-	/**
 	 * Sets the list of Aliens currently in game.
 	 * @param alienList The ArrayList of aliens to set.
 	 */
@@ -273,55 +244,6 @@ public class Game {
 	 */
 	public final ArrayList<Alien> getAliens() {
 		return aliens;
-	}
-	
-	/**
-	 * Method to move all the aliens in the right direction.
-	 */
-	@SuppressWarnings("checkstyle:magicnumber") 
-	public final void moveAliens() {
-		//check if all aliens are still able to move in the window
-		if (alienFramesDown == 0) {
-			for (Alien unit : getAliens()) {
-				// When this alien is on the right side of the screen change the direction
-				if (unit.getXCoor() + 0.5 * unit.getWidth() >= canvasWidth) {
-					alienFramesDown = (alienFall / alienVelY) * (1 / tickrate);
-					// Increase speed
-					alienVelX += 4;
-					// Switch direction
-					alienVelX *= -1;
-					break;
-				}
-				// When this alien is at the left side of the screen change the direction
-				if (unit.getXCoor() - 0.5 * unit.getWidth() <= 0) {
-					alienFramesDown = (alienFall / alienVelY) * (1 / tickrate);
-					// Increase speed
-					alienVelX -= 4;
-					// Switch direction
-					alienVelX *= -1;
-					break;
-				}
-			}
-			
-		}
-		// Decrease the amount of frames the alien needs to be going down.
-		if (alienFramesDown > 0) {
-			alienFramesDown = alienFramesDown - 1;
-		}
-		// move every alien
-		for (Alien unit : getAliens()) {
-			if (alienFramesDown > 0) {
-				unit.setVelY(alienVelY);
-				unit.setVelX(0);			
-			} else {
-				unit.setVelY(0);
-				unit.setVelX(alienVelX);
-			}
-			if (unit.getYCoor() > player.getSpaceShip().getYCoor() - (player.getSpaceShip().getHeight() * 1.5)) {
-				this.stop();
-			}
-			unit.moveUnit();
-		}
 	}
 	
 	/**
@@ -389,16 +311,4 @@ public class Game {
 		return false;
 	}
 
-	/**
-	 * Shoots bullets for aliens.
-	 */
-	@SuppressWarnings("checkstyle:magicnumber")
-	public final void shootAlienBullets() {
-		if (!aliens.isEmpty()) {
-			if (Math.random() < bulletChance * tickrate)   {
-				int shootIndex = (int) (Math.random() * aliens.size());
-				bullets.add(aliens.get(shootIndex).shootBullet(60));
-			}
-		}
-	}
 }
