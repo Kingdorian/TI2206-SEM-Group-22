@@ -2,6 +2,7 @@ package spaceinvaders.group_22.unit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 
 import java.io.IOException;
 
@@ -26,7 +27,7 @@ public abstract class UnitTest {
 	private Unit unit;
 	
 	/**
-	 * 
+	 * Method to create an instance of a subclass of the Unit class.
 	 * @param x X Coordinate
 	 * @param y Y Coordinate
 	 * @param spriteFile The filename of the sprite.
@@ -34,7 +35,10 @@ public abstract class UnitTest {
 	 */
 	public abstract Unit createInstance(double x, double y, String spriteFile);
 	
-    @Rule
+    /**
+     * thrown is the exception which is expected to be thrown during a test.
+     */
+	@Rule
     public ExpectedException thrown = ExpectedException.none();
 	
 	/**
@@ -107,12 +111,13 @@ public abstract class UnitTest {
 	}
 	
 	/**
-	 * Test creating an object with an invalid sprite()
+	 * Test creating an object with an invalid sprite().
 	 */
+	@Test
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void testInvalidUnitSprite() {
-		thrown.expect(IOException.class);
-		createInstance(1.2, 3, "png.invalid");
+		thrown.expect(IllegalArgumentException.class);
+		createInstance(1.2, 3, "png.png");
 	}
 	
 	/**
@@ -146,6 +151,15 @@ public abstract class UnitTest {
 	public final void testEquals() {
 		Unit unit2 = createInstance(1.2, 3, "testimage.png");
 		assertEquals(unit, unit2);
+	}
+	
+	/**
+	 * Test the Equals method.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testEqualsFalse() {
+		assertNotEquals(unit, null);
 	}
 	
 
