@@ -239,9 +239,9 @@ public class Game {
         
         // Distance to top of the screen.
         double distance = 125;
-        
+                
         double interval = (canvasWidth - 2 * borderDist - alienAmount * spriteWidth) / (alienAmount + 1);  
-        double startPosition = borderDist + interval;
+        double startPosition = borderDist + interval + 0.5 * spriteWidth;
        
         // Drawing lines of Aliens.
         for (int i = 0; i < lines; i++) {
@@ -250,7 +250,7 @@ public class Game {
             	startPosition += spriteWidth + interval;
             }
             distance += spriteHeight + 0.1 * spriteHeight;
-            startPosition = borderDist + interval;
+            startPosition = borderDist + interval + 0.5 * spriteWidth;
         }
 		return alienList;	
 	}
