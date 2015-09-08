@@ -125,11 +125,18 @@ public class GameUIController
     	
     	canvasWidth = canvas.getWidth();
     	canvasHeight = canvas.getHeight();
+    	newGame();
+    	
+    	canvas.setFocusTraversable(true);
+    }
+    
+    /**
+     * Creates a new game.
+     */
+    public final void newGame() {
     	game = new Game(canvasWidth, canvasHeight);
     	sprites = getSprites();
-    	
     	startAnimation();
-    	canvas.setFocusTraversable(true);
     }
     
     /**
@@ -224,6 +231,7 @@ public class GameUIController
 						if (game.hasEnded()) {
 							screenGameOver.toFront();
 							highScoreLabel.setText("Highscore: " + game.getHighScore());
+							gameLoop.stop();
 						} else {
 							screenGameOver.toBack();
 						}
@@ -298,6 +306,11 @@ public class GameUIController
         	if (game.isInProgress()) {
             	screenPaused.toFront();
             	game.stop();	
+        	}
+        } else if (event.getCode().equals(KeyCode.R)) {
+        	if (game.hasEnded()) {
+            	newGame();
+            	game.start();
         	}
         } else if (!pressedKeys.contains(event.getCode())) {
 	    	pressedKeys.add(event.getCode());
