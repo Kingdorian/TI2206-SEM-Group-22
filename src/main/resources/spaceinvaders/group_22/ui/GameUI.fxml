@@ -23,10 +23,5 @@
             <Font name="Phosphate Inline" size="36.0" />
          </font>
       </Label>
-      <Label fx:id="livesLabel" alignment="CENTER_RIGHT" layoutX="920.0" prefHeight="77.0" prefWidth="200.0" text=":LIVES" textAlignment="RIGHT" textFill="WHITE">
-         <font>
-            <Font name="Phosphate Inline" size="36.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

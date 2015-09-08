@@ -78,12 +78,6 @@ public class GameUIController
 	private Label scoreLabel;
     
     /**
-     * Label to load the amount of lives the player in.
-     */
-    @FXML
-	private Label livesLabel;
-    
-    /**
      * Called by the FXMLLoader. 
      */
     @Override
@@ -95,7 +89,6 @@ public class GameUIController
     	game = new Game(canvasWidth, canvasHeight);
     	sprites = getSprites();
     	scoreLabel.setText("Score: " + game.getPlayer().getScore());
-    	livesLabel.setText("Lives: " + game.getPlayer().getLives());
     	startAnimation();
     	canvas.setFocusTraversable(true);
     }
@@ -127,6 +120,9 @@ public class GameUIController
 	    	spriteMap.put("spaceship.png", 
 	    			new Image(getClass().getClassLoader()
 	    					.getResource("spaceinvaders/group_22/images/spaceship.png").toString()));
+	    	spriteMap.put("heart.png", 
+	    			new Image(getClass().getClassLoader()
+	    					.getResource("spaceinvaders/group_22/images/heart.png").toString()));
     		
     	return spriteMap;
     }
@@ -183,12 +179,25 @@ public class GameUIController
 									bullet.getWidth(), bullet.getHeight(), bullet.getSprite(), gc);
 						}
 						scoreLabel.setText("Score: " + game.getPlayer().getScore());
-						livesLabel.setText("Lives: " + game.getPlayer().getLives());
+						formatLives(game.getPlayer().getLives(), gc);
 					}
 				});
 		
 		 gameLoop.getKeyFrames().add(frame);
 		 gameLoop.play();
+    }
+	
+    /**
+     * Method to display the lives on the screen.
+     * @param lives The amount of lives the player has.
+     * @param gc The GraphicsContext of the canvas to draw on.
+     */
+	@SuppressWarnings("checkstyle:magicnumber")    
+    public final void formatLives(final int lives, final GraphicsContext gc) {
+    	Image heartImage = sprites.get("heart.png");
+    	for (int i = 1; i <= lives; i++) {
+        	gc.drawImage(heartImage, canvas.getWidth() - 10 - heartImage.getWidth() * i, 10);
+    	}
     }
  
     /**
