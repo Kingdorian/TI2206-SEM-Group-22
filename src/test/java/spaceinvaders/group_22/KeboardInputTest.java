@@ -68,6 +68,8 @@ public class KeboardInputTest {
 	public final void testPressSpace() {
 		simulEvents.add(KeyCode.SPACE);
 		ArrayList<Alien> alienList = new ArrayList<Alien>();
+		Alien testAlien = new Alien(0, 0, "invader.png");
+		alienList.add(testAlien);
 		game.setAliens(alienList);
 		game.tick(simulEvents);	
 		assertTrue(1 == game.getBullets().size());
