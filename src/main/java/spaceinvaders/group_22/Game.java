@@ -281,28 +281,30 @@ public class Game {
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void moveAliens() {
 		//check if all aliens are still able to move in the window
-		if(alienFramesDown==0){
+		if (alienFramesDown == 0) {
 			for (Alien unit : getAliens()) {
 				// When this alien is on the right side of the screen change the direction
-				if (unit.getXCoor() + 0.5 * unit.getWidth() >= canvasWidth ) {
+				if (unit.getXCoor() + 0.5 * unit.getWidth() >= canvasWidth) {
 					alienFramesDown = (alienFall / alienVelY) * (1 / tickrate);
 					// Increase speed
-					alienVelX+=4;
+					alienVelX += 4;
 					// Switch direction
-					alienVelX*=-1;
+					alienVelX *= -1;
 					break;
 				}
 				// When this alien is at the left side of the screen change the direction
-				if (unit.getXCoor() - 0.5 * unit.getWidth() <= 0 ) {
+				if (unit.getXCoor() - 0.5 * unit.getWidth() <= 0) {
 					alienFramesDown = (alienFall / alienVelY) * (1 / tickrate);
 					// Increase speed
-					alienVelX-=4;
+					alienVelX -= 4;
 					// Switch direction
-					alienVelX*=-1;
+					alienVelX *= -1;
 					break;
 				}
 			}
+			
 		}
+		// Decrease the amount of frames the alien needs to be going down.
 		if (alienFramesDown > 0) {
 			alienFramesDown = alienFramesDown - 1;
 		}
@@ -315,7 +317,7 @@ public class Game {
 				unit.setVelY(0);
 				unit.setVelX(alienVelX);
 			}
-			if (unit.getYCoor() > canvasHeight - 100) {
+			if (unit.getYCoor() > player.getSpaceShip().getYCoor() - (player.getSpaceShip().getHeight() * 1.5)) {
 				this.stop();
 			}
 			unit.moveUnit();
