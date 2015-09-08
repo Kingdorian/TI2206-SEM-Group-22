@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.AlienBullet;
 import spaceinvaders.group_22.unit.Bullet;
-import spaceinvaders.group_22.unit.Unit;
 import spaceinvaders.group_22.unit.ShipBullet;
 
 /**
@@ -49,11 +48,13 @@ public class Game {
     /**
      * Velocity of the spaceShip in pixels per second.
      */
+    @SuppressWarnings("checkstyle:magicnumber")
     private double spaceShipVelX = 250;
     
     /**
      * Velocity of the bullets of the spaceShip in pixels per second.
      */
+    @SuppressWarnings("checkstyle:magicnumber")
     private double spaceShipBulletVelX = 80;
     
     /**
@@ -64,15 +65,18 @@ public class Game {
 	/**
 	 * Speed of the aliens in the X direction in pixels per second.
 	 */
+	@SuppressWarnings("checkstyle:magicnumber")
 	private int alienVelX = 40;
 	
 	/**
 	 * Speed of the aliens in the Y direction in pixels per second.
 	 */
+	@SuppressWarnings("checkstyle:magicnumber")
 	private double alienVelY = 40;
 	/**
 	 * Amount of pixels the aliens go down per wave.
 	 */
+	@SuppressWarnings("checkstyle:magicnumber")
 	private double alienFall = 60;
     /**
      * Roughly the amount of bullets that spawn per second.
