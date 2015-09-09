@@ -1,5 +1,7 @@
 package spaceinvaders.group_22.unit;
 
+import spaceinvaders.group_22.Game;
+
 /**
  * A SpaceShip in the game extends Unit.
  * 

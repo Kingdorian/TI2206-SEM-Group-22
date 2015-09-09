@@ -55,4 +55,6 @@ public class SpaceShipTest extends UnitTest {
 		SpaceShip ship1 = new SpaceShip(1.2, 3, "testimage.png");
 		assertNotEquals(ship1, ship2);
 	}
+	
+
 }

@@ -185,26 +185,37 @@ public class Game {
 				countToShoot = 0;
 			}
 		}
-		double velX = player.getSpaceShip().getVelX()*0.95;
+		double velX = player.getSpaceShip().getVelX()*0.98;
+		SpaceShip playership = player.getSpaceShip();
+		if(player.getSpaceShip().getXCoor()-(0.5*player.getSpaceShip().getWidth())<=0 && velX < 0) {
+			velX*=-1;
+		}else if(player.getSpaceShip().getXCoor()+(0.5*player.getSpaceShip().getWidth())>=  canvasWidth && velX > 0) {
+			velX*=-1;
+		}
 		// Check that the spaceship is still able to move without going off the screen.
 		if (player.getSpaceShip().getXCoor() - 0.5 * player.getSpaceShip().getWidth() > 0 
 				&& pressedKeys.contains(KeyCode.A)) {
 			player.getSpaceShip();
-			velX = velX - SpaceShip.maxVelX;
+			velX = velX - SpaceShip.maxVelX*tickrate*2;
 		}
 		if (player.getSpaceShip().getXCoor() + 0.5 * player.getSpaceShip().getWidth() < canvasWidth
 				&& pressedKeys.contains(KeyCode.D)) {
 			player.getSpaceShip();
-			velX = velX + SpaceShip.maxVelX;
+			velX = velX + SpaceShip.maxVelX*tickrate*2;
 		}
 
 		if(velX>SpaceShip.maxVelX){
 			velX = SpaceShip.maxVelX;
 		}else if(velX < -SpaceShip.maxVelX){
-			velX = -SpaceShip.maxVelX;
+			velX = - SpaceShip.maxVelX;
 		}
-			
+
+		
+
+		
+		System.out.println(player.getSpaceShip().getVelX() + "Before");
 		player.getSpaceShip().setVelX(velX);
+		System.out.println(player.getSpaceShip().getVelX() + "Before");
 		player.getSpaceShip().moveUnit();
 		
 		moveAliens();

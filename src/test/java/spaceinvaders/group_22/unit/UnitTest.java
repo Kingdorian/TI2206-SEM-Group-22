@@ -23,7 +23,7 @@ public abstract class UnitTest {
 	/**
 	 * The Unit we need to be testing.
 	 */
-	private Unit unit;
+	protected Unit unit;
 	
 	/**
 	 * 
@@ -131,11 +131,11 @@ public abstract class UnitTest {
 	 */
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")    
-	public final void testMoveUnit() {
+	public void testMoveUnit() {
 		unit.setVelX(1);
 		unit.moveUnit();
-		assertTrue(unit.getXCoor() == 2.2);
-		assertTrue(unit.getYCoor() == 3);
+		assertEquals(2.2, unit.getXCoor(), 0.05);
+		assertEquals(3.0, unit.getYCoor(), 0.05);
 	}
 	
 	/**
