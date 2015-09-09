@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import spaceinvaders.group_22.unit.Alien;
+import spaceinvaders.group_22.unit.Barricade;
 
 /**
  * Test key events.
@@ -48,7 +49,7 @@ public class KeboardInputTest {
 	public final void testPressA() {
 		simulEvents.add(KeyCode.A);
 		game.tick(simulEvents);
-		Assert.assertEquals(-250, (int)game.getPlayer().getSpaceShip().getVelX());
+		Assert.assertEquals(-250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
 	}
 	/**
 	 * Test if the speed of the spaceship correctly gets updated when the D key gets pressed.
@@ -59,7 +60,7 @@ public class KeboardInputTest {
 	public final void testPressD() {
 		simulEvents.add(KeyCode.D);
 		game.tick(simulEvents);
-		Assert.assertEquals(250, (int)game.getPlayer().getSpaceShip().getVelX());
+		Assert.assertEquals(250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
 	}
 	/**
 	 * Test if a bullet is correctly launched when the player presses the space button. 
@@ -67,6 +68,8 @@ public class KeboardInputTest {
 	@Test
 	public final void testPressSpace() {
 		int bulletAmount = game.getBullets().size();
+		// Make sure the bullet does not accidentally collide with an barricade
+		game.setBarricades(new ArrayList<Barricade>());
 		simulEvents.add(KeyCode.SPACE);
 		ArrayList<Alien> alienList = new ArrayList<Alien>();
 		game.setAliens(alienList);
