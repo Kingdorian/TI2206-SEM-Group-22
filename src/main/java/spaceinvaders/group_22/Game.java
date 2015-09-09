@@ -458,7 +458,7 @@ public class Game {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void shootAlienBullets() {
 		if (!aliens.isEmpty()) {
-			if (Math.random() < bulletChance * tickrate)   {
+			if (Math.random() < ((aliens.size()) * bulletChance * tickrate)/40)   {
 				int shootIndex = (int) (Math.random() * aliens.size());
 				bullets.add(aliens.get(shootIndex).shootBullet(60));
 			}
