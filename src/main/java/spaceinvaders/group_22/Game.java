@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.AlienBullet;
 import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.ShipBullet;
 
 /**
@@ -36,6 +37,10 @@ public class Game {
 	 * List of aliens in the game.
 	 */
 	private ArrayList<Alien> aliens;	
+	/**
+     * List of explosions in the game.
+     */
+	private ArrayList<Explosion> explosions;	
 	/**
      * The width of the canvas.
      */
@@ -98,6 +103,7 @@ public class Game {
 		canvasHeight = height;
 		
 		bullets = new ArrayList<Bullet>();
+		explosions = new ArrayList<Explosion>();
 		
 		aliens = createAliens(100, 69, 60, 10, 4);
 
@@ -227,6 +233,14 @@ public class Game {
 	public final ArrayList<Bullet> getBullets() {
 		return bullets;
 	}
+	
+	/**
+	 * Gets the explosions currently in this game.
+	 * @return Arraylist of bullets in the game.
+	 */
+	public final ArrayList<Explosion> getExplosions() {
+		return explosions;
+	}
 	/**
 	 * Gets the player that is playing this game. 
 	 * @return player that is playing this game
@@ -341,12 +355,15 @@ public class Game {
 			if (this.getBullets().get(i) instanceof ShipBullet) {
 				Alien alien = this.checkShipBulletVsAliens(this.getBullets().get(i));
 				if (alien != null) {
+					this.explosions.add(new Explosion(alien.getXCoor(), alien.getYCoor(), "explosion1.png"));
 					this.getAliens().remove(alien);
 					this.getBullets().remove(i);
 					getPlayer().addScore(10);
 				}
 			} else if (this.getBullets().get(i) instanceof AlienBullet) {
 				if (this.checkAliensBulletVsSpaceShip(this.getBullets().get(i))) {
+					this.explosions.add(new Explosion(this.getPlayer().getSpaceShip().getXCoor(), 
+							this.getPlayer().getSpaceShip().getYCoor(), "explosion1.png"));
 					this.getPlayer().die();
 					this.getBullets().remove(i);
 				}

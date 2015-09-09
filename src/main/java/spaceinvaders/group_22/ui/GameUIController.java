@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.SpaceShip;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -165,6 +166,24 @@ public class GameUIController
 	    	spriteMap.put("heart.png", 
 	    			new Image(getClass().getClassLoader()
 	    					.getResource("spaceinvaders/group_22/images/heart.png").toString()));
+	    	spriteMap.put("barrier.png", 
+	    			new Image(getClass().getClassLoader()
+	    					.getResource("spaceinvaders/group_22/images/barrier.png").toString()));
+	    	spriteMap.put("explosion1.png", 
+	    			new Image(getClass().getClassLoader()
+	    					.getResource("spaceinvaders/group_22/images/explosion1.png").toString()));
+	    	spriteMap.put("explosion2.png", 
+	    			new Image(getClass().getClassLoader()
+	    					.getResource("spaceinvaders/group_22/images/explosion2.png").toString()));
+	    	spriteMap.put("explosion3.png", 
+	    			new Image(getClass().getClassLoader()
+	    					.getResource("spaceinvaders/group_22/images/explosion3.png").toString()));
+	    	spriteMap.put("explosion4.png", 
+	    			new Image(getClass().getClassLoader()
+	    					.getResource("spaceinvaders/group_22/images/explosion4.png").toString()));
+	    	spriteMap.put("explosion5.png", 
+	    			new Image(getClass().getClassLoader()
+	    					.getResource("spaceinvaders/group_22/images/explosion5.png").toString()));
     		
     	return spriteMap;
     }
@@ -212,6 +231,31 @@ public class GameUIController
 							
 						}
 						
+						// Create a duplicate to loop over, so deletion is possible.
+						ArrayList<Explosion> explosionList = new ArrayList<Explosion>();
+						explosionList.addAll(game.getExplosions());
+						
+						for (Explosion explosion : explosionList) {
+							drawUnit(explosion.getXCoor(), explosion.getYCoor(), 
+									explosion.getWidth(), explosion.getHeight(), explosion.getSprite(), gc);
+							explosion.increaseCounter();
+							
+							if (explosion.getCounter() < 10) {
+								explosion.setSprite("explosion" + 1 + ".png");
+							} else if (explosion.getCounter() < 20) {
+								explosion.setSprite("explosion" + 2 + ".png");
+							} else if (explosion.getCounter() < 30) {
+								explosion.setSprite("explosion" + 3 + ".png");
+							} else if (explosion.getCounter() < 40) {
+								explosion.setSprite("explosion" + 4 + ".png");
+							} else if (explosion.getCounter() < 50) {
+								explosion.setSprite("explosion" + 5 + ".png");
+							} else {
+								game.getExplosions().remove(explosion);
+							}
+							
+						}
+						
 						if (pressedKeys.contains(KeyCode.SPACE)) {
 					    	pressedKeys.remove(KeyCode.SPACE);
 					    }
@@ -220,6 +264,7 @@ public class GameUIController
 							drawUnit(bullet.getXCoor(), bullet.getYCoor(), 
 									bullet.getWidth(), bullet.getHeight(), bullet.getSprite(), gc);
 						}
+						
 						scoreLabel.setText("Score: " + game.getPlayer().getScore());
 						formatLives(game.getPlayer().getLives(), gc);
 						formatScore(game.getPlayer().getScore());
