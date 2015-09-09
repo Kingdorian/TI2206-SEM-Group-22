@@ -35,7 +35,7 @@ public class KeboardInputTest {
 	public final void setup() {
 		game = new Game(200 , 200);
 		game.setPlayer(new Player(game));
-		
+		game.setTickrate(60);
 		// Create simulated events
 		simulEvents = new ArrayList<KeyCode>();
 	}
@@ -48,7 +48,7 @@ public class KeboardInputTest {
 	public final void testPressA() {
 		simulEvents.add(KeyCode.A);
 		game.tick(simulEvents);
-		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() == -250);
+		Assert.assertEquals( -250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
 	}
 	/**
 	 * Test if the speed of the spaceship correctly gets updated when the D key gets pressed.
@@ -59,7 +59,7 @@ public class KeboardInputTest {
 	public final void testPressD() {
 		simulEvents.add(KeyCode.D);
 		game.tick(simulEvents);
-		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() ==  250);
+		Assert.assertEquals(250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
 	}
 	/**
 	 * Test if a bullet is correctly launched when the player presses the space button. 

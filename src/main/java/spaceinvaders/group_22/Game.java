@@ -9,6 +9,7 @@ import spaceinvaders.group_22.unit.AlienBullet;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.ShipBullet;
+import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
  * 
@@ -170,7 +171,6 @@ public class Game {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
-		double velX = 0;
 		if (pressedKeys.contains(KeyCode.SPACE)) {
 			if (shootingAllowed) {
 				bullets.add(player.getSpaceShip().shootBullet(-spaceShipBulletVelX));
@@ -185,15 +185,23 @@ public class Game {
 				countToShoot = 0;
 			}
 		}
-		
+		double velX = player.getSpaceShip().getVelX()*0.95;
 		// Check that the spaceship is still able to move without going off the screen.
 		if (player.getSpaceShip().getXCoor() - 0.5 * player.getSpaceShip().getWidth() > 0 
 				&& pressedKeys.contains(KeyCode.A)) {
-			velX = velX - spaceShipVelX;
+			player.getSpaceShip();
+			velX = velX - SpaceShip.maxVelX;
 		}
 		if (player.getSpaceShip().getXCoor() + 0.5 * player.getSpaceShip().getWidth() < canvasWidth
 				&& pressedKeys.contains(KeyCode.D)) {
-			velX = velX + spaceShipVelX;
+			player.getSpaceShip();
+			velX = velX + SpaceShip.maxVelX;
+		}
+
+		if(velX>SpaceShip.maxVelX){
+			velX = SpaceShip.maxVelX;
+		}else if(velX < -SpaceShip.maxVelX){
+			velX = -SpaceShip.maxVelX;
 		}
 			
 		player.getSpaceShip().setVelX(velX);
