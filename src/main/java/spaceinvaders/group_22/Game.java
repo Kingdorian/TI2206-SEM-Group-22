@@ -379,8 +379,8 @@ public class Game {
 				unit.setVelY(0);
 				unit.setVelX(alienVelX);
 			}
-			if (unit.getYCoor() > player.getSpaceShip().getYCoor() - (player.getSpaceShip().getHeight() * 1.5)) {
-				this.stop();
+			if (unit.getYCoor() + unit.getHeight() > player.getSpaceShip().getYCoor() ) {
+				gameOver();
 			}
 			unit.moveUnit();
 		}
