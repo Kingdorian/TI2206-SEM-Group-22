@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.AlienBullet;
 import spaceinvaders.group_22.unit.Bullet;
-import spaceinvaders.group_22.unit.Unit;
+import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.ShipBullet;
 
 /**
@@ -15,6 +15,7 @@ import spaceinvaders.group_22.unit.ShipBullet;
  * @author Dorian
  *
  */
+@SuppressWarnings("checkstyle:magicnumber")
 public class Game {
 	/**
 	 * Boolean that indicates if the game is inProgress.
@@ -36,6 +37,10 @@ public class Game {
 	 * List of aliens in the game.
 	 */
 	private ArrayList<Alien> aliens;	
+	/**
+     * List of explosions in the game.
+     */
+	private ArrayList<Explosion> explosions;	
 	/**
      * The width of the canvas.
      */
@@ -84,7 +89,7 @@ public class Game {
 	private int alienYDir = 1;
 	/**
 	 * The tickrate of the animation.
-	 */
+	 */	
 	private static double tickrate;
 	/**
 	 * To check if it is allowed to move.
@@ -94,6 +99,11 @@ public class Game {
 	 * Counter until it is allowed to shoot.
 	 */
 	private int countToShoot;
+	/**
+	 * Marks if the game has been ended.
+	 */
+	private boolean hasEnded = false;
+	
 	/**
 	 * Creates a new instance of game.
 	 * @param width of the canvas.
@@ -105,6 +115,7 @@ public class Game {
 		canvasHeight = height;
 		
 		bullets = new ArrayList<Bullet>();
+		explosions = new ArrayList<Explosion>();
 		
 		aliens = createAliens(100, 69, 60, 10, 4);
 
@@ -118,6 +129,7 @@ public class Game {
 	 */
 	public final void start() {
 		inProgress = true;
+		hasEnded = false;
 	}
 	/**
 	 * Pauses the game.
@@ -125,12 +137,32 @@ public class Game {
 	public final void stop() {
 		inProgress = false;
 	}
+	
+	/**
+	 * Stops the game and marks the game as ended.
+	 */
+	public final void gameOver() {
+		stop();
+		if (player.getScore() > highscore) {
+			setHighScore(player.getScore());
+		}
+		hasEnded = true;
+	}
+	
 	/**
 	 * Returns true if the game is in progress.
 	 * @return boolean if the game is in progress
 	 */
 	public final boolean isInProgress() {
 		return inProgress;
+	}
+	
+	/**
+	 * Returns true if the game has ended.
+	 * @return boolean if the game is ended.
+	 */
+	public final boolean hasEnded() {
+		return hasEnded;
 	}
 	/**
 	 * Will update all the objects in the game.
@@ -227,6 +259,14 @@ public class Game {
 	public final ArrayList<Bullet> getBullets() {
 		return bullets;
 	}
+	
+	/**
+	 * Gets the explosions currently in this game.
+	 * @return Arraylist of bullets in the game.
+	 */
+	public final ArrayList<Explosion> getExplosions() {
+		return explosions;
+	}
 	/**
 	 * Gets the player that is playing this game. 
 	 * @return player that is playing this game
@@ -265,9 +305,9 @@ public class Game {
         
         // Distance to top of the screen.
         double distance = 125;
-        
+                
         double interval = (canvasWidth - 2 * borderDist - alienAmount * spriteWidth) / (alienAmount + 1);  
-        double startPosition = borderDist + interval;
+        double startPosition = borderDist + interval + 0.5 * spriteWidth;
        
         // Drawing lines of Aliens.
         for (int i = 0; i < lines; i++) {
@@ -278,7 +318,7 @@ public class Game {
             	startPosition += spriteWidth + interval;
             }
             distance += spriteHeight + 0.1 * spriteHeight;
-            startPosition = borderDist + interval;
+            startPosition = borderDist + interval + 0.5 * spriteWidth;
         }
 		return alienList;	
 	}
@@ -355,12 +395,15 @@ public class Game {
 			if (this.getBullets().get(i) instanceof ShipBullet) {
 				Alien alien = this.checkShipBulletVsAliens(this.getBullets().get(i));
 				if (alien != null) {
+					this.explosions.add(new Explosion(alien.getXCoor(), alien.getYCoor(), "explosion1.png"));
 					this.getAliens().remove(alien);
 					this.getBullets().remove(i);
 					getPlayer().addScore(10);
 				}
 			} else if (this.getBullets().get(i) instanceof AlienBullet) {
 				if (this.checkAliensBulletVsSpaceShip(this.getBullets().get(i))) {
+					this.explosions.add(new Explosion(this.getPlayer().getSpaceShip().getXCoor(), 
+							this.getPlayer().getSpaceShip().getYCoor(), "explosion1.png"));
 					this.getPlayer().die();
 					this.getBullets().remove(i);
 				}

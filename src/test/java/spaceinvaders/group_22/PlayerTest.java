@@ -84,5 +84,7 @@ public class PlayerTest {
 		player.die();
 		player.die();
 		
+		Assert.assertFalse(game.isInProgress());
+		
 	}
 }
