@@ -104,38 +104,52 @@ public class GameUIController
     private Node screenPaused;
     
     /**
+     * The graphicscontext of the Canvas.
+     */
+    private static GraphicsContext gc;
+    
+    /**
      * Called by the FXMLLoader. 
      */
     @Override
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void initialize(final URL fxmlFileLocation, final ResourceBundle resources) {
+    	initializeStackPaneScreens();
+    	gc = canvas.getGraphicsContext2D();
     	
-    	// Get the various screens.
-    	// The order in the FXML file matters (!).
+    	canvasWidth = canvas.getWidth();
+    	canvasHeight = canvas.getHeight();
+    	
+    	newGame();
+    	
+    	canvas.setFocusTraversable(true);
+    }
+    
+    /**
+     * Gets the screens in the GameUI stackpane, and assigns them to the right variables.
+     * The order in the FXML file matters (!).
+     */
+    public final void initializeStackPaneScreens() {
     	screenGameOver = stackPane.getChildren().get(0);
     	screenBeforePlay = stackPane.getChildren().get(1);
     	screenPaused = stackPane.getChildren().get(2);
 
     	// Move press to play to front.
     	screenBeforePlay.toFront();
-    	
-    	
-    	canvasWidth = canvas.getWidth();
-    	canvasHeight = canvas.getHeight();
-    	
-    	game = new Game(canvasWidth, canvasHeight);
-    	sprites = getSprites();
-    	startAnimation();
-    	
-    	canvas.setFocusTraversable(true);
     }
     
     /**
      * Creates a new game.
      */
     public final void newGame() {
-    	game.resetGame();
-    	sprites = getSprites();
+    	// If the game does not exist, create a new one.
+    	if (game == null) {
+        	game = new Game(canvasWidth, canvasHeight);
+        	sprites = getSprites();
+        // Else reset the game.
+    	} else {
+        	game.resetGame();    		
+    	}
     	startAnimation();
     }
     
@@ -196,7 +210,6 @@ public class GameUIController
      */
 	@SuppressWarnings("checkstyle:magicnumber")    
     public final void startAnimation() {
-		final GraphicsContext gc = canvas.getGraphicsContext2D();
 		
 		// Create the animation Timeline, responsible for updating the animation.
 		Timeline gameLoop = new Timeline();
@@ -225,12 +238,12 @@ public class GameUIController
 						
 				        // Position the player in the middle, on the bottom of the screen.
 						drawUnit(spaceShip.getXCoor(), spaceShip.getYCoor(), spaceShip.getWidth(), 
-								spaceShip.getHeight(), spaceShip.getSprite(), gc);
+								spaceShip.getHeight(), spaceShip.getSprite());
 
 						
 						for (Alien unit : game.getAliens()) {
 							drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(),
-									unit.getHeight(), unit.getSprite(), gc);
+									unit.getHeight(), unit.getSprite());
 							
 						}
 						
@@ -240,7 +253,7 @@ public class GameUIController
 						
 						for (Explosion explosion : explosionList) {
 							drawUnit(explosion.getXCoor(), explosion.getYCoor(), 
-									explosion.getWidth(), explosion.getHeight(), explosion.getSprite(), gc);
+									explosion.getWidth(), explosion.getHeight(), explosion.getSprite());
 							explosion.increaseCounter();
 							
 							if (explosion.getCounter() < 10) {
@@ -265,11 +278,11 @@ public class GameUIController
 						
 						for (Bullet bullet : game.getBullets()) {
 							drawUnit(bullet.getXCoor(), bullet.getYCoor(), 
-									bullet.getWidth(), bullet.getHeight(), bullet.getSprite(), gc);
+									bullet.getWidth(), bullet.getHeight(), bullet.getSprite());
 						}
 						
 						scoreLabel.setText("Score: " + game.getPlayer().getScore());
-						formatLives(game.getPlayer().getLives(), gc);
+						formatLives(game.getPlayer().getLives());
 						formatScore(game.getPlayer().getScore());
 						
 						if (game.hasEnded()) {
@@ -290,10 +303,9 @@ public class GameUIController
     /**
      * Method to display the lives on the screen.
      * @param lives The amount of lives the player has.
-     * @param gc The GraphicsContext of the canvas to draw on.
      */
 	@SuppressWarnings("checkstyle:magicnumber")    
-    public final void formatLives(final int lives, final GraphicsContext gc) {
+    public final void formatLives(final int lives) {
     	Image heartImage = sprites.get("heart.png");
     	for (int i = 1; i <= lives; i++) {
         	gc.drawImage(heartImage, canvas.getWidth() - 10 - heartImage.getWidth() * i, 10);
@@ -324,11 +336,10 @@ public class GameUIController
      * @param spriteWidth The width of the sprite to draw.
      * @param spriteHeight The heifht of the sprite to draw.
      * @param sprite Image containing the sprite to draw.
-     * @param gc The GraphicsContext of the canvas to draw on.
      */  
 	@SuppressWarnings("checkstyle:magicnumber")    
     public final void drawUnit(final double x, final double y, final double spriteWidth, 
-    		final double spriteHeight, final String sprite, final GraphicsContext gc) {
+    		final double spriteHeight, final String sprite) {
         
         // Draw the player with the X and Y coordinates as center
 		Image spriteImage = sprites.get(sprite);
