@@ -24,10 +24,10 @@ public class AlienTest extends UnitTest {
 		float y = 1;
 		Alien alien = new Alien(x, y, "testimage.png");
 		Bullet bullet = alien.shootBullet(1);
-		assertTrue(bullet.getXCoor() == alien.getXCoor());
-		assertTrue(bullet.getYCoor() == alien.getYCoor());
+		assertEquals(alien.getXCoor(), bullet.getXCoor(), 0.05 );
+		assertEquals(alien.getYCoor(), bullet.getYCoor(), 0.05 );
 		bullet.moveUnit(1.0);
-		assertTrue(bullet.getXCoor() == alien.getXCoor());
+		assertEquals(alien.getXCoor(), bullet.getXCoor(), 0.05);
 		assertEquals(alien.getYCoor() + 1, bullet.getYCoor(), 0.05 );
 	}
 

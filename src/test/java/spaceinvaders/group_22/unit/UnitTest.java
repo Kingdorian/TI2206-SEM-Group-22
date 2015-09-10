@@ -56,7 +56,7 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void testUnitXCoor() {
-		assertTrue(unit.getXCoor() == 1.2);
+		assertEquals(1.2, unit.getXCoor(), 0.05);
 	}
 	
 	/**
@@ -65,7 +65,7 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void testUnitYCoor() {
-		assertTrue(unit.getYCoor() == 3);
+		assertEquals(3, unit.getYCoor(), 0.05);
 	}
 	
 	/**
@@ -73,7 +73,7 @@ public abstract class UnitTest {
 	 */
 	@Test
 	public final void testUnintVelX() {
-		assertTrue(unit.getVelX() == 0);
+		assertEquals(0, unit.getVelX(), 0.05);
 	}
 	
 	/**
@@ -81,7 +81,7 @@ public abstract class UnitTest {
 	 */
 	@Test
 	public final void testUnintVelY() {
-		assertTrue(unit.getVelY() == 0);
+		assertEquals(0, unit.getVelY(), 0.05);
 	}
 	
 	/**
@@ -89,7 +89,7 @@ public abstract class UnitTest {
 	 */
 	@Test
 	public final void testUnitWidth() {
-		assertTrue(unit.getWidth() == 1);
+		assertEquals(1, unit.getWidth(), 0.05);
 	}
 	
 	/**
@@ -97,7 +97,7 @@ public abstract class UnitTest {
 	 */
 	@Test
 	public final void testUnitHeight() {
-		assertTrue(unit.getHeight() == 1);
+		assertEquals(1, unit.getHeight(), 0.05);
 	}
 	
 	/**
@@ -105,7 +105,7 @@ public abstract class UnitTest {
 	 */
 	@Test
 	public final void testUnitSprite() {
-		assertTrue(unit.getSprite() == "testimage.png");
+		assertEquals("testimage.png", unit.getSprite());
 	}
 	
 	/**
@@ -125,8 +125,8 @@ public abstract class UnitTest {
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void testMoveUnitVelocity0() {
 		unit.moveUnit(60.0);
-		assertTrue(unit.getXCoor() == 1.2);
-		assertTrue(unit.getYCoor() == 3);
+		assertEquals(1.2, unit.getXCoor(), 0.05);
+		assertEquals(3, unit.getYCoor(), 0.05);
 	}
 	
 	/**
