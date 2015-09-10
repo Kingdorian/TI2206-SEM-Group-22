@@ -92,13 +92,25 @@ public class Game {
 	/**
 	 * String that points to alien sprite location.
 	 */
-	final String ALIENSPRITE = "alien.png";
+	/**
+	 * Part of the screen (on left and right) that cannot be used when creating aliens. 
+	 */
+	private final double ALIENBORDERMARIGIN = 1/7;
+	/**
+	 * Amount of aliens per row.
+	 */
+	private final int ALIENS_PER_ROW = 10;
+	/**
+	 * Amount of rows of aliens.
+	 */
+	private final int AMOUNT_ALIEN_ROWS = 4;
+	
+	final String ALIENSPRITE = "invader.png";
 	/**
 	 * Creates a new instance of game.
 	 * @param width of the canvas.
 	 * @param height of the canvas.
 	 */
-	@SuppressWarnings("checkstyle:magicnumber")
 	public Game(final int width, final int height) {
 		canvasWidth = width;
 		canvasHeight = height;
@@ -108,9 +120,11 @@ public class Game {
 		barricades = createBarricades();
 
 		alienController = new AlienController(this);
-		// Create an alien to use to get the width and height of the aliens used in this game. (based on their sprite size)
-		Alien spriteinfo = new Alien(100, 100, ALIENSPRITE);
-		aliens = alienController.createAlienWave(canvasWidth/7, spriteinfo.getWidth(), spriteinfo.getHeight(), 10, 4);
+		// Create an alien to use to get the width and height of the aliens used in this game. 
+		//(based on their sprite size)
+		Alien spriteinfo = new Alien(0, 0, ALIENSPRITE);
+		aliens = alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN, 
+					spriteinfo.getWidth(), spriteinfo.getHeight(), ALIENS_PER_ROW, AMOUNT_ALIEN_ROWS);
 		player = new Player(this);
 		shootingAllowed = true;
 		countToShoot = 0;
@@ -134,7 +148,11 @@ public class Game {
 	public final void reset() {
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
-		aliens = alienController.createAlienWave(100, 69, 60, 10, 4);
+		// Create an alien to use to get the width and height of the aliens used in this game. 
+		//(based on their sprite size)
+		Alien spriteinfo = new Alien(0, 0, ALIENSPRITE);
+		aliens = alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN, 
+					spriteinfo.getWidth(), spriteinfo.getHeight(), ALIENS_PER_ROW, AMOUNT_ALIEN_ROWS);
 		player = new Player(this);
 		shootingAllowed = true;
 		countToShoot = 0;
@@ -241,28 +259,6 @@ public class Game {
 		}
 	}
 	/**
-	 * Returns the highscore.
-	 * @return current highscore
-	 */
-	public final int getHighScore() {
-		return highscore;
-	}
-	
-	/**
-	 * Returns the barricades in this game.
-	 * @return the barricades in this game.
-	 */
-	public final  ArrayList<Barricade> getBarricades() {
-		return barricades;
-	}
-	/**
-	 * Sets the barricades in this game.
-	 * @param barricade the new barricades for this game.
-	 */
-	public final void setBarricades(final ArrayList<Barricade> barricade) { 
-		barricades = barricade;
-	}
-	/**
 	 * Add a new barricade to this game.
 	 * @param barricade to add.
 	 */
@@ -344,6 +340,13 @@ public class Game {
 		}
 		return bars;
 	}
+	/**
+	 * Sets the barricades in this game.
+	 * @param barricade the new barricades for this game.
+	 */
+	public final void setBarricades(final ArrayList<Barricade> barricade) { 
+		barricades = barricade;
+	}
 	// ONLY SETTERS AND GETTERS BELOW
 	/**
 	 * Sets the list of Aliens currently in game.
@@ -374,7 +377,7 @@ public class Game {
 	public final void setPlayer(final Player newPlayer) {
 		player = newPlayer;
 	}
-	
+	// ONLY GETTERS BELOW
 	/**
 	 * Gets the bullets currently in this game.
 	 * @return Arraylist of bullets in the game.
@@ -382,7 +385,6 @@ public class Game {
 	public final ArrayList<Bullet> getBullets() {
 		return bullets;
 	}
-	// ONLY GETTERS BELOW
 	/**
 	 * Gets the shipbullets currently in this game.
 	 * @return Arraylist of shipbullets in the game.
@@ -411,6 +413,13 @@ public class Game {
 		return player;
 	}
 	/**
+	 * Returns the highscore.
+	 * @return current highscore
+	 */
+	public final int getHighScore() {
+		return highscore;
+	}
+	/**
 	 * Gets the canvas width.
 	 * @return width of the canvas.
 	 */
@@ -430,6 +439,13 @@ public class Game {
 	 */
 	public final ArrayList<Alien> getAliens() {
 		return aliens;
+	}
+		/**
+	 * Returns the barricades in this game.
+	 * @return the barricades in this game.
+	 */
+	public final  ArrayList<Barricade> getBarricades() {
+		return barricades;
 	}
 		/**
 	 * Returns the current frame rate.
