@@ -47,7 +47,7 @@ public class Collisions {
 			game.getPlayer().die();
 		}
 		//Checking colissions for spaceship with enemy bullets
-		Unit collidingBullet = checkColissions(game.getPlayer().getSpaceShip(), alienBullets);
+		Unit collidingBullet = checkCollisions(game.getPlayer().getSpaceShip(), alienBullets);
 		if (collidingBullet != null) {
 			spaceShipexplosion = new Explosion(game.getPlayer().getSpaceShip().getXCoor(),
 					game.getPlayer().getSpaceShip().getYCoor(), "explosion1.png");
@@ -56,7 +56,7 @@ public class Collisions {
 		}
 		//Checking for colissions between player bullets and aliens
 		for (Unit bullet : shipBullets) {
-			Unit collidingUnit = checkColissions(bullet, new ArrayList<Unit>(game.getAliens()));
+			Unit collidingUnit = checkCollisions(bullet, new ArrayList<Unit>(game.getAliens()));
 			if (collidingUnit != null) {
 				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
 						collidingUnit.getYCoor(), "explosion1.png"));
@@ -67,7 +67,7 @@ public class Collisions {
 		}
 		// Checking for colissions between bullets and barricades
 		for (Barricade bar : game.getBarricades()) {
-			Unit collidingUnit = checkColissions(bar, new ArrayList<Unit>(game.getBullets()));
+			Unit collidingUnit = checkCollisions(bar, new ArrayList<Unit>(game.getBullets()));
 			if (collidingUnit != null) {
 				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
 						collidingUnit.getYCoor(), "explosion1.png"));
@@ -83,7 +83,7 @@ public class Collisions {
 	 * @param unitList the list of units to check colission against.
 	 * @return The unit the checkingUnit colides with, null if there are no colissions.
 	 */
-	public final Unit checkColissions(final Unit checkingUnit, final ArrayList<Unit> unitList) {
+	public final Unit checkCollisions(final Unit checkingUnit, final ArrayList<Unit> unitList) {
 		double checkX = checkingUnit.getXCoor();
 		double checkY = checkingUnit.getYCoor();
 		for (Unit unit : unitList) {
