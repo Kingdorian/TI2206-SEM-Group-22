@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.unit.Alien;
+import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.SpaceShip;
@@ -53,12 +54,12 @@ public class GameUIController
     /**
      * The width of the canvas.
      */
-    private double canvasWidth;
+    private int canvasWidth;
     
     /**
      * The height of the canvas.
      */
-    private double canvasHeight;
+    private int canvasHeight;
     
     /**
      * ArrayList of all the keys currently pressed.
@@ -120,8 +121,8 @@ public class GameUIController
     	screenBeforePlay.toFront();
     	
     	
-    	canvasWidth = canvas.getWidth();
-    	canvasHeight = canvas.getHeight();
+    	canvasWidth = (int)canvas.getWidth();
+    	canvasHeight = (int)canvas.getHeight();
     	newGame();
     	
     	canvas.setFocusTraversable(true);
@@ -131,6 +132,8 @@ public class GameUIController
      * Creates a new game.
      */
     public final void newGame() {
+    	canvasWidth = (int)canvas.getWidth();
+    	canvasHeight = (int)canvas.getHeight();
     	game = new Game(canvasWidth, canvasHeight);
     	sprites = getSprites();
     	startAnimation();
@@ -224,11 +227,15 @@ public class GameUIController
 						drawUnit(spaceShip.getXCoor(), spaceShip.getYCoor(), spaceShip.getWidth(), 
 								spaceShip.getHeight(), spaceShip.getSprite(), gc);
 
-						
+						// Draw aliens
 						for (Alien unit : game.getAliens()) {
 							drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(),
 									unit.getHeight(), unit.getSprite(), gc);
-							
+						}
+						// Draw barricades
+						for (Barricade bar : game.getBarricades()) {
+							drawUnit(bar.getXCoor(), bar.getYCoor(), bar.getWidth(),
+									bar.getHeight(), bar.getSprite(), gc);
 						}
 						
 						// Create a duplicate to loop over, so deletion is possible.

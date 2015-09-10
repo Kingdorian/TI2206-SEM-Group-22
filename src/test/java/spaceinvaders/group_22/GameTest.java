@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
 import spaceinvaders.group_22.unit.Alien;
+import spaceinvaders.group_22.unit.Barricade;
 
 /**
  * Test for the game class.
@@ -53,6 +55,30 @@ public class GameTest {
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testGetHighscore() {
 		Assert.assertEquals(0, game.getHighScore());
+	}
+	/**
+	 * Tests if the getBarricades method works correctly
+	 */
+	@Test
+	public final void testGetBarricades() {
+		ArrayList<Barricade> barricades = new ArrayList<Barricade>();
+		Barricade barricade = new  Barricade(10, 10, "testimage.png");
+		barricades.add(barricade);
+		game.setBarricades(barricades);
+		Assert.assertEquals(barricade, game.getBarricades().get(0));
+	}
+	/**
+	 * Tests if the addBarricade method adds a barricade correctly.
+	 */
+	@Test
+	public final void testAddBarricade() {
+		ArrayList<Barricade> barricades = new ArrayList<Barricade>();
+		Barricade barricade = new Barricade(10, 10, "testimage.png");
+		barricades.add(barricade);
+		game.setBarricades(new ArrayList<Barricade>());
+		game.addBarricade(barricade);
+		System.out.println(game.getBarricades());
+		//Assert.assertEquals(barricades, game.getBarricades());
 	}
 	/**
 	 * Tests if the getHighScore sets the new highscore correctly.
