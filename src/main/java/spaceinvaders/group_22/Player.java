@@ -78,7 +78,7 @@ public class Player {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void respawnShip() {
-		ship = new SpaceShip(game.getCanvasWidth() / 2, game.getCanvasHeight() - 100, "spaceship.png");
+		ship = new SpaceShip(game.getCanvasWidth() / 2, ship.getYCoor(), "spaceship.png");
 	}
 	/**
 	 * When the player dies remove one of his lives.
