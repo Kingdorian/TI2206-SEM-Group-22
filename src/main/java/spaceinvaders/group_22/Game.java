@@ -98,7 +98,7 @@ public class Game {
 	/**
 	 * Counter until it is allowed to shoot.
 	 */
-	private int countToShoot;
+	private double countToShoot;
 	/**
 	 * Marks if the game has been ended.
 	 */
@@ -393,7 +393,7 @@ public class Game {
 				unit.setVelY(0);
 				unit.setVelX(alienVelX);
 			}
-			if (unit.getYCoor() + unit.getHeight() > player.getSpaceShip().getYCoor() ) {
+			if (unit.getYCoor() + unit.getHeight() > player.getSpaceShip().getYCoor()) {
 				gameOver();
 			}
 			unit.moveUnit();
