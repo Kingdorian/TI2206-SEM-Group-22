@@ -12,6 +12,8 @@ import org.junit.Test;
 
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Barricade;
+import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.ShipBullet;
 
 /**
  * Test key events.
@@ -34,7 +36,7 @@ public class KeboardInputTest {
 	@Before
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void setup() {
-		game = new Game(200 , 200);
+		game = new Game(700 , 1000);
 		game.setPlayer(new Player(game));
 		game.setTickrate(60);
 		// Create simulated events
@@ -72,8 +74,10 @@ public class KeboardInputTest {
 		game.setBarricades(new ArrayList<Barricade>());
 		simulEvents.add(KeyCode.SPACE);
 		ArrayList<Alien> alienList = new ArrayList<Alien>();
+		Alien alien = new Alien(0, 0, "invader.png");
+		alienList.add(alien);
 		game.setAliens(alienList);
 		game.tick(simulEvents);	
-		Assert.assertEquals(bulletAmount+1, game.getBullets().size());
+		Assert.assertEquals(bulletAmount+1, game.getShipBullets().size());
 	}
 }
