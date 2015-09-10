@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.unit.Alien;
+import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.SpaceShip;
@@ -167,6 +168,7 @@ public class GameUIController
     	} else {
         	game.resetGame();    		
     	}
+
     	startAnimation();
     }
     
@@ -255,7 +257,13 @@ public class GameUIController
 						drawAliens();
 						drawExplosions();
 						drawBullets();
-						
+
+						// Draw barricades
+						for (Barricade bar : game.getBarricades()) {
+							drawUnit(bar.getXCoor(), bar.getYCoor(), bar.getWidth(),
+									bar.getHeight(), bar.getSprite());
+						}
+	
 						// Draw the lives and score on the screen.
 						formatLives(game.getPlayer().getLives());
 						formatScore(game.getPlayer().getScore());

@@ -80,22 +80,17 @@ public abstract class Unit {
 	}
 	/**
 	 * Compares two objects and returns if they are equal.
-	 * @param other the object to compare this object to
-	 * @return true if both objects are thesame.
+	 * @return true if both objects are the same.
+	 * @param other the object to compare.
 	 */
 	@Override
-	public boolean equals(final Object other) {
-		if (other != null && other instanceof Unit) {
-			Unit that = (Unit) other;
-			return this.xCoor == that.getXCoor()
-						&& this.getYCoor() == that.yCoor
-						&& this.velX == that.getVelX()
-						&& this.velY == that.getVelY()
-						&& this.getHeight() == that.getHeight()
-						&& this.getWidth() == that.getWidth();
-		}
-		return false;
-	}
+	public abstract boolean equals(Object other);
+	/**
+	 * HashCode method.
+	 * @return hashcode of this object
+	 */
+	public abstract int hashCode();
+	
 	/**
 	 * Move the unit in the direction of this unit and with his velocity.
 	 */

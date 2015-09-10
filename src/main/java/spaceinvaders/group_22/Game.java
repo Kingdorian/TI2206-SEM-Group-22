@@ -6,9 +6,12 @@ import java.util.ArrayList;
 
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.AlienBullet;
+import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.ShipBullet;
+import spaceinvaders.group_22.unit.SpaceShip;
+import spaceinvaders.group_22.unit.Unit;
 
 /**
  * 
@@ -36,7 +39,11 @@ public class Game {
 	/**
 	 * List of aliens in the game.
 	 */
-	private ArrayList<Alien> aliens;	
+	private ArrayList<Alien> aliens;
+	/**
+	 * Arraylist of all barricades in the game.
+	 */
+	private ArrayList<Barricade> barricades;
 	/**
      * List of explosions in the game.
      */
@@ -55,38 +62,15 @@ public class Game {
      * Velocity of the spaceShip in pixels per second.
      */
     private double spaceShipVelX = 250;
-    
     /**
      * Velocity of the bullets of the spaceShip in pixels per second.
      */
+    @SuppressWarnings("checkstyle:magicnumber")
     private double spaceShipBulletVelX = 80;
-    
-    /**
-     * If 0 the aliens don't have to move any frame down.
-     */
-	private double alienFramesDown = 0;
-	
-	/**
-	 * Speed of the aliens in the X direction in pixels per second.
-	 */
-	private double alienVelX = 40;
-	
-	/**
-	 * Speed of the aliens in the Y direction in pixels per second.
-	 */
-	private double alienVelY = 40;
-	/**
-	 * Amount of pixels the aliens go down per wave.
-	 */
-	private double alienFall = 10;
     /**
      * Roughly the amount of bullets that spawn per second.
      */
 	private int bulletChance = 1;
-	/**
-	 * What X direction the aliens are moving.
-	 */
-	private int alienYDir = 1;
 	/**
 	 * The tickrate of the animation.
 	 */	
@@ -105,6 +89,10 @@ public class Game {
 	private boolean hasEnded = false;
 	
 	/**
+	 * The controller of the Aliens.
+	 */
+	private AlienController alienController;
+	/**
 	 * Creates a new instance of game.
 	 * @param width of the canvas.
 	 * @param height of the canvas.
@@ -116,8 +104,11 @@ public class Game {
 		
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
+		barricades = createBarricades();
+
+		alienController = new AlienController(this);
 		
-		aliens = createAliens(100, 69, 60, 10, 4);
+		aliens = alienController.createAlienWave(100, 69, 60, 10, 4);
 
 		player = new Player(this);
 		
@@ -130,8 +121,11 @@ public class Game {
 	public final void resetGame() {
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
+		barricades = createBarricades();
 		
-		aliens = createAliens(100, 69, 60, 10, 4);
+		alienController = new AlienController(this);
+		
+		aliens = alienController.createAlienWave(100, 69, 60, 10, 4);
 		
 		player = new Player(this);
 		
@@ -151,7 +145,17 @@ public class Game {
 	public final void stop() {
 		inProgress = false;
 	}
-	
+	/**
+	 * Resets the game.
+	 */
+	public final void reset() {
+		bullets = new ArrayList<Bullet>();
+		explosions = new ArrayList<Explosion>();
+		aliens = alienController.createAlienWave(100, 69, 60, 10, 4);
+		player = new Player(this);
+		shootingAllowed = true;
+		countToShoot = 0;
+	}
 	/**
 	 * Stops the game and marks the game as ended.
 	 */
@@ -184,7 +188,6 @@ public class Game {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
-		double velX = 0;
 		if (pressedKeys.contains(KeyCode.SPACE)) {
 			if (shootingAllowed) {
 				bullets.add(player.getSpaceShip().shootBullet(-spaceShipBulletVelX));
@@ -199,22 +202,36 @@ public class Game {
 				countToShoot = 0;
 			}
 		}
-		
+		double velX = player.getSpaceShip().getVelX() * 0.98;
+		SpaceShip playership = player.getSpaceShip();
+		if (playership.getXCoor() - (0.5 * playership.getWidth()) <= 0 && velX < 0) {
+			velX *= -1;
+		} else if (player.getSpaceShip().getXCoor() 
+				+ (0.5 * playership.getWidth()) >=  canvasWidth && velX > 0) {
+			velX *= -1;
+		}
 		// Check that the spaceship is still able to move without going off the screen.
 		if (player.getSpaceShip().getXCoor() - 0.5 * player.getSpaceShip().getWidth() > 0 
 				&& pressedKeys.contains(KeyCode.A)) {
-			velX = velX - spaceShipVelX;
+			player.getSpaceShip();
+			velX = velX - SpaceShip.maxVelX * tickrate * 2;
 		}
 		if (player.getSpaceShip().getXCoor() + 0.5 * player.getSpaceShip().getWidth() < canvasWidth
 				&& pressedKeys.contains(KeyCode.D)) {
-			velX = velX + spaceShipVelX;
+			player.getSpaceShip();
+			velX = velX + SpaceShip.maxVelX * tickrate * 2;
 		}
-			
+
+		if (velX > SpaceShip.maxVelX) {
+			velX = SpaceShip.maxVelX;
+		} else if (velX < -SpaceShip.maxVelX) {
+			velX = -SpaceShip.maxVelX;
+		}
 		player.getSpaceShip().setVelX(velX);
 		player.getSpaceShip().moveUnit();
 		
-		moveAliens();
-		shootAlienBullets();
+		alienController.moveAliens();
+		alienController.shootAlienBullets();
 		
 		//Check if all bullets are still visible
 		for (int i = 0; i < bullets.size(); i++) {
@@ -227,6 +244,18 @@ public class Game {
 			bullets.get(i).moveUnit();
 		}
 		checkCollisions();
+
+		for (int i = 0; i < barricades.size(); i++) {
+			if (barricades.get(i).getHealth()==0){
+				barricades.remove(i);
+				i--;
+			}
+		}
+
+		if (aliens.isEmpty()) {
+			aliens = alienController.createAlienWave(100, 69, 60, 10, 4);
+			bullets.clear();
+		}
 	}
 	/**
 	 * Returns the highscore.
@@ -236,6 +265,27 @@ public class Game {
 		return highscore;
 	}
 	
+	/**
+	 * Returns the barricades in this game.
+	 * @return the barricades in this game.
+	 */
+	public final  ArrayList<Barricade> getBarricades() {
+		return barricades;
+	}
+	/**
+	 * Sets the barricades in this game.
+	 * @param barricade the new barricades for this game.
+	 */
+	public final void setBarricades(final ArrayList<Barricade> barricade) { 
+		barricades = barricade;
+	}
+	/**
+	 * Add a new barricade to this game.
+	 * @param barricade to add.
+	 */
+	public final void addBarricade(final Barricade barricade) {
+		barricades.add(barricade);
+	}
 	/**
 	 * Returns the current frame rate.
 	 * @return the current frame rate.
@@ -275,6 +325,20 @@ public class Game {
 	}
 	
 	/**
+	 * Gets the shipbullets currently in this game.
+	 * @return Arraylist of shipbullets in the game.
+	 */
+	public final ArrayList<Bullet> getShipBullets() {
+		ArrayList<Bullet> spaceBullets = new ArrayList<Bullet>();
+		for(int i = 0; i < getBullets().size(); i++){
+			if(getBullets().get(i) instanceof ShipBullet){
+				spaceBullets.add(getBullets().get(i));
+			}
+		}
+		return spaceBullets;
+	}
+	
+	/**
 	 * Gets the explosions currently in this game.
 	 * @return Arraylist of bullets in the game.
 	 */
@@ -304,39 +368,6 @@ public class Game {
 	}
 	
 	/**
-	 * Creates the aliens on the correct start positions.
-	 * @return an arraylist of Aliens drawn.
-	 * @param borderDist Distance to the left and right border.
-	 * @param spriteWidth Width of the sprite.
-	 * @param spriteHeight Height of the sprite.
-	 * @param alienAmount Amount of aliens per line.
-	 * @param lines Amount of alien lines.
-	 */
-	@SuppressWarnings("checkstyle:magicnumber")    
-	public final ArrayList<Alien> createAliens(final double borderDist, final int spriteWidth, 
-			final int spriteHeight, final int alienAmount, final int lines) {
-		ArrayList<Alien> alienList = new ArrayList<Alien>();
-        
-        // Distance to top of the screen.
-        double distance = 125;
-                
-        double interval = (canvasWidth - 2 * borderDist - alienAmount * spriteWidth) / (alienAmount + 1);  
-        double startPosition = borderDist + interval + 0.5 * spriteWidth;
-       
-        // Drawing lines of Aliens.
-        for (int i = 0; i < lines; i++) {
-            for (int j = 0; j < alienAmount; j++) {
-            	Alien alien = new Alien(startPosition, distance, "invader.png");
-            	alien.setVelX(alienVelX);
-            	alienList.add(alien);
-            	startPosition += spriteWidth + interval;
-            }
-            distance += spriteHeight + 0.1 * spriteHeight;
-            startPosition = borderDist + interval + 0.5 * spriteWidth;
-        }
-		return alienList;	
-	}
-	/**
 	 * Sets the list of Aliens currently in game.
 	 * @param alienList The ArrayList of aliens to set.
 	 */
@@ -351,131 +382,78 @@ public class Game {
 		return aliens;
 	}
 	
-	/**
-	 * Method to move all the aliens in the right direction.
-	 */
-	@SuppressWarnings("checkstyle:magicnumber") 
-	public final void moveAliens() {
-		//check if all aliens are still able to move in the window
-		if (alienFramesDown == 0) {
-			for (Alien unit : getAliens()) {
-				// When this alien is on the right side of the screen change the direction
-				if (unit.getXCoor() + 0.5 * unit.getWidth() >= canvasWidth) {
-					alienFramesDown = (alienFall / alienVelY) * (1 / tickrate);
-					// Increase speed
-					alienVelX += 4;
-					// Switch direction
-					alienVelX *= -1;
-					break;
-				}
-				// When this alien is at the left side of the screen change the direction
-				if (unit.getXCoor() - 0.5 * unit.getWidth() <= 0) {
-					alienFramesDown = (alienFall / alienVelY) * (1 / tickrate);
-					// Increase speed
-					alienVelX -= 4;
-					// Switch direction
-					alienVelX *= -1;
-					break;
-				}
-			}
-			
-		}
-		// Decrease the amount of frames the alien needs to be going down.
-		if (alienFramesDown > 0) {
-			alienFramesDown = alienFramesDown - 1;
-		}
-		// move every alien
-		for (Alien unit : getAliens()) {
-			if (alienFramesDown > 0) {
-				unit.setVelY(alienVelY);
-				unit.setVelX(0);			
-			} else {
-				unit.setVelY(0);
-				unit.setVelX(alienVelX);
-			}
-			if (unit.getYCoor() + unit.getHeight() > player.getSpaceShip().getYCoor()) {
-				gameOver();
-			}
-			unit.moveUnit();
-		}
-	}
+	
 	
 	/**
 	 * Checks if there are collisions between bullets and other units.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void checkCollisions() {
-		for (int i = 0; i < this.getBullets().size(); i++) {
-			if (this.getBullets().get(i) instanceof ShipBullet) {
-				Alien alien = this.checkShipBulletVsAliens(this.getBullets().get(i));
-				if (alien != null) {
-					this.explosions.add(new Explosion(alien.getXCoor(), alien.getYCoor(), "explosion1.png"));
-					this.getAliens().remove(alien);
-					this.getBullets().remove(i);
-					getPlayer().addScore(10);
-				}
-			} else if (this.getBullets().get(i) instanceof AlienBullet) {
-				if (this.checkAliensBulletVsSpaceShip(this.getBullets().get(i))) {
-					this.explosions.add(new Explosion(this.getPlayer().getSpaceShip().getXCoor(), 
-							this.getPlayer().getSpaceShip().getYCoor(), "explosion1.png"));
-					this.getPlayer().die();
-					this.getBullets().remove(i);
-				}
+		//Composing list of alien bullets
+		ArrayList<Unit> alienBullets = new ArrayList<Unit>();
+		ArrayList<Unit> shipBullets = new ArrayList<Unit>();
+		for(Bullet bullet : getBullets()) {
+			if(bullet instanceof AlienBullet) {
+				alienBullets.add(bullet);
+			} else if(bullet instanceof ShipBullet) {
+				shipBullets.add(bullet);
+			}
+		}
+		//Checking colissions for spaceship with enemy bullets
+		Unit collidingBullet = checkColissions(player.getSpaceShip(), alienBullets);
+		if (collidingBullet != null ){
+			player.die();
+			bullets.remove(collidingBullet);
+		}
+		//Checking for colissions between player bullets and aliens
+		for(Unit bullet : shipBullets) {
+			Unit collidingUnit = checkColissions(bullet, new ArrayList<Unit>(aliens));
+			if(collidingUnit != null) {
+				player.addScore(10);
+				aliens.remove(collidingUnit);
+				bullets.remove(bullet);
+				break;
+			}
+		}
+		// Checking for colissions between bullets and barricades
+		for(Barricade bar : barricades) {
+			Unit collidingUnit = checkColissions(bar, new ArrayList<Unit>(bullets));
+			if(collidingUnit != null) {
+				bullets.remove(collidingUnit);
+				bar.hit();
 			}
 		}
 	}
 	
 	/**
-	 * Checks if there is a collision between a ShipBullet and an Alien.
-	 * @param bullet The bullet to check
-	 * @return The Alien which gets hit, or null if no alien gets hit
+	 * Checks collisions between an unit and a an ArrayList of other units.
+	 * @param checkingUnit the unit to check colissions with
+	 * @param unitList the list of units to check colission against.
+	 * @return The unit the checkingUnit colides with, null if there are no colissions.
 	 */
-	public final Alien checkShipBulletVsAliens(final Bullet bullet) {
-		int size = this.getAliens().size();
-		double bulletX = bullet.getXCoor();
-		double bulletY = bullet.getYCoor();
-		for (int i = 0; i < size; i++) {
-			double alienX = this.getAliens().get(i).getXCoor();
-			double alienY = this.getAliens().get(i).getYCoor();
-			if ((bulletX - alienX >= -(this.getAliens().get(i).getWidth()) / 2) 
-				&& (bulletX - alienX <= this.getAliens().get(i).getWidth() / 2) 
-				&& (bulletY - alienY >= -(this.getAliens().get(i).getHeight()) / 2) 
-				&& (bulletY - alienY <= this.getAliens().get(i).getHeight() / 2)) {
-				return this.getAliens().get(i);
+	public final Unit checkColissions(Unit checkingUnit, ArrayList<Unit> unitList) {
+		double checkX = checkingUnit.getXCoor();
+		double checkY = checkingUnit.getYCoor();
+		for(Unit unit : unitList) {
+			double unitX = unit.getXCoor();
+			double unitY = unit.getYCoor();
+			if ((checkX - unitX >= -((unit.getWidth()/ 2) + (checkingUnit.getWidth()/2))  
+				&& (checkX - unitX <= (unit.getWidth() / 2) + (checkingUnit.getWidth()/2))) 
+				&& (checkY - unitY >= -(((unit.getHeight()) / 2) + (checkingUnit.getHeight()/2))) 
+				&& (checkY - unitY <= (unit.getHeight() / 2)  + (checkingUnit.getHeight()/2))){
+					return unit;
 			}
 		}
 		return null;
 	}
 	
-	/**
-	 * Checks if there is a collision between an AlienBullet and the SpaceShip.
-	 * @param bullet The bullet to check
-	 * @return True if there is a collision, false if there isn't
-	 */
-	public final boolean checkAliensBulletVsSpaceShip(final Bullet bullet) {
-		double bulletX = bullet.getXCoor();
-		double bulletY = bullet.getYCoor();
-		double shipX = this.getPlayer().getSpaceShip().getXCoor();
-		double shipY = this.getPlayer().getSpaceShip().getYCoor();
-		if ((bulletX - shipX >= -(this.getPlayer().getSpaceShip().getWidth()) / 2) 
-			&& (bulletX - shipX <= this.getPlayer().getSpaceShip().getWidth() / 2) 
-			&& (bulletY - shipY >= -(this.getPlayer().getSpaceShip().getHeight()) / 2) 
-			&& (bulletY - shipY <= this.getPlayer().getSpaceShip().getHeight() / 2)) {
-			return true;
+	private final ArrayList<Barricade> createBarricades() {
+		int barricadeCount = 4;
+		double interval = canvasWidth/(barricadeCount+1);
+		ArrayList<Barricade> bars = new ArrayList<Barricade>();
+		for(int i = 1; i <= barricadeCount; i++) {
+			bars.add(new Barricade(interval*i, canvasHeight-110, "barrier.png"));
 		}
-		return false;
-	}
-
-	/**
-	 * Shoots bullets for aliens.
-	 */
-	@SuppressWarnings("checkstyle:magicnumber")
-	public final void shootAlienBullets() {
-		if (!aliens.isEmpty()) {
-			if (Math.random() < bulletChance * tickrate)   {
-				int shootIndex = (int) (Math.random() * aliens.size());
-				bullets.add(aliens.get(shootIndex).shootBullet(60));
-			}
-		}
+		return bars;
 	}
 }
