@@ -27,11 +27,11 @@ public class SpaceShipTest extends UnitTest {
 		float y = 1;
 		SpaceShip spaceship = new SpaceShip(x, y, "testimage.png");
 		Bullet bullet = spaceship.shootBullet(1);
-		assertTrue(bullet.getXCoor() == spaceship.getXCoor());
-		assertTrue(bullet.getYCoor() == spaceship.getYCoor());
+		assertEquals(spaceship.getXCoor(), bullet.getXCoor(), 0.05);
+		assertEquals(spaceship.getYCoor(), bullet.getYCoor(), 0.05);
 		bullet.moveUnit();
-		assertTrue(bullet.getXCoor() == spaceship.getXCoor());
-		assertTrue(bullet.getYCoor() == spaceship.getYCoor() + 1);
+		assertEquals(spaceship.getXCoor(), bullet.getXCoor(), 0.05);
+		assertTrue(bullet.getYCoor()<spaceship.getYCoor() + 1);
 	}
 	
 	/**

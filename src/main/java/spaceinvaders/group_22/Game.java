@@ -281,7 +281,7 @@ public class Game {
 		//Composing list of alien bullets
 		ArrayList<Unit> alienBullets = new ArrayList<Unit>();
 		ArrayList<Unit> shipBullets = new ArrayList<Unit>();
-		for(Bullet bullet : getBullets()) {
+		for (Bullet bullet : getBullets()) {
 			if(bullet instanceof AlienBullet) {
 				alienBullets.add(bullet);
 			} else if(bullet instanceof ShipBullet) {
@@ -295,9 +295,9 @@ public class Game {
 			bullets.remove(collidingBullet);
 		}
 		//Checking for colissions between player bullets and aliens
-		for(Unit bullet : shipBullets) {
+		for (Unit bullet : shipBullets) {
 			Unit collidingUnit = checkColissions(bullet, new ArrayList<Unit>(aliens));
-			if(collidingUnit != null) {
+			if (collidingUnit != null) {
 				player.addScore(10);
 				aliens.remove(collidingUnit);
 				bullets.remove(bullet);
@@ -305,9 +305,9 @@ public class Game {
 			}
 		}
 		// Checking for colissions between bullets and barricades
-		for(Barricade bar : barricades) {
+		for (Barricade bar : barricades) {
 			Unit collidingUnit = checkColissions(bar, new ArrayList<Unit>(bullets));
-			if(collidingUnit != null) {
+			if (collidingUnit != null) {
 				bullets.remove(collidingUnit);
 				bar.hit();
 			}
@@ -320,16 +320,16 @@ public class Game {
 	 * @param unitList the list of units to check colission against.
 	 * @return The unit the checkingUnit colides with, null if there are no colissions.
 	 */
-	public final Unit checkColissions(Unit checkingUnit, ArrayList<Unit> unitList) {
+	public final Unit checkColissions(final Unit checkingUnit, final ArrayList<Unit> unitList) {
 		double checkX = checkingUnit.getXCoor();
 		double checkY = checkingUnit.getYCoor();
-		for(Unit unit : unitList) {
+		for (Unit unit : unitList) {
 			double unitX = unit.getXCoor();
 			double unitY = unit.getYCoor();
-			if ((checkX - unitX >= -((unit.getWidth()/ 2) + (checkingUnit.getWidth()/2))  
-				&& (checkX - unitX <= (unit.getWidth() / 2) + (checkingUnit.getWidth()/2))) 
-				&& (checkY - unitY >= -(((unit.getHeight()) / 2) + (checkingUnit.getHeight()/2))) 
-				&& (checkY - unitY <= (unit.getHeight() / 2)  + (checkingUnit.getHeight()/2))){
+			if ((checkX - unitX >= -((unit.getWidth() / 2) + (checkingUnit.getWidth() / 2))  
+				&& (checkX - unitX <= (unit.getWidth() / 2) + (checkingUnit.getWidth() / 2))) 
+				&& (checkY - unitY >= -(((unit.getHeight()) / 2) + (checkingUnit.getHeight() / 2))) 
+				&& (checkY - unitY <= (unit.getHeight() / 2)  + (checkingUnit.getHeight() / 2))) {
 					return unit;
 			}
 		}
@@ -339,12 +339,12 @@ public class Game {
 	 * Creates the barricades for this game.
 	 * @return the barricades in this game.
 	 */
-	private final ArrayList<Barricade> createBarricades() {
+	private ArrayList<Barricade> createBarricades() {
 		int barricadeCount = 4;
-		int interval = canvasWidth/(barricadeCount+1);
+		int interval = canvasWidth / (barricadeCount + 1);
 		ArrayList<Barricade> bars = new ArrayList<Barricade>();
-		for(int i = 1; i <= barricadeCount; i++) {
-			bars.add(new Barricade(interval*i, canvasHeight-110, "barrier.png"));
+		for (int i = 1; i <= barricadeCount; i++) {
+			bars.add(new Barricade(interval * i, canvasHeight - 110, "barrier.png"));
 		}
 		return bars;
 	}
@@ -399,8 +399,8 @@ public class Game {
 	 */
 	public final ArrayList<Bullet> getShipBullets() {
 		ArrayList<Bullet> spaceBullets = new ArrayList<Bullet>();
-		for(int i = 0; i < getBullets().size(); i++){
-			if(getBullets().get(i) instanceof ShipBullet){
+		for (int i = 0; i < getBullets().size(); i++) {
+			if (getBullets().get(i) instanceof ShipBullet) {
 				spaceBullets.add(getBullets().get(i));
 			}
 		}
@@ -464,19 +464,16 @@ public class Game {
 	}
 	/**
 	 * Returns if the player is allowed to shoot at the moment or still in cooldown.
-	 * @return true if the player is allowed to shoot
-	 * @return false if player is in cooldown
+	 * @return true if the player is allowed to shoot, false if player is in cooldown
 	 */
-	public boolean getShootingAllowed() {
+	public final boolean getShootingAllowed() {
 		return shootingAllowed;
 	}
 	/**
 	 * Sets the bullet list.
 	 * @param list ArrayList containing the new bullets
 	 */
-	public void setBullets(ArrayList<Bullet> list) {
+	public final void setBullets(final ArrayList<Bullet> list) {
 		bullets = list;
 	}
-	
-
 }
