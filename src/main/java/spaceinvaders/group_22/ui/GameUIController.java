@@ -49,7 +49,7 @@ public class GameUIController
     /**
      * The framerate of the animation.
      */
-    private Double framerate;
+    private int framerate;
     
     /**
      * The width of the canvas.
@@ -144,7 +144,7 @@ public class GameUIController
      * @param fps The amount of frames per second.
      */
     public final void setFramerate(final int fps) {
-    	framerate = 1.0 / fps;
+    	framerate = (int)1.0 / fps;
     }
     
     /**

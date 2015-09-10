@@ -1,23 +1,22 @@
 package spaceinvaders.group_22.unit;
 /**
- * Class for the baricade units that protect the player
+ * Class for the baricade units that protect the player.
  * @author dorian
  *
  */
-public class Barricade extends Unit{
+public class Barricade extends Unit {
 	/**
 	 * Var that keeps track of damage taken by this barricade.
 	 */
-	private int health;
+	private int health  = 10;
 	/**
-	 * Creates new Barricade object
+	 * Creates new Barricade object.
 	 * @param x X-coordinate of the barricade
 	 * @param y Y-coordinate of the barricade
 	 * @param spriteFile 
 	 */
-	public Barricade(double x, double y, String spriteFile) {
+	public Barricade(final double x, final double y, final String spriteFile) {
 		super(x, y, spriteFile);
-		health = 10;
 	}
 	/**
 	 * When barricade is hit decrease health. 
@@ -38,8 +37,8 @@ public class Barricade extends Unit{
 	 * @return true if the both objects are thesame.
 	 */
 	public final boolean equals(final Object obj) {
-		if (this == obj) {
-			return true;
+		if (obj == null) {
+			return false;
 		}
 		if (getClass() != obj.getClass()) {
 			return false;

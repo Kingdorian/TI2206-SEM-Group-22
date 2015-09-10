@@ -31,7 +31,7 @@ public class SpaceShipTest extends UnitTest {
 		assertEquals(spaceship.getYCoor(), bullet.getYCoor(), 0.05);
 		bullet.moveUnit();
 		assertEquals(spaceship.getXCoor(), bullet.getXCoor(), 0.05);
-		assertTrue(bullet.getYCoor()<spaceship.getYCoor() + 1);
+		assertTrue(bullet.getYCoor() == spaceship.getYCoor() + 1);
 	}
 	
 	/**

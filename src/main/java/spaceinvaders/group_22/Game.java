@@ -57,18 +57,10 @@ public class Game {
      */
     private int canvasHeight;
     /**
-     * Velocity of the spaceShip in pixels per second.
-     */
-    private double spaceShipVelX = 250;
-    /**
      * Velocity of the bullets of the spaceShip in pixels per second.
      */
     @SuppressWarnings("checkstyle:magicnumber")
     private double spaceShipBulletVelX = 80;
-    /**
-     * Roughly the amount of bullets that spawn per second.
-     */
-	private double bulletChance = 1;
 	/**
 	 * The tickrate of the animation.
 	 */	
@@ -95,19 +87,19 @@ public class Game {
 	/**
 	 * Part of the screen (on left and right) that cannot be used when creating aliens. 
 	 */
-	final double ALIENBORDERMARIGIN = 1 / 7;
+	static final double ALIENBORDERMARIGIN = 1 / 7;
 	/**
 	 * Amount of aliens per row.
 	 */
-	final int ALIENS_PER_ROW = 10;
+	static final int ALIENS_PER_ROW = 10;
 	/**
 	 * Amount of rows of aliens.
 	 */
-	final int AMOUNT_ALIEN_ROWS = 4;
+	static final int AMOUNT_ALIEN_ROWS = 4;
 	/**
 	 * Location of the sprite of the aliens.
 	 */
-	final String ALIENSPRITE = "barrier.png";
+	static final String ALIENSPRITE = "barrier.png";
 	/**
 	 * Creates a new instance of game.
 	 * @param width of the canvas.
@@ -221,8 +213,8 @@ public class Game {
 			bullets.get(i).moveUnit();
 		}
 		checkCollisions();
-		for (int i = 0; i < barricades.size(); i++) {
-			if (barricades.get(i).getHealth()==0){
+		for (int i = 0; i < barricades.size(); i++)  {
+			if (barricades.get(i).getHealth() == 0) {
 				barricades.remove(i);
 				i--;
 			}
@@ -237,7 +229,7 @@ public class Game {
 	 * Moves the spaceship.
 	 * @param pressedKeys the keys pressed since last tick
 	 */
-	public final void moveSpaceShip(ArrayList<KeyCode> pressedKeys) {
+	public final void moveSpaceShip(final ArrayList<KeyCode> pressedKeys) {
 		double velX = player.getSpaceShip().getVelX() * 0.98;
 		SpaceShip playership = player.getSpaceShip();
 		if (playership.getXCoor() - (0.5 * playership.getWidth()) <= 0 && velX < 0) {
@@ -249,19 +241,18 @@ public class Game {
 		// Check that the spaceship is still able to move without going off the screen.
 		if (player.getSpaceShip().getXCoor() - 0.5 * player.getSpaceShip().getWidth() > 0 
 				&& pressedKeys.contains(KeyCode.A)) {
-			player.getSpaceShip();
-			velX = velX - SpaceShip.maxVelX * tickrate * 2;
+			velX = velX - SpaceShip.MAXVELX * tickrate * 2;
 		}
 		if (player.getSpaceShip().getXCoor() + 0.5 * player.getSpaceShip().getWidth() < canvasWidth
 				&& pressedKeys.contains(KeyCode.D)) {
 			player.getSpaceShip();
-			velX = velX + SpaceShip.maxVelX * tickrate * 2;
+			velX = velX + SpaceShip.MAXVELX * tickrate * 2;
 		}
 
-		if (velX > SpaceShip.maxVelX) {
-			velX = SpaceShip.maxVelX;
-		} else if (velX < -SpaceShip.maxVelX) {
-			velX = -SpaceShip.maxVelX;
+		if (velX > SpaceShip.MAXVELX) {
+			velX = SpaceShip.MAXVELX;
+		} else if (velX < -SpaceShip.MAXVELX) {
+			velX = -SpaceShip.MAXVELX;
 		}
 		player.getSpaceShip().setVelX(velX);
 		player.getSpaceShip().moveUnit();
@@ -282,15 +273,15 @@ public class Game {
 		ArrayList<Unit> alienBullets = new ArrayList<Unit>();
 		ArrayList<Unit> shipBullets = new ArrayList<Unit>();
 		for (Bullet bullet : getBullets()) {
-			if(bullet instanceof AlienBullet) {
+			if (bullet instanceof AlienBullet) {
 				alienBullets.add(bullet);
-			} else if(bullet instanceof ShipBullet) {
+			} else if (bullet instanceof ShipBullet) {
 				shipBullets.add(bullet);
 			}
 		}
 		//Checking colissions for spaceship with enemy bullets
 		Unit collidingBullet = checkColissions(player.getSpaceShip(), alienBullets);
-		if (collidingBullet != null ){
+		if (collidingBullet != null) {
 			player.die();
 			bullets.remove(collidingBullet);
 		}
