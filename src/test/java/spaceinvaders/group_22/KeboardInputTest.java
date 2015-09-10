@@ -33,7 +33,7 @@ public class KeboardInputTest {
 	@Before
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void setup() {
-		game = new Game(200 , 200);
+		game = new Game(700 , 1000);
 		game.setPlayer(new Player(game));
 		
 		// Create simulated events
@@ -68,8 +68,6 @@ public class KeboardInputTest {
 	public final void testPressSpace() {
 		simulEvents.add(KeyCode.SPACE);
 		ArrayList<Alien> alienList = new ArrayList<Alien>();
-		Alien testAlien = new Alien(0, 0, "invader.png");
-		alienList.add(testAlien);
 		game.setAliens(alienList);
 		game.tick(simulEvents);	
 		assertTrue(1 == game.getBullets().size());

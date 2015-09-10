@@ -110,7 +110,6 @@ public class Game {
 		if (pressedKeys.contains(KeyCode.SPACE)) {
 			bullets.add(player.getSpaceShip().shootBullet(-spaceShipBulletVelX));
 		}
-		
 		// Check that the spaceship is still able to move without going off the screen.
 		if (player.getSpaceShip().getXCoor() - 0.5 * player.getSpaceShip().getWidth() > 0 
 				&& pressedKeys.contains(KeyCode.A)) {
@@ -138,10 +137,8 @@ public class Game {
 			bullets.get(i).moveUnit();
 		}
 		checkCollisions();
-		
 		if (aliens.isEmpty()) {
 			aliens = alienController.createAlienWave(100, 69, 60, 10, 4);
-			this.getBullets().clear();
 		}
 	}
 	/**
