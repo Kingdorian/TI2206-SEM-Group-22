@@ -14,6 +14,7 @@ import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.ShipBullet;
+import spaceinvaders.group_22.Game;
 
 /**
  * Test key events.

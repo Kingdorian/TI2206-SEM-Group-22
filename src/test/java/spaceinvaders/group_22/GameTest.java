@@ -6,11 +6,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import javafx.scene.input.KeyCode;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.ShipBullet;
+import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
  * Test for the game class.
@@ -263,4 +265,67 @@ public class GameTest {
 		game.setPlayer(player);
 		Assert.assertEquals(game.getPlayer(), player);
 	}
+	/**
+	 * Tests the moveSpaceShip method for bouncing spaceship to the left border.
+	 */
+	@Test
+	public final void testShipBounceLeft() {
+		game.getPlayer().setSpaceShip(new SpaceShip(-5, 0, "spaceship.png"));
+		game.getPlayer().getSpaceShip().setVelX(-10.0);
+		game.moveSpaceShip(new ArrayList<KeyCode>());
+		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() >= 0);
+	}
+	/**
+	 * Tests the moveSpaceShip method for bouncing spaceship to the right border.
+	 */
+	@Test
+	public final void testShipBounceRight() {
+		game.getPlayer().setSpaceShip(new SpaceShip(game.getCanvasWidth() + 5, 10, "spaceship.png"));
+		game.getPlayer().getSpaceShip().setVelX(10.0);
+		game.moveSpaceShip(new ArrayList<KeyCode>());
+		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() <= 0);
+	}
+	/**
+	 * Tests the ship moving normally to the right when D is pressed. 
+	 */
+	@Test
+	public final void testShipMovingRight() {
+		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
+		ArrayList keyList = new ArrayList<KeyCode>();
+		keyList.add(KeyCode.D);
+		game.moveSpaceShip(keyList);
+		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() > 0);
+	}
+	/**
+	 * Tests the ship moving normally to the left when A is pressed. 
+	 */
+	@Test
+	public final void testShipMovingLeft() {
+		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
+		ArrayList keyList = new ArrayList<KeyCode>();
+		keyList.add(KeyCode.A);
+		game.moveSpaceShip(keyList);
+		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() < 0);
+	}
+	/**
+	 * Test
+	 */
+	@Test
+	public final void testShipFasterThenMaxSpeedRight() {
+		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
+		game.getPlayer().getSpaceShip().setVelX(500);
+		game.moveSpaceShip(new ArrayList<KeyCode>());
+		Assert.assertEquals(250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
+	}
+	/**
+	 * Tests the ship moving normally to the left when A is pressed. 
+	 */
+	@Test
+	public final void testShipFasterThenMaxSpeedLeft() {
+		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
+		game.getPlayer().getSpaceShip().setVelX(-500);
+		game.moveSpaceShip(new ArrayList<KeyCode>());
+		Assert.assertEquals(-250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
+	}
+	
 }
