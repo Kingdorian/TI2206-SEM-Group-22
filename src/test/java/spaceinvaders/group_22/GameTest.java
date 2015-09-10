@@ -8,6 +8,9 @@ import org.junit.Test;
 
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Barricade;
+import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.Explosion;
+import spaceinvaders.group_22.unit.ShipBullet;
 
 /**
  * Test for the game class.
@@ -130,5 +133,63 @@ public class GameTest {
 		game.setAliens(aliens);
 		
 		Assert.assertEquals(new ArrayList<Alien>(), game.getAliens());
+	}
+	/**
+	 * Tests if the reset method works correctly for resetting barricades.
+	 */
+	@Test
+	public final void testResetBarricades() {
+		game.getBarricades().get(0).hit();
+		game.reset();
+		Assert.assertEquals(10, game.getBarricades().get(0).getHealth());
+	}
+	/**
+	 * Tests if the reset method works correctly for resetting aliens.
+	 */
+	@Test
+	public final void testResetAliens() {
+		game.setAliens(new ArrayList<Alien>());
+		game.reset();
+		Assert.assertEquals(game.ALIENS_PER_ROW*game.AMOUNT_ALIEN_ROWS,	game.getAliens().size());
+	}
+	/**
+	 * Tests if the reset method works correctly for resetting the player.
+	 */
+	@Test
+	public final void testResetPlayer() {
+		game.getPlayer().addScore(111);
+		game.reset();
+		// Player should be resetted so his score should be 0
+		Assert.assertEquals(0, game.getPlayer().getScore());
+	}
+	/**
+	 * Tests if the reset method works correctly for resetting the bullet list.
+	 */
+	@Test
+	public final void testResetBullets() {
+		game.getBullets().add(new ShipBullet(1.0, 1.0, "invader.png"));
+		game.reset();
+		// Bullet list should be emptied when the game resets
+		Assert.assertEquals(0, game.getBullets().size() );
+	}
+	/**
+	 * Tests if the reset method works correctly for resetting the explosion list.
+	 */
+	@Test
+	public final void testResetExplosions() {
+		game.getExplosions().add(new Explosion(1.0, 1.0, "explosion1.png"));
+		game.reset();
+		// Bullet list should be emptied when the game resets
+		Assert.assertEquals(0, game.getExplosions().size() );
+	}
+	/**
+	 * Tests if the reset method works correctly for resetting .
+	 */
+	@Test
+	public final void testShootingAllowed() {
+		game.getPlayer().getSpaceShip().shootBullet(0.1);
+		game.reset();
+		// Bullet list should be emptied when the game resets
+		Assert.assertTrue(game.getShootingAllowed());
 	}
 }

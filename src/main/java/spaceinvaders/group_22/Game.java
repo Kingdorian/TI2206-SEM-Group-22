@@ -95,15 +95,15 @@ public class Game {
 	/**
 	 * Part of the screen (on left and right) that cannot be used when creating aliens. 
 	 */
-	private final double ALIENBORDERMARIGIN = 1/7;
+	final double ALIENBORDERMARIGIN = 1/7;
 	/**
 	 * Amount of aliens per row.
 	 */
-	private final int ALIENS_PER_ROW = 10;
+	final int ALIENS_PER_ROW = 10;
 	/**
 	 * Amount of rows of aliens.
 	 */
-	private final int AMOUNT_ALIEN_ROWS = 4;
+	final int AMOUNT_ALIEN_ROWS = 4;
 	
 	final String ALIENSPRITE = "invader.png";
 	/**
@@ -148,6 +148,7 @@ public class Game {
 	public final void reset() {
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
+		barricades = createBarricades();
 		// Create an alien to use to get the width and height of the aliens used in this game. 
 		//(based on their sprite size)
 		Alien spriteinfo = new Alien(0, 0, ALIENSPRITE);
@@ -453,6 +454,14 @@ public class Game {
 	 */
 	public static double getTickrate() {
 		return tickrate;
+	}
+	/**
+	 * Returns if the player is allowed to shoot at the moment or still in cooldown.
+	 * @return true if the player is allowed to shoot
+	 * @return false if player is in cooldown
+	 */
+	public boolean getShootingAllowed() {
+		return shootingAllowed;
 	}
 	
 
