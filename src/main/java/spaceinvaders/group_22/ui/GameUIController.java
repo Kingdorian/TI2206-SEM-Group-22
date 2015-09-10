@@ -247,15 +247,15 @@ public class GameUIController
 									explosion.getWidth(), explosion.getHeight(), explosion.getSprite(), gc);
 							explosion.increaseCounter();
 							
-							if (explosion.getCounter() < 10) {
+							if (explosion.getCounter() < 5) {
 								explosion.setSprite("explosion" + 1 + ".png");
-							} else if (explosion.getCounter() < 20) {
+							} else if (explosion.getCounter() < 10) {
 								explosion.setSprite("explosion" + 2 + ".png");
-							} else if (explosion.getCounter() < 30) {
+							} else if (explosion.getCounter() < 15) {
 								explosion.setSprite("explosion" + 3 + ".png");
-							} else if (explosion.getCounter() < 40) {
+							} else if (explosion.getCounter() < 20) {
 								explosion.setSprite("explosion" + 4 + ".png");
-							} else if (explosion.getCounter() < 50) {
+							} else if (explosion.getCounter() < 25) {
 								explosion.setSprite("explosion" + 5 + ".png");
 							} else {
 								game.getExplosions().remove(explosion);

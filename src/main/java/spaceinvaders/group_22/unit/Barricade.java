@@ -1,60 +1,56 @@
 package spaceinvaders.group_22.unit;
 /**
- * Class for the baricade units that protect the player
+ * Class for the baricade units that protect the player.
  * @author dorian
  *
  */
-public class Barricade extends Unit{
+public class Barricade extends Unit {
 	/**
 	 * Var that keeps track of damage taken by this barricade.
 	 */
 	private int health;
 	/**
-	 * Creates new Barricade object
+	 * Creates new Barricade object.
 	 * @param x X-coordinate of the barricade
 	 * @param y Y-coordinate of the barricade
 	 * @param spriteFile 
 	 */
-	public Barricade(double x, double y, String spriteFile) {
+	@SuppressWarnings("checkstyle:magicnumber")
+	public Barricade(final double x, final double y, final String spriteFile) {
 		super(x, y, spriteFile);
 		health = 10;
 	}
 	/**
 	 * When barricade is hit decrease health. 
 	 */
-	public void hit() {
+	public final void hit() {
 		health--;
 	}
 	/**
 	 * Return the amount of health the barricade has left.
+	 * @return amount of health the barricade has left.
 	 */
-	public int getHealth() {
+	public final int getHealth() {
 		return health;
 	}
 	/**
-	 * Checks if the provided object equeals this Barricade.
-	 * @param the object to compare to.
-	 * @return true if the both objects are thesame.
+	 * Compares two objects and returns if they are equal.
+	 * @return true if both objects are the same.
+	 * @param other the object to compare.
 	 */
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (getClass() != obj.getClass())
-			return false;
-		Barricade that = (Barricade)obj;
-		if(this.getXCoor() == that.getXCoor()
+	@Override
+	public final boolean equals(final Object other) {
+		if (other != null && other instanceof Barricade) {
+			Barricade that = (Barricade) other;
+			return this.getXCoor() == that.getXCoor()
 					&& this.getYCoor() == that.getYCoor()
 					&& this.getVelX() == that.getVelX()
 					&& this.getVelY() == that.getVelY()
 					&& this.getHeight() == that.getHeight()
-					&& this.getWidth() == that.getWidth()){
-				if (health != that.health){
-					return false;
-				}
-				return true;
+					&& this.getWidth() == that.getWidth()
+					&& this.getHealth() == that.getHealth();
 		}
 		return false;
-	
 	}
 	/**
 	 * HashCode method.
