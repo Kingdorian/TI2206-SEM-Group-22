@@ -51,12 +51,12 @@ public class Game {
 	/**
      * The width of the canvas.
      */
-    private int canvasWidth;
+    private double canvasWidth;
     
     /**
      * The height of the canvas.
      */
-    private int canvasHeight;
+    private double canvasHeight;
     
     /**
      * Velocity of the spaceShip in pixels per second.
@@ -82,7 +82,7 @@ public class Game {
 	/**
 	 * Counter until it is allowed to shoot.
 	 */
-	private int countToShoot;
+	private double countToShoot;
 	/**
 	 * Marks if the game has been ended.
 	 */
@@ -98,7 +98,7 @@ public class Game {
 	 * @param height of the canvas.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
-	public Game(final int width, final int height) {
+	public Game(final double width, final double height) {
 		canvasWidth = width;
 		canvasHeight = height;
 		
@@ -110,6 +110,23 @@ public class Game {
 		
 		aliens = alienController.createAlienWave(100, 69, 60, 10, 4);
 
+		player = new Player(this);
+		
+		shootingAllowed = true;
+		countToShoot = 0;
+	}
+	/**
+	 * Resets the game.
+	 */
+	public final void resetGame() {
+		bullets = new ArrayList<Bullet>();
+		explosions = new ArrayList<Explosion>();
+		barricades = createBarricades();
+		
+		alienController = new AlienController(this);
+		
+		aliens = alienController.createAlienWave(100, 69, 60, 10, 4);
+		
 		player = new Player(this);
 		
 		shootingAllowed = true;
@@ -432,7 +449,7 @@ public class Game {
 	
 	private final ArrayList<Barricade> createBarricades() {
 		int barricadeCount = 4;
-		int interval = canvasWidth/(barricadeCount+1);
+		double interval = canvasWidth/(barricadeCount+1);
 		ArrayList<Barricade> bars = new ArrayList<Barricade>();
 		for(int i = 1; i <= barricadeCount; i++) {
 			bars.add(new Barricade(interval*i, canvasHeight-110, "barrier.png"));

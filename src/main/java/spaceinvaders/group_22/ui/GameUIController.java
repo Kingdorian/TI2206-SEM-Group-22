@@ -33,6 +33,7 @@ import javafx.util.Duration;
  * @author Jochem
  *
  */
+@SuppressWarnings("checkstyle:magicnumber")    
 public class GameUIController
     implements Initializable {
 
@@ -54,12 +55,12 @@ public class GameUIController
     /**
      * The width of the canvas.
      */
-    private int canvasWidth;
+    private double canvasWidth;
     
     /**
      * The height of the canvas.
      */
-    private int canvasHeight;
+    private double canvasHeight;
     
     /**
      * ArrayList of all the keys currently pressed.
@@ -105,37 +106,69 @@ public class GameUIController
     private Node screenPaused;
     
     /**
+     * The graphicscontext of the Canvas.
+     */
+    private static GraphicsContext gc;
+    
+    /**
      * Called by the FXMLLoader. 
      */
     @Override
-	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void initialize(final URL fxmlFileLocation, final ResourceBundle resources) {
+    	initializeStackPaneScreens();
+    	// Get the GraphicsContext of the canvas, so you can draw on it.
+    	gc = canvas.getGraphicsContext2D();
     	
-    	// Get the various screens.
-    	// The order in the FXML file matters (!).
-    	screenGameOver = stackPane.getChildren().get(0);
-    	screenBeforePlay = stackPane.getChildren().get(1);
-    	screenPaused = stackPane.getChildren().get(2);
-
-    	// Move press to play to front.
-    	screenBeforePlay.toFront();
+    	canvasWidth = canvas.getWidth();
+    	canvasHeight = canvas.getHeight();
     	
-    	
-    	canvasWidth = (int)canvas.getWidth();
-    	canvasHeight = (int)canvas.getHeight();
     	newGame();
     	
     	canvas.setFocusTraversable(true);
     }
     
     /**
+     * Retruns the canvas Width.
+     * @return canvasWidth
+     */
+    public final double getCanvasWidth() {
+    	return canvasWidth;
+    }
+    
+    /**
+     * Retruns the canvas Height.
+     * @return canvasHeight
+     */
+    public final double getCanvasHeight() {
+    	return canvasHeight;
+    }
+    
+    /**
+     * Gets the screens in the GameUI stackpane, and assigns them to the right variables.
+     * The order in the FXML file matters (!).
+     */
+    public final void initializeStackPaneScreens() {
+    	screenGameOver = stackPane.getChildren().get(0);
+    	screenBeforePlay = stackPane.getChildren().get(1);
+    	screenPaused = stackPane.getChildren().get(2);
+
+    	// Move press to play to front.
+    	screenBeforePlay.toFront();
+    }
+    
+    /**
      * Creates a new game.
      */
     public final void newGame() {
-    	canvasWidth = (int)canvas.getWidth();
-    	canvasHeight = (int)canvas.getHeight();
-    	game = new Game(canvasWidth, canvasHeight);
-    	sprites = getSprites();
+    	// If the game does not exist, create a new one.
+    	if (game == null) {
+        	game = new Game(canvasWidth, canvasHeight);
+        	sprites = getSprites();
+        // Else reset the existing game.
+    	} else {
+        	game.resetGame();    		
+    	}
+
     	startAnimation();
     }
     
@@ -144,7 +177,19 @@ public class GameUIController
      * @param fps The amount of frames per second.
      */
     public final void setFramerate(final int fps) {
-    	framerate = 1.0 / fps;
+    	if (fps > 0) {
+        	framerate = 1.0 / (double) fps;	
+    	} else {
+    		framerate = 0.0;
+    	}
+    }
+    
+    /**
+     * Returns the framerate.
+     * @return the framerate of the animation.
+     */
+    public final double getFramerate() {
+    	return framerate;
     }
     
     /**
@@ -154,49 +199,36 @@ public class GameUIController
     public final HashMap<String, Image> getSprites() {
     	HashMap<String, Image> spriteMap = new HashMap<String, Image>();
     		
-    		spriteMap.put("alienbullet.png", 
-    				new Image(getClass().getClassLoader()
-    						.getResource("spaceinvaders/group_22/images/alienbullet.png").toString()));
-    		spriteMap.put("spaceshipbullet.png", 
-    				new Image(getClass().getClassLoader()
-    						.getResource("spaceinvaders/group_22/images/spaceshipbullet.png").toString()));
-    		spriteMap.put("invader.png", 
-    				new Image(getClass().getClassLoader()
-    						.getResource("spaceinvaders/group_22/images/invader.png").toString()));
-	    	spriteMap.put("spaceship.png", 
-	    			new Image(getClass().getClassLoader()
-	    					.getResource("spaceinvaders/group_22/images/spaceship.png").toString()));
-	    	spriteMap.put("heart.png", 
-	    			new Image(getClass().getClassLoader()
-	    					.getResource("spaceinvaders/group_22/images/heart.png").toString()));
-	    	spriteMap.put("barrier.png", 
-	    			new Image(getClass().getClassLoader()
-	    					.getResource("spaceinvaders/group_22/images/barrier.png").toString()));
-	    	spriteMap.put("explosion1.png", 
-	    			new Image(getClass().getClassLoader()
-	    					.getResource("spaceinvaders/group_22/images/explosion1.png").toString()));
-	    	spriteMap.put("explosion2.png", 
-	    			new Image(getClass().getClassLoader()
-	    					.getResource("spaceinvaders/group_22/images/explosion2.png").toString()));
-	    	spriteMap.put("explosion3.png", 
-	    			new Image(getClass().getClassLoader()
-	    					.getResource("spaceinvaders/group_22/images/explosion3.png").toString()));
-	    	spriteMap.put("explosion4.png", 
-	    			new Image(getClass().getClassLoader()
-	    					.getResource("spaceinvaders/group_22/images/explosion4.png").toString()));
-	    	spriteMap.put("explosion5.png", 
-	    			new Image(getClass().getClassLoader()
-	    					.getResource("spaceinvaders/group_22/images/explosion5.png").toString()));
+    		addSprite(spriteMap, "alienbullet.png");
+    		addSprite(spriteMap, "spaceshipbullet.png");
+    		addSprite(spriteMap, "invader.png");
+    		addSprite(spriteMap, "spaceship.png");
+    		addSprite(spriteMap, "heart.png");
+    		addSprite(spriteMap, "barrier.png");
+    		addSprite(spriteMap, "explosion1.png");
+    		addSprite(spriteMap, "explosion2.png");
+    		addSprite(spriteMap, "explosion3.png");
+    		addSprite(spriteMap, "explosion4.png");
+    		addSprite(spriteMap, "explosion5.png");
     		
     	return spriteMap;
     }
     
     /**
+     * Adds a sprite to the sprite Hasmap.
+     * @param spriteMap The hashmap of sprites to add to.
+     * @param filename The filename of the sprite to add.
+     */
+    public final void addSprite(final HashMap<String, Image> spriteMap, final String filename) {
+		spriteMap.put(filename, 
+				new Image(getClass().getClassLoader()
+						.getResource("spaceinvaders/group_22/images/" + filename).toString()));
+    }
+    
+    /**
      * Starts the animation of the canvas.
      */
-	@SuppressWarnings("checkstyle:magicnumber")    
     public final void startAnimation() {
-		final GraphicsContext gc = canvas.getGraphicsContext2D();
 		
 		// Create the animation Timeline, responsible for updating the animation.
 		Timeline gameLoop = new Timeline();
@@ -206,6 +238,7 @@ public class GameUIController
     	setFramerate(60);
     	Game.setTickrate(framerate);
     	
+    	// Create each frame.
 		KeyFrame frame = new KeyFrame(
 			Duration.seconds(framerate), 
 				new EventHandler<ActionEvent>()
@@ -214,68 +247,32 @@ public class GameUIController
 						// Clear the canvas.
 						gc.clearRect(0, 0, canvasWidth, canvasHeight);
 						
-						// Testing animation using only the Player.
-	                    //double testTranslation = (System.currentTimeMillis() - timeStart) / 10.0; 
+						// If the game is in progress, look if any key is pressed.
 						if (game.isInProgress()) {
-							
 							game.tick(pressedKeys);
 						}
-									
-						SpaceShip spaceShip = game.getPlayer().getSpaceShip();
 						
-				        // Position the player in the middle, on the bottom of the screen.
-						drawUnit(spaceShip.getXCoor(), spaceShip.getYCoor(), spaceShip.getWidth(), 
-								spaceShip.getHeight(), spaceShip.getSprite(), gc);
+						// Draw the various units on the screen.
+						drawPlayer();
+						drawAliens();
+						drawExplosions();
+						drawBullets();
 
-						// Draw aliens
-						for (Alien unit : game.getAliens()) {
-							drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(),
-									unit.getHeight(), unit.getSprite(), gc);
-						}
 						// Draw barricades
 						for (Barricade bar : game.getBarricades()) {
 							drawUnit(bar.getXCoor(), bar.getYCoor(), bar.getWidth(),
-									bar.getHeight(), bar.getSprite(), gc);
+									bar.getHeight(), bar.getSprite());
 						}
-						
-						// Create a duplicate to loop over, so deletion is possible.
-						ArrayList<Explosion> explosionList = new ArrayList<Explosion>();
-						explosionList.addAll(game.getExplosions());
-						
-						for (Explosion explosion : explosionList) {
-							drawUnit(explosion.getXCoor(), explosion.getYCoor(), 
-									explosion.getWidth(), explosion.getHeight(), explosion.getSprite(), gc);
-							explosion.increaseCounter();
-							
-							if (explosion.getCounter() < 10) {
-								explosion.setSprite("explosion" + 1 + ".png");
-							} else if (explosion.getCounter() < 20) {
-								explosion.setSprite("explosion" + 2 + ".png");
-							} else if (explosion.getCounter() < 30) {
-								explosion.setSprite("explosion" + 3 + ".png");
-							} else if (explosion.getCounter() < 40) {
-								explosion.setSprite("explosion" + 4 + ".png");
-							} else if (explosion.getCounter() < 50) {
-								explosion.setSprite("explosion" + 5 + ".png");
-							} else {
-								game.getExplosions().remove(explosion);
-							}
-							
-						}
+	
+						// Draw the lives and score on the screen.
+						formatLives(game.getPlayer().getLives());
+						formatScore(game.getPlayer().getScore());
 						
 						if (pressedKeys.contains(KeyCode.SPACE)) {
 					    	pressedKeys.remove(KeyCode.SPACE);
 					    }
 						
-						for (Bullet bullet : game.getBullets()) {
-							drawUnit(bullet.getXCoor(), bullet.getYCoor(), 
-									bullet.getWidth(), bullet.getHeight(), bullet.getSprite(), gc);
-						}
-						
-						scoreLabel.setText("Score: " + game.getPlayer().getScore());
-						formatLives(game.getPlayer().getLives(), gc);
-						formatScore(game.getPlayer().getScore());
-						
+						// If the game has ended, put the Game Over screen to the front.
 						if (game.hasEnded()) {
 							screenGameOver.toFront();
 							highScoreLabel.setText("Highscore: " + game.getHighScore());
@@ -291,13 +288,71 @@ public class GameUIController
 		 gameLoop.play();
     }
 	
+	/**
+	 * Method to draw the player spaceship.
+	 */
+	private void drawPlayer() {
+		SpaceShip spaceShip = game.getPlayer().getSpaceShip();
+		
+        // Position the player in the middle, on the bottom of the screen.
+		drawUnit(spaceShip.getXCoor(), spaceShip.getYCoor(), spaceShip.getWidth(), 
+				spaceShip.getHeight(), spaceShip.getSprite());
+	}
+	
+	/**
+	 * Method to draw the aliens in game.
+	 */
+	private void drawAliens() {
+		for (Alien unit : game.getAliens()) {
+			drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(),
+					unit.getHeight(), unit.getSprite());		
+		}
+	}
+	
+	/**
+	 * Method to draw the bullets in game.
+	 */
+	private void drawBullets() {
+		for (Bullet bullet : game.getBullets()) {
+			drawUnit(bullet.getXCoor(), bullet.getYCoor(), 
+					bullet.getWidth(), bullet.getHeight(), bullet.getSprite());
+		}
+	}
+	
+	/**
+	 * Method to draw the explosions in game.
+	 */
+	private void drawExplosions() {
+		// Create a duplicate to loop over, so deletion is possible.
+		ArrayList<Explosion> explosionList = new ArrayList<Explosion>();
+		explosionList.addAll(game.getExplosions());
+		
+		// For every explosion, draw the explosion.
+		for (Explosion explosion : explosionList) {
+			drawUnit(explosion.getXCoor(), explosion.getYCoor(), 
+					explosion.getWidth(), explosion.getHeight(), explosion.getSprite());
+			
+			// Increase the counter maintaining the time one frame of the animation is visible.
+			explosion.increaseCounter();
+
+			if (explosion.getCounter() % 5 == 0) {
+				// Increase the index of the animation sprite, so the next image is shown.
+				explosion.increaseAnimationIndex();
+				explosion.setSprite("explosion" + explosion.getAnimationIndex() + ".png");
+			}
+			if (explosion.getAnimationIndex() == 5) {
+				// If we reach the final animation index, 
+				// remove the explosion since the animation has ended.
+				game.getExplosions().remove(explosion);
+			}
+		}
+	}
+	
     /**
      * Method to display the lives on the screen.
      * @param lives The amount of lives the player has.
-     * @param gc The GraphicsContext of the canvas to draw on.
      */
-	@SuppressWarnings("checkstyle:magicnumber")    
-    public final void formatLives(final int lives, final GraphicsContext gc) {
+    public final void formatLives(final int lives) {
     	Image heartImage = sprites.get("heart.png");
     	for (int i = 1; i <= lives; i++) {
         	gc.drawImage(heartImage, canvas.getWidth() - 10 - heartImage.getWidth() * i, 10);
@@ -308,7 +363,6 @@ public class GameUIController
 	 * Method to display the score on the screen.
 	 * @param score The score to be displayed.
 	 */
-	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void formatScore(final int score) {
     	int digitsBefore = 8 - Integer.toString(score).length();
     	String scoreString = "";
@@ -320,6 +374,14 @@ public class GameUIController
     	
     	scoreLabel.setText(scoreString);	
 	}
+	
+	/**
+	 * Returns the scoreLabel.
+	 * @return The scoreLabel of the UI.
+	 */
+	public final Label getScoreLabel() {
+		return scoreLabel;
+	}
  
     /**
      * Method to draw the Players Spaceship.
@@ -328,15 +390,15 @@ public class GameUIController
      * @param spriteWidth The width of the sprite to draw.
      * @param spriteHeight The heifht of the sprite to draw.
      * @param sprite Image containing the sprite to draw.
-     * @param gc The GraphicsContext of the canvas to draw on.
      */  
-	@SuppressWarnings("checkstyle:magicnumber")    
     public final void drawUnit(final double x, final double y, final double spriteWidth, 
-    		final double spriteHeight, final String sprite, final GraphicsContext gc) {
+    		final double spriteHeight, final String sprite) {
         
         // Draw the player with the X and Y coordinates as center
 		Image spriteImage = sprites.get(sprite);
-		gc.drawImage(spriteImage, x - 0.5 * spriteWidth, y - 0.5 * spriteHeight);
+		if (spriteImage != null) {
+			gc.drawImage(spriteImage, x - 0.5 * spriteWidth, y - 0.5 * spriteHeight);			
+		}
     }
 	
 	/**
