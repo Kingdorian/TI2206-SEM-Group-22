@@ -192,4 +192,33 @@ public class GameTest {
 		// Bullet list should be emptied when the game resets
 		Assert.assertTrue(game.getShootingAllowed());
 	}
+	/**
+	 * Test gameOver method stops the game.
+	 */
+	@Test
+	public final void testGameOver() {
+		game.gameOver();
+		Assert.assertFalse(game.isInProgress());
+	}
+	/**
+	 * Test gameOver method when the player has a new highscore.
+	 */
+	@Test
+	public final void testGameOverNewHighScore() {
+		// Making sure the player has at least 1 point more then the current highscore
+		game.getPlayer().addScore(game.getHighScore()+1);
+		game.gameOver();
+		Assert.assertEquals(1, game.getHighScore());
+	}
+	/**
+	 * Test gameover method when the player has no new highscore.
+	 */
+	@Test
+	public final void testGameOverNoNewHighscore() {
+		game.setHighScore(1);
+		//Make sure score is 0
+		game.getPlayer().resetScore();
+		game.gameOver();
+		Assert.assertEquals(1, game.getHighScore());
+	}
 }
