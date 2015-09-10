@@ -523,7 +523,7 @@ public class Game {
 		int interval = canvasWidth/(barricadeCount+1);
 		ArrayList<Barricade> bars = new ArrayList<Barricade>();
 		for(int i = 1; i <= barricadeCount; i++) {
-			bars.add(new Barricade(interval*i, canvasHeight-200, "invader.png"));
+			bars.add(new Barricade(interval*i, canvasHeight-110, "barrier.png"));
 		}
 		return bars;
 	}
