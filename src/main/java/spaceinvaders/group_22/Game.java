@@ -55,38 +55,13 @@ public class Game {
      * Velocity of the bullets of the spaceShip in pixels per second.
      */
     private double spaceShipBulletVelX = 80;
-    
-    /**
-     * If 0 the aliens don't have to move any frame down.
-     */
-	private double alienFramesDown = 0;
-	
-	/**
-	 * Speed of the aliens in the X direction in pixels per second.
-	 */
-	private double alienVelX = 40;
-	
-	/**
-	 * Speed of the aliens in the Y direction in pixels per second.
-	 */
-	private double alienVelY = 40;
-	/**
-	 * Amount of pixels the aliens go down per wave.
-	 */
-	private double alienFall = 10;
-    /**
-     * Roughly the amount of bullets that spawn per second.
-     */
-	private int bulletChance = 1;
-	/**
-	 * What X direction the aliens are moving.
-	 */
-	private int alienYDir = 1;
 	/**
 	 * The tickrate of the animation.
 	 */
 	private static double tickrate;
-	
+	/**
+	 * The controller of the Aliens.
+	 */
 	private AlienController alienController;
 	/**
 	 * Creates a new instance of game.
@@ -165,7 +140,6 @@ public class Game {
 		checkCollisions();
 		
 		if (aliens.isEmpty()) {
-			this.stop();
 			aliens = alienController.createAlienWave(100, 69, 60, 10, 4);
 			this.getBullets().clear();
 		}

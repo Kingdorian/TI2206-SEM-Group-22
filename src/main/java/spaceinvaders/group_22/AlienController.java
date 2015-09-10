@@ -19,7 +19,6 @@ public class AlienController {
      * If 0 the aliens don't have to move any frame down.
      */
 	private double alienFramesDown = 0;
-	
 	/**
 	 * Speed of the aliens in the X direction in pixels per second.
 	 */
@@ -37,10 +36,6 @@ public class AlienController {
      * Roughly the amount of bullets that spawn per second.
      */
 	private int bulletChance = 1;
-	/**
-	 * What X direction the aliens are moving.
-	 */
-	private int alienYDir = 1;
 	
 	/**
 	 * Creates a new alien controller.
