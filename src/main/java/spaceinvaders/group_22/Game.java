@@ -50,13 +50,7 @@ public class Game {
     /**
      * The height of the canvas.
      */
-    private double canvasHeight;
-    
-    /**
-     * Velocity of the spaceShip in pixels per second.
-     */
-    private double spaceShipVelX = 250;
-    
+    private double canvasHeight;    
     /**
      * Velocity of the bullets of the spaceShip in pixels per second.
      */
@@ -84,10 +78,6 @@ public class Game {
      * Roughly the amount of bullets that spawn per second.
      */
 	private int bulletChance = 1;
-	/**
-	 * What X direction the aliens are moving.
-	 */
-	private int alienYDir = 1;
 	/**
 	 * The tickrate of the animation.
 	 */	
@@ -185,37 +175,32 @@ public class Game {
 				countToShoot = 0;
 			}
 		}
-		double velX = player.getSpaceShip().getVelX()*0.98;
+		double velX = player.getSpaceShip().getVelX() * 0.98;
 		SpaceShip playership = player.getSpaceShip();
-		if(player.getSpaceShip().getXCoor()-(0.5*player.getSpaceShip().getWidth())<=0 && velX < 0) {
-			velX*=-1;
-		}else if(player.getSpaceShip().getXCoor()+(0.5*player.getSpaceShip().getWidth())>=  canvasWidth && velX > 0) {
-			velX*=-1;
+		if (playership.getXCoor() - (0.5 * playership.getWidth()) <= 0 && velX < 0) {
+			velX *= -1;
+		} else if (player.getSpaceShip().getXCoor() 
+				+ (0.5 * playership.getWidth()) >=  canvasWidth && velX > 0) {
+			velX *= -1;
 		}
 		// Check that the spaceship is still able to move without going off the screen.
 		if (player.getSpaceShip().getXCoor() - 0.5 * player.getSpaceShip().getWidth() > 0 
 				&& pressedKeys.contains(KeyCode.A)) {
 			player.getSpaceShip();
-			velX = velX - SpaceShip.maxVelX*tickrate*2;
+			velX = velX - SpaceShip.maxVelX * tickrate * 2;
 		}
 		if (player.getSpaceShip().getXCoor() + 0.5 * player.getSpaceShip().getWidth() < canvasWidth
 				&& pressedKeys.contains(KeyCode.D)) {
 			player.getSpaceShip();
-			velX = velX + SpaceShip.maxVelX*tickrate*2;
+			velX = velX + SpaceShip.maxVelX * tickrate * 2;
 		}
 
-		if(velX>SpaceShip.maxVelX){
+		if (velX > SpaceShip.maxVelX) {
 			velX = SpaceShip.maxVelX;
-		}else if(velX < -SpaceShip.maxVelX){
-			velX = - SpaceShip.maxVelX;
+		} else if (velX < -SpaceShip.maxVelX) {
+			velX = -SpaceShip.maxVelX;
 		}
-
-		
-
-		
-		System.out.println(player.getSpaceShip().getVelX() + "Before");
 		player.getSpaceShip().setVelX(velX);
-		System.out.println(player.getSpaceShip().getVelX() + "Before");
 		player.getSpaceShip().moveUnit();
 		
 		moveAliens();
@@ -398,7 +383,7 @@ public class Game {
 				unit.setVelY(0);
 				unit.setVelX(alienVelX);
 			}
-			if (unit.getYCoor() + unit.getHeight() > player.getSpaceShip().getYCoor() ) {
+			if (unit.getYCoor() + unit.getHeight() > player.getSpaceShip().getYCoor()) {
 				gameOver();
 			}
 			unit.moveUnit();
