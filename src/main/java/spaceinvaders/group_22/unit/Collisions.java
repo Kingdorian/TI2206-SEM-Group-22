@@ -62,6 +62,7 @@ public class Collisions {
 						collidingUnit.getYCoor(), "explosion1.png"));
 				game.getAliens().remove(collidingUnit);
 				game.getBullets().remove(bullet);
+				game.getPlayer().addScore(10);
 				break;
 			}
 		}
