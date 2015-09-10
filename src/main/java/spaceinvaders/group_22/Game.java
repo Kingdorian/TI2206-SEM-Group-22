@@ -41,7 +41,7 @@ public class Game {
 	 */
 	private ArrayList<Alien> aliens;
 	/**
-	 * Arraylist of all barricades in the game.
+	 * ArrayList of all barricades in the game.
 	 */
 	private ArrayList<Barricade> barricades;
 	/**
@@ -52,12 +52,10 @@ public class Game {
      * The width of the canvas.
      */
     private int canvasWidth;
-    
     /**
      * The height of the canvas.
      */
     private int canvasHeight;
-    
     /**
      * Velocity of the spaceShip in pixels per second.
      */
@@ -70,7 +68,7 @@ public class Game {
     /**
      * Roughly the amount of bullets that spawn per second.
      */
-	private int bulletChance = 1;
+	private double bulletChance = 1;
 	/**
 	 * The tickrate of the animation.
 	 */	
@@ -87,11 +85,14 @@ public class Game {
 	 * Marks if the game has been ended.
 	 */
 	private boolean hasEnded = false;
-	
 	/**
 	 * The controller of the Aliens.
 	 */
 	private AlienController alienController;
+	/**
+	 * String that points to alien sprite location.
+	 */
+	final String ALIENSPRITE = "alien.png";
 	/**
 	 * Creates a new instance of game.
 	 * @param width of the canvas.
@@ -107,11 +108,10 @@ public class Game {
 		barricades = createBarricades();
 
 		alienController = new AlienController(this);
-		
-		aliens = alienController.createAlienWave(100, 69, 60, 10, 4);
-
+		// Create an alien to use to get the width and height of the aliens used in this game. (based on their sprite size)
+		Alien spriteinfo = new Alien(100, 100, ALIENSPRITE);
+		aliens = alienController.createAlienWave(canvasWidth/7, spriteinfo.getWidth(), spriteinfo.getHeight(), 10, 4);
 		player = new Player(this);
-		
 		shootingAllowed = true;
 		countToShoot = 0;
 	}
@@ -270,104 +270,6 @@ public class Game {
 		barricades.add(barricade);
 	}
 	/**
-	 * Returns the current frame rate.
-	 * @return the current frame rate.
-	 */
-	public static double getTickrate() {
-		return tickrate;
-	}
-	/**
-	 * Set the tickrate for the movement.
-	 * @param newtickrate of the animation.
-	 */
-	public static void setTickrate(final double newtickrate) {
-		tickrate = newtickrate;
-	}
-	/**
-	 * Sets highscore.
-	 * @param newscore highscore (int)
-	 */
-	public final void setHighScore(final int newscore) {
-		assert newscore >= 0 && newscore > highscore;
-		highscore = newscore;
-	}
-	/**
-	 * Sets player for this game.
-	 * @param newPlayer new player
-	 */
-	public final void setPlayer(final Player newPlayer) {
-		player = newPlayer;
-	}
-	
-	/**
-	 * Gets the bullets currently in this game.
-	 * @return Arraylist of bullets in the game.
-	 */
-	public final ArrayList<Bullet> getBullets() {
-		return bullets;
-	}
-	
-	/**
-	 * Gets the shipbullets currently in this game.
-	 * @return Arraylist of shipbullets in the game.
-	 */
-	public final ArrayList<Bullet> getShipBullets() {
-		ArrayList<Bullet> spaceBullets = new ArrayList<Bullet>();
-		for(int i = 0; i < getBullets().size(); i++){
-			if(getBullets().get(i) instanceof ShipBullet){
-				spaceBullets.add(getBullets().get(i));
-			}
-		}
-		return spaceBullets;
-	}
-	
-	/**
-	 * Gets the explosions currently in this game.
-	 * @return Arraylist of bullets in the game.
-	 */
-	public final ArrayList<Explosion> getExplosions() {
-		return explosions;
-	}
-	/**
-	 * Gets the player that is playing this game. 
-	 * @return player that is playing this game
-	 */
-	public final Player getPlayer() {
-		return player;
-	}
-	/**
-	 * Gets the canvas width.
-	 * @return width of the canvas.
-	 */
-	public final double getCanvasWidth() {
-		return canvasWidth;
-	}
-	/**
-	 * Gets the height of the canvas.
-	 * @return height of the canvas.
-	 */
-	public final double getCanvasHeight() {
-		return canvasHeight;
-	}
-	
-	/**
-	 * Sets the list of Aliens currently in game.
-	 * @param alienList The ArrayList of aliens to set.
-	 */
-	public final void setAliens(final ArrayList<Alien> alienList) {
-		this.aliens = alienList;
-	}
-	/**
-	 * Gets the list of Aliens currently in game.
-	 * @return The list of aliens currently in game.
-	 */
-	public final ArrayList<Alien> getAliens() {
-		return aliens;
-	}
-	
-	
-	
-	/**
 	 * Checks if there are collisions between bullets and other units.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber") 
@@ -429,7 +331,10 @@ public class Game {
 		}
 		return null;
 	}
-	
+	/**
+	 * Creates the barricades for this game.
+	 * @return the barricades in this game.
+	 */
 	private final ArrayList<Barricade> createBarricades() {
 		int barricadeCount = 4;
 		int interval = canvasWidth/(barricadeCount+1);
@@ -439,4 +344,100 @@ public class Game {
 		}
 		return bars;
 	}
+	// ONLY SETTERS AND GETTERS BELOW
+	/**
+	 * Sets the list of Aliens currently in game.
+	 * @param alienList The ArrayList of aliens to set.
+	 */
+	public final void setAliens(final ArrayList<Alien> alienList) {
+		this.aliens = alienList;
+	}
+	/**
+	 * Set the tickrate for the movement.
+	 * @param newtickrate of the animation.
+	 */
+	public static void setTickrate(final double newtickrate) {
+		tickrate = newtickrate;
+	}
+	/**
+	 * Sets highscore.
+	 * @param newscore highscore (int)
+	 */
+	public final void setHighScore(final int newscore) {
+		assert newscore >= 0 && newscore > highscore;
+		highscore = newscore;
+	}
+	/**
+	 * Sets player for this game.
+	 * @param newPlayer new player
+	 */
+	public final void setPlayer(final Player newPlayer) {
+		player = newPlayer;
+	}
+	
+	/**
+	 * Gets the bullets currently in this game.
+	 * @return Arraylist of bullets in the game.
+	 */
+	public final ArrayList<Bullet> getBullets() {
+		return bullets;
+	}
+	// ONLY GETTERS BELOW
+	/**
+	 * Gets the shipbullets currently in this game.
+	 * @return Arraylist of shipbullets in the game.
+	 */
+	public final ArrayList<Bullet> getShipBullets() {
+		ArrayList<Bullet> spaceBullets = new ArrayList<Bullet>();
+		for(int i = 0; i < getBullets().size(); i++){
+			if(getBullets().get(i) instanceof ShipBullet){
+				spaceBullets.add(getBullets().get(i));
+			}
+		}
+		return spaceBullets;
+	}
+	/**
+	 * Gets the explosions currently in this game.
+	 * @return Arraylist of bullets in the game.
+	 */
+	public final ArrayList<Explosion> getExplosions() {
+		return explosions;
+	}
+	/**
+	 * Gets the player that is playing this game. 
+	 * @return player that is playing this game
+	 */
+	public final Player getPlayer() {
+		return player;
+	}
+	/**
+	 * Gets the canvas width.
+	 * @return width of the canvas.
+	 */
+	public final double getCanvasWidth() {
+		return canvasWidth;
+	}
+	/**
+	 * Gets the height of the canvas.
+	 * @return height of the canvas.
+	 */
+	public final double getCanvasHeight() {
+		return canvasHeight;
+	}
+	/**
+	 * Gets the list of Aliens currently in game.
+	 * @return The list of aliens currently in game.
+	 */
+	public final ArrayList<Alien> getAliens() {
+		return aliens;
+	}
+		/**
+	 * Returns the current frame rate.
+	 * @return the current frame rate.
+	 */
+	public static double getTickrate() {
+		return tickrate;
+	}
+	
+
 }
