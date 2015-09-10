@@ -8,6 +8,11 @@ package spaceinvaders.group_22.unit;
 
 public class SpaceShip extends Unit {
 	
+	
+	/**
+	 * Indicates the max speed at which a spaceship can travel.
+	 */
+	public static final int maxVelX = 250; 
 	/**
 	 * Creates a SpaceShip.
 	 * @param x X Coordinate
@@ -28,8 +33,7 @@ public class SpaceShip extends Unit {
 		bullet.setVelY(spaceShipBulletVelX);
 		return bullet;
 
-	}
-	
+	}	
 	/**
 	 * Compares two objects and returns if they are equal.
 	 * @return true if both objects are the same.
@@ -38,9 +42,21 @@ public class SpaceShip extends Unit {
 	@Override
 	public final boolean equals(final Object other) {
 		if (other != null && other instanceof SpaceShip) {
-			return super.equals(other);
+			SpaceShip that = (SpaceShip) other;
+			return this.getXCoor() == that.getXCoor()
+					&& this.getYCoor() == that.getYCoor()
+					&& this.getVelX() == that.getVelX()
+					&& this.getVelY() == that.getVelY()
+					&& this.getHeight() == that.getHeight()
+					&& this.getWidth() == that.getWidth();
 		}
 		return false;
 	}
-
+	/**
+	 * HashCode method.
+	 * @return hashcode of this object
+	 */
+	public final int hashCode() {
+		  return 0;
+	}
 }

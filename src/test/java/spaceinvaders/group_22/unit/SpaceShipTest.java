@@ -55,4 +55,14 @@ public class SpaceShipTest extends UnitTest {
 		SpaceShip ship1 = new SpaceShip(1.2, 3, "testimage.png");
 		assertNotEquals(ship1, ship2);
 	}
+
+	/**
+	 * Test the Equals method.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testEqualsNull() {
+		SpaceShip ship1 = new SpaceShip(1.2, 3, "testimage.png");
+		assertNotEquals(ship1, null);
+	}
 }

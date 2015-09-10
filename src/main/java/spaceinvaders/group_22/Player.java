@@ -34,7 +34,7 @@ public class Player {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public Player(final Game parentgame) {
 		game = parentgame;
-		ship = new SpaceShip(game.getCanvasWidth() / 2, game.getCanvasHeight() - 100, "spaceship.png");
+		ship = new SpaceShip(game.getCanvasWidth() / 2, game.getCanvasHeight() - 40, "spaceship.png");
 		score  = 0;
 		lives = 3;
 	}
@@ -74,12 +74,20 @@ public class Player {
 		score = 0;
 	}
 	/**
+	 * Respawn the spaceship.
+	 */
+	@SuppressWarnings("checkstyle:magicnumber") 
+	public final void respawnShip() {
+		ship = new SpaceShip(game.getCanvasWidth() / 2, ship.getYCoor(), "spaceship.png");
+	}
+	/**
 	 * When the player dies remove one of his lives.
 	 */
 	public final void die() {
 		lives--;
+		respawnShip();
 		if (lives <= 0) {
-			game.stop();
+			game.gameOver();
 		}
 	}
 	/**

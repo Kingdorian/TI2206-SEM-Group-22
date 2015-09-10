@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.canvas.*?>
@@ -10,17 +12,69 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="root" stylesheets="application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spaceinvaders.group_22.ui.GameUIController">
    <children>
-      <Region layoutX="140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1000.0" styleClass="canvas" />
-      <Canvas fx:id="canvas" height="720.0" layoutX="140.0" styleClass="canvas" width="1000.0" onKeyReleased="#handleKeyReleased"  onKeyPressed="#handleKeyPressed" />
-      <Label fx:id="scoreLabel" layoutX="160.0" prefHeight="77.0" prefWidth="200.0" text="Score:" textFill="WHITE">
-         <font>
-            <Font name="Phosphate Inline" size="36.0" />
-         </font>
-      </Label>
-      <Label fx:id="livesLabel" alignment="CENTER_RIGHT" layoutX="920.0" prefHeight="77.0" prefWidth="200.0" text=":LIVES" textAlignment="RIGHT" textFill="WHITE">
-         <font>
-            <Font name="Phosphate Inline" size="36.0" />
-         </font>
-      </Label>
+      <StackPane fx:id="stackPane" prefHeight="150.0" prefWidth="200.0">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Region prefHeight="720.0" prefWidth="1280.0" styleClass="gameOver" stylesheets="@../../../application.css" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutY="224.0" prefWidth="1280.0" text="Game Over" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Impact" size="64.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="highScoreLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="292.0" prefWidth="1280.0" text="Highscore: " textAlignment="CENTER" textFill="#c3c1c1">
+                     <font>
+                        <Font name="Impact" size="64.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutY="400.0" prefWidth="1280.0" text="Press R to restart" textAlignment="CENTER" textFill="#c3c1c1">
+                     <font>
+                        <Font name="Impact" size="64.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Region prefHeight="720.0" prefWidth="1280.0" styleClass="gameOver" stylesheets="@../../../application.css" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutY="224.0" prefWidth="1280.0" text="Press S to Play" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Impact" size="64.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Region prefHeight="720.0" prefWidth="1280.0" styleClass="gameOver" stylesheets="@../../../application.css" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutY="224.0" prefWidth="1280.0" text="Paused" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Impact" size="64.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutY="292.0" prefWidth="1280.0" text="Press S to Play" textAlignment="CENTER" textFill="#c3c1c1">
+                     <font>
+                        <Font name="Impact" size="64.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0">
+               <children>
+                  <ImageView fitHeight="1000.0" fitWidth="1000.0" layoutX="140.0">
+                     <image>
+                        <Image url="@../images/background.png" />
+                     </image>
+                  </ImageView>
+                  <Canvas fx:id="canvas" height="720.0" layoutX="140.0" onKeyPressed="#handleKeyPressed" onKeyReleased="#handleKeyReleased" styleClass="canvas" width="1000.0" />
+                  <Label fx:id="scoreLabel" layoutX="150.0" prefHeight="77.0" prefWidth="200.0" textFill="WHITE">
+                     <font>
+                        <Font name="Impact" size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

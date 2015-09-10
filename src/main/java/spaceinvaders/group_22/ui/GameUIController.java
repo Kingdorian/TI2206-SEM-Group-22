@@ -1,8 +1,4 @@
 package spaceinvaders.group_22.ui;
-/**
- * Sample Skeleton for "simple.fxml" Controller Class
- * Use copy/paste to copy paste this code into your favorite IDE
- **/
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -11,16 +7,20 @@ import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.unit.Alien;
+import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.SpaceShip;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.input.KeyCode;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -40,6 +40,11 @@ public class GameUIController
 	 * Canvas corresponding to fxml id.
 	 */
     @FXML private Canvas canvas;
+    
+    /**
+     * Stackpane corresponding to fmxl id.
+     */
+    @FXML private StackPane stackPane;
 
     /**
      * The framerate of the animation.
@@ -49,12 +54,12 @@ public class GameUIController
     /**
      * The width of the canvas.
      */
-    private double canvasWidth;
+    private int canvasWidth;
     
     /**
      * The height of the canvas.
      */
-    private double canvasHeight;
+    private int canvasHeight;
     
     /**
      * ArrayList of all the keys currently pressed.
@@ -78,10 +83,26 @@ public class GameUIController
 	private Label scoreLabel;
     
     /**
-     * Label to load the amount of lives the player in.
+     * Label to load the highscore in.
      */
     @FXML
-	private Label livesLabel;
+	private Label highScoreLabel;
+    
+    /**
+     * The game over screen.
+     */
+    private Node screenGameOver;
+    
+    /**
+     * The game over screen.
+     */
+    private Node screenBeforePlay;
+    
+    
+    /**
+     * The paused screen.
+     */
+    private Node screenPaused;
     
     /**
      * Called by the FXMLLoader. 
@@ -90,14 +111,32 @@ public class GameUIController
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void initialize(final URL fxmlFileLocation, final ResourceBundle resources) {
     	
-    	canvasWidth = canvas.getWidth();
-    	canvasHeight = canvas.getHeight();
+    	// Get the various screens.
+    	// The order in the FXML file matters (!).
+    	screenGameOver = stackPane.getChildren().get(0);
+    	screenBeforePlay = stackPane.getChildren().get(1);
+    	screenPaused = stackPane.getChildren().get(2);
+
+    	// Move press to play to front.
+    	screenBeforePlay.toFront();
+    	
+    	
+    	canvasWidth = (int)canvas.getWidth();
+    	canvasHeight = (int)canvas.getHeight();
+    	newGame();
+    	
+    	canvas.setFocusTraversable(true);
+    }
+    
+    /**
+     * Creates a new game.
+     */
+    public final void newGame() {
+    	canvasWidth = (int)canvas.getWidth();
+    	canvasHeight = (int)canvas.getHeight();
     	game = new Game(canvasWidth, canvasHeight);
     	sprites = getSprites();
-    	scoreLabel.setText("Score: " + game.getPlayer().getScore());
-    	livesLabel.setText("Lives: " + game.getPlayer().getLives());
     	startAnimation();
-    	canvas.setFocusTraversable(true);
     }
     
     /**
@@ -127,6 +166,27 @@ public class GameUIController
 	    	spriteMap.put("spaceship.png", 
 	    			new Image(getClass().getClassLoader()
 	    					.getResource("spaceinvaders/group_22/images/spaceship.png").toString()));
+	    	spriteMap.put("heart.png", 
+	    			new Image(getClass().getClassLoader()
+	    					.getResource("spaceinvaders/group_22/images/heart.png").toString()));
+	    	spriteMap.put("barrier.png", 
+	    			new Image(getClass().getClassLoader()
+	    					.getResource("spaceinvaders/group_22/images/barrier.png").toString()));
+	    	spriteMap.put("explosion1.png", 
+	    			new Image(getClass().getClassLoader()
+	    					.getResource("spaceinvaders/group_22/images/explosion1.png").toString()));
+	    	spriteMap.put("explosion2.png", 
+	    			new Image(getClass().getClassLoader()
+	    					.getResource("spaceinvaders/group_22/images/explosion2.png").toString()));
+	    	spriteMap.put("explosion3.png", 
+	    			new Image(getClass().getClassLoader()
+	    					.getResource("spaceinvaders/group_22/images/explosion3.png").toString()));
+	    	spriteMap.put("explosion4.png", 
+	    			new Image(getClass().getClassLoader()
+	    					.getResource("spaceinvaders/group_22/images/explosion4.png").toString()));
+	    	spriteMap.put("explosion5.png", 
+	    			new Image(getClass().getClassLoader()
+	    					.getResource("spaceinvaders/group_22/images/explosion5.png").toString()));
     		
     	return spriteMap;
     }
@@ -167,10 +227,39 @@ public class GameUIController
 						drawUnit(spaceShip.getXCoor(), spaceShip.getYCoor(), spaceShip.getWidth(), 
 								spaceShip.getHeight(), spaceShip.getSprite(), gc);
 
-						
+						// Draw aliens
 						for (Alien unit : game.getAliens()) {
 							drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(),
 									unit.getHeight(), unit.getSprite(), gc);
+						}
+						// Draw barricades
+						for (Barricade bar : game.getBarricades()) {
+							drawUnit(bar.getXCoor(), bar.getYCoor(), bar.getWidth(),
+									bar.getHeight(), bar.getSprite(), gc);
+						}
+						
+						// Create a duplicate to loop over, so deletion is possible.
+						ArrayList<Explosion> explosionList = new ArrayList<Explosion>();
+						explosionList.addAll(game.getExplosions());
+						
+						for (Explosion explosion : explosionList) {
+							drawUnit(explosion.getXCoor(), explosion.getYCoor(), 
+									explosion.getWidth(), explosion.getHeight(), explosion.getSprite(), gc);
+							explosion.increaseCounter();
+							
+							if (explosion.getCounter() < 5) {
+								explosion.setSprite("explosion" + 1 + ".png");
+							} else if (explosion.getCounter() < 10) {
+								explosion.setSprite("explosion" + 2 + ".png");
+							} else if (explosion.getCounter() < 15) {
+								explosion.setSprite("explosion" + 3 + ".png");
+							} else if (explosion.getCounter() < 20) {
+								explosion.setSprite("explosion" + 4 + ".png");
+							} else if (explosion.getCounter() < 25) {
+								explosion.setSprite("explosion" + 5 + ".png");
+							} else {
+								game.getExplosions().remove(explosion);
+							}
 							
 						}
 						
@@ -182,14 +271,55 @@ public class GameUIController
 							drawUnit(bullet.getXCoor(), bullet.getYCoor(), 
 									bullet.getWidth(), bullet.getHeight(), bullet.getSprite(), gc);
 						}
+						
 						scoreLabel.setText("Score: " + game.getPlayer().getScore());
-						livesLabel.setText("Lives: " + game.getPlayer().getLives());
+						formatLives(game.getPlayer().getLives(), gc);
+						formatScore(game.getPlayer().getScore());
+						
+						if (game.hasEnded()) {
+							screenGameOver.toFront();
+							highScoreLabel.setText("Highscore: " + game.getHighScore());
+							gameLoop.stop();
+						} else {
+							screenGameOver.toBack();
+						}
+						
 					}
 				});
 		
 		 gameLoop.getKeyFrames().add(frame);
 		 gameLoop.play();
     }
+	
+    /**
+     * Method to display the lives on the screen.
+     * @param lives The amount of lives the player has.
+     * @param gc The GraphicsContext of the canvas to draw on.
+     */
+	@SuppressWarnings("checkstyle:magicnumber")    
+    public final void formatLives(final int lives, final GraphicsContext gc) {
+    	Image heartImage = sprites.get("heart.png");
+    	for (int i = 1; i <= lives; i++) {
+        	gc.drawImage(heartImage, canvas.getWidth() - 10 - heartImage.getWidth() * i, 10);
+    	}
+    }
+	
+	/**
+	 * Method to display the score on the screen.
+	 * @param score The score to be displayed.
+	 */
+	@SuppressWarnings("checkstyle:magicnumber")    
+	public final void formatScore(final int score) {
+    	int digitsBefore = 8 - Integer.toString(score).length();
+    	String scoreString = "";
+    	
+    	for (int i = 0; i < digitsBefore; i++) {
+    		scoreString += "0";
+    	}
+    	scoreString += score;
+    	
+    	scoreLabel.setText(scoreString);	
+	}
  
     /**
      * Method to draw the Players Spaceship.
@@ -215,11 +345,20 @@ public class GameUIController
 	 */
 	@FXML
 	public final void handleKeyPressed(final KeyEvent event) {
-        System.out.println(event.getCode() + " is pressed ");
         if (event.getCode().equals(KeyCode.S) && game.getPlayer().getLives() > 0) {       	
+        	screenBeforePlay.toBack();
+        	screenPaused.toBack();
         	game.start();
         } else if (event.getCode().equals(KeyCode.P)) {
-        	game.stop();
+        	if (game.isInProgress()) {
+            	screenPaused.toFront();
+            	game.stop();	
+        	}
+        } else if (event.getCode().equals(KeyCode.R)) {
+        	if (game.hasEnded()) {
+            	newGame();
+            	game.start();
+        	}
         } else if (!pressedKeys.contains(event.getCode())) {
 	    	pressedKeys.add(event.getCode());
 	    }
