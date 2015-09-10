@@ -125,6 +125,20 @@ public class Game {
 		countToShoot = 0;
 	}
 	/**
+	 * Resets the game.
+	 */
+	public final void resetGame() {
+		bullets = new ArrayList<Bullet>();
+		explosions = new ArrayList<Explosion>();
+		
+		aliens = createAliens(100, 69, 60, 10, 4);
+		
+		player = new Player(this);
+		
+		shootingAllowed = true;
+		countToShoot = 0;
+	}
+	/**
 	 * Starts the game.
 	 */
 	public final void start() {

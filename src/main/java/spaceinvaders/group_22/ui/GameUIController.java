@@ -122,7 +122,10 @@ public class GameUIController
     	
     	canvasWidth = canvas.getWidth();
     	canvasHeight = canvas.getHeight();
-    	newGame();
+    	
+    	game = new Game(canvasWidth, canvasHeight);
+    	sprites = getSprites();
+    	startAnimation();
     	
     	canvas.setFocusTraversable(true);
     }
@@ -131,7 +134,7 @@ public class GameUIController
      * Creates a new game.
      */
     public final void newGame() {
-    	game = new Game(canvasWidth, canvasHeight);
+    	game.resetGame();
     	sprites = getSprites();
     	startAnimation();
     }
