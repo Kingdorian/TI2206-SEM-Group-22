@@ -137,7 +137,17 @@ public class Game {
 	public final void stop() {
 		inProgress = false;
 	}
-	
+	/**
+	 * Resets the game.
+	 */
+	public final void reset() {
+		bullets = new ArrayList<Bullet>();
+		explosions = new ArrayList<Explosion>();
+		aliens = createAliens(100, 69, 60, 10, 4);
+		player = new Player(this);
+		shootingAllowed = true;
+		countToShoot = 0;
+	}
 	/**
 	 * Stops the game and marks the game as ended.
 	 */
@@ -379,7 +389,7 @@ public class Game {
 				unit.setVelY(0);
 				unit.setVelX(alienVelX);
 			}
-			if (unit.getYCoor() + unit.getHeight() > player.getSpaceShip().getYCoor() ) {
+			if (unit.getYCoor() + unit.getHeight() > player.getSpaceShip().getYCoor()) {
 				gameOver();
 			}
 			unit.moveUnit();
@@ -458,7 +468,7 @@ public class Game {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void shootAlienBullets() {
 		if (!aliens.isEmpty()) {
-			if (Math.random() < bulletChance * tickrate)   {
+			if (Math.random() < ((aliens.size()) * bulletChance * tickrate) / 40)   {
 				int shootIndex = (int) (Math.random() * aliens.size());
 				bullets.add(aliens.get(shootIndex).shootBullet(60));
 			}
