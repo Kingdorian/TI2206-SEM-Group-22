@@ -392,6 +392,7 @@ public class Game {
 		for(Unit bullet : shipBullets) {
 			Unit collidingUnit = checkColissions(bullet, new ArrayList<Unit>(aliens));
 			if(collidingUnit != null) {
+				player.addScore(10);
 				aliens.remove(collidingUnit);
 				bullets.remove(bullet);
 				break;
