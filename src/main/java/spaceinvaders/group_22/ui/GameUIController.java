@@ -126,6 +126,22 @@ public class GameUIController
     }
     
     /**
+     * Retruns the canvas Width.
+     * @return canvasWidth
+     */
+    public final double getCanvasWidth() {
+    	return canvasWidth;
+    }
+    
+    /**
+     * Retruns the canvas Height.
+     * @return canvasHeight
+     */
+    public final double getCanvasHeight() {
+    	return canvasHeight;
+    }
+    
+    /**
      * Gets the screens in the GameUI stackpane, and assigns them to the right variables.
      * The order in the FXML file matters (!).
      */
@@ -158,7 +174,19 @@ public class GameUIController
      * @param fps The amount of frames per second.
      */
     public final void setFramerate(final int fps) {
-    	framerate = 1.0 / fps;
+    	if (fps > 0) {
+        	framerate = 1.0 / (double) fps;	
+    	} else {
+    		framerate = 0.0;
+    	}
+    }
+    
+    /**
+     * Returns the framerate.
+     * @return the framerate of the animation.
+     */
+    public final double getFramerate() {
+    	return framerate;
     }
     
     /**
@@ -326,6 +354,14 @@ public class GameUIController
     	scoreString += score;
     	
     	scoreLabel.setText(scoreString);	
+	}
+	
+	/**
+	 * Returns the scoreLabel.
+	 * @return The scoreLabel of the UI.
+	 */
+	public final Label getScoreLabel() {
+		return scoreLabel;
 	}
  
     /**
