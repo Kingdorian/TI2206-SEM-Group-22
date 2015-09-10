@@ -371,7 +371,13 @@ public class Game {
 	public final double getCanvasHeight() {
 		return canvasHeight;
 	}
-	
+	/**
+	 * Gets the alien controller.
+	 * @return the aliencontroller
+	 */
+	public final AlienController getAlienController() {
+		return alienController;
+	}
 	/**
 	 * Sets the list of Aliens currently in game.
 	 * @param alienList The ArrayList of aliens to set.
