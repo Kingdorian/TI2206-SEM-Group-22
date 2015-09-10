@@ -1,5 +1,7 @@
 package spaceinvaders.group_22.unit;
 
+import spaceinvaders.group_22.Game;
+
 /**
  * A SpaceShip in the game extends Unit.
  * 
@@ -8,6 +10,11 @@ package spaceinvaders.group_22.unit;
 
 public class SpaceShip extends Unit {
 	
+	
+	/**
+	 * Indicates the max speed at which a spaceship can travel.
+	 */
+	public static final int maxVelX = 250; 
 	/**
 	 * Creates a SpaceShip.
 	 * @param x X Coordinate

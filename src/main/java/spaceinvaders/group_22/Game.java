@@ -9,6 +9,7 @@ import spaceinvaders.group_22.unit.AlienBullet;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.ShipBullet;
+import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
  * 
@@ -49,13 +50,7 @@ public class Game {
     /**
      * The height of the canvas.
      */
-    private double canvasHeight;
-    
-    /**
-     * Velocity of the spaceShip in pixels per second.
-     */
-    private double spaceShipVelX = 250;
-    
+    private double canvasHeight;    
     /**
      * Velocity of the bullets of the spaceShip in pixels per second.
      */
@@ -83,10 +78,6 @@ public class Game {
      * Roughly the amount of bullets that spawn per second.
      */
 	private int bulletChance = 1;
-	/**
-	 * What X direction the aliens are moving.
-	 */
-	private int alienYDir = 1;
 	/**
 	 * The tickrate of the animation.
 	 */	
@@ -180,7 +171,6 @@ public class Game {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
-		double velX = 0;
 		if (pressedKeys.contains(KeyCode.SPACE)) {
 			if (shootingAllowed) {
 				bullets.add(player.getSpaceShip().shootBullet(-spaceShipBulletVelX));
@@ -195,17 +185,31 @@ public class Game {
 				countToShoot = 0;
 			}
 		}
-		
+		double velX = player.getSpaceShip().getVelX() * 0.98;
+		SpaceShip playership = player.getSpaceShip();
+		if (playership.getXCoor() - (0.5 * playership.getWidth()) <= 0 && velX < 0) {
+			velX *= -1;
+		} else if (player.getSpaceShip().getXCoor() 
+				+ (0.5 * playership.getWidth()) >=  canvasWidth && velX > 0) {
+			velX *= -1;
+		}
 		// Check that the spaceship is still able to move without going off the screen.
 		if (player.getSpaceShip().getXCoor() - 0.5 * player.getSpaceShip().getWidth() > 0 
 				&& pressedKeys.contains(KeyCode.A)) {
-			velX = velX - spaceShipVelX;
+			player.getSpaceShip();
+			velX = velX - SpaceShip.maxVelX * tickrate * 2;
 		}
 		if (player.getSpaceShip().getXCoor() + 0.5 * player.getSpaceShip().getWidth() < canvasWidth
 				&& pressedKeys.contains(KeyCode.D)) {
-			velX = velX + spaceShipVelX;
+			player.getSpaceShip();
+			velX = velX + SpaceShip.maxVelX * tickrate * 2;
 		}
-			
+
+		if (velX > SpaceShip.maxVelX) {
+			velX = SpaceShip.maxVelX;
+		} else if (velX < -SpaceShip.maxVelX) {
+			velX = -SpaceShip.maxVelX;
+		}
 		player.getSpaceShip().setVelX(velX);
 		player.getSpaceShip().moveUnit();
 		
