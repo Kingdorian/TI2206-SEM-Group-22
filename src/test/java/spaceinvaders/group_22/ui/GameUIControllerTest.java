@@ -59,7 +59,7 @@ public class GameUIControllerTest {
 	@Test
 	public final void testGetSetFrameRatePositive() {
 		gameUIController.setFramerate(10);
-		assertTrue(gameUIController.getFramerate() == 0.1);
+		assertEquals(gameUIController.getFramerate(), 0.1, 0.0);
 	}
 	
 	/**
@@ -68,7 +68,7 @@ public class GameUIControllerTest {
 	@Test
 	public final void testGetSetFrameRateNegative() {
 		gameUIController.setFramerate(-10);
-		assertTrue(gameUIController.getFramerate() == 0);
+		assertEquals(gameUIController.getFramerate(), 0.0, 0.0);
 	}
 	
 	/**
@@ -77,7 +77,7 @@ public class GameUIControllerTest {
 	@Test
 	public final void testGetSetFrameRateZero() {
 		gameUIController.setFramerate(0);
-		assertTrue(gameUIController.getFramerate() == 0);
+		assertEquals(gameUIController.getFramerate(), 0.0, 0.0);
 	}
 	
 	/**
@@ -85,7 +85,7 @@ public class GameUIControllerTest {
 	 */
 	@Test
 	public final void testInitialCanvasWidth() {
-		assertTrue(gameUIController.getCanvasWidth() == 1000.0);
+		assertEquals(gameUIController.getCanvasWidth(), 1000.0, 0.0);
 	}
 	
 	/**
@@ -93,7 +93,7 @@ public class GameUIControllerTest {
 	 */
 	@Test
 	public final void testInitialCanvasHeight() {
-		assertTrue(gameUIController.getCanvasHeight() == 720.0);
+		assertEquals(gameUIController.getCanvasHeight(), 720.0, 0.0);
 	}
 	
 	/**

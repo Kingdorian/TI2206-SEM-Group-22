@@ -115,6 +115,7 @@ public class GameUIController
     @Override
 	public final void initialize(final URL fxmlFileLocation, final ResourceBundle resources) {
     	initializeStackPaneScreens();
+    	// Get the GraphicsContext of the canvas, so you can draw on it.
     	gc = canvas.getGraphicsContext2D();
     	
     	canvasWidth = canvas.getWidth();
@@ -162,7 +163,7 @@ public class GameUIController
     	if (game == null) {
         	game = new Game(canvasWidth, canvasHeight);
         	sprites = getSprites();
-        // Else reset the game.
+        // Else reset the existing game.
     	} else {
         	game.resetGame();    		
     	}
@@ -244,15 +245,18 @@ public class GameUIController
 						// Clear the canvas.
 						gc.clearRect(0, 0, canvasWidth, canvasHeight);
 						
+						// If the game is in progress, look if any key is pressed.
 						if (game.isInProgress()) {
 							game.tick(pressedKeys);
 						}
-									
+						
+						// Draw the various units on the screen.
 						drawPlayer();
 						drawAliens();
 						drawExplosions();
 						drawBullets();
 						
+						// Draw the lives and score on the screen.
 						formatLives(game.getPlayer().getLives());
 						formatScore(game.getPlayer().getScore());
 						
@@ -260,6 +264,7 @@ public class GameUIController
 					    	pressedKeys.remove(KeyCode.SPACE);
 					    }
 						
+						// If the game has ended, put the Game Over screen to the front.
 						if (game.hasEnded()) {
 							screenGameOver.toFront();
 							highScoreLabel.setText("Highscore: " + game.getHighScore());
@@ -314,16 +319,22 @@ public class GameUIController
 		ArrayList<Explosion> explosionList = new ArrayList<Explosion>();
 		explosionList.addAll(game.getExplosions());
 		
+		// For every explosion, draw the explosion.
 		for (Explosion explosion : explosionList) {
 			drawUnit(explosion.getXCoor(), explosion.getYCoor(), 
 					explosion.getWidth(), explosion.getHeight(), explosion.getSprite());
+			
+			// Increase the counter maintaining the time one frame of the animation is visible.
 			explosion.increaseCounter();
 
 			if (explosion.getCounter() % 5 == 0) {
+				// Increase the index of the animation sprite, so the next image is shown.
 				explosion.increaseAnimationIndex();
 				explosion.setSprite("explosion" + explosion.getAnimationIndex() + ".png");
 			}
 			if (explosion.getAnimationIndex() == 5) {
+				// If we reach the final animation index, 
+				// remove the explosion since the animation has ended.
 				game.getExplosions().remove(explosion);
 			}
 		}
