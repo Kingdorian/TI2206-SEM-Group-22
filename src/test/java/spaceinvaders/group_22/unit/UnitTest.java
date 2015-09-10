@@ -47,7 +47,7 @@ public abstract class UnitTest {
 	public final void setup() {
 		// testImage is a 1x1 png image. 
 		unit = createInstance(1.2, 3, "testimage.png");
-		Game.setTickrate(1);
+		//game.setTickrate(1.0);
 	}
 	
 	/**
@@ -124,7 +124,7 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void testMoveUnitVelocity0() {
-		unit.moveUnit();
+		unit.moveUnit(60.0);
 		assertTrue(unit.getXCoor() == 1.2);
 		assertTrue(unit.getYCoor() == 3);
 	}
@@ -136,7 +136,7 @@ public abstract class UnitTest {
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public void testMoveUnit() {
 		unit.setVelX(1);
-		unit.moveUnit();
+		unit.moveUnit(1.0);
 		assertEquals(2.2, unit.getXCoor(), 0.05);
 		assertEquals(3.0, unit.getYCoor(), 0.05);
 	}

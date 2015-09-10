@@ -33,6 +33,7 @@ public class GameTest {
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void setUpGame() {
 		game = new Game(200, 200);
+		game.setTickrate(1.0);
 	}
 	
 	/**
@@ -228,8 +229,8 @@ public class GameTest {
 	 */
 	@Test
 	public final void testGetTickRate() {
-		game.setTickrate(10);
-		Assert.assertEquals(10, game.getTickrate());
+		game.setTickrate(10.0);
+		Assert.assertEquals(10, game.getTickrate(), 0.05);
 		
 	}
 	/**
@@ -270,6 +271,7 @@ public class GameTest {
 	 */
 	@Test
 	public final void testShipBounceLeft() {
+		game.setTickrate(10.0);
 		game.getPlayer().setSpaceShip(new SpaceShip(-5, 0, "spaceship.png"));
 		game.getPlayer().getSpaceShip().setVelX(-10.0);
 		game.moveSpaceShip(new ArrayList<KeyCode>());

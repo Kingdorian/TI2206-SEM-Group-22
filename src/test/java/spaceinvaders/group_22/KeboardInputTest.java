@@ -39,7 +39,7 @@ public class KeboardInputTest {
 	public final void setup() {
 		game = new Game(700 , 1000);
 		game.setPlayer(new Player(game));
-		game.setTickrate(60);
+		game.setTickrate(60.0);
 		// Create simulated events
 		simulEvents = new ArrayList<KeyCode>();
 	}

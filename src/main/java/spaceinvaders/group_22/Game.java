@@ -64,7 +64,7 @@ public class Game {
 	/**
 	 * The tickrate of the animation.
 	 */	
-	private static int tickrate;
+	private Double tickrate;
 	/**
 	 * To check if it is allowed to move.
 	 */
@@ -210,7 +210,7 @@ public class Game {
 		}
 		//Move every bullet
 		for (int i = 0; i < bullets.size(); i++) {
-			bullets.get(i).moveUnit();
+			bullets.get(i).moveUnit(tickrate);
 		}
 		checkCollisions();
 		for (int i = 0; i < barricades.size(); i++)  {
@@ -255,7 +255,7 @@ public class Game {
 			velX = -SpaceShip.MAXVELX;
 		}
 		player.getSpaceShip().setVelX(velX);
-		player.getSpaceShip().moveUnit();
+		player.getSpaceShip().moveUnit(tickrate);
 	}
 	/**
 	 * Add a new barricade to this game.
@@ -356,10 +356,10 @@ public class Game {
 	}
 	/**
 	 * Set the tickrate for the movement.
-	 * @param newtickrate of the animation.
+	 * @param framerate of the animation.
 	 */
-	public static void setTickrate(final int newtickrate) {
-		tickrate = newtickrate;
+	public void setTickrate(final Double framerate) {
+		tickrate = framerate;
 	}
 	/**
 	 * Sets highscore.
@@ -450,7 +450,7 @@ public class Game {
 	 * Returns the current frame rate.
 	 * @return the current frame rate.
 	 */
-	public static int getTickrate() {
+	public double getTickrate() {
 		return tickrate;
 	}
 	/**

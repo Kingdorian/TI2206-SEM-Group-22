@@ -94,9 +94,9 @@ public abstract class Unit {
 	/**
 	 * Move the unit in the direction of this unit and with his velocity.
 	 */
-	public final void moveUnit() {
-		setXCoor(this.getXCoor() + (this.getVelX() * Game.getTickrate()));
-		setYCoor(this.getYCoor() + (this.getVelY() * Game.getTickrate()));
+	public final void moveUnit(Double tickrate) {
+		setXCoor(this.getXCoor() + (this.getVelX() * tickrate));
+		setYCoor(this.getYCoor() + (this.getVelY() * tickrate));
 	}
 	
 	/**

@@ -49,7 +49,7 @@ public class GameUIController
     /**
      * The framerate of the animation.
      */
-    private int framerate;
+    private Double framerate;
     
     /**
      * The width of the canvas.
@@ -144,7 +144,7 @@ public class GameUIController
      * @param fps The amount of frames per second.
      */
     public final void setFramerate(final int fps) {
-    	framerate = (int)1.0 / fps;
+    	framerate = 1.0 / fps;
     }
     
     /**
@@ -204,7 +204,7 @@ public class GameUIController
 		
     	// Set the animation framerate.
     	setFramerate(60);
-    	Game.setTickrate(framerate);
+    	game.setTickrate(framerate);
     	
 		KeyFrame frame = new KeyFrame(
 			Duration.seconds(framerate), 

@@ -1,5 +1,6 @@
 package spaceinvaders.group_22.unit;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
@@ -25,9 +26,9 @@ public class AlienTest extends UnitTest {
 		Bullet bullet = alien.shootBullet(1);
 		assertTrue(bullet.getXCoor() == alien.getXCoor());
 		assertTrue(bullet.getYCoor() == alien.getYCoor());
-		bullet.moveUnit();
+		bullet.moveUnit(1.0);
 		assertTrue(bullet.getXCoor() == alien.getXCoor());
-		assertTrue(bullet.getYCoor() == alien.getYCoor() + 1);
+		assertEquals(alien.getYCoor() + 1, bullet.getYCoor(), 0.05 );
 	}
 
 }
