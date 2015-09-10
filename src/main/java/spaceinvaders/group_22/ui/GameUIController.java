@@ -32,6 +32,7 @@ import javafx.util.Duration;
  * @author Jochem
  *
  */
+@SuppressWarnings("checkstyle:magicnumber")    
 public class GameUIController
     implements Initializable {
 
@@ -112,7 +113,6 @@ public class GameUIController
      * Called by the FXMLLoader. 
      */
     @Override
-	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void initialize(final URL fxmlFileLocation, final ResourceBundle resources) {
     	initializeStackPaneScreens();
     	gc = canvas.getGraphicsContext2D();
@@ -208,7 +208,6 @@ public class GameUIController
     /**
      * Starts the animation of the canvas.
      */
-	@SuppressWarnings("checkstyle:magicnumber")    
     public final void startAnimation() {
 		
 		// Create the animation Timeline, responsible for updating the animation.
@@ -219,6 +218,7 @@ public class GameUIController
     	setFramerate(60);
     	Game.setTickrate(framerate);
     	
+    	// Create each frame.
 		KeyFrame frame = new KeyFrame(
 			Duration.seconds(framerate), 
 				new EventHandler<ActionEvent>()
@@ -227,63 +227,21 @@ public class GameUIController
 						// Clear the canvas.
 						gc.clearRect(0, 0, canvasWidth, canvasHeight);
 						
-						// Testing animation using only the Player.
-	                    //double testTranslation = (System.currentTimeMillis() - timeStart) / 10.0; 
 						if (game.isInProgress()) {
-							
 							game.tick(pressedKeys);
 						}
 									
-						SpaceShip spaceShip = game.getPlayer().getSpaceShip();
+						drawPlayer();
+						drawAliens();
+						drawExplosions();
+						drawBullets();
 						
-				        // Position the player in the middle, on the bottom of the screen.
-						drawUnit(spaceShip.getXCoor(), spaceShip.getYCoor(), spaceShip.getWidth(), 
-								spaceShip.getHeight(), spaceShip.getSprite());
-
-						
-						for (Alien unit : game.getAliens()) {
-							drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(),
-									unit.getHeight(), unit.getSprite());
-							
-						}
-						
-						// Create a duplicate to loop over, so deletion is possible.
-						ArrayList<Explosion> explosionList = new ArrayList<Explosion>();
-						explosionList.addAll(game.getExplosions());
-						
-						for (Explosion explosion : explosionList) {
-							drawUnit(explosion.getXCoor(), explosion.getYCoor(), 
-									explosion.getWidth(), explosion.getHeight(), explosion.getSprite());
-							explosion.increaseCounter();
-							
-							if (explosion.getCounter() < 10) {
-								explosion.setSprite("explosion" + 1 + ".png");
-							} else if (explosion.getCounter() < 20) {
-								explosion.setSprite("explosion" + 2 + ".png");
-							} else if (explosion.getCounter() < 30) {
-								explosion.setSprite("explosion" + 3 + ".png");
-							} else if (explosion.getCounter() < 40) {
-								explosion.setSprite("explosion" + 4 + ".png");
-							} else if (explosion.getCounter() < 50) {
-								explosion.setSprite("explosion" + 5 + ".png");
-							} else {
-								game.getExplosions().remove(explosion);
-							}
-							
-						}
+						formatLives(game.getPlayer().getLives());
+						formatScore(game.getPlayer().getScore());
 						
 						if (pressedKeys.contains(KeyCode.SPACE)) {
 					    	pressedKeys.remove(KeyCode.SPACE);
 					    }
-						
-						for (Bullet bullet : game.getBullets()) {
-							drawUnit(bullet.getXCoor(), bullet.getYCoor(), 
-									bullet.getWidth(), bullet.getHeight(), bullet.getSprite());
-						}
-						
-						scoreLabel.setText("Score: " + game.getPlayer().getScore());
-						formatLives(game.getPlayer().getLives());
-						formatScore(game.getPlayer().getScore());
 						
 						if (game.hasEnded()) {
 							screenGameOver.toFront();
@@ -300,11 +258,64 @@ public class GameUIController
 		 gameLoop.play();
     }
 	
+	/**
+	 * Method to draw the player spaceship.
+	 */
+	private void drawPlayer() {
+		SpaceShip spaceShip = game.getPlayer().getSpaceShip();
+		
+        // Position the player in the middle, on the bottom of the screen.
+		drawUnit(spaceShip.getXCoor(), spaceShip.getYCoor(), spaceShip.getWidth(), 
+				spaceShip.getHeight(), spaceShip.getSprite());
+	}
+	
+	/**
+	 * Method to draw the aliens in game.
+	 */
+	private void drawAliens() {
+		for (Alien unit : game.getAliens()) {
+			drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(),
+					unit.getHeight(), unit.getSprite());		
+		}
+	}
+	
+	/**
+	 * Method to draw the bullets in game.
+	 */
+	private void drawBullets() {
+		for (Bullet bullet : game.getBullets()) {
+			drawUnit(bullet.getXCoor(), bullet.getYCoor(), 
+					bullet.getWidth(), bullet.getHeight(), bullet.getSprite());
+		}
+	}
+	
+	/**
+	 * Method to draw the explosions in game.
+	 */
+	private void drawExplosions() {
+		// Create a duplicate to loop over, so deletion is possible.
+		ArrayList<Explosion> explosionList = new ArrayList<Explosion>();
+		explosionList.addAll(game.getExplosions());
+		
+		for (Explosion explosion : explosionList) {
+			drawUnit(explosion.getXCoor(), explosion.getYCoor(), 
+					explosion.getWidth(), explosion.getHeight(), explosion.getSprite());
+			explosion.increaseCounter();
+
+			if (explosion.getCounter() % 5 == 0) {
+				explosion.increaseAnimationIndex();
+				explosion.setSprite("explosion" + explosion.getAnimationIndex() + ".png");
+			}
+			if (explosion.getAnimationIndex() == 5) {
+				game.getExplosions().remove(explosion);
+			}
+		}
+	}
+	
     /**
      * Method to display the lives on the screen.
      * @param lives The amount of lives the player has.
      */
-	@SuppressWarnings("checkstyle:magicnumber")    
     public final void formatLives(final int lives) {
     	Image heartImage = sprites.get("heart.png");
     	for (int i = 1; i <= lives; i++) {
@@ -316,7 +327,6 @@ public class GameUIController
 	 * Method to display the score on the screen.
 	 * @param score The score to be displayed.
 	 */
-	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void formatScore(final int score) {
     	int digitsBefore = 8 - Integer.toString(score).length();
     	String scoreString = "";
@@ -337,13 +347,14 @@ public class GameUIController
      * @param spriteHeight The heifht of the sprite to draw.
      * @param sprite Image containing the sprite to draw.
      */  
-	@SuppressWarnings("checkstyle:magicnumber")    
     public final void drawUnit(final double x, final double y, final double spriteWidth, 
     		final double spriteHeight, final String sprite) {
         
         // Draw the player with the X and Y coordinates as center
 		Image spriteImage = sprites.get(sprite);
-		gc.drawImage(spriteImage, x - 0.5 * spriteWidth, y - 0.5 * spriteHeight);
+		if (spriteImage != null) {
+			gc.drawImage(spriteImage, x - 0.5 * spriteWidth, y - 0.5 * spriteHeight);			
+		}
     }
 	
 	/**
