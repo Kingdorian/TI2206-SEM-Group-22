@@ -72,7 +72,7 @@ public class Game {
 	/**
 	 * The tickrate of the animation.
 	 */	
-	private static double tickrate;
+	private static int tickrate;
 	/**
 	 * To check if it is allowed to move.
 	 */
@@ -95,7 +95,7 @@ public class Game {
 	/**
 	 * Part of the screen (on left and right) that cannot be used when creating aliens. 
 	 */
-	final double ALIENBORDERMARIGIN = 1/7;
+	final double ALIENBORDERMARIGIN = 1 / 7;
 	/**
 	 * Amount of aliens per row.
 	 */
@@ -104,8 +104,10 @@ public class Game {
 	 * Amount of rows of aliens.
 	 */
 	final int AMOUNT_ALIEN_ROWS = 4;
-	
-	final String ALIENSPRITE = "invader.png";
+	/**
+	 * Location of the sprite of the aliens.
+	 */
+	final String ALIENSPRITE = "barrier.png";
 	/**
 	 * Creates a new instance of game.
 	 * @param width of the canvas.
@@ -204,6 +206,38 @@ public class Game {
 				countToShoot = 0;
 			}
 		}
+		moveSpaceShip(pressedKeys);
+		alienController.moveAliens();
+		alienController.shootAlienBullets();
+		
+		//Check if all bullets are still visible
+		for (int i = 0; i < bullets.size(); i++) {
+			if (bullets.get(i).getXCoor() > canvasWidth || bullets.get(i).getYCoor() < 0) {
+				bullets.remove(i);
+			}
+		}
+		//Move every bullet
+		for (int i = 0; i < bullets.size(); i++) {
+			bullets.get(i).moveUnit();
+		}
+		checkCollisions();
+		for (int i = 0; i < barricades.size(); i++) {
+			if (barricades.get(i).getHealth()==0){
+				barricades.remove(i);
+				i--;
+			}
+		}
+
+		if (aliens.isEmpty()) {
+			aliens = alienController.createAlienWave(100, 69, 60, 10, 4);
+			bullets.clear();
+		}
+	}
+	/**
+	 * Moves the spaceship.
+	 * @param pressedKeys the keys pressed since last tick
+	 */
+	public final void moveSpaceShip(ArrayList<KeyCode> pressedKeys) {
 		double velX = player.getSpaceShip().getVelX() * 0.98;
 		SpaceShip playership = player.getSpaceShip();
 		if (playership.getXCoor() - (0.5 * playership.getWidth()) <= 0 && velX < 0) {
@@ -231,33 +265,6 @@ public class Game {
 		}
 		player.getSpaceShip().setVelX(velX);
 		player.getSpaceShip().moveUnit();
-		
-		alienController.moveAliens();
-		alienController.shootAlienBullets();
-		
-		//Check if all bullets are still visible
-		for (int i = 0; i < bullets.size(); i++) {
-			if (bullets.get(i).getXCoor() > canvasWidth || bullets.get(i).getYCoor() < 0) {
-				bullets.remove(i);
-			}
-		}
-		//Move every bullet
-		for (int i = 0; i < bullets.size(); i++) {
-			bullets.get(i).moveUnit();
-		}
-		checkCollisions();
-
-		for (int i = 0; i < barricades.size(); i++) {
-			if (barricades.get(i).getHealth()==0){
-				barricades.remove(i);
-				i--;
-			}
-		}
-
-		if (aliens.isEmpty()) {
-			aliens = alienController.createAlienWave(100, 69, 60, 10, 4);
-			bullets.clear();
-		}
 	}
 	/**
 	 * Add a new barricade to this game.
@@ -360,7 +367,7 @@ public class Game {
 	 * Set the tickrate for the movement.
 	 * @param newtickrate of the animation.
 	 */
-	public static void setTickrate(final double newtickrate) {
+	public static void setTickrate(final int newtickrate) {
 		tickrate = newtickrate;
 	}
 	/**
@@ -452,7 +459,7 @@ public class Game {
 	 * Returns the current frame rate.
 	 * @return the current frame rate.
 	 */
-	public static double getTickrate() {
+	public static int getTickrate() {
 		return tickrate;
 	}
 	/**
@@ -462,6 +469,13 @@ public class Game {
 	 */
 	public boolean getShootingAllowed() {
 		return shootingAllowed;
+	}
+	/**
+	 * Sets the bullet list.
+	 * @param list ArrayList containing the new bullets
+	 */
+	public void setBullets(ArrayList<Bullet> list) {
+		bullets = list;
 	}
 	
 

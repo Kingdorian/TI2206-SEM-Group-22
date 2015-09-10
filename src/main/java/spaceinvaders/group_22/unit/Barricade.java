@@ -22,33 +22,36 @@ public class Barricade extends Unit{
 	/**
 	 * When barricade is hit decrease health. 
 	 */
-	public void hit() {
+	public final void hit() {
 		health--;
 	}
 	/**
 	 * Return the amount of health the barricade has left.
+	 * @return the amount of health this barricade has left.
 	 */
-	public int getHealth() {
+	public final int getHealth() {
 		return health;
 	}
 	/**
 	 * Checks if the provided object equeals this Barricade.
-	 * @param the object to compare to.
+	 * @param obj the object to compare to.
 	 * @return true if the both objects are thesame.
 	 */
-	public boolean equals(Object obj) {
-		if (this == obj)
+	public final boolean equals(final Object obj) {
+		if (this == obj) {
 			return true;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
-		Barricade that = (Barricade)obj;
-		if(this.getXCoor() == that.getXCoor()
+		}
+		Barricade that = (Barricade) obj;
+		if (this.getXCoor() == that.getXCoor()
 					&& this.getYCoor() == that.getYCoor()
 					&& this.getVelX() == that.getVelX()
 					&& this.getVelY() == that.getVelY()
 					&& this.getHeight() == that.getHeight()
-					&& this.getWidth() == that.getWidth()){
-				if (health != that.health){
+					&& this.getWidth() == that.getWidth()) {
+				if (health != that.health) {
 					return false;
 				}
 				return true;

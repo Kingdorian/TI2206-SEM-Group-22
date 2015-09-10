@@ -97,7 +97,7 @@ public class GameTest {
 	*/
 	@Test(expected = AssertionError.class)
 	@SuppressWarnings("checkstyle:magicnumber")   
-	public final void testIllegalNewScore() {
+	public final void testIllegalNewHighScore() {
 		//Setting a correct highscore
 		game.setHighScore(100);
 		// Setting highscore lower then current highscore
@@ -108,7 +108,7 @@ public class GameTest {
 	 */
 	@Test(expected = AssertionError.class)
 	@SuppressWarnings("checkstyle:magicnumber")   
-	public final void testNegativeNewScore() {
+	public final void testNegativeNewHighScore() {
 		game.setHighScore(-10);
 	}
 	
@@ -220,5 +220,47 @@ public class GameTest {
 		game.getPlayer().resetScore();
 		game.gameOver();
 		Assert.assertEquals(1, game.getHighScore());
+	}
+	/**
+	 * Tests the getTickRate method in game.
+	 */
+	@Test
+	public final void testGetTickRate() {
+		game.setTickrate(10);
+		Assert.assertEquals(10, game.getTickrate());
+		
+	}
+	/**
+	 * Tests the getShipBullets Method for non ship bullets.
+	 */
+	@Test
+	public final void testGetNoShipBullets() {
+		// Remove all existing bullets from the game.
+		game.reset();
+		ArrayList<Bullet> bulletlist = new ArrayList<Bullet>();
+		bulletlist.add(game.getAliens().get(0).shootBullet(1));
+		game.setBullets(bulletlist);
+		Assert.assertEquals(new ArrayList<Bullet>(), game.getShipBullets());
+	}
+	/**
+	 * Tests the getShipBullets Method for ship bullets.
+	 */
+	@Test
+	public final void testGetShipBullets() {
+		// Remove all existing bullets from the game.
+		game.reset();
+		ArrayList<Bullet> bulletlist = new ArrayList<Bullet>();
+		bulletlist.add(game.getPlayer().getSpaceShip().shootBullet(10.1));
+		game.setBullets(bulletlist);
+		Assert.assertEquals(bulletlist, game.getShipBullets());
+	}
+	/**
+	 * Tests the setPlayer method in game.
+	 */
+	@Test
+	public final void testSetPlayer() {
+		Player player = new Player(game);
+		game.setPlayer(player);
+		Assert.assertEquals(game.getPlayer(), player);
 	}
 }
