@@ -74,10 +74,18 @@ public class Player {
 		score = 0;
 	}
 	/**
+	 * Respawn the spaceship.
+	 */
+	@SuppressWarnings("checkstyle:magicnumber") 
+	public final void respawnShip() {
+		ship = new SpaceShip(game.getCanvasWidth() / 2, game.getCanvasHeight() - 100, "spaceship.png");
+	}
+	/**
 	 * When the player dies remove one of his lives.
 	 */
 	public final void die() {
 		lives--;
+		respawnShip();
 		if (lives <= 0) {
 			game.gameOver();
 		}
