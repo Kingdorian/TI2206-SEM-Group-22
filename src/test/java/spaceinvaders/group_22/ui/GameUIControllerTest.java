@@ -10,15 +10,10 @@ import java.util.HashMap;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.mockito.Mockito;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import spaceinvaders.group_22.Game;
 
 /**
  * Unit tests for the GameUIController class.

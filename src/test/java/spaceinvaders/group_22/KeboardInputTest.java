@@ -1,7 +1,5 @@
 package spaceinvaders.group_22;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
 
 import javafx.scene.input.KeyCode;
@@ -12,8 +10,6 @@ import org.junit.Test;
 
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Barricade;
-import spaceinvaders.group_22.unit.Bullet;
-import spaceinvaders.group_22.unit.ShipBullet;
 
 /**
  * Test key events.
@@ -38,7 +34,7 @@ public class KeboardInputTest {
 	public final void setup() {
 		game = new Game(700 , 1000);
 		game.setPlayer(new Player(game));
-		game.setTickrate(60);
+		Game.setTickrate(60);
 		// Create simulated events
 		simulEvents = new ArrayList<KeyCode>();
 	}
@@ -51,7 +47,7 @@ public class KeboardInputTest {
 	public final void testPressA() {
 		simulEvents.add(KeyCode.A);
 		game.tick(simulEvents);
-		Assert.assertEquals( -250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
+		Assert.assertEquals(-250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
 	}
 	/**
 	 * Test if the speed of the spaceship correctly gets updated when the D key gets pressed.
@@ -78,6 +74,6 @@ public class KeboardInputTest {
 		alienList.add(alien);
 		game.setAliens(alienList);
 		game.tick(simulEvents);	
-		Assert.assertEquals(bulletAmount+1, game.getShipBullets().size());
+		Assert.assertEquals(bulletAmount + 1, game.getShipBullets().size());
 	}
 }

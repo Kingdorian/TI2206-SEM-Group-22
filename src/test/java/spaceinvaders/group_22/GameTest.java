@@ -57,9 +57,10 @@ public class GameTest {
 		Assert.assertEquals(0, game.getHighScore());
 	}
 	/**
-	 * Tests if the getBarricades method works correctly
+	 * Tests if the getBarricades method works correctly.
 	 */
 	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testGetBarricades() {
 		ArrayList<Barricade> barricades = new ArrayList<Barricade>();
 		Barricade barricade = new  Barricade(10, 10, "testimage.png");
@@ -71,6 +72,7 @@ public class GameTest {
 	 * Tests if the addBarricade method adds a barricade correctly.
 	 */
 	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testAddBarricade() {
 		ArrayList<Barricade> barricades = new ArrayList<Barricade>();
 		Barricade barricade = new Barricade(10, 10, "testimage.png");

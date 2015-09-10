@@ -261,7 +261,7 @@ public class GameUIController
 						// Draw barricades
 						for (Barricade bar : game.getBarricades()) {
 							drawUnit(bar.getXCoor(), bar.getYCoor(), bar.getWidth(),
-									bar.getHeight(), bar.getSprite());
+											bar.getHeight(), bar.getSprite());
 						}
 	
 						// Draw the lives and score on the screen.

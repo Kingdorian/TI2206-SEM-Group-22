@@ -22,7 +22,7 @@ public abstract class UnitTest {
 	/**
 	 * The Unit we need to be testing.
 	 */
-	protected Unit unit;
+	private Unit unit;
 	
 	/**
 	 * Method to create an instance of a subclass of the Unit class.

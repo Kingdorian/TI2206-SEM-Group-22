@@ -5,13 +5,12 @@ import javafx.scene.input.KeyCode;
 import java.util.ArrayList;
 
 import spaceinvaders.group_22.unit.Alien;
-import spaceinvaders.group_22.unit.AlienBullet;
 import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.Collisions;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.ShipBullet;
 import spaceinvaders.group_22.unit.SpaceShip;
-import spaceinvaders.group_22.unit.Unit;
 
 /**
  * 
@@ -56,21 +55,14 @@ public class Game {
     /**
      * The height of the canvas.
      */
+
     private double canvasHeight;
-    
-    /**
-     * Velocity of the spaceShip in pixels per second.
-     */
-    private double spaceShipVelX = 250;
+
     /**
      * Velocity of the bullets of the spaceShip in pixels per second.
      */
     @SuppressWarnings("checkstyle:magicnumber")
     private double spaceShipBulletVelX = 80;
-    /**
-     * Roughly the amount of bullets that spawn per second.
-     */
-	private int bulletChance = 1;
 	/**
 	 * The tickrate of the animation.
 	 */	
@@ -93,6 +85,10 @@ public class Game {
 	 */
 	private AlienController alienController;
 	/**
+	 * The collisions of units.
+	 */
+	private Collisions collisions;
+	/**
 	 * Creates a new instance of game.
 	 * @param width of the canvas.
 	 * @param height of the canvas.
@@ -107,6 +103,8 @@ public class Game {
 		barricades = createBarricades();
 
 		alienController = new AlienController(this);
+		
+		collisions = new Collisions(this);
 		
 		aliens = alienController.createAlienWave(100, 69, 60, 10, 4);
 
@@ -243,10 +241,10 @@ public class Game {
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).moveUnit();
 		}
-		checkCollisions();
+		collisions.checkCollisions();
 
 		for (int i = 0; i < barricades.size(); i++) {
-			if (barricades.get(i).getHealth()==0){
+			if (barricades.get(i).getHealth() == 0) {
 				barricades.remove(i);
 				i--;
 			}
@@ -323,6 +321,13 @@ public class Game {
 	public final ArrayList<Bullet> getBullets() {
 		return bullets;
 	}
+	/**
+	 * Sets the bullets currently in this game.
+	 * @param newBullets Arraylist of bullets in the game.
+	 */
+	public final void setBullets(final ArrayList<Bullet> newBullets) {
+		bullets = newBullets;
+	}
 	
 	/**
 	 * Gets the shipbullets currently in this game.
@@ -330,8 +335,8 @@ public class Game {
 	 */
 	public final ArrayList<Bullet> getShipBullets() {
 		ArrayList<Bullet> spaceBullets = new ArrayList<Bullet>();
-		for(int i = 0; i < getBullets().size(); i++){
-			if(getBullets().get(i) instanceof ShipBullet){
+		for (int i = 0; i < getBullets().size(); i++) {
+			if (getBullets().get(i) instanceof ShipBullet) {
 				spaceBullets.add(getBullets().get(i));
 			}
 		}
@@ -382,77 +387,18 @@ public class Game {
 		return aliens;
 	}
 	
-	
-	
 	/**
-	 * Checks if there are collisions between bullets and other units.
+	 * Creates barricades in the game.
+	 * @return ArrayList of barricades.
 	 */
-	@SuppressWarnings("checkstyle:magicnumber") 
-	public final void checkCollisions() {
-		//Composing list of alien bullets
-		ArrayList<Unit> alienBullets = new ArrayList<Unit>();
-		ArrayList<Unit> shipBullets = new ArrayList<Unit>();
-		for(Bullet bullet : getBullets()) {
-			if(bullet instanceof AlienBullet) {
-				alienBullets.add(bullet);
-			} else if(bullet instanceof ShipBullet) {
-				shipBullets.add(bullet);
-			}
-		}
-		//Checking colissions for spaceship with enemy bullets
-		Unit collidingBullet = checkColissions(player.getSpaceShip(), alienBullets);
-		if (collidingBullet != null ){
-			player.die();
-			bullets.remove(collidingBullet);
-		}
-		//Checking for colissions between player bullets and aliens
-		for(Unit bullet : shipBullets) {
-			Unit collidingUnit = checkColissions(bullet, new ArrayList<Unit>(aliens));
-			if(collidingUnit != null) {
-				player.addScore(10);
-				aliens.remove(collidingUnit);
-				bullets.remove(bullet);
-				break;
-			}
-		}
-		// Checking for colissions between bullets and barricades
-		for(Barricade bar : barricades) {
-			Unit collidingUnit = checkColissions(bar, new ArrayList<Unit>(bullets));
-			if(collidingUnit != null) {
-				bullets.remove(collidingUnit);
-				bar.hit();
-			}
-		}
-	}
-	
-	/**
-	 * Checks collisions between an unit and a an ArrayList of other units.
-	 * @param checkingUnit the unit to check colissions with
-	 * @param unitList the list of units to check colission against.
-	 * @return The unit the checkingUnit colides with, null if there are no colissions.
-	 */
-	public final Unit checkColissions(Unit checkingUnit, ArrayList<Unit> unitList) {
-		double checkX = checkingUnit.getXCoor();
-		double checkY = checkingUnit.getYCoor();
-		for(Unit unit : unitList) {
-			double unitX = unit.getXCoor();
-			double unitY = unit.getYCoor();
-			if ((checkX - unitX >= -((unit.getWidth()/ 2) + (checkingUnit.getWidth()/2))  
-				&& (checkX - unitX <= (unit.getWidth() / 2) + (checkingUnit.getWidth()/2))) 
-				&& (checkY - unitY >= -(((unit.getHeight()) / 2) + (checkingUnit.getHeight()/2))) 
-				&& (checkY - unitY <= (unit.getHeight() / 2)  + (checkingUnit.getHeight()/2))){
-					return unit;
-			}
-		}
-		return null;
-	}
-	
-	private final ArrayList<Barricade> createBarricades() {
+	private ArrayList<Barricade> createBarricades() {
 		int barricadeCount = 4;
-		double interval = canvasWidth/(barricadeCount+1);
+
+		double interval = canvasWidth / (barricadeCount + 1);
+
 		ArrayList<Barricade> bars = new ArrayList<Barricade>();
-		for(int i = 1; i <= barricadeCount; i++) {
-			bars.add(new Barricade(interval*i, canvasHeight-110, "barrier.png"));
+		for (int i = 1; i <= barricadeCount; i++) {
+			bars.add(new Barricade(interval * i, canvasHeight - 110, "barrier.png"));
 		}
 		return bars;
 	}
