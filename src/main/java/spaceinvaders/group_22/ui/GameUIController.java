@@ -168,41 +168,30 @@ public class GameUIController
     public final HashMap<String, Image> getSprites() {
     	HashMap<String, Image> spriteMap = new HashMap<String, Image>();
     		
-    		spriteMap.put("alienbullet.png", 
-    				new Image(getClass().getClassLoader()
-    						.getResource("spaceinvaders/group_22/images/alienbullet.png").toString()));
-    		spriteMap.put("spaceshipbullet.png", 
-    				new Image(getClass().getClassLoader()
-    						.getResource("spaceinvaders/group_22/images/spaceshipbullet.png").toString()));
-    		spriteMap.put("invader.png", 
-    				new Image(getClass().getClassLoader()
-    						.getResource("spaceinvaders/group_22/images/invader.png").toString()));
-	    	spriteMap.put("spaceship.png", 
-	    			new Image(getClass().getClassLoader()
-	    					.getResource("spaceinvaders/group_22/images/spaceship.png").toString()));
-	    	spriteMap.put("heart.png", 
-	    			new Image(getClass().getClassLoader()
-	    					.getResource("spaceinvaders/group_22/images/heart.png").toString()));
-	    	spriteMap.put("barrier.png", 
-	    			new Image(getClass().getClassLoader()
-	    					.getResource("spaceinvaders/group_22/images/barrier.png").toString()));
-	    	spriteMap.put("explosion1.png", 
-	    			new Image(getClass().getClassLoader()
-	    					.getResource("spaceinvaders/group_22/images/explosion1.png").toString()));
-	    	spriteMap.put("explosion2.png", 
-	    			new Image(getClass().getClassLoader()
-	    					.getResource("spaceinvaders/group_22/images/explosion2.png").toString()));
-	    	spriteMap.put("explosion3.png", 
-	    			new Image(getClass().getClassLoader()
-	    					.getResource("spaceinvaders/group_22/images/explosion3.png").toString()));
-	    	spriteMap.put("explosion4.png", 
-	    			new Image(getClass().getClassLoader()
-	    					.getResource("spaceinvaders/group_22/images/explosion4.png").toString()));
-	    	spriteMap.put("explosion5.png", 
-	    			new Image(getClass().getClassLoader()
-	    					.getResource("spaceinvaders/group_22/images/explosion5.png").toString()));
+    		addSprite(spriteMap, "alienbullet.png");
+    		addSprite(spriteMap, "spaceshipbullet.png");
+    		addSprite(spriteMap, "invader.png");
+    		addSprite(spriteMap, "spaceship.png");
+    		addSprite(spriteMap, "heart.png");
+    		addSprite(spriteMap, "barrier.png");
+    		addSprite(spriteMap, "explosion1.png");
+    		addSprite(spriteMap, "explosion2.png");
+    		addSprite(spriteMap, "explosion3.png");
+    		addSprite(spriteMap, "explosion4.png");
+    		addSprite(spriteMap, "explosion5.png");
     		
     	return spriteMap;
+    }
+    
+    /**
+     * Adds a sprite to the sprite Hasmap.
+     * @param spriteMap The hashmap of sprites to add to.
+     * @param filename The filename of the sprite to add.
+     */
+    public final void addSprite(final HashMap<String, Image> spriteMap, final String filename) {
+		spriteMap.put(filename, 
+				new Image(getClass().getClassLoader()
+						.getResource("spaceinvaders/group_22/images/" + filename).toString()));
     }
     
     /**
