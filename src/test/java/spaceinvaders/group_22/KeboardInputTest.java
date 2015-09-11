@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Barricade;
+import spaceinvaders.group_22.Game;
 
 /**
  * Test key events.
@@ -34,7 +35,7 @@ public class KeboardInputTest {
 	public final void setup() {
 		game = new Game(700 , 1000);
 		game.setPlayer(new Player(game));
-		Game.setTickrate(60);
+		game.setTickrate(60.0);
 		// Create simulated events
 		simulEvents = new ArrayList<KeyCode>();
 	}

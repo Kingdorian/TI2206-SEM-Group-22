@@ -236,7 +236,7 @@ public class GameUIController
 		
     	// Set the animation framerate.
     	setFramerate(60);
-    	Game.setTickrate(framerate);
+    	game.setTickrate(framerate);
     	
     	// Create each frame.
 		KeyFrame frame = new KeyFrame(

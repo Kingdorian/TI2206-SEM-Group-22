@@ -92,7 +92,7 @@ public class AlienController {
 			for (Alien unit : game.getAliens()) {
 				// When this alien is on the right side of the screen change the direction
 				if (unit.getXCoor() + 0.5 * unit.getWidth() >= game.getCanvasWidth()) {
-					alienFramesDown = (alienFall / alienVelY) * (1 / Game.getTickrate());
+					alienFramesDown = (alienFall / alienVelY) * (1 / game.getTickrate());
 					// Increase speed
 					alienVelX += 4;
 					// Switch direction
@@ -101,7 +101,7 @@ public class AlienController {
 				}
 				// When this alien is at the left side of the screen change the direction
 				if (unit.getXCoor() - 0.5 * unit.getWidth() <= 0) {
-					alienFramesDown = (alienFall / alienVelY) * (1 / Game.getTickrate());
+					alienFramesDown = (alienFall / alienVelY) * (1 / game.getTickrate());
 					// Increase speed
 					alienVelX -= 4;
 					// Switch direction
@@ -129,7 +129,7 @@ public class AlienController {
 			if (unit.getYCoor() + unit.getHeight() > game.getPlayer().getSpaceShip().getYCoor()) {
 				game.gameOver();
 			}
-			unit.moveUnit();
+			unit.moveUnit(game.getTickrate());
 		}
 	}
 
@@ -139,7 +139,7 @@ public class AlienController {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void shootAlienBullets() {
 		if (!game.getAliens().isEmpty()) {
-			if (Math.random() < ((game.getAliens().size()) * bulletChance * Game.getTickrate()) / 40)   {
+			if (Math.random() < ((game.getAliens().size()) * bulletChance * game.getTickrate()) / 40)   {
 				int shootIndex = (int) (Math.random() * game.getAliens().size());
 				game.getBullets().add(game.getAliens().get(shootIndex).shootBullet(60));
 			}

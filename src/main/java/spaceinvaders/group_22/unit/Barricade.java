@@ -8,17 +8,15 @@ public class Barricade extends Unit {
 	/**
 	 * Var that keeps track of damage taken by this barricade.
 	 */
-	private int health;
+	private int health  = 10;
 	/**
 	 * Creates new Barricade object.
 	 * @param x X-coordinate of the barricade
 	 * @param y Y-coordinate of the barricade
 	 * @param spriteFile 
 	 */
-	@SuppressWarnings("checkstyle:magicnumber")
 	public Barricade(final double x, final double y, final String spriteFile) {
 		super(x, y, spriteFile);
-		health = 10;
 	}
 	/**
 	 * When barricade is hit decrease health. 
@@ -34,21 +32,28 @@ public class Barricade extends Unit {
 		return health;
 	}
 	/**
-	 * Compares two objects and returns if they are equal.
-	 * @return true if both objects are the same.
-	 * @param other the object to compare.
+	 * Checks if the provided object equeals this Barricade.
+	 * @param obj the object to compare to.
+	 * @return true if the both objects are thesame.
 	 */
-	@Override
-	public final boolean equals(final Object other) {
-		if (other != null && other instanceof Barricade) {
-			Barricade that = (Barricade) other;
-			return this.getXCoor() == that.getXCoor()
+	public final boolean equals(final Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Barricade that = (Barricade) obj;
+		if (this.getXCoor() == that.getXCoor()
 					&& this.getYCoor() == that.getYCoor()
 					&& this.getVelX() == that.getVelX()
 					&& this.getVelY() == that.getVelY()
 					&& this.getHeight() == that.getHeight()
-					&& this.getWidth() == that.getWidth()
-					&& this.getHealth() == that.getHealth();
+					&& this.getWidth() == that.getWidth()) {
+				if (health != that.health) {
+					return false;
+				}
+				return true;
 		}
 		return false;
 	}
