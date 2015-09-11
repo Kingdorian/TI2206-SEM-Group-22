@@ -6,8 +6,6 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
-import spaceinvaders.group_22.Game;
-
 /**
  * A unit in the game that has a position and velocity.
  * 
@@ -80,28 +78,24 @@ public abstract class Unit {
 	}
 	/**
 	 * Compares two objects and returns if they are equal.
-	 * @param other the object to compare this object to
-	 * @return true if both objects are thesame.
+	 * @return true if both objects are the same.
+	 * @param other the object to compare.
 	 */
 	@Override
-	public boolean equals(final Object other) {
-		if (other != null && other instanceof Unit) {
-			Unit that = (Unit) other;
-			return this.xCoor == that.getXCoor()
-						&& this.getYCoor() == that.yCoor
-						&& this.velX == that.getVelX()
-						&& this.velY == that.getVelY()
-						&& this.getHeight() == that.getHeight()
-						&& this.getWidth() == that.getWidth();
-		}
-		return false;
-	}
+	public abstract boolean equals(Object other);
+	/**
+	 * HashCode method.
+	 * @return hashcode of this object
+	 */
+	public abstract int hashCode();
+	
 	/**
 	 * Move the unit in the direction of this unit and with his velocity.
+	 * @param tickrate The rate at which the game ticks.
 	 */
-	public final void moveUnit() {
-		setXCoor(this.getXCoor() + (this.getVelX() * Game.getTickrate()));
-		setYCoor(this.getYCoor() + (this.getVelY() * Game.getTickrate()));
+	public final void moveUnit(final Double tickrate) {
+		setXCoor(this.getXCoor() + (this.getVelX() * tickrate));
+		setYCoor(this.getYCoor() + (this.getVelY() * tickrate));
 	}
 	
 	/**

@@ -27,11 +27,11 @@ public class SpaceShipTest extends UnitTest {
 		float y = 1;
 		SpaceShip spaceship = new SpaceShip(x, y, "testimage.png");
 		Bullet bullet = spaceship.shootBullet(1);
-		assertTrue(bullet.getXCoor() == spaceship.getXCoor());
-		assertTrue(bullet.getYCoor() == spaceship.getYCoor());
-		bullet.moveUnit();
-		assertTrue(bullet.getXCoor() == spaceship.getXCoor());
-		assertTrue(bullet.getYCoor() == spaceship.getYCoor() + 1);
+		assertEquals(spaceship.getXCoor(), bullet.getXCoor(), 0.05);
+		assertEquals(spaceship.getYCoor(), bullet.getYCoor(), 0.05);
+		bullet.moveUnit(1.0);
+		assertEquals(spaceship.getXCoor(), bullet.getXCoor(), 0.05);
+		assertEquals(spaceship.getYCoor() + 1.0, bullet.getYCoor(),  0.05);
 	}
 	
 	/**
@@ -54,5 +54,15 @@ public class SpaceShipTest extends UnitTest {
 		SpaceShip ship2 = new SpaceShip(1, 3, "testimage.png");
 		SpaceShip ship1 = new SpaceShip(1.2, 3, "testimage.png");
 		assertNotEquals(ship1, ship2);
+	}
+
+	/**
+	 * Test the Equals method.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testEqualsNull() {
+		SpaceShip ship1 = new SpaceShip(1.2, 3, "testimage.png");
+		assertNotEquals(ship1, null);
 	}
 }

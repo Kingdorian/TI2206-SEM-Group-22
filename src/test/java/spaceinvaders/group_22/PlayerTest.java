@@ -72,6 +72,30 @@ public class PlayerTest {
 		Assert.assertEquals(2, player.getLives());
 	}
 	/**
+	 * Tests the resetScore method that the score is 0.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testresetScore() {
+		Player player = new Player(new Game(200 , 200));
+		player.addScore(10);
+		player.resetScore();
+		Assert.assertEquals(0, player.getScore());
+	}
+	/**
+	 * Tests the respawn method to load the spaceship in the middle again.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testRespawn() {
+		Game game = new Game(200 , 200);
+		Player player = new Player(game);
+		player.getSpaceShip().setVelX(20);
+		player.getSpaceShip().moveUnit(60.0);
+		player.respawnShip();
+		Assert.assertEquals(game.getCanvasWidth() / 2, player.getSpaceShip().getXCoor(), 0.05 );
+	}
+	/**
 	 * Tests the die method for te player when it has only one live left.
 	 */
 	@Test
@@ -83,6 +107,8 @@ public class PlayerTest {
 		player.die();
 		player.die();
 		player.die();
+		
+		Assert.assertFalse(game.isInProgress());
 		
 	}
 }

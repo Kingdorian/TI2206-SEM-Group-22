@@ -2,8 +2,7 @@ package spaceinvaders.group_22.unit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
-import java.io.IOException;
+import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -26,7 +25,7 @@ public abstract class UnitTest {
 	private Unit unit;
 	
 	/**
-	 * 
+	 * Method to create an instance of a subclass of the Unit class.
 	 * @param x X Coordinate
 	 * @param y Y Coordinate
 	 * @param spriteFile The filename of the sprite.
@@ -34,7 +33,10 @@ public abstract class UnitTest {
 	 */
 	public abstract Unit createInstance(double x, double y, String spriteFile);
 	
-    @Rule
+    /**
+     * thrown is the exception which is expected to be thrown during a test.
+     */
+	@Rule
     public ExpectedException thrown = ExpectedException.none();
 	
 	/**
@@ -45,7 +47,7 @@ public abstract class UnitTest {
 	public final void setup() {
 		// testImage is a 1x1 png image. 
 		unit = createInstance(1.2, 3, "testimage.png");
-		Game.setTickrate(1);
+		//game.setTickrate(1.0);
 	}
 	
 	/**
@@ -54,7 +56,7 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void testUnitXCoor() {
-		assertTrue(unit.getXCoor() == 1.2);
+		assertEquals(1.2, unit.getXCoor(), 0.05);
 	}
 	
 	/**
@@ -63,7 +65,7 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void testUnitYCoor() {
-		assertTrue(unit.getYCoor() == 3);
+		assertEquals(3, unit.getYCoor(), 0.05);
 	}
 	
 	/**
@@ -71,7 +73,7 @@ public abstract class UnitTest {
 	 */
 	@Test
 	public final void testUnintVelX() {
-		assertTrue(unit.getVelX() == 0);
+		assertEquals(0, unit.getVelX(), 0.05);
 	}
 	
 	/**
@@ -79,7 +81,7 @@ public abstract class UnitTest {
 	 */
 	@Test
 	public final void testUnintVelY() {
-		assertTrue(unit.getVelY() == 0);
+		assertEquals(0, unit.getVelY(), 0.05);
 	}
 	
 	/**
@@ -87,7 +89,7 @@ public abstract class UnitTest {
 	 */
 	@Test
 	public final void testUnitWidth() {
-		assertTrue(unit.getWidth() == 1);
+		assertEquals(1, unit.getWidth(), 0.05);
 	}
 	
 	/**
@@ -95,7 +97,7 @@ public abstract class UnitTest {
 	 */
 	@Test
 	public final void testUnitHeight() {
-		assertTrue(unit.getHeight() == 1);
+		assertEquals(1, unit.getHeight(), 0.05);
 	}
 	
 	/**
@@ -103,16 +105,17 @@ public abstract class UnitTest {
 	 */
 	@Test
 	public final void testUnitSprite() {
-		assertTrue(unit.getSprite() == "testimage.png");
+		assertEquals("testimage.png", unit.getSprite());
 	}
 	
 	/**
-	 * Test creating an object with an invalid sprite()
+	 * Test creating an object with an invalid sprite().
 	 */
+	@Test
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void testInvalidUnitSprite() {
-		thrown.expect(IOException.class);
-		createInstance(1.2, 3, "png.invalid");
+		thrown.expect(IllegalArgumentException.class);
+		createInstance(1.2, 3, "png.png");
 	}
 	
 	/**
@@ -121,9 +124,9 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void testMoveUnitVelocity0() {
-		unit.moveUnit();
-		assertTrue(unit.getXCoor() == 1.2);
-		assertTrue(unit.getYCoor() == 3);
+		unit.moveUnit(60.0);
+		assertEquals(1.2, unit.getXCoor(), 0.05);
+		assertEquals(3, unit.getYCoor(), 0.05);
 	}
 	
 	/**
@@ -131,11 +134,11 @@ public abstract class UnitTest {
 	 */
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")    
-	public final void testMoveUnit() {
+	public void testMoveUnit() {
 		unit.setVelX(1);
-		unit.moveUnit();
-		assertTrue(unit.getXCoor() == 2.2);
-		assertTrue(unit.getYCoor() == 3);
+		unit.moveUnit(1.0);
+		assertEquals(2.2, unit.getXCoor(), 0.05);
+		assertEquals(3.0, unit.getYCoor(), 0.05);
 	}
 	
 	/**
@@ -148,5 +151,100 @@ public abstract class UnitTest {
 		assertEquals(unit, unit2);
 	}
 	
+	/**
+	 * Test the Equals method.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testEqualsFalse() {
+		assertNotEquals(unit, null);
+	}
+	
+	/**
+	 * Test the hashCode method.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testHashCode() {
+		assertEquals(unit.hashCode(), 0);
+	}
+	/**
+	 * Test the equals method with a shipbullet.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testEqualsShipBullet() {
+		Bullet bullet = new ShipBullet(1.2, 3, "testimage.png");
+		bullet.setHeight(5);
+		assertNotEquals(unit, bullet);
+	}
+	/**
+	 * Test the equals method with a alienbullet.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testEqualsAlienBullet() {
+		Bullet bullet = new AlienBullet(1.2, 3, "testimage.png");
+		bullet.setHeight(5);
+		assertNotEquals(unit, bullet);
+	}
+	/**
+	 * Test the equals method with a different X Coordinate.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testEqualsXcoordinate() {
+		Unit unit2 = createInstance(1.3, 3, "testimage.png");
+		assertNotEquals(unit, unit2);
+	}
+	/**
+	 * Test the equals method with a different Y Coordinate.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testEqualsYcoordinate() {
+		Unit unit2 = createInstance(1.2, 4, "testimage.png");
+		assertNotEquals(unit, unit2);
+	}
+	/**
+	 * Test the equals method with a different width.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testEqualsWidth() {
+		Unit unit2 = createInstance(1.2, 3, "testimage.png");
+		unit2.setWidth(12);
+		assertNotEquals(unit, unit2);
+	}
+	/**
+	 * Test the equals method with a different height.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testEqualsHeight() {
+		Unit unit2 = createInstance(1.2, 3, "testimage.png");
+		unit2.setHeight(12);
+		assertNotEquals(unit, unit2);
+	}
+	/**
+	 * Test the equals method with a different velX.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testEqualsVelX() {
+		Unit unit2 = createInstance(1.2, 3, "testimage.png");
+		unit2.setVelX(4);
+		assertNotEquals(unit, unit2);
+	}
+	/**
+	 * Test the equals method with a different velY.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testEqualsVelY() {
+		Unit unit2 = createInstance(1.2, 3, "testimage.png");
+		unit2.setVelY(4);
+		assertNotEquals(unit, unit2);
+	}
 
 }
