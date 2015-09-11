@@ -257,12 +257,7 @@ public class GameUIController
 						drawAliens();
 						drawExplosions();
 						drawBullets();
-
-						// Draw barricades
-						for (Barricade bar : game.getBarricades()) {
-							drawUnit(bar.getXCoor(), bar.getYCoor(), bar.getWidth(),
-											bar.getHeight(), bar.getSprite());
-						}
+						drawBarricades();
 	
 						// Draw the lives and score on the screen.
 						formatLives(game.getPlayer().getLives());
@@ -287,6 +282,20 @@ public class GameUIController
 		 gameLoop.getKeyFrames().add(frame);
 		 gameLoop.play();
     }
+	
+	/**
+	 * Method to draw all the barricades.
+	 */
+	private void drawBarricades() {
+		// Loop over all the barricades 
+		for (Barricade bar : game.getBarricades()) {
+			//Calculate opacity on base of the health of the barricade
+			Double opacity = bar.getHealth() * 0.1;
+			gc.setGlobalAlpha(opacity);
+			drawUnit(bar.getXCoor(), bar.getYCoor(), bar.getWidth(), bar.getHeight(), bar.getSprite());
+			gc.setGlobalAlpha(1);
+		}
+	}
 	
 	/**
 	 * Method to draw the player spaceship.
