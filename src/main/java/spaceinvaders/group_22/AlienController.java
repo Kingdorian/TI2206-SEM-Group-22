@@ -93,8 +93,6 @@ public class AlienController {
 				// When this alien is on the right side of the screen change the direction
 				if (unit.getXCoor() + 0.5 * unit.getWidth() >= game.getCanvasWidth()) {
 					alienFramesDown = (alienFall / alienVelY) * (1 / game.getTickrate());
-					// Increase speed
-					alienVelX += 4;
 					// Switch direction
 					alienVelX *= -1;
 					break;
@@ -102,8 +100,6 @@ public class AlienController {
 				// When this alien is at the left side of the screen change the direction
 				if (unit.getXCoor() - 0.5 * unit.getWidth() <= 0) {
 					alienFramesDown = (alienFall / alienVelY) * (1 / game.getTickrate());
-					// Increase speed
-					alienVelX -= 4;
 					// Switch direction
 					alienVelX *= -1;
 					break;
@@ -131,6 +127,14 @@ public class AlienController {
 			}
 			unit.moveUnit(game.getTickrate());
 		}
+	}
+
+	public double getAlienVelX() {
+		return alienVelX;
+	}
+
+	public void setAlienVelX(double alienVelX) {
+		this.alienVelX = alienVelX;
 	}
 
 	/**
