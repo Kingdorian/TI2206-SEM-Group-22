@@ -67,7 +67,21 @@ public class AlienControllerTest {
 		for (int i = 0; i < game.getAliens().size(); i++) {
 			assertTrue(game.getAliens().get(i).getXCoor() == (xValues.get(i) + 4));
 		}
-		for (int i = 0; i < 29; i++) {
+	}
+	
+	/**
+	 * Test the moveAliens method when Aliens come to the side.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")
+	public final void testMoveAliensSide() {
+		ArrayList<Double> xValues = new ArrayList<Double>();
+		ArrayList<Double> yValues = new ArrayList<Double>();
+		for (int i = 0; i < game.getAliens().size(); i++) {
+			xValues.add(game.getAliens().get(i).getXCoor());
+			yValues.add(game.getAliens().get(i).getYCoor());
+		}
+		for (int i = 0; i < 30; i++) {
 			//Move to the right side of the screen
 			controller.moveAliens();
 		}
