@@ -90,10 +90,11 @@ public class Collisions {
 		for (Unit unit : unitList) {
 			double unitX = unit.getXCoor();
 			double unitY = unit.getYCoor();
-			if ((checkX - unitX >= -((unit.getWidth() / 2) + (checkingUnit.getWidth() / 2))  
-				&& (checkX - unitX <= (unit.getWidth() / 2) + (checkingUnit.getWidth() / 2))) 
-				&& (checkY - unitY >= -(((unit.getHeight()) / 2) + (checkingUnit.getHeight() / 2))) 
-				&& (checkY - unitY <= (unit.getHeight() / 2)  + (checkingUnit.getHeight() / 2))) {
+			if (
+					checkX - unitX >= -(unit.getWidth() / 2 + checkingUnit.getWidth() / 2)  
+				&& checkX - unitX <= unit.getWidth() / 2 + checkingUnit.getWidth() / 2
+				&& checkY - unitY >= -(unit.getHeight() / 2 + checkingUnit.getHeight() / 2) 
+				&& checkY - unitY <= unit.getHeight() / 2  + checkingUnit.getHeight() / 2) {
 					return unit;
 			}
 		}

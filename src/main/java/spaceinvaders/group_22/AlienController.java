@@ -148,11 +148,10 @@ public class AlienController {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void shootAlienBullets() {
-		if (!game.getAliens().isEmpty()) {
-			if (Math.random() < ((game.getAliens().size()) * bulletChance * game.getTickrate()) / 40)   {
-				int shootIndex = (int) (Math.random() * game.getAliens().size());
-				game.getBullets().add(game.getAliens().get(shootIndex).shootBullet(60));
-			}
+		if (!game.getAliens().isEmpty() && Math.random() 
+				< ((game.getAliens().size()) * bulletChance * game.getTickrate()) / 40)   {
+			int shootIndex = (int) (Math.random() * game.getAliens().size());
+			game.getBullets().add(game.getAliens().get(shootIndex).shootBullet(60));
 		}
 	}
 }

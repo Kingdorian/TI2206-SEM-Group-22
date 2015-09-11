@@ -11,7 +11,6 @@ import spaceinvaders.group_22.unit.Collisions;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.ShipBullet;
 import spaceinvaders.group_22.unit.SpaceShip;
-import spaceinvaders.group_22.unit.Unit;
 
 /**
  * 
@@ -210,16 +209,15 @@ public class Game {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
-		if (pressedKeys.contains(KeyCode.SPACE)) {
-			if (shootingAllowed) {
-				bullets.add(player.getSpaceShip().shootBullet(-spaceShipBulletVelX));
-				shootingAllowed = false;
-			}
+		
+		if (pressedKeys.contains(KeyCode.SPACE) && shootingAllowed) {
+			bullets.add(player.getSpaceShip().shootBullet(-spaceShipBulletVelX));
+			shootingAllowed = false;
 		}
 		if (!shootingAllowed) {
 			if (countToShoot < (1 / tickrate)) { 
 				countToShoot++; 
-			} else if (Double.compare((double) countToShoot, (1 / tickrate)) == 0) {
+			} else if (Double.compare((double) countToShoot, 1 / tickrate) == 0) {
 				shootingAllowed = true;
 				countToShoot = 0;
 			}
