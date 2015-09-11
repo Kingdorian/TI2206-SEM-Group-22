@@ -5,7 +5,6 @@ import javafx.scene.input.KeyCode;
 import java.util.ArrayList;
 
 import spaceinvaders.group_22.unit.Alien;
-import spaceinvaders.group_22.unit.AlienBullet;
 import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Collisions;
@@ -62,7 +61,6 @@ public class Game {
     /**
      * Velocity of the bullets of the spaceShip in pixels per second.
      */
-    @SuppressWarnings("checkstyle:magicnumber")
     private double spaceShipBulletVelX = 80;
 	/**
 	 * The tickrate of the animation.
@@ -352,7 +350,7 @@ public class Game {
 	 * Set the tickrate for the movement.
 	 * @param framerate of the animation.
 	 */
-	public void setTickrate(final Double framerate) {
+	public final void setTickrate(final Double framerate) {
 		tickrate = framerate;
 	}
 	/**
@@ -451,7 +449,7 @@ public class Game {
 	 * Returns the current frame rate.
 	 * @return the current frame rate.
 	 */
-	public double getTickrate() {
+	public final double getTickrate() {
 		return tickrate;
 	}
 	/**

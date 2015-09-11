@@ -9,6 +9,7 @@ import spaceinvaders.group_22.unit.Alien;
  * @author Ege
  *
  */
+@SuppressWarnings("checkstyle:magicnumber") 
 public class AlienController {
 	
 	/**
@@ -22,18 +23,15 @@ public class AlienController {
 	/**
 	 * Speed of the aliens in the X direction in pixels per second.
 	 */
-	@SuppressWarnings("checkstyle:magicnumber") 
 	private double alienVelX = 40;
 	
 	/**
 	 * Speed of the aliens in the Y direction in pixels per second.
 	 */
-	@SuppressWarnings("checkstyle:magicnumber") 
 	private double alienVelY = 40;
 	/**
 	 * Amount of pixels the aliens go down per wave.
 	 */
-	@SuppressWarnings("checkstyle:magicnumber") 
 	private double alienFall = 10;
     /**
      * Roughly the amount of bullets that spawn per second.
@@ -129,12 +127,20 @@ public class AlienController {
 		}
 	}
 
-	public double getAlienVelX() {
+	/**
+	 * Getter method for alienVelx.
+	 * @return The alien velocity in horizontal direction.
+	 */
+	public final double getAlienVelX() {
 		return alienVelX;
 	}
 
-	public void setAlienVelX(double alienVelX) {
-		this.alienVelX = alienVelX;
+	/**
+	 * Setter method for alienVelx.
+	 * @param newAlienVelX The new velocity of the alien.
+	 */
+	public final void setAlienVelX(final double newAlienVelX) {
+		this.alienVelX = newAlienVelX;
 	}
 
 	/**

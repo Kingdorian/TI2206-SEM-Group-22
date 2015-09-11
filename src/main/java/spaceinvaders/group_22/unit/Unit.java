@@ -6,8 +6,6 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
-import spaceinvaders.group_22.Game;
-
 /**
  * A unit in the game that has a position and velocity.
  * 
@@ -93,8 +91,9 @@ public abstract class Unit {
 	
 	/**
 	 * Move the unit in the direction of this unit and with his velocity.
+	 * @param tickrate The rate at which the game ticks.
 	 */
-	public final void moveUnit(Double tickrate) {
+	public final void moveUnit(final Double tickrate) {
 		setXCoor(this.getXCoor() + (this.getVelX() * tickrate));
 		setYCoor(this.getYCoor() + (this.getVelY() * tickrate));
 	}

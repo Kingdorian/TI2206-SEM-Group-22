@@ -4,6 +4,8 @@ package spaceinvaders.group_22.unit;
  * @author dorian
  *
  */
+
+@SuppressWarnings("checkstyle:magicnumber")
 public class Barricade extends Unit {
 	/**
 	 * Var that keeps track of damage taken by this barricade.
