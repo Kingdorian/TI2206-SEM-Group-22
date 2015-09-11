@@ -219,7 +219,7 @@ public class Game {
 		if (!shootingAllowed) {
 			if (countToShoot < (1 / tickrate)) { 
 				countToShoot++; 
-			} else if (countToShoot == (1 / tickrate)) {
+			} else if (Double.compare((double) countToShoot, (1 / tickrate)) == 0) {
 				shootingAllowed = true;
 				countToShoot = 0;
 			}
@@ -277,7 +277,6 @@ public class Game {
 		}
 		if (player.getSpaceShip().getXCoor() + 0.5 * player.getSpaceShip().getWidth() < canvasWidth
 				&& pressedKeys.contains(KeyCode.D)) {
-			player.getSpaceShip();
 			velX = velX + SpaceShip.MAXVELX * tickrate * 2;
 		}
 
@@ -297,27 +296,6 @@ public class Game {
 		barricades.add(barricade);
 	}
 	
-	/**
-	 * Checks collisions between an unit and a an ArrayList of other units.
-	 * @param checkingUnit the unit to check colissions with
-	 * @param unitList the list of units to check colission against.
-	 * @return The unit the checkingUnit colides with, null if there are no colissions.
-	 */
-	public final Unit checkColissions(final Unit checkingUnit, final ArrayList<Unit> unitList) {
-		double checkX = checkingUnit.getXCoor();
-		double checkY = checkingUnit.getYCoor();
-		for (Unit unit : unitList) {
-			double unitX = unit.getXCoor();
-			double unitY = unit.getYCoor();
-			if ((checkX - unitX >= -((unit.getWidth() / 2) + (checkingUnit.getWidth() / 2))  
-				&& (checkX - unitX <= (unit.getWidth() / 2) + (checkingUnit.getWidth() / 2))) 
-				&& (checkY - unitY >= -(((unit.getHeight()) / 2) + (checkingUnit.getHeight() / 2))) 
-				&& (checkY - unitY <= (unit.getHeight() / 2)  + (checkingUnit.getHeight() / 2))) {
-					return unit;
-			}
-		}
-		return null;
-	}
 	/**
 	 * Creates the barricades for this game.
 	 * @return the barricades in this game.

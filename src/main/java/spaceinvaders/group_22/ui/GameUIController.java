@@ -374,14 +374,14 @@ public class GameUIController
 	 */
 	public final void formatScore(final int score) {
     	int digitsBefore = 8 - Integer.toString(score).length();
-    	String scoreString = "";
+    	StringBuffer scoreString = new StringBuffer();
     	
     	for (int i = 0; i < digitsBefore; i++) {
-    		scoreString += "0";
+    		scoreString.append("0");
     	}
-    	scoreString += score;
+    	scoreString.append(score);
     	
-    	scoreLabel.setText(scoreString);	
+    	scoreLabel.setText(scoreString.toString());	
 	}
 	
 	/**
