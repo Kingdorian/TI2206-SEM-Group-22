@@ -1,0 +1,100 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{geometry}
+\geometry{portrait, margin=1.5in}
+
+\begin{document}
+
+
+\section*{Excercise 1}
+
+ \textbf{Exercise 1.1:}
+
+To follow the responsibility driven design we started with the requirements.\\
+Looking add the requirements we came up with the following classes:
+\begin{itemize}
+  \item Game
+  \item Alien
+  \item Aliengrid
+  \item SpaceShip
+  \item EnemyBullet
+\item Bullet
+\item MovementController
+\item PlayerBullet
+\item Barricades
+\item Powerup
+\item Soundcontroller
+\item Explosion
+\item EnemyController
+\item SpaceshipController
+\item Main
+\item Player
+\item UI
+\item UIController
+\item Bulletcontroller
+
+\end{itemize}
+
+ \pagebreak
+For this candidate classes we made CRC cards and distributed this cards to the team. \\
+We walked through scenarios to uncover unneeded and misssing classes and responsibilities.\\
+Finally we created the following list of classes with their responsibilities and collaborations:
+\begin{center}
+    \begin{tabular}{ | p{3cm} | p{5cm} | p{3cm} | p{2cm} | p{2cm} |}
+  \hline
+    Class & Responsibility & Collaborates with & Super & Sub \\ \hline
+   Game & All units in the game & all the controlles & & \\ \hline
+   SpaceShipController & Activities of the spaceship & Game & & \\ \hline
+  SpaceShip & Shooting a bullet & SpaceShipController & Unit & \\ \hline
+  ShipBullet& & bulletController & Bullet & \\ \hline
+   Player & The score and lives of the player & Game & & \\ \hline
+  AlienController & The movements of the aliens & Game & &  \\  \hline
+   Alien & Shooting a bullet  & AlienController & Unit &  \\  \hline
+   AlienBullet & & Bullet & Bullet &  \\  \hline
+   BulletController & Movements of the bullets & Game & &  \\  \hline
+   Bullet & &  BulletController & Unit & AlienBullet ShipBullet \\  \hline
+   ExplosionController & The development of the explosions & Game & &  \\  \hline
+  Explosion & Counter of the explosion & ExplosionController & Unit &  \\  \hline
+  BarricadeController & The changes of the barricades & Game & &  \\  \hline
+  Barricade & Health of the barricade & BarricadeController & Unit &  \\  \hline
+  Unit & Location, seize and speed of a unit &  & & Alien, Explosion, Barricade, Bullet, SpaceShip  \\  \hline
+  Collisions & The collisions between all types of units  & Game & &  \\  \hline
+  Draw  & The drawings of elements on the screen & SpaceInvadersUI & &  \\  \hline
+  Drawbarricade & The drawings of the barricades & Draw & &  \\  \hline
+  DrawBullet & The drawings of the bullets & draw & &  \\  \hline
+  DrawSpaceShip & The drawings of the spaceship & draw & &  \\  \hline
+  DrawAlien  & The drawings of the aliens & & &  \\  \hline
+  SpaceInvadersUI & The presentation of the game on the screen & GameUIController & &  \\  \hline
+  GameUIController & The keyboard inputs and refreshing the frames & SpaceInvadersUI & &  \\  \hline
+  Main & The launch of the game & Game, GameUIController & &  \\  \hline
+    \end{tabular}
+\end{center}
+
+The main difference with our actual implementation is that that game and gamUIController in our implementation have much more responsibilities.\\
+It would have been better if we had split these classes to smaller classes as in the responsibility driven design we made. Because then it will be easier to make changes to the code while you can just replace just a small class without changing a very big class. \\
+Classes we must add to do this are the draw and control classes. 
+
+ \pagebreak
+
+ \textbf{Exercise 1.2:}\\
+The main classes we implemented in our project are the game and gameUIController.
+The game class has the responsibility to handle the movements of the spaceship and the bullets, the creation of barricades and to monitor the game status.\\
+ This class also handles the lists of all the units in the game. It collaborates with the aliencontroller, collisions and player class. \\
+Another main class we implemented is the gameUIController which deals with the drawings of all the elements and animation, loading of the sprites, creation of a new game,  and the key inputs.
+ This class collaborates with the game and SpaceInvadersUI classes.\\
+
+
+ \textbf{Exercise 1.3:} \\
+Some of the classes are less important as the classes mentioned in previous exercise, because they has less responsibilities and could easier be merged with some other class.\\
+They are also a lot smaller what makes it easier to merge them in another class. For example we have a ShipBullet and a AlienBullet class which are subclasses of the Bullet class. \\
+ The ShipBullet and AlienBullet class could have been merged together in the bullet class. \\
+The reason we did not do this is because we prefer to have shipbullet and alienbullet as separate classes. \\
+It is now possible to check with instance of if a bullet is a ship or an alien bullet. \\
+With this construction it is also easier to add attributes or methods to the alien or ship bullet only.\\
+
+ \textbf{Exercise 1.4:} \\
+Zie foto
+
+
+\end{document}
