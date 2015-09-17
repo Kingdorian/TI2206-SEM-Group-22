@@ -1,14 +1,39 @@
 package spaceinvaders.group_22.logger;
 
-import static org.junit.Assert.*;
 
+import org.junit.Assert;
 import org.junit.Test;
-
+/**
+ * Test class for spaceinvaders.group_22.logger.LogEvent.class.
+ * @author Dorian
+ *
+ */
 public class LogEventTest {
-
+	/**
+	 * Tests the getException method.
+	 */
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testGetException() {
+		Exception ex = new Exception();
+		LogEvent event = new LogEvent(ex, null, null);
+		Assert.assertEquals(ex, event.getException());
 	}
+	/**
+	 * Tests the getDescription method.
+	 */
+	@Test
+	public void testGetDescription() {
+		LogEvent event = new LogEvent(null, null, "this is a description");
+		Assert.assertEquals("this is a description", event.getDescription());
+	}
+	/**
+	 * Tests the getType method.
+	 */
+	@Test
+	public void testGetType() {
+		LogEvent event = new LogEvent(null, LogEvent.Type.WARNING, null);
+		Assert.assertEquals(LogEvent.Type.WARNING, event.getType());
+	}
+	
 
 }
