@@ -9,11 +9,11 @@
 \begin{document}
 
 
-\section*{Excercise 1}
+\section*{Exercise 1}
 
  \textbf{Exercise 1.1:}
 
-To follow the responsibility driven design we started with the requirements.\\
+We followed the responsibility driven design by starting with the requirements.\\
 Looking add the requirements we came up with the following classes:
 \begin{itemize}
   \item Game
@@ -40,13 +40,13 @@ Looking add the requirements we came up with the following classes:
 
  \pagebreak
 For this candidate classes we made CRC cards and distributed this cards to the team. \\
-We walked through scenarios to uncover unneeded and misssing classes and responsibilities.\\
+We walked through scenarios to uncover unneeded and missing classes and responsibilities.\\
 Finally we created the following list of classes with their responsibilities and collaborations:
 \begin{center}
     \begin{tabular}{ | p{3cm} | p{5cm} | p{3cm} | p{2cm} | p{2cm} |}
   \hline
     Class & Responsibility & Collaborates with & Super & Sub \\ \hline
-   Game & All units in the game & all the controlles & & \\ \hline
+   Game & All units in the game & all the controllers & & \\ \hline
    SpaceShipController & Activities of the spaceship & Game & & \\ \hline
   SpaceShip & Shooting a bullet & SpaceShipController & Unit & \\ \hline
   ShipBullet& & bulletController & Bullet & \\ \hline
@@ -83,7 +83,7 @@ Classes we must add to do this are the draw and control classes.
 The main classes we implemented in our project are the game and gameUIController.
 The game class has the responsibility to handle the movements of the spaceship and the bullets, the creation of barricades and to monitor the game status.\\
  This class also handles the lists of all the units in the game. It collaborates with the aliencontroller, collisions and player class. \\
-Another main class we implemented is the gameUIController which deals with the drawings of all the elements and animation, loading of the sprites, creation of a new game,  and the key inputs.
+Another main class we implemented is the GameUIController which deals with the drawings of all the elements and animation, loading of the sprites, creation of a new game,  and the key inputs.
  This class collaborates with the game and SpaceInvadersUI classes.\\
 
 
@@ -99,7 +99,7 @@ With this construction it is also easier to add attributes or methods to the ali
  \textbf{Exercise 1.4:} \\
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=14cm, height=18cm]{UMLSEM.jpg}
+\includegraphics[width=14cm, height=16cm]{UMLSEM.jpg}
 \end{figure}
 
 
