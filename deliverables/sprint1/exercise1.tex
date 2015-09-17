@@ -9,12 +9,12 @@
 \begin{document}
 
 
-\section*{Exercise 1}
+\section{Exercise 1 - The Core}
 
- \textbf{Exercise 1.1:}
+ \subsection{Exercise 1.1}
 
-We followed the responsibility driven design by starting with the requirements.\\
-Looking add the requirements we came up with the following classes:
+During this exercise, responsibility driven design was followed, starting with the requirements.\\
+The first classes that were considered as candidate classes were the following:
 \begin{itemize}
   \item Game
   \item Alien
@@ -39,9 +39,9 @@ Looking add the requirements we came up with the following classes:
 \end{itemize}
 
  \pagebreak
-For this candidate classes we made CRC cards and distributed this cards to the team. \\
-We walked through scenarios to uncover unneeded and missing classes and responsibilities.\\
-Finally we created the following list of classes with their responsibilities and collaborations:
+For this candidate classes CRC cards were made and these were distributed to the team. \\
+By walking through scenarios unneeded and missing classes and responsibilities were uncovered.\\
+Finally the following list of classes with their responsibilities and collaborations is created:
 \begin{center}
     \begin{tabular}{ | p{3cm} | p{5cm} | p{3cm} | p{2cm} | p{2cm} |}
   \hline
@@ -73,30 +73,30 @@ Finally we created the following list of classes with their responsibilities and
     \end{tabular}
 \end{center}
 
-The main difference with our actual implementation is that that game and gamUIController in our implementation have much more responsibilities.\\
-It would have been better if we had split these classes to smaller classes as in the responsibility driven design we made. Because then it will be easier to make changes to the code while you can just replace just a small class without changing a very big class. \\
-Classes we must add to do this are the draw and control classes. 
+The main difference with the actual implementation is that that game and gamUIController in the actual implementation have much more responsibilities.\\
+It would have been better if these classes were split to smaller classes as in the responsibility driven design of classes as above. Because then it will be easier to make changes to the code while it is possible to just replace a small class without changing a very big class. \\
+Classes that could be add to do this are the draw and control classes. 
 
  \pagebreak
 
- \textbf{Exercise 1.2:}\\
-The main classes we implemented in our project are the game and gameUIController.
+ \subsection{Exercise 1.2}
+The main classes implemented in the actual implementation are the game and gameUIController.
 The game class has the responsibility to handle the movements of the spaceship and the bullets, the creation of barricades and to monitor the game status.\\
  This class also handles the lists of all the units in the game. It collaborates with the aliencontroller, collisions and player class. \\
-Another main class we implemented is the GameUIController which deals with the drawings of all the elements and animation, loading of the sprites, creation of a new game,  and the key inputs.
+Another main class implemented in the actual implementation is the GameUIController which deals with the drawings of all the elements and animation, loading of the sprites, creation of a new game,  and the key inputs.
  This class collaborates with the game and SpaceInvadersUI classes.\\
 
 
- \textbf{Exercise 1.3:} \\
+ \subsection{Exercise 1.3} 
 Some of the classes are less important as the classes mentioned in previous exercise, because they has less responsibilities and could easier be merged with some other class.\\
 They are also a lot smaller what makes it easier to merge them in another class. For example we have a ShipBullet and a AlienBullet class which are subclasses of the Bullet class. \\
  The ShipBullet and AlienBullet class could have been merged together in the bullet class. \\
-The reason we did not do this is because we prefer to have shipbullet and alienbullet as separate classes. \\
+The reason this is not done and we have shipbullet and alienbullet as separate classes, is because the product is still under development. \\
 It is now possible to check with instance of if a bullet is a ship or an alien bullet. \\
 With this construction it is also easier to add attributes or methods to the alien or ship bullet only.\\
  \pagebreak
 
- \textbf{Exercise 1.4:} \\
+ \subsection{Exercise 1.4} 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=14cm, height=16cm]{UMLSEM.jpg}
