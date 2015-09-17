@@ -53,6 +53,7 @@ public class LogEvent {
 		Date date = new Date();
 		time = timeFormat.format(date);
 		this.type = type;
+		description = event;
 	}
 	/**
 	 * Creates a exception new logEvent.
@@ -87,11 +88,13 @@ public class LogEvent {
 		}
 		// Cast object to Lo
 		LogEvent other = (LogEvent) obj;
-		if (this.description.equals(other.getDescription())) {
-			
-		}
-		if (!(other.getException().getClass() != exception.getClass())) {
+		if (!this.description.equals(other.getDescription())) {
 			return false;
+		}
+		if (other.getException()!=null&&exception.getClass()!=null){
+			if(other.getException().getClass() != exception.getClass()){
+				return false;
+			}
 		}
 		if ( !time.equals(other.getTime())) {
 			return false;
