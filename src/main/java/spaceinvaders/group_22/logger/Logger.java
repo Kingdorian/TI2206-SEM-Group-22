@@ -3,13 +3,13 @@ package spaceinvaders.group_22.logger;
 import java.util.ArrayList;
 
 /**
- * Class to log the 
+ * Class to log the events happening in the program.
  * @author Dorian
  *
  */
 public class Logger {
 	/**
-	 * ArrayList to store LogEvents.
+	 * ArrayList to store LogEvents..
 	 */
 	private ArrayList<LogEvent> allEvents = new ArrayList<LogEvent>();
 	/**
@@ -29,18 +29,18 @@ public class Logger {
 	/**
 	 * Creates a new logger object.
 	 * @param logLocation the location of the log file
-	 * @param logLevel the scope of logging between 0-5.
+	 * @param level the scope of logging between 0-5.
 	 */
-	public Logger(String logLocation, int logLevel) {
+	public Logger(final String logLocation, final int level) {
 		logWriter = new WriteLog(logLocation);
-		this.logLevel = logLevel;
+		logLevel = level;
 	}
 	/**
 	 * Logs an exception.
 	 * @param description the description of this log item.
 	 * @param exception the exception to log.
 	 */
-	public void log(String description, Exception exception) {
+	public final void log(final String description, final Exception exception) {
 		if (logLevel >= LogEvent.Type.WARNING.getValue()) {
 			LogEvent event = new LogEvent(exception, description);
 			System.out.println(event.toString());
@@ -48,12 +48,12 @@ public class Logger {
 		}
 	}
 	/**
-	 * Logs an event.'
+	 * Logs an event.
 	 * @param description the description of this log item.
 	 * @param type the type of this log item.
 	 */
-	public void log(String description, LogEvent.Type type) {
-		if (logLevel >= type.getValue() ) {
+	public final void log(final String description, final LogEvent.Type type) {
+		if (logLevel >= type.getValue()) {
 			LogEvent event = new LogEvent(type, description);
 			System.out.println(event.toString());
 			allEvents.add(event);
@@ -62,14 +62,14 @@ public class Logger {
 	/**
 	 * Writes the log to a file.
 	 */
-	public void writeLog() {
+	public final void writeLog() {
 		logWriter.write(allEvents);
 	}
 	/**
 	 * Returns all events logged untill this point.
 	 * @return the events logged untill this point.
 	 */
-	public ArrayList<LogEvent> getAllEvents() {
+	public final ArrayList<LogEvent> getAllEvents() {
 		return allEvents;
 	}
 

@@ -4,7 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-
+/**
+ * Class used to write logs to a file.
+ * @author Dorian
+ *
+ */
 public class WriteLog {
 	
 	/**
@@ -13,15 +17,16 @@ public class WriteLog {
 	private String logLocation;
 	/**
 	 * Creates a new WriteLog object.
+	 * @param location the location of the log file
 	 */
-	public WriteLog(String location) {
+	public WriteLog(final String location) {
 		logLocation = location;
 	}
 	/**
 	 * Writes the list of logItems to the logfile.
-	 * @param allEvents
+	 * @param allEvents all the events that are logged
 	 */
-	public void write(ArrayList<LogEvent> allEvents) {
+	public final void write(final ArrayList<LogEvent> allEvents) {
 		PrintWriter writer;
 		try {
 			writer = new PrintWriter(logLocation, "UTF-8");
