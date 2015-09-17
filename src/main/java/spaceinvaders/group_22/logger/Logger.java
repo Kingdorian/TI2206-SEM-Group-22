@@ -42,7 +42,7 @@ public class Logger {
 	 */
 	public void log(String description, Exception exception) {
 		if (logLevel >= LogEvent.Type.WARNING.getValue()) {
-			LogEvent event = new LogEvent(exception, LogEvent.Type.ERROR, description);
+			LogEvent event = new LogEvent(exception, LogEvent.Type.WARNING, description);
 			System.out.println(event.toString());
 			allEvents.add(event);
 		}
