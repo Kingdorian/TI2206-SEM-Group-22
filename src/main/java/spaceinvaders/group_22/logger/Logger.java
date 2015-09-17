@@ -13,10 +13,15 @@ public class Logger {
 	 */
 	private ArrayList<LogEvent> allEvents = new ArrayList<LogEvent>();
 	/**
-	 * Creates a new logger object.
+	 * Object tow write logs to a file.
 	 */
-	public Logger() {
-		
+	private WriteLog logWriter;
+	/**
+	 * Creates a new logger object.
+	 * @param logLocation the location of the log file
+	 */
+	public Logger(String logLocation) {
+		logWriter = new WriteLog(logLocation);
 	}
 	/**
 	 * Logs an exception.
@@ -33,6 +38,12 @@ public class Logger {
 	 */
 	public void log(String description, LogEvent.Type type) {
 		allEvents.add(new LogEvent(type, description));
+	}
+	/**
+	 * Writes the log to a file.
+	 */
+	public void writeLog() {
+		logWriter.write(allEvents);
 	}
 	
 }
