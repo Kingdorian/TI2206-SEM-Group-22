@@ -31,7 +31,7 @@ public class LogEvent {
 	 * @author Dorian
 	 *
 	 */
-	public enum Type {
+	public static enum Type {
 		ERROR, WARNING, INFO, DEBUG, TRACE; 
 	}
 	/**

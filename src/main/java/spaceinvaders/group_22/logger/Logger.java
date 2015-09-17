@@ -20,9 +20,19 @@ public class Logger {
 	}
 	/**
 	 * Logs an exception.
+	 * @param description the description of this log item.
+	 * @param exception the exception to log.
 	 */
 	public void log(String description, Exception exception) {
-		
+		allEvents.add(new LogEvent(exception, LogEvent.Type.ERROR, description));
+	}
+	/**
+	 * Logs an event.'
+	 * @param description the description of this log item.
+	 * @param type the type of this log item.
+	 */
+	public void log(String description, LogEvent.Type type) {
+		allEvents.add(new LogEvent(type, description));
 	}
 	
 }
