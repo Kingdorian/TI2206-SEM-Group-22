@@ -35,7 +35,6 @@ public class WriteLog {
 			// Even my fridge supports UTF-8...
 			e.printStackTrace();
 		}
-
 	}
 
 }

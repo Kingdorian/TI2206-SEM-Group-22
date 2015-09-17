@@ -42,7 +42,9 @@ public class Logger {
 	 */
 	public void log(String description, Exception exception) {
 		if (logLevel >= LogEvent.Type.WARNING.getValue()) {
-			allEvents.add(new LogEvent(exception, LogEvent.Type.ERROR, description));
+			LogEvent event = new LogEvent(exception, LogEvent.Type.ERROR, description);
+			System.out.println(event.toString());
+			allEvents.add(event);
 		}
 	}
 	/**
@@ -52,7 +54,9 @@ public class Logger {
 	 */
 	public void log(String description, LogEvent.Type type) {
 		if (logLevel >= type.getValue() ) {
-			allEvents.add(new LogEvent(type, description));
+			LogEvent event = new LogEvent(type, description);
+			System.out.println(event.toString());
+			allEvents.add(event);
 		}
 	}
 	/**
@@ -61,5 +65,13 @@ public class Logger {
 	public void writeLog() {
 		logWriter.write(allEvents);
 	}
+	/**
+	 * Returns all events logged untill this point.
+	 * @return the events logged untill this point.
+	 */
+	public ArrayList<LogEvent> getAllEvents() {
+		return allEvents;
+	}
+
 	
 }
