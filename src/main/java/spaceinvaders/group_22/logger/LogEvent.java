@@ -32,7 +32,15 @@ public class LogEvent {
 	 *
 	 */
 	public static enum Type {
-		ERROR, WARNING, INFO, DEBUG, TRACE; 
+		ERROR(1), WARNING(2), INFO(3), DEBUG(4), TRACE(5);
+		
+		private final int level;
+		Type(int level) {
+			this.level = level;
+		}
+		public int getValue() {
+			return level;
+		}
 	}
 	/**
 	 * Creates a new logEvent.

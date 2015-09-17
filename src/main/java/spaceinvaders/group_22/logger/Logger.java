@@ -13,15 +13,27 @@ public class Logger {
 	 */
 	private ArrayList<LogEvent> allEvents = new ArrayList<LogEvent>();
 	/**
-	 * Object tow write logs to a file.
+	 * Object to write logs to a file.
 	 */
 	private WriteLog logWriter;
 	/**
+	 * Indicates the level to log.
+	 * 0 no logging
+	 * 1 Errors only
+	 * 2 Errors and Warnings
+	 * 3 Errors, Warnings and Info
+	 * 4 Errors, Warnings, Info and Debug
+	 * 5 Errors, Warnings, Info, Debug and Trace 
+	 */
+	private int logLevel;
+	/**
 	 * Creates a new logger object.
 	 * @param logLocation the location of the log file
+	 * @param logLevel the scope of logging between 0-5.
 	 */
-	public Logger(String logLocation) {
+	public Logger(String logLocation, int logLevel) {
 		logWriter = new WriteLog(logLocation);
+		this.logLevel = logLevel;
 	}
 	/**
 	 * Logs an exception.
@@ -29,7 +41,9 @@ public class Logger {
 	 * @param exception the exception to log.
 	 */
 	public void log(String description, Exception exception) {
-		allEvents.add(new LogEvent(exception, LogEvent.Type.ERROR, description));
+		if (logLevel >= LogEvent.Type.WARNING.getValue()) {
+			allEvents.add(new LogEvent(exception, LogEvent.Type.ERROR, description));
+		}
 	}
 	/**
 	 * Logs an event.'
@@ -37,7 +51,9 @@ public class Logger {
 	 * @param type the type of this log item.
 	 */
 	public void log(String description, LogEvent.Type type) {
-		allEvents.add(new LogEvent(type, description));
+		if (logLevel >= type.getValue() ) {
+			allEvents.add(new LogEvent(type, description));
+		}
 	}
 	/**
 	 * Writes the log to a file.
