@@ -60,8 +60,8 @@ public class LogEvent {
 	 * @param type the type of event.
 	 * @param event a discription of the event.
 	 */
-	public LogEvent(Exception exception, Type type, String event) {
-		this(type, event);
+	public LogEvent(Exception exception, String event) {
+		this(Type.WARNING, event);
 		this.exception = exception;
 	}
 	@Override
