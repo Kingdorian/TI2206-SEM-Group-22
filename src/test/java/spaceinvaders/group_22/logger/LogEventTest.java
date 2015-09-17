@@ -15,7 +15,7 @@ public class LogEventTest {
 	@Test
 	public void testGetException() {
 		Exception ex = new Exception();
-		LogEvent event = new LogEvent(ex, null, null);
+		LogEvent event = new LogEvent(ex, null);
 		Assert.assertEquals(ex, event.getException());
 	}
 	/**
@@ -23,7 +23,7 @@ public class LogEventTest {
 	 */
 	@Test
 	public void testGetDescription() {
-		LogEvent event = new LogEvent(null, null, "this is a description");
+		LogEvent event = new LogEvent(LogEvent.Type.INFO, "this is a description");
 		Assert.assertEquals("this is a description", event.getDescription());
 	}
 	/**
@@ -31,7 +31,7 @@ public class LogEventTest {
 	 */
 	@Test
 	public void testGetType() {
-		LogEvent event = new LogEvent(null, LogEvent.Type.WARNING, null);
+		LogEvent event = new LogEvent(LogEvent.Type.WARNING, null);
 		Assert.assertEquals(LogEvent.Type.WARNING, event.getType());
 	}
 	

@@ -32,8 +32,8 @@ public class WriteLogTest {
 		logWriter.write(eventList);
 		try {
 			List<String> fileContent = Files.readAllLines(Paths.get("logs/log.log"), StandardCharsets.UTF_8);
-			Assert.assertEquals(event1, fileContent.get(0));
-			Assert.assertEquals(event2, fileContent.get(1));
+			Assert.assertEquals(event1.toString(), fileContent.get(0));
+			Assert.assertEquals(event2.toString(), fileContent.get(1));
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail("error reading file");
