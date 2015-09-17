@@ -74,6 +74,18 @@ public class LogEvent {
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
+	/**
+	 * Creates a string representation of this LogEvent.
+	 * @return a string representation of this LogEvent
+	 */
+	public String toString() {
+		return  "[" +
+				time +
+				"] [" +
+				type +
+				"] " +
+				description;
+	}
 	@Override
 	public boolean equals(Object obj) {
 		// If objects are in the same memory location
