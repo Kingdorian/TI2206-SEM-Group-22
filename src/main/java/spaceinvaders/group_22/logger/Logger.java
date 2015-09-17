@@ -8,6 +8,21 @@ import java.util.ArrayList;
  *
  */
 public class Logger {
-
+	/**
+	 * ArrayList to store LogEvents.
+	 */
+	private ArrayList<LogEvent> allEvents = new ArrayList<LogEvent>();
+	/**
+	 * Creates a new logger object.
+	 */
+	public Logger() {
+		
+	}
+	/**
+	 * Logs an exception.
+	 */
+	public void log(String description, Exception exception) {
+		
+	}
 	
 }
