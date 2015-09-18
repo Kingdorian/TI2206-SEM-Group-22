@@ -48,7 +48,7 @@ The first classes considered candidate classes are the following:
 \item Player
 \item UI
 \item UIController
-\item Bulletcontroller
+\item BulletController
 
 \end{itemize}
 
@@ -63,7 +63,7 @@ Finally the following list was created, listing classes with their responsibilit
    Game & All units in the game & all the controllers & & \\ \hline
    SpaceShipController & Activities of the spaceship & Game & & \\ \hline
   SpaceShip & Shooting a bullet & SpaceShipController & Unit & \\ \hline
-  ShipBullet& & bulletController & Bullet & \\ \hline
+  ShipBullet& & BulletController & Bullet & \\ \hline
    Player & The score and lives of the player & Game & & \\ \hline
   AlienController & The movements of the aliens & Game & &  \\  \hline
    Alien & Shooting a bullet  & AlienController & Unit &  \\  \hline
@@ -78,8 +78,8 @@ Finally the following list was created, listing classes with their responsibilit
   Collisions & The collisions between all types of units  & Game & &  \\  \hline
   Draw  & The drawings of elements on the screen & SpaceInvadersUI & &  \\  \hline
   Drawbarricade & The drawings of the barricades & Draw & &  \\  \hline
-  DrawBullet & The drawings of the bullets & draw & &  \\  \hline
-  DrawSpaceShip & The drawings of the spaceship & draw & &  \\  \hline
+  DrawBullet & The drawings of the bullets & Draw & &  \\  \hline
+  DrawSpaceShip & The drawings of the spaceship & Draw & &  \\  \hline
   DrawAlien  & The drawings of the aliens & & &  \\  \hline
   SpaceInvadersUI & The presentation of the game on the screen & GameUIController & &  \\  \hline
   GameUIController & The keyboard inputs and refreshing the frames & SpaceInvadersUI & &  \\  \hline
@@ -87,7 +87,7 @@ Finally the following list was created, listing classes with their responsibilit
     \end{tabular}
 \end{center}
 \hfill\break
-The main difference with the actual implementation is that that Game and GameUIController have much more responsibilities.\\
+The main difference with the actual implementation is that Game and GameUIController have much more responsibilities.\\
 It would have been better if these classes were split into smaller classes as in the responsibility driven design of classes as above. This will make small code changes easier, because they only affect small classes, instead of causing a rewrite of a large class.\\ Classes that could be added to improve this are the Draw and control classes. 
 
 \subsection*{Exercise 1.2}
