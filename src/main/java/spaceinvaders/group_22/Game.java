@@ -85,6 +85,7 @@ public class Game {
 	 * The collisions of units.
 	 */
 	private Collisions collisions;
+	
 	/**
 	 * Part of the screen (on left and right) that cannot be used when creating aliens. 
 	 */

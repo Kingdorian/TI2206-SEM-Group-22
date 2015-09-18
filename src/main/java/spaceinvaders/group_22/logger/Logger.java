@@ -1,5 +1,7 @@
 package spaceinvaders.group_22.logger;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -33,6 +35,16 @@ public class Logger {
 	 */
 	public Logger(final String logLocation, final int level) {
 		logLevel = level;
+		String folder = "logs";
+		new File(folder).mkdirs();
+		File file = new File(folder, logLocation);
+		try {
+			file.createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		logFileLoc = logLocation;
 		LogWriter logWriter = new LogWriter(logFileLoc, null);
 		logWriter.clearLogFile();
