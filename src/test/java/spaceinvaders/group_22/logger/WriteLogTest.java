@@ -23,13 +23,14 @@ public class WriteLogTest {
 	 */
 	@Test
 	public void testWriteLog() {
-		WriteLog logWriter = new WriteLog("logs/log.log");
 		ArrayList<LogEvent> eventList = new ArrayList<LogEvent>();
 		LogEvent event1 = new LogEvent(LogEvent.Type.INFO, "this is an event");
 		LogEvent event2 = new LogEvent(new Exception(), "this is an event");
 		eventList.add(event1);
 		eventList.add(event2);
-		logWriter.write(eventList);
+		WriteLog logWriter = new WriteLog("logs/log.log", eventList);
+		logWriter.clearLogFile();
+		new Thread(logWriter).start();
 		try {
 			List<String> fileContent = Files.readAllLines(Paths.get("logs/log.log"), StandardCharsets.UTF_8);
 			Assert.assertEquals(event1.toString(), fileContent.get(0));

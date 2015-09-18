@@ -13,10 +13,6 @@ public class Logger {
 	 */
 	private ArrayList<LogEvent> allEvents = new ArrayList<LogEvent>();
 	/**
-	 * Object to write logs to a file.
-	 */
-	private WriteLog logWriter;
-	/**
 	 * Indicates the level to log.
 	 * 0 no logging
 	 * 1 Errors only
@@ -32,8 +28,9 @@ public class Logger {
 	 * @param level the scope of logging between 0-5.
 	 */
 	public Logger(final String logLocation, final int level) {
-		logWriter = new WriteLog(logLocation);
 		logLevel = level;
+		WriteLog logWriter = new WriteLog("logs/log.log", null);
+		logWriter.clearLogFile();
 	}
 	/**
 	 * Logs an exception.
@@ -63,7 +60,9 @@ public class Logger {
 	 * Writes the log to a file.
 	 */
 	public final void writeLog() {
-		logWriter.write(allEvents);
+		WriteLog logWriter = new WriteLog("logs/log.log", allEvents);
+		logWriter.run();
+		new Thread(logWriter).start();
 		allEvents.clear();
 	}
 	/**

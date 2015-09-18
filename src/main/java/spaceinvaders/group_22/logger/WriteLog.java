@@ -12,18 +12,28 @@ import java.util.ArrayList;
  * @author Dorian
  *
  */
-public class WriteLog {
+public class WriteLog  implements Runnable{
 	
 	/**
 	 * Location of the logfile.
 	 */
 	private String logLocation;
 	/**
+	 * List of logEvents to write to the file.
+	 */
+	private ArrayList<LogEvent> eventList;
+	/**
 	 * Creates a new WriteLog object.
 	 * @param location the location of the log file
 	 */
-	public WriteLog(final String location) {
+	public WriteLog(final String location, final ArrayList<LogEvent> allEvents) {
+		eventList = allEvents;
 		logLocation = location;
+	}
+	/**
+	 * Cleares the log file.
+	 */
+	public void clearLogFile() {
 		try {
 			FileWriter writer = new FileWriter(logLocation, false);
 			writer.write("");
@@ -36,13 +46,14 @@ public class WriteLog {
 	 * Writes the list of logItems to the logfile.
 	 * @param allEvents all the events that are logged
 	 */
-	public final void write(final ArrayList<LogEvent> allEvents) {
+	@Override
+	public void run() {
 		BufferedWriter writer;
 		try {
-
+			System.out.println(logLocation);
 			FileWriter fstream = new FileWriter(logLocation, true);
 			writer = new BufferedWriter (fstream);
-			for (LogEvent event : allEvents) {
+			for (LogEvent event : eventList) {
 				writer.write(event.toString());
 				writer.newLine();
 			}
@@ -51,7 +62,7 @@ public class WriteLog {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}	
 	}
 
 }
