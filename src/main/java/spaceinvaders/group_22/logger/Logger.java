@@ -29,7 +29,7 @@ public class Logger {
 	 */
 	public Logger(final String logLocation, final int level) {
 		logLevel = level;
-		WriteLog logWriter = new WriteLog("logs/log.log", null);
+		LogWriter logWriter = new LogWriter("logs/log.log", null);
 		logWriter.clearLogFile();
 	}
 	/**
@@ -60,7 +60,7 @@ public class Logger {
 	 * Writes the log to a file.
 	 */
 	public final void writeLog() {
-		WriteLog logWriter = new WriteLog("logs/log.log", allEvents);
+		LogWriter logWriter = new LogWriter("logs/log.log", allEvents);
 		logWriter.run();
 		new Thread(logWriter).start();
 		allEvents.clear();

@@ -17,7 +17,7 @@ import org.junit.Test;
  * @author Dorian
  *
  */
-public class WriteLogTest {
+public class LogWriterTest {
 	/**
 	 * Tests if a log is written correctly.
 	 */
@@ -28,7 +28,7 @@ public class WriteLogTest {
 		LogEvent event2 = new LogEvent(new Exception(), "this is an event");
 		eventList.add(event1);
 		eventList.add(event2);
-		WriteLog logWriter = new WriteLog("logs/log.log", eventList);
+		LogWriter logWriter = new LogWriter("logs/log.log", eventList);
 		logWriter.clearLogFile();
 		new Thread(logWriter).start();
 		try {

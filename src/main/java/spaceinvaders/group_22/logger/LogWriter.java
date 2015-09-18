@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Dorian
  *
  */
-public class WriteLog  implements Runnable{
+public class LogWriter  implements Runnable{
 	
 	/**
 	 * Location of the logfile.
@@ -26,7 +26,7 @@ public class WriteLog  implements Runnable{
 	 * Creates a new WriteLog object.
 	 * @param location the location of the log file
 	 */
-	public WriteLog(final String location, final ArrayList<LogEvent> allEvents) {
+	public LogWriter(final String location, final ArrayList<LogEvent> allEvents) {
 		eventList = allEvents;
 		logLocation = location;
 	}
