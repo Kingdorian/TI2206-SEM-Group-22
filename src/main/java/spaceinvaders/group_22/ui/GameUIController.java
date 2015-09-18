@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
@@ -272,6 +273,7 @@ public class GameUIController
 							screenGameOver.toFront();
 							highScoreLabel.setText("Highscore: " + game.getHighScore());
 							gameLoop.stop();
+							game.getLogger().log("Changed to Game Over screen", LogEvent.Type.INFO);
 						} else {
 							screenGameOver.toBack();
 						}
@@ -416,14 +418,15 @@ public class GameUIController
 	 */
 	@FXML
 	public final void handleKeyPressed(final KeyEvent event) {
-        if (event.getCode().equals(KeyCode.S) && game.getPlayer().getLives() > 0) {       	
+		game.getLogger().log("Player pressed " + event.getCode().toString(), LogEvent.Type.DEBUG);
+        if (event.getCode().equals(KeyCode.S) && game.getPlayer().getLives() > 0) {
         	screenBeforePlay.toBack();
         	screenPaused.toBack();
         	game.start();
         } else if (event.getCode().equals(KeyCode.P)) {
         	if (game.isInProgress()) {
             	screenPaused.toFront();
-            	game.stop();	
+            	game.stop();
         	}
         } else if (event.getCode().equals(KeyCode.R)) {
         	if (game.hasEnded()) {

@@ -4,6 +4,8 @@ import javafx.scene.input.KeyCode;
 
 import java.util.ArrayList;
 
+import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
@@ -86,6 +88,10 @@ public class Game {
 	 */
 	private Collisions collisions;
 	/**
+	 * The logger.
+	 */
+	private Logger logger;
+	/**
 	 * Part of the screen (on left and right) that cannot be used when creating aliens. 
 	 */
 	static final double ALIENBORDERMARIGIN = 0.1;
@@ -115,6 +121,8 @@ public class Game {
 		canvasWidth = width;
 		canvasHeight = height;
 		
+		logger = new Logger("logs/log.log", 4);
+		
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
 		barricades = createBarricades();
@@ -130,6 +138,7 @@ public class Game {
 		player = new Player(this);
 		shootingAllowed = true;
 		countToShoot = 0;
+		logger.log("Created game succesfully", LogEvent.Type.INFO);
 	}
 	/**
 	 * Resets the game.
@@ -147,6 +156,7 @@ public class Game {
 		
 		shootingAllowed = true;
 		countToShoot = 0;
+		logger.log("Recreated game succesfully", LogEvent.Type.INFO);
 	}
 	/**
 	 * Starts the game.
@@ -154,12 +164,14 @@ public class Game {
 	public final void start() {
 		inProgress = true;
 		hasEnded = false;
+		logger.log("Game started", LogEvent.Type.INFO);
 	}
 	/**
 	 * Pauses the game.
 	 */
 	public final void stop() {
 		inProgress = false;
+		logger.log("Game stopped", LogEvent.Type.INFO);
 	}
 	/**
 	 * Resets the game.
@@ -186,6 +198,7 @@ public class Game {
 			setHighScore(player.getScore());
 		}
 		hasEnded = true;
+		logger.log("Game is over", LogEvent.Type.DEBUG);
 	}
 	
 	/**
@@ -211,8 +224,11 @@ public class Game {
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
 		
 		if (pressedKeys.contains(KeyCode.SPACE) && shootingAllowed) {
-			bullets.add(player.getSpaceShip().shootBullet(-spaceShipBulletVelX));
+			Bullet bullet = player.getSpaceShip().shootBullet(-spaceShipBulletVelX);
+			bullets.add(bullet);
 			shootingAllowed = false;
+			String logMessage = "Player shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
+			getLogger().log(logMessage, LogEvent.Type.TRACE);
 		}
 		if (!shootingAllowed) {
 			if (countToShoot < (1 / tickrate)) { 
@@ -230,21 +246,26 @@ public class Game {
 		for (int i = 0; i < bullets.size(); i++) {
 			if (bullets.get(i).getXCoor() > canvasWidth || bullets.get(i).getYCoor() < 0) {
 				bullets.remove(i);
+				logger.log("Removed bullet out of screen", LogEvent.Type.TRACE);
 			}
 		}
 		//Move every bullet
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).moveUnit(tickrate);
 		}
+		logger.log("Moved bullets", LogEvent.Type.TRACE);
+		
 		collisions.checkCollisions();
 		for (int i = 0; i < barricades.size(); i++)  {
 			if (barricades.get(i).getHealth() == 0) {
 				barricades.remove(i);
+				logger.log("Removed barricade", LogEvent.Type.TRACE);
 				i--;
 			}
 		}
 		//new wave of aliens
 		if (aliens.isEmpty()) {
+			logger.log("All aliens died", LogEvent.Type.TRACE);
 			//Increase aliens speed and reset direction so they start moving to the right
 			alienController.setAlienVelX(Math.abs(alienController.getAlienVelX()) + ALIENVELXINCREASE);
 			// Create an alien to use to get the width and height of the aliens used in this game. 
@@ -253,6 +274,7 @@ public class Game {
 			aliens = alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN, 
 						spriteinfo.getWidth(), spriteinfo.getHeight(), ALIENS_PER_ROW, AMOUNT_ALIEN_ROWS);
 			bullets.clear();
+			logger.log("Removed all bullets", LogEvent.Type.TRACE);
 		}
 	}
 	/**
@@ -285,6 +307,9 @@ public class Game {
 		}
 		player.getSpaceShip().setVelX(velX);
 		player.getSpaceShip().moveUnit(tickrate);
+		if (velX != 0) {
+			logger.log("Player moved X: " + velX, LogEvent.Type.TRACE);
+		}
 	}
 	/**
 	 * Add a new barricade to this game.
@@ -292,6 +317,7 @@ public class Game {
 	 */
 	public final void addBarricade(final Barricade barricade) {
 		barricades.add(barricade);
+		logger.log("Created barricade", LogEvent.Type.TRACE);
 	}
 	
 	/**
@@ -305,6 +331,7 @@ public class Game {
 		for (int i = 1; i <= barricadeCount; i++) {
 			bars.add(new Barricade(interval * i, canvasHeight - 110, "barrier.png"));
 		}
+		logger.log("Created all barricades", LogEvent.Type.DEBUG);
 		return bars;
 	}
 	/**
@@ -434,6 +461,10 @@ public class Game {
 	 */
 	public final boolean getShootingAllowed() {
 		return shootingAllowed;
+	}
+	
+	public final Logger getLogger() {
+		return logger;
 	}
 	/**
 	 * Sets the bullet list.

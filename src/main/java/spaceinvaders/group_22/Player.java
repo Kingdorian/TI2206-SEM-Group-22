@@ -1,5 +1,6 @@
 package spaceinvaders.group_22;
 
+import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
@@ -35,6 +36,7 @@ public class Player {
 	public Player(final Game parentgame) {
 		game = parentgame;
 		ship = new SpaceShip(game.getCanvasWidth() / 2, game.getCanvasHeight() - 40, "spaceship.png");
+		game.getLogger().log("Created SpaceShip for Player", LogEvent.Type.DEBUG);
 		score  = 0;
 		lives = 3;
 	}
@@ -66,6 +68,7 @@ public class Player {
 	 */
 	public final void addScore(final int points) {
 		score += points;
+		game.getLogger().log("Added " + points + "points", LogEvent.Type.TRACE);
 	}
 	/**
 	 * Resets the amount of points the player has.
@@ -79,11 +82,13 @@ public class Player {
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void respawnShip() {
 		ship = new SpaceShip(game.getCanvasWidth() / 2, ship.getYCoor(), "spaceship.png");
+		game.getLogger().log("Ship respawned", LogEvent.Type.TRACE);
 	}
 	/**
 	 * When the player dies remove one of his lives.
 	 */
 	public final void die() {
+		game.getLogger().log("Player died", LogEvent.Type.DEBUG);
 		lives--;
 		respawnShip();
 		if (lives <= 0) {

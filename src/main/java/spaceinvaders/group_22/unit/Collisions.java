@@ -3,6 +3,7 @@ package spaceinvaders.group_22.unit;
 import java.util.ArrayList;
 
 import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.logger.LogEvent;
 /**
  * 
  * @author Bryan
@@ -49,6 +50,10 @@ public class Collisions {
 		//Checking colissions for spaceship with enemy bullets
 		Unit collidingBullet = checkCollisions(game.getPlayer().getSpaceShip(), alienBullets);
 		if (collidingBullet != null) {
+			String logMessage = "Player collided bullet at X:" + game.getPlayer().getSpaceShip().getXCoor() 
+					+ " Y: " + game.getPlayer().getSpaceShip().getYCoor();
+			game.getLogger().log(logMessage, LogEvent.Type.TRACE);
+			
 			spaceShipexplosion = new Explosion(game.getPlayer().getSpaceShip().getXCoor(),
 					game.getPlayer().getSpaceShip().getYCoor(), "explosion1.png");
 			game.getExplosions().add(spaceShipexplosion);
@@ -58,6 +63,10 @@ public class Collisions {
 		for (Unit bullet : shipBullets) {
 			Unit collidingUnit = checkCollisions(bullet, new ArrayList<Unit>(game.getAliens()));
 			if (collidingUnit != null) {
+				String logMessage = "Alien collided bullet at X:" + bullet.getXCoor() 
+						+ " Y: " + bullet.getYCoor();
+				game.getLogger().log(logMessage, LogEvent.Type.TRACE);
+				
 				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
 						collidingUnit.getYCoor(), "explosion1.png"));
 				game.getAliens().remove(collidingUnit);
@@ -70,6 +79,10 @@ public class Collisions {
 		for (Barricade bar : game.getBarricades()) {
 			Unit collidingUnit = checkCollisions(bar, new ArrayList<Unit>(game.getBullets()));
 			if (collidingUnit != null) {
+				String logMessage = "Barricade collided bullet at X:" + bar.getXCoor() 
+					+ " Y: " + bar.getYCoor();
+				game.getLogger().log(logMessage, LogEvent.Type.TRACE);
+				
 				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
 						collidingUnit.getYCoor(), "explosion1.png"));
 				game.getBullets().remove(collidingUnit);

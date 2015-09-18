@@ -2,7 +2,9 @@ package spaceinvaders.group_22;
 
 import java.util.ArrayList;
 
+import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.unit.Alien;
+import spaceinvaders.group_22.unit.Bullet;
 
 /**
  * Controls the Aliens.
@@ -77,6 +79,7 @@ public class AlienController {
             distance += spriteHeight + 0.1 * spriteHeight;
             startPosition = borderDist + interval + 0.5 * spriteWidth;
         }
+        game.getLogger().log("Created alien wave succesfully", LogEvent.Type.DEBUG);
 		return alienList;	
 	}
 	
@@ -125,6 +128,9 @@ public class AlienController {
 			}
 			unit.moveUnit(game.getTickrate());
 		}
+		String velX = String.valueOf(game.getAliens().get(0).getVelX());
+		String velY = String.valueOf(game.getAliens().get(0).getVelY());
+		game.getLogger().log("Aliens moved X: " + velX + "\tY: " + velY, LogEvent.Type.TRACE);
 	}
 
 	/**
@@ -151,7 +157,10 @@ public class AlienController {
 		if (!game.getAliens().isEmpty() && Math.random() 
 				< ((game.getAliens().size()) * bulletChance * game.getTickrate()) / 40)   {
 			int shootIndex = (int) (Math.random() * game.getAliens().size());
-			game.getBullets().add(game.getAliens().get(shootIndex).shootBullet(60));
+			Bullet bullet = game.getAliens().get(shootIndex).shootBullet(60);
+			game.getBullets().add(bullet);
+			String logMessage = "Alien shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
+			game.getLogger().log(logMessage, LogEvent.Type.TRACE);
 		}
 	}
 }
