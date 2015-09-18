@@ -38,7 +38,7 @@ public class SpaceInvadersUI {
 			
 			primaryStage.setScene(scene);			
 		} catch (IOException e) {
-			Game.getLogger().log("Could not find fxml file", LogEvent.Type.ERROR);
+			Game.getLogger().log("Could not find fxml file", e);
 			e.printStackTrace();
 		}
 		
@@ -53,7 +53,7 @@ public class SpaceInvadersUI {
 			Parent screen = FXMLLoader.load(getClass().getResource(fxmlFile));
 			primaryStage.getScene().setRoot(screen);
 		} catch (IOException e) {
-			Game.getLogger().log("Could not find fxml file", LogEvent.Type.ERROR);
+			Game.getLogger().log("Could not find fxml file", e);
 			e.printStackTrace();
 		}
 		

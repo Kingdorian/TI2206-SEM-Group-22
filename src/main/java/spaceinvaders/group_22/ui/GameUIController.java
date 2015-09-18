@@ -124,6 +124,7 @@ public class GameUIController
     	canvasHeight = canvas.getHeight();
     	
     	newGame();
+    	game.getLogger().log("Show screen Before Play", LogEvent.Type.INFO);
     	
     	canvas.setFocusTraversable(true);
     }
@@ -273,7 +274,7 @@ public class GameUIController
 							screenGameOver.toFront();
 							highScoreLabel.setText("Highscore: " + game.getHighScore());
 							gameLoop.stop();
-							game.getLogger().log("Changed to Game Over screen", LogEvent.Type.INFO);
+							game.getLogger().log("Show screen Game Over", LogEvent.Type.INFO);
 						} else {
 							screenGameOver.toBack();
 						}
@@ -297,6 +298,7 @@ public class GameUIController
 			drawUnit(bar.getXCoor(), bar.getYCoor(), bar.getWidth(), bar.getHeight(), bar.getSprite());
 			gc.setGlobalAlpha(1);
 		}
+		game.getLogger().log("Drawn barricades", LogEvent.Type.TRACE);
 	}
 	
 	/**
@@ -308,6 +310,7 @@ public class GameUIController
         // Position the player in the middle, on the bottom of the screen.
 		drawUnit(spaceShip.getXCoor(), spaceShip.getYCoor(), spaceShip.getWidth(), 
 				spaceShip.getHeight(), spaceShip.getSprite());
+		game.getLogger().log("Drawn spaceship", LogEvent.Type.TRACE);
 	}
 	
 	/**
@@ -318,6 +321,7 @@ public class GameUIController
 			drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(),
 					unit.getHeight(), unit.getSprite());		
 		}
+		game.getLogger().log("Drawn aliens", LogEvent.Type.TRACE);
 	}
 	
 	/**
@@ -328,6 +332,7 @@ public class GameUIController
 			drawUnit(bullet.getXCoor(), bullet.getYCoor(), 
 					bullet.getWidth(), bullet.getHeight(), bullet.getSprite());
 		}
+		game.getLogger().log("Drawn bullets", LogEvent.Type.TRACE);
 	}
 	
 	/**
@@ -357,6 +362,7 @@ public class GameUIController
 				game.getExplosions().remove(explosion);
 			}
 		}
+		game.getLogger().log("Drawn explosions", LogEvent.Type.TRACE);
 	}
 	
     /**
@@ -426,6 +432,7 @@ public class GameUIController
         } else if (event.getCode().equals(KeyCode.P)) {
         	if (game.isInProgress()) {
             	screenPaused.toFront();
+            	game.getLogger().log("Show screen Paused", LogEvent.Type.INFO);
             	game.stop();
         	}
         } else if (event.getCode().equals(KeyCode.R)) {

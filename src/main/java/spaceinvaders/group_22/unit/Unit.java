@@ -72,7 +72,7 @@ public abstract class Unit {
 			this.setHeight(spriteImage.getHeight());
 			this.setWidth(spriteImage.getWidth());	
 		} catch (IOException e) {
-			Game.getLogger().log("Unit sprite image name invalid", LogEvent.Type.ERROR);
+			Game.getLogger().log("Unit sprite image name invalid", e);
 			e.printStackTrace();
 		}
 		

@@ -36,7 +36,7 @@ public class Player {
 	public Player(final Game parentgame) {
 		game = parentgame;
 		ship = new SpaceShip(game.getCanvasWidth() / 2, game.getCanvasHeight() - 40, "spaceship.png");
-		game.getLogger().log("Created SpaceShip for Player", LogEvent.Type.DEBUG);
+		game.getLogger().log("Created spaceship for player", LogEvent.Type.DEBUG);
 		score  = 0;
 		lives = 3;
 	}
