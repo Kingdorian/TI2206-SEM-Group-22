@@ -50,6 +50,7 @@ public class Logger {
 		LogWriter logWriter = new LogWriter(logFileLoc, null);
 		logWriter.clearLogFile();
 	}
+	
 	/**
 	 * Logs an exception.
 	 * @param description the description of this log item.
