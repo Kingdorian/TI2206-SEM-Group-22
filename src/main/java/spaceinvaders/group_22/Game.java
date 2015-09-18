@@ -121,7 +121,7 @@ public class Game {
 		canvasWidth = width;
 		canvasHeight = height;
 		
-		logger = new Logger("logs/log.log", 4);
+		logger = new Logger("log.log", 4);
 		
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
