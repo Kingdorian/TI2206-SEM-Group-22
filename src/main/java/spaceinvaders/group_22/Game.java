@@ -87,6 +87,7 @@ public class Game {
 	 * The collisions of units.
 	 */
 	private Collisions collisions;
+	
 	/**
 	 * The logger.
 	 */

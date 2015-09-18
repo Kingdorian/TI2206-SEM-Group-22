@@ -1,5 +1,7 @@
 package spaceinvaders.group_22.logger;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -9,13 +11,13 @@ import java.util.ArrayList;
  */
 public class Logger {
 	/**
+	 * Location of the logfile.
+	 */
+	private String logFileLoc;
+	/**
 	 * ArrayList to store LogEvents..
 	 */
 	private ArrayList<LogEvent> allEvents = new ArrayList<LogEvent>();
-	/**
-	 * Object to write logs to a file.
-	 */
-	private WriteLog logWriter;
 	/**
 	 * Indicates the level to log.
 	 * 0 no logging
@@ -32,9 +34,23 @@ public class Logger {
 	 * @param level the scope of logging between 0-5.
 	 */
 	public Logger(final String logLocation, final int level) {
-		logWriter = new WriteLog(logLocation);
 		logLevel = level;
+		String folder = System.getProperty("user.dir");
+		if (!new File(folder).mkdirs()) {
+			return;
+		}
+		File file = new File(folder, logLocation);
+		try {
+			file.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		logFileLoc = folder + "/" + logLocation;
+		LogWriter logWriter = new LogWriter(logFileLoc, null);
+		logWriter.clearLogFile();
 	}
+	
 	/**
 	 * Logs an exception.
 	 * @param description the description of this log item.
@@ -45,6 +61,7 @@ public class Logger {
 			LogEvent event = new LogEvent(exception, description);
 			System.out.println(event.toString());
 			allEvents.add(event);
+			writeLog();
 		}
 	}
 	/**
@@ -57,13 +74,17 @@ public class Logger {
 			LogEvent event = new LogEvent(type, description);
 			System.out.println(event.toString());
 			allEvents.add(event);
+			writeLog();
 		}
 	}
 	/**
 	 * Writes the log to a file.
 	 */
 	public final void writeLog() {
-		logWriter.write(allEvents);
+		LogWriter logWriter = new LogWriter(logFileLoc, allEvents);
+		//logWriter.run();
+		new Thread(logWriter).start();
+		//allEvents.clear();
 	}
 	/**
 	 * Returns all events logged untill this point.
@@ -71,6 +92,14 @@ public class Logger {
 	 */
 	public final ArrayList<LogEvent> getAllEvents() {
 		return allEvents;
+	}
+	
+	/**
+	 * Returns the location of the logfile.
+	 * @return the location of the logfile.
+	 */
+	public final String getLogFileLocation() {
+		return logFileLoc;
 	}
 
 	
