@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
@@ -123,6 +124,9 @@ public class GameUIController
     	canvasHeight = canvas.getHeight();
     	
     	newGame();
+    	game.getLogger().log("Set canvas width to: " + canvasWidth, LogEvent.Type.INFO);
+    	game.getLogger().log("Set canvas height to: " + canvasHeight, LogEvent.Type.INFO);
+    	game.getLogger().log("Show screen Before Play", LogEvent.Type.INFO);
     	
     	canvas.setFocusTraversable(true);
     }
@@ -178,10 +182,11 @@ public class GameUIController
      */
     public final void setFramerate(final int fps) {
     	if (fps > 0) {
-        	framerate = 1.0 / (double) fps;	
+        	framerate = 1.0 / (double) fps;
     	} else {
     		framerate = 0.0;
     	}
+    	game.getLogger().log("Set framerate to: " + framerate, LogEvent.Type.INFO);
     }
     
     /**
@@ -223,6 +228,7 @@ public class GameUIController
 		spriteMap.put(filename, 
 				new Image(getClass().getClassLoader()
 						.getResource("spaceinvaders/group_22/images/" + filename).toString()));
+		game.getLogger().log("Loaded " + filename, LogEvent.Type.DEBUG);
     }
     
     /**
@@ -272,6 +278,7 @@ public class GameUIController
 							screenGameOver.toFront();
 							highScoreLabel.setText("Highscore: " + game.getHighScore());
 							gameLoop.stop();
+							game.getLogger().log("Show screen Game Over", LogEvent.Type.INFO);
 						} else {
 							screenGameOver.toBack();
 						}
@@ -295,6 +302,7 @@ public class GameUIController
 			drawUnit(bar.getXCoor(), bar.getYCoor(), bar.getWidth(), bar.getHeight(), bar.getSprite());
 			gc.setGlobalAlpha(1);
 		}
+		game.getLogger().log("Drawn barricades", LogEvent.Type.TRACE);
 	}
 	
 	/**
@@ -306,6 +314,7 @@ public class GameUIController
         // Position the player in the middle, on the bottom of the screen.
 		drawUnit(spaceShip.getXCoor(), spaceShip.getYCoor(), spaceShip.getWidth(), 
 				spaceShip.getHeight(), spaceShip.getSprite());
+		game.getLogger().log("Drawn spaceship", LogEvent.Type.TRACE);
 	}
 	
 	/**
@@ -316,6 +325,7 @@ public class GameUIController
 			drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(),
 					unit.getHeight(), unit.getSprite());		
 		}
+		game.getLogger().log("Drawn aliens", LogEvent.Type.TRACE);
 	}
 	
 	/**
@@ -326,6 +336,7 @@ public class GameUIController
 			drawUnit(bullet.getXCoor(), bullet.getYCoor(), 
 					bullet.getWidth(), bullet.getHeight(), bullet.getSprite());
 		}
+		game.getLogger().log("Drawn bullets", LogEvent.Type.TRACE);
 	}
 	
 	/**
@@ -355,6 +366,7 @@ public class GameUIController
 				game.getExplosions().remove(explosion);
 			}
 		}
+		game.getLogger().log("Drawn explosions", LogEvent.Type.TRACE);
 	}
 	
     /**
@@ -366,6 +378,7 @@ public class GameUIController
     	for (int i = 1; i <= lives; i++) {
         	gc.drawImage(heartImage, canvas.getWidth() - 10 - heartImage.getWidth() * i, 10);
     	}
+    	game.getLogger().log("Formatted hearts to UI", LogEvent.Type.TRACE);
     }
 	
 	/**
@@ -382,6 +395,7 @@ public class GameUIController
     	scoreString.append(score);
     	
     	scoreLabel.setText(scoreString.toString());	
+    	game.getLogger().log("Formatted score to UI", LogEvent.Type.TRACE);
 	}
 	
 	/**
@@ -416,14 +430,16 @@ public class GameUIController
 	 */
 	@FXML
 	public final void handleKeyPressed(final KeyEvent event) {
-        if (event.getCode().equals(KeyCode.S) && game.getPlayer().getLives() > 0) {       	
+		game.getLogger().log("Player pressed " + event.getCode().toString(), LogEvent.Type.DEBUG);
+        if (event.getCode().equals(KeyCode.S) && game.getPlayer().getLives() > 0) {
         	screenBeforePlay.toBack();
         	screenPaused.toBack();
         	game.start();
         } else if (event.getCode().equals(KeyCode.P)) {
         	if (game.isInProgress()) {
             	screenPaused.toFront();
-            	game.stop();	
+            	game.getLogger().log("Show screen Paused", LogEvent.Type.INFO);
+            	game.stop();
         	}
         } else if (event.getCode().equals(KeyCode.R)) {
         	if (game.hasEnded()) {
