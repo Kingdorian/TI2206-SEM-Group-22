@@ -9,6 +9,10 @@ import java.util.ArrayList;
  */
 public class Logger {
 	/**
+	 * Location of the logfile.
+	 */
+	private String logFileLoc;
+	/**
 	 * ArrayList to store LogEvents..
 	 */
 	private ArrayList<LogEvent> allEvents = new ArrayList<LogEvent>();
@@ -29,7 +33,8 @@ public class Logger {
 	 */
 	public Logger(final String logLocation, final int level) {
 		logLevel = level;
-		LogWriter logWriter = new LogWriter("logs/log.log", null);
+		logFileLoc = logLocation;
+		LogWriter logWriter = new LogWriter(logFileLoc, null);
 		logWriter.clearLogFile();
 	}
 	/**
@@ -42,6 +47,7 @@ public class Logger {
 			LogEvent event = new LogEvent(exception, description);
 			System.out.println(event.toString());
 			allEvents.add(event);
+			writeLog();
 		}
 	}
 	/**
@@ -61,9 +67,11 @@ public class Logger {
 	 * Writes the log to a file.
 	 */
 	public final void writeLog() {
-		LogWriter logWriter = new LogWriter("logs/log.log", allEvents);
+		System.out.println(logFileLoc);
+		LogWriter logWriter = new LogWriter(logFileLoc, allEvents);
+		//logWriter.run();
 		new Thread(logWriter).start();
-		allEvents.clear();
+		//allEvents.clear();
 	}
 	/**
 	 * Returns all events logged untill this point.

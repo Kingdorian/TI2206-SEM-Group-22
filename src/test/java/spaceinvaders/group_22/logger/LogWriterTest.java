@@ -2,6 +2,7 @@ package spaceinvaders.group_22.logger;
 
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -28,18 +29,21 @@ public class LogWriterTest {
 		LogEvent event2 = new LogEvent(new Exception(), "this is an event");
 		eventList.add(event1);
 		eventList.add(event2);
-		LogWriter logWriter = new LogWriter("logs/log.log", eventList);
-		logWriter.clearLogFile();
+		LogWriter logWriter = new LogWriter("logs/testlog1.log", eventList);
 		new Thread(logWriter).start();
 		try {
-			List<String> fileContent = Files.readAllLines(Paths.get("logs/log.log"), StandardCharsets.UTF_8);
+			Thread.sleep(300);
+			List<String> fileContent = Files.readAllLines(Paths.get("logs/testlog1.log"), StandardCharsets.UTF_8);
 			Assert.assertEquals(event1.toString(), fileContent.get(0));
 			Assert.assertEquals(event2.toString(), fileContent.get(1));
+			System.out.println(new File("logs/testlog1.log").delete());
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail("error reading file");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
 		
 	}
 }

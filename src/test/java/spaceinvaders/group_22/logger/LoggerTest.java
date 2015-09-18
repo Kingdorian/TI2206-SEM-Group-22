@@ -2,7 +2,12 @@ package spaceinvaders.group_22.logger;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,7 +22,7 @@ public class LoggerTest {
 	 */
 	@Test
 	public void testLogEventException() {
-		Logger logger = new Logger("", 5);
+		Logger logger = new Logger("logs/testlog.log", 5);
 		LogEvent event = new LogEvent( new Exception(),  "A test Exception occurred" ); 
 		logger.log("A test Exception occurred", new Exception());
 		Assert.assertEquals(event, logger.getAllEvents().get(0));
@@ -27,17 +32,24 @@ public class LoggerTest {
 	 */
 	@Test
 	public void testLogEvent() {
-		Logger logger = new Logger("", 5);
+		Logger logger = new Logger("logs/testlog.log", 5);
 		LogEvent event = new LogEvent( LogEvent.Type.INFO, "A test" ); 
 		logger.log("A test", LogEvent.Type.INFO);
-		Assert.assertEquals(event, logger.getAllEvents().get(0));
+		try {
+			List<String> fileContent = Files.readAllLines(Paths.get("logs/testlog.log"), StandardCharsets.UTF_8);
+			Assert.assertEquals(event.toString(), fileContent.get(0));
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail("error reading file");
+		}
+
 	}
 	/**
 	 * Tests the log method with an Exception with low loglevel.
 	 */
 	@Test
 	public void testLogEventExceptionLowerLogLevel() {
-		Logger logger = new Logger("", 0);
+		Logger logger = new Logger("logs/testlog.log", 0);
 		LogEvent event = new LogEvent( new Exception(), "A test Exception occurred" ); 
 		logger.log("A test Exception occurred", new Exception());
 		Assert.assertEquals(new ArrayList<LogEvent>(), logger.getAllEvents());
@@ -47,7 +59,7 @@ public class LoggerTest {
 	 */
 	@Test
 	public void testLogEventLowerLogLevel() {
-		Logger logger = new Logger("", 1);
+		Logger logger = new Logger("logs/testlog.log", 1);
 		LogEvent event = new LogEvent( LogEvent.Type.INFO, "A test" ); 
 		logger.log("A test", LogEvent.Type.INFO);
 		// Since the loglevel is lower then the level of the added logEvent
