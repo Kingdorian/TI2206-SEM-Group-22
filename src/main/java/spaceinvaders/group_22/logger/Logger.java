@@ -36,7 +36,9 @@ public class Logger {
 	public Logger(final String logLocation, final int level) {
 		logLevel = level;
 		String folder = System.getProperty("user.dir");
-		new File(folder).mkdirs();
+		if (!new File(folder).mkdirs()) {
+			return;
+		}
 		File file = new File(folder, logLocation);
 		try {
 			file.createNewFile();
@@ -78,7 +80,6 @@ public class Logger {
 	 * Writes the log to a file.
 	 */
 	public final void writeLog() {
-		System.out.println(logFileLoc);
 		LogWriter logWriter = new LogWriter(logFileLoc, allEvents);
 		//logWriter.run();
 		new Thread(logWriter).start();

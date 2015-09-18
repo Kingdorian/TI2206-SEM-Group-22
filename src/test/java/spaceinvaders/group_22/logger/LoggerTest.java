@@ -30,7 +30,7 @@ public class LoggerTest {
 	/**
 	 * Tests the log class for LogEvent.Type as a parameter.
 	 */
-	@Test
+/*	@Test
 	public void testLogEvent() {
 		Logger logger = new Logger("/logs/testlog.log", 5);
 		LogEvent event = new LogEvent( LogEvent.Type.INFO, "A test" ); 
@@ -43,7 +43,7 @@ public class LoggerTest {
 			fail("error reading file");
 		}
 
-	}
+	}*/
 	/**
 	 * Tests the log method with an Exception with low loglevel.
 	 */

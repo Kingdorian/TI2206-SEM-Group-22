@@ -126,10 +126,9 @@ public class LogEvent {
 		if (!this.description.equals(other.getDescription())) {
 			return false;
 		}
-		if (other.getException() != null && exception.getClass() != null) {
-			if (other.getException().getClass() != exception.getClass()) {
-				return false;
-			}
+		if (other.getException() != null && exception.getClass() != null
+				&& other.getException().getClass() != exception.getClass()) {
+			return false;
 		}
 		if (!time.equals(other.getTime())) {
 			return false;
@@ -166,6 +165,14 @@ public class LogEvent {
 	 */
 	final Type getType() {
 		return type;
+	}
+	/**
+	 * HashCode method.
+	 * @return hashcode of this object
+	 */
+	@Override
+	public final int hashCode() {
+		  return 0;
 	}
 	
 }
