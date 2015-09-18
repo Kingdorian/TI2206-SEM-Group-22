@@ -72,6 +72,7 @@ public class AlienController {
         for (int i = 0; i < lines; i++) {
             for (int j = 0; j < alienAmount; j++) {
             	Alien alien = new Alien(startPosition, distance, "invader.png");
+            	game.getLogger().log("Created Alien", LogEvent.Type.TRACE);
             	alien.setVelX(alienVelX);
             	alienList.add(alien);
             	startPosition += spriteWidth + interval;

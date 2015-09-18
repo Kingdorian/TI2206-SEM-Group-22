@@ -90,7 +90,7 @@ public class Game {
 	/**
 	 * The logger.
 	 */
-	private Logger logger;
+	private static Logger logger;
 	/**
 	 * Part of the screen (on left and right) that cannot be used when creating aliens. 
 	 */
@@ -463,7 +463,11 @@ public class Game {
 		return shootingAllowed;
 	}
 	
-	public final Logger getLogger() {
+	/**
+	 * Returns the logger.
+	 * @return the logger
+	 */
+	public static final Logger getLogger() {
 		return logger;
 	}
 	/**
