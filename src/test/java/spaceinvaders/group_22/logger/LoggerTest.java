@@ -36,7 +36,7 @@ public class LoggerTest {
 		LogEvent event = new LogEvent( LogEvent.Type.INFO, "A test" ); 
 		logger.log("A test", LogEvent.Type.INFO);
 		try {
-			List<String> fileContent = Files.readAllLines(Paths.get("testlog.log"), StandardCharsets.UTF_8);
+			List<String> fileContent = Files.readAllLines(Paths.get(logger.getLogFileLocation()), StandardCharsets.UTF_8);
 			Assert.assertEquals(event.toString(), fileContent.get(0));
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -35,17 +35,16 @@ public class Logger {
 	 */
 	public Logger(final String logLocation, final int level) {
 		logLevel = level;
-		String folder = "logs";
+		String folder = System.getProperty("user.dir") + "/logs";
 		new File(folder).mkdirs();
 		File file = new File(folder, logLocation);
 		try {
 			file.createNewFile();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		logFileLoc = logLocation;
+		logFileLoc = folder + "/" + logLocation;
 		LogWriter logWriter = new LogWriter(logFileLoc, null);
 		logWriter.clearLogFile();
 	}
@@ -91,6 +90,14 @@ public class Logger {
 	 */
 	public final ArrayList<LogEvent> getAllEvents() {
 		return allEvents;
+	}
+	
+	/**
+	 * Returns the location of the logfile.
+	 * @return the location of the logfile.
+	 */
+	public final String getLogFileLocation() {
+		return logFileLoc;
 	}
 
 	
