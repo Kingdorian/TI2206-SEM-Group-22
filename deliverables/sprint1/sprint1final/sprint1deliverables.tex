@@ -121,7 +121,7 @@ This diagram contains the scenario of launching the game, until the player press
 \pagebreak
 
 \section{Exercise 2 - UML in practice}
-\subsection{Exercise 2.1}
+\subsection*{Exercise 2.1}
 UML Aggregation applies to a "Consists of" relation.
 Parts of the whole may be shared, which means that child classes can exist independent of the parent class.
 If the parent is destroyed, the child can remain without the parent.
@@ -133,7 +133,7 @@ If the parent is destroyed, the child will also be destroyed.
 Aggregation is used in the relations between the Game class and classes which assist the Game class.
 A Game consists of multiple Units (players, aliens, barricades, explosions and bullets), Collisions and the alienController. These are a composition relation, because without these classes, it is not possible to play the game, thus making the Game class useless.
 
-\subsection{Exercise  2.2}
+\subsection*{Exercise  2.2}
 Parameterized, generic classes use type parameters which enable the user to re-use code for a different object type. 
 
 An example of a parametrized class used in the project is the java.util.ArrayList class.
@@ -141,7 +141,7 @@ It takes an input Type, and allows creation of a list, reusing the same code for
 
 The project itself does not contain classes using Parameterized classes.
 \pagebreak
-\subsection{Exercise  2.3}
+\subsection*{Exercise  2.3}
 The project contains one major hierarchy, treating the different game Units. 
 Within the hierarchy there is a sub-hierarchy for bullets. There are two bullet types, one for aliens and one for the player.
 The subclasses directly linked to Unit are "Polymorphism" relations, since the behavior of each unit is different.
@@ -154,7 +154,7 @@ The subclasses of Bullet are "Is-A" relations, since they have the same behavior
 
 \pagebreak
 \section*{Excercise 3 - Simple Logging}
-\subsection{Exercise 3.1}
+\subsection*{Exercise 3.1}
 
 Responsibility driven design was used as a tool to develop the logger.
 Starting with the requirements the following classes could be added to the product:
@@ -192,6 +192,40 @@ These classes were added to a table, listing their responsibilities:
 \includegraphics[width=1.1\textwidth]{LoggerUML.jpg}
 \caption{Logger UML Class Diagram}
 \end{figure}
+\newpage
+
+ \clearpage
+\section*{Logger Functional Requirements}
+
+A list of functional requirements considered for the extension of the game with a logger using the MoSCoW method described in the previous section.
+
+\subsection*{Must Haves}
+The Logger of the game must meet the following requirements:
+\begin{itemize}
+	\item The game shall be able to log all actions happening during execution the game.
+	\item The logger shall be able to write the log to a file.
+\end{itemize}
+
+\subsection*{Should Haves}
+The Logger of the game  should meet the following requirements:
+\begin{itemize}
+	\item The logger shall keep track of the time each action is executed.
+	\item The logger shall have different logging levels.
+	\item The logger shall be able to log exceptions thrown.
+	\item The logger shall be able to log errors.
+\end{itemize}
+
+\subsection*{Could Haves}
+The Logger of the game could meet the following requirements:
+\begin{itemize}
+	\item ...
+\end{itemize}
+
+\subsection*{Would/Won't Haves}
+The Logger of the game won't meet the following requirements:
+\begin{itemize}
+	\item The logger shall use text colors in the output log.
+\end{itemize}
 
 \end{document}
 
