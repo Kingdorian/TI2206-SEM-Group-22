@@ -28,7 +28,7 @@ TA: Danny Plenge\\
  \subsection*{Exercise 1.1}
 
 During this exercise, responsibility driven design was followed, starting with the requirements.\\
-The first classes that were considered as candidate classes were the following:
+The first classes considered candidate classes are the following:
 \begin{itemize}
   \item Game
   \item Alien
@@ -53,9 +53,9 @@ The first classes that were considered as candidate classes were the following:
 \end{itemize}
 
  \pagebreak
-For this candidate classes CRC cards were made and these were distributed to the team. \\
-By walking through scenarios unneeded and missing classes and responsibilities were uncovered.\\
-Finally the following list of classes with their responsibilities and collaborations is created:
+For these candidate classes, CRC cards were made and distributed to the team. \\
+By walking through scenarios unnecessary, missing classes and responsibilities were uncovered.\\
+Finally the following list was created, listing classes with their responsibilities and collaborations:
 \begin{center}
    \hspace*{-0.75in}\begin{tabular}{ | p{3cm} | p{5cm} | p{3cm} | p{2cm} | p{2cm} |}
   \hline
@@ -87,27 +87,23 @@ Finally the following list of classes with their responsibilities and collaborat
     \end{tabular}
 \end{center}
 \hfill\break
-The main difference with the actual implementation is that that game and gamUIController in the actual implementation have much more responsibilities.\\
-It would have been better if these classes were split to smaller classes as in the responsibility driven design of classes as above. Because then it will be easier to make changes to the code while it is possible to just replace a small class without changing a very big class. \\
-Classes that could be add to do this are the draw and control classes. 
+The main difference with the actual implementation is that that Game and GameUIController have much more responsibilities.\\
+It would have been better if these classes were split into smaller classes as in the responsibility driven design of classes as above. This will make small code changes easier, because they only affect small classes, instead of causing a rewrite of a large class.\\ Classes that could be added to improve this are the Draw and control classes. 
 
- \subsection*{Exercise 1.2}
-The main classes implemented in the actual implementation are the game and gameUIController.
+\subsection*{Exercise 1.2}
+The main classes implemented in the actual implementation are the Game and GameUIController.
 The game class has the responsibility to handle the movements of the spaceship and the bullets, the creation of barricades and to monitor the game status.\\
- This class also handles the lists of all the units in the game. It collaborates with the aliencontroller, collisions and player class. \\
-Another main class implemented in the actual implementation is the GameUIController which deals with the drawings of all the elements and animation, loading of the sprites, creation of a new game,  and the key inputs.
- This class collaborates with the game and SpaceInvadersUI classes.\\
+This class also handles the lists of all the units in the game. It collaborates with the AlienController, Collisions and Player class. \\
+Another main class implemented in the actual implementation is the GameUIController which deals with the drawings of all the elements and animation, loading of the sprites, creation of a new game,  and the key inputs. This class collaborates with the game and SpaceInvadersUI classes.\\
 
- \subsection*{Exercise 1.3} 
-Some of the classes are less important as the classes mentioned in previous exercise, because they has less responsibilities and could easier be merged with some other class.\\
-They are also a lot smaller what makes it easier to merge them in another class. For example we have a ShipBullet and a AlienBullet class which are subclasses of the Bullet class. \\
- The ShipBullet and AlienBullet class could have been merged together in the bullet class. \\
-The reason this is not done and we have shipbullet and alienbullet as separate classes, is because the product is still under development. \\
-It is now possible to check with instance of if a bullet is a ship or an alien bullet. \\
-With this construction it is also easier to add attributes or methods to the alien or ship bullet only.\\
+\subsection*{Exercise 1.3} 
+Some of the classes are less important as the classes mentioned in previous exercise, because they have less responsibilities and could be merged more easy with another class.\\
+They are also a lot smaller what makes it easier to merge them in another class. For example we have a ShipBullet and an AlienBullet class which are subclasses of the Bullet class. \\
+The ShipBullet and AlienBullet class could have been merged together in the bullet class, The reason this has not been done is because the product is still under development. \\
+It is now possible to use instances to check if a bullet is a player bullet or an alien bullet. This construction also makes it easier to add attributes or methods to the alien or ship bullet only.\\
  \pagebreak
 
- \subsection*{Exercise 1.4} 
+\subsection*{Exercise 1.4} 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=14cm, height=16cm]{UMLSEM.jpg}
@@ -146,7 +142,7 @@ It takes an input Type, and allows creation of a list, reusing the same code for
 The project itself does not contain classes using Parameterized classes.
 \pagebreak
 \subsection{Exercise  2.3}
-The project contains one major hiararchy, treating the different game Units. 
+The project contains one major hierarchy, treating the different game Units. 
 Within the hierarchy there is a sub-hierarchy for bullets. There are two bullet types, one for aliens and one for the player.
 The subclasses directly linked to Unit are "Polymorphism" relations, since the behavior of each unit is different.
 The subclasses of Bullet are "Is-A" relations, since they have the same behavior as their superclass.
@@ -160,8 +156,9 @@ The subclasses of Bullet are "Is-A" relations, since they have the same behavior
 \section*{Excercise 3 - Simple Logging}
 \subsection{Exercise 3.1}
 
-To follow the responsibility driven design we started with the requirements for extending our game with a logger.
-Looking at the requirements we came up with adding the following classes to our game:
+Responsibility driven design was used as a tool to develop the logger.
+Starting with the requirements the following classes could be added to the product:
+
 \begin{itemize}
 \item Logger
 \item LogPlayer
@@ -175,13 +172,13 @@ Looking at the requirements we came up with adding the following classes to our 
 \item ReadLog
 \end{itemize}
 
-Next we are going to select the classes that we are actually going to use in our design. We will use the following classes:
+Next the classes to be used were selected from the list. The following classes will be used:
 \begin{itemize}
 \item Logger
 \item WriteLog
 \end{itemize}
 
-For these classes we created the following list of the classes with their responsibilities and collaborations:
+These classes were added to a table, listing their responsibilities:
 \begin{center}
    \hspace*{-0.75in}\begin{tabular}{ | p{3cm} | p{5cm} | p{3cm} | p{2cm} | p{2cm} |}
   \hline
