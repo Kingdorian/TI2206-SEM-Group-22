@@ -22,7 +22,7 @@ public class LoggerTest {
 	 */
 	@Test
 	public void testLogEventException() {
-		Logger logger = new Logger("testlog.log", 5);
+		Logger logger = new Logger("/logs/testlog.log", 5);
 		LogEvent event = new LogEvent( new Exception(),  "A test Exception occurred" ); 
 		logger.log("A test Exception occurred", new Exception());
 		Assert.assertEquals(event, logger.getAllEvents().get(0));
@@ -32,7 +32,7 @@ public class LoggerTest {
 	 */
 	@Test
 	public void testLogEvent() {
-		Logger logger = new Logger("testlog.log", 5);
+		Logger logger = new Logger("/logs/testlog.log", 5);
 		LogEvent event = new LogEvent( LogEvent.Type.INFO, "A test" ); 
 		logger.log("A test", LogEvent.Type.INFO);
 		try {
@@ -49,7 +49,7 @@ public class LoggerTest {
 	 */
 	@Test
 	public void testLogEventExceptionLowerLogLevel() {
-		Logger logger = new Logger("testlog.log", 0);
+		Logger logger = new Logger("/logs/testlog.log", 0);
 		LogEvent event = new LogEvent( new Exception(), "A test Exception occurred" ); 
 		logger.log("A test Exception occurred", new Exception());
 		Assert.assertEquals(new ArrayList<LogEvent>(), logger.getAllEvents());
@@ -59,7 +59,7 @@ public class LoggerTest {
 	 */
 	@Test
 	public void testLogEventLowerLogLevel() {
-		Logger logger = new Logger("testlog.log", 1);
+		Logger logger = new Logger("/logs/testlog.log", 1);
 		LogEvent event = new LogEvent( LogEvent.Type.INFO, "A test" ); 
 		logger.log("A test", LogEvent.Type.INFO);
 		// Since the loglevel is lower then the level of the added logEvent

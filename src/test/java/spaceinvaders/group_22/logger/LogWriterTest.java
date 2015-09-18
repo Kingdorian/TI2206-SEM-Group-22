@@ -29,14 +29,25 @@ public class LogWriterTest {
 		LogEvent event2 = new LogEvent(new Exception(), "this is an event");
 		eventList.add(event1);
 		eventList.add(event2);
-		LogWriter logWriter = new LogWriter("testlog1.log", eventList);
+		
+		String folder = System.getProperty("user.dir");
+		new File(folder).mkdirs();
+		File file = new File(folder, "/logs/testlog1.log");
+		try {
+			file.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		folder = folder + "/logs/testlog1.log";
+		LogWriter logWriter = new LogWriter(folder, eventList);
 		new Thread(logWriter).start();
 		try {
 			Thread.sleep(300);
-			List<String> fileContent = Files.readAllLines(Paths.get("testlog1.log"), StandardCharsets.UTF_8);
+			List<String> fileContent = Files.readAllLines(Paths.get(folder), StandardCharsets.UTF_8);
 			Assert.assertEquals(event1.toString(), fileContent.get(0));
 			Assert.assertEquals(event2.toString(), fileContent.get(1));
-			System.out.println(new File("testlog1.log").delete());
+			System.out.println(new File(folder).delete());
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail("error reading file");

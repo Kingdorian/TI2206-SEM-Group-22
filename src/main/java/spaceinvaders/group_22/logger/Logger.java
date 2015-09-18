@@ -35,7 +35,7 @@ public class Logger {
 	 */
 	public Logger(final String logLocation, final int level) {
 		logLevel = level;
-		String folder = System.getProperty("user.dir") + "/logs";
+		String folder = System.getProperty("user.dir");
 		new File(folder).mkdirs();
 		File file = new File(folder, logLocation);
 		try {
