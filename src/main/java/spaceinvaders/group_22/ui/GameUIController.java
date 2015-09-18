@@ -124,6 +124,8 @@ public class GameUIController
     	canvasHeight = canvas.getHeight();
     	
     	newGame();
+    	game.getLogger().log("Set canvas width to: " + canvasWidth, LogEvent.Type.INFO);
+    	game.getLogger().log("Set canvas height to: " + canvasHeight, LogEvent.Type.INFO);
     	game.getLogger().log("Show screen Before Play", LogEvent.Type.INFO);
     	
     	canvas.setFocusTraversable(true);
@@ -180,10 +182,11 @@ public class GameUIController
      */
     public final void setFramerate(final int fps) {
     	if (fps > 0) {
-        	framerate = 1.0 / (double) fps;	
+        	framerate = 1.0 / (double) fps;
     	} else {
     		framerate = 0.0;
     	}
+    	game.getLogger().log("Set framerate to: " + framerate, LogEvent.Type.INFO);
     }
     
     /**
@@ -225,6 +228,7 @@ public class GameUIController
 		spriteMap.put(filename, 
 				new Image(getClass().getClassLoader()
 						.getResource("spaceinvaders/group_22/images/" + filename).toString()));
+		game.getLogger().log("Loaded " + filename, LogEvent.Type.DEBUG);
     }
     
     /**
@@ -374,6 +378,7 @@ public class GameUIController
     	for (int i = 1; i <= lives; i++) {
         	gc.drawImage(heartImage, canvas.getWidth() - 10 - heartImage.getWidth() * i, 10);
     	}
+    	game.getLogger().log("Formatted hearts to UI", LogEvent.Type.TRACE);
     }
 	
 	/**
@@ -390,6 +395,7 @@ public class GameUIController
     	scoreString.append(score);
     	
     	scoreLabel.setText(scoreString.toString());	
+    	game.getLogger().log("Formatted score to UI", LogEvent.Type.TRACE);
 	}
 	
 	/**
