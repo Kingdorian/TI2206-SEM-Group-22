@@ -54,6 +54,7 @@ public class Logger {
 			LogEvent event = new LogEvent(type, description);
 			System.out.println(event.toString());
 			allEvents.add(event);
+			writeLog();
 		}
 	}
 	/**
@@ -61,7 +62,6 @@ public class Logger {
 	 */
 	public final void writeLog() {
 		LogWriter logWriter = new LogWriter("logs/log.log", allEvents);
-		logWriter.run();
 		new Thread(logWriter).start();
 		allEvents.clear();
 	}
