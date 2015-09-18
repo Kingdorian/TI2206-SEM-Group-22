@@ -111,6 +111,7 @@ With this construction it is also easier to add attributes or methods to the ali
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=14cm, height=16cm]{UMLSEM.jpg}
+\caption{Main classes UML Class Diagram}
 \end{figure}
 \pagebreak
 
@@ -118,7 +119,9 @@ With this construction it is also easier to add attributes or methods to the ali
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=0.6\textwidth]{SI-Sequence.pdf}
+\caption{Main classes UML Sequence Diagram}
 \end{figure}
+This diagram contains the scenario of launching the game, until the player presses S to start the game.
 \pagebreak
 
 \section{Exercise 2 - UML in practice}
@@ -150,6 +153,47 @@ The subclasses of Bullet are "Is-A" relations, since they have the same behavior
 
 \begin{figure}[ht!]
 \includegraphics[width=1.1\textwidth]{SI-UMLhierarchies.pdf}
+\caption{Unit hierarchy UML Class Diagram}
+\end{figure}
+
+\pagebreak
+\section*{Excercise 3 - Simple Logging}
+\subsection{Exercise 3.1}
+
+To follow the responsibility driven design we started with the requirements for extending our game with a logger.
+Looking at the requirements we came up with adding the following classes to our game:
+\begin{itemize}
+\item Logger
+\item LogPlayer
+\item LogAliens
+\item LogBullets
+\item LogBarricades
+\item LogExplosions
+\item LogExceptions
+\item LogErrors
+\item WriteLog
+\item ReadLog
+\end{itemize}
+
+Next we are going to select the classes that we are actually going to use in our design. We will use the following classes:
+\begin{itemize}
+\item Logger
+\item WriteLog
+\end{itemize}
+
+For these classes we created the following list of the classes with their responsibilities and collaborations:
+\begin{center}
+   \hspace*{-0.75in}\begin{tabular}{ | p{3cm} | p{5cm} | p{3cm} | p{2cm} | p{2cm} |}
+  \hline
+  Class & Responsibility & Collaborates with & Super & Sub \\ \hline
+  Logger & Log all the actions in the game & WriteLog & & \\ \hline
+  WriteLog & Write the log to a file & Logger & & \\ \hline
+    \end{tabular}
+\end{center}
+
+\begin{figure}[ht!]
+\includegraphics[width=1.1\textwidth]{LoggerUML.jpg}
+\caption{Logger UML Class Diagram}
 \end{figure}
 
 \end{document}
