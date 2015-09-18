@@ -64,6 +64,7 @@ public class Logger {
 	 */
 	public final void writeLog() {
 		logWriter.write(allEvents);
+		allEvents.clear();
 	}
 	/**
 	 * Returns all events logged untill this point.

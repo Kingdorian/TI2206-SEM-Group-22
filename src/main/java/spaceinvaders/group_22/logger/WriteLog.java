@@ -1,6 +1,9 @@
 package spaceinvaders.group_22.logger;
 
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -21,23 +24,32 @@ public class WriteLog {
 	 */
 	public WriteLog(final String location) {
 		logLocation = location;
+		try {
+			FileWriter writer = new FileWriter(logLocation, false);
+			writer.write("");
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * Writes the list of logItems to the logfile.
 	 * @param allEvents all the events that are logged
 	 */
 	public final void write(final ArrayList<LogEvent> allEvents) {
-		PrintWriter writer;
+		BufferedWriter writer;
 		try {
-			writer = new PrintWriter(logLocation, "UTF-8");
+
+			FileWriter fstream = new FileWriter(logLocation, true);
+			writer = new BufferedWriter (fstream);
 			for (LogEvent event : allEvents) {
-				writer.println(event.toString());
+				writer.write(event.toString());
+				writer.newLine();
 			}
 			writer.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// Even my fridge supports UTF-8...
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
