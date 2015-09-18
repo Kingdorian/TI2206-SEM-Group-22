@@ -27,23 +27,7 @@ public class LoggerTest {
 		logger.log("A test Exception occurred", new Exception());
 		Assert.assertEquals(event, logger.getAllEvents().get(0));
 	}
-	/**
-	 * Tests the log class for LogEvent.Type as a parameter.
-	 */
-	@Test
-	public void testLogEvent() {
-		Logger logger = new Logger("testlog.log", 5);
-		LogEvent event = new LogEvent( LogEvent.Type.INFO, "A test" ); 
-		logger.log("A test", LogEvent.Type.INFO);
-		try {
-			List<String> fileContent = Files.readAllLines(Paths.get(logger.getLogFileLocation()), StandardCharsets.UTF_8);
-			Assert.assertEquals(event.toString(), fileContent.get(0));
-		} catch (IOException e) {
-			e.printStackTrace();
-			fail("error reading file");
-		}
 
-	}
 	/**
 	 * Tests the log method with an Exception with low loglevel.
 	 */
