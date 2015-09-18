@@ -36,9 +36,7 @@ public class Logger {
 	public Logger(final String logLocation, final int level) {
 		logLevel = level;
 		String folder = System.getProperty("user.dir");
-		if (!new File(folder).mkdirs()) {
-			return;
-		}
+		boolean newFolderCreated = new File(folder).mkdirs();
 		File file = new File(folder, logLocation);
 		try {
 			file.createNewFile();
@@ -47,6 +45,7 @@ public class Logger {
 		}
 		
 		logFileLoc = folder + "/" + logLocation;
+		System.out.println(logFileLoc + "hi");
 		LogWriter logWriter = new LogWriter(logFileLoc, null);
 		logWriter.clearLogFile();
 	}
