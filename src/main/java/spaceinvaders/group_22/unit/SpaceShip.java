@@ -14,6 +14,10 @@ public class SpaceShip extends Unit {
 	 */
 	public static int MAXVELX = 250; 
 	/**
+	 * Times allowed to shoot per second.
+	 */
+	public static int shootTimes = 1;
+	/**
 	 * Creates a SpaceShip.
 	 * @param x X Coordinate
 	 * @param y Y Coordinate

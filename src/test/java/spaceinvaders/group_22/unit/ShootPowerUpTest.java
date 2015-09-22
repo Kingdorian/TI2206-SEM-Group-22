@@ -8,14 +8,14 @@ import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.Player;
 
 /**
- * Test for Speed Power Up, extends PowerUpTest Test.
+ * Test for Shoot Power Up, extends PowerUpTest Test.
  * @author Bryan
  */
-public class SpeedPowerUpTest extends PowerUpTest {
+public class ShootPowerUpTest extends PowerUpTest {
 	
 	@Override
 	public final Unit createInstance(final double x, final double y, final String spriteFile) {
-		return new SpeedPowerUp(x, y, spriteFile, SpeedPowerUp.DURATION);
+		return new ShootPowerUp(x, y, spriteFile, ShootPowerUp.DURATION);
 	}
 	/**
 	 * Test the activation of this powerUp.
@@ -23,9 +23,9 @@ public class SpeedPowerUpTest extends PowerUpTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activatePowerUpTest() {
-		SpeedPowerUp powerUp = new SpeedPowerUp(500, 200, "testimage.png", SpeedPowerUp.DURATION);
+		ShootPowerUp powerUp = new ShootPowerUp(500, 200, "testimage.png", ShootPowerUp.DURATION);
 		powerUp.activate(new Player(new Game(1000, 720)));
-		assertEquals(SpaceShip.MAXVELX, 750);
+		assertEquals(SpaceShip.shootTimes, 2);
 	}
 	/**
 	 * Test the deactivation of this powerUp.
@@ -33,10 +33,9 @@ public class SpeedPowerUpTest extends PowerUpTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void deactivatePowerUpTest() {
-		SpeedPowerUp powerUp = new SpeedPowerUp(500, 200, "testimage.png", SpeedPowerUp.DURATION);
+		ShootPowerUp powerUp = new ShootPowerUp(500, 200, "testimage.png", ShootPowerUp.DURATION);
 		powerUp.activate(new Player(new Game(1000, 720)));
 		powerUp.deactivate();
-		assertEquals(SpaceShip.MAXVELX, 250);
+		assertEquals(SpaceShip.shootTimes, 1);
 	}
-
 }

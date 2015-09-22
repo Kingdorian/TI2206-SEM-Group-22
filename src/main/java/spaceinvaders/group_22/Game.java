@@ -244,9 +244,9 @@ public class Game {
 			getLogger().log(logMessage, LogEvent.Type.TRACE);
 		}
 		if (!shootingAllowed) {
-			if (countToShoot < (1 / tickrate)) { 
+			if (countToShoot < ((1 / tickrate) / SpaceShip.shootTimes)) { 
 				countToShoot++; 
-			} else if (Double.compare((double) countToShoot, 1 / tickrate) == 0) {
+			} else if (Double.compare((double) countToShoot, ((1 / tickrate) / SpaceShip.shootTimes)) == 0) {
 				shootingAllowed = true;
 				countToShoot = 0;
 			}

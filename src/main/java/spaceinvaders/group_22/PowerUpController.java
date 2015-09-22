@@ -9,6 +9,7 @@ import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.unit.Collisions;
 import spaceinvaders.group_22.unit.LifePowerUp;
 import spaceinvaders.group_22.unit.PowerUp;
+import spaceinvaders.group_22.unit.ShootPowerUp;
 import spaceinvaders.group_22.unit.SpeedPowerUp;
 import spaceinvaders.group_22.unit.Unit;
 
@@ -50,7 +51,7 @@ public class PowerUpController {
 		if (random < 0.3333333334) {
 			newPowerUp = new SpeedPowerUp(x, y, "explosion1.png", SpeedPowerUp.DURATION);
 		} else if (random < 0.6666666666667) {
-			newPowerUp = new SpeedPowerUp(x, y, "explosion1.png", SpeedPowerUp.DURATION);
+			newPowerUp = new ShootPowerUp(x, y, "explosion1.png", ShootPowerUp.DURATION);
 		}
 		newPowerUp.setVelY(50);
 		game.getPowerups().add(newPowerUp);
