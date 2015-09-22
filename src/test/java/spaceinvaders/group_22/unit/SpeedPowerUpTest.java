@@ -8,7 +8,7 @@ public class SpeedPowerUpTest extends PowerUpTest {
 	
 	@Override
 	public final Unit createInstance(final double x, final double y, final String spriteFile) {
-		return new SpeedPowerUp(x, y, spriteFile);
+		return new SpeedPowerUp(x, y, spriteFile, 5.0);
 	}
 
 }

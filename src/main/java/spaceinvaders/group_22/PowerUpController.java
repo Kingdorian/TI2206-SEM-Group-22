@@ -25,11 +25,6 @@ public class PowerUpController {
 	private Game game;
 	
 	/**
-	 * Hashmap with the powerups and the time they are still active.
-	 */
-	private LinkedHashMap<PowerUp, Double> activePowerUps;
-	
-	/**
 	 * The collisions of units.
 	 */
 	private Collisions collisions;
@@ -40,7 +35,6 @@ public class PowerUpController {
 	 */
 	public PowerUpController(final Game newgame) {
 		game = newgame;
-		activePowerUps = new LinkedHashMap<PowerUp, Double>();
 		collisions = new Collisions(game);
 	}
 
@@ -51,63 +45,57 @@ public class PowerUpController {
 	 */
 	public final void createPowerUp(final Double x, final Double y) {
 		Double random = Math.random();
-		PowerUp newPowerUp = new LifePowerUp(x, y, "explosion1.png");
+		PowerUp newPowerUp = new LifePowerUp(x, y, "explosion1.png", 0);
 		Game.getLogger().log("Power Up is created" , LogEvent.Type.DEBUG);
 		if (random < 0.3333333334) {
-			newPowerUp = new SpeedPowerUp(x, y, "explosion1.png");
+			newPowerUp = new SpeedPowerUp(x, y, "explosion1.png", SpeedPowerUp.DURATION);
 		} else if (random < 0.6666666666667) {
-			newPowerUp = new SpeedPowerUp(x, y, "explosion1.png");
+			newPowerUp = new SpeedPowerUp(x, y, "explosion1.png", SpeedPowerUp.DURATION);
 		}
 		newPowerUp.setVelY(50);
 		game.getPowerups().add(newPowerUp);
 	}
 	/**
-	 * Method to move all the powerUps in the right direction.
-	 * And check if they collide or are not in the screen anymore.
+	 * Method to check a active PowerUp.
+	 * @param powerUp the powerUp to check.
 	 */
-	public final void movePowerUps() {
-		ArrayList<Unit> unitlist = new ArrayList<Unit>();
-		unitlist.add(game.getPlayer().getSpaceShip());
-		for (int i = 0; i < game.getPowerups().size(); i++) {
-			PowerUp powerUp = game.getPowerups().get(i);
-			powerUp.moveUnit(game.getTickrate());
-			if (powerUp.getXCoor() >= game.getCanvasHeight()) {
-				game.getPowerups().remove(powerUp);
-				Game.getLogger().log("Removed PowerUp that was outside screen " , LogEvent.Type.TRACE);
-			} else if (collisions.checkCollisions(powerUp, unitlist) != null) {
-				powerUp.activate(game.getPlayer());
-				game.getPowerups().remove(powerUp);
-				Game.getLogger().log("PowerUp collided with spaceship" , LogEvent.Type.TRACE);
-				if (!(powerUp instanceof LifePowerUp)) {
-					activePowerUps.put(powerUp, (1 / game.getTickrate()) * 5);
-				}
-				
-			}
+	public final void checkActivePowerUp(final PowerUp powerUp) {
+		if (powerUp.getTimeLeft() > 0) {
+			powerUp.setTimeLeft(powerUp.getTimeLeft() - game.getTickrate());
+		} else {
+			game.getPowerups().remove(powerUp);
+			powerUp.deactivate();
+			Game.getLogger().log("Power up is deactivated" , LogEvent.Type.TRACE);
 		}
+	}
+	/**
+	 * Method to check a not yet active powerUp.
+	 * @param powerUp the powerUp to check
+	 */
+	public final void checkMovingPowerUp(final PowerUp powerUp) {
+		powerUp.moveUnit(game.getTickrate());
+		ArrayList<Unit> spaceShiplist = new ArrayList<Unit>();
+		spaceShiplist.add(game.getPlayer().getSpaceShip());
+		if (powerUp.getXCoor() >= game.getCanvasHeight()) {
+			game.getPowerups().remove(powerUp);
+			Game.getLogger().log("Removed PowerUp that was outside screen " , LogEvent.Type.TRACE);
+		} else if (collisions.checkCollisions(powerUp, spaceShiplist) != null) {
+			powerUp.activate(game.getPlayer());
+			Game.getLogger().log("PowerUp collided with spaceship" , LogEvent.Type.TRACE);
+		} 
 	}
 	
 	/**
 	 * Checks all the power ups in the game.
 	 */
-	public final void checkPowerUps() {
-		movePowerUps();	
-		 
-		// Loop over all the active powerups and check if they are still active
-		 Collection<PowerUp> c = activePowerUps.keySet();
-		 Iterator<PowerUp> itr = c.iterator();
-
-		while (itr.hasNext()) {
-			PowerUp key = itr.next();
-			if (activePowerUps.get(key) != null) {
-				activePowerUps.replace(key, activePowerUps.get(key) - 1);
-				if (activePowerUps.get(key) < 0) {
-					itr.remove();
-					activePowerUps.remove(key, activePowerUps.get(key));
-					key.deactivate();
-					Game.getLogger().log("Power up is deactivated" , LogEvent.Type.TRACE);
-				}
+	public final void checkPowerUps() {		
+		for (int i = 0; i < game.getPowerups().size(); i++) {
+			PowerUp powerUp = game.getPowerups().get(i);
+			if (powerUp.getPlayer() == null) { 
+				checkMovingPowerUp(powerUp);
+			} else {
+				checkActivePowerUp(powerUp);
 			}
-		}
+		}	
 	}
-
 }

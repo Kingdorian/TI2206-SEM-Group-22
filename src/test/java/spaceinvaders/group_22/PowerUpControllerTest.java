@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import spaceinvaders.group_22.unit.PowerUp;
 import spaceinvaders.group_22.unit.SpeedPowerUp;
 /**
  * Test for the Power Up controller.
@@ -29,56 +30,75 @@ public class PowerUpControllerTest {
 	public final void setUpController() {
 		game = new Game(1000, 720);
 		controller = game.getPowerUpController();
-		game.setTickrate(6.0);
+		game.setTickrate(1.0);
 	}
 	/**
 	 * Test the creaton of a powerUp by looking at the size of the powerUp list.
 	 */
 	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testCreatePowerUp() {
 		controller.createPowerUp(500.0, 100.0);
 		assertEquals(game.getPowerups().size(), 1);
 	}
 	
 	/**
-	 * Test the move method of the controller.
+	 * Test the method for the checks of a moving power up.
 	 */
 	@Test
-	public final void testMovePowerUps() {
+	@SuppressWarnings("checkstyle:magicnumber") 
+	public final void testcheckMovePowerUps() {
 		controller.createPowerUp(500.0, 100.0);
-		controller.movePowerUps();
-		assertEquals(Double.compare(game.getPowerups().get(0).getYCoor(), 400.00), 0);
+		controller.checkMovingPowerUp(game.getPowerups().get(0));
+		System.out.println(game.getPowerups().get(0).getYCoor());
+		assertEquals(Double.compare(game.getPowerups().get(0).getYCoor(), 150.00), 0);
 	}
 	
 	/**
-	 * Test the move method of the controller of a PowerUp outside the screen.
+	 * Test the check power up method when the power up is outside the screen.
 	 */
 	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testMovePowerUpsOutsideScreen() {
 		controller.createPowerUp(1200.0, 800.0);
-		controller.movePowerUps();
-		assertEquals(game.getPowerups().size(), 0);
-	}
-	
-	/**
-	 * Test the move method of the controller of a PowerUp colliding.
-	 */
-	@Test
-	public final void testMovePowerUpsCollided() {
-		controller.createPowerUp(500.0, 380.0);
-		controller.movePowerUps();
-		assertEquals(game.getPowerups().size(), 0);
-		
-	}
-	
-	/**
-	 * Test the check power up method.
-	 */
-	@Test
-	public final void testCheckPowerUps() {
-		game.getPowerups().add(new SpeedPowerUp(500.0 , 680.0, "testimage.png"));
 		controller.checkPowerUps();
 		assertEquals(game.getPowerups().size(), 0);
 	}
+	
+	/**
+	 * Test the check power up method when the power up is colliding with the spaceship.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
+	public final void testPowerUpCollided() {
+		controller.createPowerUp(500.0, 630.0);
+		controller.checkPowerUps();
+		assertEquals(game.getPowerups().get(0).getPlayer(), game.getPlayer());
+	}
+	/**
+	 * Test a active speed power Up.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
+	public final void testActiveSpeedPowerUp() {
+		PowerUp powerUp = new SpeedPowerUp(500.0, 600.0, "testimage.png", 5.0);
+		powerUp.setPlayer(game.getPlayer());
+		game.getPowerups().add(powerUp);
+		controller.checkActivePowerUp(powerUp);		
+		assertEquals(Double.compare(powerUp.getTimeLeft(), 4.0), 0);
+	}
+	/**
+	 * Test a active speed power Up that is expired.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
+	public final void testActiveSpeedPowerUpExpired() {
+		PowerUp powerUp = new SpeedPowerUp(500.0, 600.0, "testimage.png", -1.0);
+		powerUp.setPlayer(game.getPlayer());
+		game.getPowerups().add(powerUp);
+		controller.checkPowerUps();	
+		assertEquals(game.getPowerups().size(), 0);
+	}
+	
 
 }

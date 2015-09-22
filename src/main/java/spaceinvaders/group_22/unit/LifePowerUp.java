@@ -13,9 +13,10 @@ public class LifePowerUp extends PowerUp {
 	 * @param x X coordinate
 	 * @param y Y coordinate
 	 * @param spriteFile The filename of the sprite.
+	 * @param time the time left for this powerUp
 	 */
-	public LifePowerUp(final double x, final double y, final String spriteFile) {
-		super(x, y, spriteFile);
+	public LifePowerUp(final double x, final double y, final String spriteFile, final double time) {
+		super(x, y, spriteFile, 0);
 	}
 
 	/**

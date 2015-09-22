@@ -8,13 +8,19 @@ import spaceinvaders.group_22.Player;
 public class SpeedPowerUp extends PowerUp {
 	
 	/**
+	 * Indicates the duration of this powerUP in seconds.
+	 */
+	public static double DURATION = 5.0; 
+	
+	/**
 	 * Creates a speed power Up.
 	 * @param x X coordinate
 	 * @param y Y coordinate
 	 * @param spriteFile The filename of the sprite.
+	 * @param time the time left for this powerUp
 	 */
-	public SpeedPowerUp(final double x, final double y, final String spriteFile) {
-		super(x, y, spriteFile);
+	public SpeedPowerUp(final double x, final double y, final String spriteFile, final double time) {
+		super(x, y, spriteFile, time);
 	}
 
 	@Override

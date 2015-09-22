@@ -7,7 +7,7 @@ public class LifePowerUpTest extends PowerUpTest {
 	
 	@Override
 	public final Unit createInstance(final double x, final double y, final String spriteFile) {
-		return new LifePowerUp(x, y, spriteFile);
+		return new LifePowerUp(x, y, spriteFile, 0.0);
 	}
 
 }
