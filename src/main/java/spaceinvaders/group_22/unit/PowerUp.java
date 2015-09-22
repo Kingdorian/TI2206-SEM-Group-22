@@ -13,6 +13,10 @@ public abstract class PowerUp extends Unit {
 	 * Null if it is not working on a player.
 	 */
 	private Player player = null;
+	/**
+	 * The duration if the powerUp is activated.
+	 */
+	private int duration;
 
 	/**
 	 * Creates a power Up.
@@ -30,6 +34,10 @@ public abstract class PowerUp extends Unit {
 	 * 
 	 */
 	public abstract void activate(Player newplayer);
+	/**
+	 * Deactivates the powerup for the player.
+	 */
+	public abstract void deactivate();
 	
 	/**
 	 * Gets the player who this powerup has.
@@ -45,6 +53,22 @@ public abstract class PowerUp extends Unit {
 	 */
 	public final void setPlayer(final Player newplayer) {
 		this.player = newplayer;
+	}
+	
+	/**
+	 * Gets the duration how long this powerup works when activated.
+	 * @return the duration when activated.
+	 */
+	public final int getDuration() {
+		return duration;
+	}
+	
+	/**
+	 * Sets the duration of this powerUp.
+	 * @param newduration this powerup can be active.
+	 */
+	public final void setDuration(final int newduration) {
+		duration = newduration;
 	}
 
 

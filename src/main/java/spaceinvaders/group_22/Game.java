@@ -11,6 +11,7 @@ import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Collisions;
 import spaceinvaders.group_22.unit.Explosion;
+import spaceinvaders.group_22.unit.PowerUp;
 import spaceinvaders.group_22.unit.ShipBullet;
 import spaceinvaders.group_22.unit.SpaceShip;
 
@@ -50,6 +51,10 @@ public class Game {
      */
 	private ArrayList<Explosion> explosions;	
 	/**
+     * List of powerups in the game.
+     */
+	private ArrayList<PowerUp> powerups;	
+	/**
      * The width of the canvas.
      */
     private double canvasWidth;
@@ -57,7 +62,6 @@ public class Game {
     /**
      * The height of the canvas.
      */
-
     private double canvasHeight;
     /**
      * Velocity of the bullets of the spaceShip in pixels per second.
@@ -83,6 +87,10 @@ public class Game {
 	 * The controller of the Aliens.
 	 */
 	private AlienController alienController;
+	/**
+	 * The controller for the power ups.
+	 */
+	private PowerUpController powerUpController;
 	/**
 	 * The collisions of units.
 	 */
@@ -126,9 +134,12 @@ public class Game {
 		
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
+		powerups = new ArrayList<PowerUp>();
 		barricades = createBarricades();
 
 		alienController = new AlienController(this);
+		
+		powerUpController = new PowerUpController(this);
 		
 		collisions = new Collisions(this);
 				// Create an alien to use to get the width and height of the aliens used in this game. 
@@ -150,6 +161,7 @@ public class Game {
 		barricades = createBarricades();
 		
 		alienController = new AlienController(this);
+		powerUpController = new PowerUpController(this);
 		Alien spriteinfo = new Alien(0, 0, ALIENSPRITE);
 		aliens = alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN,
 				spriteinfo.getWidth(), spriteinfo.getHeight(), ALIENS_PER_ROW, AMOUNT_ALIEN_ROWS);
@@ -243,6 +255,8 @@ public class Game {
 		alienController.moveAliens();
 		alienController.shootAlienBullets();
 		
+		powerUpController.checkPowerUps();
+		
 		//Check if all bullets are still visible
 		for (int i = 0; i < bullets.size(); i++) {
 			if (bullets.get(i).getXCoor() > canvasWidth || bullets.get(i).getYCoor() < 0) {
@@ -250,6 +264,7 @@ public class Game {
 				logger.log("Removed bullet out of screen", LogEvent.Type.TRACE);
 			}
 		}
+		
 		//Move every bullet
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).moveUnit(tickrate);
@@ -477,5 +492,19 @@ public class Game {
 	 */
 	public final void setBullets(final ArrayList<Bullet> list) {
 		bullets = list;
+	}
+	/**
+	 * Returns the powerup list.
+	 * @return arraylist of the powerups currently in the game.
+	 */
+	public final ArrayList<PowerUp> getPowerups() {
+		return powerups;
+	}
+	/**
+	 * Sets the list of powerups.
+	 * @param newpowerups arraylist of powerups to set.
+	 */
+	public final void setPowerups(final ArrayList<PowerUp> newpowerups) {
+		this.powerups = newpowerups;
 	}
 }

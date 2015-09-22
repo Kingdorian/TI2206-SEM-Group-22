@@ -16,6 +16,7 @@ public class LifePowerUp extends PowerUp {
 	 */
 	public LifePowerUp(final double x, final double y, final String spriteFile) {
 		super(x, y, spriteFile);
+		super.setDuration(0);
 	}
 
 	/**
@@ -47,5 +48,10 @@ public class LifePowerUp extends PowerUp {
 	@Override
 	public final void activate(final Player newplayer) {
 		newplayer.addLife();
+	}
+
+	@Override
+	public final void deactivate() {
+		
 	}
 }
