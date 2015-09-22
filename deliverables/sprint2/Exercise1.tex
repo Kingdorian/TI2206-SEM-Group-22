@@ -1,0 +1,69 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{geometry}
+\geometry{portrait, margin=1.5in}
+
+\begin{document}
+
+
+\section*{Excercise 1}
+To improve our code, we want to split several classes into more classes. The classes we want to split are Game and GameUIController, because these classes are now too big in our code. We have chosen to split these classes in the following classes:\\
+Game:
+\begin{itemize}
+\item Controller
+\begin{itemize}
+\item UnitController
+\begin{itemize}
+\item ExplosionController
+\item BarricadeController	
+\end{itemize}
+\item MovingUnitController
+\begin{itemize}
+\item AlienController
+\item SpaceShipController
+\item BulletController
+\begin{itemize}
+\item AlienBulletController
+\item SpaceShipBulletController
+\end{itemize}
+\end{itemize}
+\end{itemize}
+GameUIController:
+\item Draw
+\begin{itemize}
+\item DrawUnit
+\begin{itemize}
+\item DrawAlien
+\item DrawSpaceShip
+\item DrawBarricade
+\item DrawExplosion
+\item DrawBullet
+\end{itemize}
+\item DrawScore
+\item DrawLives
+\end{itemize}
+\end{itemize}
+
+We also want to change the Unit section of our code, only by making an difference between a moving unit and a non moving unit:
+\begin{itemize}
+\item Unit
+\begin{itemize}
+\item MovingUnit
+\begin{itemize}
+\item Alien
+\item SpaceShip
+\item Bullet
+\begin{itemize}
+\item SpaceShipBullet
+\item AlienBullet
+\end{itemize}
+\end{itemize}
+\item Explosion
+\item Barricade
+\end{itemize}
+\end{itemize}
+	
+We will use hashcodes to...
+
+\end{document}
