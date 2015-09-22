@@ -102,5 +102,13 @@ public class Player {
 	public final int getLives() {
 		return lives;
 	}
+	/**
+	 * Adds 1 life to the player if lives is not yet 5.
+	 */
+	public final void addLife() {
+		if(lives < 5) {
+			lives++;
+		}
+	}
 	
 }
