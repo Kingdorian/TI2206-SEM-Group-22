@@ -507,4 +507,11 @@ public class Game {
 	public final void setPowerups(final ArrayList<PowerUp> newpowerups) {
 		this.powerups = newpowerups;
 	}
+	/**
+	 * Returns the powerUpcontroller of this game.
+	 * @return the powerUpcontroller of this game.
+	 */
+	public final PowerUpController getPowerUpController(){
+		return powerUpController;
+	}
 }

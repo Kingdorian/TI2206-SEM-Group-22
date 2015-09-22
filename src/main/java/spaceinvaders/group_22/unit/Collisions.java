@@ -72,6 +72,9 @@ public class Collisions {
 				game.getAliens().remove(collidingUnit);
 				game.getBullets().remove(bullet);
 				game.getPlayer().addScore(10);
+				if (Math.random() > 0.6) {
+					game.getPowerUpController().createPowerUp(bullet.getXCoor(), bullet.getYCoor());
+				}
 				break;
 			}
 		}

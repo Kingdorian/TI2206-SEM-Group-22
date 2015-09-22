@@ -16,7 +16,6 @@ public class LifePowerUp extends PowerUp {
 	 */
 	public LifePowerUp(final double x, final double y, final String spriteFile) {
 		super(x, y, spriteFile);
-		super.setDuration(0);
 	}
 
 	/**
@@ -27,7 +26,7 @@ public class LifePowerUp extends PowerUp {
 	@Override
 	public final boolean equals(final Object other) {
 		if (other != null && other instanceof LifePowerUp) {
-			Alien that = (Alien) other;
+			LifePowerUp that = (LifePowerUp) other;
 			return this.getXCoor() == that.getXCoor()
 					&& this.getYCoor() == that.getYCoor()
 					&& this.getVelX() == that.getVelX()
@@ -47,6 +46,7 @@ public class LifePowerUp extends PowerUp {
 
 	@Override
 	public final void activate(final Player newplayer) {
+		super.setPlayer(newplayer);
 		newplayer.addLife();
 	}
 

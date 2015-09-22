@@ -12,7 +12,7 @@ public class SpaceShip extends Unit {
 	/**
 	 * Indicates the max speed at which a spaceship can travel.
 	 */
-	public static final int MAXVELX = 250; 
+	public static int MAXVELX = 250; 
 	/**
 	 * Creates a SpaceShip.
 	 * @param x X Coordinate
