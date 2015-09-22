@@ -1,0 +1,74 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{geometry}
+\geometry{portrait, margin=1.5in}
+
+\begin{document}
+\title{Space Invaders : Sprint Reflection 1}
+\date{\today}
+\author{\textit{Group 22}\\ \textit{\underline{TI2206 Software Engineering Methods}} \\
+ \\Ege de Bruin \\ Bryan van Wijk \\ Dorian de Koning \\ Jochem Lugtenburg }
+ \maketitle  
+ \begin{center}
+Supervisor: Dr. A. Bacchelli\\
+TA: Danny Plenge\\
+ \end{center}     
+ \begin{center}
+ Delft University of Technology\\
+ Faculty of EEMCS\\
+ \end{center}
+ \thispagestyle{empty}
+ \pagebreak
+
+\section*{Sprint 1 reflection}
+
+\begin{center}
+
+    \hspace*{-3cm}\begin{tabular}{ | p{2cm} | p{9cm} | p{2cm} | p{1.8cm} | p{1.8cm} | p{1cm} |}
+    \hline
+    User Story & Task & Assigned to & Estimated effort & Actual effort & Done \\ \hline
+    Exercise 1 & 1.1 - Derive classes, responsibilities, and collaborations & Bryan & 2 hours & 1.5 hours & Yes \\ \hline
+    & 1.2 - Describe main classes already implemented & Bryan & 30 minutes & 30 minutes & Yes \\
+    & 1.3 - Describe less important classes and make changes & Bryan & 1 hour & 30 minutes & Yes \\
+    & 1.4 - Draw class diagram of main elements & Bryan & 1 hour & 1 hour & Yes\\
+    & 1.5 - Draw sequence diagram to describe main element interactions & Jochem & 1 hour & 2 hours & Yes\\ \hline
+    Exercise 2 & 2.1 - Difference between aggregation and composition & Jochem & 30 minutes & 30 minutes & Yes\\ 
+    & 2.2 - Parameterized classes & Jochem & 30 minutes & 15 minutes & Yes\\
+    & 2.3 - Class diagrams for all hierarchies & Jochem & 2 hours & 1 hours & Yes\\ \hline
+    Exercise 3 & 3 - Creating requirements & All & 30 minutes & 30 minutes & Yes\\ 
+    User Story 1& 3 - Determine classes & Ege & 30 minutes & 30 minutes & Yes\\ 
+    & 3 - Select classes to implement & Dorian & 30 minutes & 15 minutes & Yes\\
+    & 3 - Identify class responsibilities & Ege & 30 minutes & 30 minutes & Yes\\
+    & 3 - Determine hierarchy, UML & Ege & 2 hours & 1.5 hours & Yes\\
+    & 3 - jUnit tests & Dorian & 2 hours & 3.5 hours & Yes\\
+    & 3 - Implementation & Ege/Dorian & 4 hours & 5 hours & Yes\\ \hline    
+    \end{tabular}
+        \vspace{10mm}
+
+        \hspace*{-3cm}\begin{tabular}{| p{2cm} | p{9cm} | p{7.8cm} |}
+        \hline
+        User Story & Task & Note \\ \hline
+        Exercise 3 & 3 - jUnit tests & Tests could be extended, some tests worked in mvn but not on Travis. \\ \hline
+        \end{tabular}
+\end{center}
+
+\section*{Main Problems Encountered}
+\subsection*{Problem 1}
+\textbf{Description:}
+During the execution of the tests regarding reading and writing to files, some failed on Travis. This lead to last minute problems before handing in the final solution to Sprint 1.\\
+\textbf{Reaction:} 
+After investigation and input from other team members, the problem was related to the ..., it could be solved using a BufferedWriter and code changes to file creation.
+
+\subsection*{Problem 2}
+\textbf{Description:}
+The Github repository was messed up and full of merge conflicts.\\
+\textbf{Reaction:} 
+Git revert was used, and some team members branched from master instead of the develop branch.
+We will no longer use Git revert and everyone will branch from develop instead of master to solve future problems.
+
+\section*{Adjustments for the next Sprint Plan}
+\begin{itemize}
+\item The amount of time per task can be distributed more accurate.
+\end{itemize}
+\end{document}
