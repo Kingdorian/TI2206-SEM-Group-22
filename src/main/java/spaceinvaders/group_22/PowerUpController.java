@@ -81,6 +81,7 @@ public class PowerUpController {
 				if (!(powerUp instanceof LifePowerUp)) {
 					activePowerUps.put(powerUp, (1 / game.getTickrate()) * 5);
 				}
+				
 			}
 		}
 	}
@@ -90,9 +91,11 @@ public class PowerUpController {
 	 */
 	public final void checkPowerUps() {
 		movePowerUps();	
+		 
 		// Loop over all the active powerups and check if they are still active
 		 Collection<PowerUp> c = activePowerUps.keySet();
 		 Iterator<PowerUp> itr = c.iterator();
+
 		while (itr.hasNext()) {
 			PowerUp key = itr.next();
 			if (activePowerUps.get(key) != null) {
