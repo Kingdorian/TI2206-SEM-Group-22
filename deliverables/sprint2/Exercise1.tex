@@ -9,15 +9,13 @@
 
 \section*{Excercise 1}
 To improve our code, we want to split several classes into more classes. The classes we want to split are Game and GameUIController, because these classes are now too big in our code. We have chosen to split these classes in the following classes:\\
-Game:
-\begin{itemize}
-\item Controller
+Game:\newline
+Controller
 \begin{itemize}
 \item UnitController
 \begin{itemize}
 \item ExplosionController
 \item BarricadeController	
-\end{itemize}
 \item MovingUnitController
 \begin{itemize}
 \item AlienController
@@ -29,8 +27,9 @@ Game:
 \end{itemize}
 \end{itemize}
 \end{itemize}
-GameUIController:
-\item Draw
+\end{itemize}
+GameUIController: \newline
+Draw
 \begin{itemize}
 \item DrawUnit
 \begin{itemize}
@@ -42,7 +41,6 @@ GameUIController:
 \end{itemize}
 \item DrawScore
 \item DrawLives
-\end{itemize}
 \end{itemize}
 
 We also want to change the Unit section of our code, only by making an difference between a moving unit and a non moving unit:
