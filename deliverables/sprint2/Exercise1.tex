@@ -13,55 +13,59 @@ Game:\newline
 Controller
 \begin{itemize}
 \item UnitController
-\begin{itemize}
-\item ExplosionController
-\item BarricadeController	
-\item MovingUnitController
-\begin{itemize}
-\item AlienController
-\item SpaceShipController
-\item BulletController
-\begin{itemize}
-\item AlienBulletController
-\item SpaceShipBulletController
+	\begin{itemize}
+	\item ExplosionController
+	\item BarricadeController	
+	\item MovingUnitController
+		\begin{itemize}
+		\item AlienController
+		\item SpaceShipController
+		\item BulletController
+			\begin{itemize}
+			\item AlienBulletController
+			\item SpaceShipBulletController
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
 \end{itemize}
-\end{itemize}
-\end{itemize}
-\end{itemize}
-GameUIController: \newline
-Draw
-\begin{itemize}
-\item DrawUnit
-\begin{itemize}
-\item DrawAlien
-\item DrawSpaceShip
-\item DrawBarricade
-\item DrawExplosion
-\item DrawBullet
-\end{itemize}
-\item DrawScore
-\item DrawLives
-\end{itemize}
-
 We also want to change the Unit section of our code, only by making an difference between a moving unit and a non moving unit:
 \begin{itemize}
 \item Unit
+	\begin{itemize}
+	\item MovingUnit
+		\begin{itemize}
+		\item Alien
+		\item SpaceShip
+		\item Bullet
+			\begin{itemize}
+			\item SpaceShipBullet
+			\item AlienBullet
+			\end{itemize}
+		\end{itemize}
+	\item Explosion
+	\item Barricade
+	\end{itemize}
+\end{itemize}
+Changing the structure of unit in our code we also need to change the ui section. This will be the new class hierarchy.	
+GameUIController:
 \begin{itemize}
-\item MovingUnit
-\begin{itemize}
-\item Alien
-\item SpaceShip
-\item Bullet
-\begin{itemize}
-\item SpaceShipBullet
-\item AlienBullet
+	\item UiUnit
+	\begin{itemize}
+		\item UiAlien
+		\item UiSpaceShip
+		\item UiBarricade
+		\item UiExplosion
+		\item UiBullet
+		\begin{itemize}
+			\item UiSpaceShipBullet
+			\item UiAlienBullet
+		\end{itemize}
+	\end{itemize}
+	\item UiElement
+	\begin{itemize}
+		\item Score
+		\item Lives
 \end{itemize}
-\end{itemize}
-\item Explosion
-\item Barricade
-\end{itemize}
-\end{itemize}
-	
-We will use hashcodes to...
+Since we did implement equals methods in most of (the suitable) classes but we did not implement hash code yet. Hashcode should be implemented  too.
 
 \end{document}
