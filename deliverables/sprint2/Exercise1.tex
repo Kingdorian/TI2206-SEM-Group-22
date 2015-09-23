@@ -10,7 +10,7 @@
 \section*{Excercise 1}
 To improve our code, we want to split several classes into more classes. The classes we want to split are Game and GameUIController, because these classes are now too big in our code. We have chosen to split these classes in the following classes:\\
 Game:\newline
-Controller
+\subsection*{Controller}
 \begin{itemize}
 \item UnitController
 	\begin{itemize}
@@ -28,9 +28,8 @@ Controller
 		\end{itemize}
 	\end{itemize}
 \end{itemize}
+\subsection*{Unit}
 We also want to change the Unit section of our code, only by making an difference between a moving unit and a non moving unit:
-\begin{itemize}
-\item Unit
 	\begin{itemize}
 	\item MovingUnit
 		\begin{itemize}
@@ -45,24 +44,24 @@ We also want to change the Unit section of our code, only by making an differenc
 	\item Explosion
 	\item Barricade
 	\end{itemize}
-\end{itemize}
+\subsection*{GameUiController}
 Changing the structure of unit in our code we also need to change the ui section. This will be the new class hierarchy.	
 GameUIController:
 \begin{itemize}
-	\item UiUnit
-	\begin{itemize}
-		\item UiAlien
-		\item UiSpaceShip
-		\item UiBarricade
-		\item UiExplosion
-		\item UiBullet
-		\begin{itemize}
-			\item UiSpaceShipBullet
-			\item UiAlienBullet
-		\end{itemize}
-	\end{itemize}
 	\item UiElement
 	\begin{itemize}
+		\item UiUnit
+		\begin{itemize}
+			\item UiAlien
+			\item UiSpaceShip
+			\item UiBarricade
+			\item UiExplosion
+			\item UiBullet
+			\begin{itemize}
+				\item UiSpaceShipBullet
+				\item UiAlienBullet
+			\end{itemize}
+		\end{itemize}
 		\item Score
 		\item Lives
 	\end{itemize}

@@ -29,28 +29,42 @@ Controller: this interface class will provide template for the Controller classe
 			\end{itemize}
 		\end{itemize}
 	\end{itemize}
+\subsection*{Unit}
+We also want to change the Unit section of our code, only by making an difference between a moving unit and a non moving unit:
+\begin{itemize}
+	\item MovingUnit: abstract class responsible for the moving units.
+	\begin{itemize}
+		\item Alien: class responsible for the aliens.
+		\item SpaceShip: class responsible for hthe spaceships.
+		\item Bullet: abstract class responsible for the bullets.
+		\begin{itemize}
+			\item SpaceShipBullet: class responsible for the bullets shot by the spaceship.
+			\item AlienBullet: class responsible for the bullets shot by the aliens.
+		\end{itemize}
+	\end{itemize}
+	\item Explosion: class responsible for the explosions.
+	\item Barricade: class responsible for the barricades.
+\end{itemize}
 \subsection*{GameUiController}
 Draw:
 \begin{itemize}
 	\item UiElement: this (abstract) clas is responsible for drawing all the ui parts on the screen.
 	\begin{itemize}
-		\begin{itemize}
-			\item UiUnit: this abstract class is responsible for the units on the screen.
+		\item UiUnit: this abstract class is responsible for the units on the screen.
+			\begin{itemize}
+				\item UiAlien: this class is responsible for drawing the aliens on the screen.
+				\item UiSpaceShip: this class is responsible for drawing the spaceship on the screen.
+				\item UiBarricade: this class is responsible for drawing the barricades on the screen.
+				\item UiExplosion: this class is responsible for drawing the explosions on the screen.
+				\item UiBullet: this abstract class is responsible for drawing the bullets on the screen.
 				\begin{itemize}
-					\item UiAlien: this class is responsible for drawing the aliens on the screen.
-					\item UiSpaceShip: this class is responsible for drawing the spaceship on the screen.
-					\item UiBarricade: this class is responsible for drawing the barricades on the screen.
-					\item UiExplosion: this class is responsible for drawing the explosions on the screen.
-					\item UiBullet: this abstract class is responsible for drawing the bullets on the screen.
-					\begin{itemize}
-						\item UiSpaceShipBullet: this class is responsible for drawing the SpaceShipBullets on the screen.
-						\item UiShipBullet: this class is responsible for drawing the SpaceShipBullets on the screen.
-					\end{itemize}
+					\item UiSpaceShipBullet: this class is responsible for drawing the SpaceShipBullets on the screen.
+					\item UiShipBullet: this class is responsible for drawing the SpaceShipBullets on the screen.
 				\end{itemize}
-		\end{itemize}
-		\item DrawScore: this class is responsible the score on the screen.
-		\item DrawLives: this class is responsible the lives on the screen.
+			\end{itemize}
 	\end{itemize}
+	\item DrawScore: this class is responsible the score on the screen.
+	\item DrawLives: this class is responsible the lives on the screen.
 \end{itemize}
 
 \end{document}
