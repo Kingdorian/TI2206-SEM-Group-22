@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import spaceinvaders.group_22.unit.PowerUp;
-import spaceinvaders.group_22.unit.SpeedPowerUp;
+import spaceinvaders.group_22.unit.PowerUpUnit;
+import spaceinvaders.group_22.unit.SpeedPowerUpUnit;
 /**
  * Test for the Power Up controller.
  * @author Bryan
@@ -81,7 +81,7 @@ public class PowerUpControllerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testActiveSpeedPowerUp() {
-		PowerUp powerUp = new SpeedPowerUp(500.0, 600.0, "testimage.png", 5.0);
+		PowerUpUnit powerUp = new SpeedPowerUpUnit(500.0, 600.0, "testimage.png", 5.0);
 		powerUp.setPlayer(game.getPlayer());
 		game.getPowerups().add(powerUp);
 		controller.checkActivePowerUp(powerUp);		
@@ -93,7 +93,7 @@ public class PowerUpControllerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testActiveSpeedPowerUpExpired() {
-		PowerUp powerUp = new SpeedPowerUp(500.0, 600.0, "testimage.png", -1.0);
+		PowerUpUnit powerUp = new SpeedPowerUpUnit(500.0, 600.0, "testimage.png", -1.0);
 		powerUp.setPlayer(game.getPlayer());
 		game.getPowerups().add(powerUp);
 		controller.checkPowerUps();	

@@ -5,7 +5,7 @@ package spaceinvaders.group_22.unit;
  * @author Bryan
  *
  */
-public abstract class PowerUpTest extends UnitTest {
+public abstract class PowerUpUnitTest extends UnitTest {
 
 
 }

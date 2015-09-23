@@ -11,7 +11,7 @@ import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Collisions;
 import spaceinvaders.group_22.unit.Explosion;
-import spaceinvaders.group_22.unit.PowerUp;
+import spaceinvaders.group_22.unit.PowerUpUnit;
 import spaceinvaders.group_22.unit.ShipBullet;
 import spaceinvaders.group_22.unit.SpaceShip;
 
@@ -53,7 +53,7 @@ public class Game {
 	/**
      * List of powerups in the game.
      */
-	private ArrayList<PowerUp> powerups;	
+	private ArrayList<PowerUpUnit> powerups;	
 	/**
      * The width of the canvas.
      */
@@ -134,7 +134,7 @@ public class Game {
 		
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
-		powerups = new ArrayList<PowerUp>();
+		powerups = new ArrayList<PowerUpUnit>();
 		barricades = createBarricades();
 
 		alienController = new AlienController(this);
@@ -498,14 +498,14 @@ public class Game {
 	 * Returns the powerup list.
 	 * @return arraylist of the powerups currently in the game.
 	 */
-	public final ArrayList<PowerUp> getPowerups() {
+	public final ArrayList<PowerUpUnit> getPowerups() {
 		return powerups;
 	}
 	/**
 	 * Sets the list of powerups.
 	 * @param newpowerups arraylist of powerups to set.
 	 */
-	public final void setPowerups(final ArrayList<PowerUp> newpowerups) {
+	public final void setPowerups(final ArrayList<PowerUpUnit> newpowerups) {
 		this.powerups = newpowerups;
 	}
 	/**

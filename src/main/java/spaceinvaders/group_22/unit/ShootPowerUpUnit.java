@@ -7,7 +7,7 @@ import spaceinvaders.group_22.Player;
  * @author Bryan
  *
  */
-public class ShootPowerUp extends PowerUp {
+public class ShootPowerUpUnit extends PowerUpUnit {
 	/**
 	 * Indicates the duration of this powerUP in seconds.
 	 */
@@ -23,7 +23,7 @@ public class ShootPowerUp extends PowerUp {
 	 * @param spriteFile The filename of the sprite.
 	 * @param time the time left for this powerUp
 	 */
-	public ShootPowerUp(final double x, final double y, final String spriteFile, final double time) {
+	public ShootPowerUpUnit(final double x, final double y, final String spriteFile, final double time) {
 		super(x, y, spriteFile, time);
 	}
 
@@ -45,8 +45,8 @@ public class ShootPowerUp extends PowerUp {
 	 */
 	@Override
 	public final boolean equals(final Object other) {
-		if (other != null && other instanceof ShootPowerUp) {
-			ShootPowerUp that = (ShootPowerUp) other;
+		if (other != null && other instanceof ShootPowerUpUnit) {
+			ShootPowerUpUnit that = (ShootPowerUpUnit) other;
 			return this.getXCoor() == that.getXCoor()
 					&& this.getYCoor() == that.getYCoor()
 					&& this.getVelX() == that.getVelX()

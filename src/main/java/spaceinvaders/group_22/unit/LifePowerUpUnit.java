@@ -1,43 +1,27 @@
 package spaceinvaders.group_22.unit;
 
 import spaceinvaders.group_22.Player;
+
 /**
- * Speed power Up class which extends the Power Up class.
+ * Life powerup class which extends the abstact powerup class.
  * @author Bryan
  */
-public class SpeedPowerUp extends PowerUp {
+public class LifePowerUpUnit extends PowerUpUnit {
 	
-	/**
-	 * Indicates the duration of this powerUP in seconds.
-	 */
-	public static double DURATION = 5.0; 
 	/**
 	 * Indicates the velocity in the Y direction of this powerup type.
 	 */
 	public static double VELY = 50.0;
 	
 	/**
-	 * Creates a speed power Up.
+	 * Creates a life power Up.
 	 * @param x X coordinate
 	 * @param y Y coordinate
 	 * @param spriteFile The filename of the sprite.
 	 * @param time the time left for this powerUp
 	 */
-	public SpeedPowerUp(final double x, final double y, final String spriteFile, final double time) {
-		super(x, y, spriteFile, time);
-	}
-
-	@Override
-	@SuppressWarnings("checkstyle:magicnumber")
-	public final void activate(final Player newplayer) {
-		super.setPlayer(newplayer);
-		SpaceShip.MAXVELX = 750;
-	}
-
-	@Override
-	@SuppressWarnings("checkstyle:magicnumber")
-	public final void deactivate() {
-		SpaceShip.MAXVELX = 250;
+	public LifePowerUpUnit(final double x, final double y, final String spriteFile, final double time) {
+		super(x, y, spriteFile, 0);
 	}
 
 	/**
@@ -47,8 +31,8 @@ public class SpeedPowerUp extends PowerUp {
 	 */
 	@Override
 	public final boolean equals(final Object other) {
-		if (other != null && other instanceof SpeedPowerUp) {
-			SpeedPowerUp that = (SpeedPowerUp) other;
+		if (other != null && other instanceof LifePowerUpUnit) {
+			LifePowerUpUnit that = (LifePowerUpUnit) other;
 			return this.getXCoor() == that.getXCoor()
 					&& this.getYCoor() == that.getYCoor()
 					&& this.getVelX() == that.getVelX()
@@ -66,4 +50,14 @@ public class SpeedPowerUp extends PowerUp {
 		  return 0;
 	}
 
+	@Override
+	public final void activate(final Player newplayer) {
+		super.setPlayer(newplayer);
+		newplayer.addLife();
+	}
+
+	@Override
+	public final void deactivate() {
+		
+	}
 }

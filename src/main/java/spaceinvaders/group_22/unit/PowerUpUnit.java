@@ -6,7 +6,7 @@ import spaceinvaders.group_22.Player;
  * Abstract powerup class extends the unit class.
  * @author Bryan
  */
-public abstract class PowerUp extends Unit {
+public abstract class PowerUpUnit extends Unit {
 	
 	/**
 	 * Player on which this powerup is working.
@@ -26,7 +26,7 @@ public abstract class PowerUp extends Unit {
 	 * @param spriteFile The filename of the sprite.
 	 * @param time the time left for this powerUp
 	 */
-	public PowerUp(final double x, final double y, final String spriteFile, final double time) {
+	public PowerUpUnit(final double x, final double y, final String spriteFile, final double time) {
 		super(x, y, spriteFile);
 		timeLeft = time;
 	}

@@ -11,11 +11,11 @@ import spaceinvaders.group_22.Player;
  * Test for Speed Power Up, extends PowerUpTest Test.
  * @author Bryan
  */
-public class LifePowerUpTest extends PowerUpTest {
+public class LifePowerUpUnitTest extends PowerUpUnitTest {
 	
 	@Override
 	public final Unit createInstance(final double x, final double y, final String spriteFile) {
-		return new LifePowerUp(x, y, spriteFile, 0.0);
+		return new LifePowerUpUnit(x, y, spriteFile, 0.0);
 	}
 	
 	/**
@@ -24,7 +24,7 @@ public class LifePowerUpTest extends PowerUpTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activatePowerUpTest() {
-		LifePowerUp powerUp = new LifePowerUp(500, 200, "testimage.png", 0);
+		LifePowerUpUnit powerUp = new LifePowerUpUnit(500, 200, "testimage.png", 0);
 		Player player = new Player(new Game(1000, 720));
 		powerUp.activate(player);
 		assertEquals(player.getLives(), 4);
@@ -35,7 +35,7 @@ public class LifePowerUpTest extends PowerUpTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activateTwoTimesPowerUpTest() {
-		LifePowerUp powerUp = new LifePowerUp(500, 200, "testimage.png", 0);
+		LifePowerUpUnit powerUp = new LifePowerUpUnit(500, 200, "testimage.png", 0);
 		Player player = new Player(new Game(1000, 720));
 		powerUp.activate(player);
 		powerUp.activate(player);
@@ -47,7 +47,7 @@ public class LifePowerUpTest extends PowerUpTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activateThreeTimesPowerUpTest() {
-		LifePowerUp powerUp = new LifePowerUp(500, 200, "testimage.png", 0);
+		LifePowerUpUnit powerUp = new LifePowerUpUnit(500, 200, "testimage.png", 0);
 		Player player = new Player(new Game(1000, 720));
 		powerUp.activate(player);
 		powerUp.activate(player);
