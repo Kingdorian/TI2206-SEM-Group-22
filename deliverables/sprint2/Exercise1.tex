@@ -12,38 +12,37 @@ To improve our code, we want to split several classes into more classes. The cla
 Game:\newline
 \subsection*{Controller}
 \begin{itemize}
-\item UnitController
+	\item UnitController
+	\item MovingUnitController
 	\begin{itemize}
 	\item ExplosionController
 	\item BarricadeController	
-	\item MovingUnitController
+	\item AlienController
+	\item SpaceShipController
+	\item BulletController
 		\begin{itemize}
-		\item AlienController
-		\item SpaceShipController
-		\item BulletController
-			\begin{itemize}
 			\item AlienBulletController
 			\item SpaceShipBulletController
-			\end{itemize}
 		\end{itemize}
 	\end{itemize}
 \end{itemize}
 \subsection*{Unit}
-We also want to change the Unit section of our code, only by making an difference between a moving unit and a non moving unit:
+We also want to change the Unit section of our code, we want to have an interface movable that is implemented by the movable/moving. This prevents a lot of duplicate code. Implementing this change would mean we would have to change all of the following classes:
 	\begin{itemize}
-	\item MovingUnit
+	\item Unit
+	\item Movable
 		\begin{itemize}
 		\item Alien
 		\item SpaceShip
 		\item Bullet
-			\begin{itemize}
+		\begin{itemize}
 			\item SpaceShipBullet
 			\item AlienBullet
-			\end{itemize}
 		\end{itemize}
-	\item Explosion
-	\item Barricade
+		\item Explosion
+		\item Barricade
 	\end{itemize}
+\end{itemize}
 \subsection*{GameUiController}
 Changing the structure of unit in our code we also need to change the ui section. This will be the new class hierarchy.	
 GameUIController:

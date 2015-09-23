@@ -14,37 +14,21 @@ Game:
 Controller: this interface class will provide template for the Controller classes of different game elements. 
 	\begin{itemize}
 	\item UnitController: this abstract class has the responsibility of controlling the non moving units in the game
+	\item MovingUnitController: this interface has the responsibility of controlling the moving units in the game. 
 		\begin{itemize}
 			\item ExplosionController: this class is responsible for modifying the explosions in the game.
 			\item BarricadeController: this class is responsible for modifying the 	barricades in the game.
-			\item MovingUnitController: this abstract class is a class that has the responsibility of controlling the moving units in the game. 
+			\item AlienController: this class has the responsibility of modifying the aliens in the game.
+			\item SpaceShipController: this class is responsible for modifying the spaceship.
+			\item BulletController: this class is responsible for modifying the bullets in the game.
 			\begin{itemize}
-				\item AlienController: this class has the responsibility of modifying the aliens in the game.
-				\item SpaceShipController: this class is responsible for modifying the spaceship.
-				\item BulletController: this class is responsible for modifying the bullets in the game.
-				\begin{itemize}
-					\item AlienBulletController this class is responsible for modifying the alienbullets in the game.
-					\item SpaceShipBulletController this class is responsible for modifying th spaceshipbullets in the game.
-				\end{itemize}
+				\item AlienBulletController this class is responsible for modifying the alienbullets in the game.
+				\item SpaceShipBulletController this class is responsible for modifying th spaceshipbullets in the game.
 			\end{itemize}
 		\end{itemize}
 	\end{itemize}
 \subsection*{Unit}
-We also want to change the Unit section of our code, only by making an difference between a moving unit and a non moving unit:
-\begin{itemize}
-	\item MovingUnit: abstract class responsible for the moving units.
-	\begin{itemize}
-		\item Alien: class responsible for the aliens.
-		\item SpaceShip: class responsible for hthe spaceships.
-		\item Bullet: abstract class responsible for the bullets.
-		\begin{itemize}
-			\item SpaceShipBullet: class responsible for the bullets shot by the spaceship.
-			\item AlienBullet: class responsible for the bullets shot by the aliens.
-		\end{itemize}
-	\end{itemize}
-	\item Explosion: class responsible for the explosions.
-	\item Barricade: class responsible for the barricades.
-\end{itemize}
+The change we want to apply to the subclasses of the Unit class is making an interface movable that is implemented by units that move.
 \subsection*{GameUiController}
 Draw:
 \begin{itemize}
