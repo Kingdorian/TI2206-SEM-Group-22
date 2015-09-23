@@ -11,6 +11,10 @@ public class SpeedPowerUp extends PowerUp {
 	 * Indicates the duration of this powerUP in seconds.
 	 */
 	public static double DURATION = 5.0; 
+	/**
+	 * Indicates the velocity in the Y direction of this powerup type.
+	 */
+	public static double VELY = 50.0;
 	
 	/**
 	 * Creates a speed power Up.

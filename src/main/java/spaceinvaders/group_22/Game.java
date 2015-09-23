@@ -259,7 +259,8 @@ public class Game {
 		
 		//Check if all bullets are still visible
 		for (int i = 0; i < bullets.size(); i++) {
-			if (bullets.get(i).getXCoor() > canvasWidth || bullets.get(i).getYCoor() < 0) {
+			if (bullets.get(i).getXCoor() > canvasWidth || bullets.get(i).getYCoor() < 0 
+					|| bullets.get(i).getYCoor() >= canvasHeight) {
 				bullets.remove(i);
 				logger.log("Removed bullet out of screen", LogEvent.Type.TRACE);
 			}
@@ -279,6 +280,7 @@ public class Game {
 				i--;
 			}
 		}
+		System.out.println(bullets.size());
 		//new wave of aliens
 		if (aliens.isEmpty()) {
 			logger.log("All aliens died", LogEvent.Type.TRACE);
@@ -511,7 +513,7 @@ public class Game {
 	 * Returns the powerUpcontroller of this game.
 	 * @return the powerUpcontroller of this game.
 	 */
-	public final PowerUpController getPowerUpController(){
+	public final PowerUpController getPowerUpController() {
 		return powerUpController;
 	}
 }

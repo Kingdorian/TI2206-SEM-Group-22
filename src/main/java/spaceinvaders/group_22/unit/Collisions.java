@@ -52,7 +52,7 @@ public class Collisions {
 		if (collidingBullet != null) {
 			String logMessage = "Player collided bullet at X:" + game.getPlayer().getSpaceShip().getXCoor() 
 					+ " Y: " + game.getPlayer().getSpaceShip().getYCoor();
-			game.getLogger().log(logMessage, LogEvent.Type.TRACE);
+			Game.getLogger().log(logMessage, LogEvent.Type.TRACE);
 			
 			spaceShipexplosion = new Explosion(game.getPlayer().getSpaceShip().getXCoor(),
 					game.getPlayer().getSpaceShip().getYCoor(), "explosion1.png");
@@ -65,7 +65,7 @@ public class Collisions {
 			if (collidingUnit != null) {
 				String logMessage = "Alien collided bullet at X:" + bullet.getXCoor() 
 						+ " Y: " + bullet.getYCoor();
-				game.getLogger().log(logMessage, LogEvent.Type.TRACE);
+				Game.getLogger().log(logMessage, LogEvent.Type.TRACE);
 				
 				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
 						collidingUnit.getYCoor(), "explosion1.png"));
@@ -84,7 +84,7 @@ public class Collisions {
 			if (collidingUnit != null) {
 				String logMessage = "Barricade collided bullet at X:" + bar.getXCoor() 
 					+ " Y: " + bar.getYCoor();
-				game.getLogger().log(logMessage, LogEvent.Type.TRACE);
+				Game.getLogger().log(logMessage, LogEvent.Type.TRACE);
 				
 				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
 						collidingUnit.getYCoor(), "explosion1.png"));

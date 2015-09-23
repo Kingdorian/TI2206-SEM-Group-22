@@ -72,7 +72,7 @@ public class AlienController {
         for (int i = 0; i < lines; i++) {
             for (int j = 0; j < alienAmount; j++) {
             	Alien alien = new Alien(startPosition, distance, "invader.png");
-            	game.getLogger().log("Created Alien", LogEvent.Type.TRACE);
+            	Game.getLogger().log("Created Alien", LogEvent.Type.TRACE);
             	alien.setVelX(alienVelX);
             	alienList.add(alien);
             	startPosition += spriteWidth + interval;
@@ -80,7 +80,7 @@ public class AlienController {
             distance += spriteHeight + 0.1 * spriteHeight;
             startPosition = borderDist + interval + 0.5 * spriteWidth;
         }
-        game.getLogger().log("Created alien wave succesfully", LogEvent.Type.DEBUG);
+        Game.getLogger().log("Created alien wave succesfully", LogEvent.Type.DEBUG);
 		return alienList;	
 	}
 	
@@ -131,7 +131,7 @@ public class AlienController {
 		}
 		String velX = String.valueOf(game.getAliens().get(0).getVelX());
 		String velY = String.valueOf(game.getAliens().get(0).getVelY());
-		game.getLogger().log("Aliens moved X: " + velX + "\tY: " + velY, LogEvent.Type.TRACE);
+		Game.getLogger().log("Aliens moved X: " + velX + "\tY: " + velY, LogEvent.Type.TRACE);
 	}
 
 	/**
@@ -161,7 +161,7 @@ public class AlienController {
 			Bullet bullet = game.getAliens().get(shootIndex).shootBullet(60);
 			game.getBullets().add(bullet);
 			String logMessage = "Alien shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
-			game.getLogger().log(logMessage, LogEvent.Type.TRACE);
+			Game.getLogger().log(logMessage, LogEvent.Type.TRACE);
 		}
 	}
 }

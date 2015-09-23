@@ -9,6 +9,11 @@ import spaceinvaders.group_22.Player;
 public class LifePowerUp extends PowerUp {
 	
 	/**
+	 * Indicates the velocity in the Y direction of this powerup type.
+	 */
+	public static double VELY = 50.0;
+	
+	/**
 	 * Creates a life power Up.
 	 * @param x X coordinate
 	 * @param y Y coordinate

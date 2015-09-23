@@ -9,6 +9,11 @@ import spaceinvaders.group_22.unit.SpaceShip;
  *
  */
 public class Player {
+	
+	/**
+	 * Maximum amount of lives a player can have.
+	 */
+	public static int MAXLIFES = 5;
 
 	/**
 	 * Spaceship the player is currently controling.
@@ -36,7 +41,7 @@ public class Player {
 	public Player(final Game parentgame) {
 		game = parentgame;
 		ship = new SpaceShip(game.getCanvasWidth() / 2, game.getCanvasHeight() - 40, "spaceship.png");
-		game.getLogger().log("Created spaceship for player", LogEvent.Type.DEBUG);
+		Game.getLogger().log("Created spaceship for player", LogEvent.Type.DEBUG);
 		score  = 0;
 		lives = 3;
 	}
@@ -68,7 +73,7 @@ public class Player {
 	 */
 	public final void addScore(final int points) {
 		score += points;
-		game.getLogger().log("Added " + points + "points", LogEvent.Type.TRACE);
+		Game.getLogger().log("Added " + points + "points", LogEvent.Type.TRACE);
 	}
 	/**
 	 * Resets the amount of points the player has.
@@ -82,13 +87,13 @@ public class Player {
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void respawnShip() {
 		ship = new SpaceShip(game.getCanvasWidth() / 2, ship.getYCoor(), "spaceship.png");
-		game.getLogger().log("Ship respawned", LogEvent.Type.TRACE);
+		Game.getLogger().log("Ship respawned", LogEvent.Type.TRACE);
 	}
 	/**
 	 * When the player dies remove one of his lives.
 	 */
 	public final void die() {
-		game.getLogger().log("Player died", LogEvent.Type.DEBUG);
+		Game.getLogger().log("Player died", LogEvent.Type.DEBUG);
 		lives--;
 		respawnShip();
 		if (lives <= 0) {
@@ -106,7 +111,7 @@ public class Player {
 	 * Adds 1 life to the player if lives is not yet 5.
 	 */
 	public final void addLife() {
-		if(lives < 5) {
+		if (lives < MAXLIFES) {
 			lives++;
 		}
 	}
