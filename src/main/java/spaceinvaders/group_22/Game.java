@@ -280,7 +280,6 @@ public class Game {
 				i--;
 			}
 		}
-		System.out.println(bullets.size());
 		//new wave of aliens
 		if (aliens.isEmpty()) {
 			logger.log("All aliens died", LogEvent.Type.TRACE);

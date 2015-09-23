@@ -81,7 +81,10 @@ public class PowerUpController {
 		} else if (collisions.checkCollisions(powerUp, spaceShiplist) != null) {
 			powerUp.activate(game.getPlayer());
 			Game.getLogger().log("PowerUp collided with spaceship" , LogEvent.Type.TRACE);
-		} 
+		}  else if (collisions.checkCollisions(powerUp, new ArrayList<Unit>(game.getBarricades())) != null) {
+			game.getPowerups().remove(powerUp);
+			Game.getLogger().log("PowerUp collided with barricade" , LogEvent.Type.TRACE);
+		}  
 	}
 	
 	/**
