@@ -7,59 +7,50 @@
 \begin{document}
 
 
-\section*{Excercise 1}
+\section*{Excercise 2}
 Each class we split into several subclasses will have one single responsibility. \\
 Game:
-\begin{itemize}
-\item Controller: this interface class will provide template for the Controller classes of different game elements. 
-\begin{itemize}
-\item UnitController: this abstract class has the responsibility of controlling the non moving units in the game
-\begin{itemize}
-\item ExplosionController: this class is responsible for modifying the explosions in the game.
-\item BarricadeController: this class is responsible for modifying the barricades in the game.
-\end{itemize}
-\item MovingUnitController: this abstract class is a class that has the responsibility of controlling the moving units in the game. 
-\begin{itemize}
-	\item AlienController: this class has the responsibility of modifying the aliens in the game.
-	\item SpaceShipController: this class is responsible for modifying the spaceship.
-	\item BulletController: this class is responsible for modifying the bullets in the game.
+\subsection*{Controller}
+Controller: this interface class will provide template for the Controller classes of different game elements. 
 	\begin{itemize}
-		\item AlienBulletController this class is responsible for modifying the alienbullets in the game.
-		\item SpaceShipBulletController this class is responsible for modifying th spaceshipbullets in the game.
+	\item UnitController: this abstract class has the responsibility of controlling the non moving units in the game
+		\begin{itemize}
+			\item ExplosionController: this class is responsible for modifying the explosions in the game.
+			\item BarricadeController: this class is responsible for modifying the 	barricades in the game.
+			\item MovingUnitController: this abstract class is a class that has the responsibility of controlling the moving units in the game. 
+			\begin{itemize}
+				\item AlienController: this class has the responsibility of modifying the aliens in the game.
+				\item SpaceShipController: this class is responsible for modifying the spaceship.
+				\item BulletController: this class is responsible for modifying the bullets in the game.
+				\begin{itemize}
+					\item AlienBulletController this class is responsible for modifying the alienbullets in the game.
+					\item SpaceShipBulletController this class is responsible for modifying th spaceshipbullets in the game.
+				\end{itemize}
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+\subsection*{GameUiController}
+Draw:
+\begin{itemize}
+	\item UiElement: this (abstract) clas is responsible for drawing all the ui parts on the screen.
+	\begin{itemize}
+		\begin{itemize}
+			\item UiUnit: this abstract class is responsible for the units on the screen.
+				\begin{itemize}
+					\item UiAlien: this class is responsible for drawing the aliens on the screen.
+					\item UiSpaceShip: this class is responsible for drawing the spaceship on the screen.
+					\item UiBarricade: this class is responsible for drawing the barricades on the screen.
+					\item UiExplosion: this class is responsible for drawing the explosions on the screen.
+					\item UiBullet: this abstract class is responsible for drawing the bullets on the screen.
+					\begin{itemize}
+						\item UiSpaceShipBullet: this class is responsible for drawing the SpaceShipBullets on the screen.
+						\item UiShipBullet: this class is responsible for drawing the SpaceShipBullets on the screen.
+					\end{itemize}
+				\end{itemize}
+		\end{itemize}
+		\item DrawScore: this class is responsible the score on the screen.
+		\item DrawLives: this class is responsible the lives on the screen.
 	\end{itemize}
 \end{itemize}
-\end{itemize}
-\end{itemize}
-GameUIController, draw:
-\begin{itemize}
-	\item DrawUnit: this abstract class is responsible for drawing units on the screen.
-	\begin{itemize}
-		\item DrawAlien: this class is responsible for drawing the aliens on the screen.
-		\item DrawSpaceShip: this class is responsible for drawing the spaceship on the screen.
-		\item DrawBarricade: this class is responsible for drawing the barricades on the screen.
-		\item DrawExplosion: this class is responsible for drawing the explosions on the screen.
-		\item DrawBullet: this class is responsible for drawing the bullets on the screen.
-	\end{itemize}
-	\item DrawScore: this class is responsible the score on the screen.
-	\item DrawLives: this class is responsible the lives on the screen.
-\end{itemize}
-\begin{itemize}
-\item Unit: the main class of all units.
-\begin{itemize}
-\item MovingUnit: the main class of all units that are moving.
-\begin{itemize}
-\item Alien: this class is the alien unit in the game.
-\item SpaceShip: this class is responsible for the spaceship unit.
-\item Bullet: this class is responsible for the bullet unit.
-\begin{itemize}
-\item SpaceShipBullet: this class is responsible for the spaceshipbullet unit.
-\item AlienBullet: this class is responsible for the alienbullet unit.
-\end{itemize}
-\end{itemize}
-\item Explosion: this class is responsible for the explosion unit.
-\item Barricade: this class is responsible for the barricade unit.
-\end{itemize}
-\end{itemize}
-
 
 \end{document}
