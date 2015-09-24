@@ -8,6 +8,7 @@ package spaceinvaders.group_22.unit;
 
 public class AlienBullet extends Bullet {
 
+	
 	/**
 	 * Creates an AlienBullet.
 	 * @param x X Coordinate

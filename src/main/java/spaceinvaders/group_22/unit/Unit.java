@@ -28,16 +28,6 @@ public abstract class Unit {
 	private double yCoor;
 	
 	/**
-	 * VelX is the velocity in the X direction in pixels per second.
-	 */
-	private double velX;
-	
-	/**
-	 * velY is the velocity in the Y direction in pixels per second.
-	 */
-	private double velY;
-	
-	/**
 	 * height of this unit.
 	 */
 	private int height;
@@ -75,9 +65,6 @@ public abstract class Unit {
 			Game.getLogger().log("Unit sprite image name invalid", e);
 			e.printStackTrace();
 		}
-		
-		this.setVelX(0);
-		this.setVelY(0);
 	}
 	/**
 	 * Compares two objects and returns if they are equal.
@@ -95,27 +82,12 @@ public abstract class Unit {
 	/**
 	 * Move the unit in the direction of this unit and with his velocity.
 	 * @param tickrate The rate at which the game ticks.
-	 */
+	 *
 	public final void moveUnit(final Double tickrate) {
 		setXCoor(this.getXCoor() + (this.getVelX() * tickrate));
 		setYCoor(this.getYCoor() + (this.getVelY() * tickrate));
-	}
+	}*/
 	
-	/**
-	 * Returns the current velocity in the X direction.
-	 * @return the current velocity in the X direction in pixels per second.
-	 */
-	public final double getVelX() {
-		return velX;
-	}
-	
-	/**
-	 * Sets the current velocity in the X direction.
-	 * @param newvelX the velocity in the X direction to set in pixels per second.
-	 */
-	public final void setVelX(final double newvelX) {
-		this.velX = newvelX;
-	}
 
 	/**
 	 * Returns the current Y coordinate of this unit.
@@ -149,21 +121,7 @@ public abstract class Unit {
 		this.yCoor = newyCoor;
 	}
 	
-	/**
-	 * Returns the current velocity in the Y direction.
-	 * @return the current velocity in the Y direction in pixels per second.
-	 */
-	public final double getVelY() {
-		return velY;
-	}
-	
-	/**
-	 * Sets the current velocity in the Y direction.
-	 * @param alienVelY the velocity in the Y direction to set in pixels per second.
-	 */
-	public final void setVelY(final double alienVelY) {
-		this.velY = alienVelY;
-	}
+
 	/**
 	 * Get the width of this unit.
 	 * @return the width of this unit.

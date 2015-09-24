@@ -48,8 +48,6 @@ public class Barricade extends Unit {
 		Barricade that = (Barricade) obj;
 		if (this.getXCoor() == that.getXCoor()
 					&& this.getYCoor() == that.getYCoor()
-					&& this.getVelX() == that.getVelX()
-					&& this.getVelY() == that.getVelY()
 					&& this.getHeight() == that.getHeight()
 					&& this.getWidth() == that.getWidth()) {
 				if (health != that.health) {
