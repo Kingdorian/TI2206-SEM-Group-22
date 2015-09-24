@@ -29,7 +29,7 @@ public class SpaceShipTest extends UnitTest {
 		Bullet bullet = spaceship.shootBullet(1);
 		assertEquals(spaceship.getXCoor(), bullet.getXCoor(), 0.05);
 		assertEquals(spaceship.getYCoor(), bullet.getYCoor(), 0.05);
-		bullet.moveUnit(1.0);
+		bullet.move(1.0);
 		assertEquals(spaceship.getXCoor(), bullet.getXCoor(), 0.05);
 		assertEquals(spaceship.getYCoor() + 1.0, bullet.getYCoor(),  0.05);
 	}
@@ -65,4 +65,5 @@ public class SpaceShipTest extends UnitTest {
 		SpaceShip ship1 = new SpaceShip(1.2, 3, "testimage.png");
 		assertNotEquals(ship1, null);
 	}
+	
 }

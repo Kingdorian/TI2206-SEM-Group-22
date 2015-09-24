@@ -10,12 +10,12 @@ public class SpaceShip extends Unit implements MovableUnit{
 	/**
 	 * VelX is the velocity in the X direction in pixels per second.
 	 */
-	double velX;
+	double velX = 0.0;
 	
 	/**
 	 * velY is the velocity in the Y direction in pixels per second.
 	 */
-	double velY;
+	double velY = 0.0;
 	
 	/**
 	 * Indicates the max speed at which a spaceship can travel.
