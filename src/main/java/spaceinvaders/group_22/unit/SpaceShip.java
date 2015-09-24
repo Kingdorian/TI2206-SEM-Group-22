@@ -68,6 +68,14 @@ public class SpaceShip extends Unit implements MovableUnit{
 		  return 0;
 	}
 	/**
+	 * Move the unit in the direction of this unit and with his velocity.
+	 * @param tickrate The rate at which the game ticks.
+	 */
+	public void move(double tickrate) {
+		setXCoor(this.getXCoor() + (this.getVelX() * tickrate));
+		setYCoor(this.getYCoor() + (this.getVelY() * tickrate));
+	}	
+	/**
 	 * Returns the current velocity in the X direction.
 	 * @return the current velocity in the X direction in pixels per second.
 	 */

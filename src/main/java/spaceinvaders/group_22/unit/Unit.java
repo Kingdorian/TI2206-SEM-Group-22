@@ -78,16 +78,6 @@ public abstract class Unit {
 	 * @return hashcode of this object
 	 */
 	public abstract int hashCode();
-	
-	/**
-	 * Move the unit in the direction of this unit and with his velocity.
-	 * @param tickrate The rate at which the game ticks.
-	 *
-	public final void moveUnit(final Double tickrate) {
-		setXCoor(this.getXCoor() + (this.getVelX() * tickrate));
-		setYCoor(this.getYCoor() + (this.getVelY() * tickrate));
-	}*/
-	
 
 	/**
 	 * Returns the current Y coordinate of this unit.
@@ -109,7 +99,7 @@ public abstract class Unit {
 	 * Sets the current X coordinate of this unit.
 	 * @param newxCoor the current X coordinate of this unit to set.
 	 */
-	private void setXCoor(final double newxCoor) {
+	protected void setXCoor(final double newxCoor) {
 		this.xCoor = newxCoor;
 	}
 	
@@ -117,7 +107,7 @@ public abstract class Unit {
 	 * Sets the current Y coordinate of this unit.
 	 * @param newyCoor the current Y coordinate of this unit to set.
 	 */
-	private void setYCoor(final double newyCoor) {
+	protected void setYCoor(final double newyCoor) {
 		this.yCoor = newyCoor;
 	}
 	

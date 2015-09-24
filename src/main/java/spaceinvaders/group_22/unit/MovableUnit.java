@@ -22,5 +22,8 @@ public interface MovableUnit {
 	 * @param newVelY the new Y velocity
 	 */
 	void setVelY(double newVelY);
-	
+	/**
+	 * 
+	 */
+	public void move(final double tickrate);
 }
