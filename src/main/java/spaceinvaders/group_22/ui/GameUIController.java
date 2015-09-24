@@ -232,6 +232,10 @@ public class GameUIController
     	return framerate;
     }
     
+    /**
+     * Returns the GraphicsContext.
+     * @return the GraphicsContext
+     */
     public static final GraphicsContext getGC(){
     	return gc;
     }
