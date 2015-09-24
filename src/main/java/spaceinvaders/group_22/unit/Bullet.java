@@ -89,6 +89,7 @@ public abstract class Bullet extends Unit implements MovableUnit {
 	 * @return true if both objects are the same.
 	 * @param other the object to compare.
 	 */
+	@SuppressWarnings("checkstyle:DesignForExtension")
 	@Override
 	public boolean equals(final Object other) {
 		if (other != null && other instanceof Bullet) {

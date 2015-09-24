@@ -6,7 +6,7 @@ package spaceinvaders.group_22.unit;
  * @author Ege de Bruin
  */
 
-public class Alien extends Unit implements MovableUnit{
+public class Alien extends Unit implements MovableUnit {
 	
 	/**
 	 * VelX is the velocity in the X direction in pixels per second.
@@ -41,7 +41,7 @@ public class Alien extends Unit implements MovableUnit{
 	 * HashCode method.
 	 * @return hashcode of this object
 	 */
-	@SuppressWarnings("CheckStyle:magicnumber")
+	@SuppressWarnings("CheckStyle:MagicNumber")
 	@Override
 	public final int hashCode() {
 		final int prime = 31;

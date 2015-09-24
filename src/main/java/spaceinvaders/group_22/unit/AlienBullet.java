@@ -23,7 +23,6 @@ public class AlienBullet extends Bullet {
 	 * @param the object to compare this object to
 	 * @return boolean result if provide object is equal to this
 	 */
-	@SuppressWarnings("checkstyle:EqualsHashCode")
 	@Override
 	public final boolean equals(final Object other) {
 		if (other != null && other instanceof AlienBullet) {
