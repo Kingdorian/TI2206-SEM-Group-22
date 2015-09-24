@@ -69,12 +69,9 @@ public class Explosion extends Unit {
 	public final boolean equals(final Object other) {
 		if (other != null && other instanceof Explosion) {
 			Explosion that = (Explosion) other;
-			return this.getXCoor() == that.getXCoor()
-					&& this.getYCoor() == that.getYCoor()
-					&& this.getVelX() == that.getVelX()
-					&& this.getVelY() == that.getVelY()
-					&& this.getHeight() == that.getHeight()
-					&& this.getWidth() == that.getWidth();
+			return super.equals(that)
+					&& this.getXCoor() == that.getXCoor()
+					&& this.getYCoor() == that.getYCoor();
 		}
 		return false;
 	}

@@ -252,7 +252,7 @@ public class Game {
 		}
 		//Move every bullet
 		for (int i = 0; i < bullets.size(); i++) {
-			bullets.get(i).moveUnit(tickrate);
+			bullets.get(i).move(tickrate);
 		}
 		logger.log("Moved bullets", LogEvent.Type.TRACE);
 		
@@ -307,7 +307,7 @@ public class Game {
 			velX = -SpaceShip.MAXVELX;
 		}
 		player.getSpaceShip().setVelX(velX);
-		player.getSpaceShip().moveUnit(tickrate);
+		player.getSpaceShip().move(tickrate);
 		if (velX != 0) {
 			logger.log("Player moved X: " + velX, LogEvent.Type.TRACE);
 		}

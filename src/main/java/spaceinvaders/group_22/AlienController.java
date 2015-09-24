@@ -127,7 +127,7 @@ public class AlienController {
 			if (unit.getYCoor() + unit.getHeight() > game.getPlayer().getSpaceShip().getYCoor()) {
 				game.gameOver();
 			}
-			unit.moveUnit(game.getTickrate());
+			unit.move(game.getTickrate());
 		}
 		String velX = String.valueOf(game.getAliens().get(0).getVelX());
 		String velY = String.valueOf(game.getAliens().get(0).getVelY());
