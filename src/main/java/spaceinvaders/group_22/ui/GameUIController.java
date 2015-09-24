@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.PowerUp;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Barricade;
@@ -219,6 +220,8 @@ public class GameUIController
     		addSprite(spriteMap, "powerup_orange.png");
     		addSprite(spriteMap, "powerup_blue.png");
     		addSprite(spriteMap, "powerup_red.png");
+    		addSprite(spriteMap, "glow_blue.png");
+    		addSprite(spriteMap, "glow_orange.png");
     	return spriteMap;
     }
     
@@ -315,9 +318,19 @@ public class GameUIController
 	private void drawPlayer() {
 		SpaceShip spaceShip = game.getPlayer().getSpaceShip();
 		
+		for (PowerUp powerup : game.getPlayer().getActivePowerUps()) {
+	        // Draw the player glow.
+			Image glowImage = sprites.get(powerup.getGlow());
+			if (glowImage != null) {
+				gc.drawImage(glowImage, spaceShip.getXCoor() - 0.5 * glowImage.getWidth(), 
+						spaceShip.getYCoor() - 0.5 * glowImage.getHeight());			
+			}
+		}
+		
         // Position the player in the middle, on the bottom of the screen.
 		drawUnit(spaceShip.getXCoor(), spaceShip.getYCoor(), spaceShip.getWidth(), 
 				spaceShip.getHeight(), spaceShip.getSprite());
+		
 		game.getLogger().log("Drawn spaceship", LogEvent.Type.TRACE);
 	}
 	

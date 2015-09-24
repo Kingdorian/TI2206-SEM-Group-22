@@ -17,6 +17,11 @@ public abstract class PowerUp {
 	private Player player;
 	
 	/**
+	 * The filename of the glow that has to be applied.
+	 */
+	protected String glow;
+	
+	/**
 	 * Makes a power up for this player.
 	 * @param setplayer to which this power up belongs.
 	 */
@@ -77,6 +82,21 @@ public abstract class PowerUp {
 	 */
 	public final void setPlayer(final Player setplayer) {
 		this.player = setplayer;
+	}
+	
+	/**
+	 * Returns the glow of this power up.
+	 * @return the glow filename of this powerup.
+	 */
+	public final String getGlow() {
+		return glow;
+	}
+	/**
+	 * Sets the glow of this power up.
+	 * @param setglow The glow to set.
+	 */
+	public final void setGlow(final String setglow) {
+		this.glow = setglow;
 	}
 
 }

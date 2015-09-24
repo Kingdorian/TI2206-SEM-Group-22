@@ -21,6 +21,7 @@ public class SpeedPowerUp extends PowerUp {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public SpeedPowerUp(final Player setPlayer) {
 		super(setPlayer);
+		this.setGlow("glow_blue.png");
 	}
 	/**
 	 * Deactivates this powerUp.

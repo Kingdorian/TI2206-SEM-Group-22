@@ -13,7 +13,7 @@ public class ShootPowerUp extends PowerUp {
 	 * Indicates the duration of this powerUP in seconds.
 	 */
 	public static double DURATION = 5.0; 
-	
+		
 	/**
 	 * Creates a Shoot power up which is active.
 	 * @param setPlayer player this powerUp is from.
@@ -21,6 +21,7 @@ public class ShootPowerUp extends PowerUp {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public ShootPowerUp(final Player setPlayer) {
 		super(setPlayer);
+		this.setGlow("glow_orange.png");
 	}
 	/**
 	 * Deactivates this power up.
