@@ -68,7 +68,7 @@ public class KeboardInputTest {
 	public final void testPressSpace() {
 		int bulletAmount = game.getBullets().size();
 		// Make sure the bullet does not accidentally collide with an barricade
-		game.setBarricades(new ArrayList<Barricade>());
+		game.getBarricadeController().setBarricades(new ArrayList<Barricade>());
 		simulEvents.add(KeyCode.SPACE);
 		ArrayList<Alien> alienList = new ArrayList<Alien>();
 		Alien alien = new Alien(0, 0, "invader.png");

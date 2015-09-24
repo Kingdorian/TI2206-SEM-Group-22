@@ -295,7 +295,7 @@ public class GameUIController
 	 */
 	private void drawBarricades() {
 		// Loop over all the barricades 
-		for (Barricade bar : game.getBarricades()) {
+		for (Barricade bar : game.getBarricadeController().getBarricades()) {
 			//Calculate opacity on base of the health of the barricade
 			Double opacity = bar.getHealth() * 0.1;
 			gc.setGlobalAlpha(opacity);

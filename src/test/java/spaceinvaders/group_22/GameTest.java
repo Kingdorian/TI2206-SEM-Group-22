@@ -71,8 +71,8 @@ public class GameTest {
 		ArrayList<Barricade> barricades = new ArrayList<Barricade>();
 		Barricade barricade = new  Barricade(10, 10, "testimage.png");
 		barricades.add(barricade);
-		game.setBarricades(barricades);
-		Assert.assertEquals(barricade, game.getBarricades().get(0));
+		game.getBarricadeController().setBarricades(barricades);
+		Assert.assertEquals(barricade, game.getBarricadeController().getBarricades().get(0));
 	}
 	/**
 	 * Tests if the addBarricade method adds a barricade correctly.
@@ -83,9 +83,9 @@ public class GameTest {
 		ArrayList<Barricade> barricades = new ArrayList<Barricade>();
 		Barricade barricade = new Barricade(10, 10, "testimage.png");
 		barricades.add(barricade);
-		game.setBarricades(new ArrayList<Barricade>());
-		game.addBarricade(barricade);
-		System.out.println(game.getBarricades());
+		game.getBarricadeController().setBarricades(new ArrayList<Barricade>());
+		game.getBarricadeController().addBarricade(barricade);
+		System.out.println(game.getBarricadeController().getBarricades());
 		//Assert.assertEquals(barricades, game.getBarricades());
 	}
 	/**
@@ -144,9 +144,9 @@ public class GameTest {
 	 */
 	@Test
 	public final void testResetBarricades() {
-		game.getBarricades().get(0).hit();
+		game.getBarricadeController().getBarricades().get(0).hit();
 		game.reset();
-		Assert.assertEquals(10, game.getBarricades().get(0).getHealth());
+		Assert.assertEquals(10, game.getBarricadeController().getBarricades().get(0).getHealth());
 	}
 	/**
 	 * Tests if the reset method works correctly for resetting aliens.

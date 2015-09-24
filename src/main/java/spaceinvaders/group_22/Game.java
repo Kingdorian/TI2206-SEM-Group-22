@@ -443,7 +443,11 @@ public class Game {
 	public final void setBullets(final ArrayList<Bullet> list) {
 		bullets = list;
 	}
-	public ArrayList<Barricade> getBarricades() {
-		return barController.getBarricades();
+	/**
+	 * Returns the barricadecontroller in this game, mostly intended for testing purposes...
+	 * @return the barricadeController in this game.
+	 */
+	public BarricadeController getBarricadeController() {
+		return barController;
 	}
 }

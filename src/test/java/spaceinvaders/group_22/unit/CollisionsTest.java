@@ -117,10 +117,10 @@ public class CollisionsTest {
 		ShipBullet bullet = new ShipBullet(5, 6.4, "spaceshipbullet.png");
 		ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 		bullets.add(bullet);
-		game.setBarricades(barricadeList);
+		game.getBarricadeController().setBarricades(barricadeList);
 		game.setBullets(bullets);
 		collisions.checkCollisions();
-		assertEquals(game.getBarricades().get(0).getHealth(), 9);
+		assertEquals(game.getBarricadeController().getBarricades().get(0).getHealth(), 9);
 	}
 
 }

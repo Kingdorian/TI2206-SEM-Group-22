@@ -76,7 +76,7 @@ public class Collisions {
 			}
 		}
 		// Checking for colissions between bullets and barricades
-		for (Barricade bar : game.getBarricades()) {
+		for (Barricade bar : game.getBarricadeController().getBarricades()) {
 			Unit collidingUnit = checkCollisions(bar, new ArrayList<Unit>(game.getBullets()));
 			if (collidingUnit != null) {
 				String logMessage = "Barricade collided bullet at X:" + bar.getXCoor() 
