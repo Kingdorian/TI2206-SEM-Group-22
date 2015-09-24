@@ -1,21 +1,38 @@
 package spaceinvaders.group_22.ui;
 
-import javafx.scene.control.Label;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
 
-public class Score extends UIElement{
+/**
+ * The drawing of the Score.
+ * @author Ege
+ *
+ */
+@SuppressWarnings("checkstyle:magicnumber")  
+public class Score extends UIElement {
 	
+	/**
+	 * The Game.
+	 */
 	private Game game;
+	
+	/**
+	 * The UI controller.
+	 */
 	private GameUIController gameUI;
 	
-	public Score(Game newGame, GameUIController gameUIController){
+	/**
+	 * The constructor.
+	 * @param newGame the Game
+	 * @param gameUIController the UI controller
+	 */
+	public Score(final Game newGame, final GameUIController gameUIController) {
 		game = newGame;
 		gameUI = gameUIController;
 	}
 
 	@Override
-	public void draw() {
+	public final void draw() {
 		int digitsBefore = 8 - Integer.toString(game.getPlayer().getScore()).length();
     	StringBuffer scoreString = new StringBuffer();
     	

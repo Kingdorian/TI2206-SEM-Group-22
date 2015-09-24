@@ -6,26 +6,43 @@ import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.unit.Explosion;
 
-public class UIElementExplosion extends UIElementUnit{
+/**
+ * The drawing of an explosion.
+ * @author Ege
+ *
+ */
+public class UIElementExplosion extends UIElementUnit {
 	
+	/**
+	 * The Game.
+	 */
 	private Game game;
+	
+	/**
+	 * The UI controller.
+	 */
 	private GameUIController gameUI;
 	
-	public UIElementExplosion(Game newGame, GameUIController gameUIController){
+	/**
+	 * The constructor.
+	 * @param newGame the Game
+	 * @param gameUIController the UI controller
+	 */
+	public UIElementExplosion(final Game newGame, final GameUIController gameUIController) {
 		game = newGame;
 		gameUI = gameUIController;
 	}
 
 	@Override
-	public void draw() {
+	public final void draw() {
 		// Create a duplicate to loop over, so deletion is possible.
 				ArrayList<Explosion> explosionList = new ArrayList<Explosion>();
 				explosionList.addAll(game.getExplosions());
 				
 				// For every explosion, draw the explosion.
 				for (Explosion explosion : explosionList) {
-					gameUI.drawUnit(explosion.getXCoor(), explosion.getYCoor(), 
-							explosion.getWidth(), explosion.getHeight(), explosion.getSprite());
+					drawUnit(explosion.getXCoor(), explosion.getYCoor(), 
+							explosion.getWidth(), explosion.getHeight(), explosion.getSprite(), gameUI);
 					
 					// Increase the counter maintaining the time one frame of the animation is visible.
 					explosion.increaseCounter();

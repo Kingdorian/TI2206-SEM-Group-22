@@ -116,17 +116,6 @@ public class GameUIControllerTest {
 		assertTrue(result.containsAll(compare));
 		
 	}
-//	
-//	/**
-//	 * Tests the score formatter.
-//	 */
-//	@Test
-//	public final void testFormatScore() {
-//		Label scoreLabel = gameUIController.getScoreLabel();
-//		gameUIController.formatScore(423455); 
-//		
-//		assertEquals(scoreLabel.getText(), "00423455");
-//	}
 
 	/**
 	 * Tests creation of a new game if the game is not null.
