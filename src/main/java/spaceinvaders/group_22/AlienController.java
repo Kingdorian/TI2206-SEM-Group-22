@@ -13,6 +13,10 @@ import spaceinvaders.group_22.unit.Bullet;
  */
 @SuppressWarnings("checkstyle:magicnumber") 
 public class AlienController {
+	/**
+	 * List of aliens in the game.
+	 */
+	private ArrayList<Alien> aliens = new ArrayList<Alien>();
 	
 	/**
 	 * The game with the controller.
@@ -60,7 +64,7 @@ public class AlienController {
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final ArrayList<Alien> createAlienWave(final double borderDist, final int spriteWidth, 
 			final int spriteHeight, final int alienAmount, final int lines) {
-		ArrayList<Alien> alienList = new ArrayList<Alien>();
+		aliens.clear();
         
         // Distance to top of the screen.
         double distance = 125;
@@ -74,14 +78,14 @@ public class AlienController {
             	Alien alien = new Alien(startPosition, distance, "invader.png");
             	game.getLogger().log("Created Alien", LogEvent.Type.TRACE);
             	alien.setVelX(alienVelX);
-            	alienList.add(alien);
+            	aliens.add(alien);
             	startPosition += spriteWidth + interval;
             }
             distance += spriteHeight + 0.1 * spriteHeight;
             startPosition = borderDist + interval + 0.5 * spriteWidth;
         }
         game.getLogger().log("Created alien wave succesfully", LogEvent.Type.DEBUG);
-		return alienList;	
+		return aliens;	
 	}
 	
 	/**
@@ -91,7 +95,7 @@ public class AlienController {
 	public final void moveAliens() {
 		//check if all aliens are still able to move in the window
 		if (alienFramesDown == 0) {
-			for (Alien unit : game.getAliens()) {
+			for (Alien unit : aliens) {
 				// When this alien is on the right side of the screen change the direction
 				if (unit.getXCoor() + 0.5 * unit.getWidth() >= game.getCanvasWidth()) {
 					alienFramesDown = (alienFall / alienVelY) * (1 / game.getTickrate());
@@ -114,7 +118,7 @@ public class AlienController {
 			alienFramesDown = alienFramesDown - 1;
 		}
 		// move every alien
-		for (Alien unit : game.getAliens()) {
+		for (Alien unit : aliens) {
 			if (alienFramesDown > 0) {
 				unit.setVelY(alienVelY);
 				unit.setVelX(0);			
@@ -129,8 +133,8 @@ public class AlienController {
 			}
 			unit.moveUnit(game.getTickrate());
 		}
-		String velX = String.valueOf(game.getAliens().get(0).getVelX());
-		String velY = String.valueOf(game.getAliens().get(0).getVelY());
+		String velX = String.valueOf(aliens.get(0).getVelX());
+		String velY = String.valueOf(aliens.get(0).getVelY());
 		game.getLogger().log("Aliens moved X: " + velX + "\tY: " + velY, LogEvent.Type.TRACE);
 	}
 
@@ -155,13 +159,27 @@ public class AlienController {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void shootAlienBullets() {
-		if (!game.getAliens().isEmpty() && Math.random() 
-				< ((game.getAliens().size()) * bulletChance * game.getTickrate()) / 40)   {
-			int shootIndex = (int) (Math.random() * game.getAliens().size());
-			Bullet bullet = game.getAliens().get(shootIndex).shootBullet(60);
+		if (!aliens.isEmpty() && Math.random() 
+				< ((aliens.size()) * bulletChance * game.getTickrate()) / 40)   {
+			int shootIndex = (int) (Math.random() * aliens.size());
+			Bullet bullet = aliens.get(shootIndex).shootBullet(60);
 			game.getBullets().add(bullet);
 			String logMessage = "Alien shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
 			game.getLogger().log(logMessage, LogEvent.Type.TRACE);
 		}
+	}
+	/**
+	 * Sets the list of Aliens currently in game.
+	 * @param alienList The ArrayList of aliens to set.
+	 */
+	public final void setAliens(final ArrayList<Alien> alienList) {
+		this.aliens = alienList;
+	}
+	/**
+	 * Gets the list of Aliens currently in game.
+	 * @return The list of aliens currently in game.
+	 */
+	public final ArrayList<Alien> getAliens() {
+		return aliens;
 	}
 }

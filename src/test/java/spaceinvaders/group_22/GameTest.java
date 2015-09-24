@@ -123,7 +123,7 @@ public class GameTest {
 	@Test
 	public final void testSetAliens() {
 		ArrayList<Alien> aliens = new ArrayList<Alien>();		
-		game.setAliens(aliens);
+		game.getAlienController().setAliens(aliens);
 		
 		Assert.assertEquals(new ArrayList<Alien>(), aliens);	
 		
@@ -135,9 +135,9 @@ public class GameTest {
 	@Test
 	public final void testGetAliens() {
 		ArrayList<Alien> aliens = new ArrayList<Alien>();		
-		game.setAliens(aliens);
+		game.getAlienController().setAliens(aliens);
 		
-		Assert.assertEquals(new ArrayList<Alien>(), game.getAliens());
+		Assert.assertEquals(new ArrayList<Alien>(), game.getAlienController().getAliens());
 	}
 	/**
 	 * Tests if the reset method works correctly for resetting barricades.
@@ -153,9 +153,9 @@ public class GameTest {
 	 */
 	@Test
 	public final void testResetAliens() {
-		game.setAliens(new ArrayList<Alien>());
+		game.getAlienController().setAliens(new ArrayList<Alien>());
 		game.reset();
-		Assert.assertEquals(game.ALIENS_PER_ROW*game.AMOUNT_ALIEN_ROWS,	game.getAliens().size());
+		Assert.assertEquals(game.ALIENS_PER_ROW*game.AMOUNT_ALIEN_ROWS,	game.getAlienController().getAliens().size());
 	}
 	/**
 	 * Tests if the reset method works correctly for resetting the player.
@@ -243,7 +243,7 @@ public class GameTest {
 		// Remove all existing bullets from the game.
 		game.reset();
 		ArrayList<Bullet> bulletlist = new ArrayList<Bullet>();
-		bulletlist.add(game.getAliens().get(0).shootBullet(1));
+		bulletlist.add(game.getAlienController().getAliens().get(0).shootBullet(1));
 		game.setBullets(bulletlist);
 		Assert.assertEquals(new ArrayList<Bullet>(), game.getShipBullets());
 	}

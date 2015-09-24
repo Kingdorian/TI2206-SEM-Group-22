@@ -321,7 +321,7 @@ public class GameUIController
 	 * Method to draw the aliens in game.
 	 */
 	private void drawAliens() {
-		for (Alien unit : game.getAliens()) {
+		for (Alien unit : game.getAlienController().getAliens()) {
 			drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(),
 					unit.getHeight(), unit.getSprite());		
 		}

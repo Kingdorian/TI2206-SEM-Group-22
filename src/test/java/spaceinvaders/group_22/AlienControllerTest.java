@@ -59,13 +59,13 @@ public class AlienControllerTest {
 	public final void testMoveAliens() {
 		ArrayList<Double> xValues = new ArrayList<Double>();
 		ArrayList<Double> yValues = new ArrayList<Double>();
-		for (int i = 0; i < game.getAliens().size(); i++) {
-			xValues.add(game.getAliens().get(i).getXCoor());
-			yValues.add(game.getAliens().get(i).getYCoor());
+		for (int i = 0; i < game.getAlienController().getAliens().size(); i++) {
+			xValues.add(game.getAlienController().getAliens().get(i).getXCoor());
+			yValues.add(game.getAlienController().getAliens().get(i).getYCoor());
 		}
 		controller.moveAliens();
-		for (int i = 0; i < game.getAliens().size(); i++) {
-			assertTrue(game.getAliens().get(i).getXCoor() == (xValues.get(i) + 4));
+		for (int i = 0; i < game.getAlienController().getAliens().size(); i++) {
+			assertTrue(game.getAlienController().getAliens().get(i).getXCoor() == (xValues.get(i) + 4));
 		}
 	}
 	
@@ -77,16 +77,16 @@ public class AlienControllerTest {
 	public final void testMoveAliensSide() {
 		ArrayList<Double> xValues = new ArrayList<Double>();
 		ArrayList<Double> yValues = new ArrayList<Double>();
-		for (int i = 0; i < game.getAliens().size(); i++) {
-			xValues.add(game.getAliens().get(i).getXCoor());
-			yValues.add(game.getAliens().get(i).getYCoor());
+		for (int i = 0; i < game.getAlienController().getAliens().size(); i++) {
+			xValues.add(game.getAlienController().getAliens().get(i).getXCoor());
+			yValues.add(game.getAlienController().getAliens().get(i).getYCoor());
 		}
 		for (int i = 0; i < 30; i++) {
 			//Move to the right side of the screen
 			controller.moveAliens();
 		}
-		for (int i = 0; i < game.getAliens().size(); i++) {
-			assertTrue(game.getAliens().get(i).getYCoor() == (yValues.get(i) + 8));
+		for (int i = 0; i < game.getAlienController().getAliens().size(); i++) {
+			assertTrue(game.getAlienController().getAliens().get(i).getYCoor() == (yValues.get(i) + 8));
 		}
 	}
 }

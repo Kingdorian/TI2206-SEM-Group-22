@@ -38,10 +38,6 @@ public class Game {
 	 */
 	private ArrayList<Bullet> bullets;
 	/**
-	 * List of aliens in the game.
-	 */
-	private ArrayList<Alien> aliens;
-	/**
      * List of explosions in the game.
      */
 	private ArrayList<Explosion> explosions;	
@@ -135,7 +131,7 @@ public class Game {
 				// Create an alien to use to get the width and height of the aliens used in this game. 
 		//(based on their sprite size)
 		Alien spriteinfo = new Alien(0, 0, ALIENSPRITE);
-		aliens = alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN,
+		alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN,
 					spriteinfo.getWidth(), spriteinfo.getHeight(), ALIENS_PER_ROW, AMOUNT_ALIEN_ROWS);
 		player = new Player(this);
 		shootingAllowed = true;
@@ -152,7 +148,7 @@ public class Game {
 		
 		alienController = new AlienController(this);
 		Alien spriteinfo = new Alien(0, 0, ALIENSPRITE);
-		aliens = alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN,
+		alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN,
 				spriteinfo.getWidth(), spriteinfo.getHeight(), ALIENS_PER_ROW, AMOUNT_ALIEN_ROWS);
 		player = new Player(this);
 		
@@ -185,7 +181,7 @@ public class Game {
 		// Create an alien to use to get the width and height of the aliens used in this game. 
 		//(based on their sprite size)
 		Alien spriteinfo = new Alien(0, 0, ALIENSPRITE);
-		aliens = alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN, 
+		alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN, 
 					spriteinfo.getWidth(), spriteinfo.getHeight(), ALIENS_PER_ROW, AMOUNT_ALIEN_ROWS);
 		player = new Player(this);
 		shootingAllowed = true;
@@ -267,14 +263,14 @@ public class Game {
 			}
 		}
 		//new wave of aliens
-		if (aliens.isEmpty()) {
+		if (alienController.getAliens().isEmpty()) {
 			logger.log("All aliens died", LogEvent.Type.TRACE);
 			//Increase aliens speed and reset direction so they start moving to the right
 			alienController.setAlienVelX(Math.abs(alienController.getAlienVelX()) + ALIENVELXINCREASE);
 			// Create an alien to use to get the width and height of the aliens used in this game. 
 			//(based on their sprite size)
 			Alien spriteinfo = new Alien(0, 0, ALIENSPRITE);
-			aliens = alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN, 
+			alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN, 
 						spriteinfo.getWidth(), spriteinfo.getHeight(), ALIENS_PER_ROW, AMOUNT_ALIEN_ROWS);
 			bullets.clear();
 			logger.log("Removed all bullets", LogEvent.Type.TRACE);
@@ -315,13 +311,7 @@ public class Game {
 		}
 	}
 	// ONLY SETTERS AND GETTERS BELOW
-	/**
-	 * Sets the list of Aliens currently in game.
-	 * @param alienList The ArrayList of aliens to set.
-	 */
-	public final void setAliens(final ArrayList<Alien> alienList) {
-		this.aliens = alienList;
-	}
+
 	/**
 	 * Set the tickrate for the movement.
 	 * @param framerate of the animation.
@@ -406,13 +396,6 @@ public class Game {
 	 */
 	public final AlienController getAlienController() {
 		return alienController;
-	}
-	/**
-	 * Gets the list of Aliens currently in game.
-	 * @return The list of aliens currently in game.
-	 */
-	public final ArrayList<Alien> getAliens() {
-		return aliens;
 	}
 		/**
 	 * Returns the current frame rate.

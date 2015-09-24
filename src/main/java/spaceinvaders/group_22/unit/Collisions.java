@@ -61,7 +61,7 @@ public class Collisions {
 		}
 		//Checking for colissions between player bullets and aliens
 		for (Unit bullet : shipBullets) {
-			Unit collidingUnit = checkCollisions(bullet, new ArrayList<Unit>(game.getAliens()));
+			Unit collidingUnit = checkCollisions(bullet, new ArrayList<Unit>(game.getAlienController().getAliens()));
 			if (collidingUnit != null) {
 				String logMessage = "Alien collided bullet at X:" + bullet.getXCoor() 
 						+ " Y: " + bullet.getYCoor();
@@ -69,7 +69,7 @@ public class Collisions {
 				
 				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
 						collidingUnit.getYCoor(), "explosion1.png"));
-				game.getAliens().remove(collidingUnit);
+				game.getAlienController().getAliens().remove(collidingUnit);
 				game.getBullets().remove(bullet);
 				game.getPlayer().addScore(10);
 				break;

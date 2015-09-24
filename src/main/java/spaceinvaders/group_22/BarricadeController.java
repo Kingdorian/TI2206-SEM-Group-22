@@ -18,12 +18,12 @@ public class BarricadeController extends UnitController {
 	/**
 	 * ArrayList of all barricades in the Controller.
 	 */
-	private ArrayList<Barricade> barricades;
+	private ArrayList<Barricade> barricades = new ArrayList<Barricade>();
 	/**
 	 * Creates a new barricadeController Object.
 	 * @param parentGame the game where the barricades this controller controls is.
 	 */
-	public BarricadeController (Game parentGame) {
+	public BarricadeController(Game parentGame) {
 		this.game = parentGame;
 	}
 	
