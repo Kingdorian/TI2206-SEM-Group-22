@@ -11,7 +11,7 @@ import spaceinvaders.group_22.unit.Barricade;
  *
  */
 public class BarricadeController extends UnitController {
-	/*
+	/**
 	 * Game that this controller is part of.
 	 */
 	private Game game;
@@ -21,7 +21,7 @@ public class BarricadeController extends UnitController {
 	private ArrayList<Barricade> barricades;
 	/**
 	 * Creates a new barricadeController Object.
-	 * @param parentGame
+	 * @param parentGame the game where the barricades this controller controls is.
 	 */
 	public BarricadeController (Game parentGame) {
 		this.game = parentGame;
@@ -29,10 +29,12 @@ public class BarricadeController extends UnitController {
 	
 	/**
 	 * Creates the barricades for this Controller.
-	 * @return the barricades in this Controller.
 	 */
+	@SuppressWarnings("checkstyle:MagicNumber")
 	public final void create() {
 		int barricadeCount = 4;
+		// Offset from the bottom in pixels
+		int bottomOfset = 110;
 		int interval = (int) game.getCanvasWidth() / (barricadeCount + 1);
 		barricades.clear();
 		for (int i = 1; i <= barricadeCount; i++) {
