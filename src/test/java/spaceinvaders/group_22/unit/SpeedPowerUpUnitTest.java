@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.Player;
+import spaceinvaders.group_22.ShootPowerUp;
 
 /**
  * Test for Speed Power Up, extends PowerUpTest Test.
@@ -24,8 +25,10 @@ public class SpeedPowerUpUnitTest extends PowerUpUnitTest {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activatePowerUpTest() {
 		SpeedPowerUpUnit powerUp = new SpeedPowerUpUnit(500, 200, "testimage.png");
-		powerUp.activate(new Player(new Game(1000, 720)));
-		assertEquals(SpaceShip.MAXVELX, 750);
+		Player player = new Player(new Game(1000, 720));
+		powerUp.activate(player);
+		
+		assertEquals(player.getSpaceShip().getVelMultiplier(), 2.5, 0.f);
 	}
 
 }

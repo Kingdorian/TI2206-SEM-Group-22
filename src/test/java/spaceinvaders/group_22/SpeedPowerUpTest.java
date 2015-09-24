@@ -28,7 +28,7 @@ public class SpeedPowerUpTest extends PowerUpTest {
 		Player player = new Player(game);
 		PowerUp powerup = new SpeedPowerUp(player);
 		powerup.deactivate();
-		assertEquals(SpaceShip.MAXVELX, 250);
+		assertEquals(player.getSpaceShip().getVelMultiplier(), 1.0, 0.f);
 	}
 
 }

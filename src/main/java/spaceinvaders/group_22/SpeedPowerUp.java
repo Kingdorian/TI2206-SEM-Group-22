@@ -28,14 +28,16 @@ public class SpeedPowerUp extends PowerUp {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
 	protected final void deactivate() {
-		SpaceShip.MAXVELX = 250;
+		getPlayer().getSpaceShip().setVelMultiplier(1.0);
 		super.getPlayer().getActivePowerUps().remove(this);
+		getPlayer().getSpaceShip().updateMultiplier();
 	}	
 	@Override
 	@SuppressWarnings("checkstyle:magicnumber")
 	protected final void activate() {
 		getPlayer().getActivePowerUps().add(this);
 		setTimeLeft(DURATION);
-		SpaceShip.MAXVELX = 750;
+		getPlayer().getSpaceShip().setVelMultiplier(2.5);
+		getPlayer().getSpaceShip().updateMultiplier();
 	}
 }

@@ -6,6 +6,12 @@ import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
+import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.Player;
+import spaceinvaders.group_22.PowerUp;
+import spaceinvaders.group_22.ShootPowerUp;
+import spaceinvaders.group_22.SpeedPowerUp;
+
 /**
  * Test for the SpaceShip class which extends UnitTest.
  * @author Bryan van Wijk
@@ -65,4 +71,32 @@ public class SpaceShipTest extends UnitTest {
 		SpaceShip ship1 = new SpaceShip(1.2, 3, "testimage.png");
 		assertNotEquals(ship1, null);
 	}
+	
+	/**
+	 * Test the multiplier update method.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testUpdateMultiplierSpeed() {
+		Game game = new Game(1000, 750);
+		Player player = new Player(game);
+		player.getActivePowerUps().add(new SpeedPowerUp(player));
+		player.getSpaceShip().updateMultiplier();
+		assertEquals(625, player.getSpaceShip().MAXVELX, 0.f);
+	}
+	
+	/**
+	 * Test the multiplier update method.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void testUpdateMultiplierShoot() {
+		Game game = new Game(1000, 750);
+		Player player = new Player(game);
+		player.getActivePowerUps().add(new ShootPowerUp(player));
+		player.getSpaceShip().updateMultiplier();
+		assertEquals(2, player.getSpaceShip().shootTimes, 0.f);
+
+	}
+
 }

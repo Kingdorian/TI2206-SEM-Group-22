@@ -28,15 +28,17 @@ public class ShootPowerUp extends PowerUp {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
 	protected final void deactivate() {
-		SpaceShip.shootTimes = 1;
+		getPlayer().getSpaceShip().setShootingMultiplier(1.0);
 		super.getPlayer().getActivePowerUps().remove(this);
+		getPlayer().getSpaceShip().updateMultiplier();
 	}
 	@Override
 	@SuppressWarnings("checkstyle:magicnumber")
 	protected final void activate() {
 		getPlayer().getActivePowerUps().add(this);
 		setTimeLeft(DURATION);
-		SpaceShip.shootTimes = 2;
+		getPlayer().getSpaceShip().setShootingMultiplier(2.0);
+		getPlayer().getSpaceShip().updateMultiplier();
 	}
 
 }
