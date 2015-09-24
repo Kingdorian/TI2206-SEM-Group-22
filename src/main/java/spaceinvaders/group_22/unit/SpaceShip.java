@@ -4,18 +4,19 @@ package spaceinvaders.group_22.unit;
  * A SpaceShip in the game extends Unit.
  * 
  * @author Bryan van Wijk
+ * @author Dorian
  */
 
-public class SpaceShip extends Unit implements MovableUnit{
+public class SpaceShip extends Unit implements MovableUnit {
 	/**
 	 * VelX is the velocity in the X direction in pixels per second.
 	 */
-	double velX = 0.0;
+	private double velX = 0.0;
 	
 	/**
 	 * velY is the velocity in the Y direction in pixels per second.
 	 */
-	double velY = 0.0;
+	private double velY = 0.0;
 	
 	/**
 	 * Indicates the max speed at which a spaceship can travel.
@@ -61,6 +62,7 @@ public class SpaceShip extends Unit implements MovableUnit{
 	 * HashCode method.
 	 * @return hashcode of this object
 	 */
+	@SuppressWarnings({"checkstyle:magicnumber", "checkstyle:DesignForExtension"})
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -76,7 +78,7 @@ public class SpaceShip extends Unit implements MovableUnit{
 	 * Move the unit in the direction of this unit and with his velocity.
 	 * @param tickrate The rate at which the game ticks.
 	 */
-	public void move(double tickrate) {
+	public final void move(final double tickrate) {
 		setXCoor(this.getXCoor() + (this.getVelX() * tickrate));
 		setYCoor(this.getYCoor() + (this.getVelY() * tickrate));
 	}	

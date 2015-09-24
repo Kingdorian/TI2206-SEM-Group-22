@@ -5,17 +5,17 @@ package spaceinvaders.group_22.unit;
  * @author Ege de Bruin
  */
 
-public abstract class Bullet extends Unit implements MovableUnit{
+public abstract class Bullet extends Unit implements MovableUnit {
 
 	/**
 	 * VelX is the velocity in the X direction in pixels per second.
 	 */
-	double velX;
+	private double velX;
 	
 	/**
 	 * velY is the velocity in the Y direction in pixels per second.
 	 */
-	double velY;
+	private double velY;
 	
 	/**
 	 * Creates a Bullet.
@@ -31,15 +31,7 @@ public abstract class Bullet extends Unit implements MovableUnit{
 	 * Move the unit in the direction of this unit and with his velocity.
 	 * @param tickrate The rate at which the game ticks.
 	 */
-	public final void move(final Double tickrate) {
-		setXCoor(this.getXCoor() + (this.getVelX() * tickrate));
-		setYCoor(this.getYCoor() + (this.getVelY() * tickrate));
-	}
-	/**
-	 * Move the unit in the direction of this unit and with his velocity.
-	 * @param tickrate The rate at which the game ticks.
-	 */
-	public void move(double tickrate) {
+	public final void move(final double tickrate) {
 		setXCoor(this.getXCoor() + (this.getVelX() * tickrate));
 		setYCoor(this.getYCoor() + (this.getVelY() * tickrate));
 	}
@@ -79,8 +71,9 @@ public abstract class Bullet extends Unit implements MovableUnit{
 	 * HashCode method.
 	 * @return hashcode of this object
 	 */
+	@SuppressWarnings("checkstyle:magicnumber")
 	@Override
-	public int hashCode() {
+	public final int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		long temp;

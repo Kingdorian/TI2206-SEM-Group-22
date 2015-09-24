@@ -1,5 +1,9 @@
 package spaceinvaders.group_22.unit;
-
+/**
+ * Interface for Subclasses of the Unit class that move.
+ * @author Dorian
+ *
+ */
 public interface MovableUnit {
 
 	/**
@@ -23,7 +27,8 @@ public interface MovableUnit {
 	 */
 	void setVelY(double newVelY);
 	/**
-	 * 
+	 * Moves the Unit according to its velocity.
+	 * @param tickrate the amount of ticks per second of the game.
 	 */
-	public void move(final double tickrate);
+	 void move(final double tickrate);
 }

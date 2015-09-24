@@ -107,7 +107,6 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEquals() {
-		System.out.println(unit.hashCode());
 		Unit unit2 = createInstance(1.2, 3, "testimage.png");
 		System.out.println(unit2.hashCode());
 		assertEquals(unit, unit2);

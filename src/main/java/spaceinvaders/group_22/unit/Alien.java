@@ -11,12 +11,12 @@ public class Alien extends Unit implements MovableUnit{
 	/**
 	 * VelX is the velocity in the X direction in pixels per second.
 	 */
-	double velX;
+	private double velX;
 	
 	/**
 	 * velY is the velocity in the Y direction in pixels per second.
 	 */
-	double velY;
+	private double velY;
 	/**
 	 * Creates an Alien.
 	 * @param x X coordinate
@@ -41,8 +41,9 @@ public class Alien extends Unit implements MovableUnit{
 	 * HashCode method.
 	 * @return hashcode of this object
 	 */
+	@SuppressWarnings("CheckStyle:magicnumber")
 	@Override
-	public int hashCode() {
+	public final int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		long temp;
@@ -61,7 +62,6 @@ public class Alien extends Unit implements MovableUnit{
 	@Override
 	public final boolean equals(final Object other) {
 		if (other != null && other instanceof Alien) {
-			System.out.println("helelo");
 			Alien that = (Alien) other;
 			return 	super.equals(that)
 					&& this.getVelX() == that.getVelX()
@@ -73,7 +73,7 @@ public class Alien extends Unit implements MovableUnit{
 	 * Move the unit in the direction of this unit and with his velocity.
 	 * @param tickrate The rate at which the game ticks.
 	 */
-	public void move(double tickrate) {
+	public final void move(final double tickrate) {
 		setXCoor(this.getXCoor() + (this.getVelX() * tickrate));
 		setYCoor(this.getYCoor() + (this.getVelY() * tickrate));
 	}

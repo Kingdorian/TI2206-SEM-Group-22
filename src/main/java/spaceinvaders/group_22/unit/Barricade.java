@@ -34,7 +34,7 @@ public class Barricade extends Unit {
 		return health;
 	}
 	@Override
-	public boolean equals(Object obj) {
+	public final boolean equals(final Object obj) {
 		if (this == obj) {
 			return true;
 		}
@@ -54,7 +54,7 @@ public class Barricade extends Unit {
 		return true;
 	}
 	@Override
-	public int hashCode() {
+	public final int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + health;

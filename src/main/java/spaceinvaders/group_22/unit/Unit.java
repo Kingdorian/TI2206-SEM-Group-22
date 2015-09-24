@@ -7,7 +7,6 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 import spaceinvaders.group_22.Game;
-import spaceinvaders.group_22.logger.LogEvent;
 
 /**
  * A unit in the game that has a position and velocity.
@@ -69,9 +68,9 @@ public abstract class Unit {
 	 * @return true if both objects are the same.
 	 * @param other the object to compare.
 	 */
+	@SuppressWarnings("checksytle:DesignForExtension")
 	@Override
-	public boolean equals(Object obj) {
-		System.out.println("helelo");
+	public boolean equals(final Object obj) {
 		if (this == obj) {
 			return true;	
 		}
@@ -86,8 +85,9 @@ public abstract class Unit {
 			return false;
 		}
 		if (sprite == null) {
-			if (other.sprite != null)
+			if (other.sprite != null) {
 				return false;
+			}
 		} else if (!sprite.equals(other.sprite)) {
 			return false;
 		}
@@ -107,6 +107,7 @@ public abstract class Unit {
 	 * Returns hashcode of this object.
 	 * @return hashcode of this object.
 	 */
+	@SuppressWarnings({"checkstyle:magicnumber", "checkstyle:AvoidInlineConditionals", "checkstyle:DesignForExtension"})
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -143,14 +144,14 @@ public abstract class Unit {
 	 * Sets the current X coordinate of this unit.
 	 * @param newxCoor the current X coordinate of this unit to set.
 	 */
-	protected void setXCoor(final double newxCoor) {
+	protected final void setXCoor(final double newxCoor) {
 		this.xCoor = newxCoor;
 	}
 	/**
 	 * Sets the current Y coordinate of this unit.
 	 * @param newyCoor the current Y coordinate of this unit to set.
 	 */
-	protected void setYCoor(final double newyCoor) {
+	protected final void setYCoor(final double newyCoor) {
 		this.yCoor = newyCoor;
 	}
 	/**
