@@ -1,0 +1,26 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{geometry}
+\geometry{portrait, margin=1.5in}
+
+\begin{document}
+The following new classes were created for the implementation of the PowerUp feature.//
+In the table the responsibilities and collaborations are presented for every class.
+\begin{center}
+    \begin{tabular}{ | p{3cm} | p{4cm} | p{3cm} | p{2cm} | p{3cm} |}
+  \hline
+    Class & Responsibility & Collaborates with & Super & Sub \\ \hline
+   PowerUpUnit & Location, seize and speed  &  & Unit & SpeedPowerUpUnit, LifePowerUpUnit, ShootPowerUpUnit \\ \hline
+   SpeedPowerUpUnit & Creation active PowerUp  & SpeedPowerUp & PowerUpUnit & \\ \hline
+  ShootPowerUpUnit & Creation active PowerUp & ShootPowerUp & PowerUpUnit & \\ \hline
+  LifePowerUpUnitt & Activation powerUp & Player  & PowerUpUnit & \\ \hline
+   SpeedPowerUp & Activation and deactivation powerUp & SpaceShip & PowerUp & \\ \hline
+  ShootPowerUp & Activation and deactivation powerUp & SpaceShip & PowerUp &  \\  \hline
+   PowerUp & Counting time left  & Player &  & ShootPowerUp, SpeedPowerUp  \\  \hline
+   PowerUpController & Movement and creation PowerUp units & Game, Collisions &  &  \\  \hline
+ 
+    \end{tabular}
+\end{center}
+
+\end{document}
