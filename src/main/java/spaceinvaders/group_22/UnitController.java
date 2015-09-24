@@ -1,9 +1,5 @@
 package spaceinvaders.group_22;
 
-import java.util.ArrayList;
-
-import spaceinvaders.group_22.unit.Unit;
-
 /**
  * Abstract class for controling units.
  * @author Dorian
@@ -11,7 +7,7 @@ import spaceinvaders.group_22.unit.Unit;
  */
 public abstract class UnitController {
 	/**
-	 * The game this controller is part of;
+	 * The game this controller is part of.
 	 */
 	protected Game game;
 	
@@ -23,7 +19,9 @@ public abstract class UnitController {
 		game = parentgame;
 		System.out.println(game);
 	}
-	
+	/**
+	 * Creates the units this controller controls.
+	 */
 	public abstract void create();
 
 }

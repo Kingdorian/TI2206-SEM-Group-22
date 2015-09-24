@@ -69,11 +69,6 @@ public class AlienController extends UnitController implements MovableUnitContro
 	/**
 	 * Creates the aliens on the correct start positions.
 	 * @return an arraylist of Aliens drawn.
-	 * @param borderDist Distance to the left and right border.
-	 * @param spriteWidth Width of the sprite.
-	 * @param spriteHeight Height of the sprite.
-	 * @param alienAmount Amount of aliens per line.
-	 * @param lines Amount of alien lines.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void create() {
@@ -83,7 +78,8 @@ public class AlienController extends UnitController implements MovableUnitContro
         double distance = 125;
         // Create alien object to make sure we can get the width and height of aliens
         Alien testAlien = new Alien(0.0, 0.0, Alien.SPRITE); 
-        double interval = (game.getCanvasWidth() - 2 * ALIENBORDERMARIGIN - ALIENS_PER_ROW * testAlien.getWidth()) / (ALIENS_PER_ROW + 1);  
+        double interval = (game.getCanvasWidth() - 2 * ALIENBORDERMARIGIN
+        						- ALIENS_PER_ROW * testAlien.getWidth()) / (ALIENS_PER_ROW + 1);  
         double startPosition = ALIENBORDERMARIGIN + interval + 0.5 * testAlien.getWidth();
        
         // Drawing lines of Aliens.
@@ -95,7 +91,7 @@ public class AlienController extends UnitController implements MovableUnitContro
             	aliens.add(alien);
             	startPosition += testAlien.getWidth() + interval;
             }
-            distance += 1.1 * testAlien.getHeight() ;
+            distance += 1.1 * testAlien.getHeight();
             startPosition = ALIENBORDERMARIGIN + interval + 0.5 * testAlien.getWidth();
         }
         game.getLogger().log("Created alien wave succesfully", LogEvent.Type.DEBUG);

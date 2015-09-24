@@ -6,13 +6,10 @@ import java.util.ArrayList;
 
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
-import spaceinvaders.group_22.unit.Alien;
-import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Collisions;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.ShipBullet;
-import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
  * 
@@ -191,6 +188,7 @@ public class Game {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
 		if (pressedKeys.contains(KeyCode.SPACE) && shootingAllowed) {
+			System.out.println(spaceShipBulletVelX);
 			Bullet bullet = player.getSpaceShip().shootBullet(-spaceShipBulletVelX);
 			bullets.add(bullet);
 			shootingAllowed = false;
@@ -217,7 +215,20 @@ public class Game {
 			}
 		}
 		logger.log("Moved bullets", LogEvent.Type.TRACE);
+		//Move every bullet
+		for (int i = 0; i < bullets.size(); i++) {
+			bullets.get(i).moveUnit(tickrate);
+		}
+		logger.log("Moved bullets", LogEvent.Type.TRACE);
 		
+		collisions.checkCollisions();
+		for (int i = 0; i < barController.getBarricades().size(); i++)  {
+			if (barController.getBarricades().get(i).getHealth() == 0) {
+				barController.getBarricades().remove(i);
+				logger.log("Removed barricade", LogEvent.Type.TRACE);
+				i--;
+			}
+		}
 		collisions.checkCollisions();
 		barController.removeDead();
 		//new wave of aliens
@@ -350,14 +361,14 @@ public class Game {
 	 * Returns the barricadecontroller in this game, mostly intended for testing purposes...
 	 * @return the barricadeController in this game.
 	 */
-	public BarricadeController getBarricadeController() {
+	public final BarricadeController getBarricadeController() {
 		return barController;
 	}
 	/**
 	 * Returns the spaceshipcontroller in this game.
 	 * @return the spaceshipcontroller in this game.
 	 */
-	public SpaceShipController getSpaceShipController() {
+	public final SpaceShipController getSpaceShipController() {
 		return spaceShipContr;
 	}
 }

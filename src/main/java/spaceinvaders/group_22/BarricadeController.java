@@ -30,7 +30,7 @@ public class BarricadeController extends UnitController {
 	/**
 	 * Creates the barricades for this Controller.
 	 */
-	@SuppressWarnings("checkstyle:MagicNumber")
+	@SuppressWarnings("checkstyle:magicnumber")
 	public final void create() {
 		int barricadeCount = 4;
 		// Offset from the bottom in pixels

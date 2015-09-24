@@ -7,16 +7,15 @@ import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
- * Class for controlling the spaceship
+ * Class for controlling the spaceship.
  * @author Dorian
  */
 public class SpaceShipController extends UnitController implements MovableUnitController {
 
 	/**
 	 * Creates a new spaceShipcontroller.
-	 * @param parentgame the game the controller is part of
 	 */
-	public SpaceShipController(Game parentGame) {
+	public SpaceShipController(final Game parentGame) {
 		super(parentGame);
 	}
 	@Override
@@ -28,6 +27,7 @@ public class SpaceShipController extends UnitController implements MovableUnitCo
 	 * Moves the spaceship.
 	 * @param pressedKeys the keys pressed since last tick
 	 */
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void moveSpaceShip(final ArrayList<KeyCode> pressedKeys) {
 		double velX = game.getPlayer().getSpaceShip().getVelX() * 0.98;
 		SpaceShip playership = game.getPlayer().getSpaceShip();
@@ -42,7 +42,8 @@ public class SpaceShipController extends UnitController implements MovableUnitCo
 				&& pressedKeys.contains(KeyCode.A)) {
 			velX = velX - SpaceShip.MAXVELX * game.getTickrate() * 2;
 		}
-		if (game.getPlayer().getSpaceShip().getXCoor() + 0.5 * game.getPlayer().getSpaceShip().getWidth() < game.getCanvasWidth()
+		if (game.getPlayer().getSpaceShip().getXCoor() 
+				+ 0.5 * game.getPlayer().getSpaceShip().getWidth() < game.getCanvasWidth()
 				&& pressedKeys.contains(KeyCode.D)) {
 			velX = velX + SpaceShip.MAXVELX * game.getTickrate() * 2;
 		}
