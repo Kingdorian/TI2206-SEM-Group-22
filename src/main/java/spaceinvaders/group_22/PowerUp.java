@@ -8,6 +8,11 @@ package spaceinvaders.group_22;
 public abstract class PowerUp {
 	
 	/**
+	 * Indicates the duration of this powerUP in seconds.
+	 */
+	public static double DURATION = 5.0; 
+	
+	/**
 	 * Time left in seconds this Power Up can be active.
 	 */
 	private Double timeLeft;
@@ -46,8 +51,9 @@ public abstract class PowerUp {
 	 * @param timePast The time past.
 	 */
 	public final void decreaseTimeLeft(final Double timePast) {
-		this.timeLeft = timeLeft - timePast;
-		if (timeLeft < 0) {
+		this.timeLeft = this.timeLeft - timePast;
+		activate();
+		if (timeLeft <= 0) {
 			deactivate();
 		}
 	}

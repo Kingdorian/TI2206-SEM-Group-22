@@ -22,6 +22,8 @@ public class SpeedPowerUp extends PowerUp {
 	public SpeedPowerUp(final Player setPlayer) {
 		super(setPlayer);
 		this.setGlow("glow_blue.png");
+		super.getPlayer().getActivePowerUps().add(this);
+		setTimeLeft(DURATION);
 	}
 	/**
 	 * Deactivates this powerUp.
@@ -33,9 +35,7 @@ public class SpeedPowerUp extends PowerUp {
 	}	
 	@Override
 	@SuppressWarnings("checkstyle:magicnumber")
-	protected final void activate() {
-		getPlayer().getActivePowerUps().add(this);
-		setTimeLeft(DURATION);
+	protected final void activate() {	
 		SpaceShip.MAXVELX = 750;
 	}
 }
