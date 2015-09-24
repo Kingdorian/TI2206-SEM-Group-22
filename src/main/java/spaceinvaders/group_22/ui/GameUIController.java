@@ -110,6 +110,34 @@ public class GameUIController
      * The graphicscontext of the Canvas.
      */
     private static GraphicsContext gc;
+    /**
+     * The drawing of the SpaceShip.
+     */
+    private UIElementSpaceShip uiSpaceShip;
+    /**
+     * The drawing of the Alien.
+     */
+    private UIElementAlien uiAlien;
+    /**
+     * The drawing of the Bullet.
+     */
+    private UIElementBullet uiBullet;
+    /**
+     * The drawing of the Explosion.
+     */
+    private UIElementExplosion uiExplosion;
+    /**
+     * The drawing of the Barricade.
+     */
+    private UIElementBarricade uiBarricade;
+    /**
+     * The drawing of the score.
+     */
+    private Score uiScore;
+    /**
+     * The drawing of the lives;
+     */
+    private Lives uiLives;
     
     /**
      * Called by the FXMLLoader. 
@@ -127,6 +155,14 @@ public class GameUIController
     	game.getLogger().log("Set canvas width to: " + canvasWidth, LogEvent.Type.INFO);
     	game.getLogger().log("Set canvas height to: " + canvasHeight, LogEvent.Type.INFO);
     	game.getLogger().log("Show screen Before Play", LogEvent.Type.INFO);
+    	
+    	uiAlien = new UIElementAlien(game);
+    	uiSpaceShip = new UIElementSpaceShip(game);
+    	uiBullet = new UIElementBullet(game);
+    	uiExplosion = new UIElementExplosion(game);
+    	uiBarricade = new UIElementBarricade(game);
+    	uiScore = new Score(game);
+    	uiLives = new Lives(game);
     	
     	canvas.setFocusTraversable(true);
     }
@@ -259,15 +295,15 @@ public class GameUIController
 						}
 						
 						// Draw the various units on the screen.
-						drawPlayer();
-						drawAliens();
-						drawExplosions();
-						drawBullets();
-						drawBarricades();
+						uiSpaceShip.draw();
+						uiAlien.draw();
+						uiBullet.draw();
+						uiBarricade.draw();
+						uiExplosion.draw();
 	
 						// Draw the lives and score on the screen.
-						formatLives(game.getPlayer().getLives());
-						formatScore(game.getPlayer().getScore());
+						uiLives.draw();
+						uiScore.draw();
 						
 						if (pressedKeys.contains(KeyCode.SPACE)) {
 					    	pressedKeys.remove(KeyCode.SPACE);
@@ -291,138 +327,12 @@ public class GameUIController
     }
 	
 	/**
-	 * Method to draw all the barricades.
-	 */
-	private void drawBarricades() {
-		// Loop over all the barricades 
-		for (Barricade bar : game.getBarricades()) {
-			//Calculate opacity on base of the health of the barricade
-			Double opacity = bar.getHealth() * 0.1;
-			gc.setGlobalAlpha(opacity);
-			drawUnit(bar.getXCoor(), bar.getYCoor(), bar.getWidth(), bar.getHeight(), bar.getSprite());
-			gc.setGlobalAlpha(1);
-		}
-		game.getLogger().log("Drawn barricades", LogEvent.Type.TRACE);
-	}
-	
-	/**
-	 * Method to draw the player spaceship.
-	 */
-	private void drawPlayer() {
-		SpaceShip spaceShip = game.getPlayer().getSpaceShip();
-		
-        // Position the player in the middle, on the bottom of the screen.
-		drawUnit(spaceShip.getXCoor(), spaceShip.getYCoor(), spaceShip.getWidth(), 
-				spaceShip.getHeight(), spaceShip.getSprite());
-		game.getLogger().log("Drawn spaceship", LogEvent.Type.TRACE);
-	}
-	
-	/**
-	 * Method to draw the aliens in game.
-	 */
-	private void drawAliens() {
-		for (Alien unit : game.getAliens()) {
-			drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(),
-					unit.getHeight(), unit.getSprite());		
-		}
-		game.getLogger().log("Drawn aliens", LogEvent.Type.TRACE);
-	}
-	
-	/**
-	 * Method to draw the bullets in game.
-	 */
-	private void drawBullets() {
-		for (Bullet bullet : game.getBullets()) {
-			drawUnit(bullet.getXCoor(), bullet.getYCoor(), 
-					bullet.getWidth(), bullet.getHeight(), bullet.getSprite());
-		}
-		game.getLogger().log("Drawn bullets", LogEvent.Type.TRACE);
-	}
-	
-	/**
-	 * Method to draw the explosions in game.
-	 */
-	private void drawExplosions() {
-		// Create a duplicate to loop over, so deletion is possible.
-		ArrayList<Explosion> explosionList = new ArrayList<Explosion>();
-		explosionList.addAll(game.getExplosions());
-		
-		// For every explosion, draw the explosion.
-		for (Explosion explosion : explosionList) {
-			drawUnit(explosion.getXCoor(), explosion.getYCoor(), 
-					explosion.getWidth(), explosion.getHeight(), explosion.getSprite());
-			
-			// Increase the counter maintaining the time one frame of the animation is visible.
-			explosion.increaseCounter();
-
-			if (explosion.getCounter() % 5 == 0) {
-				// Increase the index of the animation sprite, so the next image is shown.
-				explosion.increaseAnimationIndex();
-				explosion.setSprite("explosion" + explosion.getAnimationIndex() + ".png");
-			}
-			if (explosion.getAnimationIndex() == 5) {
-				// If we reach the final animation index, 
-				// remove the explosion since the animation has ended.
-				game.getExplosions().remove(explosion);
-			}
-		}
-		game.getLogger().log("Drawn explosions", LogEvent.Type.TRACE);
-	}
-	
-    /**
-     * Method to display the lives on the screen.
-     * @param lives The amount of lives the player has.
-     */
-    public final void formatLives(final int lives) {
-    	Image heartImage = sprites.get("heart.png");
-    	for (int i = 1; i <= lives; i++) {
-        	gc.drawImage(heartImage, canvas.getWidth() - 10 - heartImage.getWidth() * i, 10);
-    	}
-    	game.getLogger().log("Formatted hearts to UI", LogEvent.Type.TRACE);
-    }
-	
-	/**
-	 * Method to display the score on the screen.
-	 * @param score The score to be displayed.
-	 */
-	public final void formatScore(final int score) {
-    	int digitsBefore = 8 - Integer.toString(score).length();
-    	StringBuffer scoreString = new StringBuffer();
-    	
-    	for (int i = 0; i < digitsBefore; i++) {
-    		scoreString.append("0");
-    	}
-    	scoreString.append(score);
-    	
-    	scoreLabel.setText(scoreString.toString());	
-    	game.getLogger().log("Formatted score to UI", LogEvent.Type.TRACE);
-	}
-	
-	/**
 	 * Returns the scoreLabel.
 	 * @return The scoreLabel of the UI.
 	 */
 	public final Label getScoreLabel() {
 		return scoreLabel;
 	}
- 
-    /**
-     * Method to draw the Players Spaceship.
-     * @param x The horizontal position of the player to draw.
-     * @param y The vertical position of the player to draw.
-     * @param spriteWidth The width of the sprite to draw.
-     * @param spriteHeight The heifht of the sprite to draw.
-     * @param sprite Image containing the sprite to draw.
-     */  
-    public final void drawUnit(final double x, final double y, final double spriteWidth, 
-    		final double spriteHeight, final String sprite) {
-        
-        // Draw the player with the X and Y coordinates as center
-		Image spriteImage = sprites.get(sprite);
-		if (spriteImage != null) {
-			gc.drawImage(spriteImage, x - 0.5 * spriteWidth, y - 0.5 * spriteHeight);			
-		}
-    }
 	
 	/**
 	 * Handles if a key is pressed.
