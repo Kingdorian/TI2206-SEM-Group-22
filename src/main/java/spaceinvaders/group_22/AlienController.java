@@ -13,7 +13,7 @@ import spaceinvaders.group_22.unit.Bullet;
  *
  */
 @SuppressWarnings("checkstyle:magicnumber") 
-public class AlienController {
+public class AlienController extends UnitController {
 	/**
 	 * Part of the screen (on left and right) that cannot be used when creating aliens. 
 	 */
@@ -36,10 +36,6 @@ public class AlienController {
 	 */
 	private ArrayList<Alien> aliens = new ArrayList<Alien>();
 	
-	/**
-	 * The game with the controller.
-	 */
-	private Game game;
 	 /**
      * If 0 the aliens don't have to move any frame down.
      */
@@ -67,7 +63,7 @@ public class AlienController {
 	 * @param newGame The Game where the AlienController comes.
 	 */
 	public AlienController(final Game newGame) {
-		game = newGame;
+		super(newGame);
 	}
 	
 	/**
@@ -80,7 +76,7 @@ public class AlienController {
 	 * @param lines Amount of alien lines.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")    
-	public final ArrayList<Alien> createAlienWave() {
+	public final void create() {
 		aliens.clear();
         
         // Distance to top of the screen.
@@ -103,14 +99,13 @@ public class AlienController {
             startPosition = ALIENBORDERMARIGIN + interval + 0.5 * testAlien.getWidth();
         }
         game.getLogger().log("Created alien wave succesfully", LogEvent.Type.DEBUG);
-		return aliens;	
 	}
 	
 	/**
 	 * Method to move all the aliens in the right direction.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber") 
-	public final void moveAliens() {
+	public final void move() {
 		//check if all aliens are still able to move in the window
 		if (alienFramesDown == 0) {
 			for (Alien unit : aliens) {
@@ -192,7 +187,7 @@ public class AlienController {
 	public final void nextRound() {
 		game.getLogger().log("proceding to next round", LogEvent.Type.INFO);
 		alienVelX = Math.abs(alienVelX) + AlienController.ALIENVELXINCREASE;
-		createAlienWave();
+		create();
 	}
 	/**
 	 * Sets the list of Aliens currently in game.

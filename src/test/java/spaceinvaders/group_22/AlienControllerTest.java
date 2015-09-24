@@ -43,7 +43,8 @@ public class AlienControllerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testCreateAlienWave() {
-		ArrayList<Alien> aliens = controller.createAlienWave();
+		controller.create();
+		ArrayList<Alien> aliens = controller.getAliens();
 		assertEquals(AlienController.ALIENS_PER_ROW*AlienController.AMOUNT_ALIEN_ROWS, aliens.size());
 		for (int i = 0; i < aliens.size(); i++) {
 			//Test if every alien has the right sprite
@@ -52,40 +53,29 @@ public class AlienControllerTest {
 	}
 
 	/**
-	 * Test the moveAliens method.
+	 * Test the move method.
 	 */
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber") 
-	public final void testMoveAliens() {
+	public final void testmove() {
 		ArrayList<Double> xValues = new ArrayList<Double>();
 		ArrayList<Double> yValues = new ArrayList<Double>();
 		for (int i = 0; i < game.getAlienController().getAliens().size(); i++) {
 			xValues.add(game.getAlienController().getAliens().get(i).getXCoor());
 			yValues.add(game.getAlienController().getAliens().get(i).getYCoor());
 		}
-		controller.moveAliens();
+		controller.move();
 		for (int i = 0; i < game.getAlienController().getAliens().size(); i++) {
 			assertTrue(game.getAlienController().getAliens().get(i).getXCoor() == (xValues.get(i) + 4));
 		}
 	}
-	
+
 	/**
-	 * Go to next round.
-	 */
-	public final void nextRound() {
-		alienVelX = Math.abs(alienController.getAlienVelX()) + AlienController.ALIENVELXINCREASE:
-		// Create an alien to use to get the width and height of the aliens used in this game. 
-		//(based on their sprite size)
-		Alien spriteinfo = new Alien(0, 0, Alien.SPRITE);
-		alienController.createAlienWave();
-		bullets.clear();
-	}
-	/**
-	 * Test the moveAliens method when Aliens come to the side.
+	 * Test the move method when Aliens come to the side.
 	 */
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")
-	public final void testMoveAliensSide() {
+	public final void testmoveSide() {
 		ArrayList<Double> xValues = new ArrayList<Double>();
 		ArrayList<Double> yValues = new ArrayList<Double>();
 		for (int i = 0; i < game.getAlienController().getAliens().size(); i++) {
@@ -94,7 +84,7 @@ public class AlienControllerTest {
 		}
 		for (int i = 0; i < 30; i++) {
 			//Move to the right side of the screen
-			controller.moveAliens();
+			controller.move();
 		}
 		for (int i = 0; i < game.getAlienController().getAliens().size(); i++) {
 			assertTrue(game.getAlienController().getAliens().get(i).getYCoor() == (yValues.get(i) + 8));

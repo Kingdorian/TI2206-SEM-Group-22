@@ -79,6 +79,10 @@ public class Game {
 	 */
 	private AlienController alienController;
 	/**
+	 * The spaceshipcontroller of this game.
+	 */
+	private SpaceShipController spaceShipContr;
+	/**
 	 * The collisions of units.
 	 */
 	private Collisions collisions;
@@ -103,9 +107,9 @@ public class Game {
 		explosions = new ArrayList<Explosion>();
 		barController = new BarricadeController(this);
 		barController.create();
-
+		spaceShipContr = new SpaceShipController(this);
 		alienController = new AlienController(this);
-		alienController.createAlienWave();		
+		alienController.create();		
 		collisions = new Collisions(this);
 		player = new Player(this);
 		shootingAllowed = true;
@@ -119,7 +123,7 @@ public class Game {
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
 		barController.create();
-		alienController.createAlienWave();
+		alienController.create();
 		player = new Player(this);
 		
 		shootingAllowed = true;
@@ -148,7 +152,7 @@ public class Game {
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
 		barController.create();
-		alienController.createAlienWave();
+		alienController.create();
 		player = new Player(this);
 		shootingAllowed = true;
 		countToShoot = 0;
@@ -201,8 +205,8 @@ public class Game {
 				countToShoot = 0;
 			}
 		}
-		moveSpaceShip(pressedKeys);
-		alienController.moveAliens();
+		spaceShipContr.moveSpaceShip(pressedKeys);
+		alienController.move();
 		alienController.shootAlienBullets();
 		
 		//Check if all bullets are still visible
@@ -211,10 +215,6 @@ public class Game {
 				bullets.remove(i);
 				logger.log("Removed bullet out of screen", LogEvent.Type.TRACE);
 			}
-		}
-		//Move every bullet
-		for (int i = 0; i < bullets.size(); i++) {
-			bullets.get(i).moveUnit(tickrate);
 		}
 		logger.log("Moved bullets", LogEvent.Type.TRACE);
 		
@@ -236,40 +236,7 @@ public class Game {
 			logger.log("Removed all bullets", LogEvent.Type.TRACE);
 		}
 	}
-	/**
-	 * Moves the spaceship.
-	 * @param pressedKeys the keys pressed since last tick
-	 */
-	public final void moveSpaceShip(final ArrayList<KeyCode> pressedKeys) {
-		double velX = player.getSpaceShip().getVelX() * 0.98;
-		SpaceShip playership = player.getSpaceShip();
-		if (playership.getXCoor() - (0.5 * playership.getWidth()) <= 0 && velX < 0) {
-			velX *= -1;
-		} else if (player.getSpaceShip().getXCoor() 
-				+ (0.5 * playership.getWidth()) >=  canvasWidth && velX > 0) {
-			velX *= -1;
-		}
-		// Check that the spaceship is still able to move without going off the screen.
-		if (player.getSpaceShip().getXCoor() - 0.5 * player.getSpaceShip().getWidth() > 0 
-				&& pressedKeys.contains(KeyCode.A)) {
-			velX = velX - SpaceShip.MAXVELX * tickrate * 2;
-		}
-		if (player.getSpaceShip().getXCoor() + 0.5 * player.getSpaceShip().getWidth() < canvasWidth
-				&& pressedKeys.contains(KeyCode.D)) {
-			velX = velX + SpaceShip.MAXVELX * tickrate * 2;
-		}
-
-		if (velX > SpaceShip.MAXVELX) {
-			velX = SpaceShip.MAXVELX;
-		} else if (velX < -SpaceShip.MAXVELX) {
-			velX = -SpaceShip.MAXVELX;
-		}
-		player.getSpaceShip().setVelX(velX);
-		player.getSpaceShip().moveUnit(tickrate);
-		if (velX != 0) {
-			logger.log("Player moved X: " + velX, LogEvent.Type.TRACE);
-		}
-	}
+	
 	// ONLY SETTERS AND GETTERS BELOW
 
 	/**
@@ -392,5 +359,12 @@ public class Game {
 	 */
 	public BarricadeController getBarricadeController() {
 		return barController;
+	}
+	/**
+	 * Returns the spaceshipcontroller in this game.
+	 * @return the spaceshipcontroller in this game.
+	 */
+	public SpaceShipController getSpaceShipController() {
+		return spaceShipContr;
 	}
 }

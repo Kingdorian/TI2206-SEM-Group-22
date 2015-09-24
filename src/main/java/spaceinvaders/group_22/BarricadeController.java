@@ -23,8 +23,8 @@ public class BarricadeController extends UnitController {
 	 * Creates a new barricadeController Object.
 	 * @param parentGame the game where the barricades this controller controls is.
 	 */
-	public BarricadeController(Game parentGame) {
-		this.game = parentGame;
+	public BarricadeController(final Game parentGame) {
+		super(parentGame);
 	}
 	
 	/**
@@ -35,12 +35,12 @@ public class BarricadeController extends UnitController {
 		int barricadeCount = 4;
 		// Offset from the bottom in pixels
 		int bottomOfset = 110;
-		int interval = (int) game.getCanvasWidth() / (barricadeCount + 1);
+		int interval = (int) super.game.getCanvasWidth() 	/ (barricadeCount + 1);
 		barricades.clear();
 		for (int i = 1; i <= barricadeCount; i++) {
-			barricades.add(new Barricade(interval * i, game.getCanvasHeight() - 110, "barrier.png"));
+			barricades.add(new Barricade(interval * i, super.game.getCanvasHeight() - 110, "barrier.png"));
 		}
-		game.getLogger().log("Created all barricades", LogEvent.Type.DEBUG);
+		super.game.getLogger().log("Created all barricades", LogEvent.Type.DEBUG);
 	}
 	/**
 	 * Add a new barricade to this Controller.
