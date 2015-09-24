@@ -42,13 +42,13 @@ public class Game {
 	 */
 	private ArrayList<Alien> aliens;
 	/**
-	 * ArrayList of all barricades in the game.
-	 */
-	private ArrayList<Barricade> barricades;
-	/**
      * List of explosions in the game.
      */
 	private ArrayList<Explosion> explosions;	
+	/**
+	 * The barricadeController.
+	 */
+	private BarricadeController barController;
 	/**
      * The width of the canvas.
      */
@@ -126,7 +126,8 @@ public class Game {
 		
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
-		barricades = createBarricades();
+		barController = new BarricadeController(this);
+		barController.create();
 
 		alienController = new AlienController(this);
 		
@@ -147,7 +148,7 @@ public class Game {
 	public final void resetGame() {
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
-		barricades = createBarricades();
+		barController.create();
 		
 		alienController = new AlienController(this);
 		Alien spriteinfo = new Alien(0, 0, ALIENSPRITE);
@@ -180,7 +181,7 @@ public class Game {
 	public final void reset() {
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
-		barricades = createBarricades();
+		barController.create();
 		// Create an alien to use to get the width and height of the aliens used in this game. 
 		//(based on their sprite size)
 		Alien spriteinfo = new Alien(0, 0, ALIENSPRITE);
@@ -257,6 +258,7 @@ public class Game {
 		logger.log("Moved bullets", LogEvent.Type.TRACE);
 		
 		collisions.checkCollisions();
+		ArrayList<Barricade> barricades = barController.getBarricades();
 		for (int i = 0; i < barricades.size(); i++)  {
 			if (barricades.get(i).getHealth() == 0) {
 				barricades.remove(i);
@@ -311,36 +313,6 @@ public class Game {
 		if (velX != 0) {
 			logger.log("Player moved X: " + velX, LogEvent.Type.TRACE);
 		}
-	}
-	/**
-	 * Add a new barricade to this game.
-	 * @param barricade to add.
-	 */
-	public final void addBarricade(final Barricade barricade) {
-		barricades.add(barricade);
-		logger.log("Created barricade", LogEvent.Type.TRACE);
-	}
-	
-	/**
-	 * Creates the barricades for this game.
-	 * @return the barricades in this game.
-	 */
-	private ArrayList<Barricade> createBarricades() {
-		int barricadeCount = 4;
-		int interval = (int) canvasWidth / (barricadeCount + 1);
-		ArrayList<Barricade> bars = new ArrayList<Barricade>();
-		for (int i = 1; i <= barricadeCount; i++) {
-			bars.add(new Barricade(interval * i, canvasHeight - 110, "barrier.png"));
-		}
-		logger.log("Created all barricades", LogEvent.Type.DEBUG);
-		return bars;
-	}
-	/**
-	 * Sets the barricades in this game.
-	 * @param barricade the new barricades for this game.
-	 */
-	public final void setBarricades(final ArrayList<Barricade> barricade) { 
-		barricades = barricade;
 	}
 	// ONLY SETTERS AND GETTERS BELOW
 	/**
@@ -443,13 +415,6 @@ public class Game {
 		return aliens;
 	}
 		/**
-	 * Returns the barricades in this game.
-	 * @return the barricades in this game.
-	 */
-	public final  ArrayList<Barricade> getBarricades() {
-		return barricades;
-	}
-		/**
 	 * Returns the current frame rate.
 	 * @return the current frame rate.
 	 */
@@ -477,5 +442,8 @@ public class Game {
 	 */
 	public final void setBullets(final ArrayList<Bullet> list) {
 		bullets = list;
+	}
+	public ArrayList<Barricade> getBarricades() {
+		return barController.getBarricades();
 	}
 }
