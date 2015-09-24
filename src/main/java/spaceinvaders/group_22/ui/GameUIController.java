@@ -318,20 +318,27 @@ public class GameUIController
 	private void drawPlayer() {
 		SpaceShip spaceShip = game.getPlayer().getSpaceShip();
 		
-		for (PowerUp powerup : game.getPlayer().getActivePowerUps()) {
-	        // Draw the player glow.
-			Image glowImage = sprites.get(powerup.getGlow());
-			if (glowImage != null) {
-				gc.drawImage(glowImage, spaceShip.getXCoor() - 0.5 * glowImage.getWidth(), 
-						spaceShip.getYCoor() - 0.5 * glowImage.getHeight());			
-			}
-		}
+		drawPowerupGlow();
 		
         // Position the player in the middle, on the bottom of the screen.
 		drawUnit(spaceShip.getXCoor(), spaceShip.getYCoor(), spaceShip.getWidth(), 
 				spaceShip.getHeight(), spaceShip.getSprite());
 		
 		game.getLogger().log("Drawn spaceship", LogEvent.Type.TRACE);
+	}
+	
+	/**
+	 * Draws the glow of a powerup.
+	 */
+	private void drawPowerupGlow() {
+		for (PowerUp powerup : game.getPlayer().getActivePowerUps()) {
+	        // Draw the player glow.
+			Image glowImage = sprites.get(powerup.getGlow());
+			if (glowImage != null) {
+				gc.drawImage(glowImage, game.getPlayer().getSpaceShip().getXCoor() - 0.5 * glowImage.getWidth(), 
+						game.getPlayer().getSpaceShip().getYCoor() - 0.5 * glowImage.getHeight());			
+			}
+		}
 	}
 	
 	/**
