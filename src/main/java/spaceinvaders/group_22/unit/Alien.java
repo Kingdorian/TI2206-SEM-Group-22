@@ -37,7 +37,22 @@ public class Alien extends Unit implements MovableUnit{
 		bullet.setVelY(velocity);
 		return bullet;
 	}
-	
+	/**
+	 * HashCode method.
+	 * @return hashcode of this object
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		long temp;
+		temp = Double.doubleToLongBits(velX);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(velY);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
 	/**
 	 * Compares two objects and returns if they are equal.
 	 * @return true if both objects are the same.
@@ -45,24 +60,14 @@ public class Alien extends Unit implements MovableUnit{
 	 */
 	@Override
 	public final boolean equals(final Object other) {
-		if (other != null && other instanceof Alien) {
-			Alien that = (Alien) other;
-			return this.getXCoor() == that.getXCoor()
-					&& this.getYCoor() == that.getYCoor()
+		if (other != null && other instanceof ShipBullet) {
+			ShipBullet that = (ShipBullet) other;
+			return 	super.equals(that)
 					&& this.getVelX() == that.getVelX()
-					&& this.getVelY() == that.getVelY()
-					&& this.getHeight() == that.getHeight()
-					&& this.getWidth() == that.getWidth();
+					&& this.getVelY() == that.getVelY();
 		}
 		return false;
-	}
-	/**
-	 * HashCode method.
-	 * @return hashcode of this object
-	 */
-	public final int hashCode() {
-		  return 0;
-	}
+	}	
 	/**
 	 * Move the unit in the direction of this unit and with his velocity.
 	 * @param tickrate The rate at which the game ticks.

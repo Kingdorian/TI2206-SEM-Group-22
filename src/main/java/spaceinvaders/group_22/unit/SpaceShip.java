@@ -51,12 +51,9 @@ public class SpaceShip extends Unit implements MovableUnit{
 	public final boolean equals(final Object other) {
 		if (other != null && other instanceof SpaceShip) {
 			SpaceShip that = (SpaceShip) other;
-			return this.getXCoor() == that.getXCoor()
-					&& this.getYCoor() == that.getYCoor()
+			return super.equals(other)
 					&& this.getVelX() == that.getVelX()
-					&& this.getVelY() == that.getVelY()
-					&& this.getHeight() == that.getHeight()
-					&& this.getWidth() == that.getWidth();
+					&& this.getVelY() == that.getVelY();
 		}
 		return false;
 	}
@@ -64,8 +61,16 @@ public class SpaceShip extends Unit implements MovableUnit{
 	 * HashCode method.
 	 * @return hashcode of this object
 	 */
-	public final int hashCode() {
-		  return 0;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		long temp;
+		temp = Double.doubleToLongBits(velX);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(velY);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
 	}
 	/**
 	 * Move the unit in the direction of this unit and with his velocity.

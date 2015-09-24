@@ -41,9 +41,7 @@ public abstract class Unit {
 	 * an Image object containing the sprite.
 	 */
 	private String sprite;
-	
 
-	
 	/**
 	 * Creates a unit at Location X, Y with velocity 0 and direction north.
 	 * @param x Coordinate of this unit.
@@ -72,12 +70,55 @@ public abstract class Unit {
 	 * @param other the object to compare.
 	 */
 	@Override
-	public abstract boolean equals(Object other);
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Unit other = (Unit) obj;
+		if (height != other.height) {
+			return false;
+		}
+		if (sprite == null) {
+			if (other.sprite != null)
+				return false;
+		} else if (!sprite.equals(other.sprite)) {
+			return false;
+		}
+		if (width != other.width) {
+			return false;
+		}
+		if (Double.doubleToLongBits(xCoor) != Double.doubleToLongBits(other.xCoor)) {
+			return false;
+		}
+		if (Double.doubleToLongBits(yCoor) != Double.doubleToLongBits(other.yCoor)) {
+			return false;
+		}
+		return true;
+	}
 	/**
-	 * HashCode method.
-	 * @return hashcode of this object
+	 * Returns hashcode of this object.
+	 * @return hashcode of this object.
 	 */
-	public abstract int hashCode();
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + height;
+		result = prime * result + ((sprite == null) ? 0 : sprite.hashCode());
+		result = prime * result + width;
+		long temp;
+		temp = Double.doubleToLongBits(xCoor);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(yCoor);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
 
 	/**
 	 * Returns the current Y coordinate of this unit.
@@ -102,7 +143,6 @@ public abstract class Unit {
 	protected void setXCoor(final double newxCoor) {
 		this.xCoor = newxCoor;
 	}
-	
 	/**
 	 * Sets the current Y coordinate of this unit.
 	 * @param newyCoor the current Y coordinate of this unit to set.
@@ -110,8 +150,6 @@ public abstract class Unit {
 	protected void setYCoor(final double newyCoor) {
 		this.yCoor = newyCoor;
 	}
-	
-
 	/**
 	 * Get the width of this unit.
 	 * @return the width of this unit.
@@ -155,7 +193,4 @@ public abstract class Unit {
 	public final void setSprite(final String newSprite) {
 		this.sprite = newSprite;
 	}	
-
-
-
 }
