@@ -1,14 +1,17 @@
 package spaceinvaders.group_22.ui;
 
+import javafx.scene.control.Label;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
 
 public class Score extends UIElement{
 	
 	private Game game;
+	private GameUIController gameUI;
 	
-	public Score(Game newGame){
+	public Score(Game newGame, GameUIController gameUIController){
 		game = newGame;
+		gameUI = gameUIController;
 	}
 
 	@Override
@@ -21,7 +24,7 @@ public class Score extends UIElement{
     	}
     	scoreString.append(game.getPlayer().getScore());
     	
-    	scoreLabel.setText(scoreString.toString());	
+    	gameUI.getScoreLabel().setText(scoreString.toString());	
     	game.getLogger().log("Formatted score to UI", LogEvent.Type.TRACE);		
 	}
 

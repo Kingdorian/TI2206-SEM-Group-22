@@ -155,14 +155,13 @@ public class GameUIController
     	game.getLogger().log("Set canvas width to: " + canvasWidth, LogEvent.Type.INFO);
     	game.getLogger().log("Set canvas height to: " + canvasHeight, LogEvent.Type.INFO);
     	game.getLogger().log("Show screen Before Play", LogEvent.Type.INFO);
-    	
-    	uiAlien = new UIElementAlien(game);
-    	uiSpaceShip = new UIElementSpaceShip(game);
-    	uiBullet = new UIElementBullet(game);
-    	uiExplosion = new UIElementExplosion(game);
-    	uiBarricade = new UIElementBarricade(game);
-    	uiScore = new Score(game);
-    	uiLives = new Lives(game);
+    	uiAlien = new UIElementAlien(game, this);
+    	uiSpaceShip = new UIElementSpaceShip(game, this);
+    	uiBullet = new UIElementBullet(game, this);
+    	uiExplosion = new UIElementExplosion(game, this);
+    	uiBarricade = new UIElementBarricade(game, this);
+    	uiScore = new Score(game, this);
+    	uiLives = new Lives(game, this);
     	
     	canvas.setFocusTraversable(true);
     }
@@ -231,6 +230,10 @@ public class GameUIController
      */
     public final double getFramerate() {
     	return framerate;
+    }
+    
+    public static final GraphicsContext getGC(){
+    	return gc;
     }
     
     /**
@@ -360,6 +363,24 @@ public class GameUIController
 	    	pressedKeys.add(event.getCode());
 	    }
 	}
+	
+	/**
+	  * Method to draw the Units.
+	  * @param x The horizontal position of the player to draw.
+	  * @param y The vertical position of the player to draw.
+	  * @param spriteWidth The width of the sprite to draw.
+	  * @param spriteHeight The heifht of the sprite to draw.
+	  * @param sprite Image containing the sprite to draw.
+	  */  
+	public final void drawUnit(final double x, final double y, final double spriteWidth, 
+   		final double spriteHeight, final String sprite) {
+       
+       // Draw the player with the X and Y coordinates as center
+		Image spriteImage = sprites.get(sprite);
+		if (spriteImage != null) {
+			gc.drawImage(spriteImage, x - 0.5 * spriteWidth, y - 0.5 * spriteHeight);			
+		}
+   }
 	
 	/**
 	 * Handles if a key is released.

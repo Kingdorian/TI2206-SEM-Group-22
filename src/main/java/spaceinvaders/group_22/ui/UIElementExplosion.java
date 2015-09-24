@@ -9,9 +9,11 @@ import spaceinvaders.group_22.unit.Explosion;
 public class UIElementExplosion extends UIElementUnit{
 	
 	private Game game;
+	private GameUIController gameUI;
 	
-	public UIElementExplosion(Game newGame) {
+	public UIElementExplosion(Game newGame, GameUIController gameUIController){
 		game = newGame;
+		gameUI = gameUIController;
 	}
 
 	@Override
@@ -22,7 +24,7 @@ public class UIElementExplosion extends UIElementUnit{
 				
 				// For every explosion, draw the explosion.
 				for (Explosion explosion : explosionList) {
-					drawUnit(explosion.getXCoor(), explosion.getYCoor(), 
+					gameUI.drawUnit(explosion.getXCoor(), explosion.getYCoor(), 
 							explosion.getWidth(), explosion.getHeight(), explosion.getSprite());
 					
 					// Increase the counter maintaining the time one frame of the animation is visible.
