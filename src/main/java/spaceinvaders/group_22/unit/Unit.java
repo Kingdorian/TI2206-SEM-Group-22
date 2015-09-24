@@ -71,8 +71,9 @@ public abstract class Unit {
 	 */
 	@Override
 	public boolean equals(Object obj) {
+		System.out.println("helelo");
 		if (this == obj) {
-			return true;
+			return true;	
 		}
 		if (obj == null) {
 			return false;
@@ -90,6 +91,7 @@ public abstract class Unit {
 		} else if (!sprite.equals(other.sprite)) {
 			return false;
 		}
+
 		if (width != other.width) {
 			return false;
 		}
@@ -105,6 +107,7 @@ public abstract class Unit {
 	 * Returns hashcode of this object.
 	 * @return hashcode of this object.
 	 */
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

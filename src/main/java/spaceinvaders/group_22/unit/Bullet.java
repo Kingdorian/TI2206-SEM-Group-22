@@ -97,9 +97,9 @@ public abstract class Bullet extends Unit implements MovableUnit{
 	 * @param other the object to compare.
 	 */
 	@Override
-	public final boolean equals(final Object other) {
-		if (other != null && other instanceof ShipBullet) {
-			ShipBullet that = (ShipBullet) other;
+	public boolean equals(final Object other) {
+		if (other != null && other instanceof Bullet) {
+			Bullet that = (Bullet) other;
 			return 	super.equals(that)
 					&& this.getVelX() == that.getVelX()
 					&& this.getVelY() == that.getVelY();

@@ -18,4 +18,16 @@ public class AlienBullet extends Bullet {
 	public AlienBullet(final double x, final double y, final String spriteFile) {
 		super(x, y, spriteFile);
 	}
+	/**
+	 * Checks if provided object is equal to this object.
+	 * @param the object to compare this object to
+	 * @return boolean result if provide object is equal to this
+	 */
+	@Override
+	public final boolean equals(final Object other) {
+		if (other != null && other instanceof AlienBullet) {
+			return 	super.equals(other);
+		}
+		return false;
+	}
 }

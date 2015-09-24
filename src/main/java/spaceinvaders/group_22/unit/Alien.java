@@ -60,8 +60,9 @@ public class Alien extends Unit implements MovableUnit{
 	 */
 	@Override
 	public final boolean equals(final Object other) {
-		if (other != null && other instanceof ShipBullet) {
-			ShipBullet that = (ShipBullet) other;
+		if (other != null && other instanceof Alien) {
+			System.out.println("helelo");
+			Alien that = (Alien) other;
 			return 	super.equals(that)
 					&& this.getVelX() == that.getVelX()
 					&& this.getVelY() == that.getVelY();
