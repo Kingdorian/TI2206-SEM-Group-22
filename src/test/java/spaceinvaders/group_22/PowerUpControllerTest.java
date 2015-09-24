@@ -38,7 +38,7 @@ public class PowerUpControllerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testCreatePowerUp() {
-		controller.createPowerUp(500.0, 100.0);
+		controller.createPowerUpUnit(500.0, 100.0);
 		assertEquals(game.getPowerups().size(), 1);
 	}
 	
@@ -48,9 +48,8 @@ public class PowerUpControllerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testcheckMovePowerUps() {
-		controller.createPowerUp(500.0, 100.0);
+		controller.createPowerUpUnit(500.0, 100.0);
 		controller.checkMovingPowerUp(game.getPowerups().get(0));
-		System.out.println(game.getPowerups().get(0).getYCoor());
 		assertEquals(Double.compare(game.getPowerups().get(0).getYCoor(), 150.00), 0);
 	}
 	
@@ -60,7 +59,7 @@ public class PowerUpControllerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testMovePowerUpsOutsideScreen() {
-		controller.createPowerUp(1200.0, 800.0);
+		controller.createPowerUpUnit(1200.0, 800.0);
 		controller.checkPowerUps();
 		assertEquals(game.getPowerups().size(), 0);
 	}
@@ -71,33 +70,19 @@ public class PowerUpControllerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testPowerUpCollided() {
-		controller.createPowerUp(500.0, 630.0);
+		controller.createPowerUpUnit(500.0, 630.0);
 		controller.checkPowerUps();
-		assertEquals(game.getPowerups().get(0).getPlayer(), game.getPlayer());
-	}
-	/**
-	 * Test a active speed power Up.
-	 */
-	@Test
-	@SuppressWarnings("checkstyle:magicnumber") 
-	public final void testActiveSpeedPowerUp() {
-		PowerUpUnit powerUp = new SpeedPowerUpUnit(500.0, 600.0, "testimage.png", 5.0);
-		powerUp.setPlayer(game.getPlayer());
-		game.getPowerups().add(powerUp);
-		controller.checkActivePowerUp(powerUp);		
-		assertEquals(Double.compare(powerUp.getTimeLeft(), 4.0), 0);
-	}
-	/**
-	 * Test a active speed power Up that is expired.
-	 */
-	@Test
-	@SuppressWarnings("checkstyle:magicnumber") 
-	public final void testActiveSpeedPowerUpExpired() {
-		PowerUpUnit powerUp = new SpeedPowerUpUnit(500.0, 600.0, "testimage.png", -1.0);
-		powerUp.setPlayer(game.getPlayer());
-		game.getPowerups().add(powerUp);
-		controller.checkPowerUps();	
 		assertEquals(game.getPowerups().size(), 0);
+	}
+	/**
+	 * Test the check power up method when the power up is colliding with the spaceship.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
+	public final void testActivePowerUp() {
+		new SpeedPowerUp(game.getPlayer());
+		controller.checkPowerUps();
+		assertEquals(game.getPlayer().getActivePowerUps().get(0).getTimeLeft(), 4.0, 0.02);
 	}
 	
 

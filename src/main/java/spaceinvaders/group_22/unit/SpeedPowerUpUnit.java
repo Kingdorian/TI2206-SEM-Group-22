@@ -1,16 +1,13 @@
 package spaceinvaders.group_22.unit;
 
 import spaceinvaders.group_22.Player;
+import spaceinvaders.group_22.SpeedPowerUp;
 /**
  * Speed power Up class which extends the Power Up class.
  * @author Bryan
  */
 public class SpeedPowerUpUnit extends PowerUpUnit {
-	
-	/**
-	 * Indicates the duration of this powerUP in seconds.
-	 */
-	public static double DURATION = 5.0; 
+
 	/**
 	 * Indicates the velocity in the Y direction of this powerup type.
 	 */
@@ -21,23 +18,15 @@ public class SpeedPowerUpUnit extends PowerUpUnit {
 	 * @param x X coordinate
 	 * @param y Y coordinate
 	 * @param spriteFile The filename of the sprite.
-	 * @param time the time left for this powerUp
 	 */
-	public SpeedPowerUpUnit(final double x, final double y, final String spriteFile, final double time) {
-		super(x, y, spriteFile, time);
+	public SpeedPowerUpUnit(final double x, final double y, final String spriteFile) {
+		super(x, y, spriteFile);
 	}
 
 	@Override
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activate(final Player newplayer) {
-		super.setPlayer(newplayer);
-		SpaceShip.MAXVELX = 750;
-	}
-
-	@Override
-	@SuppressWarnings("checkstyle:magicnumber")
-	public final void deactivate() {
-		SpaceShip.MAXVELX = 250;
+		new SpeedPowerUp(newplayer);
 	}
 
 	/**

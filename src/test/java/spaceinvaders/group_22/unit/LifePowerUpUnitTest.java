@@ -15,7 +15,7 @@ public class LifePowerUpUnitTest extends PowerUpUnitTest {
 	
 	@Override
 	public final Unit createInstance(final double x, final double y, final String spriteFile) {
-		return new LifePowerUpUnit(x, y, spriteFile, 0.0);
+		return new LifePowerUpUnit(x, y, spriteFile);
 	}
 	
 	/**
@@ -24,7 +24,7 @@ public class LifePowerUpUnitTest extends PowerUpUnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activatePowerUpTest() {
-		LifePowerUpUnit powerUp = new LifePowerUpUnit(500, 200, "testimage.png", 0);
+		LifePowerUpUnit powerUp = new LifePowerUpUnit(500, 200, "testimage.png");
 		Player player = new Player(new Game(1000, 720));
 		powerUp.activate(player);
 		assertEquals(player.getLives(), 4);
@@ -35,7 +35,7 @@ public class LifePowerUpUnitTest extends PowerUpUnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activateTwoTimesPowerUpTest() {
-		LifePowerUpUnit powerUp = new LifePowerUpUnit(500, 200, "testimage.png", 0);
+		LifePowerUpUnit powerUp = new LifePowerUpUnit(500, 200, "testimage.png");
 		Player player = new Player(new Game(1000, 720));
 		powerUp.activate(player);
 		powerUp.activate(player);
@@ -47,7 +47,7 @@ public class LifePowerUpUnitTest extends PowerUpUnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activateThreeTimesPowerUpTest() {
-		LifePowerUpUnit powerUp = new LifePowerUpUnit(500, 200, "testimage.png", 0);
+		LifePowerUpUnit powerUp = new LifePowerUpUnit(500, 200, "testimage.png");
 		Player player = new Player(new Game(1000, 720));
 		powerUp.activate(player);
 		powerUp.activate(player);

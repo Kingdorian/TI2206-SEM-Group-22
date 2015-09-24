@@ -1,6 +1,7 @@
 package spaceinvaders.group_22.unit;
 
 import spaceinvaders.group_22.Player;
+import spaceinvaders.group_22.ShootPowerUp;
 
 /**
  * Shoot power up class extends the power Up class.
@@ -8,10 +9,6 @@ import spaceinvaders.group_22.Player;
  *
  */
 public class ShootPowerUpUnit extends PowerUpUnit {
-	/**
-	 * Indicates the duration of this powerUP in seconds.
-	 */
-	public static double DURATION = 5.0; 
 	/**
 	 * Indicates the velocity in the Y direction of this powerup type.
 	 */
@@ -21,21 +18,14 @@ public class ShootPowerUpUnit extends PowerUpUnit {
 	 * @param x X coordinate
 	 * @param y Y coordinate
 	 * @param spriteFile The filename of the sprite.
-	 * @param time the time left for this powerUp
 	 */
-	public ShootPowerUpUnit(final double x, final double y, final String spriteFile, final double time) {
-		super(x, y, spriteFile, time);
+	public ShootPowerUpUnit(final double x, final double y, final String spriteFile) {
+		super(x, y, spriteFile);
 	}
 
 	@Override
 	public final void activate(final Player newplayer) {
-		super.setPlayer(newplayer);
-		SpaceShip.shootTimes = 2;
-	}
-
-	@Override
-	public final void deactivate() {
-		SpaceShip.shootTimes = 1;
+		new ShootPowerUp(newplayer);
 	}
 
 	/**

@@ -15,7 +15,7 @@ public class ShootPowerUpUnitTest extends PowerUpUnitTest {
 	
 	@Override
 	public final Unit createInstance(final double x, final double y, final String spriteFile) {
-		return new ShootPowerUpUnit(x, y, spriteFile, ShootPowerUpUnit.DURATION);
+		return new ShootPowerUpUnit(x, y, spriteFile);
 	}
 	/**
 	 * Test the activation of this powerUp.
@@ -23,19 +23,8 @@ public class ShootPowerUpUnitTest extends PowerUpUnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activatePowerUpTest() {
-		ShootPowerUpUnit powerUp = new ShootPowerUpUnit(500, 200, "testimage.png", ShootPowerUpUnit.DURATION);
+		ShootPowerUpUnit powerUp = new ShootPowerUpUnit(500, 200, "testimage.png");
 		powerUp.activate(new Player(new Game(1000, 720)));
 		assertEquals(SpaceShip.shootTimes, 2);
-	}
-	/**
-	 * Test the deactivation of this powerUp.
-	 */
-	@Test
-	@SuppressWarnings("checkstyle:magicnumber")
-	public final void deactivatePowerUpTest() {
-		ShootPowerUpUnit powerUp = new ShootPowerUpUnit(500, 200, "testimage.png", ShootPowerUpUnit.DURATION);
-		powerUp.activate(new Player(new Game(1000, 720)));
-		powerUp.deactivate();
-		assertEquals(SpaceShip.shootTimes, 1);
 	}
 }

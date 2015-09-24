@@ -40,33 +40,21 @@ public class PowerUpController {
 	 * @param x coordinate of the new powerUp
 	 * @param y coordinate of the new powerUp
 	 */
-	public final void createPowerUp(final Double x, final Double y) {
+	public final void createPowerUpUnit(final Double x, final Double y) {
 		Double random = Math.random();
-		PowerUpUnit newPowerUp = new LifePowerUpUnit(x, y, "explosion1.png", 0);
+		PowerUpUnit newPowerUp = new LifePowerUpUnit(x, y, "explosion1.png");
 		newPowerUp.setVelY(LifePowerUpUnit.VELY);
 		Game.getLogger().log("Power Up is created" , LogEvent.Type.DEBUG);
 		if (random < 0.3333333334) {
-			newPowerUp = new SpeedPowerUpUnit(x, y, "explosion1.png", SpeedPowerUpUnit.DURATION);
+			newPowerUp = new SpeedPowerUpUnit(x, y, "explosion1.png");
 			newPowerUp.setVelY(SpeedPowerUpUnit.VELY);
 		} else if (random < 0.6666666666667) {
-			newPowerUp = new ShootPowerUpUnit(x, y, "explosion1.png", ShootPowerUpUnit.DURATION);
+			newPowerUp = new ShootPowerUpUnit(x, y, "explosion1.png");
 			newPowerUp.setVelY(ShootPowerUpUnit.VELY);
 		}
 		game.getPowerups().add(newPowerUp);
 	}
-	/**
-	 * Method to check an active PowerUp.
-	 * @param powerUp the powerUp to check.
-	 */
-	public final void checkActivePowerUp(final PowerUpUnit powerUp) {
-		if (powerUp.getTimeLeft() > 0) {
-			powerUp.setTimeLeft(powerUp.getTimeLeft() - game.getTickrate());
-		} else {
-			game.getPowerups().remove(powerUp);
-			powerUp.deactivate();
-			Game.getLogger().log("Power up is deactivated" , LogEvent.Type.TRACE);
-		}
-	}
+
 	/**
 	 * Method to check a not yet active powerUp.
 	 * @param powerUp the powerUp to check
@@ -79,7 +67,9 @@ public class PowerUpController {
 			game.getPowerups().remove(powerUp);
 			Game.getLogger().log("Removed PowerUp that was outside screen " , LogEvent.Type.TRACE);
 		} else if (collisions.checkCollisions(powerUp, spaceShiplist) != null) {
+			
 			powerUp.activate(game.getPlayer());
+			game.getPowerups().remove(powerUp);
 			Game.getLogger().log("PowerUp collided with spaceship" , LogEvent.Type.TRACE);
 		}  else if (collisions.checkCollisions(powerUp, new ArrayList<Unit>(game.getBarricades())) != null) {
 			game.getPowerups().remove(powerUp);
@@ -92,12 +82,12 @@ public class PowerUpController {
 	 */
 	public final void checkPowerUps() {		
 		for (int i = 0; i < game.getPowerups().size(); i++) {
-			PowerUpUnit powerUp = game.getPowerups().get(i);
-			if (powerUp.getPlayer() == null) { 
-				checkMovingPowerUp(powerUp);
-			} else {
-				checkActivePowerUp(powerUp);
-			}
-		}	
+			checkMovingPowerUp(game.getPowerups().get(i));
+		}
+		//Loop over the active power ups for the player
+		for (int i = 0; i < game.getPlayer().getActivePowerUps().size(); i++) {
+			
+			game.getPlayer().getActivePowerUps().get(i).decreaseTimeLeft(game.getTickrate());
+		}
 	}
 }

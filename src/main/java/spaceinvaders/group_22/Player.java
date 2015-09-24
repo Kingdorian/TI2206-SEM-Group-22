@@ -1,5 +1,7 @@
 package spaceinvaders.group_22;
 
+import java.util.ArrayList;
+
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.unit.SpaceShip;
 
@@ -14,6 +16,10 @@ public class Player {
 	 * Maximum amount of lives a player can have.
 	 */
 	public static int MAXLIFES = 5;
+	/**
+	 * List of active power ups for this player.
+	 */
+	private ArrayList<PowerUp> activePowerUps;
 
 	/**
 	 * Spaceship the player is currently controling.
@@ -44,6 +50,7 @@ public class Player {
 		Game.getLogger().log("Created spaceship for player", LogEvent.Type.DEBUG);
 		score  = 0;
 		lives = 3;
+		activePowerUps = new ArrayList<PowerUp>();
 	}
 	
 	/**
@@ -87,6 +94,7 @@ public class Player {
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void respawnShip() {
 		ship = new SpaceShip(game.getCanvasWidth() / 2, ship.getYCoor(), "spaceship.png");
+		activePowerUps = new ArrayList<PowerUp>();
 		Game.getLogger().log("Ship respawned", LogEvent.Type.TRACE);
 	}
 	/**
@@ -114,6 +122,20 @@ public class Player {
 		if (lives < MAXLIFES) {
 			lives++;
 		}
+	}
+	/**
+	 * Returns a list of all the active power ups of this player.
+	 * @return a list of the active power ups of this player.
+	 */
+	public final ArrayList<PowerUp> getActivePowerUps() {
+		return activePowerUps;
+	}
+	/**
+	 * Sets the list of all the active power ups of this player.
+	 * @param newactivePowerUps the list of active power ups of this player.
+	 */
+	public final void setActivePowerUps(final ArrayList<PowerUp> newactivePowerUps) {
+		this.activePowerUps = newactivePowerUps;
 	}
 	
 }
