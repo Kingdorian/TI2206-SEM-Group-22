@@ -22,6 +22,8 @@ public class ShootPowerUp extends PowerUp {
 	public ShootPowerUp(final Player setPlayer) {
 		super(setPlayer);
 		this.setGlow("glow_orange.png");
+		getPlayer().getActivePowerUps().add(this);
+		setTimeLeft(DURATION);
 	}
 	/**
 	 * Deactivates this power up.
@@ -35,8 +37,6 @@ public class ShootPowerUp extends PowerUp {
 	@Override
 	@SuppressWarnings("checkstyle:magicnumber")
 	protected final void activate() {
-		getPlayer().getActivePowerUps().add(this);
-		setTimeLeft(DURATION);
 		getPlayer().getSpaceShip().setShootingMultiplier(2.0);
 		getPlayer().getSpaceShip().updateMultiplier();
 	}
