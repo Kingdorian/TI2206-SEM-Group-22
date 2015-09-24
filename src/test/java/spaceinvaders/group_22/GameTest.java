@@ -319,7 +319,7 @@ public class GameTest {
 		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
 		game.getPlayer().getSpaceShip().setVelX(500);
 		game.moveSpaceShip(new ArrayList<KeyCode>());
-		Assert.assertEquals(250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
+		Assert.assertEquals(SpaceShip.MAXVELX, game.getPlayer().getSpaceShip().getVelX(), 0.05);
 	}
 	/**
 	 * Tests the ship moving normally to the left when A is pressed. 
@@ -329,7 +329,7 @@ public class GameTest {
 		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
 		game.getPlayer().getSpaceShip().setVelX(-500);
 		game.moveSpaceShip(new ArrayList<KeyCode>());
-		Assert.assertEquals(-250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
+		Assert.assertEquals(-SpaceShip.MAXVELX, game.getPlayer().getSpaceShip().getVelX(), 0.05);
 	}
 	
 }
