@@ -11,6 +11,7 @@ import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Explosion;
+import spaceinvaders.group_22.unit.PowerUpUnit;
 import spaceinvaders.group_22.unit.SpaceShip;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -215,7 +216,9 @@ public class GameUIController
     		addSprite(spriteMap, "explosion3.png");
     		addSprite(spriteMap, "explosion4.png");
     		addSprite(spriteMap, "explosion5.png");
-    		
+    		addSprite(spriteMap, "powerup_orange.png");
+    		addSprite(spriteMap, "powerup_blue.png");
+    		addSprite(spriteMap, "powerup_red.png");
     	return spriteMap;
     }
     
@@ -264,7 +267,8 @@ public class GameUIController
 						drawExplosions();
 						drawBullets();
 						drawBarricades();
-	
+						drawPowerups();
+						
 						// Draw the lives and score on the screen.
 						formatLives(game.getPlayer().getLives());
 						formatScore(game.getPlayer().getScore());
@@ -326,6 +330,17 @@ public class GameUIController
 					unit.getHeight(), unit.getSprite());		
 		}
 		game.getLogger().log("Drawn aliens", LogEvent.Type.TRACE);
+	}
+	
+	/**
+	 * Method to draw the aliens in game.
+	 */
+	private void drawPowerups() {
+		for (PowerUpUnit powerup : game.getPowerups()) {
+			drawUnit(powerup.getXCoor(), powerup.getYCoor(), powerup.getWidth(),
+					powerup.getHeight(), powerup.getSprite());		
+		}
+		game.getLogger().log("Drawn powerups", LogEvent.Type.TRACE);
 	}
 	
 	/**
