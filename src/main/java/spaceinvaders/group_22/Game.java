@@ -53,7 +53,6 @@ public class Game {
     /**
      * The height of the canvas.
      */
-
     private double canvasHeight;
     /**
      * Velocity of the bullets of the spaceShip in pixels per second.
@@ -106,12 +105,8 @@ public class Game {
 		barController.create();
 
 		alienController = new AlienController(this);
-		
+		alienController.createAlienWave();		
 		collisions = new Collisions(this);
-				// Create an alien to use to get the width and height of the aliens used in this game. 
-		//(based on their sprite size)
-		Alien spriteinfo = new Alien(0, 0, Alien.SPRITE);
-		alienController.createAlienWave();
 		player = new Player(this);
 		shootingAllowed = true;
 		countToShoot = 0;
@@ -124,9 +119,6 @@ public class Game {
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
 		barController.create();
-		
-		alienController = new AlienController(this);
-		Alien spriteinfo = new Alien(0, 0, Alien.SPRITE);
 		alienController.createAlienWave();
 		player = new Player(this);
 		
@@ -156,9 +148,6 @@ public class Game {
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
 		barController.create();
-		// Create an alien to use to get the width and height of the aliens used in this game. 
-		//(based on their sprite size)
-		Alien spriteinfo = new Alien(0, 0, Alien.SPRITE);
 		alienController.createAlienWave();
 		player = new Player(this);
 		shootingAllowed = true;
@@ -197,7 +186,6 @@ public class Game {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
-		
 		if (pressedKeys.contains(KeyCode.SPACE) && shootingAllowed) {
 			Bullet bullet = player.getSpaceShip().shootBullet(-spaceShipBulletVelX);
 			bullets.add(bullet);
@@ -241,13 +229,9 @@ public class Game {
 		}
 		//new wave of aliens
 		if (alienController.getAliens().isEmpty()) {
-			logger.log("All aliens died", LogEvent.Type.TRACE);
+			logger.log("All aliens died", LogEvent.Type.INFO);
 			//Increase aliens speed and reset direction so they start moving to the right
-			alienController.setAlienVelX(Math.abs(alienController.getAlienVelX()) + AlienController.ALIENVELXINCREASE);
-			// Create an alien to use to get the width and height of the aliens used in this game. 
-			//(based on their sprite size)
-			Alien spriteinfo = new Alien(0, 0, Alien.SPRITE);
-			alienController.createAlienWave();
+			alienController.nextRound();
 			bullets.clear();
 			logger.log("Removed all bullets", LogEvent.Type.TRACE);
 		}

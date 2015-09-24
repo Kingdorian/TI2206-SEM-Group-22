@@ -70,6 +70,17 @@ public class AlienControllerTest {
 	}
 	
 	/**
+	 * Go to next round.
+	 */
+	public final void nextRound() {
+		alienVelX = Math.abs(alienController.getAlienVelX()) + AlienController.ALIENVELXINCREASE:
+		// Create an alien to use to get the width and height of the aliens used in this game. 
+		//(based on their sprite size)
+		Alien spriteinfo = new Alien(0, 0, Alien.SPRITE);
+		alienController.createAlienWave();
+		bullets.clear();
+	}
+	/**
 	 * Test the moveAliens method when Aliens come to the side.
 	 */
 	@Test

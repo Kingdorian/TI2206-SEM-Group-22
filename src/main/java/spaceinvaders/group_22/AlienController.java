@@ -187,6 +187,14 @@ public class AlienController {
 		}
 	}
 	/**
+	 * Go to next round.
+	 */
+	public final void nextRound() {
+		game.getLogger().log("proceding to next round", LogEvent.Type.INFO);
+		alienVelX = Math.abs(alienVelX) + AlienController.ALIENVELXINCREASE;
+		createAlienWave();
+	}
+	/**
 	 * Sets the list of Aliens currently in game.
 	 * @param alienList The ArrayList of aliens to set.
 	 */
