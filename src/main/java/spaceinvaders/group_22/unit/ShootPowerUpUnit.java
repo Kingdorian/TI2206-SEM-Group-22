@@ -12,7 +12,7 @@ public class ShootPowerUpUnit extends PowerUpUnit {
 	/**
 	 * Indicates the velocity in the Y direction of this powerup type.
 	 */
-	public static double VELY = 50.0;
+	static final double VELY = 50.0;
 	/**
 	 * Creates a shoot power Up.
 	 * @param x X coordinate
@@ -52,6 +52,14 @@ public class ShootPowerUpUnit extends PowerUpUnit {
 	 */
 	public final int hashCode() {
 		  return 0;
+	}
+	
+	/**
+	 * Returns the velocity in the Y direction.
+	 * @return The velocity in the Y direction.
+	 */
+	public static double getVely() {
+		return VELY;
 	}
 
 }

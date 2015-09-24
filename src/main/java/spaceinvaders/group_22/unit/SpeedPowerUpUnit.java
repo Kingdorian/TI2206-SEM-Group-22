@@ -11,7 +11,7 @@ public class SpeedPowerUpUnit extends PowerUpUnit {
 	/**
 	 * Indicates the velocity in the Y direction of this powerup type.
 	 */
-	public static double VELY = 50.0;
+	static final double VELY = 50.0;
 	
 	/**
 	 * Creates a speed power Up.
@@ -55,4 +55,11 @@ public class SpeedPowerUpUnit extends PowerUpUnit {
 		  return 0;
 	}
 
+	/**
+	 * Returns the velocity in the Y direction.
+	 * @return The velocity in the Y direction.
+	 */
+	public static double getVely() {
+		return VELY;
+	}
 }

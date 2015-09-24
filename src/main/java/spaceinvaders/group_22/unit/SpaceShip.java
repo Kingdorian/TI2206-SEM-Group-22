@@ -6,23 +6,24 @@ package spaceinvaders.group_22.unit;
  * @author Bryan van Wijk
  */
 
+@SuppressWarnings("checkstyle:magicnumber")
 public class SpaceShip extends Unit {
 	
 	
 	/**
 	 * Indicates the max speed at which a spaceship can travel.
 	 */
-	public static double MAXVELX;
+	private static double maxVelx;
 	
 	/**
 	 * The default speed at which a spaceship can travel.
 	 */
-	public static double defaultVel = 250; 
+	private static double defaultVel = 250; 
 	
 	/**
 	 * The default speed at which a spaceship can travel.
 	 */
-	public static double defaultShootSpeed = 1; 
+	private static double defaultShootSpeed = 1; 
 	
 	/**
 	 * A multiplier for the velocity used by powerups.
@@ -37,7 +38,7 @@ public class SpaceShip extends Unit {
 	/**
 	 * Times allowed to shoot per second.
 	 */
-	public static double shootTimes;
+	private static double shootTimes;
 	/**
 	 * Creates a SpaceShip.
 	 * @param x X Coordinate
@@ -46,8 +47,8 @@ public class SpaceShip extends Unit {
 	 */
 	public SpaceShip(final double x, final double y, final String spriteFile) {
 		super(x, y, spriteFile);
-		shootTimes = defaultShootSpeed * shootingMultiplier;
-		MAXVELX = defaultVel * velMultiplier;
+		setShootTimes(defaultShootSpeed * shootingMultiplier);
+		setMAXVELX(defaultVel * velMultiplier);
 	}
 	
 	/**
@@ -66,8 +67,8 @@ public class SpaceShip extends Unit {
 	 * Updates spaceship attributes by multiplying with the multiplier.
 	 */
 	public final void updateMultiplier() {
-		shootTimes = (int) (defaultShootSpeed * shootingMultiplier);
-		MAXVELX = (int) (defaultVel * velMultiplier);
+		setShootTimes((int) (defaultShootSpeed * shootingMultiplier));
+		setMAXVELX((int) (defaultVel * velMultiplier));
 	}
 	
 	/**
@@ -127,5 +128,37 @@ public class SpaceShip extends Unit {
 	 */
 	public final int hashCode() {
 		  return 0;
+	}
+
+	/**
+	 * Get the shooting speed.
+	 * @return the shooting speed.
+	 */
+	public static double getShootTimes() {
+		return shootTimes;
+	}
+
+	/**
+	 * Set the shooting speed.
+	 * @param newShootTimes the new shooting speed.
+	 */
+	public static void setShootTimes(final double newShootTimes) {
+		SpaceShip.shootTimes = newShootTimes;
+	}
+
+	/**
+	 * Get the maximum movement speed.
+	 * @return the maximum movement speed.
+	 */
+	public static double getMAXVELX() {
+		return maxVelx;
+	}
+
+	/**
+	 * Set the maximum movement speed.
+	 * @param newMaxvel the new maximum movement speed.
+	 */
+	public static void setMAXVELX(final double newMaxvel) {
+		maxVelx = newMaxvel;
 	}
 }

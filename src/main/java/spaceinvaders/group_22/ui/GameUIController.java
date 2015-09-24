@@ -336,7 +336,7 @@ public class GameUIController
 			Image glowImage = sprites.get(powerup.getGlow());
 			if (glowImage != null) {
 				//Calculate opacity on base of the health of the barricade
-				Double opacity = powerup.getTimeLeft() / PowerUp.DURATION;
+				Double opacity = powerup.getTimeLeft() / PowerUp.getDuration();
 				gc.setGlobalAlpha(opacity);
 				gc.drawImage(glowImage, game.getPlayer().getSpaceShip().getXCoor() - 0.5 * glowImage.getWidth(), 
 						game.getPlayer().getSpaceShip().getYCoor() - 0.5 * glowImage.getHeight());	

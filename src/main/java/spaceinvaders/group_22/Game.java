@@ -243,9 +243,9 @@ public class Game {
 			getLogger().log(logMessage, LogEvent.Type.TRACE);
 		}
 		if (!shootingAllowed) {
-			if (countToShoot < ((1 / tickrate) / SpaceShip.shootTimes)) { 
+			if (countToShoot < ((1 / tickrate) / SpaceShip.getShootTimes())) { 
 				countToShoot++; 
-			} else if (Double.compare((double) countToShoot, ((1 / tickrate) / SpaceShip.shootTimes)) == 0) {
+			} else if (Double.compare((double) countToShoot, ((1 / tickrate) / SpaceShip.getShootTimes())) == 0) {
 				shootingAllowed = true;
 				countToShoot = 0;
 			}
@@ -309,17 +309,17 @@ public class Game {
 		// Check that the spaceship is still able to move without going off the screen.
 		if (player.getSpaceShip().getXCoor() - 0.5 * player.getSpaceShip().getWidth() > 0 
 				&& pressedKeys.contains(KeyCode.A)) {
-			velX = velX - SpaceShip.MAXVELX * tickrate * 2;
+			velX = velX - SpaceShip.getMAXVELX() * tickrate * 2;
 		}
 		if (player.getSpaceShip().getXCoor() + 0.5 * player.getSpaceShip().getWidth() < canvasWidth
 				&& pressedKeys.contains(KeyCode.D)) {
-			velX = velX + SpaceShip.MAXVELX * tickrate * 2;
+			velX = velX + SpaceShip.getMAXVELX() * tickrate * 2;
 		}
 
-		if (velX > SpaceShip.MAXVELX) {
-			velX = SpaceShip.MAXVELX;
-		} else if (velX < -SpaceShip.MAXVELX) {
-			velX = -SpaceShip.MAXVELX;
+		if (velX > SpaceShip.getMAXVELX()) {
+			velX = SpaceShip.getMAXVELX();
+		} else if (velX < -SpaceShip.getMAXVELX()) {
+			velX = -SpaceShip.getMAXVELX();
 		}
 		player.getSpaceShip().setVelX(velX);
 		player.getSpaceShip().moveUnit(tickrate);

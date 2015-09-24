@@ -7,7 +7,6 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 import spaceinvaders.group_22.Game;
-import spaceinvaders.group_22.logger.LogEvent;
 
 /**
  * A unit in the game that has a position and velocity.

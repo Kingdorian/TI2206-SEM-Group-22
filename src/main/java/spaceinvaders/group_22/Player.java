@@ -15,7 +15,7 @@ public class Player {
 	/**
 	 * Maximum amount of lives a player can have.
 	 */
-	public static int MAXLIFES = 5;
+	static final int MAXLIVES = 5;
 	/**
 	 * List of active power ups for this player.
 	 */
@@ -121,7 +121,7 @@ public class Player {
 	 * Adds 1 life to the player if lives is not yet 5.
 	 */
 	public final void addLife() {
-		if (lives < MAXLIFES) {
+		if (lives < MAXLIVES) {
 			lives++;
 		}
 	}

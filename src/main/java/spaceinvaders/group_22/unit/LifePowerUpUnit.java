@@ -11,7 +11,7 @@ public class LifePowerUpUnit extends PowerUpUnit {
 	/**
 	 * Indicates the velocity in the Y direction of this powerup type.
 	 */
-	public static double VELY = 50.0;
+	private static final double VELY = 50.0;
 	
 	/**
 	 * Creates a life power Up.
@@ -52,5 +52,14 @@ public class LifePowerUpUnit extends PowerUpUnit {
 	@Override
 	public final void activate(final Player newplayer) {
 		newplayer.addLife();
+
+	}
+
+	/**
+	 * Returns the velocity in the Y direction.
+	 * @return The velocity in the Y direction.
+	 */
+	public static double getVely() {
+		return VELY;
 	}
 }

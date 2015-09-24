@@ -1,7 +1,5 @@
 package spaceinvaders.group_22;
 
-import spaceinvaders.group_22.unit.SpaceShip;
-
 /**
  * Active Speed Power Up class.
  * @author Bryan
@@ -12,7 +10,7 @@ public class SpeedPowerUp extends PowerUp {
 	/**
 	 * Indicates the duration of this powerUP in seconds.
 	 */
-	public static double DURATION = 5.0; 
+	static final double DURATION = 5.0; 
 	
 	/**
 	 * Creates a Speed power up which is active.

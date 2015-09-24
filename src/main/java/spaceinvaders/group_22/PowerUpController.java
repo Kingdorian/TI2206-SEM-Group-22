@@ -14,6 +14,7 @@ import spaceinvaders.group_22.unit.Unit;
  * @author Bryan
  *
  */
+@SuppressWarnings("checkstyle:magicnumber")
 public class PowerUpController {
 	
 	/**
@@ -43,14 +44,14 @@ public class PowerUpController {
 	public final void createPowerUpUnit(final Double x, final Double y) {
 		Double random = Math.random();
 		PowerUpUnit newPowerUp = new LifePowerUpUnit(x, y, "powerup_red.png");
-		newPowerUp.setVelY(LifePowerUpUnit.VELY);
+		newPowerUp.setVelY(LifePowerUpUnit.getVely());
 		Game.getLogger().log("Power Up is created" , LogEvent.Type.DEBUG);
-		if (random < 0.3333333334) {
+		if (random < (1 / 3)) {
 			newPowerUp = new SpeedPowerUpUnit(x, y, "powerup_blue.png");
-			newPowerUp.setVelY(SpeedPowerUpUnit.VELY);
-		} else if (random < 0.6666666666667) {
+			newPowerUp.setVelY(SpeedPowerUpUnit.getVely());
+		} else if (random < (2 / 3)) {
 			newPowerUp = new ShootPowerUpUnit(x, y, "powerup_orange.png");
-			newPowerUp.setVelY(ShootPowerUpUnit.VELY);
+			newPowerUp.setVelY(ShootPowerUpUnit.getVely());
 		}
 		game.getPowerups().add(newPowerUp);
 	}

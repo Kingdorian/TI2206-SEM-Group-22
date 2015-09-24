@@ -10,7 +10,7 @@ public abstract class PowerUp {
 	/**
 	 * Indicates the duration of this powerUP in seconds.
 	 */
-	public static double DURATION = 5.0; 
+	private static final double DURATION = 5.0; 
 	
 	/**
 	 * Time left in seconds this Power Up can be active.
@@ -24,7 +24,7 @@ public abstract class PowerUp {
 	/**
 	 * The filename of the glow that has to be applied.
 	 */
-	protected String glow;
+	private String glow;
 	
 	/**
 	 * Makes a power up for this player.
@@ -103,6 +103,14 @@ public abstract class PowerUp {
 	 */
 	public final void setGlow(final String setglow) {
 		this.glow = setglow;
+	}
+
+	/**
+	 * Returns the duration of the powerup.
+	 * @return The powerup duration.
+	 */
+	public static double getDuration() {
+		return DURATION;
 	}
 
 }
