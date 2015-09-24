@@ -6,7 +6,7 @@ package spaceinvaders.group_22.unit;
  * @author Bryan van Wijk
  */
 
-public class SpaceShip extends Unit {
+public class SpaceShip extends Unit implements MovableUnit{
 	
 	
 	/**

@@ -6,7 +6,7 @@ package spaceinvaders.group_22.unit;
  * @author Ege de Bruin
  */
 
-public class Alien extends Unit {
+public class Alien extends Unit implements MovableUnit{
 	
 	/**
 	 * Creates an Alien.

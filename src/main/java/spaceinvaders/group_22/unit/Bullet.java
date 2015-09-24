@@ -5,7 +5,7 @@ package spaceinvaders.group_22.unit;
  * @author Ege de Bruin
  */
 
-public abstract class Bullet extends Unit {
+public abstract class Bullet extends Unit implements MovableUnit{
 
 	/**
 	 * Creates a Bullet.
