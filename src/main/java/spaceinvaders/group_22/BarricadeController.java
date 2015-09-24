@@ -64,4 +64,16 @@ public class BarricadeController extends UnitController {
 	public final  ArrayList<Barricade> getBarricades() {
 		return barricades;
 	}
+	/**
+	 * Remove dead barricades.
+	 */
+	public final void removeDead() {
+		for (int i = 0; i < barricades.size(); i++)  {
+			if (barricades.get(i).getHealth() == 0) {
+				barricades.remove(i);
+				game.getLogger().log("Removed barricade", LogEvent.Type.TRACE);
+				i--;
+			}
+		}
+	}
 }

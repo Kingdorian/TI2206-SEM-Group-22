@@ -13,7 +13,7 @@ import spaceinvaders.group_22.unit.Bullet;
  *
  */
 @SuppressWarnings("checkstyle:magicnumber") 
-public class AlienController extends UnitController {
+public class AlienController extends UnitController implements MovableUnitController {
 	/**
 	 * Part of the screen (on left and right) that cannot be used when creating aliens. 
 	 */

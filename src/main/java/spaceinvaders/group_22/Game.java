@@ -219,14 +219,7 @@ public class Game {
 		logger.log("Moved bullets", LogEvent.Type.TRACE);
 		
 		collisions.checkCollisions();
-		ArrayList<Barricade> barricades = barController.getBarricades();
-		for (int i = 0; i < barricades.size(); i++)  {
-			if (barricades.get(i).getHealth() == 0) {
-				barricades.remove(i);
-				logger.log("Removed barricade", LogEvent.Type.TRACE);
-				i--;
-			}
-		}
+		barController.removeDead();
 		//new wave of aliens
 		if (alienController.getAliens().isEmpty()) {
 			logger.log("All aliens died", LogEvent.Type.INFO);
