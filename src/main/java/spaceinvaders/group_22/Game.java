@@ -89,26 +89,6 @@ public class Game {
 	 */
 	private static Logger logger;
 	/**
-	 * Part of the screen (on left and right) that cannot be used when creating aliens. 
-	 */
-	static final double ALIENBORDERMARIGIN = 0.1;
-	/**
-	 * Amount of aliens per row.
-	 */
-	static final int ALIENS_PER_ROW = 10;
-	/**
-	 * Amount of rows of aliens.
-	 */
-	static final int AMOUNT_ALIEN_ROWS = 4;
-	/**
-	 * Amount of pixels/second the speed of the aliens increases per wave.
-	 */
-	static final int ALIENVELXINCREASE = 10;
-	/**
-	 * Location of the sprite of the aliens.
-	 */
-	static final String ALIENSPRITE = "invader.png";
-	/**
 	 * Creates a new instance of game.
 	 * @param width of the canvas.
 	 * @param height of the canvas.
@@ -130,9 +110,8 @@ public class Game {
 		collisions = new Collisions(this);
 				// Create an alien to use to get the width and height of the aliens used in this game. 
 		//(based on their sprite size)
-		Alien spriteinfo = new Alien(0, 0, ALIENSPRITE);
-		alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN,
-					spriteinfo.getWidth(), spriteinfo.getHeight(), ALIENS_PER_ROW, AMOUNT_ALIEN_ROWS);
+		Alien spriteinfo = new Alien(0, 0, Alien.SPRITE);
+		alienController.createAlienWave();
 		player = new Player(this);
 		shootingAllowed = true;
 		countToShoot = 0;
@@ -147,9 +126,8 @@ public class Game {
 		barController.create();
 		
 		alienController = new AlienController(this);
-		Alien spriteinfo = new Alien(0, 0, ALIENSPRITE);
-		alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN,
-				spriteinfo.getWidth(), spriteinfo.getHeight(), ALIENS_PER_ROW, AMOUNT_ALIEN_ROWS);
+		Alien spriteinfo = new Alien(0, 0, Alien.SPRITE);
+		alienController.createAlienWave();
 		player = new Player(this);
 		
 		shootingAllowed = true;
@@ -180,9 +158,8 @@ public class Game {
 		barController.create();
 		// Create an alien to use to get the width and height of the aliens used in this game. 
 		//(based on their sprite size)
-		Alien spriteinfo = new Alien(0, 0, ALIENSPRITE);
-		alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN, 
-					spriteinfo.getWidth(), spriteinfo.getHeight(), ALIENS_PER_ROW, AMOUNT_ALIEN_ROWS);
+		Alien spriteinfo = new Alien(0, 0, Alien.SPRITE);
+		alienController.createAlienWave();
 		player = new Player(this);
 		shootingAllowed = true;
 		countToShoot = 0;
@@ -266,12 +243,11 @@ public class Game {
 		if (alienController.getAliens().isEmpty()) {
 			logger.log("All aliens died", LogEvent.Type.TRACE);
 			//Increase aliens speed and reset direction so they start moving to the right
-			alienController.setAlienVelX(Math.abs(alienController.getAlienVelX()) + ALIENVELXINCREASE);
+			alienController.setAlienVelX(Math.abs(alienController.getAlienVelX()) + AlienController.ALIENVELXINCREASE);
 			// Create an alien to use to get the width and height of the aliens used in this game. 
 			//(based on their sprite size)
-			Alien spriteinfo = new Alien(0, 0, ALIENSPRITE);
-			alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN, 
-						spriteinfo.getWidth(), spriteinfo.getHeight(), ALIENS_PER_ROW, AMOUNT_ALIEN_ROWS);
+			Alien spriteinfo = new Alien(0, 0, Alien.SPRITE);
+			alienController.createAlienWave();
 			bullets.clear();
 			logger.log("Removed all bullets", LogEvent.Type.TRACE);
 		}

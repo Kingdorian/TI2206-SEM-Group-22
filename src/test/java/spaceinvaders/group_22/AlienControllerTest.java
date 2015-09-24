@@ -43,8 +43,8 @@ public class AlienControllerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testCreateAlienWave() {
-		ArrayList<Alien> aliens = controller.createAlienWave(0, 0, 0, 5, 5);
-		assertEquals(aliens.size(), 25);
+		ArrayList<Alien> aliens = controller.createAlienWave();
+		assertEquals(AlienController.ALIENS_PER_ROW*AlienController.AMOUNT_ALIEN_ROWS, aliens.size());
 		for (int i = 0; i < aliens.size(); i++) {
 			//Test if every alien has the right sprite
 			assertEquals(aliens.get(i).getSprite(), "invader.png");

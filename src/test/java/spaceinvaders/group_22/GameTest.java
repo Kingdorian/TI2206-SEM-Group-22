@@ -155,7 +155,7 @@ public class GameTest {
 	public final void testResetAliens() {
 		game.getAlienController().setAliens(new ArrayList<Alien>());
 		game.reset();
-		Assert.assertEquals(game.ALIENS_PER_ROW*game.AMOUNT_ALIEN_ROWS,	game.getAlienController().getAliens().size());
+		Assert.assertEquals(AlienController.ALIENS_PER_ROW*AlienController.AMOUNT_ALIEN_ROWS,game.getAlienController().getAliens().size());
 	}
 	/**
 	 * Tests if the reset method works correctly for resetting the player.

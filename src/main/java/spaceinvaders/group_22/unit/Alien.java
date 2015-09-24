@@ -7,7 +7,10 @@ package spaceinvaders.group_22.unit;
  */
 
 public class Alien extends Unit {
-	
+	/**
+	 * Location of the sprite of the aliens.
+	 */
+	public static final String SPRITE = "invader.png";
 	/**
 	 * Creates an Alien.
 	 * @param x X coordinate

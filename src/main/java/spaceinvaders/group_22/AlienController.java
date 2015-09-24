@@ -9,10 +9,28 @@ import spaceinvaders.group_22.unit.Bullet;
 /**
  * Controls the Aliens.
  * @author Ege
+ * @author Dorian
  *
  */
 @SuppressWarnings("checkstyle:magicnumber") 
 public class AlienController {
+	/**
+	 * Part of the screen (on left and right) that cannot be used when creating aliens. 
+	 */
+	static final double ALIENBORDERMARIGIN = 0.1;
+	/**
+	 * Amount of aliens per row.
+	 */
+	static final int ALIENS_PER_ROW = 10;
+	/**
+	 * Amount of rows of aliens.
+	 */
+	static final int AMOUNT_ALIEN_ROWS = 4;
+	/**
+	 * Amount of pixels/second the speed of the aliens increases per wave.
+	 */
+	static final int ALIENVELXINCREASE = 10;
+
 	/**
 	 * List of aliens in the game.
 	 */
@@ -62,27 +80,27 @@ public class AlienController {
 	 * @param lines Amount of alien lines.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")    
-	public final ArrayList<Alien> createAlienWave(final double borderDist, final int spriteWidth, 
-			final int spriteHeight, final int alienAmount, final int lines) {
+	public final ArrayList<Alien> createAlienWave() {
 		aliens.clear();
         
         // Distance to top of the screen.
         double distance = 125;
-                
-        double interval = (game.getCanvasWidth() - 2 * borderDist - alienAmount * spriteWidth) / (alienAmount + 1);  
-        double startPosition = borderDist + interval + 0.5 * spriteWidth;
+        // Create alien object to make sure we can get the width and height of aliens
+        Alien testAlien = new Alien(0.0, 0.0, Alien.SPRITE); 
+        double interval = (game.getCanvasWidth() - 2 * ALIENBORDERMARIGIN - ALIENS_PER_ROW * testAlien.getWidth()) / (ALIENS_PER_ROW + 1);  
+        double startPosition = ALIENBORDERMARIGIN + interval + 0.5 * testAlien.getWidth();
        
         // Drawing lines of Aliens.
-        for (int i = 0; i < lines; i++) {
-            for (int j = 0; j < alienAmount; j++) {
+        for (int i = 0; i < AMOUNT_ALIEN_ROWS; i++) {
+            for (int j = 0; j < ALIENS_PER_ROW; j++) {
             	Alien alien = new Alien(startPosition, distance, "invader.png");
             	game.getLogger().log("Created Alien", LogEvent.Type.TRACE);
             	alien.setVelX(alienVelX);
             	aliens.add(alien);
-            	startPosition += spriteWidth + interval;
+            	startPosition += testAlien.getWidth() + interval;
             }
-            distance += spriteHeight + 0.1 * spriteHeight;
-            startPosition = borderDist + interval + 0.5 * spriteWidth;
+            distance += 1.1 * testAlien.getHeight() ;
+            startPosition = ALIENBORDERMARIGIN + interval + 0.5 * testAlien.getWidth();
         }
         game.getLogger().log("Created alien wave succesfully", LogEvent.Type.DEBUG);
 		return aliens;	
