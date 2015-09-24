@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -89,5 +90,15 @@ public class AlienControllerTest {
 		for (int i = 0; i < game.getAlienController().getAliens().size(); i++) {
 			assertTrue(game.getAlienController().getAliens().get(i).getYCoor() == (yValues.get(i) + 8));
 		}
+	}
+	/**
+	 * Tests if setAliens sets the ArrayList of aliens correctly.
+	 */
+	@Test
+	public final void testSetAliens() {
+		ArrayList<Alien> aliens = new ArrayList<Alien>();		
+		controller.setAliens(aliens);
+		Assert.assertEquals(new ArrayList<Alien>(), aliens);	
+		
 	}
 }

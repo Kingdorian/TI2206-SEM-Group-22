@@ -62,32 +62,7 @@ public class GameTest {
 	public final void testGetHighscore() {
 		Assert.assertEquals(0, game.getHighScore());
 	}
-	/**
-	 * Tests if the getBarricades method works correctly.
-	 */
-	@Test
-	@SuppressWarnings("checkstyle:magicnumber")   
-	public final void testGetBarricades() {
-		ArrayList<Barricade> barricades = new ArrayList<Barricade>();
-		Barricade barricade = new  Barricade(10, 10, "testimage.png");
-		barricades.add(barricade);
-		game.getBarricadeController().setBarricades(barricades);
-		Assert.assertEquals(barricade, game.getBarricadeController().getBarricades().get(0));
-	}
-	/**
-	 * Tests if the addBarricade method adds a barricade correctly.
-	 */
-	@Test
-	@SuppressWarnings("checkstyle:magicnumber")   
-	public final void testAddBarricade() {
-		ArrayList<Barricade> barricades = new ArrayList<Barricade>();
-		Barricade barricade = new Barricade(10, 10, "testimage.png");
-		barricades.add(barricade);
-		game.getBarricadeController().setBarricades(new ArrayList<Barricade>());
-		game.getBarricadeController().addBarricade(barricade);
-		System.out.println(game.getBarricadeController().getBarricades());
-		//Assert.assertEquals(barricades, game.getBarricades());
-	}
+	
 	/**
 	 * Tests if the getHighScore sets the new highscore correctly.
 	 */
@@ -115,18 +90,6 @@ public class GameTest {
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testNegativeNewHighScore() {
 		game.setHighScore(-10);
-	}
-	
-	/**
-	 * Tests if setAliens sets the ArrayList of aliens correctly.
-	 */
-	@Test
-	public final void testSetAliens() {
-		ArrayList<Alien> aliens = new ArrayList<Alien>();		
-		game.getAlienController().setAliens(aliens);
-		
-		Assert.assertEquals(new ArrayList<Alien>(), aliens);	
-		
 	}
 	
 	/**
@@ -269,17 +232,6 @@ public class GameTest {
 		Assert.assertEquals(game.getPlayer(), player);
 	}
 	/**
-	 * Tests the moveSpaceShip method for bouncing spaceship to the left border.
-	 */
-	@Test
-	public final void testShipBounceLeft() {
-		game.setTickrate(10.0);
-		game.getPlayer().setSpaceShip(new SpaceShip(-5, 0, "spaceship.png"));
-		game.getPlayer().getSpaceShip().setVelX(-10.0);
-		game.getSpaceShipController().moveSpaceShip(new ArrayList<KeyCode>());
-		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() >= 0);
-	}
-	/**
 	 * Tests the moveSpaceShip method for bouncing spaceship to the right border.
 	 */
 	@Test
@@ -289,47 +241,6 @@ public class GameTest {
 		game.getSpaceShipController().moveSpaceShip(new ArrayList<KeyCode>());
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() <= 0);
 	}
-	/**
-	 * Tests the ship moving normally to the right when D is pressed. 
-	 */
-	@Test
-	public final void testShipMovingRight() {
-		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
-		ArrayList keyList = new ArrayList<KeyCode>();
-		keyList.add(KeyCode.D);
-		game.getSpaceShipController().moveSpaceShip(keyList);
-		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() > 0);
-	}
-	/**
-	 * Tests the ship moving normally to the left when A is pressed. 
-	 */
-	@Test
-	public final void testShipMovingLeft() {
-		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
-		ArrayList keyList = new ArrayList<KeyCode>();
-		keyList.add(KeyCode.A);
-		game.getSpaceShipController().moveSpaceShip(keyList);
-		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() < 0);
-	}
-	/**
-	 * Test
-	 */
-	@Test
-	public final void testShipFasterThenMaxSpeedRight() {
-		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
-		game.getPlayer().getSpaceShip().setVelX(500);
-		game.getSpaceShipController().moveSpaceShip(new ArrayList<KeyCode>());
-		Assert.assertEquals(250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
-	}
-	/**
-	 * Tests the ship moving normally to the left when A is pressed. 
-	 */
-	@Test
-	public final void testShipFasterThenMaxSpeedLeft() {
-		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
-		game.getPlayer().getSpaceShip().setVelX(-500);
-		game.getSpaceShipController().moveSpaceShip(new ArrayList<KeyCode>());
-		Assert.assertEquals(-250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
-	}
+	
 	
 }
