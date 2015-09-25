@@ -33,38 +33,32 @@ public class Barricade extends Unit {
 	public final int getHealth() {
 		return health;
 	}
-	/**
-	 * Checks if the provided object equeals this Barricade.
-	 * @param obj the object to compare to.
-	 * @return true if the both objects are thesame.
-	 */
+	@Override
 	public final boolean equals(final Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		if (!super.equals(obj)) {
 			return false;
 		}
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Barricade that = (Barricade) obj;
-		if (this.getXCoor() == that.getXCoor()
-					&& this.getYCoor() == that.getYCoor()
-					&& this.getVelX() == that.getVelX()
-					&& this.getVelY() == that.getVelY()
-					&& this.getHeight() == that.getHeight()
-					&& this.getWidth() == that.getWidth()) {
-				if (health != that.health) {
-					return false;
-				}
-				return true;
+		Barricade other = (Barricade) obj;
+		if (health != other.health) {
+			return false;
 		}
-		return false;
+		return true;
 	}
-	/**
-	 * HashCode method.
-	 * @return hashcode of this object
-	 */
+	@Override
 	public final int hashCode() {
-		  return 0;
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + health;
+		return result;
 	}
 	
 

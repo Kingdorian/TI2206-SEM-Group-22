@@ -91,7 +91,7 @@ public class PlayerTest {
 		Game game = new Game(200 , 200);
 		Player player = new Player(game);
 		player.getSpaceShip().setVelX(20);
-		player.getSpaceShip().moveUnit(60.0);
+		player.getSpaceShip().move(60.0);
 		player.respawnShip();
 		Assert.assertEquals(game.getCanvasWidth() / 2, player.getSpaceShip().getXCoor(), 0.05 );
 	}

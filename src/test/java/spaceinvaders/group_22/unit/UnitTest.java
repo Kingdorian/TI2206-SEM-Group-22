@@ -1,7 +1,6 @@
 package spaceinvaders.group_22.unit;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Before;
@@ -9,14 +8,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import spaceinvaders.group_22.Game;
-
 /**
  * Test the abstract unit class.
  * 
  * @author Bryan van Wijk
  *
  */
+@SuppressWarnings("checkstyle:magicnumber")   
 public abstract class UnitTest {
 	
 	/**
@@ -67,23 +65,6 @@ public abstract class UnitTest {
 	public final void testUnitYCoor() {
 		assertEquals(3, unit.getYCoor(), 0.05);
 	}
-	
-	/**
-	 * Test the Velocity in the X direction.
-	 */
-	@Test
-	public final void testUnintVelX() {
-		assertEquals(0, unit.getVelX(), 0.05);
-	}
-	
-	/**
-	 * Test the velocity in the Y direction.
-	 */
-	@Test
-	public final void testUnintVelY() {
-		assertEquals(0, unit.getVelY(), 0.05);
-	}
-	
 	/**
 	 * Test the unit width.
 	 */
@@ -117,30 +98,6 @@ public abstract class UnitTest {
 		thrown.expect(IllegalArgumentException.class);
 		createInstance(1.2, 3, "png.png");
 	}
-	
-	/**
-	 * Test the move method with velocity 0 in X and Y.
-	 */
-	@Test
-	@SuppressWarnings("checkstyle:magicnumber")    
-	public final void testMoveUnitVelocity0() {
-		unit.moveUnit(60.0);
-		assertEquals(1.2, unit.getXCoor(), 0.05);
-		assertEquals(3, unit.getYCoor(), 0.05);
-	}
-	
-	/**
-	 * Test the move method with velocity 1 in the X direction.
-	 */
-	@Test
-	@SuppressWarnings("checkstyle:magicnumber")    
-	public void testMoveUnit() {
-		unit.setVelX(1);
-		unit.moveUnit(1.0);
-		assertEquals(2.2, unit.getXCoor(), 0.05);
-		assertEquals(3.0, unit.getYCoor(), 0.05);
-	}
-	
 	/**
 	 * Test the Equals method.
 	 */
@@ -148,6 +105,7 @@ public abstract class UnitTest {
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEquals() {
 		Unit unit2 = createInstance(1.2, 3, "testimage.png");
+		System.out.println(unit2.hashCode());
 		assertEquals(unit, unit2);
 	}
 	
@@ -159,15 +117,7 @@ public abstract class UnitTest {
 	public final void testEqualsFalse() {
 		assertNotEquals(unit, null);
 	}
-	
-	/**
-	 * Test the hashCode method.
-	 */
-	@Test
-	@SuppressWarnings("checkstyle:magicnumber")   
-	public final void testHashCode() {
-		assertEquals(unit.hashCode(), 0);
-	}
+
 	/**
 	 * Test the equals method with a shipbullet.
 	 */
@@ -224,26 +174,6 @@ public abstract class UnitTest {
 	public final void testEqualsHeight() {
 		Unit unit2 = createInstance(1.2, 3, "testimage.png");
 		unit2.setHeight(12);
-		assertNotEquals(unit, unit2);
-	}
-	/**
-	 * Test the equals method with a different velX.
-	 */
-	@Test
-	@SuppressWarnings("checkstyle:magicnumber")   
-	public final void testEqualsVelX() {
-		Unit unit2 = createInstance(1.2, 3, "testimage.png");
-		unit2.setVelX(4);
-		assertNotEquals(unit, unit2);
-	}
-	/**
-	 * Test the equals method with a different velY.
-	 */
-	@Test
-	@SuppressWarnings("checkstyle:magicnumber")   
-	public final void testEqualsVelY() {
-		Unit unit2 = createInstance(1.2, 3, "testimage.png");
-		unit2.setVelY(4);
 		assertNotEquals(unit, unit2);
 	}
 

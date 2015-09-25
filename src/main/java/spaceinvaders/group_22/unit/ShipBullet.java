@@ -18,29 +18,17 @@ public class ShipBullet extends Bullet {
 	}
 	
 	/**
-	 * Compares two objects and returns if they are equal.
-	 * @return true if both objects are the same.
-	 * @param other the object to compare.
+	 * Checks if provided object is equal to this object.
+	 * @param the object to compare this object to
+	 * @return boolean result if provide object is equal to this
 	 */
+	@SuppressWarnings("checkstyle:EqualsHahsCode")
 	@Override
 	public final boolean equals(final Object other) {
 		if (other != null && other instanceof ShipBullet) {
-			ShipBullet that = (ShipBullet) other;
-			return this.getXCoor() == that.getXCoor()
-					&& this.getYCoor() == that.getYCoor()
-					&& this.getVelX() == that.getVelX()
-					&& this.getVelY() == that.getVelY()
-					&& this.getHeight() == that.getHeight()
-					&& this.getWidth() == that.getWidth();
+			return 	super.equals(other);
 		}
 		return false;
-	}
-	/**
-	 * HashCode method.
-	 * @return hashcode of this object
-	 */
-	public final int hashCode() {
-		  return 0;
 	}
 
 }

@@ -6,8 +6,21 @@ package spaceinvaders.group_22.unit;
  * @author Ege de Bruin
  */
 
-public class Alien extends Unit {
+public class Alien extends Unit implements MovableUnit {
 	
+	/**
+	 * Location of the sprite of the aliens.
+	 */
+	public static final String SPRITE = "invader.png";
+	/**
+	 * VelX is the velocity in the X direction in pixels per second.
+	 */
+	private double velX;
+	
+	/**
+	 * velY is the velocity in the Y direction in pixels per second.
+	 */
+	private double velY;
 	/**
 	 * Creates an Alien.
 	 * @param x X coordinate
@@ -28,7 +41,23 @@ public class Alien extends Unit {
 		bullet.setVelY(velocity);
 		return bullet;
 	}
-	
+	/**
+	 * HashCode method.
+	 * @return hashcode of this object
+	 */
+	@SuppressWarnings("CheckStyle:MagicNumber")
+	@Override
+	public final int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		long temp;
+		temp = Double.doubleToLongBits(velX);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(velY);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
 	/**
 	 * Compares two objects and returns if they are equal.
 	 * @return true if both objects are the same.
@@ -38,21 +67,51 @@ public class Alien extends Unit {
 	public final boolean equals(final Object other) {
 		if (other != null && other instanceof Alien) {
 			Alien that = (Alien) other;
-			return this.getXCoor() == that.getXCoor()
-					&& this.getYCoor() == that.getYCoor()
+			return 	super.equals(that)
 					&& this.getVelX() == that.getVelX()
-					&& this.getVelY() == that.getVelY()
-					&& this.getHeight() == that.getHeight()
-					&& this.getWidth() == that.getWidth();
+					&& this.getVelY() == that.getVelY();
 		}
 		return false;
+	}	
+	/**
+	 * Move the unit in the direction of this unit and with his velocity.
+	 * @param tickrate The rate at which the game ticks.
+	 */
+	public final void move(final double tickrate) {
+		setXCoor(this.getXCoor() + (this.getVelX() * tickrate));
+		setYCoor(this.getYCoor() + (this.getVelY() * tickrate));
 	}
 	/**
-	 * HashCode method.
-	 * @return hashcode of this object
+	 * Returns the current velocity in the X direction.
+	 * @return the current velocity in the X direction in pixels per second.
 	 */
-	public final int hashCode() {
-		  return 0;
+	public final double getVelX() {
+		return velX;
 	}
+	
+	/**
+	 * Sets the current velocity in the X direction.
+	 * @param newvelX the velocity in the X direction to set in pixels per second.
+	 */
+	public final void setVelX(final double newvelX) {
+		this.velX = newvelX;
+	}
+	
+	/**
+	 * Returns the current velocity in the Y direction.
+	 * @return the current velocity in the Y direction in pixels per second.
+	 */
+	public final double getVelY() {
+		return velY;
+	}
+	
+	/**
+	 * Sets the current velocity in the Y direction.
+	 * @param alienVelY the velocity in the Y direction to set in pixels per second.
+	 */
+	public final void setVelY(final double alienVelY) {
+		this.velY = alienVelY;
+	}
+
 
 }

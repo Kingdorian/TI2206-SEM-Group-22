@@ -45,6 +45,8 @@ public class Collisions {
 			}
 		}
 		if (spaceShipexplosion != null && spaceShipexplosion.getCounter() == 24) {
+			game.getLogger().log("Spaceship hit by bullet" , LogEvent.Type.INFO);
+			game.getBullets().clear();
 			game.getPlayer().die();
 		}
 		//Checking colissions for spaceship with enemy bullets
@@ -52,7 +54,7 @@ public class Collisions {
 		if (collidingBullet != null) {
 			String logMessage = "Player collided bullet at X:" + game.getPlayer().getSpaceShip().getXCoor() 
 					+ " Y: " + game.getPlayer().getSpaceShip().getYCoor();
-			game.getLogger().log(logMessage, LogEvent.Type.TRACE);
+			Game.getLogger().log(logMessage, LogEvent.Type.TRACE);
 			
 			spaceShipexplosion = new Explosion(game.getPlayer().getSpaceShip().getXCoor(),
 					game.getPlayer().getSpaceShip().getYCoor(), "explosion1.png");
@@ -61,27 +63,30 @@ public class Collisions {
 		}
 		//Checking for colissions between player bullets and aliens
 		for (Unit bullet : shipBullets) {
-			Unit collidingUnit = checkCollisions(bullet, new ArrayList<Unit>(game.getAliens()));
+			Unit collidingUnit = checkCollisions(bullet, new ArrayList<Unit>(game.getAlienController().getAliens()));
 			if (collidingUnit != null) {
 				String logMessage = "Alien collided bullet at X:" + bullet.getXCoor() 
 						+ " Y: " + bullet.getYCoor();
-				game.getLogger().log(logMessage, LogEvent.Type.TRACE);
+				Game.getLogger().log(logMessage, LogEvent.Type.TRACE);
 				
 				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
 						collidingUnit.getYCoor(), "explosion1.png"));
-				game.getAliens().remove(collidingUnit);
+				game.getAlienController().getAliens().remove(collidingUnit);
 				game.getBullets().remove(bullet);
 				game.getPlayer().addScore(10);
+				if (Math.random() > 0.6) {
+					game.getPowerUpController().createPowerUpUnit(bullet.getXCoor(), bullet.getYCoor());
+				}
 				break;
 			}
 		}
 		// Checking for colissions between bullets and barricades
-		for (Barricade bar : game.getBarricades()) {
+		for (Barricade bar : game.getBarricadeController().getBarricades()) {
 			Unit collidingUnit = checkCollisions(bar, new ArrayList<Unit>(game.getBullets()));
 			if (collidingUnit != null) {
 				String logMessage = "Barricade collided bullet at X:" + bar.getXCoor() 
 					+ " Y: " + bar.getYCoor();
-				game.getLogger().log(logMessage, LogEvent.Type.TRACE);
+				Game.getLogger().log(logMessage, LogEvent.Type.TRACE);
 				
 				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
 						collidingUnit.getYCoor(), "explosion1.png"));

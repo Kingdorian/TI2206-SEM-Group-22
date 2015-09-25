@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import javafx.scene.input.KeyCode;
 import spaceinvaders.group_22.unit.Alien;
-import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.ShipBullet;
@@ -19,6 +18,7 @@ import spaceinvaders.group_22.unit.SpaceShip;
  * @author Dorian
  *
  */
+@SuppressWarnings("checkstyle:magicnumber")   
 public class GameTest {
 	
 	/**
@@ -30,7 +30,6 @@ public class GameTest {
 	 * Class to set up a game before each test is executed.
 	 */
 	@Before
-	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void setUpGame() {
 		game = new Game(200, 200);
 		game.setTickrate(1.0);
@@ -40,7 +39,6 @@ public class GameTest {
 	 * Tests if the testInProgress method returns false if the game is not in progress.
 	 */
 	@Test
-	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testIsNotInProgress() {
 		Assert.assertFalse(game.isInProgress());
 	}
@@ -48,7 +46,6 @@ public class GameTest {
 	 * Tests if the testInProgress method returns t if the game is in progress.
 	 */
 	@Test
-	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testIsInProgress() {
 		// Start game
 		game.start();
@@ -58,41 +55,13 @@ public class GameTest {
 	 * Tests if the gethighscore method works correctly.
 	 */
 	@Test
-	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testGetHighscore() {
 		Assert.assertEquals(0, game.getHighScore());
-	}
-	/**
-	 * Tests if the getBarricades method works correctly.
-	 */
-	@Test
-	@SuppressWarnings("checkstyle:magicnumber")   
-	public final void testGetBarricades() {
-		ArrayList<Barricade> barricades = new ArrayList<Barricade>();
-		Barricade barricade = new  Barricade(10, 10, "testimage.png");
-		barricades.add(barricade);
-		game.setBarricades(barricades);
-		Assert.assertEquals(barricade, game.getBarricades().get(0));
-	}
-	/**
-	 * Tests if the addBarricade method adds a barricade correctly.
-	 */
-	@Test
-	@SuppressWarnings("checkstyle:magicnumber")   
-	public final void testAddBarricade() {
-		ArrayList<Barricade> barricades = new ArrayList<Barricade>();
-		Barricade barricade = new Barricade(10, 10, "testimage.png");
-		barricades.add(barricade);
-		game.setBarricades(new ArrayList<Barricade>());
-		game.addBarricade(barricade);
-		System.out.println(game.getBarricades());
-		//Assert.assertEquals(barricades, game.getBarricades());
 	}
 	/**
 	 * Tests if the getHighScore sets the new highscore correctly.
 	 */
 	@Test
-	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testSetHighScore() {
 		game.setHighScore(100);
 		Assert.assertEquals(100, game.getHighScore());
@@ -101,7 +70,6 @@ public class GameTest {
 	 * Test if proper exception is thrown when inputting a lower highscore.
 	*/
 	@Test(expected = AssertionError.class)
-	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testIllegalNewHighScore() {
 		//Setting a correct highscore
 		game.setHighScore(100);
@@ -112,21 +80,8 @@ public class GameTest {
 	 * Test if proper exception is thrown when inputting a negative highscore.
 	 */
 	@Test(expected = AssertionError.class)
-	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testNegativeNewHighScore() {
 		game.setHighScore(-10);
-	}
-	
-	/**
-	 * Tests if setAliens sets the ArrayList of aliens correctly.
-	 */
-	@Test
-	public final void testSetAliens() {
-		ArrayList<Alien> aliens = new ArrayList<Alien>();		
-		game.setAliens(aliens);
-		
-		Assert.assertEquals(new ArrayList<Alien>(), aliens);	
-		
 	}
 	
 	/**
@@ -135,27 +90,27 @@ public class GameTest {
 	@Test
 	public final void testGetAliens() {
 		ArrayList<Alien> aliens = new ArrayList<Alien>();		
-		game.setAliens(aliens);
+		game.getAlienController().setAliens(aliens);
 		
-		Assert.assertEquals(new ArrayList<Alien>(), game.getAliens());
+		Assert.assertEquals(new ArrayList<Alien>(), game.getAlienController().getAliens());
 	}
 	/**
 	 * Tests if the reset method works correctly for resetting barricades.
 	 */
 	@Test
 	public final void testResetBarricades() {
-		game.getBarricades().get(0).hit();
+		game.getBarricadeController().getBarricades().get(0).hit();
 		game.reset();
-		Assert.assertEquals(10, game.getBarricades().get(0).getHealth());
+		Assert.assertEquals(10, game.getBarricadeController().getBarricades().get(0).getHealth());
 	}
 	/**
 	 * Tests if the reset method works correctly for resetting aliens.
 	 */
 	@Test
 	public final void testResetAliens() {
-		game.setAliens(new ArrayList<Alien>());
+		game.getAlienController().setAliens(new ArrayList<Alien>());
 		game.reset();
-		Assert.assertEquals(game.ALIENS_PER_ROW*game.AMOUNT_ALIEN_ROWS,	game.getAliens().size());
+		Assert.assertEquals(AlienController.ALIENS_PER_ROW*AlienController.AMOUNT_ALIEN_ROWS,game.getAlienController().getAliens().size());
 	}
 	/**
 	 * Tests if the reset method works correctly for resetting the player.
@@ -175,7 +130,7 @@ public class GameTest {
 		game.getBullets().add(new ShipBullet(1.0, 1.0, "invader.png"));
 		game.reset();
 		// Bullet list should be emptied when the game resets
-		Assert.assertEquals(0, game.getBullets().size() );
+		Assert.assertEquals(0, game.getBullets().size());
 	}
 	/**
 	 * Tests if the reset method works correctly for resetting the explosion list.
@@ -185,7 +140,7 @@ public class GameTest {
 		game.getExplosions().add(new Explosion(1.0, 1.0, "explosion1.png"));
 		game.reset();
 		// Bullet list should be emptied when the game resets
-		Assert.assertEquals(0, game.getExplosions().size() );
+		Assert.assertEquals(0, game.getExplosions().size());
 	}
 	/**
 	 * Tests if the reset method works correctly for resetting .
@@ -211,7 +166,7 @@ public class GameTest {
 	@Test
 	public final void testGameOverNewHighScore() {
 		// Making sure the player has at least 1 point more then the current highscore
-		game.getPlayer().addScore(game.getHighScore()+1);
+		game.getPlayer().addScore(game.getHighScore() + 1);
 		game.gameOver();
 		Assert.assertEquals(1, game.getHighScore());
 	}
@@ -243,7 +198,7 @@ public class GameTest {
 		// Remove all existing bullets from the game.
 		game.reset();
 		ArrayList<Bullet> bulletlist = new ArrayList<Bullet>();
-		bulletlist.add(game.getAliens().get(0).shootBullet(1));
+		bulletlist.add(game.getAlienController().getAliens().get(0).shootBullet(1));
 		game.setBullets(bulletlist);
 		Assert.assertEquals(new ArrayList<Bullet>(), game.getShipBullets());
 	}
@@ -269,67 +224,13 @@ public class GameTest {
 		Assert.assertEquals(game.getPlayer(), player);
 	}
 	/**
-	 * Tests the moveSpaceShip method for bouncing spaceship to the left border.
-	 */
-	@Test
-	public final void testShipBounceLeft() {
-		game.setTickrate(10.0);
-		game.getPlayer().setSpaceShip(new SpaceShip(-5, 0, "spaceship.png"));
-		game.getPlayer().getSpaceShip().setVelX(-10.0);
-		game.moveSpaceShip(new ArrayList<KeyCode>());
-		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() >= 0);
-	}
-	/**
 	 * Tests the moveSpaceShip method for bouncing spaceship to the right border.
 	 */
 	@Test
 	public final void testShipBounceRight() {
 		game.getPlayer().setSpaceShip(new SpaceShip(game.getCanvasWidth() + 5, 10, "spaceship.png"));
 		game.getPlayer().getSpaceShip().setVelX(10.0);
-		game.moveSpaceShip(new ArrayList<KeyCode>());
+		game.getSpaceShipController().moveSpaceShip(new ArrayList<KeyCode>());
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() <= 0);
 	}
-	/**
-	 * Tests the ship moving normally to the right when D is pressed. 
-	 */
-	@Test
-	public final void testShipMovingRight() {
-		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
-		ArrayList keyList = new ArrayList<KeyCode>();
-		keyList.add(KeyCode.D);
-		game.moveSpaceShip(keyList);
-		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() > 0);
-	}
-	/**
-	 * Tests the ship moving normally to the left when A is pressed. 
-	 */
-	@Test
-	public final void testShipMovingLeft() {
-		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
-		ArrayList keyList = new ArrayList<KeyCode>();
-		keyList.add(KeyCode.A);
-		game.moveSpaceShip(keyList);
-		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() < 0);
-	}
-	/**
-	 * Test
-	 */
-	@Test
-	public final void testShipFasterThenMaxSpeedRight() {
-		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
-		game.getPlayer().getSpaceShip().setVelX(500);
-		game.moveSpaceShip(new ArrayList<KeyCode>());
-		Assert.assertEquals(250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
-	}
-	/**
-	 * Tests the ship moving normally to the left when A is pressed. 
-	 */
-	@Test
-	public final void testShipFasterThenMaxSpeedLeft() {
-		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
-		game.getPlayer().getSpaceShip().setVelX(-500);
-		game.moveSpaceShip(new ArrayList<KeyCode>());
-		Assert.assertEquals(-250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
-	}
-	
 }

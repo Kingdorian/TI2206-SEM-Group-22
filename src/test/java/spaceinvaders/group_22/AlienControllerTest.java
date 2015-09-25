@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,8 +44,9 @@ public class AlienControllerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testCreateAlienWave() {
-		ArrayList<Alien> aliens = controller.createAlienWave(0, 0, 0, 5, 5);
-		assertEquals(aliens.size(), 25);
+		controller.create();
+		ArrayList<Alien> aliens = controller.getAliens();
+		assertEquals(AlienController.ALIENS_PER_ROW*AlienController.AMOUNT_ALIEN_ROWS, aliens.size());
 		for (int i = 0; i < aliens.size(); i++) {
 			//Test if every alien has the right sprite
 			assertEquals(aliens.get(i).getSprite(), "invader.png");
@@ -52,41 +54,52 @@ public class AlienControllerTest {
 	}
 
 	/**
-	 * Test the moveAliens method.
+	 * Test the move method.
 	 */
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber") 
-	public final void testMoveAliens() {
+	public final void testmove() {
 		ArrayList<Double> xValues = new ArrayList<Double>();
 		ArrayList<Double> yValues = new ArrayList<Double>();
-		for (int i = 0; i < game.getAliens().size(); i++) {
-			xValues.add(game.getAliens().get(i).getXCoor());
-			yValues.add(game.getAliens().get(i).getYCoor());
+		for (int i = 0; i < game.getAlienController().getAliens().size(); i++) {
+			xValues.add(game.getAlienController().getAliens().get(i).getXCoor());
+			yValues.add(game.getAlienController().getAliens().get(i).getYCoor());
 		}
-		controller.moveAliens();
-		for (int i = 0; i < game.getAliens().size(); i++) {
-			assertTrue(game.getAliens().get(i).getXCoor() == (xValues.get(i) + 4));
+		controller.move();
+		for (int i = 0; i < game.getAlienController().getAliens().size(); i++) {
+			assertEquals(xValues.get(i) + 4, game.getAlienController().getAliens().get(i).getXCoor(), 0.05);
 		}
 	}
-	
+
 	/**
-	 * Test the moveAliens method when Aliens come to the side.
+	 * Test the move method when Aliens come to the side.
 	 */
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")
-	public final void testMoveAliensSide() {
+	public final void testmoveSide() {
 		ArrayList<Double> xValues = new ArrayList<Double>();
 		ArrayList<Double> yValues = new ArrayList<Double>();
-		for (int i = 0; i < game.getAliens().size(); i++) {
-			xValues.add(game.getAliens().get(i).getXCoor());
-			yValues.add(game.getAliens().get(i).getYCoor());
+		for (int i = 0; i < game.getAlienController().getAliens().size(); i++) {
+			xValues.add(game.getAlienController().getAliens().get(i).getXCoor());
+			yValues.add(game.getAlienController().getAliens().get(i).getYCoor());
 		}
-		for (int i = 0; i < 30; i++) {
+		for (int i = 0; i < 50; i++) {
 			//Move to the right side of the screen
-			controller.moveAliens();
+			controller.move();
 		}
-		for (int i = 0; i < game.getAliens().size(); i++) {
-			assertTrue(game.getAliens().get(i).getYCoor() == (yValues.get(i) + 8));
+		for (int i = 0; i < game.getAlienController().getAliens().size(); i++) {
+			System.out.println(game.getAlienController().getAliens().get(i).getYCoor());
+			assertEquals(yValues.get(i) + 8, game.getAlienController().getAliens().get(i).getYCoor(), 0.05);
 		}
+	}
+	/**
+	 * Tests if setAliens sets the ArrayList of aliens correctly.
+	 */
+	@Test
+	public final void testSetAliens() {
+		ArrayList<Alien> aliens = new ArrayList<Alien>();		
+		controller.setAliens(aliens);
+		Assert.assertEquals(new ArrayList<Alien>(), aliens);	
+		
 	}
 }
