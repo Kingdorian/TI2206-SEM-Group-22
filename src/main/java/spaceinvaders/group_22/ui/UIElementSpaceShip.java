@@ -28,7 +28,7 @@ public class UIElementSpaceShip extends UIElementUnit {
         // Position the player in the middle, on the bottom of the screen.
 		drawUnit(spaceShip.getXCoor(), spaceShip.getYCoor(), spaceShip.getWidth(), 
 				spaceShip.getHeight(), spaceShip.getSprite(), getGC());
-		getGame().getLogger().log("Drawn spaceship", LogEvent.Type.TRACE);
+		Game.getLogger().log("Drawn spaceship", LogEvent.Type.TRACE);
 	}
 
 }

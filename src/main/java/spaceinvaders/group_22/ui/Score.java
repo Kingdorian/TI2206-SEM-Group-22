@@ -1,6 +1,5 @@
 package spaceinvaders.group_22.ui;
 
-import javafx.fxml.FXML;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import spaceinvaders.group_22.Game;
@@ -41,7 +40,7 @@ public class Score extends UIElement {
     	scoreString.append(getGame().getPlayer().getScore());
     	
     	label.setText(scoreString.toString());	
-    	getGame().getLogger().log("Formatted score to UI", LogEvent.Type.TRACE);		
+    	Game.getLogger().log("Formatted score to UI", LogEvent.Type.TRACE);		
 	}
 
 }

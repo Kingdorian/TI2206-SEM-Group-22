@@ -11,7 +11,10 @@ import org.junit.Test;
 public class ExplosionTest extends UnitTest {
 
 	@Override
-	public final Unit createInstance(final double x, final double y, final String spriteFile) { return new Explosion(x, y, spriteFile); }
+	public final Unit createInstance(final double x, final double y, 
+			final String spriteFile) { 
+		return new Explosion(x, y, spriteFile); 
+	}
 	
 	/**
 	 * Tests the counter of the explosion.

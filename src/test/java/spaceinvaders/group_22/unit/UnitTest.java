@@ -1,7 +1,6 @@
 package spaceinvaders.group_22.unit;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Before;
@@ -9,14 +8,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import spaceinvaders.group_22.Game;
-
 /**
  * Test the abstract unit class.
  * 
  * @author Bryan van Wijk
  *
  */
+@SuppressWarnings("checkstyle:magicnumber")   
 public abstract class UnitTest {
 	
 	/**
@@ -133,8 +131,8 @@ public abstract class UnitTest {
 	 * Test the move method with velocity 1 in the X direction.
 	 */
 	@Test
-	@SuppressWarnings("checkstyle:magicnumber")    
-	public void testMoveUnit() {
+	@SuppressWarnings("checkstyle:magicnumber")
+	public final void testMoveUnit() {
 		unit.setVelX(1);
 		unit.moveUnit(1.0);
 		assertEquals(2.2, unit.getXCoor(), 0.05);

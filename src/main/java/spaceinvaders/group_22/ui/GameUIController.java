@@ -2,16 +2,10 @@ package spaceinvaders.group_22.ui;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
-import spaceinvaders.group_22.unit.Alien;
-import spaceinvaders.group_22.unit.Barricade;
-import spaceinvaders.group_22.unit.Bullet;
-import spaceinvaders.group_22.unit.Explosion;
-import spaceinvaders.group_22.unit.SpaceShip;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -25,7 +19,6 @@ import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.util.Duration;
 
 /**
@@ -74,11 +67,6 @@ public class GameUIController
     private Game game;
     
     /**
-     * Hashmap containing all sprites.
-     */
-    private HashMap<String, Image> sprites;
-    
-    /**
      * Label to load the score of the player in.
      */
     @FXML
@@ -109,7 +97,7 @@ public class GameUIController
     /**
      * The graphicscontext of the Canvas.
      */
-    private static GraphicsContext gc;
+    private GraphicsContext gc;
     /**
      * The drawing of the SpaceShip.
      */
@@ -169,7 +157,7 @@ public class GameUIController
     	uiScore = new Score(game, gc, scoreLabel);
     	uiLives = new Lives(game, gc);
     	
-    	game.getLogger().log("UIElements initialized.", LogEvent.Type.INFO);
+    	Game.getLogger().log("UIElements initialized.", LogEvent.Type.INFO);
     }
     
     /**
@@ -208,9 +196,9 @@ public class GameUIController
     	// If the game does not exist, create a new one.
     	if (game == null) {
         	game = new Game(canvasWidth, canvasHeight);
-        	game.getLogger().log("Set canvas width to: " + canvasWidth, LogEvent.Type.INFO);
-        	game.getLogger().log("Set canvas height to: " + canvasHeight, LogEvent.Type.INFO);
-        	game.getLogger().log("Show screen Before Play", LogEvent.Type.INFO);
+        	Game.getLogger().log("Set canvas width to: " + canvasWidth, LogEvent.Type.INFO);
+        	Game.getLogger().log("Set canvas height to: " + canvasHeight, LogEvent.Type.INFO);
+        	Game.getLogger().log("Show screen Before Play", LogEvent.Type.INFO);
         // Else reset the existing game.
     	} else {
         	game.resetGame();    		
@@ -229,7 +217,7 @@ public class GameUIController
     	} else {
     		framerate = 0.0;
     	}
-    	game.getLogger().log("Set framerate to: " + framerate, LogEvent.Type.INFO);
+    	Game.getLogger().log("Set framerate to: " + framerate, LogEvent.Type.INFO);
     }
     
     /**
@@ -287,7 +275,7 @@ public class GameUIController
 							screenGameOver.toFront();
 							highScoreLabel.setText("Highscore: " + game.getHighScore());
 							gameLoop.stop();
-							game.getLogger().log("Show screen Game Over", LogEvent.Type.INFO);
+							Game.getLogger().log("Show screen Game Over", LogEvent.Type.INFO);
 						} else {
 							screenGameOver.toBack();
 						}
@@ -313,7 +301,7 @@ public class GameUIController
 	 */
 	@FXML
 	public final void handleKeyPressed(final KeyEvent event) {
-		game.getLogger().log("Player pressed " + event.getCode().toString(), LogEvent.Type.DEBUG);
+		Game.getLogger().log("Player pressed " + event.getCode().toString(), LogEvent.Type.DEBUG);
         if (event.getCode().equals(KeyCode.S) && game.getPlayer().getLives() > 0) {
         	screenBeforePlay.toBack();
         	screenPaused.toBack();
@@ -321,7 +309,7 @@ public class GameUIController
         } else if (event.getCode().equals(KeyCode.P)) {
         	if (game.isInProgress()) {
             	screenPaused.toFront();
-            	game.getLogger().log("Show screen Paused", LogEvent.Type.INFO);
+            	Game.getLogger().log("Show screen Paused", LogEvent.Type.INFO);
             	game.stop();
         	}
         } else if (event.getCode().equals(KeyCode.R)) {

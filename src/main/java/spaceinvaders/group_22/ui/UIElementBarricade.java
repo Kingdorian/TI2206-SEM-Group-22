@@ -10,6 +10,8 @@ import spaceinvaders.group_22.unit.Barricade;
  * @author Ege
  *
  */
+@SuppressWarnings("checkstyle:magicnumber")   
+
 public class UIElementBarricade extends UIElementUnit {
 	
 	/**
@@ -31,7 +33,7 @@ public class UIElementBarricade extends UIElementUnit {
 			drawUnit(bar.getXCoor(), bar.getYCoor(), bar.getWidth(), bar.getHeight(), bar.getSprite(), getGC());
 			getGC().setGlobalAlpha(1);
 		}
-		getGame().getLogger().log("Drawn barricades", LogEvent.Type.TRACE);
+		Game.getLogger().log("Drawn barricades", LogEvent.Type.TRACE);
 		
 	}
 

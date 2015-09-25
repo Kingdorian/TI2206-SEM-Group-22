@@ -29,7 +29,7 @@ public class Lives extends UIElement {
     	for (int i = 1; i <= getGame().getPlayer().getLives(); i++) {
         	getGC().drawImage(heartImage, getGame().getCanvasWidth() - 10 - heartImage.getWidth() * i, 10);
     	}
-    	getGame().getLogger().log("Formatted hearts to UI", LogEvent.Type.TRACE);
+    	Game.getLogger().log("Formatted hearts to UI", LogEvent.Type.TRACE);
 	}
 
 }

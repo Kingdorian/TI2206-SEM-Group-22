@@ -28,7 +28,7 @@ public class UIElementAlien extends UIElementUnit {
 			drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(),
 					unit.getHeight(), unit.getSprite(), getGC());		
 		}
-		getGame().getLogger().log("Drawn aliens", LogEvent.Type.TRACE);
+		Game.getLogger().log("Drawn aliens", LogEvent.Type.TRACE);
 	}
 
 }

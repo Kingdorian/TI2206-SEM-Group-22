@@ -12,6 +12,7 @@ import spaceinvaders.group_22.unit.Explosion;
  * @author Ege
  *
  */
+@SuppressWarnings("checkstyle:magicnumber")  
 public class UIElementExplosion extends UIElementUnit {
 	
 	/**
@@ -48,7 +49,7 @@ public class UIElementExplosion extends UIElementUnit {
 						getGame().getExplosions().remove(explosion);
 					}
 				}
-				getGame().getLogger().log("Drawn explosions", LogEvent.Type.TRACE);
+				Game.getLogger().log("Drawn explosions", LogEvent.Type.TRACE);
 	}
 
 }
