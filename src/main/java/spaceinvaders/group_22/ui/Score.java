@@ -1,5 +1,8 @@
 package spaceinvaders.group_22.ui;
 
+import javafx.fxml.FXML;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
 
@@ -12,37 +15,33 @@ import spaceinvaders.group_22.logger.LogEvent;
 public class Score extends UIElement {
 	
 	/**
-	 * The Game.
+	 * The label to draw the score on.
 	 */
-	private Game game;
-	
-	/**
-	 * The UI controller.
-	 */
-	private GameUIController gameUI;
+	private Label label;
 	
 	/**
 	 * The constructor.
 	 * @param newGame the Game
-	 * @param gameUIController the UI controller
+	 * @param gc the GraphicsContext to draw on.	
+	 * @param scoreLabel The label on which the score should be drawn. 
 	 */
-	public Score(final Game newGame, final GameUIController gameUIController) {
-		game = newGame;
-		gameUI = gameUIController;
+	public Score(final Game newGame, final GraphicsContext gc, final Label scoreLabel) {
+		super(newGame, gc);
+		label = scoreLabel;
 	}
 
 	@Override
 	public final void draw() {
-		int digitsBefore = 8 - Integer.toString(game.getPlayer().getScore()).length();
+		int digitsBefore = 8 - Integer.toString(getGame().getPlayer().getScore()).length();
     	StringBuffer scoreString = new StringBuffer();
     	
     	for (int i = 0; i < digitsBefore; i++) {
     		scoreString.append("0");
     	}
-    	scoreString.append(game.getPlayer().getScore());
+    	scoreString.append(getGame().getPlayer().getScore());
     	
-    	gameUI.getScoreLabel().setText(scoreString.toString());	
-    	game.getLogger().log("Formatted score to UI", LogEvent.Type.TRACE);		
+    	label.setText(scoreString.toString());	
+    	getGame().getLogger().log("Formatted score to UI", LogEvent.Type.TRACE);		
 	}
 
 }

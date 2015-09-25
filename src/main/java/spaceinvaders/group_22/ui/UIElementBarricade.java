@@ -1,5 +1,6 @@
 package spaceinvaders.group_22.ui;
 
+import javafx.scene.canvas.GraphicsContext;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.unit.Barricade;
@@ -12,36 +13,25 @@ import spaceinvaders.group_22.unit.Barricade;
 public class UIElementBarricade extends UIElementUnit {
 	
 	/**
-	 * The Game.
-	 */
-	private Game game;
-	
-	/**
-	 * The UI controller.
-	 */
-	private GameUIController gameUI;
-	
-	/**
 	 * The constructor.
 	 * @param newGame the Game
-	 * @param gameUIController the UI controller
+	 * @param gc the GraphicsContext to draw on.	 
 	 */
-	public UIElementBarricade(final Game newGame, final GameUIController gameUIController) {
-		game = newGame;
-		gameUI = gameUIController;
+	public UIElementBarricade(final Game newGame, final GraphicsContext gc) {	
+		super(newGame, gc);
 	}
 
 	@Override
 	public final void draw() {
 		// Loop over all the barricades 
-		for (Barricade bar : game.getBarricades()) {
+		for (Barricade bar : getGame().getBarricades()) {
 			//Calculate opacity on base of the health of the barricade
 			Double opacity = bar.getHealth() * 0.1;
-			gameUI.getGC().setGlobalAlpha(opacity);
-			drawUnit(bar.getXCoor(), bar.getYCoor(), bar.getWidth(), bar.getHeight(), bar.getSprite(), gameUI);
-			gameUI.getGC().setGlobalAlpha(1);
+			getGC().setGlobalAlpha(opacity);
+			drawUnit(bar.getXCoor(), bar.getYCoor(), bar.getWidth(), bar.getHeight(), bar.getSprite(), getGC());
+			getGC().setGlobalAlpha(1);
 		}
-		game.getLogger().log("Drawn barricades", LogEvent.Type.TRACE);
+		getGame().getLogger().log("Drawn barricades", LogEvent.Type.TRACE);
 		
 	}
 

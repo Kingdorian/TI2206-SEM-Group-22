@@ -152,23 +152,28 @@ public class GameUIController
     	canvasHeight = canvas.getHeight();
     	
     	newGame();
-    	game.getLogger().log("Set canvas width to: " + canvasWidth, LogEvent.Type.INFO);
-    	game.getLogger().log("Set canvas height to: " + canvasHeight, LogEvent.Type.INFO);
-    	game.getLogger().log("Show screen Before Play", LogEvent.Type.INFO);
     	
-    	uiAlien = new UIElementAlien(game, this);
-    	uiSpaceShip = new UIElementSpaceShip(game, this);
-    	uiBullet = new UIElementBullet(game, this);
-    	uiExplosion = new UIElementExplosion(game, this);
-    	uiBarricade = new UIElementBarricade(game, this);
-    	uiScore = new Score(game, this);
-    	uiLives = new Lives(game, this);
-    	
+    	initializeUIElements();
     	canvas.setFocusTraversable(true);
     }
     
     /**
-     * Retruns the canvas Width.
+     * Initializes the UI elements.
+     */
+    private void initializeUIElements() {
+    	uiAlien = new UIElementAlien(game, gc);
+    	uiSpaceShip = new UIElementSpaceShip(game, gc);
+    	uiBullet = new UIElementBullet(game, gc);
+    	uiExplosion = new UIElementExplosion(game, gc);
+    	uiBarricade = new UIElementBarricade(game, gc);
+    	uiScore = new Score(game, gc, scoreLabel);
+    	uiLives = new Lives(game, gc);
+    	
+    	game.getLogger().log("UIElements initialized.", LogEvent.Type.INFO);
+    }
+    
+    /**
+     * Returns the canvas Width.
      * @return canvasWidth
      */
     public final double getCanvasWidth() {
@@ -176,7 +181,7 @@ public class GameUIController
     }
     
     /**
-     * Retruns the canvas Height.
+     * Returns the canvas Height.
      * @return canvasHeight
      */
     public final double getCanvasHeight() {
@@ -203,7 +208,9 @@ public class GameUIController
     	// If the game does not exist, create a new one.
     	if (game == null) {
         	game = new Game(canvasWidth, canvasHeight);
-        	sprites = getSprites();
+        	game.getLogger().log("Set canvas width to: " + canvasWidth, LogEvent.Type.INFO);
+        	game.getLogger().log("Set canvas height to: " + canvasHeight, LogEvent.Type.INFO);
+        	game.getLogger().log("Show screen Before Play", LogEvent.Type.INFO);
         // Else reset the existing game.
     	} else {
         	game.resetGame();    		
@@ -231,56 +238,6 @@ public class GameUIController
      */
     public final double getFramerate() {
     	return framerate;
-    }
-    
-    /**
-     * Returns the GraphicsContext.
-     * @return the GraphicsContext
-     */
-    public static final GraphicsContext getGC() {
-    	return gc;
-    }
-    
-    /**
-     * Creates a hashmap of all available sprite images.
-     * @return a hashmap containing all available sprite images.
-     */
-    public final HashMap<String, Image> getSprites() {
-    	HashMap<String, Image> spriteMap = new HashMap<String, Image>();
-    		
-    		addSprite(spriteMap, "alienbullet.png");
-    		addSprite(spriteMap, "spaceshipbullet.png");
-    		addSprite(spriteMap, "invader.png");
-    		addSprite(spriteMap, "spaceship.png");
-    		addSprite(spriteMap, "heart.png");
-    		addSprite(spriteMap, "barrier.png");
-    		addSprite(spriteMap, "explosion1.png");
-    		addSprite(spriteMap, "explosion2.png");
-    		addSprite(spriteMap, "explosion3.png");
-    		addSprite(spriteMap, "explosion4.png");
-    		addSprite(spriteMap, "explosion5.png");
-    		
-    	return spriteMap;
-    }
-    
-    /**
-     * Returns the sprites.
-     * @return the sprites
-     */
-    public final HashMap<String, Image> getSprite() {
-    	return sprites;
-    }
-    
-    /**
-     * Adds a sprite to the sprite Hasmap.
-     * @param spriteMap The hashmap of sprites to add to.
-     * @param filename The filename of the sprite to add.
-     */
-    public final void addSprite(final HashMap<String, Image> spriteMap, final String filename) {
-		spriteMap.put(filename, 
-				new Image(getClass().getClassLoader()
-						.getResource("spaceinvaders/group_22/images/" + filename).toString()));
-		game.getLogger().log("Loaded " + filename, LogEvent.Type.DEBUG);
     }
     
     /**

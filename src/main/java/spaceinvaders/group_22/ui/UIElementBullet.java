@@ -1,5 +1,6 @@
 package spaceinvaders.group_22.ui;
 
+import javafx.scene.canvas.GraphicsContext;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.unit.Bullet;
@@ -11,33 +12,23 @@ import spaceinvaders.group_22.unit.Bullet;
  */
 public class UIElementBullet extends UIElementUnit {
 	
-	/**
-	 * The Game.
-	 */
-	private Game game;
-	
-	/**
-	 * The UI controller.
-	 */
-	private GameUIController gameUI;
 	
 	/**
 	 * The constructor.
 	 * @param newGame the Game
-	 * @param gameUIController the UI controller
+	 * @param gc the GraphicsContext to draw on.	 
 	 */
-	public UIElementBullet(final Game newGame, final GameUIController gameUIController) {
-		game = newGame;
-		gameUI = gameUIController;
+	public UIElementBullet(final Game newGame, final GraphicsContext gc) {	
+		super(newGame, gc);
 	}
 
 	@Override
 	public final void draw() {
-		for (Bullet bullet : game.getBullets()) {
+		for (Bullet bullet : getGame().getBullets()) {
 			drawUnit(bullet.getXCoor(), bullet.getYCoor(), 
-					bullet.getWidth(), bullet.getHeight(), bullet.getSprite(), gameUI);
+					bullet.getWidth(), bullet.getHeight(), bullet.getSprite(), getGC());
 		}
-		game.getLogger().log("Drawn bullets", LogEvent.Type.TRACE);
+		getGame().getLogger().log("Drawn bullets", LogEvent.Type.TRACE);
 		
 	}
 
