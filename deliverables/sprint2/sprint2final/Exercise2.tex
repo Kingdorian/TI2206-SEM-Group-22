@@ -1,54 +1,67 @@
-\documentclass[10pt]{article}
-\usepackage[utf8]{inputenc}
+\section*{Exercise 2 - Your wish is my command}
+The following new classes were created for the implementation of the PowerUp feature.
+In the table the responsibilities and collaborations are presented for every class.
+\begin{center}
+    \begin{tabular}{ | p{3cm} | p{4cm} | p{3cm} | p{2cm} | p{3cm} |}
+  \hline
+    Class & Responsibility & Collaborates with & Super & Sub \\ \hline
+   PowerUpUnit & Location, seize and speed  &  & Unit & SpeedPowerUpUnit, LifePowerUpUnit, ShootPowerUpUnit \\ \hline
+   SpeedPowerUpUnit & Creation active PowerUp  & SpeedPowerUp & PowerUpUnit & \\ \hline
+  ShootPowerUpUnit & Creation active PowerUp & ShootPowerUp & PowerUpUnit & \\ \hline
+  LifePowerUpUnitt & Activation powerUp & Player  & PowerUpUnit & \\ \hline
+   SpeedPowerUp & Activation and deactivation powerUp & SpaceShip & PowerUp & \\ \hline
+  ShootPowerUp & Activation and deactivation powerUp & SpaceShip & PowerUp &  \\  \hline
+   PowerUp & Counting time left  & Player &  & ShootPowerUp, SpeedPowerUp  \\  \hline
+   PowerUpController & Movement and creation PowerUp units & Game, Collisions &  &  \\  \hline
+ 
+    \end{tabular}
+\end{center}
 
-\usepackage{geometry}
-\geometry{portrait, margin=1.5in}
+\newpage
+\subsection*{Exercise 2 UML} 
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=15cm]{SI-UMLpowerupHierarchy1.pdf}
+\caption{Unit UML Class Diagram}
+\end{figure}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=12cm]{SI-UMLpowerupHierarchy2.pdf}
+\caption{Powerup UML Class Diagram}
+\end{figure}
+\clearpage
+\section{Powerup Functional Requirements}
 
-\begin{document}
+A list of functional requirements considered for the implementation of powerups using the MoSCoW method described in the previous section.
 
-
-\section*{Excercise 2}
-Each class we split into several subclasses will have one single responsibility. \\
-Game:
-\subsection*{Controller}
-Controller: this interface class will provide template for the Controller classes of different game elements. 
-	\begin{itemize}
-	\item UnitController: this abstract class has the responsibility of controlling the non moving units in the game
-	\item MovingUnitController: this interface has the responsibility of controlling the moving units in the game. 
-		\begin{itemize}
-			\item ExplosionController: this class is responsible for modifying the explosions in the game.
-			\item BarricadeController: this class is responsible for modifying the 	barricades in the game.
-			\item AlienController: this class has the responsibility of modifying the aliens in the game.
-			\item SpaceShipController: this class is responsible for modifying the spaceship.
-			\item BulletController: this class is responsible for modifying the bullets in the game.
-			\begin{itemize}
-				\item AlienBulletController this class is responsible for modifying the alienbullets in the game.
-				\item SpaceShipBulletController this class is responsible for modifying th spaceshipbullets in the game.
-			\end{itemize}
-		\end{itemize}
-	\end{itemize}
-\subsection*{Unit}
-The change we want to apply to the subclasses of the Unit class is making an interface movable that is implemented by units that move.
-\subsection*{GameUiController}
-Draw:
+\subsection{Must Haves}
+Powerups must meet the following requirements:
 \begin{itemize}
-	\item UiElement: this (abstract) clas is responsible for drawing all the ui parts on the screen.
-	\begin{itemize}
-		\item UiElementUnit: this abstract class is responsible for the units on the screen.
-			\begin{itemize}
-				\item UiElementAlien: this class is responsible for drawing the aliens on the screen.
-				\item UiElementSpaceShip: this class is responsible for drawing the spaceship on the screen.
-				\item UiElementBarricade: this class is responsible for drawing the barricades on the screen.
-				\item UiElementExplosion: this class is responsible for drawing the explosions on the screen.
-				\item UiElementBullet: this abstract class is responsible for drawing the bullets on the screen.
-				\begin{itemize}
-					\item UiElementSpaceShipBullet: this class is responsible for drawing the SpaceShipBullets on the screen.
-					\item UiElementShipBullet: this class is responsible for drawing the SpaceShipBullets on the screen.
-				\end{itemize}
-			\end{itemize}
-	\end{itemize}
-	\item DrawScore: this class is responsible the score on the screen.
-	\item DrawLives: this class is responsible the lives on the screen.
+	\item Aliens shall randomly drop a powerup upon death.
+	\item A Powerup buff shall be applied upon collision with the spaceship.
+	\item A Powerup shall disappear upon collision with the spaceship.
 \end{itemize}
 
-\end{document}
+\subsection{Should Haves}
+Powerups should meet the following requirements:
+\begin{itemize}
+	\item Player velocity shall increase for a feasible amount of time upon collision with a Speed Powerup.
+	\item Player shooting speed shall increase for a feasible amount of time upon collision with a Shooting Powerup.
+	\item Player life shall increase upon collision with a Life Powerup.
+	\item Player life shall not increase if the maximum amount of 5 lives has been reached.
+	\item A Powerup shall have a custom sprite based on its type.
+	\item A Powerup shall not disappear upon collision with a bullet.
+	\item A Powerup shall not disappear upon collision with an alien.
+\end{itemize}
+
+\subsection{Could Haves}
+Powerups could meet the following requirements:
+\begin{itemize}
+	\item A Powerup shall explode upon hitting a barricade.
+\end{itemize}
+
+\subsection{Would/Won't Haves}
+Powerups won't meet the following requirements:
+\begin{itemize}
+	\item A Powerup shall explode upon colliding with a bullet.
+\end{itemize}
