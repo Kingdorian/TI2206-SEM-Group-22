@@ -6,13 +6,10 @@ import java.util.ArrayList;
 
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
-import spaceinvaders.group_22.unit.Alien;
-import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Collisions;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.ShipBullet;
-import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
  * 
@@ -38,17 +35,13 @@ public class Game {
 	 */
 	private ArrayList<Bullet> bullets;
 	/**
-	 * List of aliens in the game.
-	 */
-	private ArrayList<Alien> aliens;
-	/**
-	 * ArrayList of all barricades in the game.
-	 */
-	private ArrayList<Barricade> barricades;
-	/**
      * List of explosions in the game.
      */
 	private ArrayList<Explosion> explosions;	
+	/**
+	 * The barricadeController.
+	 */
+	private BarricadeController barController;
 	/**
      * The width of the canvas.
      */
@@ -57,7 +50,6 @@ public class Game {
     /**
      * The height of the canvas.
      */
-
     private double canvasHeight;
     /**
      * Velocity of the bullets of the spaceShip in pixels per second.
@@ -84,6 +76,10 @@ public class Game {
 	 */
 	private AlienController alienController;
 	/**
+	 * The spaceshipcontroller of this game.
+	 */
+	private SpaceShipController spaceShipContr;
+	/**
 	 * The collisions of units.
 	 */
 	private Collisions collisions;
@@ -92,26 +88,6 @@ public class Game {
 	 * The logger.
 	 */
 	private static Logger logger;
-	/**
-	 * Part of the screen (on left and right) that cannot be used when creating aliens. 
-	 */
-	static final double ALIENBORDERMARIGIN = 0.1;
-	/**
-	 * Amount of aliens per row.
-	 */
-	static final int ALIENS_PER_ROW = 10;
-	/**
-	 * Amount of rows of aliens.
-	 */
-	static final int AMOUNT_ALIEN_ROWS = 4;
-	/**
-	 * Amount of pixels/second the speed of the aliens increases per wave.
-	 */
-	static final int ALIENVELXINCREASE = 10;
-	/**
-	 * Location of the sprite of the aliens.
-	 */
-	static final String ALIENSPRITE = "invader.png";
 	/**
 	 * Creates a new instance of game.
 	 * @param width of the canvas.
@@ -126,16 +102,12 @@ public class Game {
 		
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
-		barricades = createBarricades();
-
+		barController = new BarricadeController(this);
+		barController.create();
+		spaceShipContr = new SpaceShipController(this);
 		alienController = new AlienController(this);
-		
+		alienController.create();		
 		collisions = new Collisions(this);
-				// Create an alien to use to get the width and height of the aliens used in this game. 
-		//(based on their sprite size)
-		Alien spriteinfo = new Alien(0, 0, ALIENSPRITE);
-		aliens = alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN,
-					spriteinfo.getWidth(), spriteinfo.getHeight(), ALIENS_PER_ROW, AMOUNT_ALIEN_ROWS);
 		player = new Player(this);
 		shootingAllowed = true;
 		countToShoot = 0;
@@ -147,12 +119,8 @@ public class Game {
 	public final void resetGame() {
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
-		barricades = createBarricades();
-		
-		alienController = new AlienController(this);
-		Alien spriteinfo = new Alien(0, 0, ALIENSPRITE);
-		aliens = alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN,
-				spriteinfo.getWidth(), spriteinfo.getHeight(), ALIENS_PER_ROW, AMOUNT_ALIEN_ROWS);
+		barController.create();
+		alienController.create();
 		player = new Player(this);
 		
 		shootingAllowed = true;
@@ -180,12 +148,8 @@ public class Game {
 	public final void reset() {
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
-		barricades = createBarricades();
-		// Create an alien to use to get the width and height of the aliens used in this game. 
-		//(based on their sprite size)
-		Alien spriteinfo = new Alien(0, 0, ALIENSPRITE);
-		aliens = alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN, 
-					spriteinfo.getWidth(), spriteinfo.getHeight(), ALIENS_PER_ROW, AMOUNT_ALIEN_ROWS);
+		barController.create();
+		alienController.create();
 		player = new Player(this);
 		shootingAllowed = true;
 		countToShoot = 0;
@@ -223,8 +187,8 @@ public class Game {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
-		
 		if (pressedKeys.contains(KeyCode.SPACE) && shootingAllowed) {
+			System.out.println(spaceShipBulletVelX);
 			Bullet bullet = player.getSpaceShip().shootBullet(-spaceShipBulletVelX);
 			bullets.add(bullet);
 			shootingAllowed = false;
@@ -239,8 +203,8 @@ public class Game {
 				countToShoot = 0;
 			}
 		}
-		moveSpaceShip(pressedKeys);
-		alienController.moveAliens();
+		spaceShipContr.moveSpaceShip(pressedKeys);
+		alienController.move();
 		alienController.shootAlienBullets();
 		
 		//Check if all bullets are still visible
@@ -250,6 +214,7 @@ public class Game {
 				logger.log("Removed bullet out of screen", LogEvent.Type.TRACE);
 			}
 		}
+		logger.log("Moved bullets", LogEvent.Type.TRACE);
 		//Move every bullet
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).move(tickrate);
@@ -257,99 +222,27 @@ public class Game {
 		logger.log("Moved bullets", LogEvent.Type.TRACE);
 		
 		collisions.checkCollisions();
-		for (int i = 0; i < barricades.size(); i++)  {
-			if (barricades.get(i).getHealth() == 0) {
-				barricades.remove(i);
+		for (int i = 0; i < barController.getBarricades().size(); i++)  {
+			if (barController.getBarricades().get(i).getHealth() == 0) {
+				barController.getBarricades().remove(i);
 				logger.log("Removed barricade", LogEvent.Type.TRACE);
 				i--;
 			}
 		}
+		collisions.checkCollisions();
+		barController.removeDead();
 		//new wave of aliens
-		if (aliens.isEmpty()) {
-			logger.log("All aliens died", LogEvent.Type.TRACE);
+		if (alienController.getAliens().isEmpty()) {
+			logger.log("All aliens died", LogEvent.Type.INFO);
 			//Increase aliens speed and reset direction so they start moving to the right
-			alienController.setAlienVelX(Math.abs(alienController.getAlienVelX()) + ALIENVELXINCREASE);
-			// Create an alien to use to get the width and height of the aliens used in this game. 
-			//(based on their sprite size)
-			Alien spriteinfo = new Alien(0, 0, ALIENSPRITE);
-			aliens = alienController.createAlienWave(canvasWidth * ALIENBORDERMARIGIN, 
-						spriteinfo.getWidth(), spriteinfo.getHeight(), ALIENS_PER_ROW, AMOUNT_ALIEN_ROWS);
+			alienController.nextRound();
 			bullets.clear();
 			logger.log("Removed all bullets", LogEvent.Type.TRACE);
 		}
 	}
-	/**
-	 * Moves the spaceship.
-	 * @param pressedKeys the keys pressed since last tick
-	 */
-	public final void moveSpaceShip(final ArrayList<KeyCode> pressedKeys) {
-		double velX = player.getSpaceShip().getVelX() * 0.98;
-		SpaceShip playership = player.getSpaceShip();
-		if (playership.getXCoor() - (0.5 * playership.getWidth()) <= 0 && velX < 0) {
-			velX *= -1;
-		} else if (player.getSpaceShip().getXCoor() 
-				+ (0.5 * playership.getWidth()) >=  canvasWidth && velX > 0) {
-			velX *= -1;
-		}
-		// Check that the spaceship is still able to move without going off the screen.
-		if (player.getSpaceShip().getXCoor() - 0.5 * player.getSpaceShip().getWidth() > 0 
-				&& pressedKeys.contains(KeyCode.A)) {
-			velX = velX - SpaceShip.MAXVELX * tickrate * 2;
-		}
-		if (player.getSpaceShip().getXCoor() + 0.5 * player.getSpaceShip().getWidth() < canvasWidth
-				&& pressedKeys.contains(KeyCode.D)) {
-			velX = velX + SpaceShip.MAXVELX * tickrate * 2;
-		}
-
-		if (velX > SpaceShip.MAXVELX) {
-			velX = SpaceShip.MAXVELX;
-		} else if (velX < -SpaceShip.MAXVELX) {
-			velX = -SpaceShip.MAXVELX;
-		}
-		player.getSpaceShip().setVelX(velX);
-		player.getSpaceShip().move(tickrate);
-		if (velX != 0) {
-			logger.log("Player moved X: " + velX, LogEvent.Type.TRACE);
-		}
-	}
-	/**
-	 * Add a new barricade to this game.
-	 * @param barricade to add.
-	 */
-	public final void addBarricade(final Barricade barricade) {
-		barricades.add(barricade);
-		logger.log("Created barricade", LogEvent.Type.TRACE);
-	}
 	
-	/**
-	 * Creates the barricades for this game.
-	 * @return the barricades in this game.
-	 */
-	private ArrayList<Barricade> createBarricades() {
-		int barricadeCount = 4;
-		int interval = (int) canvasWidth / (barricadeCount + 1);
-		ArrayList<Barricade> bars = new ArrayList<Barricade>();
-		for (int i = 1; i <= barricadeCount; i++) {
-			bars.add(new Barricade(interval * i, canvasHeight - 110, "barrier.png"));
-		}
-		logger.log("Created all barricades", LogEvent.Type.DEBUG);
-		return bars;
-	}
-	/**
-	 * Sets the barricades in this game.
-	 * @param barricade the new barricades for this game.
-	 */
-	public final void setBarricades(final ArrayList<Barricade> barricade) { 
-		barricades = barricade;
-	}
 	// ONLY SETTERS AND GETTERS BELOW
-	/**
-	 * Sets the list of Aliens currently in game.
-	 * @param alienList The ArrayList of aliens to set.
-	 */
-	public final void setAliens(final ArrayList<Alien> alienList) {
-		this.aliens = alienList;
-	}
+
 	/**
 	 * Set the tickrate for the movement.
 	 * @param framerate of the animation.
@@ -435,20 +328,6 @@ public class Game {
 	public final AlienController getAlienController() {
 		return alienController;
 	}
-	/**
-	 * Gets the list of Aliens currently in game.
-	 * @return The list of aliens currently in game.
-	 */
-	public final ArrayList<Alien> getAliens() {
-		return aliens;
-	}
-		/**
-	 * Returns the barricades in this game.
-	 * @return the barricades in this game.
-	 */
-	public final  ArrayList<Barricade> getBarricades() {
-		return barricades;
-	}
 		/**
 	 * Returns the current frame rate.
 	 * @return the current frame rate.
@@ -477,5 +356,19 @@ public class Game {
 	 */
 	public final void setBullets(final ArrayList<Bullet> list) {
 		bullets = list;
+	}
+	/**
+	 * Returns the barricadecontroller in this game, mostly intended for testing purposes...
+	 * @return the barricadeController in this game.
+	 */
+	public final BarricadeController getBarricadeController() {
+		return barController;
+	}
+	/**
+	 * Returns the spaceshipcontroller in this game.
+	 * @return the spaceshipcontroller in this game.
+	 */
+	public final SpaceShipController getSpaceShipController() {
+		return spaceShipContr;
 	}
 }

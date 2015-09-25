@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import spaceinvaders.group_22.Game;
-import spaceinvaders.group_22.logger.LogEvent;
 
 /**
  * Class which creates an object that is used to maintain

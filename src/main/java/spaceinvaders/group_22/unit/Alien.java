@@ -9,6 +9,10 @@ package spaceinvaders.group_22.unit;
 public class Alien extends Unit implements MovableUnit {
 	
 	/**
+	 * Location of the sprite of the aliens.
+	 */
+	public static final String SPRITE = "invader.png";
+	/**
 	 * VelX is the velocity in the X direction in pixels per second.
 	 */
 	private double velX;
