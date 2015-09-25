@@ -295,7 +295,7 @@ public class GameUIController
 	 */
 	private void drawBarricades() {
 		// Loop over all the barricades 
-		for (Barricade bar : game.getBarricades()) {
+		for (Barricade bar : game.getBarricadeController().getBarricades()) {
 			//Calculate opacity on base of the health of the barricade
 			Double opacity = bar.getHealth() * 0.1;
 			gc.setGlobalAlpha(opacity);
@@ -321,7 +321,7 @@ public class GameUIController
 	 * Method to draw the aliens in game.
 	 */
 	private void drawAliens() {
-		for (Alien unit : game.getAliens()) {
+		for (Alien unit : game.getAlienController().getAliens()) {
 			drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(),
 					unit.getHeight(), unit.getSprite());		
 		}

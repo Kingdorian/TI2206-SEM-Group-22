@@ -7,7 +7,6 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 import spaceinvaders.group_22.Game;
-import spaceinvaders.group_22.logger.LogEvent;
 
 /**
  * A unit in the game that has a position and velocity.
@@ -28,16 +27,6 @@ public abstract class Unit {
 	private double yCoor;
 	
 	/**
-	 * VelX is the velocity in the X direction in pixels per second.
-	 */
-	private double velX;
-	
-	/**
-	 * velY is the velocity in the Y direction in pixels per second.
-	 */
-	private double velY;
-	
-	/**
 	 * height of this unit.
 	 */
 	private int height;
@@ -51,9 +40,7 @@ public abstract class Unit {
 	 * an Image object containing the sprite.
 	 */
 	private String sprite;
-	
 
-	
 	/**
 	 * Creates a unit at Location X, Y with velocity 0 and direction north.
 	 * @param x Coordinate of this unit.
@@ -75,47 +62,67 @@ public abstract class Unit {
 			Game.getLogger().log("Unit sprite image name invalid", e);
 			e.printStackTrace();
 		}
-		
-		this.setVelX(0);
-		this.setVelY(0);
 	}
 	/**
 	 * Compares two objects and returns if they are equal.
 	 * @return true if both objects are the same.
 	 * @param other the object to compare.
 	 */
+	@SuppressWarnings("checksytle:DesignForExtension")
 	@Override
-	public abstract boolean equals(Object other);
-	/**
-	 * HashCode method.
-	 * @return hashcode of this object
-	 */
-	public abstract int hashCode();
-	
-	/**
-	 * Move the unit in the direction of this unit and with his velocity.
-	 * @param tickrate The rate at which the game ticks.
-	 */
-	public final void moveUnit(final Double tickrate) {
-		setXCoor(this.getXCoor() + (this.getVelX() * tickrate));
-		setYCoor(this.getYCoor() + (this.getVelY() * tickrate));
+	public boolean equals(final Object obj) {
+		if (this == obj) {
+			return true;	
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Unit other = (Unit) obj;
+		if (height != other.height) {
+			return false;
+		}
+		if (sprite == null) {
+			if (other.sprite != null) {
+				return false;
+			}
+		} else if (!sprite.equals(other.sprite)) {
+			return false;
+		}
+
+		if (width != other.width) {
+			return false;
+		}
+		if (Double.doubleToLongBits(xCoor) != Double.doubleToLongBits(other.xCoor)) {
+			return false;
+		}
+		if (Double.doubleToLongBits(yCoor) != Double.doubleToLongBits(other.yCoor)) {
+			return false;
+		}
+		return true;
 	}
-	
 	/**
-	 * Returns the current velocity in the X direction.
-	 * @return the current velocity in the X direction in pixels per second.
+	 * Returns hashcode of this object.
+	 * @return hashcode of this object.
 	 */
-	public final double getVelX() {
-		return velX;
+	@SuppressWarnings({"checkstyle:magicnumber", "checkstyle:AvoidInlineConditionals", "checkstyle:DesignForExtension"})
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + height;
+		result = prime * result + ((sprite == null) ? 0 : sprite.hashCode());
+		result = prime * result + width;
+		long temp;
+		temp = Double.doubleToLongBits(xCoor);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(yCoor);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
 	}
-	
-	/**
-	 * Sets the current velocity in the X direction.
-	 * @param newvelX the velocity in the X direction to set in pixels per second.
-	 */
-	public final void setVelX(final double newvelX) {
-		this.velX = newvelX;
-	}
+
 
 	/**
 	 * Returns the current Y coordinate of this unit.
@@ -137,32 +144,15 @@ public abstract class Unit {
 	 * Sets the current X coordinate of this unit.
 	 * @param newxCoor the current X coordinate of this unit to set.
 	 */
-	private void setXCoor(final double newxCoor) {
+	protected final void setXCoor(final double newxCoor) {
 		this.xCoor = newxCoor;
 	}
-	
 	/**
 	 * Sets the current Y coordinate of this unit.
 	 * @param newyCoor the current Y coordinate of this unit to set.
 	 */
-	private void setYCoor(final double newyCoor) {
+	protected final void setYCoor(final double newyCoor) {
 		this.yCoor = newyCoor;
-	}
-	
-	/**
-	 * Returns the current velocity in the Y direction.
-	 * @return the current velocity in the Y direction in pixels per second.
-	 */
-	public final double getVelY() {
-		return velY;
-	}
-	
-	/**
-	 * Sets the current velocity in the Y direction.
-	 * @param alienVelY the velocity in the Y direction to set in pixels per second.
-	 */
-	public final void setVelY(final double alienVelY) {
-		this.velY = alienVelY;
 	}
 	/**
 	 * Get the width of this unit.
@@ -207,7 +197,4 @@ public abstract class Unit {
 	public final void setSprite(final String newSprite) {
 		this.sprite = newSprite;
 	}	
-
-
-
 }

@@ -1,0 +1,70 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{geometry}
+\geometry{portrait, margin=1.5in}
+
+\begin{document}
+
+
+\section*{Excercise 1}
+To improve our code, we want to split several classes into more classes. The classes we want to split are Game and GameUIController, because these classes are now too big in our code. We have chosen to split these classes in the following classes:\\
+Game:\newline
+\subsection*{Controller}
+\begin{itemize}
+	\item UnitController
+	\item MovingUnitController
+	\begin{itemize}
+	\item ExplosionController
+	\item BarricadeController	
+	\item AlienController
+	\item SpaceShipController
+	\item BulletController
+		\begin{itemize}
+			\item AlienBulletController
+			\item SpaceShipBulletController
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+\subsection*{Unit}
+We also want to change the Unit section of our code, we want to have an interface movable that is implemented by the movable/moving. This prevents a lot of duplicate code. Implementing this change would mean we would have to change all of the following classes:
+	\begin{itemize}
+	\item Unit
+	\item Movable
+		\begin{itemize}
+		\item Alien
+		\item SpaceShip
+		\item Bullet
+		\begin{itemize}
+			\item SpaceShipBullet
+			\item AlienBullet
+		\end{itemize}
+		\item Explosion
+		\item Barricade
+	\end{itemize}
+\end{itemize}
+\subsection*{GameUiController}
+Changing the structure of unit in our code we also need to change the ui section. This will be the new class hierarchy.	
+GameUIController:
+\begin{itemize}
+	\item UiElement
+	\begin{itemize}
+		\item UiElementUnit
+		\begin{itemize}
+			\item UiElementAlien
+			\item UiElementSpaceShip
+			\item UiElementBarricade
+			\item UiElementExplosion
+			\item UiElementBullet
+			\begin{itemize}
+				\item UiElementSpaceShipBullet
+				\item UiElementAlienBullet
+			\end{itemize}
+		\end{itemize}
+		\item Score
+		\item Lives
+	\end{itemize}
+\end{itemize}
+Since we did implement equals methods in most of (the suitable) classes but we did not implement hash code yet. Hashcode should be implemented  too.
+
+\end{document}

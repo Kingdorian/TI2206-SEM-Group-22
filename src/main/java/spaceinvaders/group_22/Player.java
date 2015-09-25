@@ -94,6 +94,7 @@ public class Player {
 		if (lives <= 0) {
 			game.gameOver();
 		}
+		game.getBullets();
 	}
 	/**
 	 * Get the amount of lives the player has left.

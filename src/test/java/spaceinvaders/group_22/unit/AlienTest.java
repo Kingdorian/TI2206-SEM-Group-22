@@ -26,7 +26,7 @@ public class AlienTest extends UnitTest {
 		Bullet bullet = alien.shootBullet(1);
 		assertEquals(alien.getXCoor(), bullet.getXCoor(), 0.05 );
 		assertEquals(alien.getYCoor(), bullet.getYCoor(), 0.05 );
-		bullet.moveUnit(1.0);
+		bullet.move(1.0);
 		assertEquals(alien.getXCoor(), bullet.getXCoor(), 0.05);
 		assertEquals(alien.getYCoor() + 1, bullet.getYCoor(), 0.05 );
 	}
