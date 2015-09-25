@@ -46,10 +46,10 @@ public class PowerUpController {
 		PowerUpUnit newPowerUp = new LifePowerUpUnit(x, y, "powerup_red.png");
 		newPowerUp.setVelY(LifePowerUpUnit.getVely());
 		Game.getLogger().log("Power Up is created" , LogEvent.Type.DEBUG);
-		if (random < (1 / 3)) {
+		if (random < 0.4) {
 			newPowerUp = new SpeedPowerUpUnit(x, y, "powerup_blue.png");
 			newPowerUp.setVelY(SpeedPowerUpUnit.getVely());
-		} else if (random < (2 / 3)) {
+		} else if (random < 0.6) {
 			newPowerUp = new ShootPowerUpUnit(x, y, "powerup_orange.png");
 			newPowerUp.setVelY(ShootPowerUpUnit.getVely());
 		}
