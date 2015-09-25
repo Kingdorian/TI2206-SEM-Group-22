@@ -5,7 +5,16 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.PowerUp;
 import spaceinvaders.group_22.logger.LogEvent;
+
+import spaceinvaders.group_22.unit.Alien;
+import spaceinvaders.group_22.unit.Barricade;
+import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.Explosion;
+import spaceinvaders.group_22.unit.PowerUpUnit;
+import spaceinvaders.group_22.unit.SpaceShip;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -115,6 +124,10 @@ public class GameUIController
      */
     private UIElementExplosion uiExplosion;
     /**
+     * The drawing of the PowerUp.
+     */
+    private UIElementPowerUp uiPowerUp;
+    /**
      * The drawing of the Barricade.
      */
     private UIElementBarricade uiBarricade;
@@ -156,6 +169,7 @@ public class GameUIController
     	uiBarricade = new UIElementBarricade(game, gc);
     	uiScore = new Score(game, gc, scoreLabel);
     	uiLives = new Lives(game, gc);
+    	uiPowerUp = new UIElementPowerUp(game, gc);
     	
     	Game.getLogger().log("UIElements initialized.", LogEvent.Type.INFO);
     }
@@ -261,7 +275,8 @@ public class GameUIController
 						uiBullet.draw();
 						uiBarricade.draw();
 						uiExplosion.draw();
-	
+						uiPowerUp.draw();
+						
 						// Draw the lives and score on the screen.
 						uiLives.draw();
 						uiScore.draw();
@@ -288,7 +303,6 @@ public class GameUIController
     }
 	
 	/**
-
 	 * Returns the scoreLabel.
 	 * @return The scoreLabel of the UI.
 	 */

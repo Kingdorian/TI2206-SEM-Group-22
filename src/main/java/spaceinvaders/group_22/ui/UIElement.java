@@ -63,6 +63,11 @@ public abstract class UIElement {
     		addSprite(sprites, "explosion3.png");
     		addSprite(sprites, "explosion4.png");
     		addSprite(sprites, "explosion5.png");
+    		addSprite(sprites, "powerup_orange.png");
+    		addSprite(sprites, "powerup_blue.png");
+    		addSprite(sprites, "powerup_red.png");
+    		addSprite(sprites, "glow_blue.png");
+    		addSprite(sprites, "glow_orange.png");
     }
     
     /**
