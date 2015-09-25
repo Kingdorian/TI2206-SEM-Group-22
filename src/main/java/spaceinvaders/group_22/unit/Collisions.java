@@ -45,6 +45,8 @@ public class Collisions {
 			}
 		}
 		if (spaceShipexplosion != null && spaceShipexplosion.getCounter() == 24) {
+			game.getLogger().log("Spaceship hit by bullet" , LogEvent.Type.INFO);
+			game.getBullets().clear();
 			game.getPlayer().die();
 		}
 		//Checking colissions for spaceship with enemy bullets

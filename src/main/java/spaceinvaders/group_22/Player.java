@@ -88,12 +88,14 @@ public class Player {
 	 * When the player dies remove one of his lives.
 	 */
 	public final void die() {
+		Thread.dumpStack();
 		game.getLogger().log("Player died", LogEvent.Type.DEBUG);
 		lives--;
 		respawnShip();
 		if (lives <= 0) {
 			game.gameOver();
 		}
+		game.getBullets();
 	}
 	/**
 	 * Get the amount of lives the player has left.
