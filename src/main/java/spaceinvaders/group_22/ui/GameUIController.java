@@ -296,6 +296,22 @@ public class GameUIController
 	}
 	
 	/**
+	 * Returns the game.
+	 * @return The game object of the UI.
+	 */
+	public final Game getGame() {
+		return game;
+	}
+	
+	/**
+	 * Returns the graphicsContext.
+	 * @return The graphicsContext of the UI.
+	 */
+	public final GraphicsContext getGC() {
+		return gc;
+	}
+	
+	/**
 	 * Handles if a key is pressed.
 	 * @param event of a key pressed
 	 */
