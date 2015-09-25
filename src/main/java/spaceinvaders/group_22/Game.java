@@ -229,7 +229,6 @@ public class Game {
 				i--;
 			}
 		}
-		collisions.checkCollisions();
 		barController.removeDead();
 		//new wave of aliens
 		if (alienController.getAliens().isEmpty()) {
