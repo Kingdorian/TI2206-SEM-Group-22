@@ -5,6 +5,7 @@ import java.util.HashMap;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.logger.LogEvent;
 
 /**
  * The drawing of all the elements.
