@@ -1,5 +1,7 @@
 package spaceinvaders.group_22;
 
+import java.util.ArrayList;
+
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.unit.SpaceShip;
 
@@ -9,6 +11,15 @@ import spaceinvaders.group_22.unit.SpaceShip;
  *
  */
 public class Player {
+	
+	/**
+	 * Maximum amount of lives a player can have.
+	 */
+	static final int MAXLIVES = 5;
+	/**
+	 * List of active power ups for this player.
+	 */
+	private ArrayList<PowerUp> activePowerUps;
 
 	/**
 	 * Spaceship the player is currently controling.
@@ -36,9 +47,10 @@ public class Player {
 	public Player(final Game parentgame) {
 		game = parentgame;
 		ship = new SpaceShip(game.getCanvasWidth() / 2, game.getCanvasHeight() - 40, "spaceship.png");
-		game.getLogger().log("Created spaceship for player", LogEvent.Type.DEBUG);
+		Game.getLogger().log("Created spaceship for player", LogEvent.Type.DEBUG);
 		score  = 0;
 		lives = 3;
+		activePowerUps = new ArrayList<PowerUp>();
 	}
 	
 	/**
@@ -68,7 +80,7 @@ public class Player {
 	 */
 	public final void addScore(final int points) {
 		score += points;
-		game.getLogger().log("Added " + points + "points", LogEvent.Type.TRACE);
+		Game.getLogger().log("Added " + points + "points", LogEvent.Type.TRACE);
 	}
 	/**
 	 * Resets the amount of points the player has.
@@ -82,13 +94,16 @@ public class Player {
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void respawnShip() {
 		ship = new SpaceShip(game.getCanvasWidth() / 2, ship.getYCoor(), "spaceship.png");
-		game.getLogger().log("Ship respawned", LogEvent.Type.TRACE);
+		for (PowerUp powerup : game.getPlayer().getActivePowerUps()) {
+			powerup.deactivate();
+		}
+		Game.getLogger().log("Ship respawned", LogEvent.Type.TRACE);
 	}
 	/**
 	 * When the player dies remove one of his lives.
 	 */
 	public final void die() {
-		game.getLogger().log("Player died", LogEvent.Type.DEBUG);
+		Game.getLogger().log("Player died", LogEvent.Type.DEBUG);
 		lives--;
 		respawnShip();
 		if (lives <= 0) {
@@ -101,6 +116,28 @@ public class Player {
 	 */
 	public final int getLives() {
 		return lives;
+	}
+	/**
+	 * Adds 1 life to the player if lives is not yet 5.
+	 */
+	public final void addLife() {
+		if (lives < MAXLIVES) {
+			lives++;
+		}
+	}
+	/**
+	 * Returns a list of all the active power ups of this player.
+	 * @return a list of the active power ups of this player.
+	 */
+	public final ArrayList<PowerUp> getActivePowerUps() {
+		return activePowerUps;
+	}
+	/**
+	 * Sets the list of all the active power ups of this player.
+	 * @param newactivePowerUps the list of active power ups of this player.
+	 */
+	public final void setActivePowerUps(final ArrayList<PowerUp> newactivePowerUps) {
+		this.activePowerUps = newactivePowerUps;
 	}
 	
 }

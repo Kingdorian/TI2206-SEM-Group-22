@@ -10,6 +10,7 @@ import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Collisions;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.ShipBullet;
+import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
  * 
@@ -80,6 +81,10 @@ public class Game {
 	 */
 	private SpaceShipController spaceShipContr;
 	/**
+	 * The controller for the power ups.
+	 */
+	private PowerUpController powerUpController;
+	/**
 	 * The collisions of units.
 	 */
 	private Collisions collisions;
@@ -106,7 +111,8 @@ public class Game {
 		barController.create();
 		spaceShipContr = new SpaceShipController(this);
 		alienController = new AlienController(this);
-		alienController.create();		
+		alienController.create();			
+		powerUpController = new PowerUpController(this);
 		collisions = new Collisions(this);
 		player = new Player(this);
 		shootingAllowed = true;
@@ -196,9 +202,9 @@ public class Game {
 			getLogger().log(logMessage, LogEvent.Type.TRACE);
 		}
 		if (!shootingAllowed) {
-			if (countToShoot < (1 / tickrate)) { 
+			if (countToShoot < ((1 / tickrate) / SpaceShip.getShootTimes())) { 
 				countToShoot++; 
-			} else if (Double.compare((double) countToShoot, 1 / tickrate) == 0) {
+			} else if (Double.compare((double) countToShoot, ((1 / tickrate) / SpaceShip.getShootTimes())) == 0) {
 				shootingAllowed = true;
 				countToShoot = 0;
 			}
@@ -207,9 +213,12 @@ public class Game {
 		alienController.move();
 		alienController.shootAlienBullets();
 		
+		powerUpController.checkPowerUps();
+		
 		//Check if all bullets are still visible
 		for (int i = 0; i < bullets.size(); i++) {
-			if (bullets.get(i).getXCoor() > canvasWidth || bullets.get(i).getYCoor() < 0) {
+			if (bullets.get(i).getXCoor() > canvasWidth || bullets.get(i).getYCoor() < 0 
+					|| bullets.get(i).getYCoor() >= canvasHeight) {
 				bullets.remove(i);
 				logger.log("Removed bullet out of screen", LogEvent.Type.TRACE);
 			}
@@ -239,7 +248,6 @@ public class Game {
 			logger.log("Removed all bullets", LogEvent.Type.TRACE);
 		}
 	}
-	
 	// ONLY SETTERS AND GETTERS BELOW
 
 	/**
@@ -369,5 +377,12 @@ public class Game {
 	 */
 	public final SpaceShipController getSpaceShipController() {
 		return spaceShipContr;
+	}
+	/**
+	 * Returns the powerUpcontroller of this game.
+	 * @return the powerUpcontroller of this game.
+	 */
+	public final PowerUpController getPowerUpController() {
+		return powerUpController;
 	}
 }

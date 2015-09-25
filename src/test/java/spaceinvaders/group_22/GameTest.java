@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import javafx.scene.input.KeyCode;
 import spaceinvaders.group_22.unit.Alien;
-import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.ShipBullet;
@@ -234,6 +233,4 @@ public class GameTest {
 		game.getSpaceShipController().moveSpaceShip(new ArrayList<KeyCode>());
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() <= 0);
 	}
-	
-	
 }

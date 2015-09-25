@@ -68,7 +68,6 @@ public class AlienController extends UnitController implements MovableUnitContro
 	
 	/**
 	 * Creates the aliens on the correct start positions.
-	 * @return an arraylist of Aliens drawn.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void create() {
@@ -86,7 +85,7 @@ public class AlienController extends UnitController implements MovableUnitContro
         for (int i = 0; i < AMOUNT_ALIEN_ROWS; i++) {
             for (int j = 0; j < ALIENS_PER_ROW; j++) {
             	Alien alien = new Alien(startPosition, distance, "invader.png");
-            	game.getLogger().log("Created Alien", LogEvent.Type.TRACE);
+            	Game.getLogger().log("Created Alien", LogEvent.Type.TRACE);
             	alien.setVelX(alienVelX);
             	aliens.add(alien);
             	startPosition += testAlien.getWidth() + interval;
@@ -94,7 +93,8 @@ public class AlienController extends UnitController implements MovableUnitContro
             distance += 1.1 * testAlien.getHeight();
             startPosition = ALIENBORDERMARIGIN + interval + 0.5 * testAlien.getWidth();
         }
-        game.getLogger().log("Created alien wave succesfully", LogEvent.Type.DEBUG);
+
+        Game.getLogger().log("Created alien wave succesfully", LogEvent.Type.DEBUG);
 	}
 	
 	/**
@@ -142,9 +142,10 @@ public class AlienController extends UnitController implements MovableUnitContro
 			}
 			unit.move(game.getTickrate());
 		}
+
 		String velX = String.valueOf(aliens.get(0).getVelX());
 		String velY = String.valueOf(aliens.get(0).getVelY());
-		game.getLogger().log("Aliens moved X: " + velX + "\tY: " + velY, LogEvent.Type.TRACE);
+		Game.getLogger().log("Aliens moved X: " + velX + "\tY: " + velY, LogEvent.Type.TRACE);
 	}
 
 	/**
@@ -174,14 +175,14 @@ public class AlienController extends UnitController implements MovableUnitContro
 			Bullet bullet = aliens.get(shootIndex).shootBullet(60);
 			game.getBullets().add(bullet);
 			String logMessage = "Alien shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
-			game.getLogger().log(logMessage, LogEvent.Type.TRACE);
+			Game.getLogger().log(logMessage, LogEvent.Type.TRACE);
 		}
 	}
 	/**
 	 * Go to next round.
 	 */
 	public final void nextRound() {
-		game.getLogger().log("proceding to next round", LogEvent.Type.INFO);
+		Game.getLogger().log("proceding to next round", LogEvent.Type.INFO);
 		alienVelX = Math.abs(alienVelX) + AlienController.ALIENVELXINCREASE;
 		create();
 	}

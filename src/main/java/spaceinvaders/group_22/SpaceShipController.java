@@ -14,6 +14,7 @@ public class SpaceShipController extends UnitController implements MovableUnitCo
 
 	/**
 	 * Creates a new spaceShipcontroller.
+	 * @param parentGame Game this controller works for.
 	 */
 	public SpaceShipController(final Game parentGame) {
 		super(parentGame);
@@ -40,23 +41,23 @@ public class SpaceShipController extends UnitController implements MovableUnitCo
 		// Check that the spaceship is still able to move without going off the screen.
 		if (game.getPlayer().getSpaceShip().getXCoor() - 0.5 * game.getPlayer().getSpaceShip().getWidth() > 0 
 				&& pressedKeys.contains(KeyCode.A)) {
-			velX = velX - SpaceShip.MAXVELX * game.getTickrate() * 2;
+			velX = velX - SpaceShip.getMAXVELX() * game.getTickrate() * 2;
 		}
 		if (game.getPlayer().getSpaceShip().getXCoor() 
 				+ 0.5 * game.getPlayer().getSpaceShip().getWidth() < game.getCanvasWidth()
 				&& pressedKeys.contains(KeyCode.D)) {
-			velX = velX + SpaceShip.MAXVELX * game.getTickrate() * 2;
+			velX = velX + SpaceShip.getMAXVELX() * game.getTickrate() * 2;
 		}
 
-		if (velX > SpaceShip.MAXVELX) {
-			velX = SpaceShip.MAXVELX;
-		} else if (velX < -SpaceShip.MAXVELX) {
-			velX = -SpaceShip.MAXVELX;
+		if (velX > SpaceShip.getMAXVELX()) {
+			velX = SpaceShip.getMAXVELX();
+		} else if (velX < -SpaceShip.getMAXVELX()) {
+			velX = -SpaceShip.getMAXVELX();
 		}
 		game.getPlayer().getSpaceShip().setVelX(velX);
 		game.getPlayer().getSpaceShip().move(game.getTickrate());
 		if (velX != 0) {
-			game.getLogger().log("Player moved X: " + velX, LogEvent.Type.TRACE);
+			Game.getLogger().log("Player moved X: " + velX, LogEvent.Type.TRACE);
 		}
 	}
 
