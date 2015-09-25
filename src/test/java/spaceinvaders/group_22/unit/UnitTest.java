@@ -1,7 +1,6 @@
 package spaceinvaders.group_22.unit;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Before;
@@ -9,14 +8,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import spaceinvaders.group_22.Game;
-
 /**
  * Test the abstract unit class.
  * 
  * @author Bryan van Wijk
  *
  */
+@SuppressWarnings("checkstyle:magicnumber")   
 public abstract class UnitTest {
 	
 	/**
@@ -100,7 +98,6 @@ public abstract class UnitTest {
 		thrown.expect(IllegalArgumentException.class);
 		createInstance(1.2, 3, "png.png");
 	}
-	
 	/**
 	 * Test the Equals method.
 	 */

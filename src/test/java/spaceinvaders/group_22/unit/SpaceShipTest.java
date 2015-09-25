@@ -11,6 +11,7 @@ import org.junit.Test;
  * @author Bryan van Wijk
  *
  */
+@SuppressWarnings("checkstyle:magicnumber")   
 public class SpaceShipTest extends UnitTest {
 
 	@Override

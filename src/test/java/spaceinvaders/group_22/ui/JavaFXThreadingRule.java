@@ -45,7 +45,7 @@ public class JavaFXThreadingRule implements TestRule {
         @Override
         public void evaluate() throws Throwable {
             
-            if(!jfxIsSetup) {
+            if (!jfxIsSetup) {
                 setupJavaFX();
                 
                 jfxIsSetup = true;
@@ -62,17 +62,21 @@ public class JavaFXThreadingRule implements TestRule {
                         rethrownException = e;
                     }
                     countDownLatch.countDown();
-                }});
+                } });
             
             countDownLatch.await();
             
             // if an exception was thrown by the statement during evaluation,
             // then re-throw it to fail the test
-            if(rethrownException != null) {
+            if (rethrownException != null) {
                 throw rethrownException;
             }
         }
 
+        /**
+         * Set up JavaFX, so testing is enabled for JFX elements.
+         * @throws InterruptedException
+         */
         protected void setupJavaFX() throws InterruptedException {
             
             long timeMillis = System.currentTimeMillis();

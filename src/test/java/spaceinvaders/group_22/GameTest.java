@@ -19,6 +19,7 @@ import spaceinvaders.group_22.unit.SpaceShip;
  * @author Dorian
  *
  */
+@SuppressWarnings("checkstyle:magicnumber")   
 public class GameTest {
 	
 	/**
@@ -30,7 +31,6 @@ public class GameTest {
 	 * Class to set up a game before each test is executed.
 	 */
 	@Before
-	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void setUpGame() {
 		game = new Game(200, 200);
 		game.setTickrate(1.0);
@@ -40,7 +40,6 @@ public class GameTest {
 	 * Tests if the testInProgress method returns false if the game is not in progress.
 	 */
 	@Test
-	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testIsNotInProgress() {
 		Assert.assertFalse(game.isInProgress());
 	}
@@ -48,7 +47,6 @@ public class GameTest {
 	 * Tests if the testInProgress method returns t if the game is in progress.
 	 */
 	@Test
-	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testIsInProgress() {
 		// Start game
 		game.start();
@@ -58,16 +56,13 @@ public class GameTest {
 	 * Tests if the gethighscore method works correctly.
 	 */
 	@Test
-	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testGetHighscore() {
 		Assert.assertEquals(0, game.getHighScore());
 	}
-	
 	/**
 	 * Tests if the getHighScore sets the new highscore correctly.
 	 */
 	@Test
-	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testSetHighScore() {
 		game.setHighScore(100);
 		Assert.assertEquals(100, game.getHighScore());
@@ -76,7 +71,6 @@ public class GameTest {
 	 * Test if proper exception is thrown when inputting a lower highscore.
 	*/
 	@Test(expected = AssertionError.class)
-	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testIllegalNewHighScore() {
 		//Setting a correct highscore
 		game.setHighScore(100);
@@ -87,7 +81,6 @@ public class GameTest {
 	 * Test if proper exception is thrown when inputting a negative highscore.
 	 */
 	@Test(expected = AssertionError.class)
-	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testNegativeNewHighScore() {
 		game.setHighScore(-10);
 	}
@@ -138,7 +131,7 @@ public class GameTest {
 		game.getBullets().add(new ShipBullet(1.0, 1.0, "invader.png"));
 		game.reset();
 		// Bullet list should be emptied when the game resets
-		Assert.assertEquals(0, game.getBullets().size() );
+		Assert.assertEquals(0, game.getBullets().size());
 	}
 	/**
 	 * Tests if the reset method works correctly for resetting the explosion list.
@@ -148,7 +141,7 @@ public class GameTest {
 		game.getExplosions().add(new Explosion(1.0, 1.0, "explosion1.png"));
 		game.reset();
 		// Bullet list should be emptied when the game resets
-		Assert.assertEquals(0, game.getExplosions().size() );
+		Assert.assertEquals(0, game.getExplosions().size());
 	}
 	/**
 	 * Tests if the reset method works correctly for resetting .
@@ -174,7 +167,7 @@ public class GameTest {
 	@Test
 	public final void testGameOverNewHighScore() {
 		// Making sure the player has at least 1 point more then the current highscore
-		game.getPlayer().addScore(game.getHighScore()+1);
+		game.getPlayer().addScore(game.getHighScore() + 1);
 		game.gameOver();
 		Assert.assertEquals(1, game.getHighScore());
 	}

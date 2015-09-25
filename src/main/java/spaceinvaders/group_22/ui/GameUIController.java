@@ -2,16 +2,10 @@ package spaceinvaders.group_22.ui;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
-import spaceinvaders.group_22.unit.Alien;
-import spaceinvaders.group_22.unit.Barricade;
-import spaceinvaders.group_22.unit.Bullet;
-import spaceinvaders.group_22.unit.Explosion;
-import spaceinvaders.group_22.unit.SpaceShip;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -25,7 +19,6 @@ import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.util.Duration;
 
 /**
@@ -74,11 +67,6 @@ public class GameUIController
     private Game game;
     
     /**
-     * Hashmap containing all sprites.
-     */
-    private HashMap<String, Image> sprites;
-    
-    /**
      * Label to load the score of the player in.
      */
     @FXML
@@ -109,7 +97,35 @@ public class GameUIController
     /**
      * The graphicscontext of the Canvas.
      */
-    private static GraphicsContext gc;
+    private GraphicsContext gc;
+    /**
+     * The drawing of the SpaceShip.
+     */
+    private UIElementSpaceShip uiSpaceShip;
+    /**
+     * The drawing of the Alien.
+     */
+    private UIElementAlien uiAlien;
+    /**
+     * The drawing of the Bullet.
+     */
+    private UIElementBullet uiBullet;
+    /**
+     * The drawing of the Explosion.
+     */
+    private UIElementExplosion uiExplosion;
+    /**
+     * The drawing of the Barricade.
+     */
+    private UIElementBarricade uiBarricade;
+    /**
+     * The drawing of the score.
+     */
+    private Score uiScore;
+    /**
+     * The drawing of the lives.
+     */
+    private Lives uiLives;
     
     /**
      * Called by the FXMLLoader. 
@@ -124,15 +140,28 @@ public class GameUIController
     	canvasHeight = canvas.getHeight();
     	
     	newGame();
-    	game.getLogger().log("Set canvas width to: " + canvasWidth, LogEvent.Type.INFO);
-    	game.getLogger().log("Set canvas height to: " + canvasHeight, LogEvent.Type.INFO);
-    	game.getLogger().log("Show screen Before Play", LogEvent.Type.INFO);
     	
+    	initializeUIElements();
     	canvas.setFocusTraversable(true);
     }
     
     /**
-     * Retruns the canvas Width.
+     * Initializes the UI elements.
+     */
+    private void initializeUIElements() {
+    	uiAlien = new UIElementAlien(game, gc);
+    	uiSpaceShip = new UIElementSpaceShip(game, gc);
+    	uiBullet = new UIElementBullet(game, gc);
+    	uiExplosion = new UIElementExplosion(game, gc);
+    	uiBarricade = new UIElementBarricade(game, gc);
+    	uiScore = new Score(game, gc, scoreLabel);
+    	uiLives = new Lives(game, gc);
+    	
+    	Game.getLogger().log("UIElements initialized.", LogEvent.Type.INFO);
+    }
+    
+    /**
+     * Returns the canvas Width.
      * @return canvasWidth
      */
     public final double getCanvasWidth() {
@@ -140,7 +169,7 @@ public class GameUIController
     }
     
     /**
-     * Retruns the canvas Height.
+     * Returns the canvas Height.
      * @return canvasHeight
      */
     public final double getCanvasHeight() {
@@ -167,7 +196,9 @@ public class GameUIController
     	// If the game does not exist, create a new one.
     	if (game == null) {
         	game = new Game(canvasWidth, canvasHeight);
-        	sprites = getSprites();
+        	Game.getLogger().log("Set canvas width to: " + canvasWidth, LogEvent.Type.INFO);
+        	Game.getLogger().log("Set canvas height to: " + canvasHeight, LogEvent.Type.INFO);
+        	Game.getLogger().log("Show screen Before Play", LogEvent.Type.INFO);
         // Else reset the existing game.
     	} else {
         	game.resetGame();    		
@@ -186,7 +217,7 @@ public class GameUIController
     	} else {
     		framerate = 0.0;
     	}
-    	game.getLogger().log("Set framerate to: " + framerate, LogEvent.Type.INFO);
+    	Game.getLogger().log("Set framerate to: " + framerate, LogEvent.Type.INFO);
     }
     
     /**
@@ -195,40 +226,6 @@ public class GameUIController
      */
     public final double getFramerate() {
     	return framerate;
-    }
-    
-    /**
-     * Creates a hashmap of all available sprite images.
-     * @return a hashmap containing all available sprite images.
-     */
-    public final HashMap<String, Image> getSprites() {
-    	HashMap<String, Image> spriteMap = new HashMap<String, Image>();
-    		
-    		addSprite(spriteMap, "alienbullet.png");
-    		addSprite(spriteMap, "spaceshipbullet.png");
-    		addSprite(spriteMap, "invader.png");
-    		addSprite(spriteMap, "spaceship.png");
-    		addSprite(spriteMap, "heart.png");
-    		addSprite(spriteMap, "barrier.png");
-    		addSprite(spriteMap, "explosion1.png");
-    		addSprite(spriteMap, "explosion2.png");
-    		addSprite(spriteMap, "explosion3.png");
-    		addSprite(spriteMap, "explosion4.png");
-    		addSprite(spriteMap, "explosion5.png");
-    		
-    	return spriteMap;
-    }
-    
-    /**
-     * Adds a sprite to the sprite Hasmap.
-     * @param spriteMap The hashmap of sprites to add to.
-     * @param filename The filename of the sprite to add.
-     */
-    public final void addSprite(final HashMap<String, Image> spriteMap, final String filename) {
-		spriteMap.put(filename, 
-				new Image(getClass().getClassLoader()
-						.getResource("spaceinvaders/group_22/images/" + filename).toString()));
-		game.getLogger().log("Loaded " + filename, LogEvent.Type.DEBUG);
     }
     
     /**
@@ -259,15 +256,15 @@ public class GameUIController
 						}
 						
 						// Draw the various units on the screen.
-						drawPlayer();
-						drawAliens();
-						drawExplosions();
-						drawBullets();
-						drawBarricades();
+						uiSpaceShip.draw();
+						uiAlien.draw();
+						uiBullet.draw();
+						uiBarricade.draw();
+						uiExplosion.draw();
 	
 						// Draw the lives and score on the screen.
-						formatLives(game.getPlayer().getLives());
-						formatScore(game.getPlayer().getScore());
+						uiLives.draw();
+						uiScore.draw();
 						
 						if (pressedKeys.contains(KeyCode.SPACE)) {
 					    	pressedKeys.remove(KeyCode.SPACE);
@@ -278,7 +275,7 @@ public class GameUIController
 							screenGameOver.toFront();
 							highScoreLabel.setText("Highscore: " + game.getHighScore());
 							gameLoop.stop();
-							game.getLogger().log("Show screen Game Over", LogEvent.Type.INFO);
+							Game.getLogger().log("Show screen Game Over", LogEvent.Type.INFO);
 						} else {
 							screenGameOver.toBack();
 						}
@@ -291,138 +288,29 @@ public class GameUIController
     }
 	
 	/**
-	 * Method to draw all the barricades.
-	 */
-	private void drawBarricades() {
-		// Loop over all the barricades 
-		for (Barricade bar : game.getBarricadeController().getBarricades()) {
-			//Calculate opacity on base of the health of the barricade
-			Double opacity = bar.getHealth() * 0.1;
-			gc.setGlobalAlpha(opacity);
-			drawUnit(bar.getXCoor(), bar.getYCoor(), bar.getWidth(), bar.getHeight(), bar.getSprite());
-			gc.setGlobalAlpha(1);
-		}
-		game.getLogger().log("Drawn barricades", LogEvent.Type.TRACE);
-	}
-	
-	/**
-	 * Method to draw the player spaceship.
-	 */
-	private void drawPlayer() {
-		SpaceShip spaceShip = game.getPlayer().getSpaceShip();
-		
-        // Position the player in the middle, on the bottom of the screen.
-		drawUnit(spaceShip.getXCoor(), spaceShip.getYCoor(), spaceShip.getWidth(), 
-				spaceShip.getHeight(), spaceShip.getSprite());
-		game.getLogger().log("Drawn spaceship", LogEvent.Type.TRACE);
-	}
-	
-	/**
-	 * Method to draw the aliens in game.
-	 */
-	private void drawAliens() {
-		for (Alien unit : game.getAlienController().getAliens()) {
-			drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(),
-					unit.getHeight(), unit.getSprite());		
-		}
-		game.getLogger().log("Drawn aliens", LogEvent.Type.TRACE);
-	}
-	
-	/**
-	 * Method to draw the bullets in game.
-	 */
-	private void drawBullets() {
-		for (Bullet bullet : game.getBullets()) {
-			drawUnit(bullet.getXCoor(), bullet.getYCoor(), 
-					bullet.getWidth(), bullet.getHeight(), bullet.getSprite());
-		}
-		game.getLogger().log("Drawn bullets", LogEvent.Type.TRACE);
-	}
-	
-	/**
-	 * Method to draw the explosions in game.
-	 */
-	private void drawExplosions() {
-		// Create a duplicate to loop over, so deletion is possible.
-		ArrayList<Explosion> explosionList = new ArrayList<Explosion>();
-		explosionList.addAll(game.getExplosions());
-		
-		// For every explosion, draw the explosion.
-		for (Explosion explosion : explosionList) {
-			drawUnit(explosion.getXCoor(), explosion.getYCoor(), 
-					explosion.getWidth(), explosion.getHeight(), explosion.getSprite());
-			
-			// Increase the counter maintaining the time one frame of the animation is visible.
-			explosion.increaseCounter();
 
-			if (explosion.getCounter() % 5 == 0) {
-				// Increase the index of the animation sprite, so the next image is shown.
-				explosion.increaseAnimationIndex();
-				explosion.setSprite("explosion" + explosion.getAnimationIndex() + ".png");
-			}
-			if (explosion.getAnimationIndex() == 5) {
-				// If we reach the final animation index, 
-				// remove the explosion since the animation has ended.
-				game.getExplosions().remove(explosion);
-			}
-		}
-		game.getLogger().log("Drawn explosions", LogEvent.Type.TRACE);
-	}
-	
-    /**
-     * Method to display the lives on the screen.
-     * @param lives The amount of lives the player has.
-     */
-    public final void formatLives(final int lives) {
-    	Image heartImage = sprites.get("heart.png");
-    	for (int i = 1; i <= lives; i++) {
-        	gc.drawImage(heartImage, canvas.getWidth() - 10 - heartImage.getWidth() * i, 10);
-    	}
-    	game.getLogger().log("Formatted hearts to UI", LogEvent.Type.TRACE);
-    }
-	
-	/**
-	 * Method to display the score on the screen.
-	 * @param score The score to be displayed.
-	 */
-	public final void formatScore(final int score) {
-    	int digitsBefore = 8 - Integer.toString(score).length();
-    	StringBuffer scoreString = new StringBuffer();
-    	
-    	for (int i = 0; i < digitsBefore; i++) {
-    		scoreString.append("0");
-    	}
-    	scoreString.append(score);
-    	
-    	scoreLabel.setText(scoreString.toString());	
-    	game.getLogger().log("Formatted score to UI", LogEvent.Type.TRACE);
-	}
-	
-	/**
 	 * Returns the scoreLabel.
 	 * @return The scoreLabel of the UI.
 	 */
 	public final Label getScoreLabel() {
 		return scoreLabel;
 	}
- 
-    /**
-     * Method to draw the Players Spaceship.
-     * @param x The horizontal position of the player to draw.
-     * @param y The vertical position of the player to draw.
-     * @param spriteWidth The width of the sprite to draw.
-     * @param spriteHeight The heifht of the sprite to draw.
-     * @param sprite Image containing the sprite to draw.
-     */  
-    public final void drawUnit(final double x, final double y, final double spriteWidth, 
-    		final double spriteHeight, final String sprite) {
-        
-        // Draw the player with the X and Y coordinates as center
-		Image spriteImage = sprites.get(sprite);
-		if (spriteImage != null) {
-			gc.drawImage(spriteImage, x - 0.5 * spriteWidth, y - 0.5 * spriteHeight);			
-		}
-    }
+	
+	/**
+	 * Returns the game.
+	 * @return The game object of the UI.
+	 */
+	public final Game getGame() {
+		return game;
+	}
+	
+	/**
+	 * Returns the graphicsContext.
+	 * @return The graphicsContext of the UI.
+	 */
+	public final GraphicsContext getGC() {
+		return gc;
+	}
 	
 	/**
 	 * Handles if a key is pressed.
@@ -430,7 +318,7 @@ public class GameUIController
 	 */
 	@FXML
 	public final void handleKeyPressed(final KeyEvent event) {
-		game.getLogger().log("Player pressed " + event.getCode().toString(), LogEvent.Type.DEBUG);
+		Game.getLogger().log("Player pressed " + event.getCode().toString(), LogEvent.Type.DEBUG);
         if (event.getCode().equals(KeyCode.S) && game.getPlayer().getLives() > 0) {
         	screenBeforePlay.toBack();
         	screenPaused.toBack();
@@ -438,7 +326,7 @@ public class GameUIController
         } else if (event.getCode().equals(KeyCode.P)) {
         	if (game.isInProgress()) {
             	screenPaused.toFront();
-            	game.getLogger().log("Show screen Paused", LogEvent.Type.INFO);
+            	Game.getLogger().log("Show screen Paused", LogEvent.Type.INFO);
             	game.stop();
         	}
         } else if (event.getCode().equals(KeyCode.R)) {
