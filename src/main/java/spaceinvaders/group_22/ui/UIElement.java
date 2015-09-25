@@ -81,7 +81,7 @@ public abstract class UIElement {
 		spriteMap.put(filename, 
 				new Image(getClass().getClassLoader()
 						.getResource("spaceinvaders/group_22/images/" + filename).toString()));
-		//getLogger().log("Loaded " + filename, LogEvent.Type.DEBUG);
+		Game.getLogger().log("Loaded " + filename, LogEvent.Type.DEBUG);
     }
 
 	/**
