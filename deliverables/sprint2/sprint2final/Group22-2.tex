@@ -1,0 +1,87 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{geometry}
+\usepackage{graphicx}
+
+\geometry{portrait, margin=1.5in}
+
+\begin{document}
+\title{Space Invaders : Sprint 2 Assignment}
+\date{\today}
+\author{\textit{Group 22}\\ \textit{\underline{TI2206 Software Engineering Methods}} \\
+ \\Ege de Bruin \\ Bryan van Wijk \\ Dorian de Koning \\ Jochem Lugtenburg }
+ \maketitle  
+ \begin{center}
+Supervisor: Dr. A. Bacchelli\\
+TA: Danny Plenge\\
+ \end{center}     
+ \begin{center}
+ Delft University of Technology\\
+ Faculty of EEMCS\\
+ \end{center}
+ \thispagestyle{empty}
+ \pagebreak
+ 
+\include{Exercise1}
+\subsection*{Exercise 1 UML} 
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=12cm, height=8cm]{ControllerUML.jpg}
+\caption{Controller UML Class Diagram}
+\end{figure}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=12cm, height=8cm]{UiElementUML.jpg}
+\caption{UIElement UML Class Diagram}
+\end{figure}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=12cm, height=8cm]{UnitUML.jpg}
+\caption{Unit UML Class Diagram}
+\end{figure}
+\pagebreak
+\clearpage
+\section*{Code Improvement Functional Requirements}
+
+A list of functional requirements considered for code improvements using the MoSCoW method described in the previous section.
+
+\subsection*{Must Haves}
+The Code Improvements must meet the following requirements:
+\begin{itemize}
+	\item Code shall be Checkstyle compliant.
+	\item Code shall be PMD and Findbugs compliant.
+	\item Classes shall only have one responsibility.
+	\item Methods shall not be too long.
+\end{itemize}
+
+\subsection*{Should Haves}
+The Code Improvements should meet the following requirements:
+\begin{itemize}
+	\item Code shall contain Javadoc comments explaining complex methods.
+	\item Code shall not be commented.
+	\item Static shall be used where appropriate.
+	\item Private access modifiers shall be used where appropriate.
+	\item Test coverage shall be at least 75\%.
+	\item Code shall contain less duplicate code.
+\end{itemize}
+
+\subsection*{Could Haves}
+The Code Improvements could meet the following requirements:
+\begin{itemize}
+	\item Variables shall be named in correct English.
+	\item Methods shall be named in correct English.
+	\item Classes shall be named in correct English.
+	\item HashCode methods shall be implemented correctly where equals is used.
+\end{itemize}
+
+\subsection*{Would/Won't Haves}
+The Code Improvements won't meet the following requirements:
+\begin{itemize}
+	\item ...
+\end{itemize}
+
+
+
+\end{document}
+
