@@ -26,7 +26,7 @@ public class UIElementBarricade extends UIElementUnit {
 	@Override
 	public final void draw() {
 		// Loop over all the barricades 
-		for (Barricade bar : getGame().getAlienController().getBarricades()) {
+		for (Barricade bar : getGame().getBarricadeController().getBarricades()) {
 			//Calculate opacity on base of the health of the barricade
 			Double opacity = bar.getHealth() * 0.1;
 			getGC().setGlobalAlpha(opacity);
