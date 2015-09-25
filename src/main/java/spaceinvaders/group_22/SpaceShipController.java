@@ -54,7 +54,7 @@ public class SpaceShipController extends UnitController implements MovableUnitCo
 			velX = -SpaceShip.MAXVELX;
 		}
 		game.getPlayer().getSpaceShip().setVelX(velX);
-		game.getPlayer().getSpaceShip().moveUnit(game.getTickrate());
+		game.getPlayer().getSpaceShip().move(game.getTickrate());
 		if (velX != 0) {
 			game.getLogger().log("Player moved X: " + velX, LogEvent.Type.TRACE);
 		}
