@@ -30,11 +30,6 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 * Amount of pixels/second the speed of the aliens increases per wave.
 	 */
 	static final int ALIENVELXINCREASE = 10;
-
-	/**
-	 * List of aliens in the game.
-	 */
-	private ArrayList<Alien> aliens = new ArrayList<Alien>();
 	
 	 /**
      * If 0 the aliens don't have to move any frame down.
@@ -57,6 +52,14 @@ public class AlienController extends UnitController implements MovableUnitContro
      * Roughly the amount of bullets that spawn per second.
      */
 	private int bulletChance = 1;
+	/**
+	 * Current alien wave.
+	 */
+	private AlienWave alienWave;
+	/**
+	 * Factory to create alien waves.
+	 */
+	private AlienWaveFactory alienWaveFactory;
 	
 	/**
 	 * Creates a new alien controller.
@@ -64,38 +67,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 */
 	public AlienController(final Game newGame) {
 		super(newGame);
-	}
-	
-	/**
-	 * Creates the aliens on the correct start positions.
-	 */
-	@SuppressWarnings("checkstyle:magicnumber")    
-	public final void create() {
-		aliens.clear();
-        
-        // Distance to top of the screen.
-        double distance = 125;
-        // Create alien object to make sure we can get the width and height of aliens
-        Alien testAlien = new Alien(0.0, 0.0, Alien.SPRITE); 
-        double interval = ((game.getCanvasWidth() - (2 * ALIENBORDERMARIGIN * game.getCanvasWidth()))
-        						- (ALIENS_PER_ROW * testAlien.getWidth())) / (ALIENS_PER_ROW + 1);  
-        game.getLogger().log("Set alien interval to: " + interval, LogEvent.Type.DEBUG);
-
-        // Drawing lines of Aliens.
-        for (int i = 0; i < AMOUNT_ALIEN_ROWS; i++) {
-            double startPosition = ALIENBORDERMARIGIN * game.getCanvasWidth() + 0.5 * testAlien.getWidth();
-            game.getLogger().log("Creating new alien line with X cord for start: " + startPosition, LogEvent.Type.DEBUG);
-            for (int j = 0; j < ALIENS_PER_ROW; j++) {
-            	Alien alien = new Alien(startPosition, distance, "invader.png");
-            	Game.getLogger().log("Created Alien", LogEvent.Type.TRACE);
-            	alien.setVelX(alienVelX);
-            	aliens.add(alien);
-            	startPosition += testAlien.getWidth() + interval;
-            }
-            distance += 1.1 * testAlien.getHeight();
-        }
-
-        Game.getLogger().log("Created alien wave succesfully", LogEvent.Type.DEBUG);
+		alienWave = alienWaveFactory.createWave();
 	}
 	
 	/**
@@ -105,7 +77,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 	public final void move() {
 		//check if all aliens are still able to move in the window
 		if (alienFramesDown == 0) {
-			for (Alien unit : aliens) {
+			for (Alien unit : alienWave.getAliens()) {
 				// When this alien is on the right side of the screen change the direction
 				if (unit.getXCoor() + 0.5 * unit.getWidth() >= game.getCanvasWidth()) {
 					alienFramesDown = (alienFall / alienVelY) * (1 / game.getTickrate());
@@ -128,7 +100,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 			alienFramesDown = alienFramesDown - 1;
 		}
 		// move every alien
-		for (Alien unit : aliens) {
+		for (Alien unit : alienWave.getAliens()) {
 			if (alienFramesDown > 0) {
 				unit.setVelY(alienVelY);
 				unit.setVelX(0);			
@@ -144,8 +116,8 @@ public class AlienController extends UnitController implements MovableUnitContro
 			unit.move(game.getTickrate());
 		}
 
-		String velX = String.valueOf(aliens.get(0).getVelX());
-		String velY = String.valueOf(aliens.get(0).getVelY());
+		String velX = String.valueOf(alienWave.getAliens().get(0).getVelX());
+		String velY = String.valueOf(alienWave.getAliens().get(0).getVelY());
 		Game.getLogger().log("Aliens moved X: " + velX + "\tY: " + velY, LogEvent.Type.TRACE);
 	}
 
@@ -170,10 +142,10 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void shootAlienBullets() {
-		if (!aliens.isEmpty() && Math.random() 
-				< ((aliens.size()) * bulletChance * game.getTickrate()) / 40)   {
-			int shootIndex = (int) (Math.random() * aliens.size());
-			Bullet bullet = aliens.get(shootIndex).shootBullet(60);
+		if (!alienWave.getAliens().isEmpty() && Math.random() 
+				< ((alienWave.getAliens().size()) * bulletChance * game.getTickrate()) / 40)   {
+			int shootIndex = (int) (Math.random() * alienWave.getAliens().size());
+			Bullet bullet = alienWave.getAliens().get(shootIndex).shootBullet(60);
 			game.getBullets().add(bullet);
 			String logMessage = "Alien shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
 			Game.getLogger().log(logMessage, LogEvent.Type.TRACE);
@@ -187,18 +159,17 @@ public class AlienController extends UnitController implements MovableUnitContro
 		alienVelX = Math.abs(alienVelX) + AlienController.ALIENVELXINCREASE;
 		create();
 	}
-	/**
-	 * Sets the list of Aliens currently in game.
-	 * @param alienList The ArrayList of aliens to set.
-	 */
-	public final void setAliens(final ArrayList<Alien> alienList) {
-		this.aliens = alienList;
+
+	@Override
+	public void create() {
+		// TODO Auto-generated method stub
+		
 	}
 	/**
-	 * Gets the list of Aliens currently in game.
-	 * @return The list of aliens currently in game.
+	 * Returns the current alien wave.
+	 * @return the current alien wave.
 	 */
-	public final ArrayList<Alien> getAliens() {
-		return aliens;
+	public AlienWave getAlienWave() {
+		return alienWave;
 	}
 }
