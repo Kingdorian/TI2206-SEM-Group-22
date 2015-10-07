@@ -1,5 +1,6 @@
 package spaceinvaders.group_22;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import spaceinvaders.group_22.logger.LogEvent;
@@ -36,16 +37,33 @@ public class AlienWaveFactory implements AlienWaveFactoryInterface {
 	 * Speed of the aliens in the X direction in pixels per second.
 	 */
 	private double alienVelX = 40;
+	/**
+	 * Reader used to read the alienwaves from a file.
+	 */
+	private AlienWaveReader waveReader;
 	
 	/**
 	 * Constructor of the alien wave factory.
 	 * @param setgame game to set for this factory.
 	 */
 	public AlienWaveFactory(final Game setgame) {
+		waveReader = new AlienWaveReader();
 
-		
-		/// has to be removed if read is fixed :
-		
+	}
+
+	@Override
+	public final AlienWave createWaves() {
+		String sep = System.getProperty("file.separator");
+		try {
+			waveReader.read("src" + sep	+ "main" + sep + "resources" + sep
+					+ "spaceinvaders" +  sep + "group_22" + sep	+ "waves" + sep);
+		} catch (IOException e) {
+			Game.getLogger().log("IOException occured while reading alienwaves", e);
+			return createDefaultWaves();
+		}
+		return patterns.get((int) Math.random() * patterns.size()).copy();	
+	}
+	public final AlienWave createDefaultWaves() {
 		ConcreteAlienWave wave = new ConcreteAlienWave();
 		ArrayList<Alien> aliens = new ArrayList<Alien>();
 		
@@ -68,14 +86,7 @@ public class AlienWaveFactory implements AlienWaveFactoryInterface {
             }
             distance += 1.1 * testAlien.getHeight();
         }
-        //wave.setAliens(aliens);
-
-       patterns.add(wave);
-	}
-
-	@Override
-	public final AlienWave createWave() {
-		return patterns.get((int) Math.random() * patterns.size()).copy();	
+        return wave;
 	}
 
 }

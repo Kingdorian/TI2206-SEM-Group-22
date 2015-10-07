@@ -10,5 +10,5 @@ public interface AlienWaveFactoryInterface {
 	 * Method to create a new alienWave.
 	 * @return new Alienwave
 	 */
-	AlienWave createWave();
+	AlienWave createWaves();
 }
