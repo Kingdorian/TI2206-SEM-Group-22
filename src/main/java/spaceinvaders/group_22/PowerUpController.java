@@ -3,6 +3,7 @@ package spaceinvaders.group_22;
 import java.util.ArrayList;
 
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.unit.AlienUnitFactory;
 import spaceinvaders.group_22.unit.Collisions;
 import spaceinvaders.group_22.unit.LifePowerUpUnit;
 import spaceinvaders.group_22.unit.PowerUpUnit;
@@ -16,7 +17,7 @@ import spaceinvaders.group_22.unit.Unit;
  *
  */
 @SuppressWarnings("checkstyle:magicnumber")
-public class PowerUpController extends UnitController{
+public class PowerUpController {
 	
 	/**
 	 * The game object for which the controller has to control the powerups.
@@ -37,7 +38,7 @@ public class PowerUpController extends UnitController{
 	 * @param newgame game to create a powerupcontroller for.
 	 */
 	public PowerUpController(final Game newgame) {
-		super(newgame);
+		game = newgame;
 		collisions = new Collisions(game);
 	}
 
@@ -48,14 +49,16 @@ public class PowerUpController extends UnitController{
 	 */
 	public final void createPowerUpUnit(final Double x, final Double y) {
 		Double random = Math.random();
-		PowerUpUnit newPowerUp = getAlienfactory().createLifePowerup(x, y);
+		AlienUnitFactory factory = new AlienUnitFactory();
+		
+		PowerUpUnit newPowerUp = factory.createLifePowerup(x, y);
 		newPowerUp.setVelY(LifePowerUpUnit.getMaxVely());
 		Game.getLogger().log("Power Up is created" , LogEvent.Type.DEBUG);
 		if (random < (0.4)) {
-			newPowerUp = getAlienfactory().createSpeedPowerup(x, y);
+			newPowerUp = factory.createSpeedPowerup(x, y);
 			newPowerUp.setVelY(SpeedPowerUpUnit.getMAXVELY());
 		} else if (random < (0.6)) {
-			newPowerUp = getAlienfactory().createShootPowerup(x, y);
+			newPowerUp = factory.createShootPowerup(x, y);
 			newPowerUp.setVelY(ShootPowerUpUnit.getMaxVely());
 		}
 		powerups.add(newPowerUp);
@@ -111,12 +114,6 @@ public class PowerUpController extends UnitController{
 	 */
 	public final  ArrayList<PowerUpUnit> getPowerUps() {
 		return powerups;
-	}
-
-	@Override
-	public void create() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
