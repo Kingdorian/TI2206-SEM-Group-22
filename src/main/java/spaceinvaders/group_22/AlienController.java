@@ -44,7 +44,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 */
 	public AlienController(final Game newGame) {
 		super(newGame);
-		alienWaves = AlienWaveReader.read("", new AlienWaveFactory(game));
+		//alienWaves = AlienWaveReader.read("");
 	}
 	
 	/**

@@ -34,13 +34,17 @@ public class AlienWaveReader {
 	public static final ArrayList<ArrayList<ArrayList<Character>>> 	read(final String fileName) {
 		File dir = new File(fileName);
 	    ArrayList<ArrayList<ArrayList<Character>>> alienWaves = new ArrayList<ArrayList<ArrayList<Character>>>();
-		if(dir == null) {
-			Game.getLogger().log("The wave directory:\"" + fileName + "\" is not found", LogEvent.Type.WARNING);
+		if(!dir.exists()) {
+			Game.getLogger().log("The wave directory:\"" + fileName + "\" does not exist", LogEvent.Type.WARNING);
+			return null;
+		}else if(dir.listFiles().length==0) {
+			Game.getLogger().log("The wave directory:\"" + fileName + "\" is empty", LogEvent.Type.WARNING);
 			return null;
 		}
 		for(final File wave : dir.listFiles()) {
 			// Check if file is a wave file.
-			String[] nameSplit = wave.getName().split(".");
+			String[] nameSplit = wave.getName().split("\\.");
+			System.out.println(wave.getName());
 			if (nameSplit[nameSplit.length-1].equals("wave")) {
 				alienWaves.add(parseFile(wave));
 			}
@@ -52,7 +56,7 @@ public class AlienWaveReader {
 	 * parses a file and returns Character arraylist accordingly
 	 * @return
 	 */
-	private static ArrayList<ArrayList<Character>> parseFile(File wave) {
+	public static ArrayList<ArrayList<Character>> parseFile(File wave) {
 		Game.getLogger().log("Reading wave: " + wave.getName(), LogEvent.Type.DEBUG);
 		ArrayList<ArrayList<Character>> charList = new ArrayList<ArrayList<Character>>();
 		int lineNum = 0; 
