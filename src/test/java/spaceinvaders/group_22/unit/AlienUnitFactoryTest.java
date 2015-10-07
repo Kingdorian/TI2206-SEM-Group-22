@@ -25,5 +25,38 @@ public class AlienUnitFactoryTest extends AbstractUnitFactoryTest {
 		
 		assertEquals(outputBullet, actualBullet);	
 	}
-
+	
+	/**
+	 * Test the creation of speed powerup units.
+	 */
+	@Test
+	public final void testSpeedPowerUpUnit() {
+		Unit outputSpeedPowerUpUnit = new SpeedPowerUpUnit(1, 1, "powerup_blue.png");
+		Unit actualSpeedPowerUpUnit = factory.createBullet(1, 1);
+		
+		assertEquals(outputSpeedPowerUpUnit, actualSpeedPowerUpUnit);	
+	}
+	
+	/**
+	 * Test the creation of shoot powerup units.
+	 */
+	@Test
+	public final void testShootPowerUpUnit() {
+		Unit outputShootPowerUpUnit = new ShootPowerUpUnit(1, 1, "powerup_orange.png");
+		Unit actualShootPowerUpUnit = factory.createBullet(1, 1);
+		
+		assertEquals(outputShootPowerUpUnit, actualShootPowerUpUnit);	
+	}
+	
+	/**
+	 * Test the creation of life powerup units.
+	 */
+	@Test
+	public final void testLifePowerUpUnit() {
+		Unit outputLifePowerUpUnit = new LifePowerUpUnit(1, 1, "powerup_red.png");
+		Unit actualLifePowerUpUnit = factory.createBullet(1, 1);
+		
+		assertEquals(outputLifePowerUpUnit, actualLifePowerUpUnit);	
+	}
+	
 }

@@ -39,17 +39,6 @@ public abstract class AbstractUnitFactoryTest {
 	public abstract void testBullet();
 	
 	/**
-	 * Test the creation of barricades.
-	 */
-	@Test
-	public final void createBarricadeTest() {
-		Unit outputBarricade = new Barricade(1, 1, "barrier.png");
-		Unit actualBarricade = factory.createBarricade(1, 1);
-		
-		assertEquals(outputBarricade, actualBarricade);
-	}
-	
-	/**
 	 * Test the creation of explosions.
 	 */
 	@Test
