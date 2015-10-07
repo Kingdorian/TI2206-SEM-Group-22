@@ -67,5 +67,31 @@ public class AlienWaveReaderTest {
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "notExistingFile.wave");
 		waveReader.parseFile(file);
 	}
+	@Test
+	public void testReadMultipleFiles() throws  FileNotFoundException, IOException {
+		String sep = System.getProperty("file.separator");
+		String file = "src" + sep	+ "main" + sep + "resources" + sep
+				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "2testfiles" + sep;
+		ArrayList<ArrayList<ArrayList<Character>>> charList = waveReader.read(file);
+		ArrayList<ArrayList<ArrayList<Character>>> expectedList = new ArrayList<ArrayList<ArrayList<Character>>>();
+		ArrayList<ArrayList<Character>> expectedFile1 = new ArrayList<ArrayList<Character>>();
+		ArrayList<Character> expectedLine1 = new ArrayList<Character>();
+		expectedLine1.add('*');
+		expectedLine1.add('+');
+		expectedFile1.add(expectedLine1);
+		expectedList.add(expectedFile1);
+		ArrayList<ArrayList<Character>> expectedFile2 = new ArrayList<ArrayList<Character>>();
+		ArrayList<Character> expectedLine2 = new ArrayList<Character>();
+		expectedLine2.add('x');
+		expectedLine2.add('u');
+		expectedFile2.add(expectedLine2);
+		ArrayList<Character> expectedLine3 = new ArrayList<Character>();
+		expectedLine3.add('^');
+		expectedLine3.add('%');
+		expectedFile2.add(expectedLine3);
+		expectedList.add(expectedFile2);
+		assertEquals(expectedList, waveReader.read(file));
+		
+	}
 
 }
