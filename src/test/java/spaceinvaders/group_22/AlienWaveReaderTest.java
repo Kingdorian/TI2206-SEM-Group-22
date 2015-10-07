@@ -22,7 +22,6 @@ public class AlienWaveReaderTest {
 	}
 	@Test
 	public void testReadEmptyFile() {
-		System.getProperty("file.separator");
 		String sep = System.getProperty("file.separator");
 		File file = new File("src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "emptytestwave.wave");
@@ -31,7 +30,6 @@ public class AlienWaveReaderTest {
 	}
 	@Test
 	public void testReadOneLineFile() {
-		System.getProperty("file.separator");
 		String sep = System.getProperty("file.separator");
 		File file = new File("src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "oneline.wave");
@@ -41,6 +39,23 @@ public class AlienWaveReaderTest {
 		tempList.add('*');
 		tempList.add('&');
 		expectedList.add(tempList);
+		Assert.assertEquals(expectedList, charList);
+	}
+	@Test
+	public void testReadMultiLineFile() {
+		String sep = System.getProperty("file.separator");
+		File file = new File("src" + sep	+ "main" + sep + "resources" + sep
+				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "multiline.wave");
+		ArrayList<ArrayList<Character>> charList = waveReader.parseFile(file);
+		ArrayList<ArrayList<Character>> expectedList = new ArrayList<ArrayList<Character>>();
+		ArrayList<Character> tempList = new ArrayList<Character>();
+		tempList.add('*');
+		tempList.add('&');
+		expectedList.add(tempList);
+		ArrayList<Character> otherTempList = new ArrayList<Character>();
+		otherTempList.add('^');
+		otherTempList.add('*');
+		expectedList.add(otherTempList);
 		Assert.assertEquals(expectedList, charList);
 	}
 
