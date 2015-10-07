@@ -1,6 +1,12 @@
 package spaceinvaders.group_22;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import spaceinvaders.group_22.logger.LogEvent;
 
 /**
  * Class to read alien wave patterns from a file.
@@ -22,9 +28,39 @@ public class AlienWaveReader {
 	 * @param fileName location to read from.
 	 * @return arraylist of read alienwaves.
 	 */
-	public static final ArrayList<AlienWave> read(final String fileName) {
-		// TODO create method to read from the file the alien waves.
-		return new ArrayList<AlienWave>();
+	public static final ArrayList<AlienWave> read(final String fileName, final AlienWaveFactory aWaveFac) {
+		ArrayList<AlienWave> alienWaves = new ArrayList<AlienWave>();
+		int curLine = 0;
+		AlienWave wave = aWaveFac.createWave();
+		try {
+			BufferedReader bReader = new BufferedReader(new FileReader(fileName));
+			// Keep track of current line number (For debugging purposes)
+			String line;
+			while ((line = bReader.readLine()) != null){
+				curLine++;
+				//Processing the line
+				if(line == "---") {
+					alienWaves.add(wave);
+					wave = aWaveFac.createWave();
+				} else {
+					alienWaves.add(processLine());
+				}
+			}
+		}catch(FileNotFoundException e){
+			Game.getLogger().log("File:\"" + fileName + "\" not found", e);
+		}catch(IOException e){
+			Game.getLogger().log("Error reading line " + curLine, e);
+		}
+		return alienWaves;
+	}
+	
+	/**
+	 * Parses a line and creates corresponding aliens.
+	 * @return
+	 */
+	private static AlienWave processLine() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

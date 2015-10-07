@@ -42,8 +42,7 @@ public class AlienWaveFactory implements AlienWaveFactoryInterface {
 	 * @param setgame game to set for this factory.
 	 */
 	public AlienWaveFactory(final Game setgame) {
-		game = setgame;
-		patterns = AlienWaveReader.read("");
+
 		
 		/// has to be removed if read is fixed :
 		
