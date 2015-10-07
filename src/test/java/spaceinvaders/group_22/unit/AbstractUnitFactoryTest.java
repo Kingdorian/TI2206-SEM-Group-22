@@ -37,16 +37,5 @@ public abstract class AbstractUnitFactoryTest {
 	 */
 	@Test
 	public abstract void testBullet();
-	
-	/**
-	 * Test the creation of explosions.
-	 */
-	@Test
-	public final void createExplosionTest() {
-		Unit outputExplosion = new Explosion(1, 1, "explosion1.png");
-		Unit actualExplosion = factory.createExplosion(1, 1);
-		
-		assertEquals(outputExplosion, actualExplosion);
-	}
 
 }

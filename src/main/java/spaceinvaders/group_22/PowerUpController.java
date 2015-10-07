@@ -3,7 +3,6 @@ package spaceinvaders.group_22;
 import java.util.ArrayList;
 
 import spaceinvaders.group_22.logger.LogEvent;
-import spaceinvaders.group_22.unit.AlienUnitFactory;
 import spaceinvaders.group_22.unit.Collisions;
 import spaceinvaders.group_22.unit.LifePowerUpUnit;
 import spaceinvaders.group_22.unit.PowerUpUnit;
@@ -46,14 +45,14 @@ public class PowerUpController extends UnitController {
 	public final void createPowerUpUnit(final Double x, final Double y) {
 		Double random = Math.random();
 		
-		PowerUpUnit newPowerUp = getAlienfactory().createLifePowerup(x, y);
+		PowerUpUnit newPowerUp = new LifePowerUpUnit(1, 1, "powerup_red.png");
 		newPowerUp.setVelY(LifePowerUpUnit.getMaxVely());
 		Game.getLogger().log("Power Up is created" , LogEvent.Type.DEBUG);
 		if (random < (0.4)) {
-			newPowerUp = getAlienfactory().createSpeedPowerup(x, y);
+			newPowerUp = new SpeedPowerUpUnit(1, 1, "powerup_blue.png");
 			newPowerUp.setVelY(SpeedPowerUpUnit.getMAXVELY());
 		} else if (random < (0.6)) {
-			newPowerUp = getAlienfactory().createShootPowerup(x, y);
+			newPowerUp = new ShootPowerUpUnit(1, 1, "powerup_orange.png");
 			newPowerUp.setVelY(ShootPowerUpUnit.getMaxVely());
 		}
 		powerups.add(newPowerUp);

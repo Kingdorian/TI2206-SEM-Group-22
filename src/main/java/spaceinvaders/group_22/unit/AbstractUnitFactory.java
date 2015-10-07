@@ -35,14 +35,4 @@ public abstract class AbstractUnitFactory {
 	 */
 	public abstract Unit createBullet(final double x, final double y);
 	
-	/**
-	 * A method responsible for creating an explosion object.
-	 * @param x X Coordinate.
-	 * @param y Y Coordinate.
-	 * @return An explosion object.
-	 */
-	public final Explosion createExplosion(final double x, final double y) {
-		return new Explosion(x, y, "explosion1.png");
-	}
-	
 }

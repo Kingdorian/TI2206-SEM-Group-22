@@ -25,15 +25,5 @@ public class SpaceShipUnitFactoryTest extends AbstractUnitFactoryTest {
 		
 		assertEquals(outputBullet, actualBullet);	
 	}
-
-	/**
-	 * Test the creation of barricades.
-	 */
-	@Test
-	public final void createBarricadeTest() {
-		Unit outputBarricade = new Barricade(1, 1, "barrier.png");
-		Unit actualBarricade = ((SpaceShipUnitFactory) factory).createBarricade(1, 1);
-		
-		assertEquals(outputBarricade, actualBarricade);
-	}
+	
 }

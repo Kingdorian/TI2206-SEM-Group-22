@@ -23,15 +23,5 @@ public class SpaceShipUnitFactory extends AbstractUnitFactory {
 	public final ShipBullet createBullet(final double x, final double y) {
 		return new ShipBullet(x, y, "spaceshipbullet.png");
 	}
-	
-	/**
-	 * A method responsible for creating a barricade object.
-	 * @param x X Coordinate.
-	 * @param y Y Coordinate.
-	 * @return A Barricade object.
-	 */
-	public final Barricade createBarricade(final double x, final double y) {
-		return new Barricade(x, y, "barrier.png");
-	}
 
 }
