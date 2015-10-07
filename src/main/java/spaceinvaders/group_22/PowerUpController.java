@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.unit.Collisions;
 import spaceinvaders.group_22.unit.LifePowerUpUnit;
+import spaceinvaders.group_22.unit.LifePowerupFactory;
 import spaceinvaders.group_22.unit.PowerUpUnit;
 import spaceinvaders.group_22.unit.ShootPowerUpUnit;
+import spaceinvaders.group_22.unit.ShootPowerupFactory;
 import spaceinvaders.group_22.unit.SpeedPowerUpUnit;
+import spaceinvaders.group_22.unit.SpeedPowerupFactory;
 import spaceinvaders.group_22.unit.Unit;
 
 /**
@@ -30,7 +33,6 @@ public class PowerUpController {
      * ArrayList of powerUps in the controller.
      */
 	private ArrayList<PowerUpUnit> powerups = new ArrayList<PowerUpUnit>();	
-
 	
 	/**
 	 * Creates a powerUpcontroller for the game object.
@@ -48,17 +50,22 @@ public class PowerUpController {
 	 */
 	public final void createPowerUpUnit(final Double x, final Double y) {
 		Double random = Math.random();
-		PowerUpUnit newPowerUp = new LifePowerUpUnit(x, y, "powerup_red.png");
-		newPowerUp.setVelY(LifePowerUpUnit.getMaxVely());
-		Game.getLogger().log("Power Up is created" , LogEvent.Type.DEBUG);
-		if (random < (0.4)) {
-			newPowerUp = new SpeedPowerUpUnit(x, y, "powerup_blue.png");
+		PowerUpUnit newPowerUp = null;
+		
+		if (random < 0.1) {
+			newPowerUp = new LifePowerupFactory().create(x, y);
+			newPowerUp.setVelY(LifePowerUpUnit.getMaxVely());
+		} else if (random < 0.4) {
+			newPowerUp = new SpeedPowerupFactory().create(x, y);
 			newPowerUp.setVelY(SpeedPowerUpUnit.getMAXVELY());
-		} else if (random < (0.6)) {
-			newPowerUp = new ShootPowerUpUnit(x, y, "powerup_orange.png");
+		} else if (random < 0.6) {
+			newPowerUp = new ShootPowerupFactory().create(x, y);
 			newPowerUp.setVelY(ShootPowerUpUnit.getMaxVely());
 		}
-		powerups.add(newPowerUp);
+		
+		if (newPowerUp != null) {
+			powerups.add(newPowerUp);			
+		}
 	}
 
 	/**
