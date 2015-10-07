@@ -1,10 +1,12 @@
 package spaceinvaders.group_22;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.unit.Alien;
@@ -29,40 +31,52 @@ public class AlienWaveReader {
 	 * @param fileName location to read from.
 	 * @return arraylist of read alienwaves.
 	 */
-	public static final ArrayList<AlienWave> read(final String fileName, final AlienWaveFactory aWaveFac) {
-		ArrayList<AlienWave> alienWaves = new ArrayList<AlienWave>();
-		int curLine = 0;
-		AlienWave wave = aWaveFac.createWave();
-		try {
-			BufferedReader bReader = new BufferedReader(new FileReader(fileName));
-			// Keep track of current line number (For debugging purposes)
-			String line;
-			while ((line = bReader.readLine()) != null){
-				curLine++;
-				//Processing the line
-				if(line == "---") {
-					alienWaves.add(wave);
-					wave = aWaveFac.createWave();
-				} else {
-					//TODO Do this in a cleaner way.
-					wave.getAliens().addAll(processLine());
-				}
+	public static final ArrayList<ArrayList<ArrayList<Character>>> 	read(final String fileName) {
+		File dir = new File(fileName);
+	    ArrayList<ArrayList<ArrayList<Character>>> alienWaves = new ArrayList<ArrayList<ArrayList<Character>>>();
+		if(dir == null) {
+			Game.getLogger().log("The wave directory:\"" + fileName + "\" is not found", LogEvent.Type.WARNING);
+			return null;
+		}
+		for(final File wave : dir.listFiles()) {
+			// Check if file is a wave file.
+			String[] nameSplit = wave.getName().split(".");
+			if (nameSplit[nameSplit.length-1].equals("wave")) {
+				alienWaves.add(parseFile(wave));
 			}
-		}catch(FileNotFoundException e){
-			Game.getLogger().log("File:\"" + fileName + "\" not found", e);
-		}catch(IOException e){
-			Game.getLogger().log("Error reading line " + curLine, e);
 		}
 		return alienWaves;
 	}
 	
 	/**
-	 * Parses a line and creates corresponding aliens.
+	 * parses a file and returns Character arraylist accordingly
 	 * @return
 	 */
-	private static ArrayList<Alien> processLine() {
-		// TODO Auto-generated method stub
-		return null;
+	private static ArrayList<ArrayList<Character>> parseFile(File wave) {
+		Game.getLogger().log("Reading wave: " + wave.getName(), LogEvent.Type.DEBUG);
+		ArrayList<ArrayList<Character>> charList = new ArrayList<ArrayList<Character>>();
+		int lineNum = 0; 
+		try {
+			BufferedReader bReader = new BufferedReader(new FileReader(wave));
+			String line;
+			//Keep track of current line num (For debugging purposes)
+			while ((line = bReader.readLine()) != null){
+				ArrayList<Character> lineChars = new ArrayList<Character>();
+				// Convert from Array to ArrayList 
+				//(We cannot use the standard method because the ArrayList uses the Character wrapper class)
+				for(char c : line.toCharArray()) {
+					lineChars.add(c);
+				}
+				charList.add(lineChars);
+ 				lineNum++;
+			}
+			bReader.close();
+		} catch (FileNotFoundException e) {
+			Game.getLogger().log("File:\"" + wave + "\" not found when reading waves", e);
+		} catch (IOException e) {
+			Game.getLogger().log("Exception occured during reading wave: " + wave.getName() + " on line: " + lineNum, e);
+		}
+		return charList;
 	}
 
 }
