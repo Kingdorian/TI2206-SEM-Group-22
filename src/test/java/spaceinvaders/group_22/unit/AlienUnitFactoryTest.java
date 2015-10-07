@@ -32,7 +32,7 @@ public class AlienUnitFactoryTest extends AbstractUnitFactoryTest {
 	@Test
 	public final void testSpeedPowerUpUnit() {
 		Unit outputSpeedPowerUpUnit = new SpeedPowerUpUnit(1, 1, "powerup_blue.png");
-		Unit actualSpeedPowerUpUnit = factory.createBullet(1, 1);
+		Unit actualSpeedPowerUpUnit = ((AlienUnitFactory) factory).createSpeedPowerup(1, 1);
 		
 		assertEquals(outputSpeedPowerUpUnit, actualSpeedPowerUpUnit);	
 	}
@@ -43,7 +43,7 @@ public class AlienUnitFactoryTest extends AbstractUnitFactoryTest {
 	@Test
 	public final void testShootPowerUpUnit() {
 		Unit outputShootPowerUpUnit = new ShootPowerUpUnit(1, 1, "powerup_orange.png");
-		Unit actualShootPowerUpUnit = factory.createBullet(1, 1);
+		Unit actualShootPowerUpUnit = ((AlienUnitFactory) factory).createShootPowerup(1, 1);
 		
 		assertEquals(outputShootPowerUpUnit, actualShootPowerUpUnit);	
 	}
@@ -54,7 +54,7 @@ public class AlienUnitFactoryTest extends AbstractUnitFactoryTest {
 	@Test
 	public final void testLifePowerUpUnit() {
 		Unit outputLifePowerUpUnit = new LifePowerUpUnit(1, 1, "powerup_red.png");
-		Unit actualLifePowerUpUnit = factory.createBullet(1, 1);
+		Unit actualLifePowerUpUnit = ((AlienUnitFactory) factory).createLifePowerup(1, 1);
 		
 		assertEquals(outputLifePowerUpUnit, actualLifePowerUpUnit);	
 	}
