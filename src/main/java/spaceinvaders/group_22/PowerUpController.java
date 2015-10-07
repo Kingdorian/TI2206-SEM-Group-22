@@ -55,10 +55,10 @@ public class PowerUpController {
 		if (random < 0.1) {
 			newPowerUp = new LifePowerupFactory().create(x, y);
 			newPowerUp.setVelY(LifePowerUpUnit.getMaxVely());
-		} else if (random >= 0.1 && random < 0.4) {
+		} else if (random >= 0.1 && random < 0.5) {
 			newPowerUp = new SpeedPowerupFactory().create(x, y);
 			newPowerUp.setVelY(SpeedPowerUpUnit.getMAXVELY());
-		} else if (random >= 0.4 && random < 0.6) {
+		} else if (random >= 0.5) {
 			newPowerUp = new ShootPowerupFactory().create(x, y);
 			newPowerUp.setVelY(ShootPowerUpUnit.getMaxVely());
 		}
