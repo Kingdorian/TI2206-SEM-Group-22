@@ -76,7 +76,7 @@ public class AlienController extends UnitController implements MovableUnitContro
         // Distance to top of the screen.
         double distance = 125;
         // Create alien object to make sure we can get the width and height of aliens
-        Alien testAlien = new Alien(0.0, 0.0, Alien.SPRITE); 
+        Alien testAlien = getAlienfactory().createUnit(0.0, 0.0); 
         double interval = ((game.getCanvasWidth() - (2 * ALIENBORDERMARIGIN * game.getCanvasWidth()))
         						- (ALIENS_PER_ROW * testAlien.getWidth())) / (ALIENS_PER_ROW + 1);  
         game.getLogger().log("Set alien interval to: " + interval, LogEvent.Type.DEBUG);
@@ -84,9 +84,10 @@ public class AlienController extends UnitController implements MovableUnitContro
         // Drawing lines of Aliens.
         for (int i = 0; i < AMOUNT_ALIEN_ROWS; i++) {
             double startPosition = ALIENBORDERMARIGIN * game.getCanvasWidth() + 0.5 * testAlien.getWidth();
-            game.getLogger().log("Creating new alien line with X cord for start: " + startPosition, LogEvent.Type.DEBUG);
+            game.getLogger().log("Creating new alien line with X cord for start: " 
+            + startPosition, LogEvent.Type.DEBUG);
             for (int j = 0; j < ALIENS_PER_ROW; j++) {
-            	Alien alien = new Alien(startPosition, distance, "invader.png");
+            	Alien alien = getAlienfactory().createUnit(startPosition, distance); 
             	Game.getLogger().log("Created Alien", LogEvent.Type.TRACE);
             	alien.setVelX(alienVelX);
             	aliens.add(alien);

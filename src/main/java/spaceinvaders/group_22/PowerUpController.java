@@ -16,12 +16,8 @@ import spaceinvaders.group_22.unit.Unit;
  *
  */
 @SuppressWarnings("checkstyle:magicnumber")
-public class PowerUpController {
+public class PowerUpController extends UnitController {
 	
-	/**
-	 * The game object for which the controller has to control the powerups.
-	 */
-	private Game game;
 	/**
 	 * The collisions of units.
 	 */
@@ -37,7 +33,7 @@ public class PowerUpController {
 	 * @param newgame game to create a powerupcontroller for.
 	 */
 	public PowerUpController(final Game newgame) {
-		game = newgame;
+		super(newgame);
 		collisions = new Collisions(game);
 	}
 
@@ -48,6 +44,7 @@ public class PowerUpController {
 	 */
 	public final void createPowerUpUnit(final Double x, final Double y) {
 		Double random = Math.random();
+		
 		PowerUpUnit newPowerUp = new LifePowerUpUnit(x, y, "powerup_red.png");
 		newPowerUp.setVelY(LifePowerUpUnit.getMaxVely());
 		Game.getLogger().log("Power Up is created" , LogEvent.Type.DEBUG);
@@ -111,6 +108,12 @@ public class PowerUpController {
 	 */
 	public final  ArrayList<PowerUpUnit> getPowerUps() {
 		return powerups;
+	}
+
+	@Override
+	public void create() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
