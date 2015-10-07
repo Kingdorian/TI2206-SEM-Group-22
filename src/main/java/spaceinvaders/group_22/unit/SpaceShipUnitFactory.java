@@ -18,12 +18,12 @@ public class SpaceShipUnitFactory extends AbstractUnitFactory {
 	}
 	
 	@Override 
-	public final Unit createUnit(final double x, final double y) {
+	public final SpaceShip createUnit(final double x, final double y) {
 		return new SpaceShip(x, y, "spaceship.png");
 	}
 
 	@Override 
-	public final Unit createBullet(final double x, final double y) {
+	public final ShipBullet createBullet(final double x, final double y) {
 		return new ShipBullet(x, y, "spaceshipbullet.png");
 	}
 

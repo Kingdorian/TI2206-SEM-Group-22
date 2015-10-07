@@ -18,12 +18,12 @@ public class AlienUnitFactory extends AbstractUnitFactory {
 	}
 	
 	@Override
-	public final Unit createUnit(final double x, final double y) {
+	public final Alien createUnit(final double x, final double y) {
 		return new Alien(x, y, "invader.png");
 	}
 
 	@Override
-	public final Unit createBullet(final double x, final double y) {
+	public final AlienBullet createBullet(final double x, final double y) {
 		return new AlienBullet(x, y, "alienbullet.png");
 	}
 	
