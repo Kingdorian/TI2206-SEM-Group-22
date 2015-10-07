@@ -30,8 +30,10 @@ public class AlienWaveReader {
 	 * Method for reading the alienwaves from a file.
 	 * @param fileName location to read from.
 	 * @return arraylist of read alienwaves.
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public static final ArrayList<ArrayList<ArrayList<Character>>> 	read(final String fileName) {
+	public static final ArrayList<ArrayList<ArrayList<Character>>> 	read(final String fileName) throws FileNotFoundException, IOException {
 		File dir = new File(fileName);
 	    ArrayList<ArrayList<ArrayList<Character>>> alienWaves = new ArrayList<ArrayList<ArrayList<Character>>>();
 		if(!dir.exists()) {
@@ -55,31 +57,30 @@ public class AlienWaveReader {
 	/**
 	 * parses a file and returns Character arraylist accordingly
 	 * @return
+	 * @throws FileNotFoundException, IOException 
 	 */
-	public static ArrayList<ArrayList<Character>> parseFile(File wave) {
+	public static ArrayList<ArrayList<Character>>  parseFile(File wave) throws FileNotFoundException, IOException {
 		Game.getLogger().log("Reading wave: " + wave.getName(), LogEvent.Type.DEBUG);
 		ArrayList<ArrayList<Character>> charList = new ArrayList<ArrayList<Character>>();
 		int lineNum = 0; 
-		try {
-			BufferedReader bReader = new BufferedReader(new FileReader(wave));
-			String line;
-			//Keep track of current line num (For debugging purposes)
-			while ((line = bReader.readLine()) != null){
-				ArrayList<Character> lineChars = new ArrayList<Character>();
-				// Convert from Array to ArrayList 
-				//(We cannot use the standard method because the ArrayList uses the Character wrapper class)
-				for(char c : line.toCharArray()) {
-					lineChars.add(c);
-				}
-				charList.add(lineChars);
- 				lineNum++;
+		BufferedReader bReader = new BufferedReader(new FileReader(wave));
+		String line;
+		//Keep track of current line num (For debugging purposes)
+		while ((line = bReader.readLine()) != null){
+			ArrayList<Character> lineChars = new ArrayList<Character>();
+			// Convert from Array to ArrayList 
+			//(We cannot use the standard method because the ArrayList uses the Character wrapper class)
+			for(char c : line.toCharArray()) {
+				lineChars.add(c);
 			}
-			bReader.close();
-		} catch (FileNotFoundException e) {
-			Game.getLogger().log("File:\"" + wave + "\" not found when reading waves", e);
+			charList.add(lineChars);
+			lineNum++;
+		}
+		bReader.close();
+			/**Game.getLogger().log("File:\"" + wave + "\" not found when reading waves", e);
 		} catch (IOException e) {
 			Game.getLogger().log("Exception occured during reading wave: " + wave.getName() + " on line: " + lineNum, e);
-		}
+		}*/
 		return charList;
 	}
 
