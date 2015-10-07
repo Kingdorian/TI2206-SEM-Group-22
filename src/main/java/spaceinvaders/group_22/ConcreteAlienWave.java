@@ -40,55 +40,11 @@ public class ConcreteAlienWave implements AlienWave {
 
 	@Override
 	public final AlienWave copy() {
-		// TODO Auto-generated method stub
-		return null;
+		AlienWave wave = new ConcreteAlienWave();
+		wave.setAliens(aliens);
+		return wave;
 	}
 	
-	/**
-	 * Returns the Alien velocity in the x direction.
-	 * @return the alien velocity in the x direction.
-	 */
-	public final double getAlienVelX() {
-		return alienVelX;
-	}
-	
-	/**
-	 * Sets the alien velocity in the x direction.
-	 * @param setalienVelX the velocity in the x direction.
-	 */
-	public final void setAlienVelX(final double setalienVelX) {
-		this.alienVelX = setalienVelX;
-	}
-	
-	/**
-	 * Returns the alien velocity in the y direction.
-	 * @return the alien velocity in the y direction.
-	 */
-	public final double getAlienVelY() {
-		return alienVelY;
-	}
-	/**
-	 * Sets the alien velocity in the y direction.
-	 * @param setalienVelY the velocity to set in the y direction.
-	 */
-	public final void setAlienVelY(final double setalienVelY) {
-		this.alienVelY = setalienVelY;
-	}
-	
-	/**
-	 * Gets the amount of pixels aliens go down per wave.
-	 * @return the amount of pixels aliens go down per wave.
-	 */
-	public final double getAlienFall() {
-		return alienFall;
-	}
-	/**
-	 * Sets the amount of pixels aliens go down per wave.
-	 * @param setalienFall the amount of pixels aliens go down per wave to set.
-	 */
-	public final void setAlienFall(final double setalienFall) {
-		this.alienFall = setalienFall;
-	}
 	@Override
 	public final ArrayList<Alien> getAliens() {
 		return aliens;
@@ -99,6 +55,36 @@ public class ConcreteAlienWave implements AlienWave {
 	 */
 	public final void setAliens(final ArrayList<Alien> setaliens) {
 		this.aliens = setaliens;
+	}
+	@Override
+	public final double getAlienVelX() {
+		return alienVelX;
+	}
+	@Override
+	public final void setAlienVelX(final double setalienVelX) {
+		this.alienVelX = setalienVelX;
+	}
+	@Override
+	public final double getAlienVelY() {
+		return alienVelY;
+	}
+	/**
+	 * Sets the alien velocity in the y direction.
+	 * @param setalienVelY the velocity in the y direction.
+	 */
+	public final void setAlienVelY(final double setalienVelY) {
+		this.alienVelY = setalienVelY;
+	}
+	@Override
+	public final double getAlienFall() {
+		return alienFall;
+	}
+	/**
+	 * Sets the amount of pixels the aliens go down per wave.
+	 * @param setalienFall the amount of pixels aliens go down per wave.
+	 */
+	public final void setAlienFall(final double setalienFall) {
+		this.alienFall = setalienFall;
 	}
 
 }

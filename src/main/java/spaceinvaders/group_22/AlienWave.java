@@ -20,7 +20,30 @@ public interface AlienWave {
 	 * @return arraylist of the aliens of this wave.
 	 */
 	ArrayList<Alien> getAliens();
+	/**
+	 * Returns the alien vel x of this wave.
+	 * @return the alien velocity in the x direction.
+	 */
+	double getAlienVelX();
+	/**
+	 * returns the alien velocity in the y direction.
+	 * @return the alien velocity in the y direction.
+	 */
+	double getAlienVelY();
+	/**
+	 * Returns the amount of pixels aliens go down per wave.
+	 * @return the amount of pixels aliens go down per wave.
+	 */
+	double getAlienFall();
+	/**
+	 * Sets the alien velocity in the x direction.
+	 * @param d velocity in the x direction.
+	 */
+	void setAlienVelX(double d);
+	/**
+	 * Sets the aliens of this wave.
+	 * @param aliens list of the aliens of this wave.
+	 */
+	void setAliens(ArrayList<Alien> aliens);
 	
-	
-
 }

@@ -10,13 +10,21 @@ import java.util.ArrayList;
 public class AlienWaveReader {
 	
 	/**
+	 * Constructor of the alien wave reader.
+	 */
+	public AlienWaveReader() {
+		
+	}
+	
+	
+	/**
 	 * Method for reading the alienwaves from a file.
 	 * @param fileName location to read from.
 	 * @return arraylist of read alienwaves.
 	 */
 	public static final ArrayList<AlienWave> read(final String fileName) {
 		// TODO create method to read from the file the alien waves.
-		return null;
+		return new ArrayList<AlienWave>();
 	}
 
 }

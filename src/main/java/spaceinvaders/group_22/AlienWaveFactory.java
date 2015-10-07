@@ -44,10 +44,9 @@ public class AlienWaveFactory implements AlienWaveFactoryInterface {
 	public AlienWaveFactory(final Game setgame) {
 		game = setgame;
 		patterns = AlienWaveReader.read("");
-	}
-
-	@Override
-	public final AlienWave createWave() {
+		
+		/// has to be removed if read is fixed :
+		
 		ConcreteAlienWave wave = new ConcreteAlienWave();
 		ArrayList<Alien> aliens = new ArrayList<Alien>();
 		
@@ -57,12 +56,10 @@ public class AlienWaveFactory implements AlienWaveFactoryInterface {
         Alien testAlien = new Alien(0.0, 0.0, Alien.SPRITE); 
         double interval = ((game.getCanvasWidth() - (2 * ALIENBORDERMARIGIN * game.getCanvasWidth()))
         						- (ALIENS_PER_ROW * testAlien.getWidth())) / (ALIENS_PER_ROW + 1);  
-        game.getLogger().log("Set alien interval to: " + interval, LogEvent.Type.DEBUG);
 
         // Drawing lines of Aliens.
         for (int i = 0; i < AMOUNT_ALIEN_ROWS; i++) {
             double startPosition = ALIENBORDERMARIGIN * game.getCanvasWidth() + 0.5 * testAlien.getWidth();
-            game.getLogger().log("Creating new alien line with X cord for start: " + startPosition, LogEvent.Type.DEBUG);
             for (int j = 0; j < ALIENS_PER_ROW; j++) {
             	Alien alien = new Alien(startPosition, distance, "invader.png");
             	Game.getLogger().log("Created Alien", LogEvent.Type.TRACE);
@@ -73,8 +70,13 @@ public class AlienWaveFactory implements AlienWaveFactoryInterface {
             distance += 1.1 * testAlien.getHeight();
         }
         wave.setAliens(aliens);
-        Game.getLogger().log("Created alien wave succesfully", LogEvent.Type.DEBUG);
-        return wave;
+
+       patterns.add(wave);
+	}
+
+	@Override
+	public final AlienWave createWave() {
+		return patterns.get((int) Math.random() * patterns.size()).copy();	
 	}
 
 }

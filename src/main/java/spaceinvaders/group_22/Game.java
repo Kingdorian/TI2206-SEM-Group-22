@@ -239,7 +239,7 @@ public class Game {
 		}
 		barController.removeDead();
 		//new wave of aliens
-		if (alienController.getAlienWave().getAliens().isEmpty()) {
+		if (alienController.getAliens().isEmpty()) {
 			logger.log("All aliens died", LogEvent.Type.INFO);
 			//Increase aliens speed and reset direction so they start moving to the right
 			alienController.nextRound();
