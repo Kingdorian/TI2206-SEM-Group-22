@@ -65,10 +65,9 @@ public class SpaceShip extends Unit implements MovableUnit {
 	 * @return The shot Bullet
 	 */
 	public final Bullet shootBullet(final double spaceShipBulletVelX) {
-		Bullet bullet = new ShipBullet(this.getXCoor(), this.getYCoor(), "spaceshipbullet.png");
+		Bullet bullet = new SpaceShipUnitFactory().createBullet(this.getXCoor(), this.getYCoor());
 		bullet.setVelY(spaceShipBulletVelX);
 		return bullet;
-
 	}	
 	
 	/**

@@ -37,7 +37,7 @@ public class Alien extends Unit implements MovableUnit {
 	 * @return The shot Bullet
 	 */
 	public final Bullet shootBullet(final int velocity) {
-		Bullet bullet = new AlienBullet(this.getXCoor(), this.getYCoor(), "alienbullet.png");
+		Bullet bullet = new AlienUnitFactory().createBullet(this.getXCoor(), this.getYCoor());
 		bullet.setVelY(velocity);
 		return bullet;
 	}
