@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.unit.SpaceShip;
+import spaceinvaders.group_22.unit.SpaceShipUnitFactory;
 
 /**
  * Class for the player.
@@ -34,10 +35,16 @@ public class Player {
 	 * Amount of lives the player has left.
 	 */
 	private int lives;
+	
 	/**
 	 * Game the player "lives" in.
 	 */
 	private Game game;
+	
+	/**
+	 * Game the player "lives" in.
+	 */
+	private SpaceShipUnitFactory spaceshipFactory;
 	
 	/**
 	 * Creates new Player object.
@@ -45,10 +52,12 @@ public class Player {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
 	public Player(final Game parentgame) {
+		spaceshipFactory = new SpaceShipUnitFactory();
+		
 		game = parentgame;
-		ship = new SpaceShip(game.getCanvasWidth() / 2, game.getCanvasHeight() - 40, "spaceship.png");
+		ship = spaceshipFactory.createUnit(game.getCanvasWidth() / 2, game.getCanvasHeight() - 40);
 		Game.getLogger().log("Created spaceship for player", LogEvent.Type.DEBUG);
-		score  = 0;
+		score = 0;
 		lives = 3;
 		activePowerUps = new ArrayList<PowerUp>();
 	}
@@ -93,7 +102,7 @@ public class Player {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void respawnShip() {
-		ship = new SpaceShip(game.getCanvasWidth() / 2, ship.getYCoor(), "spaceship.png");
+		ship = spaceshipFactory.createUnit(game.getCanvasWidth() / 2, game.getCanvasHeight() - 40);
 		for (int i = 0; i < game.getPlayer().getActivePowerUps().size(); i++) {
 			game.getPlayer().getActivePowerUps().get(i).deactivate();
 		}

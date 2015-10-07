@@ -38,7 +38,8 @@ public class BarricadeController extends UnitController {
 		int interval = (int) super.game.getCanvasWidth() / (barricadeCount + 1);
 		barricades.clear();
 		for (int i = 1; i <= barricadeCount; i++) {
-			barricades.add(new Barricade(interval * i, super.game.getCanvasHeight() - bottomOfset, "barrier.png"));
+			barricades.add(getSpaceshipfactory()
+					.createBarricade(interval * i, super.game.getCanvasHeight() - bottomOfset));
 		}
 		super.game.getLogger().log("Created all barricades", LogEvent.Type.DEBUG);
 	}
