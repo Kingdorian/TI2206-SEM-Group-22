@@ -20,7 +20,7 @@ public class SpaceShipUnitFactoryTest extends AbstractUnitFactoryTest {
 	@Override
 	@Test
 	public final void testBullet() {
-		Unit outputBullet = new ShipBullet(1, 1, "alienbullet.png");
+		Unit outputBullet = new ShipBullet(1, 1, "spaceshipbullet.png");
 		Unit actualBullet = factory.createBullet(1, 1);
 		
 		assertEquals(outputBullet, actualBullet);	
