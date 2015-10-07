@@ -37,21 +37,6 @@ public class AlienControllerTest {
 		controller = game.getAlienController();
 		game.setTickrate(0.1);
 	}
-	
-	/**
-	 * Test the createAlienWave method.
-	 */
-	@Test
-	@SuppressWarnings("checkstyle:magicnumber") 
-	public final void testCreateAlienWave() {
-		controller.create();
-		ArrayList<Alien> aliens = controller.getAliens();
-		assertEquals(AlienController.ALIENS_PER_ROW*AlienController.AMOUNT_ALIEN_ROWS, aliens.size());
-		for (int i = 0; i < aliens.size(); i++) {
-			//Test if every alien has the right sprite
-			assertEquals(aliens.get(i).getSprite(), "invader.png");
-		}
-	}
 
 	/**
 	 * Test the move method.
@@ -91,15 +76,5 @@ public class AlienControllerTest {
 			System.out.println(game.getAlienController().getAliens().get(i).getYCoor());
 			assertEquals(yValues.get(i) + 8, game.getAlienController().getAliens().get(i).getYCoor(), 0.05);
 		}
-	}
-	/**
-	 * Tests if setAliens sets the ArrayList of aliens correctly.
-	 */
-	@Test
-	public final void testSetAliens() {
-		ArrayList<Alien> aliens = new ArrayList<Alien>();		
-		controller.setAliens(aliens);
-		Assert.assertEquals(new ArrayList<Alien>(), aliens);	
-		
 	}
 }

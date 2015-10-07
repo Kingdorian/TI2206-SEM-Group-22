@@ -90,7 +90,7 @@ public class GameTest {
 	@Test
 	public final void testGetAliens() {
 		ArrayList<Alien> aliens = new ArrayList<Alien>();		
-		game.getAlienController().setAliens(aliens);
+		game.getAlienController().getAlienWave().setAliens(aliens);;
 		
 		Assert.assertEquals(new ArrayList<Alien>(), game.getAlienController().getAliens());
 	}
@@ -102,15 +102,6 @@ public class GameTest {
 		game.getBarricadeController().getBarricades().get(0).hit();
 		game.reset();
 		Assert.assertEquals(10, game.getBarricadeController().getBarricades().get(0).getHealth());
-	}
-	/**
-	 * Tests if the reset method works correctly for resetting aliens.
-	 */
-	@Test
-	public final void testResetAliens() {
-		game.getAlienController().setAliens(new ArrayList<Alien>());
-		game.reset();
-		Assert.assertEquals(AlienController.ALIENS_PER_ROW*AlienController.AMOUNT_ALIEN_ROWS,game.getAlienController().getAliens().size());
 	}
 	/**
 	 * Tests if the reset method works correctly for resetting the player.

@@ -99,7 +99,7 @@ public class CollisionsTest {
 		ShipBullet bullet = new ShipBullet(5, 6.4, "spaceshipbullet.png");
 		ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 		bullets.add(bullet);
-		game.getAlienController().setAliens(alienList);
+		game.getAlienController().getAlienWave().setAliens(alienList);
 		game.setBullets(bullets);
 		collisions.checkCollisions();
 		assertEquals(game.getAlienController().getAliens().size(), 0);
