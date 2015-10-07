@@ -24,7 +24,7 @@ public abstract class AbstractUnitFactory {
 	 * @param y Y Coordinate.
 	 * @return A Spaceship or an Alien.
 	 */
-	abstract Unit createUnit(final double x, final double y);
+	public abstract Unit createUnit(final double x, final double y);
 	
 	/**
 	 * Abstract method. A subclass implementing this, 
@@ -33,7 +33,7 @@ public abstract class AbstractUnitFactory {
 	 * @param y Y Coordinate.
 	 * @return A ShipBullet or an AlienBullet.
 	 */
-	abstract Unit createBullet(final double x, final double y);
+	public abstract Unit createBullet(final double x, final double y);
 	
 	/**
 	 * A method responsible for creating a barricade object.

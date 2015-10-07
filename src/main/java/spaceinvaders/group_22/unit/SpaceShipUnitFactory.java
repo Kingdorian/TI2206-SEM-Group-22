@@ -17,11 +17,13 @@ public class SpaceShipUnitFactory extends AbstractUnitFactory {
 		Game.getLogger().log(getClass().getName() + "  created succesfully", LogEvent.Type.INFO);
 	}
 	
-	@Override final Unit createUnit(final double x, final double y) {
+	@Override 
+	public final Unit createUnit(final double x, final double y) {
 		return new SpaceShip(x, y, "spaceship.png");
 	}
 
-	@Override final Unit createBullet(final double x, final double y) {
+	@Override 
+	public final Unit createBullet(final double x, final double y) {
 		return new ShipBullet(x, y, "spaceshipbullet.png");
 	}
 
