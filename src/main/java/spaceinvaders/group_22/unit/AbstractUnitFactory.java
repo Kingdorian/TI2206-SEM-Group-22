@@ -52,7 +52,7 @@ public abstract class AbstractUnitFactory {
 	 * @return An explosion object.
 	 */
 	public final Explosion createExplosion(final double x, final double y) {
-		return new Explosion(x, y, "explosion.png");
+		return new Explosion(x, y, "explosion1.png");
 	}
 	
 }
