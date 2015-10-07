@@ -45,14 +45,14 @@ public class PowerUpController extends UnitController {
 	public final void createPowerUpUnit(final Double x, final Double y) {
 		Double random = Math.random();
 		
-		PowerUpUnit newPowerUp = new LifePowerUpUnit(1, 1, "powerup_red.png");
+		PowerUpUnit newPowerUp = new LifePowerUpUnit(x, y, "powerup_red.png");
 		newPowerUp.setVelY(LifePowerUpUnit.getMaxVely());
 		Game.getLogger().log("Power Up is created" , LogEvent.Type.DEBUG);
 		if (random < (0.4)) {
-			newPowerUp = new SpeedPowerUpUnit(1, 1, "powerup_blue.png");
+			newPowerUp = new SpeedPowerUpUnit(x, y, "powerup_blue.png");
 			newPowerUp.setVelY(SpeedPowerUpUnit.getMAXVELY());
 		} else if (random < (0.6)) {
-			newPowerUp = new ShootPowerUpUnit(1, 1, "powerup_orange.png");
+			newPowerUp = new ShootPowerUpUnit(x, y, "powerup_orange.png");
 			newPowerUp.setVelY(ShootPowerUpUnit.getMaxVely());
 		}
 		powerups.add(newPowerUp);
