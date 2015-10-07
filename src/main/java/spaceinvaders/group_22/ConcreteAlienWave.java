@@ -15,7 +15,7 @@ public class ConcreteAlienWave implements AlienWave {
 	/**
 	 * List of aliens from this wave.
 	 */
-	private ArrayList<Alien> aliens = new ArrayList<Alien>();
+	private ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
 	
 	/**
 	 * Speed of the aliens in the X direction in pixels per second.
@@ -47,13 +47,17 @@ public class ConcreteAlienWave implements AlienWave {
 	
 	@Override
 	public final ArrayList<Alien> getAliens() {
-		return aliens;
+		ArrayList<Alien> alienList = new ArrayList<Alien>();
+		for(ArrayList<Alien> list : aliens) {
+			alienList.addAll(list);
+		}
+		return alienList;
 	}
 	/**
 	 * Sets the aliens in this wave.
 	 * @param setaliens to set in this wave.
 	 */
-	public final void setAliens(final ArrayList<Alien> setaliens) {
+	public final void setAliens(final ArrayList<ArrayList<Alien>> setaliens) {
 		this.aliens = setaliens;
 	}
 	@Override
@@ -85,6 +89,17 @@ public class ConcreteAlienWave implements AlienWave {
 	 */
 	public final void setAlienFall(final double setalienFall) {
 		this.alienFall = setalienFall;
+	}
+	/**
+	 * Sets a row of the alienWave to the row given in the parameter
+	 * @param rowIndex the index of the row to set
+	 * @param row the new row of aliens
+	 */
+	public final void setAlienRow(int rowIndex, ArrayList<Alien> row) {
+		aliens.get(rowIndex).clear();
+		for(Alien alien : row) {
+			aliens.get(rowIndex).add(alien);
+		}
 	}
 
 }

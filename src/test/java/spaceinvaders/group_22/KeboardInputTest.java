@@ -74,7 +74,7 @@ public class KeboardInputTest {
 		ArrayList<Alien> alienList = new ArrayList<Alien>();
 		Alien alien = new Alien(0, 0, "invader.png");
 		alienList.add(alien);
-		game.getAlienController().getAlienWave().setAliens(alienList);
+		game.getAlienController().getAlienWaves().get(0).setAlienRow(0, alienList);
 		game.tick(simulEvents);	
 		Assert.assertEquals(bulletAmount + 1, game.getShipBullets().size());
 	}

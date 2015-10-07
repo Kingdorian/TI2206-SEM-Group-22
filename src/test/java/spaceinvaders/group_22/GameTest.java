@@ -90,7 +90,7 @@ public class GameTest {
 	@Test
 	public final void testGetAliens() {
 		ArrayList<Alien> aliens = new ArrayList<Alien>();		
-		game.getAlienController().getAlienWave().setAliens(aliens);;
+		game.getAlienController().getAlienWaves().get(0).setAlienRow(0, aliens);;
 		
 		Assert.assertEquals(new ArrayList<Alien>(), game.getAlienController().getAliens());
 	}

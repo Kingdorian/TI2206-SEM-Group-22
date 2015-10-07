@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.unit.Alien;
 
 /**
  * Class to read alien wave patterns from a file.
@@ -43,7 +44,8 @@ public class AlienWaveReader {
 					alienWaves.add(wave);
 					wave = aWaveFac.createWave();
 				} else {
-					alienWaves.add(processLine());
+					//TODO Do this in a cleaner way.
+					wave.getAliens().addAll(processLine());
 				}
 			}
 		}catch(FileNotFoundException e){
@@ -58,7 +60,7 @@ public class AlienWaveReader {
 	 * Parses a line and creates corresponding aliens.
 	 * @return
 	 */
-	private static AlienWave processLine() {
+	private static ArrayList<Alien> processLine() {
 		// TODO Auto-generated method stub
 		return null;
 	}

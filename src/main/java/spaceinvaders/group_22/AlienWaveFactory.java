@@ -68,7 +68,7 @@ public class AlienWaveFactory implements AlienWaveFactoryInterface {
             }
             distance += 1.1 * testAlien.getHeight();
         }
-        wave.setAliens(aliens);
+        //wave.setAliens(aliens);
 
        patterns.add(wave);
 	}
