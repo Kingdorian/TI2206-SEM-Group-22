@@ -235,24 +235,24 @@ public class WavePatternTest {
 		Assert.assertArrayEquals(chars, charArray);
 	}
 	@Test(expected = IndexOutOfBoundsException.class)  
-	public void testSetCharEmptyPattern() {
+	public void testGetCharEmptyPattern() {
 		WavePattern pattern = new WavePattern();
 		pattern.getChar(0, 0);
 	}
 	@Test(expected = IndexOutOfBoundsException.class)  
-	public void testSetCharInvalidRowIndex() {
+	public void testGetCharInvalidRowIndex() {
 		WavePattern pattern = new WavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		pattern.getChar(1, 0);
 	}
 	@Test(expected = IndexOutOfBoundsException.class)  
-	public void testSetCharEmptyPatternInvalidColumnIndex() {
+	public void testGetCharEmptyPatternInvalidColumnIndex() {
 		WavePattern pattern = new WavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		pattern.getChar(0, 0);
 	}
 	@Test(expected = IndexOutOfBoundsException.class)  
-	public void testSetCharInvalidColumnIndex() {
+	public void testGetCharInvalidColumnIndex() {
 		WavePattern pattern = new WavePattern();
 		ArrayList<Character> list = new ArrayList<Character>();
 		list.add('a');
@@ -260,12 +260,56 @@ public class WavePatternTest {
 		pattern.getChar(0, 1);
 	}
 	@Test 
-	public void testSetChar() {
+	public void testGetChar() {
 		WavePattern pattern = new WavePattern();
 		ArrayList<Character> list = new ArrayList<Character>();
 		list.add('a');
 		pattern.addRow(list);
 		Assert.assertEquals('a', pattern.getChar(0, 0));
+	}
+	@Test 
+	public void testGetCharSecondRow() {
+		WavePattern pattern = new WavePattern();
+		pattern.addRow(new ArrayList<Character>());
+		ArrayList<Character> list = new ArrayList<Character>();
+		list.add('a');
+		list.add('b');
+		pattern.addRow(list);
+		Assert.assertEquals('b', pattern.getChar(1, 1));
+	}
+	@Test(expected = IndexOutOfBoundsException.class)  
+	public void testSetCharEmptyPattern() {
+		WavePattern pattern = new WavePattern();
+		pattern.setChar(0, 0, 'a');
+	}
+	@Test(expected = IndexOutOfBoundsException.class)  
+	public void testSetCharInvalidRowIndex() {
+		WavePattern pattern = new WavePattern();
+		pattern.addRow(new ArrayList<Character>());
+		pattern.setChar(1, 0, 'a');
+	}
+	@Test(expected = IndexOutOfBoundsException.class)  
+	public void testSetCharEmptyPatternInvalidColumnIndex() {
+		WavePattern pattern = new WavePattern();
+		pattern.addRow(new ArrayList<Character>());
+		pattern.setChar(0, 0, 'a');
+	}
+	@Test(expected = IndexOutOfBoundsException.class)  
+	public void testSetCharInvalidColumnIndex() {
+		WavePattern pattern = new WavePattern();
+		ArrayList<Character> list = new ArrayList<Character>();
+		list.add('a');
+		pattern.addRow(new ArrayList<Character>());
+		pattern.setChar(0, 1, 'a');
+	}
+	@Test 
+	public void testSetChar() {
+		WavePattern pattern = new WavePattern();
+		ArrayList<Character> list = new ArrayList<Character>();
+		list.add('a');
+		pattern.addRow(list);
+		pattern.setChar(0, 0, 'b');
+		Assert.assertEquals('b', pattern.getChar(0, 0));
 	}
 	@Test 
 	public void testSetCharSecondRow() {
@@ -275,7 +319,32 @@ public class WavePatternTest {
 		list.add('a');
 		list.add('b');
 		pattern.addRow(list);
-		Assert.assertEquals('b', pattern.getChar(1, 1));
+		pattern.setChar(1, 1,  'c');
+		Assert.assertEquals('c', pattern.getChar(1, 1));
 	}
-	
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void testGetRowEmptyPattern() {
+		WavePattern pattern = new WavePattern();
+		pattern.getRow(0);
+	}
+	@Test
+	public void testAddRowArray() {
+		WavePattern pattern = new WavePattern();
+		char[] chars = {'a', 'b', 'c'};
+		pattern.addRow(chars);
+		ArrayList<Character> charList = new ArrayList<Character>();
+		charList.add('a');
+		charList.add('b');
+		charList.add('c');
+		Assert.assertEquals(charList, pattern.getRow(0));
+	}
+	@Test
+	public void testAddRowEmptyArrayRow() {
+		WavePattern pattern = new WavePattern();
+		ArrayList<Character> list = new ArrayList<Character>();
+		char[] chars = {};
+		pattern.addRow(chars);
+		Assert.assertEquals(list, pattern.getRow(0));
+	}
+
 }

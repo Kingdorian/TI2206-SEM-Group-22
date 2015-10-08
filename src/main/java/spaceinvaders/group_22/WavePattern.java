@@ -124,7 +124,7 @@ public class WavePattern {
 	 * @return unmodifiable ArrayList containing the row
 	 * @throws IndexOutOfBoundsException if the index is invalid
 	 */
-	public ArrayList<Character> getRow(int index) {
+	public ArrayList<Character> getRow(int index) throws IndexOutOfBoundsException {
 		// Create a copy of the old list to ensure it cannot be changed.
 		return pattern.get(index);
 	}
