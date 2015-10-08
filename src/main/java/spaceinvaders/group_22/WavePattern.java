@@ -67,4 +67,14 @@ public class WavePattern {
 			pattern.get(index).set(i, newRow[i]);
 		}
 	}
+	/**
+	 * Sets a char in a given location.
+	 * @param rowIndex of the char
+	 * @param columnIndex of the char
+	 * @param value the char to put
+	 * @throws IndexOutOfBoundsException if the row or columIndex is invalid
+	 */
+	public void setChar(int rowIndex, int columnIndex, char value) throws IndexOutOfBoundsException {
+		pattern.get(rowIndex).set(columnIndex, value);
+	}
 }
