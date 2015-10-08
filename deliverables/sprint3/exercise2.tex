@@ -10,11 +10,11 @@
 
 \section{Exercise 2 - Design Patterns}
 \subsection{Exercise 2.1 - Strategy Pattern}
-Before this sprint iteration, the project already contained a small implementation of the strategy pattern. The MovableUnit interface was already there to provide methods a Unit should implement if it can move on the screen. 
+Before this sprint iteration, the project already contained a small implementation of the strategy pattern. The MovableUnit interface was already there to provide methods a Unit should implement if it can move on the screen.\\
 
 Since not every Unit can move, it is more flexible to add an interface for this. 
 The methods for moving are not needed in classes such as Barricade. 
-Instead of adding these methods in the superclass, it is better to add them in an interface so only subclasses implementing the interface, implement the methods.
+Instead of adding these methods in the superclass, it is better to add them in an interface so only subclasses implementing the interface, implement the methods.\\
 
 The same can be done for shooting, and activating a unit on the player (such as a powerup).
 The project was extended to include an interface for shooting, ShootableUnit and an interface for activating a unit on the player, ActivatableUnit. 
@@ -24,7 +24,9 @@ The project was extended to include an interface for shooting, ShootableUnit and
 \subsection{Exercise 2.3 - Strategy Pattern}
 
 \subsection{Exercise 2.1 - Abstract Factory Pattern}
+A factory pattern can be useful for the creation of a PowerUpUnit. If a powerup is created in game, it does not need knowledge of the implementation. In the project, there are three 'flavors' of powerups, Speed, Life and Shoot. If a factory is used, the factory handles the creation of each powerup and the game can easily obtain it by calling a method on the corresponding factory.\\
 
+In the project, an interface AbstractPowerupFactory was created. The interface defines a create method which should be implemented. Three factories: LifePowerupFactory, SpeedPowerupFactory and ShootPowerupFactory implement this interface and create the corresponding powerups. In the PowerUpController, these three factories are used for the creation of the required powerup, instead of calling the constructor. 
 \subsection{Exercise 2.2 - Abstract Factory Pattern}
 
 \subsection{Exercise 2.3 - Abstract Factory Pattern}
