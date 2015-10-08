@@ -47,5 +47,24 @@ public class WavePattern {
 		}
 		return places;
 	}
-
+	/**
+	 * Sets a row to the given row.
+	 * @param index the index of the current row
+	 * @param ArrayList<Character> the new row
+	 * @throws indexoutofboundsexception when index is invalid.
+	 */
+	public void setRow(int index, ArrayList<Character> newRow) throws IndexOutOfBoundsException {
+		pattern.set(index, newRow); 
+	}
+	/**
+	 * Sets a row to a given row.
+	 * @param index the index of the current row
+	 * @param Array<char> the new row
+	 * @throws indexoutofboundsexception when index is invalid.
+	 */
+	public void setRow(int index, char[] newRow) throws IndexOutOfBoundsException {
+		for(int i = 0; i < newRow.length; i++) {
+			pattern.get(index).set(i, newRow[i]);
+		}
+	}
 }
