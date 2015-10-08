@@ -12,12 +12,12 @@ public class WavePattern {
 	/**
 	 * 2D ArrayList containing chars to represent Aliens.
 	 */
-	ArrayList<ArrayList<Character>> pattern = new ArrayList<ArrayList<Character>>();
+	ArrayList<ArrayList<Character>> pattern;
 	/**
 	 * Creates a new WavePattern Object.
 	 */
 	public WavePattern() {
-		
+		pattern = new ArrayList<ArrayList<Character>>();
 	}
 	/**
 	 * Returns height in aliens of this pattern.
@@ -87,6 +87,16 @@ public class WavePattern {
 	 */
 	public void setChar(int rowIndex, int columnIndex, char value) throws IndexOutOfBoundsException {
 		pattern.get(rowIndex).set(columnIndex, value);
+	}
+	/**
+	 * Gets a char in a given location.
+	 * @param rowIndex of the char
+	 * @param columnIndex of the char
+	 * @return the char at the given location
+	 * @throws IndexOutOfBoundsException if the row or columIndex is invalid
+	 */
+	public char getChar(int rowIndex, int columnIndex) throws IndexOutOfBoundsException {
+		return pattern.get(rowIndex).get(columnIndex);
 	}
 	/**
 	 * Adds a new row to the pattern.
