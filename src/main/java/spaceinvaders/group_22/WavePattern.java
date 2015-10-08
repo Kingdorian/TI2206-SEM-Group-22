@@ -128,4 +128,24 @@ public class WavePattern {
 		// Create a copy of the old list to ensure it cannot be changed.
 		return pattern.get(index);
 	}
+	/**
+	 * Compares object to this WavePattern.
+	 * @param other the boject to compare this to.
+	 */
+	public boolean equals(Object other) {
+		if(other==null && other instanceof WavePattern) {
+			WavePattern otherPattern = (WavePattern)other;
+			if(this.getHeight()!=otherPattern.getHeight()){
+				return false;
+			}
+			for(int i = 0; i < pattern.size(); i ++) {
+				if(!this.getRow(i).equals(otherPattern.getRow(i))){
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+	 
 }
