@@ -28,7 +28,7 @@ public class DefaultAlienWaveFactory implements AlienWaveFactoryInterface{
 	public DefaultAlienWaveFactory (final Game setGame) {
 		game = setGame;
 	}
-	public final ArrayList<AlienWave> createWaves() {
+	public final AlienWave createWave() {
 		ConcreteAlienWave wave = new ConcreteAlienWave();
 		ArrayList<Alien> aliens = new ArrayList<Alien>();
 		
@@ -51,8 +51,6 @@ public class DefaultAlienWaveFactory implements AlienWaveFactoryInterface{
             }
             distance += 1.1 * testAlien.getHeight();
         }
-        ArrayList<AlienWave> waves = new ArrayList<AlienWave>();
-        waves.add(wave);
-        return waves;
+        return wave;
 	}
 }

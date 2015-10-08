@@ -14,5 +14,5 @@ public interface AlienWaveFactoryInterface {
 	 * @return new Alienwave
 	 * @throws Exception 
 	 */
-	ArrayList<AlienWave> createWaves() throws Exception;
+	AlienWave createWave();
 }

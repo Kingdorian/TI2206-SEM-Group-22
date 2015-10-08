@@ -30,9 +30,9 @@ public class AlienController extends UnitController implements MovableUnitContro
      */
 	private int bulletChance = 1;
 	/**
-	 * List of AlienWaves
+	 * Current alienwave.
 	 */
-	private ArrayList<AlienWave> alienWaves;
+	private AlienWave curWave;
 	/**
 	 * Factory to create alien waves.
 	 */
@@ -44,12 +44,13 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 */
 	public AlienController(final Game newGame) {
 		super(newGame);
-		alienWaveFactory = new ReadAlienWaveFactory(newGame);
 		try{
-		alienWaves = alienWaveFactory.createWaves();
+			alienWaveFactory = new ReadAlienWaveFactory(newGame);
+			curWave = alienWaveFactory.createWave();
 		}catch (Exception e) {
 			Game.getLogger().log("Failed reading alienWaves from file using default alien factory", LogEvent.Type.WARNING);
 			alienWaveFactory = new DefaultAlienWaveFactory(newGame);
+			curWave = alienWaveFactory.createWave();
 		}
 	}
 	
@@ -60,19 +61,19 @@ public class AlienController extends UnitController implements MovableUnitContro
 	public final void move() {
 		//check if all aliens are still able to move in the window
 		if (alienFramesDown == 0) {
-			for (Alien unit : alienWaves.get(0).getAliens()) {
+			for (Alien unit : curWave.getAliens()) {
 				// When this alien is on the right side of the screen change the direction
 				if (unit.getXCoor() + 0.5 * unit.getWidth() >= game.getCanvasWidth()) {
-					alienFramesDown = (alienWaves.get(0).getAlienFall() / alienWaves.get(0).getAlienVelY()) * (1 / game.getTickrate());
+					alienFramesDown = (curWave.getAlienFall() / curWave.getAlienVelY()) * (1 / game.getTickrate());
 					// Switch direction
-					alienWaves.get(0).setAlienVelX(alienWaves.get(0).getAlienVelX() * -1);
+					curWave.setAlienVelX(curWave.getAlienVelX() * -1);
 					break;
 				}
 				// When this alien is at the left side of the screen change the direction
 				if (unit.getXCoor() - 0.5 * unit.getWidth() <= 0) {
-					alienFramesDown = (alienWaves.get(0).getAlienFall() / alienWaves.get(0).getAlienVelY()) * (1 / game.getTickrate());
+					alienFramesDown = (curWave.getAlienFall() / curWave.getAlienVelY()) * (1 / game.getTickrate());
 					// Switch direction
-					alienWaves.get(0).setAlienVelX(alienWaves.get(0).getAlienVelX() * -1);
+					curWave.setAlienVelX(curWave.getAlienVelX() * -1);
 					break;
 				}
 			}
@@ -83,13 +84,13 @@ public class AlienController extends UnitController implements MovableUnitContro
 			alienFramesDown = alienFramesDown - 1;
 		}
 		// move every alien
-		for (Alien unit : alienWaves.get(0).getAliens()) {
+		for (Alien unit : curWave.getAliens()) {
 			if (alienFramesDown > 0) {
-				unit.setVelY(alienWaves.get(0).getAlienVelY());
+				unit.setVelY(curWave.getAlienVelY());
 				unit.setVelX(0);			
 			} else {
 				unit.setVelY(0);
-				unit.setVelX(alienWaves.get(0).getAlienVelX());
+				unit.setVelX(curWave.getAlienVelX());
 			}
 
 			//Check if there is an alien at the height of the spaceship.
@@ -99,8 +100,8 @@ public class AlienController extends UnitController implements MovableUnitContro
 			unit.move(game.getTickrate());
 		}
 
-		String velX = String.valueOf(alienWaves.get(0).getAliens().get(0).getVelX());
-		String velY = String.valueOf(alienWaves.get(0).getAliens().get(0).getVelY());
+		String velX = String.valueOf(curWave.getAliens().get(0).getVelX());
+		String velY = String.valueOf(curWave.getAliens().get(0).getVelY());
 		Game.getLogger().log("Aliens moved X: " + velX + "\tY: " + velY, LogEvent.Type.TRACE);
 	}
 
@@ -109,10 +110,10 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void shootAlienBullets() {
-		if (!alienWaves.get(0).getAliens().isEmpty() && Math.random() 
-				< ((alienWaves.get(0).getAliens().size()) * bulletChance * game.getTickrate()) / 40)   {
-			int shootIndex = (int) (Math.random() * alienWaves.get(0).getAliens().size());
-			Bullet bullet = alienWaves.get(0).getAliens().get(shootIndex).shootBullet(60);
+		if (!curWave.getAliens().isEmpty() && Math.random() 
+				< ((curWave.getAliens().size()) * bulletChance * game.getTickrate()) / 40)   {
+			int shootIndex = (int) (Math.random() * curWave.getAliens().size());
+			Bullet bullet = curWave.getAliens().get(shootIndex).shootBullet(60);
 			game.getBullets().add(bullet);
 			String logMessage = "Alien shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
 			Game.getLogger().log(logMessage, LogEvent.Type.TRACE);
@@ -123,7 +124,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 */
 	public final void nextRound() {
 		Game.getLogger().log("proceding to next round", LogEvent.Type.INFO);
-		alienWaves.get(0).setAlienVelX( Math.abs(alienWaves.get(0).getAlienVelX()) + AlienController.ALIENVELXINCREASE);
+		curWave = alienWaveFactory.createWave();
 	}
 
 	@Override
@@ -135,14 +136,14 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 * Returns the current alien wave.
 	 * @return the current alien wave.
 	 */
-	public final ArrayList<AlienWave> getAlienWaves() {
-		return alienWaves;
+	public final AlienWave getAlienWave() {
+		return curWave;
 	}
 	/**
 	 * Returns the current aliens.
 	 * @return the current aliens
 	 */
 	public final ArrayList<Alien> getAliens() {
-		return alienWaves.get(0).getAliens();
+		return curWave.getAliens();
 	}
 }

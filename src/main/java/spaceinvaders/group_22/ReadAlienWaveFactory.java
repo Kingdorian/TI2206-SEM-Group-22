@@ -32,27 +32,28 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 	 * Reader used to read the alienwaves from a file.
 	 */
 	private AlienWaveReader waveReader;
-	
+	/**
+	 * List of all patterns that are read from files.
+	 */
+	private ArrayList<WavePattern> patternList;
+	/**
+	 * WaveP
+	 */
 	/**
 	 * Constructor of the alien wave factory.
 	 * @param setgame game to set for this factory.
 	 */
-	public ReadAlienWaveFactory(final Game setgame) {
+	public ReadAlienWaveFactory(final Game setgame) throws Exception {
 		waveReader = new AlienWaveReader();
 		game = setgame;
-
+		String sep = System.getProperty("file.separator");
+		patternList = waveReader.read("src" + sep	+ "main" + sep + "resources" + sep
+				+ "spaceinvaders" +  sep + "group_22" + sep	+ "waves" + sep);
 	}
 
-	public final ArrayList<AlienWave> createWaves() throws Exception{
-		String sep = System.getProperty("file.separator");
+	public final AlienWave createWave() {
 		ArrayList<AlienWave> waves = new ArrayList<AlienWave>();
-		ArrayList<WavePattern> wavePatterns = 
-				waveReader.read("src" + sep	+ "main" + sep + "resources" + sep
-				+ "spaceinvaders" +  sep + "group_22" + sep	+ "waves" + sep);
-		for(WavePattern w : wavePatterns) {
-			waves.add(createWaveFromPattern(w));
-		}
-		return waves;
+		return createWaveFromPattern(patternList.get(0));
 	}
 	/**
 	 * Creates a new alienwave according to the supplied pattern

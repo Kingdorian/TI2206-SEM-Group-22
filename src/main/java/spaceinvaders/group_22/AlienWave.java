@@ -49,5 +49,13 @@ public interface AlienWave {
 	 * Sets aliens in a specific row of the alienwave.
 	 */
 	void setAlienRow(int rowIndex, ArrayList<Alien> row);
+	/**
+	 * Adds a row of aliens to the alienwave.
+	 */
+	public void addAlienRow(ArrayList<Alien> row);
+	/**
+	 * Removes alien from wave.
+	 */
+	void remove(Alien alien);
 	
 }

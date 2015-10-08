@@ -71,7 +71,7 @@ public class Collisions {
 				
 				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
 						collidingUnit.getYCoor(), "explosion1.png"));
-				game.getAlienController().getAliens().remove(collidingUnit);
+				game.getAlienController().getAlienWave().remove((Alien)collidingUnit);
 				game.getBullets().remove(bullet);
 				game.getPlayer().addScore(10);
 				if (Math.random() > 0.6) {

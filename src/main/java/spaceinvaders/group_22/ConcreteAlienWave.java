@@ -103,5 +103,19 @@ public class ConcreteAlienWave implements AlienWave {
 			aliens.get(rowIndex).add(alien);
 		}
 	}
+	/**
+	 * Adds a row of aliens to the alienwave.
+	 */
+	public final void addAlienRow(ArrayList<Alien> row) {
+		aliens.add(new ArrayList<Alien>());
+		setAlienRow(aliens.size()-1, row);
+	}
+	/**
+	 * Removes an alien from this wave
+	 * @param alien the alien to remove
+	 */
+	public void remove(Alien alien) {
+		aliens.remove(alien);
+	}
 
 }
