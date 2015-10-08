@@ -48,6 +48,7 @@ public class AlienWaveFactory implements AlienWaveFactoryInterface {
 	 */
 	public AlienWaveFactory(final Game setgame) {
 		waveReader = new AlienWaveReader();
+		game = setgame;
 
 	}
 
@@ -107,7 +108,9 @@ public class AlienWaveFactory implements AlienWaveFactoryInterface {
         Alien testAlien = new Alien(0.0, 0.0, Alien.SPRITE); 
         // Drawing lines of Aliens.
         for (int i = 0; i < pattern.getHeight(); i++) {
-        	 double interval = ((game.getCanvasWidth() - (2 * ALIENBORDERMARIGIN * game.getCanvasWidth()))
+        	 double interval = ((game.getCanvasWidth() -
+        			 (2 * ALIENBORDERMARIGIN
+        					 * game.getCanvasWidth()))
 						- (pattern.getLength(i) * testAlien.getWidth())) / (pattern.getLength(i) + 1);  
             double x = ALIENBORDERMARIGIN * game.getCanvasWidth() + 0.5 * testAlien.getWidth();
             for (int j = 0; j < pattern.getLength(i); j++) {

@@ -103,7 +103,7 @@ public class Game {
 		canvasWidth = width;
 		canvasHeight = height;
 		
-		logger = new Logger("log.log", 3);
+		logger = new Logger("log.log", 5);
 		
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();

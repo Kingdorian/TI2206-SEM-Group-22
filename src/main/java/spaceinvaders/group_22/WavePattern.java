@@ -147,5 +147,12 @@ public class WavePattern {
 		}
 		return false;
 	}
+	/**
+	 * Returns a string representation of this AlienWave.
+	 * @return String representation of this alienWave.
+	 */
+	public String toString() {
+		return pattern.toString();
+	}
 	 
 }

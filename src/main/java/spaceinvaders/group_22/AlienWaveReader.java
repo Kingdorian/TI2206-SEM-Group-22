@@ -80,6 +80,7 @@ public class AlienWaveReader {
 		} catch (IOException e) {
 			Game.getLogger().log("Exception occured during reading wave: " + wave.getName() + " on line: " + lineNum, e);
 		}*/
+		Game.getLogger().log("Read file: " + wave + "\n resulting pattern: " +pattern.toString(), LogEvent.Type.TRACE);
 		return pattern;
 	}
 
