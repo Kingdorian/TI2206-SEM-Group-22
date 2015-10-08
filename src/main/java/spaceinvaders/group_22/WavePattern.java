@@ -1,6 +1,7 @@
 package spaceinvaders.group_22;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Class describes a pattern for an Alien wave.
@@ -36,6 +37,16 @@ public class WavePattern {
 		}
 		return width;
 	}
+	/**
+	 * get length of specific row
+	 * @param index the index of the row to get the length from
+	 * @return int the length of the row.
+	 * @throws ArrayIndexOutOfBoundsException if the index is invalid.
+	 */
+	public int getLength(int index) {
+		return pattern.get(index).size();
+	}
+	
 	/**
 	 * Gets the amount of places in this pattern.
 	 * @return amount of places (either occupied by an alien or empty) in this pattern.
@@ -76,5 +87,22 @@ public class WavePattern {
 	 */
 	public void setChar(int rowIndex, int columnIndex, char value) throws IndexOutOfBoundsException {
 		pattern.get(rowIndex).set(columnIndex, value);
+	}
+	/**
+	 * Adds a new row to the pattern.
+	 * @param row the row to add
+	 */
+	public void addRow(ArrayList<Character> row) {
+		pattern.add(row);
+	}
+	/**
+	 * Gets row in a in the specified location.
+	 * @param index of the row
+	 * @return unmodifiable ArrayList containing the row
+	 * @throws IndexOutOfBoundsException if the index is invalid
+	 */
+	public ArrayList<Character> getRow(int index) {
+		// Create a copy of the old list to ensure it cannot be changed.
+		return (ArrayList)Collections.unmodifiableList(pattern.get(index));
 	}
 }
