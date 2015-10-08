@@ -131,4 +131,41 @@ public class WavePatternTest {
 		pattern.addRow(list);
 		Assert.assertEquals(20, pattern.getLength(1));	
 	}
+	@Test
+	public void testGetSizeEmptyPattern() { 
+		WavePattern pattern = new WavePattern();
+		Assert.assertEquals(0, pattern.size());
+	}
+	@Test
+	public void testGetSizeSingleEmptyRowPattern() { 
+		WavePattern pattern = new WavePattern();
+		pattern.addRow(new ArrayList<Character>());
+		Assert.assertEquals(0, pattern.size());
+	}
+	@Test
+	public void testGetSizeMultiRow() { 
+		WavePattern pattern = new WavePattern();
+		ArrayList<Character> list = new ArrayList<Character>();
+		for(int i = 0; i < 3; i++) {
+			list.add('c');
+		}
+		pattern.addRow(list);
+		Assert.assertEquals(3, pattern.size());
+	}
+	@Test
+	public void testGetSizeMultiRowMultiChar() { 
+		WavePattern pattern = new WavePattern();
+		ArrayList<Character> list = new ArrayList<Character>();
+		for(int i = 0; i < 3; i++) {
+			list.add('c');
+		}
+		ArrayList<Character> otherlist = new ArrayList<Character>();
+		for(int i = 0; i < 5; i++) {
+			otherlist.add('b');
+		}
+		pattern.addRow(otherlist);
+		pattern.addRow(list);
+		Assert.assertEquals(8, pattern.size());
+	}
+
 }
