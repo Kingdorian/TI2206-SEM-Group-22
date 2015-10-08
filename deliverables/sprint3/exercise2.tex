@@ -1,0 +1,32 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+ 
+\usepackage{geometry}
+\usepackage{graphicx}
+
+\geometry{portrait, margin=1.5in}
+ 
+\begin{document}
+
+\section{Exercise 2 - Design Patterns}
+\subsection{Exercise 2.1 - Strategy Pattern}
+Before this sprint iteration, the project already contained a small implementation of the strategy pattern. The MovableUnit interface was already there to provide methods a Unit should implement if it can move on the screen. 
+
+Since not every Unit can move, it is more flexible to add an interface for this. 
+The methods for moving are not needed in classes such as Barricade. 
+Instead of adding these methods in the superclass, it is better to add them in an interface so only subclasses implementing the interface, implement the methods.
+
+The same can be done for shooting, and activating a unit on the player (such as a powerup).
+The project was extended to include an interface for shooting, ShootableUnit and an interface for activating a unit on the player, ActivatableUnit. 
+
+\subsection{Exercise 2.2 - Strategy Pattern}
+
+\subsection{Exercise 2.3 - Strategy Pattern}
+
+\subsection{Exercise 2.1 - Abstract Factory Pattern}
+
+\subsection{Exercise 2.2 - Abstract Factory Pattern}
+
+\subsection{Exercise 2.3 - Abstract Factory Pattern}
+
+\end{document}
