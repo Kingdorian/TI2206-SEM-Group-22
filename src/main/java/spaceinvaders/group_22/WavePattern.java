@@ -36,4 +36,16 @@ public class WavePattern {
 		}
 		return width;
 	}
+	/**
+	 * Gets the amount of places in this pattern.
+	 * @return amount of places (either occupied by an alien or empty) in this pattern.
+	 */
+	public int size() {
+		int places = 0;
+		for(ArrayList<Character> row : pattern) {
+			places+=row.size();
+		}
+		return places;
+	}
+
 }
