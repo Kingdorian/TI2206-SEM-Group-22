@@ -42,5 +42,16 @@ public class AlienTest extends UnitTest {
 		alien.setBulletChance(1.0);
 		assertEquals(alien.getBulletChance(), 1, 0.05);
 	}
+	/**
+	 * Test the health of an alien.
+	 */
+	@Test
+	public final void healthTest() {
+		float x = 1;
+		float y = 1;
+		Alien alien = new Alien(x, y, "testimage.png", 2);
+		alien.hit();
+		assertEquals(alien.getHealth(), 1);
+	}
 
 }

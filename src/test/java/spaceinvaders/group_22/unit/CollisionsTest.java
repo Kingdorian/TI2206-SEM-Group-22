@@ -102,7 +102,7 @@ public class CollisionsTest {
 		game.getAlienController().getAlienWave().setAliens(alienList);
 		game.setBullets(bullets);
 		collisions.checkCollisions();
-		assertEquals(game.getAlienController().getAliens().size(), 0);
+		assertEquals(alien.getHealth(), 0);
 	}
 	
 	/**

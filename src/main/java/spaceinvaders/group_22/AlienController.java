@@ -93,6 +93,19 @@ public class AlienController extends UnitController implements MovableUnitContro
 		String velY = String.valueOf(alienWave.getAliens().get(0).getVelY());
 		Game.getLogger().log("Aliens moved X: " + velX + "\tY: " + velY, LogEvent.Type.TRACE);
 	}
+	/**
+	 * Remove dead aliens.
+	 */
+	public final void removeDeadAliens() {
+		for (int i = 0; i < alienWave.getAliens().size(); i++)  {
+			if (alienWave.getAliens().get(i).getHealth() <= 0) {
+				alienWave.getAliens().remove(i);
+				game.getPlayer().addScore(10);
+				Game.getLogger().log("Removed Alien", LogEvent.Type.TRACE);
+				i--;
+			}
+		}		
+	}
 
 	/**
 	 * Shoots bullets for aliens.

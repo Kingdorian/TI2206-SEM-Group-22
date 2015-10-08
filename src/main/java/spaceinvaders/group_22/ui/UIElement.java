@@ -55,6 +55,7 @@ public abstract class UIElement {
     		addSprite(sprites, "alienbullet.png");
     		addSprite(sprites, "spaceshipbullet.png");
     		addSprite(sprites, "invader.png");
+    		addSprite(sprites, "invader_health2.png");
     		addSprite(sprites, "spaceship.png");
     		addSprite(sprites, "heart.png");
     		addSprite(sprites, "barrier.png");

@@ -13,6 +13,10 @@ public class Alien extends Unit implements MovableUnit {
 	 */
 	public static final String SPRITE = "invader.png";
 	/**
+	 * Location of the sprite of the red aliens.
+	 */
+	public static final String SPRITE_HEALTH2 = "invader_health2.png";
+	/**
 	 * VelX is the velocity in the X direction in pixels per second.
 	 */
 	private double velX;
@@ -26,13 +30,31 @@ public class Alien extends Unit implements MovableUnit {
 	 */
 	private double bulletChance = 0.025;
 	/**
-	 * Creates an Alien.
+	 * Variable that keeps track of the health left for this alien.
+	 */
+	private int health = 1;
+	/**
+	 * Creates an Alien with default health.
 	 * @param x X coordinate
 	 * @param y Y coordinate
 	 * @param spriteFile The filename of the sprite.
 	 */
 	public Alien(final double x, final double y, final String spriteFile) {
 		super(x, y, spriteFile);
+	}
+	/**
+	 * Creates an Alien with specified health.
+	 * @param x X coordinate
+	 * @param y Y coordinate
+	 * @param spriteFile The filename of the sprite.
+	 * @param sethealth health this alien has.
+	 */
+	public Alien(final double x, final double y, final String spriteFile, final int sethealth) {
+		super(x, y, spriteFile);
+		if (sethealth >= 1) {
+			health = sethealth;
+			setSprite(SPRITE_HEALTH2);
+		}
 	}
 	
 	/**
@@ -131,5 +153,19 @@ public class Alien extends Unit implements MovableUnit {
 		this.bulletChance = setbulletChance;
 	}
 
-
+	/**
+	 * @return the health
+	 */
+	public final int getHealth() {
+		return health;
+	}
+	/**
+	 * When alien is hit decrease health.
+	 */
+	public final void hit() {
+		health--;
+		if (health <= 1) {
+			setSprite(SPRITE);
+		}
+	}
 }
