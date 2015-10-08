@@ -75,4 +75,5 @@ public abstract class PowerUpUnit extends Unit implements MovableUnit {
 	public final void setVelY(final double alienVelY) {
 		this.velY = alienVelY;
 	}
+	
 }
