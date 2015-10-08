@@ -347,4 +347,70 @@ public class WavePatternTest {
 		Assert.assertEquals(list, pattern.getRow(0));
 	}
 
+	@Test
+	public void testEqualsOtherNull() {
+		WavePattern pattern = new WavePattern();
+		Assert.assertFalse(pattern.equals(null));
+	}
+	@Test
+	public void testEqualsNoPattern() {
+		WavePattern pattern = new WavePattern();
+		Assert.assertFalse(pattern.equals(12));
+	}
+	@Test
+	public void testEqualsThisLarger() {
+		WavePattern pattern = new WavePattern();
+		pattern.addRow(new ArrayList<Character>());
+		WavePattern otherPattern = new WavePattern();
+		Assert.assertNotEquals(pattern,otherPattern);
+	}
+	@Test
+	public void testEqualsOtherLarger() {
+		WavePattern pattern = new WavePattern();
+		WavePattern otherPattern = new WavePattern();
+		otherPattern.addRow(new ArrayList<Character>());
+		Assert.assertNotEquals(pattern,otherPattern);
+	}
+	@Test
+	public void testEqualsNotEqualFirstRow() {
+		WavePattern pattern = new WavePattern();
+		WavePattern otherPattern = new WavePattern();
+		char[] chars = {'a', 'b'};
+		pattern.addRow(chars);
+		otherPattern.addRow(new ArrayList<Character>());
+		Assert.assertNotEquals(pattern,otherPattern);
+	}
+	@Test
+	public void testEqualsEqualOneRow() {
+		WavePattern pattern = new WavePattern();
+		WavePattern otherPattern = new WavePattern();
+		char[] chars = {'a', 'b'};
+		pattern.addRow(chars);
+		otherPattern.addRow(chars);
+		Assert.assertEquals(pattern,otherPattern);
+	}
+	@Test
+	public void testEqualsNotEqualsSecondRow() {
+		WavePattern pattern = new WavePattern();
+		WavePattern otherPattern = new WavePattern();
+		char[] chars = {'a', 'b'};
+		pattern.addRow(chars);
+		otherPattern.addRow(chars);
+		otherPattern.addRow(chars);
+		chars[1] = 'c';
+		pattern.addRow(chars);	
+		Assert.assertNotEquals(pattern,otherPattern);
+	}
+	@Test
+	public void testEqualsNotEqualsMultiRow() {
+		WavePattern pattern = new WavePattern();
+		WavePattern otherPattern = new WavePattern();
+		char[] chars = {'a', 'b'};
+		pattern.addRow(chars);
+		otherPattern.addRow(chars);
+		chars[0] = 'c';
+		otherPattern.addRow(chars);
+		pattern.addRow(chars);	
+		Assert.assertEquals(pattern,otherPattern);
+	}
 }
