@@ -1,6 +1,5 @@
 package spaceinvaders.group_22;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import spaceinvaders.group_22.logger.LogEvent;
@@ -47,7 +46,7 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 	@Override
 	public final AlienWave createWave() {
         alienVelX += AlienController.ALIENVELXINCREASE;
-		return createWaveFromPattern(patternList.get(0));
+		return createWaveFromPattern(patternList.get((int) (Math.random() * patternList.size())));
 	}
 	/**
 	 * Creates a new alienwave according to the supplied pattern.
@@ -77,6 +76,10 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
                     	alien.setVelX(alienVelX);
                     	aliens.add(alien);
                       	Game.getLogger().log("Created Alien at location:(" + x + "," + y + ")", LogEvent.Type.TRACE);
+                      	break;
+            		default:
+            			
+            			break;
             	}
             	x += testAlien.getWidth() + interval;
             }
