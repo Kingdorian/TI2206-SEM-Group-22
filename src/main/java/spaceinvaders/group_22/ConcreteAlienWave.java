@@ -49,9 +49,10 @@ public class ConcreteAlienWave implements AlienWave {
 	@Override
 	public final ArrayList<Alien> getAliens() {
 		ArrayList<Alien> alienList = new ArrayList<Alien>();
-		for(ArrayList<Alien> list : aliens) {
+		for (ArrayList<Alien> list : aliens) {
 			alienList.addAll(list);
 		}
+		
 		return alienList;
 	}
 	/**
@@ -92,26 +93,27 @@ public class ConcreteAlienWave implements AlienWave {
 		this.alienFall = setalienFall;
 	}
 	/**
-	 * Sets a row of the alienWave to the row given in the parameter
+	 * Sets a row of the alienWave to the row given in the parameter.
 	 * @param rowIndex the index of the row to set
 	 * @param row the new row of aliens
 	 */
-	public final void setAlienRow(int rowIndex, ArrayList<Alien> row) {
+	public final void setAlienRow(final int rowIndex, final ArrayList<Alien> row) {
 		Game.getLogger().log("AlienWave, Clearing row:" + rowIndex, LogEvent.Type.TRACE);
 		aliens.get(rowIndex).clear();
-		for(Alien alien : row) {
+		for (Alien alien : row) {
 			aliens.get(rowIndex).add(alien);
 		}
 	}
 	/**
 	 * Adds a row of aliens to the alienwave.
+	 * @param row to add.
 	 */
-	public final void addAlienRow(ArrayList<Alien> row) {
+	public final void addAlienRow(final ArrayList<Alien> row) {
 		aliens.add(new ArrayList<Alien>());
-		setAlienRow(aliens.size()-1, row);
+		setAlienRow(aliens.size() - 1, row);
 	}
 	/**
-	 * Removes an alien from this wave
+	 * Removes an alien from this wave.
 	 * @param alien the alien to remove
 	 */
 	public void remove(Alien alien) {

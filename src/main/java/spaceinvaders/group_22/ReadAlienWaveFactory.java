@@ -12,10 +12,7 @@ import spaceinvaders.group_22.unit.Alien;
  *
  */
 public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
-	/**
-	 * ArrayList of the possible alienWaves.
-	 */
-	private ArrayList<AlienWave> patterns = new ArrayList<AlienWave>();
+
 	/**
 	 * Game object this factory belongs to.
 	 */
@@ -38,6 +35,7 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 	/**
 	 * Constructor of the alien wave factory.
 	 * @param setgame game to set for this factory.
+	 * @throws Exception if file can't be read.
 	 */
 	public ReadAlienWaveFactory(final Game setgame) throws Exception {
 		waveReader = new AlienWaveReader();
@@ -46,20 +44,20 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 		patternList = waveReader.read("src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "waves" + sep);
 	}
-
+	@Override
 	public final AlienWave createWave() {
-		ArrayList<AlienWave> waves = new ArrayList<AlienWave>();
 		System.out.println(patternList.get(0).toString());
-        alienVelX+= AlienController.ALIENVELXINCREASE;
+        alienVelX += AlienController.ALIENVELXINCREASE;
 		return createWaveFromPattern(patternList.get(0));
 	}
 	/**
-	 * Creates a new alienwave according to the supplied pattern
+	 * Creates a new alienwave according to the supplied pattern.
 	 * @return pattern to create a alienwave from
+	 * @param pattern the pattern to create an wave from.
 	 */
-	public final AlienWave createWaveFromPattern(WavePattern pattern) {
+	public final AlienWave createWaveFromPattern(final WavePattern pattern) {
 		ConcreteAlienWave wave = new ConcreteAlienWave();
-		ArrayList<Alien> aliens = new ArrayList<Alien>();
+		
 		
 		 // Distance to top of the screen.
         double y = 125;
@@ -67,8 +65,9 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
         Alien testAlien = new Alien(0.0, 0.0, Alien.SPRITE); 
         // Drawing lines of Aliens.
         for (int i = 0; i < pattern.getHeight(); i++) {
-        	 double interval = ((game.getCanvasWidth() -
-        			 (2 * AlienController.ALIENBORDERMARIGIN
+        	ArrayList<Alien> aliens = new ArrayList<Alien>();
+        	 double interval = ((game.getCanvasWidth() 
+        			 - (2 * AlienController.ALIENBORDERMARIGIN
         					 * game.getCanvasWidth()))
 						- (pattern.getLength(i) * testAlien.getWidth())) / (pattern.getLength(i) + 1);  
             double x = AlienController.ALIENBORDERMARIGIN * game.getCanvasWidth() + 0.5 * testAlien.getWidth();
@@ -85,6 +84,7 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
             y += 1.1 * testAlien.getHeight();
             wave.addAlienRow(aliens);
         }
+
         return wave;
 	}
 }

@@ -55,10 +55,10 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 */
 	public AlienController(final Game newGame) {
 		super(newGame);
-		try{
+		try {
 			alienWaveFactory = new ReadAlienWaveFactory(newGame);
 			curWave = alienWaveFactory.createWave();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			Game.getLogger().log("Failed reading alienWaves from file using default alien factory", LogEvent.Type.WARNING);
 			alienWaveFactory = new DefaultAlienWaveFactory(newGame);
 			curWave = alienWaveFactory.createWave();
@@ -71,6 +71,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void move() {
 		//check if all aliens are still able to move in the window
+        
 		if (alienFramesDown == 0) {
 			for (Alien unit : curWave.getAliens()) {
 				// When this alien is on the right side of the screen change the direction

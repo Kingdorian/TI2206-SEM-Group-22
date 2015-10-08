@@ -12,7 +12,7 @@ public class WavePattern {
 	/**
 	 * 2D ArrayList containing chars to represent Aliens.
 	 */
-	ArrayList<ArrayList<Character>> pattern;
+	private ArrayList<ArrayList<Character>> pattern;
 	/**
 	 * Creates a new WavePattern Object.
 	 */
@@ -23,7 +23,7 @@ public class WavePattern {
 	 * Returns height in aliens of this pattern.
 	 * @return amount of rows of aliens.
 	 */
-	public int getHeight() {
+	public final int getHeight() {
 		return pattern.size();
 	}
 	/**
@@ -124,7 +124,7 @@ public class WavePattern {
 	 * @return unmodifiable ArrayList containing the row
 	 * @throws IndexOutOfBoundsException if the index is invalid
 	 */
-	public ArrayList<Character> getRow(int index) throws IndexOutOfBoundsException {
+	public ArrayList<Character> getRow(final int index) throws IndexOutOfBoundsException {
 		// Create a copy of the old list to ensure it cannot be changed.
 		return pattern.get(index);
 	}
@@ -132,14 +132,14 @@ public class WavePattern {
 	 * Compares object to this WavePattern.
 	 * @param other the boject to compare this to.
 	 */
-	public boolean equals(Object other) {
-		if(other!=null && other instanceof WavePattern) {
-			WavePattern otherPattern = (WavePattern)other;
-			if(this.getHeight()!=otherPattern.getHeight()){
+	public boolean equals(final Object other) {
+		if (other != null && other instanceof WavePattern) {
+			WavePattern otherPattern = (WavePattern) other;
+			if (this.getHeight() != otherPattern.getHeight()) {
 				return false;
 			}
-			for(int i = 0; i < pattern.size(); i ++) {
-				if(!this.getRow(i).equals(otherPattern.getRow(i))){
+			for (int i = 0; i < pattern.size(); i++) {
+				if (!this.getRow(i).equals(otherPattern.getRow(i))) {
 					return false;
 				}
 			}
@@ -151,7 +151,7 @@ public class WavePattern {
 	 * Returns a string representation of this AlienWave.
 	 * @return String representation of this alienWave.
 	 */
-	public String toString() {
+	public final String toString() {
 		return pattern.toString();
 	}
 	 
