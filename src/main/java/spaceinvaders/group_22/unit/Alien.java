@@ -6,7 +6,7 @@ package spaceinvaders.group_22.unit;
  * @author Ege de Bruin
  */
 
-public class Alien extends Unit implements MovableUnit {
+public class Alien extends Unit implements MovableUnit, ShootableUnit {
 	
 	/**
 	 * Location of the sprite of the aliens.
@@ -36,7 +36,7 @@ public class Alien extends Unit implements MovableUnit {
 	 * @param velocity The speed of the Bullet
 	 * @return The shot Bullet
 	 */
-	public final Bullet shootBullet(final int velocity) {
+	public final Bullet shootBullet(final double velocity) {
 		Bullet bullet = new AlienBullet(this.getXCoor(), this.getYCoor(), "alienbullet.png");
 		bullet.setVelY(velocity);
 		return bullet;
