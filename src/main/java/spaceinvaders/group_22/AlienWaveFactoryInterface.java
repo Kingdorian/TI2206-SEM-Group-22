@@ -12,16 +12,7 @@ public interface AlienWaveFactoryInterface {
 	/**
 	 * Method to create a list of alienwaves.
 	 * @return new Alienwave
+	 * @throws Exception 
 	 */
-	ArrayList<AlienWave> createWaves();
-	/**
-	 * Method to create a default alienwave.
-	 * @return new default alienwave Alienwave
-	 */
-	AlienWave createDefaultWave();
-	/**
-	 * Method to create a default alienwave.
-	 * @return new default alienwave Alienwave
-	 */
-	AlienWave createWaveFromPattern(WavePattern w);
+	ArrayList<AlienWave> createWaves() throws Exception;
 }

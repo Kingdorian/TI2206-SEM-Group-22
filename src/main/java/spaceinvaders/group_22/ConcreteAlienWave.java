@@ -2,6 +2,7 @@ package spaceinvaders.group_22;
 
 import java.util.ArrayList;
 
+import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.unit.Alien;
 
 /**
@@ -96,6 +97,7 @@ public class ConcreteAlienWave implements AlienWave {
 	 * @param row the new row of aliens
 	 */
 	public final void setAlienRow(int rowIndex, ArrayList<Alien> row) {
+		Game.getLogger().log("AlienWave, Clearing row:" + rowIndex, LogEvent.Type.TRACE);
 		aliens.get(rowIndex).clear();
 		for(Alien alien : row) {
 			aliens.get(rowIndex).add(alien);
