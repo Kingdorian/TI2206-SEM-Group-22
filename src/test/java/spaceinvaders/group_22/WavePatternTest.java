@@ -182,6 +182,56 @@ public class WavePatternTest {
 		list.add('b');
 		pattern.addRow(list);
 		Assert.assertEquals(list, pattern.getRow(0));
+	}	
+	@Test(expected = IndexOutOfBoundsException.class)  
+	public void testSetRowEmptyPatternArrayList() {
+		WavePattern pattern = new WavePattern();
+		pattern.setRow(2, new ArrayList<Character>());
 	}
-	
+	@Test(expected = IndexOutOfBoundsException.class)  
+	public void testSetRowEmptyPatternArray() {
+		WavePattern pattern = new WavePattern();
+		pattern.setRow(2, new char[2]);
+	}
+	@Test 
+	public void testSetRowWithCharsList() {
+		WavePattern pattern = new WavePattern();
+		pattern.addRow(new ArrayList<Character>());
+		ArrayList<Character> list = new ArrayList<Character>();
+		list.add('a'); list.add('b');
+		pattern.setRow(0, list);
+		Assert.assertEquals(list, pattern.getRow(0));
+	}
+	@Test
+	public void testSetRowWithCharsArray() {
+		WavePattern pattern = new WavePattern();
+		pattern.addRow(new ArrayList<Character>());
+		char[] chars = {'a', 'b', 'c'};
+		pattern.setRow(0, chars);
+		char[] charArray = new char[pattern.getRow(0).size()];
+		for(int i = 0; i < pattern.getRow(0).size(); i++) {
+			charArray[i] = pattern.getRow(0).get(i);
+		}
+		Assert.assertArrayEquals(chars, charArray);
+	}
+	@Test 
+	public void testSetRowWithCharsEmptyList() {
+		WavePattern pattern = new WavePattern();
+		pattern.addRow(new ArrayList<Character>());
+		ArrayList<Character> list = new ArrayList<Character>();
+		pattern.setRow(0, list);
+		Assert.assertEquals(list, pattern.getRow(0));
+	}
+	@Test
+	public void testSetRowWithCharsEmptyArray() {
+		WavePattern pattern = new WavePattern();
+		pattern.addRow(new ArrayList<Character>());
+		char[] chars = {};
+		pattern.setRow(0, chars);
+		char[] charArray = new char[pattern.getRow(0).size()];
+		for(int i = 0; i < pattern.getRow(0).size(); i++) {
+			charArray[i] = pattern.getRow(0).get(i);
+		}
+		Assert.assertArrayEquals(chars, charArray);
+	}
 }

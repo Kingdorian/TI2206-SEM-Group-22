@@ -74,9 +74,11 @@ public class WavePattern {
 	 * @throws indexoutofboundsexception when index is invalid.
 	 */
 	public void setRow(int index, char[] newRow) throws IndexOutOfBoundsException {
+		ArrayList<Character> rowList = new ArrayList<Character>();
 		for(int i = 0; i < newRow.length; i++) {
-			pattern.get(index).set(i, newRow[i]);
+			rowList.add(newRow[i]);
 		}
+		setRow(index, rowList);
 	}
 	/**
 	 * Sets a char in a given location.
