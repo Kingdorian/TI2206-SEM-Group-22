@@ -116,8 +116,10 @@ public class ConcreteAlienWave implements AlienWave {
 	 * Removes an alien from this wave.
 	 * @param alien the alien to remove
 	 */
-	public void remove(Alien alien) {
-		aliens.remove(alien);
+	public final void remove(final Alien alien) {
+		for (ArrayList<Alien> list : aliens) {
+			list.remove(alien);
+		}
 	}
 
 }

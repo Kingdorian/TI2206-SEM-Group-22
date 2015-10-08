@@ -46,7 +46,6 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 	}
 	@Override
 	public final AlienWave createWave() {
-		System.out.println(patternList.get(0).toString());
         alienVelX += AlienController.ALIENVELXINCREASE;
 		return createWaveFromPattern(patternList.get(0));
 	}

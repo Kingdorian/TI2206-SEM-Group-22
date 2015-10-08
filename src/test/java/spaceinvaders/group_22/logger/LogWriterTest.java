@@ -46,7 +46,6 @@ public class LogWriterTest {
 			List<String> fileContent = Files.readAllLines(Paths.get("testlog1.log"), StandardCharsets.UTF_8);
 			Assert.assertEquals(event1.toString(), fileContent.get(0));
 			Assert.assertEquals(event2.toString(), fileContent.get(1));
-			System.out.println(new File("testlog1.log").delete());
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail("error reading file");

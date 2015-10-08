@@ -93,9 +93,9 @@ public class GameTest {
 	@Test
 	public final void testGetAliens() {
 		Game game = new Game(100, 100);
-		ArrayList<Alien> aliens = new ArrayList<Alien>();		
-		game.getAlienController().getAlienWave().addAlienRow(aliens);
-		Assert.assertEquals(new ArrayList<Alien>(), game.getAlienController().getAliens());
+		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
+		game.getAlienController().getAlienWave().setAliens(aliens);
+		Assert.assertEquals(new ArrayList<ArrayList<Alien>>(), game.getAlienController().getAliens());
 	}
 	/**
 	 * Tests if the reset method works correctly for resetting barricades.

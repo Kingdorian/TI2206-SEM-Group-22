@@ -45,7 +45,6 @@ public class Logger {
 		}
 		
 		logFileLoc = folder + "/" + logLocation;
-		System.out.println(logFileLoc + "hi");
 		LogWriter logWriter = new LogWriter(logFileLoc, null);
 		logWriter.clearLogFile();
 	}

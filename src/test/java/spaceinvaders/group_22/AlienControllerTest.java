@@ -37,10 +37,12 @@ public class AlienControllerTest {
 		controller = game.getAlienController();
 		game.setTickrate(0.1);
 		ArrayList<Alien> row = new ArrayList<Alien>();
-		for(int i = 0; i < 10; i ++) {
-			row.add(new Alien(10, 10, "invader.png"));
+		for (int i = 0; i < 10; i++) {
+			row.add(new Alien(500, 350, "invader.png"));
 		}
-		game.getAlienController().getAlienWave().addAlienRow(row);
+		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
+		aliens.add(row);
+		game.getAlienController().getAlienWave().setAliens(aliens);
 	}
 
 	/**
@@ -73,12 +75,11 @@ public class AlienControllerTest {
 			xValues.add(game.getAlienController().getAliens().get(i).getXCoor());
 			yValues.add(game.getAlienController().getAliens().get(i).getYCoor());
 		}
-		for (int i = 0; i < 50; i++) {
+		for (int i = 0; i < 500; i++) {
 			//Move to the right side of the screen
 			controller.move();
 		}
 		for (int i = 0; i < game.getAlienController().getAliens().size(); i++) {
-			System.out.println(game.getAlienController().getAliens().get(i).getYCoor());
 			assertEquals(yValues.get(i) + 8, game.getAlienController().getAliens().get(i).getYCoor(), 0.05);
 		}
 	}
