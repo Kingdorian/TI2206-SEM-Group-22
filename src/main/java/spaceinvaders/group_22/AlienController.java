@@ -14,7 +14,18 @@ import spaceinvaders.group_22.unit.Bullet;
  */
 @SuppressWarnings("checkstyle:magicnumber") 
 public class AlienController extends UnitController implements MovableUnitController {
-	
+	/**
+	 * Part of the screen (on left and right) that cannot be used when creating aliens. 
+	 */
+	static final double ALIENBORDERMARIGIN = 0.15;
+	/**
+	 * Amount of aliens per row.
+	 */
+	static final int ALIENS_PER_ROW = 10;
+	/**
+	 * Amount of rows of aliens.
+	 */
+	static final int AMOUNT_ALIEN_ROWS = 4;
 	/**
 	 * Amount of pixels/second the speed of the aliens increases per wave.
 	 */
@@ -99,10 +110,9 @@ public class AlienController extends UnitController implements MovableUnitContro
 			}
 			unit.move(game.getTickrate());
 		}
-
-		String velX = String.valueOf(curWave.getAliens().get(0).getVelX());
-		String velY = String.valueOf(curWave.getAliens().get(0).getVelY());
-		Game.getLogger().log("Aliens moved X: " + velX + "\tY: " + velY, LogEvent.Type.TRACE);
+	//	String velX = String.valueOf(curWave.getAliens().get(0).getVelX());
+	//	String velY = String.valueOf(curWave.getAliens().get(0).getVelY());
+	//	Game.getLogger().log("Aliens moved X: " + velX + "\tY: " + velY, LogEvent.Type.TRACE);
 	}
 
 	/**

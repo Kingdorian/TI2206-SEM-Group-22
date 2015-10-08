@@ -36,6 +36,11 @@ public class AlienControllerTest {
 		game = new Game(1000, 720);
 		controller = game.getAlienController();
 		game.setTickrate(0.1);
+		ArrayList<Alien> row = new ArrayList<Alien>();
+		for(int i = 0; i < 10; i ++) {
+			row.add(new Alien(10, 10, "invader.png"));
+		}
+		game.getAlienController().getAlienWave().addAlienRow(row);
 	}
 
 	/**

@@ -13,10 +13,6 @@ import spaceinvaders.group_22.unit.Alien;
  */
 public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 	/**
-	 * Part of the screen (on left and right) that cannot be used when creating aliens. 
-	 */
-	static final double ALIENBORDERMARIGIN = 0.15;
-	/**
 	 * ArrayList of the possible alienWaves.
 	 */
 	private ArrayList<AlienWave> patterns = new ArrayList<AlienWave>();
@@ -53,6 +49,8 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 
 	public final AlienWave createWave() {
 		ArrayList<AlienWave> waves = new ArrayList<AlienWave>();
+		System.out.println(patternList.get(0).toString());
+        alienVelX+= AlienController.ALIENVELXINCREASE;
 		return createWaveFromPattern(patternList.get(0));
 	}
 	/**
@@ -70,10 +68,10 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
         // Drawing lines of Aliens.
         for (int i = 0; i < pattern.getHeight(); i++) {
         	 double interval = ((game.getCanvasWidth() -
-        			 (2 * ALIENBORDERMARIGIN
+        			 (2 * AlienController.ALIENBORDERMARIGIN
         					 * game.getCanvasWidth()))
 						- (pattern.getLength(i) * testAlien.getWidth())) / (pattern.getLength(i) + 1);  
-            double x = ALIENBORDERMARIGIN * game.getCanvasWidth() + 0.5 * testAlien.getWidth();
+            double x = AlienController.ALIENBORDERMARIGIN * game.getCanvasWidth() + 0.5 * testAlien.getWidth();
             for (int j = 0; j < pattern.getLength(i); j++) {
             	switch (pattern.getChar(i, j)) {
             		case '*':
@@ -85,6 +83,7 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
             	x += testAlien.getWidth() + interval;
             }
             y += 1.1 * testAlien.getHeight();
+            wave.addAlienRow(aliens);
         }
         return wave;
 	}

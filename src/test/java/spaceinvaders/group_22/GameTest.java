@@ -33,6 +33,9 @@ public class GameTest {
 	public final void setUpGame() {
 		game = new Game(200, 200);
 		game.setTickrate(1.0);
+		ArrayList<Alien> row = new ArrayList<Alien>();
+		row.add(new Alien(10, 10, "invader.png"));
+		game.getAlienController().getAlienWave().addAlienRow(row);
 	}
 	
 	/**
@@ -89,8 +92,9 @@ public class GameTest {
 	 */
 	@Test
 	public final void testGetAliens() {
+		Game game = new Game(100, 100);
 		ArrayList<Alien> aliens = new ArrayList<Alien>();		
-		game.getAlienController().getAlienWave().addAlienRow(aliens);;
+		game.getAlienController().getAlienWave().addAlienRow(aliens);
 		Assert.assertEquals(new ArrayList<Alien>(), game.getAlienController().getAliens());
 	}
 	/**
