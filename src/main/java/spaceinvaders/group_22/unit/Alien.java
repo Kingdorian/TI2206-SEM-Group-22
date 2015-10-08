@@ -22,6 +22,10 @@ public class Alien extends Unit implements MovableUnit {
 	 */
 	private double velY;
 	/**
+	 * Chance this aliens shoots a bullet.
+	 */
+	private double bulletChance = 0.025;
+	/**
 	 * Creates an Alien.
 	 * @param x X coordinate
 	 * @param y Y coordinate
@@ -111,6 +115,20 @@ public class Alien extends Unit implements MovableUnit {
 	 */
 	public final void setVelY(final double alienVelY) {
 		this.velY = alienVelY;
+	}
+	/**
+	 * Gets the chance this aliens shoots a bullet.
+	 * @return the chance this alien shoots a bullet
+	 */
+	public final double getBulletChance() {
+		return bulletChance;
+	}
+	/**
+	 * Sets the chance this aliens shoots a bullet.
+	 * @param setbulletChance chance this alien shoots a bullet
+	 */
+	public final void setBulletChance(final double setbulletChance) {
+		this.bulletChance = setbulletChance;
 	}
 
 

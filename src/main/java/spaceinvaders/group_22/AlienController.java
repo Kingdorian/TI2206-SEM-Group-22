@@ -24,11 +24,6 @@ public class AlienController extends UnitController implements MovableUnitContro
      * If 0 the aliens don't have to move any frame down.
      */
 	private double alienFramesDown = 0;
-	
-    /**
-     * Roughly the amount of bullets that spawn per second.
-     */
-	private int bulletChance = 1;
 	/**
 	 * Current alien wave.
 	 */
@@ -104,13 +99,13 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void shootAlienBullets() {
-		if (!alienWave.getAliens().isEmpty() && Math.random() 
-				< ((alienWave.getAliens().size()) * bulletChance * game.getTickrate()) / 40)   {
-			int shootIndex = (int) (Math.random() * alienWave.getAliens().size());
-			Bullet bullet = alienWave.getAliens().get(shootIndex).shootBullet(60);
-			game.getBullets().add(bullet);
-			String logMessage = "Alien shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
-			Game.getLogger().log(logMessage, LogEvent.Type.TRACE);
+		for (int i = 0; i < alienWave.getAliens().size(); i++) {
+			if (Math.random() < (alienWave.getAliens().get(i).getBulletChance() * game.getTickrate()))   {
+				Bullet bullet = alienWave.getAliens().get(i).shootBullet(60);
+				game.getBullets().add(bullet);
+				String logMessage = "Alien shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
+				Game.getLogger().log(logMessage, LogEvent.Type.TRACE);
+			}	
 		}
 	}
 	/**
@@ -118,7 +113,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 */
 	public final void nextRound() {
 		Game.getLogger().log("proceding to next round", LogEvent.Type.INFO);
-		alienWave.setAlienVelX( Math.abs(alienWave.getAlienVelX()) + AlienController.ALIENVELXINCREASE);
+		alienWave.setAlienVelX(Math.abs(alienWave.getAlienVelX()) + AlienController.ALIENVELXINCREASE);
 		alienWave = alienWaveFactory.createWave();
 	}
 
