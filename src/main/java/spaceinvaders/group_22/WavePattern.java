@@ -102,10 +102,21 @@ public class WavePattern {
 	}
 	/**
 	 * Adds a new row to the pattern.
-	 * @param row the row to add
+	 * @param row ArrayList the row to add
 	 */
 	public void addRow(final ArrayList<Character> row) {
 		pattern.add(new ArrayList<Character>(row));
+	}
+	/**
+	 * Adds a new row to the pattern.
+	 * @param row Array the row to add
+	 */
+	public void addRow(final char[] row) {
+		ArrayList<Character> rowList = new ArrayList<Character>();
+		for(int i = 0; i < row.length; i++) {
+			rowList.add(row[i]);
+		}
+		addRow(rowList);
 	}
 	/**
 	 * Gets row in a in the specified location.
