@@ -80,7 +80,8 @@ public class Logger {
 	 * Writes the log to a file.
 	 */
 	public final void writeLog() {
-		LogWriter logWriter = new LogWriter(logFileLoc, allEvents);
+		ArrayList<LogEvent> tempList = new ArrayList<LogEvent>(allEvents);
+		LogWriter logWriter = new LogWriter(logFileLoc, tempList);
 		//logWriter.run();
 		new Thread(logWriter).start();
 		//allEvents.clear();
