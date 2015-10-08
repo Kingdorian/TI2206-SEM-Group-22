@@ -140,7 +140,6 @@ public class WavePattern {
 			}
 			for(int i = 0; i < pattern.size(); i ++) {
 				if(!this.getRow(i).equals(otherPattern.getRow(i))){
-			
 					return false;
 				}
 			}

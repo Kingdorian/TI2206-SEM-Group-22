@@ -33,7 +33,7 @@ public class AlienWaveReader {
 	 * @throws IOException 
 	 * @throws FileNotFoundException 
 	 */
-	public static final ArrayList<WavePattern> read(final String fileName) throws FileNotFoundException, IOException {
+	public final ArrayList<WavePattern> read(final String fileName) throws FileNotFoundException, IOException {
 		File dir = new File(fileName);
 	    ArrayList<WavePattern> alienWaves = new ArrayList<WavePattern>();
 		if(!dir.exists()) {
@@ -46,7 +46,6 @@ public class AlienWaveReader {
 		for(final File wave : dir.listFiles()) {
 			// Check if file is a wave file.
 			String[] nameSplit = wave.getName().split("\\.");
-			System.out.println(wave.getName());
 			if (nameSplit[nameSplit.length-1].equals("wave")) {
 				alienWaves.add(parseFile(wave));
 			}
@@ -59,7 +58,7 @@ public class AlienWaveReader {
 	 * @return
 	 * @throws FileNotFoundException, IOException 
 	 */
-	public static WavePattern parseFile(File wave) throws FileNotFoundException, IOException {
+	public WavePattern parseFile(File wave) throws FileNotFoundException, IOException {
 		Game.getLogger().log("Reading wave: " + wave.getName(), LogEvent.Type.DEBUG);
 		WavePattern pattern = new WavePattern();
 		int lineNum = 0; 

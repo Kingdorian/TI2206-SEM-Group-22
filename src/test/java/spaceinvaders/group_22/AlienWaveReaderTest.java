@@ -27,38 +27,34 @@ public class AlienWaveReaderTest {
 		String sep = System.getProperty("file.separator");
 		File file = new File("src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "emptytestwave.wave");
-		ArrayList<ArrayList<Character>> charList = waveReader.parseFile(file);
-		Assert.assertTrue(charList.isEmpty());
+		WavePattern pattern =  waveReader.parseFile(file);
+		Assert.assertEquals(0, pattern.size());
 	}
 	@Test
 	public void testReadOneLineFile() throws FileNotFoundException, IOException {
 		String sep = System.getProperty("file.separator");
 		File file = new File("src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "oneline.wave");
-		ArrayList<ArrayList<Character>> charList = waveReader.parseFile(file);
-		ArrayList<ArrayList<Character>> expectedList = new ArrayList<ArrayList<Character>>();
+		WavePattern pattern = waveReader.parseFile(file);
+		WavePattern expectedPattern = new WavePattern();
 		ArrayList<Character> tempList = new ArrayList<Character>();
 		tempList.add('*');
 		tempList.add('&');
-		expectedList.add(tempList);
-		Assert.assertEquals(expectedList, charList);
+		expectedPattern.addRow(tempList);
+		Assert.assertEquals(expectedPattern, pattern);
 	}
 	@Test
 	public void testReadMultiLineFile() throws FileNotFoundException, IOException {
 		String sep = System.getProperty("file.separator");
 		File file = new File("src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "multiline.wave");
-		ArrayList<ArrayList<Character>> charList = waveReader.parseFile(file);
-		ArrayList<ArrayList<Character>> expectedList = new ArrayList<ArrayList<Character>>();
-		ArrayList<Character> tempList = new ArrayList<Character>();
-		tempList.add('*');
-		tempList.add('&');
-		expectedList.add(tempList);
-		ArrayList<Character> otherTempList = new ArrayList<Character>();
-		otherTempList.add('^');
-		otherTempList.add('*');
-		expectedList.add(otherTempList);
-		Assert.assertEquals(expectedList, charList);
+		WavePattern pattern = waveReader.parseFile(file);
+		WavePattern expectedPattern = new WavePattern();
+		char[] chars = {'*', '&'};
+		expectedPattern.addRow(chars);
+		char[] chars2 = {'^', '*'};
+		expectedPattern.addRow(chars2);
+		Assert.assertEquals(expectedPattern, pattern);
 	}
 	@Test(expected = FileNotFoundException.class)  
 	public void testTriggerFileNotFound() throws FileNotFoundException, IOException {
@@ -72,25 +68,25 @@ public class AlienWaveReaderTest {
 		String sep = System.getProperty("file.separator");
 		String file = "src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "2testfiles" + sep;
-		ArrayList<ArrayList<ArrayList<Character>>> charList = waveReader.read(file);
-		ArrayList<ArrayList<ArrayList<Character>>> expectedList = new ArrayList<ArrayList<ArrayList<Character>>>();
-		ArrayList<ArrayList<Character>> expectedFile1 = new ArrayList<ArrayList<Character>>();
+		ArrayList<WavePattern> charPatterns = waveReader.read(file);
+		ArrayList<WavePattern> expectedPatterns = new ArrayList<WavePattern>();
+		WavePattern expectedFile1 = new WavePattern();
 		ArrayList<Character> expectedLine1 = new ArrayList<Character>();
 		expectedLine1.add('*');
 		expectedLine1.add('+');
-		expectedFile1.add(expectedLine1);
-		expectedList.add(expectedFile1);
-		ArrayList<ArrayList<Character>> expectedFile2 = new ArrayList<ArrayList<Character>>();
+		expectedFile1.addRow(expectedLine1);
+		expectedPatterns.add(expectedFile1);
+		WavePattern expectedFile2 = new WavePattern();
 		ArrayList<Character> expectedLine2 = new ArrayList<Character>();
 		expectedLine2.add('x');
 		expectedLine2.add('u');
-		expectedFile2.add(expectedLine2);
+		expectedFile2.addRow(expectedLine2);
 		ArrayList<Character> expectedLine3 = new ArrayList<Character>();
 		expectedLine3.add('^');
 		expectedLine3.add('%');
-		expectedFile2.add(expectedLine3);
-		expectedList.add(expectedFile2);
-		assertEquals(expectedList, waveReader.read(file));
+		expectedFile2.addRow(expectedLine3);
+		expectedPatterns.add(expectedFile2);
+		assertEquals(expectedPatterns, waveReader.read(file));
 		
 	}
 
