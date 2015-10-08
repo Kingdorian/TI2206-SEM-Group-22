@@ -43,7 +43,7 @@ public class WavePattern {
 	 * @return int the length of the row.
 	 * @throws ArrayIndexOutOfBoundsException if the index is invalid.
 	 */
-	public int getLength(int index) {
+	public int getLength(int index) throws ArrayIndexOutOfBoundsException{
 		return pattern.get(index).size();
 	}
 	
@@ -65,7 +65,7 @@ public class WavePattern {
 	 * @throws indexoutofboundsexception when index is invalid.
 	 */
 	public void setRow(int index, ArrayList<Character> newRow) throws IndexOutOfBoundsException {
-		pattern.set(index, newRow); 
+		pattern.set(index, new ArrayList<Character>(newRow)); 
 	}
 	/**
 	 * Sets a row to a given row.
@@ -102,8 +102,8 @@ public class WavePattern {
 	 * Adds a new row to the pattern.
 	 * @param row the row to add
 	 */
-	public void addRow(ArrayList<Character> row) {
-		pattern.add(row);
+	public void addRow(final ArrayList<Character> row) {
+		pattern.add(new ArrayList<Character>(row));
 	}
 	/**
 	 * Gets row in a in the specified location.
