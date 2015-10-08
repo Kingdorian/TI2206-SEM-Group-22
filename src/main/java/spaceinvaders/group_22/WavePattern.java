@@ -113,6 +113,6 @@ public class WavePattern {
 	 */
 	public ArrayList<Character> getRow(int index) {
 		// Create a copy of the old list to ensure it cannot be changed.
-		return (ArrayList)Collections.unmodifiableList(pattern.get(index));
+		return pattern.get(index);
 	}
 }

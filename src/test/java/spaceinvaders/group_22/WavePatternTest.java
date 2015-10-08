@@ -167,5 +167,21 @@ public class WavePatternTest {
 		pattern.addRow(list);
 		Assert.assertEquals(8, pattern.size());
 	}
-
+	@Test
+	public void testAddRowEmptyRow() {
+		WavePattern pattern = new WavePattern();
+		ArrayList<Character> list = new ArrayList<Character>();
+		pattern.addRow(list);
+		Assert.assertEquals(list, pattern.getRow(0));
+	}
+	@Test
+	public void testAddRowWithChars() {
+		WavePattern pattern = new WavePattern();
+		ArrayList<Character> list = new ArrayList<Character>();
+		list.add('a');
+		list.add('b');
+		pattern.addRow(list);
+		Assert.assertEquals(list, pattern.getRow(0));
+	}
+	
 }
