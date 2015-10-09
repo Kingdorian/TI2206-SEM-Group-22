@@ -7,7 +7,7 @@ The methods for moving are not needed in classes such as Barricade.
 Instead of adding these methods in the superclass, it is better to add them in an interface so only subclasses implementing the interface, implement the methods.\\
 
 The same can be done for shooting, and activating a unit on the player (such as a powerup).
-The project was extended to include an interface for shooting, ShootableUnit and an interface for activating a unit on the player, ActivatableUnit. 
+The project was extended to include an interface for shooting, ShootingUnit and an interface for activating a unit on the player, ActivatableUnit. 
 
 \subsection{Exercise 2.2 - Strategy Pattern}
 
@@ -29,7 +29,7 @@ Figure \ref{fig:2-2strategy} contains the UML Class diagram for the strategy pat
 \label{fig:2-3strategy}
 \end{figure}
 
-Figure \ref{fig:2-3strategy} contains the UML Sequence diagram for the strategy pattern in Unit. This diagram only contains the case concerning MovableUnit and ShootableUnit. It visualizes that all methods defined in the interfaces are implemented and used correctly.
+Figure \ref{fig:2-3strategy} contains the UML Sequence diagram for the strategy pattern in Unit. This diagram only contains the case concerning MovableUnit and ShootingUnit. It visualizes that all methods defined in the interfaces are implemented and used correctly.
 
 \subsection{Exercise 2.1 - Abstract Factory Pattern}
 A factory pattern can be useful for the creation of a PowerUpUnit. If a powerup is created in game, it does not need knowledge of the implementation. In the project, there are three 'flavors' of powerups, Speed, Life and Shoot. If a factory is used, the factory handles the creation of each powerup and the game can easily obtain it by calling a method on the corresponding factory.\\
