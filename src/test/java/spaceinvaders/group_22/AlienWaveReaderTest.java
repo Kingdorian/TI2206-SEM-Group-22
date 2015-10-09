@@ -86,7 +86,10 @@ public class AlienWaveReaderTest {
 		expectedLine3.add('%');
 		expectedFile2.addRow(expectedLine3);
 		expectedPatterns.add(expectedFile2);
-		assertEquals(expectedPatterns, waveReader.read(file));
+		ArrayList<WavePattern> otherExpPattern = new ArrayList<WavePattern>();
+		otherExpPattern.add(expectedFile2);
+		otherExpPattern.add(expectedFile1);
+		assertTrue(expectedPatterns.equals(waveReader.read(file))||otherExpPattern.equals(waveReader.read(file)));
 		
 	}
 
