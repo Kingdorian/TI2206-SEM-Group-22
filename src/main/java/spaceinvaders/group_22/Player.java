@@ -3,6 +3,7 @@ package spaceinvaders.group_22;
 import java.util.ArrayList;
 
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
@@ -47,7 +48,7 @@ public class Player {
 	public Player(final Game parentgame) {
 		game = parentgame;
 		ship = new SpaceShip(game.getCanvasWidth() / 2, game.getCanvasHeight() - 40, "spaceship.png");
-		Game.getLogger().log("Created spaceship for player", LogEvent.Type.DEBUG);
+		Logger.getInstance().log("Created spaceship for player", LogEvent.Type.DEBUG);
 		score  = 0;
 		lives = 3;
 		activePowerUps = new ArrayList<PowerUp>();
@@ -80,7 +81,7 @@ public class Player {
 	 */
 	public final void addScore(final int points) {
 		score += points;
-		Game.getLogger().log("Added " + points + "points", LogEvent.Type.TRACE);
+		Logger.getInstance().log("Added " + points + "points", LogEvent.Type.TRACE);
 	}
 	/**
 	 * Resets the amount of points the player has.
@@ -94,16 +95,18 @@ public class Player {
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void respawnShip() {
 		ship = new SpaceShip(game.getCanvasWidth() / 2, ship.getYCoor(), "spaceship.png");
-		for (int i = 0; i < game.getPlayer().getActivePowerUps().size(); i++) {
-			game.getPlayer().getActivePowerUps().get(i).deactivate();
+		ArrayList<PowerUp> powerups = new ArrayList<PowerUp>();
+		powerups.addAll(getActivePowerUps());
+		for (PowerUp powerup : powerups) {
+			powerup.deactivate();
 		}
-		Game.getLogger().log("Ship respawned", LogEvent.Type.TRACE);
+		Logger.getInstance().log("Ship respawned", LogEvent.Type.TRACE);
 	}
 	/**
 	 * When the player dies remove one of his lives.
 	 */
 	public final void die() {
-		Game.getLogger().log("Player died", LogEvent.Type.DEBUG);
+		Logger.getInstance().log("Player died", LogEvent.Type.DEBUG);
 		lives--;
 		respawnShip();
 		if (lives <= 0) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 /**
  * 
  * @author Bryan
@@ -45,7 +46,7 @@ public class Collisions {
 			}
 		}
 		if (spaceShipexplosion != null && spaceShipexplosion.getCounter() == 24) {
-			game.getLogger().log("Spaceship hit by bullet" , LogEvent.Type.INFO);
+			Logger.getInstance().log("Spaceship hit by bullet" , LogEvent.Type.INFO);
 			game.getBullets().clear();
 			game.getPlayer().die();
 		}
@@ -54,7 +55,7 @@ public class Collisions {
 		if (collidingBullet != null) {
 			String logMessage = "Player collided bullet at X:" + game.getPlayer().getSpaceShip().getXCoor() 
 					+ " Y: " + game.getPlayer().getSpaceShip().getYCoor();
-			Game.getLogger().log(logMessage, LogEvent.Type.TRACE);
+			Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
 			
 			spaceShipexplosion = new Explosion(game.getPlayer().getSpaceShip().getXCoor(),
 					game.getPlayer().getSpaceShip().getYCoor(), "explosion1.png");
@@ -67,13 +68,12 @@ public class Collisions {
 			if (collidingUnit != null) {
 				String logMessage = "Alien collided bullet at X:" + bullet.getXCoor() 
 						+ " Y: " + bullet.getYCoor();
-				Game.getLogger().log(logMessage, LogEvent.Type.TRACE);
+				Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
 				
 				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
 						collidingUnit.getYCoor(), "explosion1.png"));
-				game.getAlienController().getAliens().remove(collidingUnit);
+				((Alien) collidingUnit).hit();
 				game.getBullets().remove(bullet);
-				game.getPlayer().addScore(10);
 				if (Math.random() > 0.6) {
 					game.getPowerUpController().createPowerUpUnit(bullet.getXCoor(), bullet.getYCoor());
 				}
@@ -86,7 +86,7 @@ public class Collisions {
 			if (collidingUnit != null) {
 				String logMessage = "Barricade collided bullet at X:" + bar.getXCoor() 
 					+ " Y: " + bar.getYCoor();
-				Game.getLogger().log(logMessage, LogEvent.Type.TRACE);
+				Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
 				
 				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
 						collidingUnit.getYCoor(), "explosion1.png"));

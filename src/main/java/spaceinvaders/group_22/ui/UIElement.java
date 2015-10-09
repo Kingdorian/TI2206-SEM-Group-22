@@ -1,3 +1,4 @@
+
 package spaceinvaders.group_22.ui;
 
 import java.util.HashMap;
@@ -6,6 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 
 /**
  * The drawing of all the elements.
@@ -55,6 +57,13 @@ public abstract class UIElement {
     		addSprite(sprites, "alienbullet.png");
     		addSprite(sprites, "spaceshipbullet.png");
     		addSprite(sprites, "invader.png");
+    		addSprite(sprites, "invader_shooter.png");
+    		addSprite(sprites, "invader_health1.png");
+    		addSprite(sprites, "invader_health2.png");
+    		addSprite(sprites, "invader_health3.png");
+    		addSprite(sprites, "invader_health4.png");
+    		addSprite(sprites, "invader_health5.png");
+    		addSprite(sprites, "invader_shooter.png");
     		addSprite(sprites, "spaceship.png");
     		addSprite(sprites, "heart.png");
     		addSprite(sprites, "barrier.png");
@@ -68,6 +77,7 @@ public abstract class UIElement {
     		addSprite(sprites, "powerup_red.png");
     		addSprite(sprites, "glow_blue.png");
     		addSprite(sprites, "glow_orange.png");
+    		addSprite(sprites, "invader_large.png");
     }
     
     /**
@@ -87,7 +97,7 @@ public abstract class UIElement {
 		spriteMap.put(filename, 
 				new Image(getClass().getClassLoader()
 						.getResource("spaceinvaders/group_22/images/" + filename).toString()));
-		Game.getLogger().log("Loaded " + filename, LogEvent.Type.DEBUG);
+		Logger.getInstance().log("Loaded " + filename, LogEvent.Type.DEBUG);
     }
 
 	/**

@@ -36,21 +36,13 @@ public class AlienControllerTest {
 		game = new Game(1000, 720);
 		controller = game.getAlienController();
 		game.setTickrate(0.1);
-	}
-	
-	/**
-	 * Test the createAlienWave method.
-	 */
-	@Test
-	@SuppressWarnings("checkstyle:magicnumber") 
-	public final void testCreateAlienWave() {
-		controller.create();
-		ArrayList<Alien> aliens = controller.getAliens();
-		assertEquals(AlienController.ALIENS_PER_ROW*AlienController.AMOUNT_ALIEN_ROWS, aliens.size());
-		for (int i = 0; i < aliens.size(); i++) {
-			//Test if every alien has the right sprite
-			assertEquals(aliens.get(i).getSprite(), "invader.png");
+		ArrayList<Alien> row = new ArrayList<Alien>();
+		for (int i = 0; i < 10; i++) {
+			row.add(new Alien(500, 350, "invader.png"));
 		}
+		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
+		aliens.add(row);
+		game.getAlienController().getAlienWave().setAliens(aliens);
 	}
 
 	/**
@@ -83,23 +75,12 @@ public class AlienControllerTest {
 			xValues.add(game.getAlienController().getAliens().get(i).getXCoor());
 			yValues.add(game.getAlienController().getAliens().get(i).getYCoor());
 		}
-		for (int i = 0; i < 50; i++) {
+		for (int i = 0; i < 500; i++) {
 			//Move to the right side of the screen
 			controller.move();
 		}
 		for (int i = 0; i < game.getAlienController().getAliens().size(); i++) {
-			System.out.println(game.getAlienController().getAliens().get(i).getYCoor());
 			assertEquals(yValues.get(i) + 8, game.getAlienController().getAliens().get(i).getYCoor(), 0.05);
 		}
-	}
-	/**
-	 * Tests if setAliens sets the ArrayList of aliens correctly.
-	 */
-	@Test
-	public final void testSetAliens() {
-		ArrayList<Alien> aliens = new ArrayList<Alien>();		
-		controller.setAliens(aliens);
-		Assert.assertEquals(new ArrayList<Alien>(), aliens);	
-		
 	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javafx.scene.input.KeyCode;
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
@@ -13,12 +14,19 @@ import spaceinvaders.group_22.unit.SpaceShip;
 public class SpaceShipController extends UnitController implements MovableUnitController {
 
 	/**
+	 * The game object.
+	 */
+	private Game game;
+	
+	/**
 	 * Creates a new spaceShipcontroller.
 	 * @param parentGame Game this controller works for.
 	 */
 	public SpaceShipController(final Game parentGame) {
 		super(parentGame);
+		game = getGame();
 	}
+		
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
@@ -41,11 +49,13 @@ public class SpaceShipController extends UnitController implements MovableUnitCo
 		// Check that the spaceship is still able to move without going off the screen.
 		if (game.getPlayer().getSpaceShip().getXCoor() - 0.5 * game.getPlayer().getSpaceShip().getWidth() > 0 
 				&& pressedKeys.contains(KeyCode.A)) {
+			Logger.getInstance().log("Player pressed A", LogEvent.Type.DEBUG);
 			velX = velX - SpaceShip.getMAXVELX() * game.getTickrate() * 2;
 		}
 		if (game.getPlayer().getSpaceShip().getXCoor() 
 				+ 0.5 * game.getPlayer().getSpaceShip().getWidth() < game.getCanvasWidth()
 				&& pressedKeys.contains(KeyCode.D)) {
+			Logger.getInstance().log("Player pressed D", LogEvent.Type.DEBUG);
 			velX = velX + SpaceShip.getMAXVELX() * game.getTickrate() * 2;
 		}
 
@@ -57,7 +67,7 @@ public class SpaceShipController extends UnitController implements MovableUnitCo
 		game.getPlayer().getSpaceShip().setVelX(velX);
 		game.getPlayer().getSpaceShip().move(game.getTickrate());
 		if (velX != 0) {
-			Game.getLogger().log("Player moved X: " + velX, LogEvent.Type.TRACE);
+			Logger.getInstance().log("Player moved X: " + velX, LogEvent.Type.TRACE);
 		}
 	}
 

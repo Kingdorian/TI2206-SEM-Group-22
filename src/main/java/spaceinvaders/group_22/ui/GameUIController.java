@@ -5,16 +5,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
-import spaceinvaders.group_22.PowerUp;
 import spaceinvaders.group_22.logger.LogEvent;
-
-import spaceinvaders.group_22.unit.Alien;
-import spaceinvaders.group_22.unit.Barricade;
-import spaceinvaders.group_22.unit.Bullet;
-import spaceinvaders.group_22.unit.Explosion;
-import spaceinvaders.group_22.unit.PowerUpUnit;
-import spaceinvaders.group_22.unit.SpaceShip;
-
+import spaceinvaders.group_22.logger.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -171,7 +163,7 @@ public class GameUIController
     	uiLives = new Lives(game, gc);
     	uiPowerUp = new UIElementPowerUp(game, gc);
     	
-    	Game.getLogger().log("UIElements initialized.", LogEvent.Type.INFO);
+    	Logger.getInstance().log("UIElements initialized.", LogEvent.Type.INFO);
     }
     
     /**
@@ -210,9 +202,9 @@ public class GameUIController
     	// If the game does not exist, create a new one.
     	if (game == null) {
         	game = new Game(canvasWidth, canvasHeight);
-        	Game.getLogger().log("Set canvas width to: " + canvasWidth, LogEvent.Type.INFO);
-        	Game.getLogger().log("Set canvas height to: " + canvasHeight, LogEvent.Type.INFO);
-        	Game.getLogger().log("Show screen Before Play", LogEvent.Type.INFO);
+        	Logger.getInstance().log("Set canvas width to: " + canvasWidth, LogEvent.Type.INFO);
+        	Logger.getInstance().log("Set canvas height to: " + canvasHeight, LogEvent.Type.INFO);
+        	Logger.getInstance().log("Show screen Before Play", LogEvent.Type.INFO);
         // Else reset the existing game.
     	} else {
         	game.resetGame();    		
@@ -231,7 +223,7 @@ public class GameUIController
     	} else {
     		framerate = 0.0;
     	}
-    	Game.getLogger().log("Set framerate to: " + framerate, LogEvent.Type.INFO);
+    	Logger.getInstance().log("Set framerate to: " + framerate, LogEvent.Type.INFO);
     }
     
     /**
@@ -290,7 +282,7 @@ public class GameUIController
 							screenGameOver.toFront();
 							highScoreLabel.setText("Highscore: " + game.getHighScore());
 							gameLoop.stop();
-							Game.getLogger().log("Show screen Game Over", LogEvent.Type.INFO);
+							Logger.getInstance().log("Show screen Game Over", LogEvent.Type.INFO);
 						} else {
 							screenGameOver.toBack();
 						}
@@ -332,18 +324,20 @@ public class GameUIController
 	 */
 	@FXML
 	public final void handleKeyPressed(final KeyEvent event) {
-		Game.getLogger().log("Player pressed " + event.getCode().toString(), LogEvent.Type.DEBUG);
         if (event.getCode().equals(KeyCode.S) && game.getPlayer().getLives() > 0) {
+        	Logger.getInstance().log("Player pressed S", LogEvent.Type.DEBUG);
         	screenBeforePlay.toBack();
         	screenPaused.toBack();
         	game.start();
         } else if (event.getCode().equals(KeyCode.P)) {
         	if (game.isInProgress()) {
+        		Logger.getInstance().log("Player pressed P", LogEvent.Type.DEBUG);
             	screenPaused.toFront();
-            	Game.getLogger().log("Show screen Paused", LogEvent.Type.INFO);
+            	Logger.getInstance().log("Show screen Paused", LogEvent.Type.INFO);
             	game.stop();
         	}
         } else if (event.getCode().equals(KeyCode.R)) {
+        	Logger.getInstance().log("Player pressed R", LogEvent.Type.DEBUG);
         	if (game.hasEnded()) {
             	newGame();
             	game.start();

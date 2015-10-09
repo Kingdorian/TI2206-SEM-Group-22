@@ -47,7 +47,6 @@ public class BarricadeControllerTest {
 		barricades.add(barricade);
 		barController.setBarricades(new ArrayList<Barricade>());
 		barController.addBarricade(barricade);
-		System.out.println(barController.getBarricades());
 		//Assert.assertEquals(barricades, game.getBarricades());
 	}
 }

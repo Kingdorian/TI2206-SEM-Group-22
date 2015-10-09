@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.PowerUp;
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
@@ -30,7 +31,7 @@ public class UIElementSpaceShip extends UIElementUnit {
         // Position the player in the middle, on the bottom of the screen.
 		drawUnit(spaceShip.getXCoor(), spaceShip.getYCoor(), spaceShip.getWidth(), 
 				spaceShip.getHeight(), spaceShip.getSprite(), getGC());
-		Game.getLogger().log("Drawn spaceship", LogEvent.Type.TRACE);
+		Logger.getInstance().log("Drawn spaceship", LogEvent.Type.TRACE);
 	}
 	
 	/**

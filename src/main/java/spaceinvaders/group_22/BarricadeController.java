@@ -3,6 +3,7 @@ package spaceinvaders.group_22;
 import java.util.ArrayList;
 
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Barricade;
 
 /**
@@ -11,10 +12,12 @@ import spaceinvaders.group_22.unit.Barricade;
  *
  */
 public class BarricadeController extends UnitController {
+
 	/**
-	 * Game that this controller is part of.
+	 * The game object.
 	 */
 	private Game game;
+	
 	/**
 	 * ArrayList of all barricades in the Controller.
 	 */
@@ -25,6 +28,7 @@ public class BarricadeController extends UnitController {
 	 */
 	public BarricadeController(final Game parentGame) {
 		super(parentGame);
+		game = getGame();
 	}
 	
 	/**
@@ -35,12 +39,12 @@ public class BarricadeController extends UnitController {
 		int barricadeCount = 4;
 		// Offset from the bottom in pixels
 		int bottomOfset = 110;
-		int interval = (int) super.game.getCanvasWidth() / (barricadeCount + 1);
+		int interval = (int) game.getCanvasWidth() / (barricadeCount + 1);
 		barricades.clear();
 		for (int i = 1; i <= barricadeCount; i++) {
-			barricades.add(new Barricade(interval * i, super.game.getCanvasHeight() - bottomOfset, "barrier.png"));
+			barricades.add(new Barricade(interval * i, game.getCanvasHeight() - bottomOfset, "barrier.png"));
 		}
-		super.game.getLogger().log("Created all barricades", LogEvent.Type.DEBUG);
+		Logger.getInstance().log("Created all barricades", LogEvent.Type.DEBUG);
 	}
 	/**
 	 * Add a new barricade to this Controller.
@@ -48,7 +52,7 @@ public class BarricadeController extends UnitController {
 	 */
 	public final void addBarricade(final Barricade barricade) {
 		barricades.add(barricade);
-		game.getLogger().log("Created barricade", LogEvent.Type.TRACE);
+		Logger.getInstance().log("Created barricade", LogEvent.Type.TRACE);
 	}
 	/**
 	 * Sets the barricades in this Controller.
@@ -71,7 +75,7 @@ public class BarricadeController extends UnitController {
 		for (int i = 0; i < barricades.size(); i++)  {
 			if (barricades.get(i).getHealth() == 0) {
 				barricades.remove(i);
-				game.getLogger().log("Removed barricade", LogEvent.Type.TRACE);
+				Logger.getInstance().log("Removed barricade", LogEvent.Type.TRACE);
 				i--;
 			}
 		}

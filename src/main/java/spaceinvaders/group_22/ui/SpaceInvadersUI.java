@@ -6,7 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.logger.Logger;
 
 /**
  * Class which creates an object that is used to maintain
@@ -37,7 +37,7 @@ public class SpaceInvadersUI {
 			
 			primaryStage.setScene(scene);			
 		} catch (IOException e) {
-			Game.getLogger().log("Could not find fxml file", e);
+			Logger.getInstance().log("Could not find fxml file", e);
 			e.printStackTrace();
 		}
 		
@@ -52,7 +52,7 @@ public class SpaceInvadersUI {
 			Parent screen = FXMLLoader.load(getClass().getResource(fxmlFile));
 			primaryStage.getScene().setRoot(screen);
 		} catch (IOException e) {
-			Game.getLogger().log("Could not find fxml file", e);
+			Logger.getInstance().log("Could not find fxml file", e);
 			e.printStackTrace();
 		}
 		
