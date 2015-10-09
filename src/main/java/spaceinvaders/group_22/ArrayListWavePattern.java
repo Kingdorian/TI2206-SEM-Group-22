@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author Dorian
  *
  */
-public class ArrayListWavePattern {
+public class ArrayListWavePattern implements WavePattern {
 	/**
 	 * 2D ArrayList containing chars to represent Aliens.
 	 */
