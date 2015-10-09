@@ -129,7 +129,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 		list.addAll(alienWave.getAliens());
 		for (Alien alien : list)  {
 			if (alien.getHealth() <= 0) {
-				alienWave.getAliens().remove(alien);
+				alienWave.remove(alien);
 				game.getPlayer().addScore(10);
 				Logger.getInstance().log("Removed Alien", LogEvent.Type.TRACE);
 			}
