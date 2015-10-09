@@ -94,6 +94,7 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
             			Alien shooterAlien = new Alien(x, y, "invader_shooter.png");
             			shooterAlien.setVelX(AlienController.getAlienVelX());
             			shooterAlien.increaseShooting();
+            			aliens.add(shooterAlien);
             			Logger.getInstance().log("Created fast shooting alien Alien at location:"
             					+ "(" + x + "," + y + ")", LogEvent.Type.TRACE);
             			break;
