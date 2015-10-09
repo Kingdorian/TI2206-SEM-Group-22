@@ -1,7 +1,5 @@
 package spaceinvaders.group_22;
 
-import java.util.ArrayList;
-
 /**
  * Interface for creating an alienWave.
  * @author Dorian and Bryan

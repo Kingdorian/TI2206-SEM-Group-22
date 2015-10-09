@@ -30,7 +30,10 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 * Amount of pixels/second the speed of the aliens increases per wave.
 	 */
 	static final int ALIENVELXINCREASE = 10;
-	
+	/**
+	 * Speed of the aliens in the X direction in pixels per second.
+	 */
+	private static double alienVelX;
 	 /**
      * If 0 the aliens don't have to move any frame down.
      */
@@ -59,7 +62,8 @@ public class AlienController extends UnitController implements MovableUnitContro
 			alienWaveFactory = new ReadAlienWaveFactory(newGame);
 			curWave = alienWaveFactory.createWave();
 		} catch (Exception e) {
-			Game.getLogger().log("Failed reading alienWaves from file using default alien factory", LogEvent.Type.WARNING);
+			Game.getLogger().log("Failed reading alienWaves from file now using default alien factory"
+					, LogEvent.Type.WARNING);
 			alienWaveFactory = new DefaultAlienWaveFactory(newGame);
 			curWave = alienWaveFactory.createWave();
 		}
@@ -135,6 +139,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 */
 	public final void nextRound() {
 		Game.getLogger().log("proceding to next round", LogEvent.Type.INFO);
+		alienVelX+=ALIENVELXINCREASE;
 		curWave = alienWaveFactory.createWave();
 	}
 
@@ -156,5 +161,19 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 */
 	public final ArrayList<Alien> getAliens() {
 		return curWave.getAliens();
+	}
+	/**
+	 * Returns alienVelX for this ALiencontroller.
+	 * @return alienVelX the alienvelx
+	 */
+	public static double getAlienVelX() {
+		return alienVelX;
+	}
+	/**
+	 * Sets the alienVelX for this alienController.
+	 * @param newVelX the new alienvelX
+	 */
+	public static void setAlienVelX(double newVelX) {
+		alienVelX = newVelX;
 	}
 }

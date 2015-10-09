@@ -17,10 +17,6 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 	 */
 	private Game game;
 	/**
-	 * Speed of the aliens in the X direction in pixels per second.
-	 */
-	private double alienVelX = 40;
-	/**
 	 * Reader used to read the alienwaves from a file.
 	 */
 	private AlienWaveReader waveReader;
@@ -45,7 +41,6 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 	}
 	@Override
 	public final AlienWave createWave() {
-        alienVelX += AlienController.ALIENVELXINCREASE;
 		return createWaveFromPattern(patternList.get((int) (Math.random() * patternList.size())));
 	}
 	/**
@@ -73,7 +68,7 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
             	switch (pattern.getChar(i, j)) {
             		case '*':
             			Alien alien = new Alien(x, y, "invader.png");
-                    	alien.setVelX(alienVelX);
+                    	alien.setVelX(AlienController.getAlienVelX());
                     	aliens.add(alien);
                       	Game.getLogger().log("Created Alien at location:(" + x + "," + y + ")", LogEvent.Type.TRACE);
                       	break;
