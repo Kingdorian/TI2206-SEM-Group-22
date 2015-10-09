@@ -23,7 +23,7 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 	/**
 	 * List of all patterns that are read from files.
 	 */
-	private ArrayList<ArrayListWavePattern> patternList;
+	private ArrayList<WavePattern> patternList;
 	/**
 	 * WaveP
 	 */
@@ -46,10 +46,10 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 	/**
 	 * Creates a new alienwave according to the supplied pattern.
 	 * @return pattern to create a alienwave from
-	 * @param pattern the pattern to create an wave from.
+	 * @param wavePattern the pattern to create an wave from.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
-	public final AlienWave createWaveFromPattern(final ArrayListWavePattern pattern) {
+	public final AlienWave createWaveFromPattern(final WavePattern wavePattern) {
 		ConcreteAlienWave wave = new ConcreteAlienWave();
 		
 		
@@ -58,15 +58,15 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
         // Create alien object to make sure we can get the width and height of aliens
         Alien testAlien = new Alien(0.0, 0.0, Alien.SPRITE); 
         // Drawing lines of Aliens.
-        for (int i = 0; i < pattern.getHeight(); i++) {
+        for (int i = 0; i < wavePattern.getHeight(); i++) {
         	ArrayList<Alien> aliens = new ArrayList<Alien>();
         	 double interval = ((game.getCanvasWidth() 
         			 - (2 * AlienController.ALIENBORDERMARIGIN
         					 * game.getCanvasWidth()))
-						- (pattern.getLength(i) * testAlien.getWidth())) / (pattern.getLength(i) + 1);  
+						- (wavePattern.getLength(i) * testAlien.getWidth())) / (wavePattern.getLength(i) + 1);  
             double x = AlienController.ALIENBORDERMARIGIN * game.getCanvasWidth() + 0.5 * testAlien.getWidth();
-            for (int j = 0; j < pattern.getLength(i); j++) {
-            	switch (pattern.getChar(i, j)) {
+            for (int j = 0; j < wavePattern.getLength(i); j++) {
+            	switch (wavePattern.getChar(i, j)) {
             		case '*':
             			Alien alien = new Alien(x, y, "invader.png");
                     	alien.setVelX(AlienController.getAlienVelX());

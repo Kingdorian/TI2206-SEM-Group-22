@@ -68,8 +68,8 @@ public class AlienWaveReaderTest {
 		String sep = System.getProperty("file.separator");
 		String file = "src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "2testfiles" + sep;
-		ArrayList<ArrayListWavePattern> charPatterns = waveReader.read(file);
-		ArrayList<ArrayListWavePattern> expectedPatterns = new ArrayList<ArrayListWavePattern>();
+		ArrayList<WavePattern> charPatterns = waveReader.read(file);
+		ArrayList<WavePattern> expectedPatterns = new ArrayList<WavePattern>();
 		ArrayListWavePattern expectedFile1 = new ArrayListWavePattern();
 		ArrayList<Character> expectedLine1 = new ArrayList<Character>();
 		expectedLine1.add('*');
