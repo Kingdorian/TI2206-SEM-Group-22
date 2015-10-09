@@ -22,13 +22,35 @@ public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	 */
 	private double velY;
 	/**
-	 * Creates an Alien.
+	 * Chance this aliens shoots a bullet.
+	 */
+	private double bulletChance = 0.025;
+	/**
+	 * Variable that keeps track of the health left for this alien.
+	 */
+	private int health = 1;
+	/**
+	 * Creates an Alien with default health.
 	 * @param x X coordinate
 	 * @param y Y coordinate
 	 * @param spriteFile The filename of the sprite.
 	 */
 	public Alien(final double x, final double y, final String spriteFile) {
 		super(x, y, spriteFile);
+	}
+	/**
+	 * Creates an Alien with specified health.
+	 * @param x X coordinate
+	 * @param y Y coordinate
+	 * @param spriteFile The filename of the sprite.
+	 * @param sethealth health this alien has.
+	 */
+	public Alien(final double x, final double y, final String spriteFile, final int sethealth) {
+		super(x, y, spriteFile);
+		if (sethealth >= 1) {
+			health = sethealth;
+			setSprite();
+		}
 	}
 	
 	/**
@@ -112,6 +134,42 @@ public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	public final void setVelY(final double alienVelY) {
 		this.velY = alienVelY;
 	}
+	/**
+	 * Gets the chance this aliens shoots a bullet.
+	 * @return the chance this alien shoots a bullet
+	 */
+	public final double getBulletChance() {
+		return bulletChance;
+	}
+	/**
+	 * Sets the chance this aliens shoots a bullet to 0.25.
+	 */
+	public final void increaseShooting() {
+		this.bulletChance = 0.25;
+		setSprite();
+	}
 
-
+	/**
+	 * @return the health
+	 */
+	public final int getHealth() {
+		return health;
+	}
+	/**
+	 * Sets the right sprite by the health and bullet chance.
+	 */
+	public final void setSprite() {
+		String sprite = "invader_health" + health + ".png";
+		if (getBulletChance() > 0.025) {
+			sprite = "invader_shooter.png";
+		}
+		setSprite(sprite);
+	}
+	/**
+	 * When alien is hit decrease health.
+	 */
+	public final void hit() {
+		health--;
+		setSprite();
+	}
 }
