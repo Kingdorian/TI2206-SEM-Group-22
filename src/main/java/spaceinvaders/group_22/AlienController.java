@@ -17,7 +17,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 	/**
 	 * Part of the screen (on left and right) that cannot be used when creating aliens. 
 	 */
-	static final double ALIENBORDERMARIGIN = 0.15;
+	static final double ALIENBORDERMARGIN = 0.15;
 	/**
 	 * Amount of aliens per row.
 	 */
@@ -115,9 +115,9 @@ public class AlienController extends UnitController implements MovableUnitContro
 			}
 			unit.move(game.getTickrate());
 		}
-	//	String velX = String.valueOf(curWave.getAliens().get(0).getVelX());
-	//	String velY = String.valueOf(curWave.getAliens().get(0).getVelY());
-	//	Game.getLogger().log("Aliens moved X: " + velX + "\tY: " + velY, LogEvent.Type.TRACE);
+		String velX = String.valueOf(curWave.getAliens().get(0).getVelX());
+		String velY = String.valueOf(curWave.getAliens().get(0).getVelY());
+		Game.getLogger().log("Aliens moved X: " + velX + "\tY: " + velY, LogEvent.Type.TRACE);
 	}
 
 	/**
