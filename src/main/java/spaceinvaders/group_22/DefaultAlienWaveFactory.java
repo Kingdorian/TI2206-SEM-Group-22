@@ -3,6 +3,7 @@ package spaceinvaders.group_22;
 import java.util.ArrayList;
 
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Alien;
 /**
  * Default alien wave factory to create a default alien wave.
@@ -46,7 +47,7 @@ public class DefaultAlienWaveFactory implements AlienWaveFactoryInterface {
             		+ 0.5 * testAlien.getWidth();
             for (int j = 0; j < AlienController.ALIENS_PER_ROW; j++) {
             	Alien alien = new Alien(startPosition, distance, "invader.png");
-            	Game.getLogger().log("Created Alien", LogEvent.Type.TRACE);
+            	Logger.getInstance().log("Created Alien", LogEvent.Type.TRACE);
             	alien.setVelX(AlienController.getAlienVelX());
             	aliens.add(alien);
             	startPosition += testAlien.getWidth() + interval;

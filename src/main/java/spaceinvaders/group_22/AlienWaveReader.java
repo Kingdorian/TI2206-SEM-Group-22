@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 
 /**
  * Class to read alien wave patterns from a file.
@@ -34,10 +35,10 @@ public class AlienWaveReader {
 		File dir = new File(fileName);
 	    ArrayList<WavePattern> alienWaves = new ArrayList<WavePattern>();
 		if (!dir.exists()) {
-			Game.getLogger().log("The wave directory:\"" + fileName + "\" does not exist", LogEvent.Type.WARNING);
+			Logger.getInstance().log("The wave directory:\"" + fileName + "\" does not exist", LogEvent.Type.WARNING);
 			return null;
 		} else if (dir.listFiles().length == 0) {
-			Game.getLogger().log("The wave directory:\"" + fileName + "\" is empty", LogEvent.Type.WARNING);
+			Logger.getInstance().log("The wave directory:\"" + fileName + "\" is empty", LogEvent.Type.WARNING);
 			return null;
 		}
 		for (final File wave : dir.listFiles()) {
@@ -58,7 +59,7 @@ public class AlienWaveReader {
 	 * @throws IOException if an error occurred when reading the file
 	 */
 	public final ArrayListWavePattern parseFile(final File wave) throws FileNotFoundException, IOException {
-		Game.getLogger().log("Reading wave: " + wave.getName(), LogEvent.Type.DEBUG);
+		Logger.getInstance().log("Reading wave: " + wave.getName(), LogEvent.Type.DEBUG);
 		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		int lineNum = 0; 
 		BufferedReader bReader = new BufferedReader(new FileReader(wave));
@@ -75,7 +76,8 @@ public class AlienWaveReader {
 			lineNum++;
 		}
 		bReader.close();
-		Game.getLogger().log("Read file: " + wave + "\n resulting pattern: " + pattern.toString(), LogEvent.Type.TRACE);
+		Logger.getInstance().log("Read file: " + wave 
+				+ "\n resulting pattern: " + pattern.toString(), LogEvent.Type.TRACE);
 		return pattern;
 	}
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javafx.scene.input.KeyCode;
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
@@ -57,7 +58,7 @@ public class SpaceShipController extends UnitController implements MovableUnitCo
 		game.getPlayer().getSpaceShip().setVelX(velX);
 		game.getPlayer().getSpaceShip().move(game.getTickrate());
 		if (velX != 0) {
-			Game.getLogger().log("Player moved X: " + velX, LogEvent.Type.TRACE);
+			Logger.getInstance().log("Player moved X: " + velX, LogEvent.Type.TRACE);
 		}
 	}
 

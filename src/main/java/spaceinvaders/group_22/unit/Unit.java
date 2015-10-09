@@ -7,6 +7,7 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.logger.Logger;
 
 /**
  * A unit in the game that has a position and velocity.
@@ -59,7 +60,7 @@ public abstract class Unit {
 			this.setHeight(spriteImage.getHeight());
 			this.setWidth(spriteImage.getWidth());	
 		} catch (IOException e) {
-			Game.getLogger().log("Unit sprite image name invalid", e);
+			Logger.getInstance().log("Unit sprite image name invalid", e);
 			e.printStackTrace();
 		}
 	}

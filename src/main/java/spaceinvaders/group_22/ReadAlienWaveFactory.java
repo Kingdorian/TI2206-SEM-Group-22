@@ -3,6 +3,7 @@ package spaceinvaders.group_22;
 import java.util.ArrayList;
 
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Alien;
 
 /**
@@ -71,7 +72,8 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
             			Alien alien = new Alien(x, y, "invader.png");
                     	alien.setVelX(AlienController.getAlienVelX());
                     	aliens.add(alien);
-                      	Game.getLogger().log("Created Alien at location:(" + x + "," + y + ")", LogEvent.Type.TRACE);
+                    	Logger.getInstance().log("Created Alien at location:(" + x + "," + y + ")", 
+                    			LogEvent.Type.TRACE);
                       	break;
             		default:
             			

@@ -13,12 +13,6 @@ import spaceinvaders.group_22.ui.SpaceInvadersUI;
 public class Main extends Application {
 	@Override
 	public final void start(final Stage stage) {
-		/**
-		 * Initialize the logger.
-		 */
-		Logger.getInstance().setLogFileLocation("log.log");
-		Logger.getInstance().setLogLevel(1);
-		
 		SpaceInvadersUI userInterface = new SpaceInvadersUI(stage);
 		userInterface.loadUIScreen("GameUI.fxml");
 		userInterface.launch();
@@ -31,5 +25,9 @@ public class Main extends Application {
 	 */
 	public static void main(final String[] args) {
 		launch(args);
+		
+		// Initalize the logger.
+		Logger.getInstance().setLogFileLocation("log.log");
+		Logger.getInstance().setLogLevel(1);
 	}
 }

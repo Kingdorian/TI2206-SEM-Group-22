@@ -3,6 +3,7 @@ package spaceinvaders.group_22.ui;
 import javafx.scene.canvas.GraphicsContext;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Alien;
 
 /**
@@ -28,7 +29,7 @@ public class UIElementAlien extends UIElementUnit {
 			drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(),
 					unit.getHeight(), unit.getSprite(), getGC());		
 		}
-		Game.getLogger().log("Drawn aliens", LogEvent.Type.TRACE);
+		Logger.getInstance().log("Drawn aliens", LogEvent.Type.TRACE);
 	}
 
 }

@@ -3,6 +3,7 @@ package spaceinvaders.group_22.ui;
 import javafx.scene.canvas.GraphicsContext;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Barricade;
 
 /**
@@ -33,7 +34,7 @@ public class UIElementBarricade extends UIElementUnit {
 			drawUnit(bar.getXCoor(), bar.getYCoor(), bar.getWidth(), bar.getHeight(), bar.getSprite(), getGC());
 			getGC().setGlobalAlpha(1);
 		}
-		Game.getLogger().log("Drawn barricades", LogEvent.Type.TRACE);
+		Logger.getInstance().log("Drawn barricades", LogEvent.Type.TRACE);
 		
 	}
 

@@ -2,6 +2,7 @@ package spaceinvaders.group_22.unit;
 
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 
 /**
  * Class responsible for the creation of Speed Powerups.
@@ -14,7 +15,7 @@ public class SpeedPowerupFactory implements AbstractPowerupFactory {
 	 * Constructor for a SpeedPowerupFactory.
 	 */
 	public SpeedPowerupFactory() {
-		Game.getLogger().log(getClass().getName() + "  created succesfully", LogEvent.Type.INFO);
+		Logger.getInstance().log(getClass().getName() + "  created succesfully", LogEvent.Type.INFO);
 	}
 	
 	/**
