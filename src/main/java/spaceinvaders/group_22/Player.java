@@ -95,8 +95,10 @@ public class Player {
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void respawnShip() {
 		ship = new SpaceShip(game.getCanvasWidth() / 2, ship.getYCoor(), "spaceship.png");
-		for (int i = 0; i < game.getPlayer().getActivePowerUps().size(); i++) {
-			game.getPlayer().getActivePowerUps().get(i).deactivate();
+		ArrayList<PowerUp> powerups = new ArrayList<PowerUp>();
+		powerups.addAll(getActivePowerUps());
+		for (PowerUp powerup : powerups) {
+			powerup.deactivate();
 		}
 		Logger.getInstance().log("Ship respawned", LogEvent.Type.TRACE);
 	}

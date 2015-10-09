@@ -57,6 +57,13 @@ public abstract class UIElement {
     		addSprite(sprites, "alienbullet.png");
     		addSprite(sprites, "spaceshipbullet.png");
     		addSprite(sprites, "invader.png");
+    		addSprite(sprites, "invader_shooter.png");
+    		addSprite(sprites, "invader_health1.png");
+    		addSprite(sprites, "invader_health2.png");
+    		addSprite(sprites, "invader_health3.png");
+    		addSprite(sprites, "invader_health4.png");
+    		addSprite(sprites, "invader_health5.png");
+    		addSprite(sprites, "invader_shooter.png");
     		addSprite(sprites, "spaceship.png");
     		addSprite(sprites, "heart.png");
     		addSprite(sprites, "barrier.png");
@@ -70,6 +77,7 @@ public abstract class UIElement {
     		addSprite(sprites, "powerup_red.png");
     		addSprite(sprites, "glow_blue.png");
     		addSprite(sprites, "glow_orange.png");
+    		addSprite(sprites, "invader_large.png");
     }
     
     /**

@@ -205,6 +205,7 @@ public class Game {
 		spaceShipContr.moveSpaceShip(pressedKeys);
 		alienController.move();
 		alienController.shootAlienBullets();
+		alienController.removeDeadAliens();
 		
 		powerUpController.checkPowerUps();
 		

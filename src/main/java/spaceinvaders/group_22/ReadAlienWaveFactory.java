@@ -75,6 +75,28 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
                     	Logger.getInstance().log("Created Alien at location:(" + x + "," + y + ")", 
                     			LogEvent.Type.TRACE);
                       	break;
+            		case '#': 
+            			Alien bigAlien = new Alien(x + (testAlien.getWidth() / 2), 
+            					y + (testAlien.getWidth() / 2), "invader_large.png");
+            			bigAlien.setVelX(AlienController.getAlienVelX());
+            			aliens.add(bigAlien);
+            			Logger.getInstance().log("Created 2x2 Alien at location:"
+            					+ "(" + x + "," + y + ")", LogEvent.Type.TRACE);
+            			break;
+            		case '%':
+            			Alien redAlien = new Alien(x, y, "invader_health5.png", 5);
+            			redAlien.setVelX(AlienController.getAlienVelX());
+                    	aliens.add(redAlien);
+                    	Logger.getInstance().log("Created red alien Alien at location:"
+                    			+ "(" + x + "," + y + ")", LogEvent.Type.TRACE);
+                      	break;
+            		case 'S':
+            			Alien shooterAlien = new Alien(x, y, "invader_shooter.png");
+            			shooterAlien.setVelX(AlienController.getAlienVelX());
+            			shooterAlien.increaseShooting();
+            			Logger.getInstance().log("Created fast shooting alien Alien at location:"
+            					+ "(" + x + "," + y + ")", LogEvent.Type.TRACE);
+            			break;
             		default:
             			
             			break;
