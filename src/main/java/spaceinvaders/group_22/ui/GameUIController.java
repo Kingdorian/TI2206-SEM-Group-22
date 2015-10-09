@@ -324,18 +324,20 @@ public class GameUIController
 	 */
 	@FXML
 	public final void handleKeyPressed(final KeyEvent event) {
-		Logger.getInstance().log("Player pressed " + event.getCode().toString(), LogEvent.Type.DEBUG);
         if (event.getCode().equals(KeyCode.S) && game.getPlayer().getLives() > 0) {
+        	Logger.getInstance().log("Player pressed S", LogEvent.Type.DEBUG);
         	screenBeforePlay.toBack();
         	screenPaused.toBack();
         	game.start();
         } else if (event.getCode().equals(KeyCode.P)) {
         	if (game.isInProgress()) {
+        		Logger.getInstance().log("Player pressed P", LogEvent.Type.DEBUG);
             	screenPaused.toFront();
             	Logger.getInstance().log("Show screen Paused", LogEvent.Type.INFO);
             	game.stop();
         	}
         } else if (event.getCode().equals(KeyCode.R)) {
+        	Logger.getInstance().log("Player pressed R", LogEvent.Type.DEBUG);
         	if (game.hasEnded()) {
             	newGame();
             	game.start();

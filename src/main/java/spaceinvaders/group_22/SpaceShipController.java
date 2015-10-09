@@ -49,11 +49,13 @@ public class SpaceShipController extends UnitController implements MovableUnitCo
 		// Check that the spaceship is still able to move without going off the screen.
 		if (game.getPlayer().getSpaceShip().getXCoor() - 0.5 * game.getPlayer().getSpaceShip().getWidth() > 0 
 				&& pressedKeys.contains(KeyCode.A)) {
+			Logger.getInstance().log("Player pressed A", LogEvent.Type.DEBUG);
 			velX = velX - SpaceShip.getMAXVELX() * game.getTickrate() * 2;
 		}
 		if (game.getPlayer().getSpaceShip().getXCoor() 
 				+ 0.5 * game.getPlayer().getSpaceShip().getWidth() < game.getCanvasWidth()
 				&& pressedKeys.contains(KeyCode.D)) {
+			Logger.getInstance().log("Player pressed D", LogEvent.Type.DEBUG);
 			velX = velX + SpaceShip.getMAXVELX() * game.getTickrate() * 2;
 		}
 
