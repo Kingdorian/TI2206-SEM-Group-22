@@ -7,7 +7,7 @@ package spaceinvaders.group_22.unit;
  * @author Dorian
  */
 @SuppressWarnings("checkstyle:magicnumber") 
-public class SpaceShip extends Unit implements MovableUnit {
+public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	/**
 	 * VelX is the velocity in the X direction in pixels per second.
 	 */
@@ -61,12 +61,12 @@ public class SpaceShip extends Unit implements MovableUnit {
 	
 	/**
 	 * Creates a bullet object on the place of the Ship and shoots it upwards.
-	 * @param spaceShipBulletVelX The speed of the Bullet
+	 * @param velocity The speed of the Bullet
 	 * @return The shot Bullet
 	 */
-	public final Bullet shootBullet(final double spaceShipBulletVelX) {
+	public final Bullet shootBullet(final double velocity) {
 		Bullet bullet = new ShipBullet(this.getXCoor(), this.getYCoor(), "spaceshipbullet.png");
-		bullet.setVelY(spaceShipBulletVelX);
+		bullet.setVelY(velocity);
 		return bullet;
 
 	}	
