@@ -31,15 +31,9 @@ public class Main extends Application {
 		Logger.getInstance().setLogFileLocation("log.log");
 		Logger.getInstance().setLogLevel(0);
 		
-		for (String arg : Arrays.asList(args)) {
-			if (arg.startsWith("-log=")) {
-				int i = Integer.parseInt(arg.substring(5));
-				
-				if (i >= 0 && i <= 5) {
-					Logger.getInstance().setLogLevel(i);			
-				}
-			}
-		}
+		JavaArgumentReader argumentreader = new JavaArgumentReader(args);
+		
+		Logger.getInstance().setLogLevel(argumentreader.parseLogLevel());
 
 		launch(args);
 	}
