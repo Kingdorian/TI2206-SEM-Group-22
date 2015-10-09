@@ -1,6 +1,5 @@
 package spaceinvaders.group_22.unit;
 
-import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 

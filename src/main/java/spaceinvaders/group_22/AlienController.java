@@ -54,11 +54,17 @@ public class AlienController extends UnitController implements MovableUnitContro
 	private AlienWaveFactoryInterface alienWaveFactory;
 	
 	/**
+	 * The game object.
+	 */
+	private Game game;
+	
+	/**
 	 * Creates a new alien controller.
 	 * @param newGame The Game where the AlienController comes.
 	 */
 	public AlienController(final Game newGame) {
 		super(newGame);
+		game = getGame();
 		try {
 			alienWaveFactory = new ReadAlienWaveFactory(newGame);
 			curWave = alienWaveFactory.createWave();
@@ -149,6 +155,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 		// TODO Auto-generated method stub
 		
 	}
+	
 	/**
 	 * Returns the current alien wave.
 	 * @return the current alien wave.

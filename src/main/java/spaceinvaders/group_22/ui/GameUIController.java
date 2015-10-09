@@ -5,16 +5,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
-import spaceinvaders.group_22.PowerUp;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
-import spaceinvaders.group_22.unit.Alien;
-import spaceinvaders.group_22.unit.Barricade;
-import spaceinvaders.group_22.unit.Bullet;
-import spaceinvaders.group_22.unit.Explosion;
-import spaceinvaders.group_22.unit.PowerUpUnit;
-import spaceinvaders.group_22.unit.SpaceShip;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;

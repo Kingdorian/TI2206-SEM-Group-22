@@ -6,7 +6,6 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
-import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.Logger;
 
 /**
@@ -69,7 +68,7 @@ public abstract class Unit {
 	 * @return true if both objects are the same.
 	 * @param other the object to compare.
 	 */
-	@SuppressWarnings("checksytle:DesignForExtension")
+	@SuppressWarnings("checkstyle:designforextension")
 	@Override
 	public boolean equals(final Object obj) {
 		if (this == obj) {
@@ -108,7 +107,7 @@ public abstract class Unit {
 	 * Returns hashcode of this object.
 	 * @return hashcode of this object.
 	 */
-	@SuppressWarnings({"checkstyle:magicnumber", "checkstyle:AvoidInlineConditionals", "checkstyle:DesignForExtension"})
+	@SuppressWarnings({"checkstyle:magicnumber", "checkstyle:avoidinlineconditionals", "checkstyle:designforextension"})
 	@Override
 	public int hashCode() {
 		final int prime = 31;

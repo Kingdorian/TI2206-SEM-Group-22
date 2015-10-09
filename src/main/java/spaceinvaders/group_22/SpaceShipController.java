@@ -14,12 +14,19 @@ import spaceinvaders.group_22.unit.SpaceShip;
 public class SpaceShipController extends UnitController implements MovableUnitController {
 
 	/**
+	 * The game object.
+	 */
+	private Game game;
+	
+	/**
 	 * Creates a new spaceShipcontroller.
 	 * @param parentGame Game this controller works for.
 	 */
 	public SpaceShipController(final Game parentGame) {
 		super(parentGame);
+		game = getGame();
 	}
+		
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub

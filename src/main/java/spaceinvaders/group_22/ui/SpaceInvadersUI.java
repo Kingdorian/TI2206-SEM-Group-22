@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.Logger;
 
 /**
