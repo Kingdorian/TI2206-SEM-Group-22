@@ -1,4 +1,5 @@
 package spaceinvaders.group_22;
+
 /**
  * Interface for creating an alienWave.
  * @author Dorian and Bryan
@@ -7,8 +8,9 @@ package spaceinvaders.group_22;
 
 public interface AlienWaveFactoryInterface {
 	/**
-	 * Method to create a new alienWave.
+	 * Method to create a list of alienwaves.
 	 * @return new Alienwave
+	 * @throws Exception 
 	 */
 	AlienWave createWave();
 }

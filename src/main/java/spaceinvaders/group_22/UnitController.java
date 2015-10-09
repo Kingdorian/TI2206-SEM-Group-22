@@ -17,7 +17,6 @@ public abstract class UnitController {
 	 */
 	public UnitController(Game parentgame) {
 		game = parentgame;
-		System.out.println(game);
 	}
 	/**
 	 * Creates the units this controller controls.

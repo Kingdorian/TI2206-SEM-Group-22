@@ -33,6 +33,9 @@ public class GameTest {
 	public final void setUpGame() {
 		game = new Game(200, 200);
 		game.setTickrate(1.0);
+		ArrayList<Alien> row = new ArrayList<Alien>();
+		row.add(new Alien(10, 10, "invader.png"));
+		game.getAlienController().getAlienWave().addAlienRow(row);
 	}
 	
 	/**
@@ -89,10 +92,10 @@ public class GameTest {
 	 */
 	@Test
 	public final void testGetAliens() {
-		ArrayList<Alien> aliens = new ArrayList<Alien>();		
-		game.getAlienController().getAlienWave().setAliens(aliens);;
-		
-		Assert.assertEquals(new ArrayList<Alien>(), game.getAlienController().getAliens());
+		Game game = new Game(100, 100);
+		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
+		game.getAlienController().getAlienWave().setAliens(aliens);
+		Assert.assertEquals(new ArrayList<ArrayList<Alien>>(), game.getAlienController().getAliens());
 	}
 	/**
 	 * Tests if the reset method works correctly for resetting barricades.
