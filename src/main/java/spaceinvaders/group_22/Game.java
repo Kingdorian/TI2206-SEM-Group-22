@@ -188,6 +188,7 @@ public class Game {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
 		if (pressedKeys.contains(KeyCode.SPACE) && shootingAllowed) {
+			Logger.getInstance().log("Player pressed Space", LogEvent.Type.DEBUG);
 			Bullet bullet = player.getSpaceShip().shootBullet(-spaceShipBulletVelX);
 			bullets.add(bullet);
 			shootingAllowed = false;
