@@ -73,6 +73,11 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
                     	aliens.add(alien);
                       	Game.getLogger().log("Created Alien at location:(" + x + "," + y + ")", LogEvent.Type.TRACE);
                       	break;
+            		case '#': 
+            			Alien bigAlien = new Alien(x + (testAlien.getWidth()/2), y + (testAlien.getWidth()/2), "invader_large.png");
+            			bigAlien.setVelX(AlienController.getAlienVelX());
+            			aliens.add(bigAlien);
+            			Game.getLogger().log("Created 2x2 Alien at location:(" + x + "," + y + ")", LogEvent.Type.TRACE);
             		default:
             			
             			break;

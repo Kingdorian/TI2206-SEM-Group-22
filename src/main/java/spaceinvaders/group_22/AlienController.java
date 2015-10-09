@@ -57,8 +57,9 @@ public class AlienController extends UnitController implements MovableUnitContro
 			alienWaveFactory = new ReadAlienWaveFactory(newGame);
 			alienWave = alienWaveFactory.createWave();
 		} catch (Exception e) {
+			e.printStackTrace();
 			Game.getLogger().log("Failed reading alienWaves from file now using default alien factory"
-					, LogEvent.Type.WARNING);
+					, e);
 			alienWaveFactory = new DefaultAlienWaveFactory(newGame);
 			alienWave = alienWaveFactory.createWave();
 		}
