@@ -7,7 +7,7 @@ package spaceinvaders.group_22.unit;
  * @author Dorian
  */
 @SuppressWarnings("checkstyle:magicnumber") 
-public class SpaceShip extends Unit implements MovableUnit, ShootableUnit {
+public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	/**
 	 * VelX is the velocity in the X direction in pixels per second.
 	 */

@@ -4,7 +4,7 @@ package spaceinvaders.group_22.unit;
  * @author Jochem
  *
  */
-public interface ShootableUnit {
+public interface ShootingUnit {
 
 	/**
 	 * Method implementing shoot functionality.
