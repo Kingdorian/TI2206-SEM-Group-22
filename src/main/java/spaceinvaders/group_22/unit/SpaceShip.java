@@ -131,7 +131,7 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * HashCode method.
 	 * @return hashcode of this object
 	 */
-	@SuppressWarnings({"checkstyle:magicnumber", "checkstyle:DesignForExtension"})
+	@SuppressWarnings({"checkstyle:magicnumber", "checkstyle:designforextension"})
 	@Override
 	public int hashCode() {
 		final int prime = 31;

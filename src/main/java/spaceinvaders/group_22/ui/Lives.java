@@ -4,6 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 
 /**
  * The drawing of the lives.
@@ -29,7 +30,7 @@ public class Lives extends UIElement {
     	for (int i = 1; i <= getGame().getPlayer().getLives(); i++) {
         	getGC().drawImage(heartImage, getGame().getCanvasWidth() - 10 - heartImage.getWidth() * i, 10);
     	}
-    	Game.getLogger().log("Formatted hearts to UI", LogEvent.Type.TRACE);
+    	Logger.getInstance().log("Formatted hearts to UI", LogEvent.Type.TRACE);
 	}
 
 }

@@ -67,7 +67,7 @@ public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	 * HashCode method.
 	 * @return hashcode of this object
 	 */
-	@SuppressWarnings("CheckStyle:MagicNumber")
+	@SuppressWarnings("checkstyle:magicnumber")    
 	@Override
 	public final int hashCode() {
 		final int prime = 31;

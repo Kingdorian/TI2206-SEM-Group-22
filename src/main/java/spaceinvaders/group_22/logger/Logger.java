@@ -10,6 +10,12 @@ import java.util.ArrayList;
  *
  */
 public class Logger {
+	
+	/**
+	 * The singleton unique instance of Logger.
+	 */
+	private static volatile Logger uniqueInstance;
+	
 	/**
 	 * Location of the logfile.
 	 */
@@ -28,6 +34,7 @@ public class Logger {
 	 * 5 Errors, Warnings, Info, Debug and Trace 
 	 */
 	private int logLevel;
+	
 	/**
 	 * Creates a new logger object.
 	 * @param logLocation the location of the log file
@@ -47,6 +54,21 @@ public class Logger {
 		logFileLoc = folder + "/" + logLocation;
 		LogWriter logWriter = new LogWriter(logFileLoc, null);
 		logWriter.clearLogFile();
+	}
+
+	/**
+	 * Returns the singleton instance of Logger.
+	 * @return the Loggers unique instance.
+	 */
+	public static Logger getInstance() {
+		if (uniqueInstance == null) {
+			synchronized (Logger.class) {
+				if (uniqueInstance == null) {
+					uniqueInstance = new Logger("log.log", 1);
+		       }
+			}	
+		}
+		return uniqueInstance; 
 	}
 	
 	/**
@@ -99,6 +121,22 @@ public class Logger {
 	 */
 	public final String getLogFileLocation() {
 		return logFileLoc;
+	}
+	
+	/**
+	 * Sets the log file location to another file.
+	 * @param newLoc The new location of the logger file.
+	 */
+	public final void setLogFileLocation(final String newLoc) {
+		logFileLoc = newLoc;
+	}
+	
+	/**
+	 * Sets the log level to a different level.
+	 * @param newLogLevel The new level of the logger.
+	 */
+	public final void setLogLevel(final int newLogLevel) {
+		logLevel = newLogLevel;
 	}
 
 	

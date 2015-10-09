@@ -7,6 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 
 /**
  * The drawing of all the elements.
@@ -96,7 +97,7 @@ public abstract class UIElement {
 		spriteMap.put(filename, 
 				new Image(getClass().getClassLoader()
 						.getResource("spaceinvaders/group_22/images/" + filename).toString()));
-		Game.getLogger().log("Loaded " + filename, LogEvent.Type.DEBUG);
+		Logger.getInstance().log("Loaded " + filename, LogEvent.Type.DEBUG);
     }
 
 	/**

@@ -3,6 +3,7 @@ package spaceinvaders.group_22;
 import java.util.ArrayList;
 
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Alien;
 
 /**
@@ -71,25 +72,30 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
             			Alien alien = new Alien(x, y, "invader.png");
                     	alien.setVelX(AlienController.getAlienVelX());
                     	aliens.add(alien);
-                      	Game.getLogger().log("Created Alien at location:(" + x + "," + y + ")", LogEvent.Type.TRACE);
+                    	Logger.getInstance().log("Created Alien at location:(" + x + "," + y + ")", 
+                    			LogEvent.Type.TRACE);
                       	break;
             		case '#': 
-            			Alien bigAlien = new Alien(x + (testAlien.getWidth()/2), y + (testAlien.getWidth()/2), "invader_large.png");
+            			Alien bigAlien = new Alien(x + (testAlien.getWidth() / 2), 
+            					y + (testAlien.getWidth() / 2), "invader_large.png");
             			bigAlien.setVelX(AlienController.getAlienVelX());
             			aliens.add(bigAlien);
-            			Game.getLogger().log("Created 2x2 Alien at location:(" + x + "," + y + ")", LogEvent.Type.TRACE);
+            			Logger.getInstance().log("Created 2x2 Alien at location:"
+            					+ "(" + x + "," + y + ")", LogEvent.Type.TRACE);
             			break;
             		case '%':
             			Alien redAlien = new Alien(x, y, "invader_health5.png", 5);
             			redAlien.setVelX(AlienController.getAlienVelX());
                     	aliens.add(redAlien);
-                      	Game.getLogger().log("Created red alien Alien at location:(" + x + "," + y + ")", LogEvent.Type.TRACE);
+                    	Logger.getInstance().log("Created red alien Alien at location:"
+                    			+ "(" + x + "," + y + ")", LogEvent.Type.TRACE);
                       	break;
             		case 'S':
             			Alien shooterAlien = new Alien(x, y, "invader_shooter.png");
             			shooterAlien.setVelX(AlienController.getAlienVelX());
             			shooterAlien.increaseShooting();
-            			Game.getLogger().log("Created fast shooting alien Alien at location:(" + x + "," + y + ")", LogEvent.Type.TRACE);
+            			Logger.getInstance().log("Created fast shooting alien Alien at location:"
+            					+ "(" + x + "," + y + ")", LogEvent.Type.TRACE);
             			break;
             		default:
             			

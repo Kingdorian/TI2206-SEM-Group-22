@@ -63,7 +63,7 @@ public class ArrayListWavePattern implements WavePattern {
 	 * @param newRow the new row
 	 * @throws IndexOutOfBoundsException when index is invalid.
 	 */
-	public final void setRow(final int index, ArrayList<Character> newRow) throws IndexOutOfBoundsException {
+	public final void setRow(final int index, final ArrayList<Character> newRow) throws IndexOutOfBoundsException {
 		pattern.set(index, new ArrayList<Character>(newRow)); 
 	}
 	/**
@@ -86,7 +86,8 @@ public class ArrayListWavePattern implements WavePattern {
 	 * @param value the char to put
 	 * @throws IndexOutOfBoundsException if the row or columIndex is invalid
 	 */
-	public final void setChar(final int rowIndex, final int columnIndex, final char value) throws IndexOutOfBoundsException {
+	public final void setChar(final int rowIndex, 
+			final int columnIndex, final char value) throws IndexOutOfBoundsException {
 		pattern.get(rowIndex).set(columnIndex, value);
 	}
 	/**

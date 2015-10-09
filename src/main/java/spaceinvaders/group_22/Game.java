@@ -88,11 +88,7 @@ public class Game {
 	 * The collisions of units.
 	 */
 	private Collisions collisions;
-	
-	/**
-	 * The logger.
-	 */
-	private static Logger logger;
+
 	/**
 	 * Creates a new instance of game.
 	 * @param width of the canvas.
@@ -102,8 +98,6 @@ public class Game {
 	public Game(final double width, final double height) {
 		canvasWidth = width;
 		canvasHeight = height;
-		
-		logger = new Logger("log.log", 4);
 		
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
@@ -117,7 +111,7 @@ public class Game {
 		player = new Player(this);
 		shootingAllowed = true;
 		countToShoot = 0;
-		logger.log("Created game succesfully", LogEvent.Type.INFO);
+		Logger.getInstance().log("Created game succesfully", LogEvent.Type.INFO);
 	}
 	/**
 	 * Resets the game.
@@ -131,7 +125,7 @@ public class Game {
 		
 		shootingAllowed = true;
 		countToShoot = 0;
-		logger.log("Recreated game succesfully", LogEvent.Type.INFO);
+		Logger.getInstance().log("Recreated game succesfully", LogEvent.Type.INFO);
 	}
 	/**
 	 * Starts the game.
@@ -139,14 +133,14 @@ public class Game {
 	public final void start() {
 		inProgress = true;
 		hasEnded = false;
-		logger.log("Game started", LogEvent.Type.INFO);
+		Logger.getInstance().log("Game started", LogEvent.Type.INFO);
 	}
 	/**
 	 * Pauses the game.
 	 */
 	public final void stop() {
 		inProgress = false;
-		logger.log("Game stopped", LogEvent.Type.INFO);
+		Logger.getInstance().log("Game stopped", LogEvent.Type.INFO);
 	}
 	/**
 	 * Resets the game.
@@ -169,7 +163,7 @@ public class Game {
 			setHighScore(player.getScore());
 		}
 		hasEnded = true;
-		logger.log("Game is over", LogEvent.Type.DEBUG);
+		Logger.getInstance().log("Game is over", LogEvent.Type.DEBUG);
 	}
 	
 	/**
@@ -198,7 +192,7 @@ public class Game {
 			bullets.add(bullet);
 			shootingAllowed = false;
 			String logMessage = "Player shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
-			getLogger().log(logMessage, LogEvent.Type.TRACE);
+			Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
 		}
 		if (!shootingAllowed) {
 			if (countToShoot < ((1 / tickrate) / SpaceShip.getShootTimes())) { 
@@ -220,32 +214,32 @@ public class Game {
 			if (bullets.get(i).getXCoor() > canvasWidth || bullets.get(i).getYCoor() < 0 
 					|| bullets.get(i).getYCoor() >= canvasHeight) {
 				bullets.remove(i);
-				logger.log("Removed bullet out of screen", LogEvent.Type.TRACE);
+				Logger.getInstance().log("Removed bullet out of screen", LogEvent.Type.TRACE);
 			}
 		}
-		logger.log("Moved bullets", LogEvent.Type.TRACE);
+		Logger.getInstance().log("Moved bullets", LogEvent.Type.TRACE);
 		//Move every bullet
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).move(tickrate);
 		}
-		logger.log("Moved bullets", LogEvent.Type.TRACE);
+		Logger.getInstance().log("Moved bullets", LogEvent.Type.TRACE);
 		
 		collisions.checkCollisions();
 		for (int i = 0; i < barController.getBarricades().size(); i++)  {
 			if (barController.getBarricades().get(i).getHealth() == 0) {
 				barController.getBarricades().remove(i);
-				logger.log("Removed barricade", LogEvent.Type.TRACE);
+				Logger.getInstance().log("Removed barricade", LogEvent.Type.TRACE);
 				i--;
 			}
 		}
 		barController.removeDead();
 		//new wave of aliens
 		if (alienController.getAliens().isEmpty()) {
-			logger.log("All aliens died", LogEvent.Type.INFO);
+			Logger.getInstance().log("All aliens died", LogEvent.Type.INFO);
 			//Increase aliens speed and reset direction so they start moving to the right
 			alienController.nextRound();
 			bullets.clear();
-			logger.log("Removed all bullets", LogEvent.Type.TRACE);
+			Logger.getInstance().log("Removed all bullets", LogEvent.Type.TRACE);
 		}
 	}
 	// ONLY SETTERS AND GETTERS BELOW
@@ -350,13 +344,6 @@ public class Game {
 		return shootingAllowed;
 	}
 	
-	/**
-	 * Returns the logger.
-	 * @return the logger
-	 */
-	public static final Logger getLogger() {
-		return logger;
-	}
 	/**
 	 * Sets the bullet list.
 	 * @param list ArrayList containing the new bullets

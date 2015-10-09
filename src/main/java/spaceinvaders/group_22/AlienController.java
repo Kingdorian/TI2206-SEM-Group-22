@@ -3,6 +3,7 @@ package spaceinvaders.group_22;
 import java.util.ArrayList;
 
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Bullet;
 
@@ -48,17 +49,22 @@ public class AlienController extends UnitController implements MovableUnitContro
 	private AlienWaveFactoryInterface alienWaveFactory;
 	
 	/**
+	 * The game object.
+	 */
+	private Game game;
+	
+	/**
 	 * Creates a new alien controller.
 	 * @param newGame The Game where the AlienController comes.
 	 */
 	public AlienController(final Game newGame) {
 		super(newGame);
+		game = getGame();
 		try {
 			alienWaveFactory = new ReadAlienWaveFactory(newGame);
 			alienWave = alienWaveFactory.createWave();
 		} catch (Exception e) {
-			e.printStackTrace();
-			Game.getLogger().log("Failed reading alienWaves from file now using default alien factory"
+			Logger.getInstance().log("Failed reading alienWaves from file now using default alien factory"
 					, e);
 			alienWaveFactory = new DefaultAlienWaveFactory(newGame);
 			alienWave = alienWaveFactory.createWave();
@@ -113,7 +119,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 		}
 		String velX = String.valueOf(alienWave.getAliens().get(0).getVelX());
 		String velY = String.valueOf(alienWave.getAliens().get(0).getVelY());
-		Game.getLogger().log("Aliens moved X: " + velX + "\tY: " + velY, LogEvent.Type.TRACE);
+		Logger.getInstance().log("Aliens moved X: " + velX + "\tY: " + velY, LogEvent.Type.TRACE);
 	}
 	/**
 	 * Remove dead aliens.
@@ -125,7 +131,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 			if (alien.getHealth() <= 0) {
 				alienWave.getAliens().remove(alien);
 				game.getPlayer().addScore(10);
-				Game.getLogger().log("Removed Alien", LogEvent.Type.TRACE);
+				Logger.getInstance().log("Removed Alien", LogEvent.Type.TRACE);
 			}
 		}	
 	}
@@ -140,7 +146,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 				Bullet bullet = alien.shootBullet(60);
 				game.getBullets().add(bullet);
 				String logMessage = "Alien shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
-				Game.getLogger().log(logMessage, LogEvent.Type.TRACE);
+				Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
 			}	
 		}
 	}
@@ -148,7 +154,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 * Go to next round.
 	 */
 	public final void nextRound() {
-		Game.getLogger().log("proceding to next round", LogEvent.Type.INFO);
+		Logger.getInstance().log("proceding to next round", LogEvent.Type.INFO);
 		alienVelX += ALIENVELXINCREASE;
 		alienWave.setAlienVelX(Math.abs(alienWave.getAlienVelX()) + AlienController.ALIENVELXINCREASE);
 		alienWave = alienWaveFactory.createWave();
@@ -159,6 +165,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 		// TODO Auto-generated method stub
 		
 	}
+	
 	/**
 	 * Returns the current alien wave.
 	 * @return the current alien wave.

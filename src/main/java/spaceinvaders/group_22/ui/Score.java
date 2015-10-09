@@ -4,6 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 
 /**
  * The drawing of the Score.
@@ -40,7 +41,7 @@ public class Score extends UIElement {
     	scoreString.append(getGame().getPlayer().getScore());
     	
     	label.setText(scoreString.toString());	
-    	Game.getLogger().log("Formatted score to UI", LogEvent.Type.TRACE);		
+    	Logger.getInstance().log("Formatted score to UI", LogEvent.Type.TRACE);		
 	}
 
 }

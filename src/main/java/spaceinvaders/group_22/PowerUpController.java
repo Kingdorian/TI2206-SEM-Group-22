@@ -3,6 +3,7 @@ package spaceinvaders.group_22;
 import java.util.ArrayList;
 
 import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Collisions;
 import spaceinvaders.group_22.unit.LifePowerUpUnit;
 import spaceinvaders.group_22.unit.LifePowerupFactory;
@@ -78,16 +79,16 @@ public class PowerUpController {
 		spaceShiplist.add(game.getPlayer().getSpaceShip());
 		if (powerUp.getYCoor() >= game.getCanvasHeight()) {
 			powerups.remove(powerUp);
-			Game.getLogger().log("Removed PowerUp that was outside screen " , LogEvent.Type.TRACE);
+			Logger.getInstance().log("Removed PowerUp that was outside screen " , LogEvent.Type.TRACE);
 		} else if (collisions.checkCollisions(powerUp, spaceShiplist) != null) {
 			
 			powerUp.activate(game.getPlayer());
 			powerups.remove(powerUp);
-			Game.getLogger().log("PowerUp collided with spaceship" , LogEvent.Type.TRACE);
+			Logger.getInstance().log("PowerUp collided with spaceship" , LogEvent.Type.TRACE);
 		}  else if (collisions.checkCollisions(powerUp, 
 				new ArrayList<Unit>(game.getBarricadeController().getBarricades())) != null) {
 			powerups.remove(powerUp);
-			Game.getLogger().log("PowerUp collided with barricade" , LogEvent.Type.TRACE);
+			Logger.getInstance().log("PowerUp collided with barricade" , LogEvent.Type.TRACE);
 		}  
 	}
 	
