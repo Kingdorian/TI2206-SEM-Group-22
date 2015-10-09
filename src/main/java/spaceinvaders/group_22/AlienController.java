@@ -97,14 +97,15 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 * Remove dead aliens.
 	 */
 	public final void removeDeadAliens() {
-		for (int i = 0; i < alienWave.getAliens().size(); i++)  {
-			if (alienWave.getAliens().get(i).getHealth() <= 0) {
-				alienWave.getAliens().remove(i);
+		ArrayList<Alien> list = new ArrayList<Alien>();
+		list.addAll(alienWave.getAliens());
+		for (Alien alien : list)  {
+			if (alien.getHealth() <= 0) {
+				alienWave.getAliens().remove(alien);
 				game.getPlayer().addScore(10);
 				Game.getLogger().log("Removed Alien", LogEvent.Type.TRACE);
-				i--;
 			}
-		}		
+		}	
 	}
 
 	/**
@@ -112,9 +113,9 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void shootAlienBullets() {
-		for (int i = 0; i < alienWave.getAliens().size(); i++) {
-			if (Math.random() < (alienWave.getAliens().get(i).getBulletChance() * game.getTickrate()))   {
-				Bullet bullet = alienWave.getAliens().get(i).shootBullet(60);
+		for (Alien alien : alienWave.getAliens()) {
+			if (Math.random() < (alien.getBulletChance() * game.getTickrate()))   {
+				Bullet bullet = alien.shootBullet(60);
 				game.getBullets().add(bullet);
 				String logMessage = "Alien shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
 				Game.getLogger().log(logMessage, LogEvent.Type.TRACE);
