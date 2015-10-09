@@ -53,11 +53,11 @@ public class AlienWaveReader {
 	/**
 	 * parses a file and returns Character arraylist accordingly.
 	 * @param wave the wave file to parse into a wavepattern
-	 * @returns the wavepattern as specified by the specified file
+	 * @return the wavepattern as specified by the specified file
 	 * @throws FileNotFoundException if the file is not found
 	 * @throws IOException if an error occurred when reading the file
 	 */
-	public WavePattern parseFile(final File wave) throws FileNotFoundException, IOException {
+	public final WavePattern parseFile(final File wave) throws FileNotFoundException, IOException {
 		Game.getLogger().log("Reading wave: " + wave.getName(), LogEvent.Type.DEBUG);
 		WavePattern pattern = new WavePattern();
 		int lineNum = 0; 

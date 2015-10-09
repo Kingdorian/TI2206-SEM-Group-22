@@ -19,14 +19,14 @@ public class DefaultAlienWaveFactory implements AlienWaveFactoryInterface {
 	 * Alien wave factory to create a default alien wave.
 	 * @param setGame the game to set the game of this factory to
 	 */
-	public DefaultAlienWaveFactory  (final Game setGame) {
+	public DefaultAlienWaveFactory(final Game setGame) {
 		game = setGame;
 	}
 	/**
 	 * Creates an alienwave.
-	 * @returns the created alienwave object
+	 * @return the created alienwave object
 	 */
-	@SuppressWarnings("checkstyle:magicnumer")
+	@SuppressWarnings("checkstyle:magicnumber")
 	public final AlienWave createWave() {
 		ConcreteAlienWave wave = new ConcreteAlienWave();
 		
@@ -54,6 +54,7 @@ public class DefaultAlienWaveFactory implements AlienWaveFactoryInterface {
             distance += 1.1 * testAlien.getHeight();
             wave.addAlienRow(aliens);
         }
+        
         return wave;
 	}
 }

@@ -1,7 +1,6 @@
 package spaceinvaders.group_22;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Class describes a pattern for an Alien wave.
@@ -30,20 +29,20 @@ public class WavePattern {
 	 * Returns amount of aliens in the largest row.
 	 * @return the width of the largest row.
 	 */
-	public int getWidth() {
+	public final int getWidth() {
 		int width = 0;
-		for(ArrayList<Character> row : pattern) {
+		for (ArrayList<Character> row : pattern) {
 			width = Math.max(width, row.size());
 		}
 		return width;
 	}
 	/**
-	 * get length of specific row
+	 * get length of specific row.
 	 * @param index the index of the row to get the length from
 	 * @return int the length of the row.
 	 * @throws ArrayIndexOutOfBoundsException if the index is invalid.
 	 */
-	public int getLength(int index) throws ArrayIndexOutOfBoundsException{
+	public final int getLength(final int index) throws ArrayIndexOutOfBoundsException {
 		return pattern.get(index).size();
 	}
 	
@@ -51,31 +50,31 @@ public class WavePattern {
 	 * Gets the amount of places in this pattern.
 	 * @return amount of places (either occupied by an alien or empty) in this pattern.
 	 */
-	public int size() {
+	public final int size() {
 		int places = 0;
-		for(ArrayList<Character> row : pattern) {
-			places+=row.size();
+		for (ArrayList<Character> row : pattern) {
+			places += row.size();
 		}
 		return places;
 	}
 	/**
 	 * Sets a row to the given row.
 	 * @param index the index of the current row
-	 * @param ArrayList<Character> the new row
-	 * @throws indexoutofboundsexception when index is invalid.
+	 * @param newRow the new row
+	 * @throws IndexOutOfBoundsException when index is invalid.
 	 */
-	public void setRow(int index, ArrayList<Character> newRow) throws IndexOutOfBoundsException {
+	public final void setRow(final int index, ArrayList<Character> newRow) throws IndexOutOfBoundsException {
 		pattern.set(index, new ArrayList<Character>(newRow)); 
 	}
 	/**
 	 * Sets a row to a given row.
 	 * @param index the index of the current row
-	 * @param Array<char> the new row
-	 * @throws indexoutofboundsexception when index is invalid.
+	 * @param newRow an array with chars for the new row
+	 * @throws IndexOutOfBoundsException when index is invalid.
 	 */
-	public void setRow(int index, char[] newRow) throws IndexOutOfBoundsException {
+	public final void setRow(final int index, final char[] newRow) throws IndexOutOfBoundsException {
 		ArrayList<Character> rowList = new ArrayList<Character>();
-		for(int i = 0; i < newRow.length; i++) {
+		for (int i = 0; i < newRow.length; i++) {
 			rowList.add(newRow[i]);
 		}
 		setRow(index, rowList);
@@ -87,7 +86,7 @@ public class WavePattern {
 	 * @param value the char to put
 	 * @throws IndexOutOfBoundsException if the row or columIndex is invalid
 	 */
-	public void setChar(int rowIndex, int columnIndex, char value) throws IndexOutOfBoundsException {
+	public final void setChar(final int rowIndex, final int columnIndex, final char value) throws IndexOutOfBoundsException {
 		pattern.get(rowIndex).set(columnIndex, value);
 	}
 	/**
@@ -97,23 +96,23 @@ public class WavePattern {
 	 * @return the char at the given location
 	 * @throws IndexOutOfBoundsException if the row or columIndex is invalid
 	 */
-	public char getChar(int rowIndex, int columnIndex) throws IndexOutOfBoundsException {
+	public final char getChar(final int rowIndex, final int columnIndex) throws IndexOutOfBoundsException {
 		return pattern.get(rowIndex).get(columnIndex);
 	}
 	/**
 	 * Adds a new row to the pattern.
 	 * @param row ArrayList the row to add
 	 */
-	public void addRow(final ArrayList<Character> row) {
+	public final void addRow(final ArrayList<Character> row) {
 		pattern.add(new ArrayList<Character>(row));
 	}
 	/**
 	 * Adds a new row to the pattern.
 	 * @param row Array the row to add
 	 */
-	public void addRow(final char[] row) {
+	public final void addRow(final char[] row) {
 		ArrayList<Character> rowList = new ArrayList<Character>();
-		for(int i = 0; i < row.length; i++) {
+		for (int i = 0; i < row.length; i++) {
 			rowList.add(row[i]);
 		}
 		addRow(rowList);
@@ -124,15 +123,16 @@ public class WavePattern {
 	 * @return unmodifiable ArrayList containing the row
 	 * @throws IndexOutOfBoundsException if the index is invalid
 	 */
-	public ArrayList<Character> getRow(final int index) throws IndexOutOfBoundsException {
+	public final ArrayList<Character> getRow(final int index) throws IndexOutOfBoundsException {
 		// Create a copy of the old list to ensure it cannot be changed.
 		return pattern.get(index);
 	}
 	/**
 	 * Compares object to this WavePattern.
 	 * @param other the boject to compare this to.
+	 * @return true if obj in param is equal to this otherwise false
 	 */
-	public boolean equals(final Object other) {
+	public final boolean equals(final Object other) {
 		if (other != null && other instanceof WavePattern) {
 			WavePattern otherPattern = (WavePattern) other;
 			if (this.getHeight() != otherPattern.getHeight()) {

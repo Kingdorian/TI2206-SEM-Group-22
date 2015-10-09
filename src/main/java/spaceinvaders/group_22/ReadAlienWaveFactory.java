@@ -48,6 +48,7 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 	 * @return pattern to create a alienwave from
 	 * @param pattern the pattern to create an wave from.
 	 */
+	@SuppressWarnings("checkstyle:magicnumber")
 	public final AlienWave createWaveFromPattern(final WavePattern pattern) {
 		ConcreteAlienWave wave = new ConcreteAlienWave();
 		

@@ -139,7 +139,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 */
 	public final void nextRound() {
 		Game.getLogger().log("proceding to next round", LogEvent.Type.INFO);
-		alienVelX+=ALIENVELXINCREASE;
+		alienVelX += ALIENVELXINCREASE;
 		curWave = alienWaveFactory.createWave();
 	}
 
@@ -173,7 +173,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 * Sets the alienVelX for this alienController.
 	 * @param newVelX the new alienvelX
 	 */
-	public static void setAlienVelX(double newVelX) {
+	public static void setAlienVelX(final double newVelX) {
 		alienVelX = newVelX;
 	}
 }
