@@ -8,23 +8,23 @@ import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class WavePatternTest {
+public class ArrayListWavePatternTest {
 
 	@Test
 	public void testGetHeightEmptyPattern() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		Assert.assertEquals(0, pattern.getHeight());
 	}
 
 	@Test
 	public void testGetHeightSingleRow() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		Assert.assertEquals(1, pattern.getHeight());
 	}
 	@Test
 	public void testGetHeightMultiRow() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		for(int i = 0; i < 3; i++) {
 			pattern.addRow(new ArrayList<Character>());
 		}
@@ -32,18 +32,18 @@ public class WavePatternTest {
 	}
 	@Test
 	public void testGetWidthEmptyPattern() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		Assert.assertEquals(0, pattern.getWidth());
 	}
 	@Test
 	public void testGetWidthSingleEmptyRow() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		Assert.assertEquals(0, pattern.getWidth());
 	}
 	@Test
 	public void testGetWidthSingleRowSingleChar() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		ArrayList<Character> list = new ArrayList<Character>();
 		list.add('c');
 		pattern.addRow(list);
@@ -51,7 +51,7 @@ public class WavePatternTest {
 	}
 	@Test
 	public void testGetWidthSingleRowMultiChar() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		ArrayList<Character> list = new ArrayList<Character>();
 		for(int i = 0; i < 5; i ++) {
 			list.add('c');
@@ -61,7 +61,7 @@ public class WavePatternTest {
 	}
 	@Test
 	public void testGetWidthMultiRowEmpty() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		ArrayList<Character> list = new ArrayList<Character>();
 		for(int i = 0; i < 3; i++) {
 			pattern.addRow(list);
@@ -70,7 +70,7 @@ public class WavePatternTest {
 	}
 	@Test
 	public void testGetWidthMultiRowFirstEmpty() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		ArrayList<Character> list = new ArrayList<Character>();
 		for(int i = 0; i < 3; i++) {
@@ -81,7 +81,7 @@ public class WavePatternTest {
 	}
 	@Test
 	public void testGetWidthMultiRowFirstMax() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		ArrayList<Character> list = new ArrayList<Character>();
 		for(int i = 0; i < 5; i++) {
 			list.add('*');
@@ -96,24 +96,24 @@ public class WavePatternTest {
 	}
 	@Test(expected = IndexOutOfBoundsException.class)  
 	public void testGetLengthEmptyPattern() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.getLength(2);
 	}
 	@Test(expected = IndexOutOfBoundsException.class)  
 	public void testGetLengthInvalidRowIndex() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		pattern.getLength(2);
 	}
 	@Test
 	public void testGetLengthEmptyRow() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		Assert.assertEquals(0, pattern.getLength(0));	
 	}
 	@Test
 	public void testGetLengthSingleChar() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		ArrayList list = new ArrayList<Character>();
 		list.add('a');
@@ -122,7 +122,7 @@ public class WavePatternTest {
 	}
 	@Test
 	public void testGetLengthMultiChar() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		ArrayList list = new ArrayList<Character>();
 		for(int i = 0; i < 20; i++) {
@@ -133,18 +133,18 @@ public class WavePatternTest {
 	}
 	@Test
 	public void testGetSizeEmptyPattern() { 
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		Assert.assertEquals(0, pattern.size());
 	}
 	@Test
 	public void testGetSizeSingleEmptyRowPattern() { 
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		Assert.assertEquals(0, pattern.size());
 	}
 	@Test
 	public void testGetSizeMultiRow() { 
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		ArrayList<Character> list = new ArrayList<Character>();
 		for(int i = 0; i < 3; i++) {
 			list.add('c');
@@ -154,7 +154,7 @@ public class WavePatternTest {
 	}
 	@Test
 	public void testGetSizeMultiRowMultiChar() { 
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		ArrayList<Character> list = new ArrayList<Character>();
 		for(int i = 0; i < 3; i++) {
 			list.add('c');
@@ -169,14 +169,14 @@ public class WavePatternTest {
 	}
 	@Test
 	public void testAddRowEmptyRow() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		ArrayList<Character> list = new ArrayList<Character>();
 		pattern.addRow(list);
 		Assert.assertEquals(list, pattern.getRow(0));
 	}
 	@Test
 	public void testAddRowWithChars() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		ArrayList<Character> list = new ArrayList<Character>();
 		list.add('a');
 		list.add('b');
@@ -185,17 +185,17 @@ public class WavePatternTest {
 	}	
 	@Test(expected = IndexOutOfBoundsException.class)  
 	public void testSetRowEmptyPatternArrayList() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.setRow(2, new ArrayList<Character>());
 	}
 	@Test(expected = IndexOutOfBoundsException.class)  
 	public void testSetRowEmptyPatternArray() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.setRow(2, new char[2]);
 	}
 	@Test 
 	public void testSetRowWithCharsList() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		ArrayList<Character> list = new ArrayList<Character>();
 		list.add('a'); list.add('b');
@@ -204,7 +204,7 @@ public class WavePatternTest {
 	}
 	@Test
 	public void testSetRowWithCharsArray() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		char[] chars = {'a', 'b', 'c'};
 		pattern.setRow(0, chars);
@@ -216,7 +216,7 @@ public class WavePatternTest {
 	}
 	@Test 
 	public void testSetRowWithCharsEmptyList() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		ArrayList<Character> list = new ArrayList<Character>();
 		pattern.setRow(0, list);
@@ -224,7 +224,7 @@ public class WavePatternTest {
 	}
 	@Test
 	public void testSetRowWithCharsEmptyArray() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		char[] chars = {};
 		pattern.setRow(0, chars);
@@ -236,24 +236,24 @@ public class WavePatternTest {
 	}
 	@Test(expected = IndexOutOfBoundsException.class)  
 	public void testGetCharEmptyPattern() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.getChar(0, 0);
 	}
 	@Test(expected = IndexOutOfBoundsException.class)  
 	public void testGetCharInvalidRowIndex() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		pattern.getChar(1, 0);
 	}
 	@Test(expected = IndexOutOfBoundsException.class)  
 	public void testGetCharEmptyPatternInvalidColumnIndex() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		pattern.getChar(0, 0);
 	}
 	@Test(expected = IndexOutOfBoundsException.class)  
 	public void testGetCharInvalidColumnIndex() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		ArrayList<Character> list = new ArrayList<Character>();
 		list.add('a');
 		pattern.addRow(new ArrayList<Character>());
@@ -261,7 +261,7 @@ public class WavePatternTest {
 	}
 	@Test 
 	public void testGetChar() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		ArrayList<Character> list = new ArrayList<Character>();
 		list.add('a');
 		pattern.addRow(list);
@@ -269,7 +269,7 @@ public class WavePatternTest {
 	}
 	@Test 
 	public void testGetCharSecondRow() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		ArrayList<Character> list = new ArrayList<Character>();
 		list.add('a');
@@ -279,24 +279,24 @@ public class WavePatternTest {
 	}
 	@Test(expected = IndexOutOfBoundsException.class)  
 	public void testSetCharEmptyPattern() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.setChar(0, 0, 'a');
 	}
 	@Test(expected = IndexOutOfBoundsException.class)  
 	public void testSetCharInvalidRowIndex() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		pattern.setChar(1, 0, 'a');
 	}
 	@Test(expected = IndexOutOfBoundsException.class)  
 	public void testSetCharEmptyPatternInvalidColumnIndex() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		pattern.setChar(0, 0, 'a');
 	}
 	@Test(expected = IndexOutOfBoundsException.class)  
 	public void testSetCharInvalidColumnIndex() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		ArrayList<Character> list = new ArrayList<Character>();
 		list.add('a');
 		pattern.addRow(new ArrayList<Character>());
@@ -304,7 +304,7 @@ public class WavePatternTest {
 	}
 	@Test 
 	public void testSetChar() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		ArrayList<Character> list = new ArrayList<Character>();
 		list.add('a');
 		pattern.addRow(list);
@@ -313,7 +313,7 @@ public class WavePatternTest {
 	}
 	@Test 
 	public void testSetCharSecondRow() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.addRow(new ArrayList<Character>());
 		ArrayList<Character> list = new ArrayList<Character>();
 		list.add('a');
@@ -324,12 +324,12 @@ public class WavePatternTest {
 	}
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testGetRowEmptyPattern() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.getRow(0);
 	}
 	@Test
 	public void testAddRowArray() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		char[] chars = {'a', 'b', 'c'};
 		pattern.addRow(chars);
 		ArrayList<Character> charList = new ArrayList<Character>();
@@ -340,7 +340,7 @@ public class WavePatternTest {
 	}
 	@Test
 	public void testAddRowEmptyArrayRow() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		ArrayList<Character> list = new ArrayList<Character>();
 		char[] chars = {};
 		pattern.addRow(chars);
@@ -349,32 +349,32 @@ public class WavePatternTest {
 
 	@Test
 	public void testEqualsOtherNull() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		Assert.assertFalse(pattern.equals(null));
 	}
 	@Test
 	public void testEqualsNoPattern() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		Assert.assertFalse(pattern.equals(12));
 	}
 	@Test
 	public void testEqualsThisLarger() {
-		WavePattern pattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
 		pattern.addRow(new ArrayList<Character>());
-		WavePattern otherPattern = new WavePattern();
+		ArrayListWavePattern otherPattern = new ArrayListWavePattern();
 		Assert.assertNotEquals(pattern,otherPattern);
 	}
 	@Test
 	public void testEqualsOtherLarger() {
-		WavePattern pattern = new WavePattern();
-		WavePattern otherPattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
+		ArrayListWavePattern otherPattern = new ArrayListWavePattern();
 		otherPattern.addRow(new ArrayList<Character>());
 		Assert.assertNotEquals(pattern,otherPattern);
 	}
 	@Test
 	public void testEqualsNotEqualFirstRow() {
-		WavePattern pattern = new WavePattern();
-		WavePattern otherPattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
+		ArrayListWavePattern otherPattern = new ArrayListWavePattern();
 		char[] chars = {'a', 'b'};
 		pattern.addRow(chars);
 		otherPattern.addRow(new ArrayList<Character>());
@@ -382,8 +382,8 @@ public class WavePatternTest {
 	}
 	@Test
 	public void testEqualsEqualOneRow() {
-		WavePattern pattern = new WavePattern();
-		WavePattern otherPattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
+		ArrayListWavePattern otherPattern = new ArrayListWavePattern();
 		char[] chars = {'a', 'b'};
 		pattern.addRow(chars);
 		otherPattern.addRow(chars);
@@ -391,8 +391,8 @@ public class WavePatternTest {
 	}
 	@Test
 	public void testEqualsNotEqualsSecondRow() {
-		WavePattern pattern = new WavePattern();
-		WavePattern otherPattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
+		ArrayListWavePattern otherPattern = new ArrayListWavePattern();
 		char[] chars = {'a', 'b'};
 		pattern.addRow(chars);
 		otherPattern.addRow(chars);
@@ -403,8 +403,8 @@ public class WavePatternTest {
 	}
 	@Test
 	public void testEqualsNotEqualsMultiRow() {
-		WavePattern pattern = new WavePattern();
-		WavePattern otherPattern = new WavePattern();
+		ArrayListWavePattern pattern = new ArrayListWavePattern();
+		ArrayListWavePattern otherPattern = new ArrayListWavePattern();
 		char[] chars = {'a', 'b'};
 		pattern.addRow(chars);
 		otherPattern.addRow(chars);

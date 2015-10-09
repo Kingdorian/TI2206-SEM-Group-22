@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author Dorian
  *
  */
-public class WavePattern {
+public class ArrayListWavePattern {
 	/**
 	 * 2D ArrayList containing chars to represent Aliens.
 	 */
@@ -15,7 +15,7 @@ public class WavePattern {
 	/**
 	 * Creates a new WavePattern Object.
 	 */
-	public WavePattern() {
+	public ArrayListWavePattern() {
 		pattern = new ArrayList<ArrayList<Character>>();
 	}
 	/**
@@ -133,8 +133,8 @@ public class WavePattern {
 	 * @return true if obj in param is equal to this otherwise false
 	 */
 	public final boolean equals(final Object other) {
-		if (other != null && other instanceof WavePattern) {
-			WavePattern otherPattern = (WavePattern) other;
+		if (other != null && other instanceof ArrayListWavePattern) {
+			ArrayListWavePattern otherPattern = (ArrayListWavePattern) other;
 			if (this.getHeight() != otherPattern.getHeight()) {
 				return false;
 			}

@@ -27,7 +27,7 @@ public class AlienWaveReaderTest {
 		String sep = System.getProperty("file.separator");
 		File file = new File("src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "emptytestwave.wave");
-		WavePattern pattern =  waveReader.parseFile(file);
+		ArrayListWavePattern pattern =  waveReader.parseFile(file);
 		Assert.assertEquals(0, pattern.size());
 	}
 	@Test
@@ -35,8 +35,8 @@ public class AlienWaveReaderTest {
 		String sep = System.getProperty("file.separator");
 		File file = new File("src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "oneline.wave");
-		WavePattern pattern = waveReader.parseFile(file);
-		WavePattern expectedPattern = new WavePattern();
+		ArrayListWavePattern pattern = waveReader.parseFile(file);
+		ArrayListWavePattern expectedPattern = new ArrayListWavePattern();
 		ArrayList<Character> tempList = new ArrayList<Character>();
 		tempList.add('*');
 		tempList.add('&');
@@ -48,8 +48,8 @@ public class AlienWaveReaderTest {
 		String sep = System.getProperty("file.separator");
 		File file = new File("src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "multiline.wave");
-		WavePattern pattern = waveReader.parseFile(file);
-		WavePattern expectedPattern = new WavePattern();
+		ArrayListWavePattern pattern = waveReader.parseFile(file);
+		ArrayListWavePattern expectedPattern = new ArrayListWavePattern();
 		char[] chars = {'*', '&'};
 		expectedPattern.addRow(chars);
 		char[] chars2 = {'^', '*'};
@@ -68,15 +68,15 @@ public class AlienWaveReaderTest {
 		String sep = System.getProperty("file.separator");
 		String file = "src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "2testfiles" + sep;
-		ArrayList<WavePattern> charPatterns = waveReader.read(file);
-		ArrayList<WavePattern> expectedPatterns = new ArrayList<WavePattern>();
-		WavePattern expectedFile1 = new WavePattern();
+		ArrayList<ArrayListWavePattern> charPatterns = waveReader.read(file);
+		ArrayList<ArrayListWavePattern> expectedPatterns = new ArrayList<ArrayListWavePattern>();
+		ArrayListWavePattern expectedFile1 = new ArrayListWavePattern();
 		ArrayList<Character> expectedLine1 = new ArrayList<Character>();
 		expectedLine1.add('*');
 		expectedLine1.add('+');
 		expectedFile1.addRow(expectedLine1);
 		expectedPatterns.add(expectedFile1);
-		WavePattern expectedFile2 = new WavePattern();
+		ArrayListWavePattern expectedFile2 = new ArrayListWavePattern();
 		ArrayList<Character> expectedLine2 = new ArrayList<Character>();
 		expectedLine2.add('x');
 		expectedLine2.add('u');
@@ -86,7 +86,7 @@ public class AlienWaveReaderTest {
 		expectedLine3.add('%');
 		expectedFile2.addRow(expectedLine3);
 		expectedPatterns.add(expectedFile2);
-		ArrayList<WavePattern> otherExpPattern = new ArrayList<WavePattern>();
+		ArrayList<ArrayListWavePattern> otherExpPattern = new ArrayList<ArrayListWavePattern>();
 		otherExpPattern.add(expectedFile2);
 		otherExpPattern.add(expectedFile1);
 		assertTrue(expectedPatterns.equals(waveReader.read(file))||otherExpPattern.equals(waveReader.read(file)));

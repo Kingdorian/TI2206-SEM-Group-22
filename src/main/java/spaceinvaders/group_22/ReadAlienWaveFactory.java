@@ -23,7 +23,7 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 	/**
 	 * List of all patterns that are read from files.
 	 */
-	private ArrayList<WavePattern> patternList;
+	private ArrayList<ArrayListWavePattern> patternList;
 	/**
 	 * WaveP
 	 */
@@ -49,7 +49,7 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 	 * @param pattern the pattern to create an wave from.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
-	public final AlienWave createWaveFromPattern(final WavePattern pattern) {
+	public final AlienWave createWaveFromPattern(final ArrayListWavePattern pattern) {
 		ConcreteAlienWave wave = new ConcreteAlienWave();
 		
 		
