@@ -198,7 +198,7 @@ public class Game {
 		if (!shootingAllowed) {
 			if (countToShoot < ((1 / tickrate) / SpaceShip.getShootTimes())) { 
 				countToShoot++; 
-			} else if (Double.compare((double) countToShoot, ((1 / tickrate) / SpaceShip.getShootTimes())) == 0) {
+			} else if (Double.compare((double) countToShoot, ((1 / tickrate) / SpaceShip.getShootTimes())) >= 0) {
 				shootingAllowed = true;
 				countToShoot = 0;
 			}
