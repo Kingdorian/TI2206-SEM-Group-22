@@ -10,17 +10,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="root" stylesheets="application.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spaceinvaders.group_22.ui.MultiPlayerGameUIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="root" stylesheets="application.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spaceinvaders.group_22.MultiPlayerGameUI.MultiPlayerGameUIController">
    <children>
       <StackPane fx:id="stackPane" prefHeight="150.0" prefWidth="200.0">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Region prefHeight="720.0" prefWidth="1280.0" styleClass="gameOver" stylesheets="@../../../application.css" />
                   <Label fx:id="winningPlayer" alignment="CENTER" contentDisplay="CENTER" layoutY="224.0" prefWidth="1280.0" text="Game Over" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Impact" size="64.0" />
                      </font>
+                     <graphic>
+                        <Region prefHeight="720.0" prefWidth="1280.0" styleClass="gameOver" stylesheets="@../../../application.css" />
+                     </graphic>
                   </Label>
                   <Label fx:id="highScoreLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="292.0" prefWidth="1280.0" text="Highscore: " textAlignment="CENTER" textFill="#c3c1c1">
                      <font>

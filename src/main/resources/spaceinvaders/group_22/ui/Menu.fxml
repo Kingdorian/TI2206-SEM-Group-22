@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="729.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane id=".button" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" stylesheets="@MenuButton.css">
+         <children>
+            <Region prefHeight="720.0" prefWidth="1280.0" styleClass="gameOver" stylesheets="@../../../application.css" />
+            <ImageView fitHeight="1000.0" fitWidth="1000.0" layoutX="140.0">
+               <image>
+                  <Image url="@../images/background.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="384.0" layoutY="296.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="512.0" text="Multiplayer" />
+            <Button layoutX="384.0" layoutY="128.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="512.0" text="Singleplayer" />
+            <Button layoutX="384.0" layoutY="464.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="512.0" text="Quit" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
