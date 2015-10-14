@@ -302,6 +302,15 @@ public class Game {
 	public final Player getPlayer() {
 		return player;
 	}
+	
+	/**
+	 * Gets the player that is playing this game. 
+	 * @return player that is playing this game
+	 */
+	public final SpaceShip getSpaceship() {
+		return player.getSpaceShip();
+	}
+	
 	/**
 	 * Returns the highscore.
 	 * @return current highscore
