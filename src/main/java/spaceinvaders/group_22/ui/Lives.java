@@ -11,8 +11,7 @@ import spaceinvaders.group_22.ui.UIElement;
  * Class for drawing  the lives on the screen.
  * @author Dorian
  *
- */
-@SuppressWarnings("checkstyle:magicnumber")    
+ */   
 public abstract class Lives extends UIElement {
 	
 	/**
