@@ -103,7 +103,7 @@ public class GameTest {
 	@Test
 	public final void testResetBarricades() {
 		game.getBarricadeController().getBarricades().get(0).hit();
-		game.reset();
+		game.resetGame();
 		Assert.assertEquals(10, game.getBarricadeController().getBarricades().get(0).getHealth());
 	}
 	/**
@@ -112,7 +112,7 @@ public class GameTest {
 	@Test
 	public final void testResetPlayer() {
 		game.getPlayer().addScore(111);
-		game.reset();
+		game.resetGame();
 		// Player should be resetted so his score should be 0
 		Assert.assertEquals(0, game.getPlayer().getScore());
 	}
@@ -122,7 +122,7 @@ public class GameTest {
 	@Test
 	public final void testResetBullets() {
 		game.getBullets().add(new ShipBullet(1.0, 1.0, "invader.png"));
-		game.reset();
+		game.resetGame();
 		// Bullet list should be emptied when the game resets
 		Assert.assertEquals(0, game.getBullets().size());
 	}
@@ -132,7 +132,7 @@ public class GameTest {
 	@Test
 	public final void testResetExplosions() {
 		game.getExplosions().add(new Explosion(1.0, 1.0, "explosion1.png"));
-		game.reset();
+		game.resetGame();
 		// Bullet list should be emptied when the game resets
 		Assert.assertEquals(0, game.getExplosions().size());
 	}
@@ -142,7 +142,7 @@ public class GameTest {
 	@Test
 	public final void testShootingAllowed() {
 		game.getPlayer().getSpaceShip().shootBullet(0.1);
-		game.reset();
+		game.resetGame();
 		// Bullet list should be emptied when the game resets
 		Assert.assertTrue(game.getShootingAllowed());
 	}
@@ -190,7 +190,7 @@ public class GameTest {
 	@Test
 	public final void testGetNoShipBullets() {
 		// Remove all existing bullets from the game.
-		game.reset();
+		game.resetGame();
 		ArrayList<Bullet> bulletlist = new ArrayList<Bullet>();
 		bulletlist.add(game.getAlienController().getAliens().get(0).shootBullet(1));
 		game.setBullets(bulletlist);
@@ -202,7 +202,7 @@ public class GameTest {
 	@Test
 	public final void testGetShipBullets() {
 		// Remove all existing bullets from the game.
-		game.reset();
+		game.resetGame();
 		ArrayList<Bullet> bulletlist = new ArrayList<Bullet>();
 		bulletlist.add(game.getPlayer().getSpaceShip().shootBullet(10.1));
 		game.setBullets(bulletlist);

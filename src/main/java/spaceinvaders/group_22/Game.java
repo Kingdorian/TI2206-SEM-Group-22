@@ -119,7 +119,7 @@ public class Game {
 	/**
 	 * Resets the game.
 	 */
-	public final void resetGame() {
+	public void resetGame() {
 		bullets = new ArrayList<Bullet>();
 		explosions = new ArrayList<Explosion>();
 		barController.create();
@@ -149,22 +149,9 @@ public class Game {
 	}
 
 	/**
-	 * Resets the game.
-	 */
-	public final void reset() {
-		bullets = new ArrayList<Bullet>();
-		explosions = new ArrayList<Explosion>();
-		barController.create();
-		alienController.create();
-		player = new Player(this);
-		shootingAllowed = true;
-		countToShoot = 0;
-	}
-
-	/**
 	 * Stops the game and marks the game as ended.
 	 */
-	public final void gameOver() {
+	public void gameOver() {
 		stop();
 		if (player.getScore() > highscore) {
 			setHighScore(player.getScore());
@@ -197,7 +184,7 @@ public class Game {
 	 * @param pressedKeys
 	 *            the keys pressed since last tick
 	 */
-	public final void tick(final ArrayList<KeyCode> pressedKeys) {
+	public void tick(final ArrayList<KeyCode> pressedKeys) {
 		tickShipShooting(pressedKeys);
 		spaceShipContr.moveSpaceShip(pressedKeys);
 		alienController.move();
@@ -207,7 +194,6 @@ public class Game {
 		tickBullets();
 		collisions.checkCollisions();
 		barController.removeDead();
-		// new wave of aliens
 		alienController.checkAllAliensDead();
 	}
 
@@ -283,6 +269,18 @@ public class Game {
 	 */
 	public final void setPlayer(final Player newPlayer) {
 		player = newPlayer;
+	}
+	
+	/**
+	 * Sets the explosions for this game.
+	 * @param newExplosions the explosions
+	 */
+	public final void setExplosions(final ArrayList<Explosion> newExplosions) {
+		explosions = newExplosions;
+	}
+	
+	public final void setHasEnded(boolean ended){
+		hasEnded = ended;
 	}
 
 	// ONLY GETTERS BELOW
@@ -420,5 +418,13 @@ public class Game {
 	 */
 	public final PowerUpController getPowerUpController() {
 		return powerUpController;
+	}
+	
+	/**
+	 * Returns the collisions of the game.
+	 * @return the collisions of the game
+	 */
+	public final Collisions getCollisions() {
+		return collisions;
 	}
 }
