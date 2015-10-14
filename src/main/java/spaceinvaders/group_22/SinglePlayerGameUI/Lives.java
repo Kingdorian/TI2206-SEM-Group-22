@@ -1,10 +1,11 @@
-package spaceinvaders.group_22.ui;
+package spaceinvaders.group_22.SinglePlayerGameUI;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
+import spaceinvaders.group_22.ui.UIElement;
 
 /**
  * The drawing of the lives.

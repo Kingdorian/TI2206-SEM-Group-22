@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.SinglePlayerGameUI.Lives;
+import spaceinvaders.group_22.SinglePlayerGameUI.Score;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import javafx.animation.KeyFrame;
