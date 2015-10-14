@@ -197,4 +197,5 @@ public abstract class Unit {
 	public final void setSprite(final String newSprite) {
 		this.sprite = newSprite;
 	}	
+
 }
