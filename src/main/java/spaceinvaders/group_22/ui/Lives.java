@@ -1,4 +1,4 @@
-package spaceinvaders.group_22.SinglePlayerGameUI;
+package spaceinvaders.group_22.ui;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -8,12 +8,12 @@ import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.ui.UIElement;
 
 /**
- * The drawing of the lives.
- * @author Ege, Dorian
+ * Class for drawing  the lives on the screen.
+ * @author Dorian
  *
  */
 @SuppressWarnings("checkstyle:magicnumber")    
-public class Lives extends spaceinvaders.group_22.ui.Lives {
+public abstract class Lives extends UIElement {
 	
 	/**
 	 * The constructor.
@@ -26,12 +26,6 @@ public class Lives extends spaceinvaders.group_22.ui.Lives {
 
 
 	@Override
-	public final void draw() {
-		Image heartImage = getSprites().get("heart.png");
-    	for (int i = 1; i <= getGame().getPlayer().getLives(); i++) {
-        	getGC().drawImage(heartImage, getGame().getCanvasWidth() - 10 - heartImage.getWidth() * i, 10);
-    	}
-    	Logger.getInstance().log("Formatted hearts to UI", LogEvent.Type.TRACE);
-	}
+	public abstract void draw();
 
 }
