@@ -1,4 +1,4 @@
-package spaceinvaders.group_22.SinglePlayerGameUI;
+package spaceinvaders.group_22.MultiPlayerGameUI;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;

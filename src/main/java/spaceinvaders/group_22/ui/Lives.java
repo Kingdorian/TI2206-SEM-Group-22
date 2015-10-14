@@ -23,7 +23,9 @@ public abstract class Lives extends UIElement {
 		super(newGame, gc);
 	}
 
-
+	/**
+	 * Draws the Lives on the screen. 
+	 */
 	@Override
 	public abstract void draw();
 
