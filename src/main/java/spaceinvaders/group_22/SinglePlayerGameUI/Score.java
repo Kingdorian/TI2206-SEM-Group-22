@@ -16,32 +16,43 @@ import spaceinvaders.group_22.ui.UIElement;
 public class Score extends spaceinvaders.group_22.ui.Score {
 	
 	/**
-	 * The label to draw the score on.
+	 * The label to draw the score of player 1 on.
 	 */
-	private Label label;
+	private Label labelPlayer1;
+	/**
+	 * The label to draw the score for player 2 on.
+	 */
+	private Label labelPlayer2;
 	
 	/**
 	 * The constructor.
 	 * @param newGame the Game
 	 * @param gc the GraphicsContext to draw on.	
-	 * @param scoreLabel The label on which the score should be drawn. 
+	 * @param scoreLabelPlayer1 The label on which the score of the first player should be drawn. 
+	 * @param ScoreLabelPlayer2 The label on which the score of the second player should be drawn.
 	 */
-	public Score(final Game newGame, final GraphicsContext gc, final Label scoreLabel) {
-		super(newGame, gc, scoreLabel);
+	public Score(final Game newGame, final GraphicsContext gc, 
+			final Label scoreLabelPlayer1, final Label scoreLabelPlayer2) {
+		super(newGame, gc, scoreLabelPlayer1);
+		labelPlayer2 = scoreLabelPlayer2;
 	}
 	/**
 	 * Draws the score on the screen.
 	 */
 	public final void draw() {
-		int digitsBefore = 8 - Integer.toString(getGame().getPlayer().getScore()).length();
-    	StringBuffer scoreString = new StringBuffer();
-    	
-    	for (int i = 0; i < digitsBefore; i++) {
-    		scoreString.append("0");
+		int digits = 8;
+		//TODO Change this so it actually gets the score of player1
+    	String scoreString = Integer.toString(getGame().getPlayer().getScore());
+    	for (int i = 0; i < digits  - scoreString.length(); i++) {
+    		scoreString = "0" + scoreString;
     	}
-    	scoreString.append(getGame().getPlayer().getScore());
-    	
-    	label.setText(scoreString.toString());	
+    	labelPlayer1.setText(scoreString);
+    	//TODO Change this so it actually gets the score of player2
+    	scoreString = Integer.toString(getGame().getPlayer().getScore());
+    	for (int i = 0; i < digits  - scoreString.length(); i++) {
+    		scoreString = "0" + scoreString;
+    	}
+    	labelPlayer2.setText(scoreString);
     	Logger.getInstance().log("Formatted score to UI", LogEvent.Type.TRACE);		
 	}
 
