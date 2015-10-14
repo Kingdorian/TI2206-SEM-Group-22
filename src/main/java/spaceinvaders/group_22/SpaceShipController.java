@@ -38,22 +38,22 @@ public class SpaceShipController extends UnitController implements MovableUnitCo
 	 */
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void moveSpaceShip(final ArrayList<KeyCode> pressedKeys) {
-		double velX = game.getPlayer().getSpaceShip().getVelX() * 0.98;
-		SpaceShip playership = game.getPlayer().getSpaceShip();
+		double velX = game.getPlayerSpaceship().getVelX() * 0.98;
+		SpaceShip playership = game.getPlayerSpaceship();
 		if (playership.getXCoor() - (0.5 * playership.getWidth()) <= 0 && velX < 0) {
 			velX *= -1;
-		} else if (game.getPlayer().getSpaceShip().getXCoor() 
+		} else if (game.getPlayerSpaceship().getXCoor() 
 				+ (0.5 * playership.getWidth()) >=  game.getCanvasWidth() && velX > 0) {
 			velX *= -1;
 		}
 		// Check that the spaceship is still able to move without going off the screen.
-		if (game.getPlayer().getSpaceShip().getXCoor() - 0.5 * game.getPlayer().getSpaceShip().getWidth() > 0 
+		if (game.getPlayerSpaceship().getXCoor() - 0.5 * game.getPlayerSpaceship().getWidth() > 0 
 				&& pressedKeys.contains(KeyCode.A)) {
 			Logger.getInstance().log("Player pressed A", LogEvent.Type.DEBUG);
 			velX = velX - SpaceShip.getMAXVELX() * game.getTickrate() * 2;
 		}
-		if (game.getPlayer().getSpaceShip().getXCoor() 
-				+ 0.5 * game.getPlayer().getSpaceShip().getWidth() < game.getCanvasWidth()
+		if (game.getPlayerSpaceship().getXCoor() 
+				+ 0.5 * game.getPlayerSpaceship().getWidth() < game.getCanvasWidth()
 				&& pressedKeys.contains(KeyCode.D)) {
 			Logger.getInstance().log("Player pressed D", LogEvent.Type.DEBUG);
 			velX = velX + SpaceShip.getMAXVELX() * game.getTickrate() * 2;
@@ -64,8 +64,8 @@ public class SpaceShipController extends UnitController implements MovableUnitCo
 		} else if (velX < -SpaceShip.getMAXVELX()) {
 			velX = -SpaceShip.getMAXVELX();
 		}
-		game.getPlayer().getSpaceShip().setVelX(velX);
-		game.getPlayer().getSpaceShip().move(game.getTickrate());
+		game.getPlayerSpaceship().setVelX(velX);
+		game.getPlayerSpaceship().move(game.getTickrate());
 		if (velX != 0) {
 			Logger.getInstance().log("Player moved X: " + velX, LogEvent.Type.TRACE);
 		}
