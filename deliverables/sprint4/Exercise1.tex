@@ -56,9 +56,13 @@ In the table the responsibilities and collaborations are presented for every cla
   \hline
     Class & Responsibility & Collaborates with & Super & Sub \\ \hline
    MultiPlayerGame & Players  & & Game & \\ \hline
-   MultiPlayerGameUIController & Key control & MultiPlayerGame  & GameUIController  & \\ \hline
+   GameUIController & drawing the UI elements & MultiPlayerGame  & GameUIController  & \\ \hline
+ MultiPlayerGameUIController & Key control & MultiPlayerGame  & GameUIController  & \\ \hline
+ SinglePlayerGameUIController & Key control & Game  & GameUIController  & \\ \hline
    MenuUIController& Conrol menu & MultiPlayerGameUI- Controller  &   &  \\ \hline
    UiElementMultiSpaceShips& draw multiple spaceShips & MultiPlayerGameUI- Controller  &  &  \\ \hline
+ MultiGameScore & score display multiple players &  MultiPlayerGame  &  Score  & \\ \hline
+ MultiGameLives &  lives display multiple players & MultiPlayerGame  & Lives  & \\ \hline
  MultiSpaceShipsController& Control multiple spaceships & SpaceShip  & SpaceShipController &  \\ \hline
  MultiPlayerPowerUpController& Control powerups for multiple players & MultiPlayerGame   & PowerUpController &  \\ \hline
  MultiPlayerCollisions & Collisions in a multiplayer game & MultiPlayerGame   & Collisions&  \\ \hline
