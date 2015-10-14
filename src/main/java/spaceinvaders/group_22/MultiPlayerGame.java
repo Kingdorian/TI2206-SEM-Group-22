@@ -28,7 +28,14 @@ public class MultiPlayerGame extends Game {
 	 * List of countToShot for the players.
 	 */
 	private ArrayList<Integer> countToShootMultiPlayer;
-
+	/**
+	 * The PowerUpController.
+	 */
+	private MultiPlayerPowerUpController mpPowerUpController;
+	/**
+	 * The SpaceShipsController.
+	 */
+	private MultiSpaceShipsController mpSpaceShipsController;
 	/**
 	 * Creates a MultiPlayerGame.
 	 * @param width width of the canvas
@@ -36,14 +43,14 @@ public class MultiPlayerGame extends Game {
 	 */
 	public MultiPlayerGame(final double width, final double height) {
 		super(width, height);
-		setPlayer(null);
 		for (int i = 0; i < 2; i++) {
 			Player play = new Player(this);
 			players.add(play);
 			shootingAllowedMultiPlayer.add(true);
 			countToShootMultiPlayer.add(0);
 		}
-		//TODO MultiSpaceShipController for two players, MultiPlayerPowerUpController
+		mpSpaceShipsController = new MultiSpaceShipsController(this);
+		mpPowerUpController = new MultiPlayerPowerUpController(this);
 	}
 	
 	/**
@@ -70,7 +77,11 @@ public class MultiPlayerGame extends Game {
 	@Override
 	public final void gameOver() {
 		stop();
-		//TODO Highscore for two players
+		for (int i = 0; i < 2; i++) {
+			if (players.get(i).getScore() > getHighScore()) {
+				setHighScore(players.get(i).getScore());
+			}
+		}
 		setHasEnded(true);
 		Logger.getInstance().log("Game is over", LogEvent.Type.DEBUG);
 	}
@@ -79,11 +90,11 @@ public class MultiPlayerGame extends Game {
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
 		tickShipShooting(pressedKeys, KeyCode.SPACE, 0);
 		tickShipShooting(pressedKeys, KeyCode.SHIFT, 1);
-		// TODO getSpaceShipController().moveSpaceShip(pressedKeys) for MultiPlayer
+		mpSpaceShipsController.moveSpaceShip(pressedKeys);
 		getAlienController().move();
 		getAlienController().shootAlienBullets();
 		getAlienController().removeDeadAliens();
-		// TODO getPowerUpController().checkPowerUps() for MultiPlayer
+		mpPowerUpController.checkPowerUps();
 		tickBullets();
 		getCollisions().checkCollisions();
 		getBarricadeController().removeDead();

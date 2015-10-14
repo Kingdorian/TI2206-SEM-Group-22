@@ -47,7 +47,6 @@ public class Game {
 	 * The width of the canvas.
 	 */
 	private double canvasWidth;
-
 	/**
 	 * The height of the canvas.
 	 */
