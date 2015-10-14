@@ -49,7 +49,7 @@ public abstract class UIElementTest {
 	 */
 	@Before
 	public final void setUp() {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameUI.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SinglePlayerGameUI.fxml"));
 		try {
 			fxmlLoader.load();
 		} catch (IOException e) {
