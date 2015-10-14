@@ -47,8 +47,8 @@ public class UIElementSpaceShip extends UIElementUnit {
 				Double opacity = powerup.getTimeLeft() / PowerUp.getDuration();
 				getGC().setGlobalAlpha(opacity);
 				getGC().drawImage(glowImage, 
-						getGame().getPlayer().getSpaceShip().getXCoor() - 0.5 * glowImage.getWidth(),
-						getGame().getPlayer().getSpaceShip().getYCoor() - 0.5 * glowImage.getHeight());	
+						getGame().getPlayerSpaceship().getXCoor() - 0.5 * glowImage.getWidth(),
+						getGame().getPlayerSpaceship().getYCoor() - 0.5 * glowImage.getHeight());	
 				getGC().setGlobalAlpha(1);
 			}
 		}
