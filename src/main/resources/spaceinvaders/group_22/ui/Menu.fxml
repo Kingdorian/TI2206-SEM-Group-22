@@ -7,9 +7,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="729.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane id=".button" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" stylesheets="@MenuButton.css">
+      <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0">
          <children>
             <Region prefHeight="720.0" prefWidth="1280.0" styleClass="gameOver" stylesheets="@../../../application.css" />
             <ImageView fitHeight="1000.0" fitWidth="1000.0" layoutX="140.0">
@@ -17,9 +17,10 @@
                   <Image url="@../images/background.png" />
                </image>
             </ImageView>
-            <Button layoutX="384.0" layoutY="296.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="512.0" text="Multiplayer" />
-            <Button layoutX="384.0" layoutY="128.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="512.0" text="Singleplayer" />
-            <Button layoutX="384.0" layoutY="464.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="512.0" text="Quit" />
+            <Button layoutX="448.0" layoutY="280.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="384.0" stylesheets="@Menu.css" text="Singleplayer" />
+            <Button layoutX="448.0" layoutY="424.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="384.0" stylesheets="@Menu.css" text="Multiplayer" />
+            <Button layoutX="448.0" layoutY="568.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="384.0" stylesheets="@Menu.css" text="Quit" />
+            <Label alignment="CENTER" layoutX="141.0" layoutY="15.0" minWidth="-Infinity" prefHeight="245.0" prefWidth="1000.0" styleClass="title" stylesheets="@Menu.css" text="Space Invaders" textAlignment="CENTER" textFill="WHITE" />
          </children>
       </Pane>
    </children>
