@@ -73,7 +73,7 @@ public abstract class GameUIController
      * Label to load the score of the player in.
      */
     @FXML
-	protected Label scoreLabel;
+	private Label scoreLabel;
     
     /**
      * Label to load the highscore in.
@@ -359,5 +359,6 @@ public abstract class GameUIController
 	public void setGc(GraphicsContext gc) {
 		this.gc = gc;
 	}
+
 
 }
