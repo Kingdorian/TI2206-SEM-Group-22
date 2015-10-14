@@ -33,5 +33,9 @@ public abstract class Score extends UIElement {
 
 	@Override
 	public abstract void draw();
+	
+	public Label getLabel() {
+		return label;
+	}
 
 }

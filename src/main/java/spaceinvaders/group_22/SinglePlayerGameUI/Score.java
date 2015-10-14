@@ -16,43 +16,25 @@ import spaceinvaders.group_22.ui.UIElement;
 public class Score extends spaceinvaders.group_22.ui.Score {
 	
 	/**
-	 * The label to draw the score of player 1 on.
-	 */
-	private Label labelPlayer1;
-	/**
-	 * The label to draw the score for player 2 on.
-	 */
-	private Label labelPlayer2;
-	
-	/**
 	 * The constructor.
 	 * @param newGame the Game
 	 * @param gc the GraphicsContext to draw on.	
 	 * @param scoreLabelPlayer1 The label on which the score of the first player should be drawn. 
 	 * @param ScoreLabelPlayer2 The label on which the score of the second player should be drawn.
 	 */
-	public Score(final Game newGame, final GraphicsContext gc, 
-			final Label scoreLabelPlayer1, final Label scoreLabelPlayer2) {
-		super(newGame, gc, scoreLabelPlayer1);
-		labelPlayer2 = scoreLabelPlayer2;
+	public Score(final Game newGame, final GraphicsContext gc,	final Label scoreLabelPlayer) {
+		super(newGame, gc, scoreLabelPlayer);
 	}
 	/**
 	 * Draws the score on the screen.
 	 */
 	public final void draw() {
 		int digits = 8;
-		//TODO Change this so it actually gets the score of player1
     	String scoreString = Integer.toString(getGame().getPlayer().getScore());
     	for (int i = 0; i < digits  - scoreString.length(); i++) {
     		scoreString = "0" + scoreString;
     	}
-    	labelPlayer1.setText(scoreString);
-    	//TODO Change this so it actually gets the score of player2
-    	scoreString = Integer.toString(getGame().getPlayer().getScore());
-    	for (int i = 0; i < digits  - scoreString.length(); i++) {
-    		scoreString = "0" + scoreString;
-    	}
-    	labelPlayer2.setText(scoreString);
+    	getLabel().setText(scoreString);
     	Logger.getInstance().log("Formatted score to UI", LogEvent.Type.TRACE);		
 	}
 

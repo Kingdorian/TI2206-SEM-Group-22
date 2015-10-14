@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
-import spaceinvaders.group_22.SinglePlayerGameUI.Lives;
-import spaceinvaders.group_22.SinglePlayerGameUI.Score;
+import spaceinvaders.group_22.ui.Lives;
+import spaceinvaders.group_22.ui.Score;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import javafx.animation.KeyFrame;
@@ -31,7 +31,7 @@ import javafx.util.Duration;
  *
  */
 @SuppressWarnings("checkstyle:magicnumber")    
-public class GameUIController
+public abstract class GameUIController
     implements Initializable {
 
 	/**
@@ -73,7 +73,7 @@ public class GameUIController
      * Label to load the score of the player in.
      */
     @FXML
-	private Label scoreLabel;
+	protected Label scoreLabel;
     
     /**
      * Label to load the highscore in.
@@ -104,35 +104,35 @@ public class GameUIController
     /**
      * The drawing of the SpaceShip.
      */
-    private UIElementSpaceShip uiSpaceShip;
+    protected UIElementSpaceShip uiSpaceShip;
     /**
      * The drawing of the Alien.
      */
-    private UIElementAlien uiAlien;
+    protected UIElementAlien uiAlien;
     /**
      * The drawing of the Bullet.
      */
-    private UIElementBullet uiBullet;
+    protected UIElementBullet uiBullet;
     /**
      * The drawing of the Explosion.
      */
-    private UIElementExplosion uiExplosion;
+    protected UIElementExplosion uiExplosion;
     /**
      * The drawing of the PowerUp.
      */
-    private UIElementPowerUp uiPowerUp;
+    protected UIElementPowerUp uiPowerUp;
     /**
      * The drawing of the Barricade.
      */
-    private UIElementBarricade uiBarricade;
+    protected UIElementBarricade uiBarricade;
     /**
      * The drawing of the score.
      */
-    private Score uiScore;
+    protected Score uiScore;
     /**
      * The drawing of the lives.
      */
-    private Lives uiLives;
+    protected Lives uiLives;
     
     /**
      * Called by the FXMLLoader. 
@@ -141,7 +141,7 @@ public class GameUIController
 	public final void initialize(final URL fxmlFileLocation, final ResourceBundle resources) {
     	initializeStackPaneScreens();
     	// Get the GraphicsContext of the canvas, so you can draw on it.
-    	gc = canvas.getGraphicsContext2D();
+    	setGc(canvas.getGraphicsContext2D());
     	
     	canvasWidth = canvas.getWidth();
     	canvasHeight = canvas.getHeight();
@@ -155,18 +155,7 @@ public class GameUIController
     /**
      * Initializes the UI elements.
      */
-    private void initializeUIElements() {
-    	uiAlien = new UIElementAlien(game, gc);
-    	uiSpaceShip = new UIElementSpaceShip(game, gc);
-    	uiBullet = new UIElementBullet(game, gc);
-    	uiExplosion = new UIElementExplosion(game, gc);
-    	uiBarricade = new UIElementBarricade(game, gc);
-    	uiScore = new Score(game, gc, scoreLabel);
-    	uiLives = new Lives(game, gc);
-    	uiPowerUp = new UIElementPowerUp(game, gc);
-    	
-    	Logger.getInstance().log("UIElements initialized.", LogEvent.Type.INFO);
-    }
+    protected abstract void initializeUIElements();
     
     /**
      * Returns the canvas Width.
@@ -256,7 +245,7 @@ public class GameUIController
 				{
 					public void handle(final ActionEvent ae) {
 						// Clear the canvas.
-						gc.clearRect(0, 0, canvasWidth, canvasHeight);
+						getGc().clearRect(0, 0, canvasWidth, canvasHeight);
 						
 						// If the game is in progress, look if any key is pressed.
 						if (game.isInProgress()) {
@@ -317,7 +306,7 @@ public class GameUIController
 	 * @return The graphicsContext of the UI.
 	 */
 	public final GraphicsContext getGC() {
-		return gc;
+		return getGc();
 	}
 	
 	/**
@@ -358,6 +347,17 @@ public class GameUIController
 	    if (pressedKeys.contains(event.getCode())) {
 	    	pressedKeys.remove(event.getCode());
 	    }
+	}
+	/**
+	 * Returns the Graphiccontext object of this object.
+	 * @return the GraphicsContext
+	 */
+	public GraphicsContext getGc() {
+		return gc;
+	}
+
+	public void setGc(GraphicsContext gc) {
+		this.gc = gc;
 	}
 
 }
