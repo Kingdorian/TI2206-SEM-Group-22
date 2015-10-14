@@ -26,17 +26,35 @@ public abstract class UIElementUnit extends UIElement {
 
 	/**
 	 * Method to draw the Units.
+	 * @param unit The unit to draw.
 	 */
 	public final void drawUnit(final Unit unit) {
 		Image spriteImage = getSprites().get(unit.getSprite());
 		
-		double xpos = unit.getXCoor() - 0.5 * unit.getWidth();
-		double ypos = unit.getYCoor() - 0.5 * unit.getHeight();
 		if (spriteImage != null) {
-			getGC().drawImage(spriteImage, xpos, ypos);			
+			getGC().drawImage(spriteImage, calculateXposition(unit), calculateYposition(unit));			
 		}	
 		Logger.getInstance().log("Drawn " + unit.getClass().getName(), LogEvent.Type.TRACE);
 	}
+	
+	/**
+	 * Calculates the x position of the unit to draw.
+	 * @param unit The unit to draw.
+	 * @return The x-position to draw the unit at.
+	 */
+	public final double calculateXposition(final Unit unit) {
+		return unit.getXCoor() - 0.5 * unit.getWidth();
+	}
+
+	/**
+	 * Calculates the y position of the unit to draw.
+	 * @param unit The unit to draw.
+	 * @return The y-position to draw the unit at.
+	 */
+	public final double calculateYposition(final Unit unit) {
+		return unit.getYCoor() - 0.5 * unit.getHeight();
+	}
+
 
 	/**
 	 * Draw method for the UIElement.
