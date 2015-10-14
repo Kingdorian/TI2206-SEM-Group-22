@@ -159,6 +159,20 @@ public class AlienController extends UnitController implements MovableUnitContro
 		alienWave.setAlienVelX(Math.abs(alienWave.getAlienVelX()) + AlienController.ALIENVELXINCREASE);
 		alienWave = alienWaveFactory.createWave();
 	}
+	
+	/**
+	 * Checks if all aliens are dead.
+	 */
+	public final void checkAllAliensDead() {
+		if (alienWave.getAliens().isEmpty()) {
+			Logger.getInstance().log("All aliens died", LogEvent.Type.INFO);
+			// Increase aliens speed and reset direction so they start moving to
+			// the right
+			nextRound();
+			game.getBullets().clear();
+			Logger.getInstance().log("Removed all bullets", LogEvent.Type.TRACE);
+		}
+	}
 
 	@Override
 	public void create() {
