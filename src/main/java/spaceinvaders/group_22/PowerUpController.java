@@ -41,7 +41,7 @@ public class PowerUpController {
 	 */
 	public PowerUpController(final Game newgame) {
 		game = newgame;
-		collisions = new Collisions(game);
+		collisions = new Collisions(getGame());
 	}
 
 	/**
@@ -73,20 +73,13 @@ public class PowerUpController {
 	 * Method to check a not yet active powerUp.
 	 * @param powerUp the powerUp to check
 	 */
-	public final void checkMovingPowerUp(final PowerUpUnit powerUp) {
-		powerUp.move(game.getTickrate());
-		ArrayList<Unit> spaceShiplist = new ArrayList<Unit>();
-		spaceShiplist.add(game.getPlayer().getSpaceShip());
-		if (powerUp.getYCoor() >= game.getCanvasHeight()) {
+	public void checkMovingPowerUp(final PowerUpUnit powerUp) {
+		powerUp.move(getGame().getTickrate());
+		if (powerUp.getYCoor() >= getGame().getCanvasHeight()) {
 			powerups.remove(powerUp);
 			Logger.getInstance().log("Removed PowerUp that was outside screen " , LogEvent.Type.TRACE);
-		} else if (collisions.checkCollisions(powerUp, spaceShiplist) != null) {
-			
-			powerUp.activate(game.getPlayer());
-			powerups.remove(powerUp);
-			Logger.getInstance().log("PowerUp collided with spaceship" , LogEvent.Type.TRACE);
-		}  else if (collisions.checkCollisions(powerUp, 
-				new ArrayList<Unit>(game.getBarricadeController().getBarricades())) != null) {
+		}  else if (getCollisions().checkCollisions(powerUp, 
+				new ArrayList<Unit>(getGame().getBarricadeController().getBarricades())) != null) {
 			powerups.remove(powerUp);
 			Logger.getInstance().log("PowerUp collided with barricade" , LogEvent.Type.TRACE);
 		}  
@@ -95,14 +88,32 @@ public class PowerUpController {
 	/**
 	 * Checks all the power ups in the game.
 	 */
-	public final void checkPowerUps() {		
+	public void checkPowerUps() {		
 		for (int i = 0; i < powerups.size(); i++) {
 			checkMovingPowerUp(powerups.get(i));
 		}
-		//Loop over the active power ups for the player
-		for (int i = 0; i < game.getPlayer().getActivePowerUps().size(); i++) {
-			
-			game.getPlayer().getActivePowerUps().get(i).decreaseTimeLeft(game.getTickrate());
+		checkActivationPowerUps(game.getPlayer());
+		
+		//Loop over the active powerups and decrease their time.
+		ArrayList<PowerUp> activepowerups = new ArrayList<PowerUp>();
+		activepowerups.addAll(game.getPlayer().getActivePowerUps());
+		for (PowerUp powerUp : activepowerups) {
+			powerUp.decreaseTimeLeft(getGame().getTickrate());
+		}
+	}
+	
+	/**
+	 * Method to check if there is a powerup that has to be activiated.
+	 * @param player to check the powerups for.
+	 */
+	public final void checkActivationPowerUps(final Player player) {
+		ArrayList<Unit> unitlist = new ArrayList<Unit>();
+		unitlist.addAll(getPowerUps());
+		PowerUpUnit powerUpUnit = (PowerUpUnit) getCollisions().checkCollisions(player.getSpaceShip(), unitlist);
+		if (powerUpUnit != null) {
+			powerUpUnit.activate(player);
+			getPowerUps().remove(powerUpUnit);
+			Logger.getInstance().log("PowerUp collided with spaceship" , LogEvent.Type.TRACE);
 		}
 	}
 	
@@ -119,6 +130,21 @@ public class PowerUpController {
 	 */
 	public final  ArrayList<PowerUpUnit> getPowerUps() {
 		return powerups;
+	}
+
+	/**
+	 * Returns the game object of this controller.
+	 * @return the game to return.
+	 */
+	public final Game getGame() {
+		return game;
+	}
+
+	/**
+	 * @return the collisions
+	 */
+	public final Collisions getCollisions() {
+		return collisions;
 	}
 
 }
