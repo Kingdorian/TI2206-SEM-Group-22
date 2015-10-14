@@ -26,12 +26,10 @@ public class UIElementSpaceShip extends UIElementUnit {
 
 	@Override
 	public final void draw() {
-		SpaceShip spaceShip = getGame().getPlayer().getSpaceShip();
+		SpaceShip spaceShip = getGame().getPlayerSpaceship();
 		drawPowerupGlow();
         // Position the player in the middle, on the bottom of the screen.
-		drawUnit(spaceShip.getXCoor(), spaceShip.getYCoor(), spaceShip.getWidth(), 
-				spaceShip.getHeight(), spaceShip.getSprite(), getGC());
-		Logger.getInstance().log("Drawn spaceship", LogEvent.Type.TRACE);
+		drawUnit(spaceShip);
 	}
 	
 	/**

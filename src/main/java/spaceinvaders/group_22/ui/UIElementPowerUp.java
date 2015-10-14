@@ -26,10 +26,8 @@ public class UIElementPowerUp extends UIElementUnit {
 	@Override
 	public final void draw() {
 		for (PowerUpUnit powerup : getGame().getPowerUpController().getPowerUps()) {
-			drawUnit(powerup.getXCoor(), powerup.getYCoor(), powerup.getWidth(),
-					powerup.getHeight(), powerup.getSprite(), getGC());		
+			drawUnit(powerup);	
 		}
-		Logger.getInstance().log("Drawn powerups", LogEvent.Type.TRACE);	
 	}
 
 }

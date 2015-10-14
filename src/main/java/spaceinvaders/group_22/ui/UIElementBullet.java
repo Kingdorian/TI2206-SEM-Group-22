@@ -26,11 +26,8 @@ public class UIElementBullet extends UIElementUnit {
 	@Override
 	public final void draw() {
 		for (Bullet bullet : getGame().getBullets()) {
-			drawUnit(bullet.getXCoor(), bullet.getYCoor(), 
-					bullet.getWidth(), bullet.getHeight(), bullet.getSprite(), getGC());
-		}
-		Logger.getInstance().log("Drawn bullets", LogEvent.Type.TRACE);
-		
+			drawUnit(bullet);
+		}		
 	}
 
 }

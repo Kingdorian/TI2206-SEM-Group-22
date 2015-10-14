@@ -26,10 +26,8 @@ public class UIElementAlien extends UIElementUnit {
 	@Override
 	public final void draw() {
 		for (Alien unit : getGame().getAlienController().getAliens()) {
-			drawUnit(unit.getXCoor(), unit.getYCoor(), unit.getWidth(),
-					unit.getHeight(), unit.getSprite(), getGC());		
+			drawUnit(unit);	
 		}
-		Logger.getInstance().log("Drawn aliens", LogEvent.Type.TRACE);
 	}
 
 }
