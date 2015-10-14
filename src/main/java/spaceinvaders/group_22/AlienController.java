@@ -112,7 +112,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 			}
 
 			//Check if there is an alien at the height of the spaceship.
-			if (unit.getYCoor() + unit.getHeight() > game.getSpaceship().getYCoor()) {
+			if (unit.getYCoor() + unit.getHeight() > game.getPlayerSpaceship().getYCoor()) {
 				game.gameOver();
 			}
 			unit.move(game.getTickrate());

@@ -51,14 +51,14 @@ public class Collisions {
 			game.getPlayer().die();
 		}
 		//Checking colissions for spaceship with enemy bullets
-		Unit collidingBullet = checkCollisions(game.getPlayer().getSpaceShip(), alienBullets);
+		Unit collidingBullet = checkCollisions(game.getPlayerSpaceship(), alienBullets);
 		if (collidingBullet != null) {
-			String logMessage = "Player collided bullet at X:" + game.getPlayer().getSpaceShip().getXCoor() 
+			String logMessage = "Player collided bullet at X:" + game.getPlayerSpaceship().getXCoor() 
 					+ " Y: " + game.getPlayer().getSpaceShip().getYCoor();
 			Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
 			
-			spaceShipexplosion = new Explosion(game.getPlayer().getSpaceShip().getXCoor(),
-					game.getPlayer().getSpaceShip().getYCoor(), "explosion1.png");
+			spaceShipexplosion = new Explosion(game.getPlayerSpaceship().getXCoor(),
+					game.getPlayerSpaceship().getYCoor(), "explosion1.png");
 			game.getExplosions().add(spaceShipexplosion);
 			game.getBullets().remove(collidingBullet);
 		}

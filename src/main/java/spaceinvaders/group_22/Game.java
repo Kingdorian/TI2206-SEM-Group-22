@@ -304,10 +304,10 @@ public class Game {
 	}
 	
 	/**
-	 * Gets the player that is playing this game. 
-	 * @return player that is playing this game
+	 * Gets the spaceship of the player that is playing this game. 
+	 * @return the spaceship of the player that is playing this game.
 	 */
-	public final SpaceShip getSpaceship() {
+	public final SpaceShip getPlayerSpaceship() {
 		return player.getSpaceShip();
 	}
 	
