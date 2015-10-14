@@ -80,7 +80,11 @@ public abstract class GameUIController
      */
     @FXML
 	private Label highScoreLabel;
-    
+    /**
+     * Label to display the winning player.
+     */
+    @FXML
+    private Label winningPlayer;
     /**
      * The game over screen.
      */
