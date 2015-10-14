@@ -201,7 +201,7 @@ public class Game {
 	 * Will create new bullets if player presses space.
 	 * @param pressedKeys the keys pressed since last tick
 	 */
-	public final void tickShipShooting(final ArrayList<KeyCode> pressedKeys) {
+	public void tickShipShooting(final ArrayList<KeyCode> pressedKeys) {
 		if (pressedKeys.contains(KeyCode.SPACE) && shootingAllowed) {
 			Logger.getInstance().log("Player pressed Space", LogEvent.Type.DEBUG);
 			Bullet bullet = player.getSpaceShip().shootBullet(-spaceShipBulletVelX);
@@ -279,7 +279,11 @@ public class Game {
 		explosions = newExplosions;
 	}
 	
-	public final void setHasEnded(boolean ended){
+	/**
+	 * Sets if game is ended.
+	 * @param ended if game is ended
+	 */
+	public final void setHasEnded(final boolean ended) {
 		hasEnded = ended;
 	}
 
@@ -426,5 +430,13 @@ public class Game {
 	 */
 	public final Collisions getCollisions() {
 		return collisions;
+	}
+	
+	/**
+	 * Returns the ShipBullet velocity.
+	 * @return the ShipBulelt velocity
+	 */
+	public final double getShipBulletVelX() {
+		return spaceShipBulletVelX;
 	}
 }
