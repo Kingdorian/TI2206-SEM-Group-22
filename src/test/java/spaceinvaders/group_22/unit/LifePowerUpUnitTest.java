@@ -25,7 +25,8 @@ public class LifePowerUpUnitTest extends PowerUpUnitTest {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activatePowerUpTest() {
 		LifePowerUpUnit powerUp = new LifePowerUpUnit(500, 200, "testimage.png");
-		Player player = new Player(new Game(1000, 720));
+		Game game = new Game(1000, 720);
+		Player player = new Player(game, game.getCanvasWidth() / 2);
 		powerUp.activate(player);
 		assertEquals(player.getLives(), 4);
 	}
@@ -36,7 +37,8 @@ public class LifePowerUpUnitTest extends PowerUpUnitTest {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activateTwoTimesPowerUpTest() {
 		LifePowerUpUnit powerUp = new LifePowerUpUnit(500, 200, "testimage.png");
-		Player player = new Player(new Game(1000, 720));
+		Game game = new Game(1000, 720);
+		Player player = new Player(game, game.getCanvasWidth() / 2);
 		powerUp.activate(player);
 		powerUp.activate(player);
 		assertEquals(player.getLives(), 5);
@@ -48,7 +50,8 @@ public class LifePowerUpUnitTest extends PowerUpUnitTest {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activateThreeTimesPowerUpTest() {
 		LifePowerUpUnit powerUp = new LifePowerUpUnit(500, 200, "testimage.png");
-		Player player = new Player(new Game(1000, 720));
+		Game game = new Game(1000, 720);
+		Player player = new Player(game, game.getCanvasWidth() / 2);
 		powerUp.activate(player);
 		powerUp.activate(player);
 		powerUp.activate(player);

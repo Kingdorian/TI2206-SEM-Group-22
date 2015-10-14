@@ -108,7 +108,7 @@ public class Game {
 		alienController.create();			
 		powerUpController = new PowerUpController(this);
 		collisions = new Collisions(this);
-		player = new Player(this);
+		player = new Player(this, getCanvasWidth() / 2);
 		shootingAllowed = true;
 		countToShoot = 0;
 		Logger.getInstance().log("Created game succesfully", LogEvent.Type.INFO);
@@ -121,7 +121,7 @@ public class Game {
 		explosions = new ArrayList<Explosion>();
 		barController.create();
 		alienController.create();
-		player = new Player(this);
+		player = new Player(this, getCanvasWidth() / 2);
 		
 		shootingAllowed = true;
 		countToShoot = 0;
@@ -150,7 +150,7 @@ public class Game {
 		explosions = new ArrayList<Explosion>();
 		barController.create();
 		alienController.create();
-		player = new Player(this);
+		player = new Player(this, getCanvasWidth() / 2);
 		shootingAllowed = true;
 		countToShoot = 0;
 	}
@@ -370,7 +370,7 @@ public class Game {
 	 * Returns the powerUpcontroller of this game.
 	 * @return the powerUpcontroller of this game.
 	 */
-	public final PowerUpController getPowerUpController() {
+	public PowerUpController getPowerUpController() {
 		return powerUpController;
 	}
 }

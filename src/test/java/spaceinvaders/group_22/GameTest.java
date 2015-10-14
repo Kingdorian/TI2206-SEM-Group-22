@@ -213,7 +213,7 @@ public class GameTest {
 	 */
 	@Test
 	public final void testSetPlayer() {
-		Player player = new Player(game);
+		Player player = new Player(game, game.getCanvasWidth() / 2);
 		game.setPlayer(player);
 		Assert.assertEquals(game.getPlayer(), player);
 	}

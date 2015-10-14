@@ -24,7 +24,8 @@ public class ShootPowerUpUnitTest extends PowerUpUnitTest {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activatePowerUpTest() {
 		ShootPowerUpUnit powerUp = new ShootPowerUpUnit(500, 200, "testimage.png");
-		Player player = new Player(new Game(1000, 720));
+		Game game = new Game(1000, 720);
+		Player player = new Player(game, game.getCanvasWidth() / 2);
 		powerUp.activate(player);
 		
 		assertEquals(player.getSpaceShip().getShootingMultiplier(), 2.0, 0.f);

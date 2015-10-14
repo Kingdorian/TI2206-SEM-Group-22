@@ -35,7 +35,7 @@ public class KeboardInputTest {
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void setup() {
 		game = new Game(1000.0 , 720.0);
-		game.setPlayer(new Player(game));
+		game.setPlayer(new Player(game, game.getCanvasWidth() / 2));
 		game.setTickrate(60.0);
 		ArrayList<Alien> row = new ArrayList<Alien>();
 		row.add(new Alien(10, 10, "invader.png"));

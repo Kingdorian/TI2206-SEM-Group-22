@@ -25,7 +25,8 @@ public class SpeedPowerUpUnitTest extends PowerUpUnitTest {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activatePowerUpTest() {
 		SpeedPowerUpUnit powerUp = new SpeedPowerUpUnit(500, 200, "testimage.png");
-		Player player = new Player(new Game(1000, 720));
+		Game game = new Game(1000, 720);
+		Player player = new Player(game, game.getCanvasWidth() / 2);
 		powerUp.activate(player);
 		
 		assertEquals(player.getSpaceShip().getVelMultiplier(), 2.5, 0.f);

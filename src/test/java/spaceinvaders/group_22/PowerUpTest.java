@@ -41,7 +41,7 @@ public abstract class PowerUpTest {
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void setup() {
 		game = new Game(1000, 750);
-		player = new Player(game);
+		player = new Player(game, game.getCanvasWidth() / 2);
 		powerup = createInstance(player);
 	}
 	

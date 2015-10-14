@@ -43,11 +43,12 @@ public class Player {
 	/**
 	 * Creates new Player object.
 	 * @param parentgame the game where the object is part of.
+	 * @param shipX X coordinate of the ship.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
-	public Player(final Game parentgame) {
+	public Player(final Game parentgame, final double shipX) {
 		game = parentgame;
-		ship = new SpaceShip(game.getCanvasWidth() / 2, game.getCanvasHeight() - 40, "spaceship.png");
+		ship = new SpaceShip(shipX, game.getCanvasHeight() - 40, "spaceship.png");
 		Logger.getInstance().log("Created spaceship for player", LogEvent.Type.DEBUG);
 		score  = 0;
 		lives = 3;
