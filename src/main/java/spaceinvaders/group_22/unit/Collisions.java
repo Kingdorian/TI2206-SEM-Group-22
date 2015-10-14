@@ -54,7 +54,7 @@ public class Collisions {
 		Unit collidingBullet = checkCollisions(game.getPlayerSpaceship(), alienBullets);
 		if (collidingBullet != null) {
 			String logMessage = "Player collided bullet at X:" + game.getPlayerSpaceship().getXCoor() 
-					+ " Y: " + game.getPlayer().getSpaceShip().getYCoor();
+					+ " Y: " + game.getPlayerSpaceship().getYCoor();
 			Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
 			
 			spaceShipexplosion = new Explosion(game.getPlayerSpaceship().getXCoor(),
