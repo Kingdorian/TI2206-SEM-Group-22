@@ -30,12 +30,12 @@ public abstract class Unit {
 	/**
 	 * height of this unit.
 	 */
-	private int height;
+	private double height;
 	
 	/**
 	 * width of this unit.
 	 */
-	private int width;
+	private double width;
 	
 	/**
 	 * an Image object containing the sprite.
@@ -51,6 +51,8 @@ public abstract class Unit {
 		this.setXCoor(x);
 		this.setYCoor(y);
 		this.setSpriteImage();
+		this.setWidth(sprite.getWidth());
+		this.setHeight(sprite.getHeight());
 	}
 	/**
 	 * Compares two objects and returns if they are equal.
@@ -101,9 +103,9 @@ public abstract class Unit {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + height;
+		result = (int) (prime * result + height);
 		result = prime * result + ((sprite == null) ? 0 : sprite.hashCode());
-		result = prime * result + width;
+		result = (int) (prime * result + width);
 		long temp;
 		temp = Double.doubleToLongBits(xCoor);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -147,28 +149,28 @@ public abstract class Unit {
 	 * Get the width of this unit.
 	 * @return the width of this unit.
 	 */
-	public final int getWidth() {
+	public final double getWidth() {
 		return width;
 	}
 	/**
 	 * Sets the width of this unit.
-	 * @param newWidth to set as width.
+	 * @param d to set as width.
 	 */
-	public final void setWidth(final int newWidth) {
-		this.width = newWidth;
+	public final void setWidth(final double d) {
+		this.width = d;
 	}
 	/**
 	 * Get the height of this unit.
 	 * @return the height of this unit.
 	 */
-	public final int getHeight() {
+	public final double getHeight() {
 		return height;
 	}
 	/**
 	 * Sets the height of this unit.
 	 * @param newheight the height to set.
 	 */
-	public final void setHeight(final int newheight) {
+	public final void setHeight(final double newheight) {
 		this.height = newheight;
 	}
 	

@@ -132,9 +132,9 @@ public class SpriteLoader {
      */
     public final Image getAlienWithHealth(final int health) {
     	if (health > 0 && health <= ALIEN_MAXHEALTH) {
-    		return sprites.get("alienhealth" + Integer.toString(health) + ".png");
+    		return sprites.get("alien_health" + Integer.toString(health) + ".png");
     	} else {
-    		return sprites.get("alienhealth1.png");
+    		return sprites.get("alien_health1.png");
     	}
     }
     
