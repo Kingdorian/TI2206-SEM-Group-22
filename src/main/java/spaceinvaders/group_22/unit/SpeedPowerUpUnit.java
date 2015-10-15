@@ -18,7 +18,6 @@ public class SpeedPowerUpUnit extends PowerUpUnit {
 	 * Creates a speed power Up.
 	 * @param x X coordinate
 	 * @param y Y coordinate
-	 * @param spriteFile The filename of the sprite.
 	 */
 	public SpeedPowerUpUnit(final double x, final double y) {
 		super(x, y);

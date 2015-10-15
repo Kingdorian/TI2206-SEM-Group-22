@@ -72,7 +72,7 @@ public abstract class Bullet extends Unit implements MovableUnit {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
 	@Override
-	public final int hashCode() {
+	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		long temp;

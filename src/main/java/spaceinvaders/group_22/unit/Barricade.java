@@ -18,7 +18,6 @@ public class Barricade extends Unit {
 	 * Creates new Barricade object.
 	 * @param x X-coordinate of the barricade
 	 * @param y Y-coordinate of the barricade
-	 * @param spriteFile 
 	 */
 	public Barricade(final double x, final double y) {
 		super(x, y);

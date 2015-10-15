@@ -8,6 +8,7 @@ import spaceinvaders.group_22.ui.SpriteLoader;
  * @author Ege de Bruin
  */
 
+@SuppressWarnings("checkstyle:magicnumber") 
 public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	
 	/**
@@ -23,10 +24,12 @@ public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	 * velY is the velocity in the Y direction in pixels per second.
 	 */
 	private double velY;
+	
 	/**
 	 * Chance this aliens shoots a bullet.
 	 */
 	private double bulletChance = 0.025;
+	
 	/**
 	 * Variable that keeps track of the health left for this alien.
 	 */

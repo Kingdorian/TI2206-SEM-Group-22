@@ -1,13 +1,6 @@
 package spaceinvaders.group_22.unit;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-
-import javax.imageio.ImageIO;
-
 import javafx.scene.image.Image;
-import spaceinvaders.group_22.logger.Logger;
 
 /**
  * A unit in the game that has a position and velocity.

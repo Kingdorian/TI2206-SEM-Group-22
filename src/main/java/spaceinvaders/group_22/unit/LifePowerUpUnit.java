@@ -18,7 +18,6 @@ public class LifePowerUpUnit extends PowerUpUnit {
 	 * Creates a life power Up.
 	 * @param x X coordinate
 	 * @param y Y coordinate
-	 * @param spriteFile The filename of the sprite.
 	 */
 	public LifePowerUpUnit(final double x, final double y) {
 		super(x, y);

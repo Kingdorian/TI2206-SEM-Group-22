@@ -1,7 +1,5 @@
 package spaceinvaders.group_22;
 	
-import java.util.Arrays;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import spaceinvaders.group_22.logger.Logger;
