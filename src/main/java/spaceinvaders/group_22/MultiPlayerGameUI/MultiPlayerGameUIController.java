@@ -2,7 +2,9 @@ package spaceinvaders.group_22.MultiPlayerGameUI;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.MultiPlayerGame;
+import spaceinvaders.group_22.SinglePlayerGame;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.ui.GameUIController;
@@ -15,6 +17,10 @@ import spaceinvaders.group_22.ui.UIElementPowerUp;
 
 public class MultiPlayerGameUIController extends GameUIController {
 	
+    /**
+     * Game object of the current game.
+     */
+    private MultiPlayerGame game;
 	/**
 	 * The Label for the other player.
 	 */
@@ -24,10 +30,27 @@ public class MultiPlayerGameUIController extends GameUIController {
     @FXML
 	private Label scoreLabelPlayer2;
 	
-	public void MultiPlayerGameUIController() {
+	public MultiPlayerGameUIController() {
 		Logger.getInstance().log("Created MultiPlayerGameUI Objec", LogEvent.Type.DEBUG);
-		
 	}
+	
+    /**
+     * Creates a new game.
+     */
+    public final void newGame() {
+    	// If the game does not exist, create a new one.
+    	if (getGame() == null) {
+        	game = new MultiPlayerGame(getCanvasWidth(), getCanvasHeight());
+        	Logger.getInstance().log("Set canvas width to: " + getCanvasWidth(), LogEvent.Type.INFO);
+        	Logger.getInstance().log("Set canvas height to: " +  getCanvasHeight(), LogEvent.Type.INFO);
+        	Logger.getInstance().log("Show screen Before Play", LogEvent.Type.INFO);
+        // Else reset the existing game.
+    	} else {
+        	getGame().resetGame();    		
+    	}
+
+    	startAnimation();
+    }
 	
     /**
      * Initializes the UI elements.
@@ -48,6 +71,6 @@ public class MultiPlayerGameUIController extends GameUIController {
     
     @Override
     public MultiPlayerGame getGame() {
-    	return (MultiPlayerGame)super.getGame();
+    	return game;
     }
 }

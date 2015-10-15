@@ -147,7 +147,6 @@ public abstract class GameUIController
     	initializeStackPaneScreens();
     	// Get the GraphicsContext of the canvas, so you can draw on it.
     	setGc(canvas.getGraphicsContext2D());
-    	
     	canvasWidth = canvas.getWidth();
     	canvasHeight = canvas.getHeight();
     	
@@ -194,20 +193,7 @@ public abstract class GameUIController
     /**
      * Creates a new game.
      */
-    public final void newGame() {
-    	// If the game does not exist, create a new one.
-    	if (game == null) {
-        	game = new SinglePlayerGame(canvasWidth, canvasHeight);
-        	Logger.getInstance().log("Set canvas width to: " + canvasWidth, LogEvent.Type.INFO);
-        	Logger.getInstance().log("Set canvas height to: " + canvasHeight, LogEvent.Type.INFO);
-        	Logger.getInstance().log("Show screen Before Play", LogEvent.Type.INFO);
-        // Else reset the existing game.
-    	} else {
-        	game.resetGame();    		
-    	}
-
-    	startAnimation();
-    }
+    public abstract void newGame();
     
     /**
      * Method to set the framerate of the animation.
@@ -241,7 +227,7 @@ public abstract class GameUIController
 		
     	// Set the animation framerate.
     	setFramerate(60);
-    	game.setTickrate(framerate);
+    	getGame().setTickrate(framerate);
     	
     	// Create each frame.
 		KeyFrame frame = new KeyFrame(
@@ -253,8 +239,8 @@ public abstract class GameUIController
 						getGc().clearRect(0, 0, canvasWidth, canvasHeight);
 						
 						// If the game is in progress, look if any key is pressed.
-						if (game.isInProgress()) {
-							game.tick(pressedKeys);
+						if (getGame().isInProgress()) {
+							getGame().tick(pressedKeys);
 						}
 						
 						// Draw the various units on the screen.
@@ -274,9 +260,9 @@ public abstract class GameUIController
 					    }
 						
 						// If the game has ended, put the Game Over screen to the front.
-						if (game.hasEnded()) {
+						if (getGame().hasEnded()) {
 							screenGameOver.toFront();
-							highScoreLabel.setText("Highscore: " + game.getHighScore());
+							highScoreLabel.setText("Highscore: " + getGame().getHighScore());
 							gameLoop.stop();
 							Logger.getInstance().log("Show screen Game Over", LogEvent.Type.INFO);
 						} else {
@@ -305,6 +291,13 @@ public abstract class GameUIController
 	public Game getGame() {
 		return game;
 	}
+	/**
+	 * Sets game to provided game
+	 * @param g game to set game to
+	 */
+	public void setGame(Game g) {
+		game = g;
+	}
 	
 	/**
 	 * Returns the graphicsContext.
@@ -320,26 +313,26 @@ public abstract class GameUIController
 	 */
 	@FXML
 	public final void handleKeyPressed(final KeyEvent event) {
-        if (event.getCode().equals(KeyCode.S) && !game.isInProgress()) {
+        if (event.getCode().equals(KeyCode.S) && !getGame().isInProgress()) {
         	Logger.getInstance().log("Player pressed S", LogEvent.Type.DEBUG);
         	screenBeforePlay.toBack();
         	screenPaused.toBack();
-        	game.start();
+        	getGame().start();
         } else if (event.getCode().equals(KeyCode.P)) {
-        	if (game.isInProgress()) {
+        	if (getGame().isInProgress()) {
         		Logger.getInstance().log("Player pressed P", LogEvent.Type.DEBUG);
             	screenPaused.toFront();
             	Logger.getInstance().log("Show screen Paused", LogEvent.Type.INFO);
-            	game.stop();
+            	getGame().stop();
         	}
         } else if (event.getCode().equals(KeyCode.R)) {
         	Logger.getInstance().log("Player pressed R", LogEvent.Type.DEBUG);
-        	if (game.hasEnded()) {
+        	if (getGame().hasEnded()) {
             	newGame();
-            	game.start();
+            	getGame().start();
         	}
         } else if (event.getCode().equals(KeyCode.M)) {
-        	if (game.hasEnded()) {
+        	if (getGame().hasEnded()) {
         		SpaceInvadersUI.getInstance().loadUIScreen("Menu.fxml");
         	}
         }else if (!pressedKeys.contains(event.getCode())) {
