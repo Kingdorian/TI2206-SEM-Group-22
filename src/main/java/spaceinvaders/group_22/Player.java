@@ -110,7 +110,7 @@ public class Player {
 			powerup.deactivate();
 		}
 		SpawnProtectionPowerup spawnprotection = new SpawnProtectionPowerup(this);
-		spawnprotection.setTimeLeft(1.0);
+		spawnprotection.setTimeLeft(2.0);
 		activePowerUps.add(spawnprotection);
 		Logger.getInstance().log("Ship respawned", LogEvent.Type.TRACE);
 	}

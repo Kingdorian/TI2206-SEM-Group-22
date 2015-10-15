@@ -56,7 +56,6 @@ public abstract class SpaceShipController extends UnitController implements Mova
 		if (player.getSpaceShip().getExplosion() != null 
 				&& player.getSpaceShip().getExplosion().getCounter() == 24) {
 			Logger.getInstance().log("Spaceship hit by bullet" , LogEvent.Type.INFO);
-			game.getBullets().clear();
 			player.die();
 		}
 	}
