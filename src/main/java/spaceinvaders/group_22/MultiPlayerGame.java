@@ -45,6 +45,7 @@ public class MultiPlayerGame extends Game {
 		super(width, height);
 		for (int i = 0; i < 2; i++) {
 			Player play = new Player(this, (i + 1) * getCanvasWidth() / 3);
+			
 			players.add(play);
 			shootingAllowed.add(true);
 			countToShootMultiPlayer.add(0);
@@ -99,6 +100,7 @@ public class MultiPlayerGame extends Game {
 		for (Player player: players) {
 			checkAlienHeight(player.getSpaceShip());
 		}
+		
 	}
 	
 	/**
@@ -112,7 +114,6 @@ public class MultiPlayerGame extends Game {
 			Logger.getInstance().log("Player pressed " + needKey, LogEvent.Type.DEBUG);
 			Bullet bullet = players.get(index).getSpaceShip().shootBullet(-getShipBulletVelX());
 			getBullets().add(bullet);
-			System.out.println(getBullets().size());
 			shootingAllowed.set(index, false);
 			String logMessage = "Player shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
 			Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);

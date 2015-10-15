@@ -34,7 +34,7 @@ public class MultiPlayerGameTest extends GameTest {
 	 */
 	@Before
 	public final void setUp() {
-		multiGame = new MultiPlayerGame(200, 200);
+		multiGame = new MultiPlayerGame(1280, 720);
 		multiGame.setTickrate(1.0);
 		ArrayList<Alien> row = new ArrayList<Alien>();
 		row.add(new Alien(10, 10, "invader.png"));
@@ -78,9 +78,7 @@ public class MultiPlayerGameTest extends GameTest {
 	public final void testTick() {
 		ArrayList<KeyCode> pressedKeys = new ArrayList<KeyCode>();
 		pressedKeys.add(KeyCode.SHIFT);
-		multiGame.getBullets().clear();
-		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
-		multiGame.getAlienController().getAlienWave().setAliens(aliens);
+		multiGame.getBullets().clear();	
 		multiGame.getShootingAllowed().set(1, true);
 		multiGame.tick(pressedKeys);
 		Assert.assertEquals(multiGame.getBullets().size(), 1);
