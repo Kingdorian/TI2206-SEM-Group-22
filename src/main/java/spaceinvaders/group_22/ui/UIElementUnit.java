@@ -30,7 +30,7 @@ public abstract class UIElementUnit extends UIElement {
 	  * @param sprite Image containing the sprite to draw.
 	  * @param gc the GraphicsContext to draw on.
 	  */  
-	public final void drawUnit(final double x, final double y, final double spriteWidth, 
+	public void drawUnit(final double x, final double y, final double spriteWidth, 
   		final double spriteHeight, final String sprite, final GraphicsContext gc) {
       
       // Draw the player with the X and Y coordinates as center

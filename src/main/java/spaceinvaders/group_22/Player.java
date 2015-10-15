@@ -41,6 +41,10 @@ public class Player {
 	 * Game the player "lives" in.
 	 */
 	private Game game;
+	/**
+	 * Indicates if player can get damaged by bullets.
+	 */
+	private boolean invulnerable = false;
 	
 	/**
 	 * Creates new Player object.
@@ -105,6 +109,9 @@ public class Player {
 		for (PowerUp powerup : powerups) {
 			powerup.deactivate();
 		}
+		SpawnProtectionPowerup spawnprotection = new SpawnProtectionPowerup(this);
+		spawnprotection.setTimeLeft(1.0);
+		activePowerUps.add(spawnprotection);
 		Logger.getInstance().log("Ship respawned", LogEvent.Type.TRACE);
 	}
 	/**
@@ -117,7 +124,6 @@ public class Player {
 		if (lives <= 0) {
 			game.gameOver();
 		}
-		game.getBullets();
 	}
 	/**
 	 * Get the amount of lives the player has left.
@@ -147,5 +153,20 @@ public class Player {
 	 */
 	public final void setActivePowerUps(final ArrayList<PowerUp> newactivePowerUps) {
 		this.activePowerUps = newactivePowerUps;
-	}	
+	}
+	/**
+	 * Sets if the player is invulnerable.
+	 * @param b boolean if the player is invulnerable.
+	 */
+	public void setInvulnerable(boolean b) {
+		invulnerable = b;
+	}
+	/**
+	 * Returns player invulnerability.
+	 * 
+	 */
+	public boolean isInvulnerable() {
+		return invulnerable;
+	}
+	
 }
