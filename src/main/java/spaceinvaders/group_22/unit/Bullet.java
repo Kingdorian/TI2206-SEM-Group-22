@@ -72,7 +72,7 @@ public abstract class Bullet extends Unit implements MovableUnit {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
 	@Override
-	public int hashCode() {
+	public final int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		long temp;
@@ -88,9 +88,8 @@ public abstract class Bullet extends Unit implements MovableUnit {
 	 * @return true if both objects are the same.
 	 * @param other the object to compare.
 	 */
-	@SuppressWarnings("checkstyle:designforextension")
 	@Override
-	public boolean equals(final Object other) {
+	public final boolean equals(final Object other) {
 		if (other != null && other instanceof Bullet) {
 			Bullet that = (Bullet) other;
 			return 	super.equals(that)

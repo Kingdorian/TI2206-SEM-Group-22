@@ -17,20 +17,7 @@ public class ShipBullet extends Bullet {
 	public ShipBullet(final double x, final double y) {
 		super(x, y);
 	}
-	
-	/**
-	 * Checks if provided object is equal to this object.
-	 * @param the object to compare this object to
-	 * @return boolean result if provide object is equal to this
-	 */
-	@Override
-	public final boolean equals(final Object other) {
-		if (other != null && other instanceof ShipBullet) {
-			return 	super.equals(other);
-		}
-		return false;
-	}
-	
+
 	/**
 	 * Sets the right sprite image.
 	 */
