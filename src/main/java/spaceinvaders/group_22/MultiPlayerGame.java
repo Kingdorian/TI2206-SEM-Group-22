@@ -144,6 +144,17 @@ public class MultiPlayerGame extends Game {
 		return players;
 	}
 
+	@Override
+	public boolean playerAlive() {
+		boolean aPlayerAlive = false;
+		for(Player p : players) {
+			if(p.getLives()>0) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 
 }

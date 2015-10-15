@@ -176,6 +176,11 @@ public abstract class Game {
 		}
 	}
 	
+	/**
+	 * Returns if the game has any alive players.
+	 * @return true if a player is alive
+	 */
+	public abstract boolean playerAlive();
 	// ONLY SETTERS AND GETTERS BELOW
 
 	/**
@@ -350,4 +355,5 @@ public abstract class Game {
 	public final double getShipBulletVelX() {
 		return spaceShipBulletVelX;
 	}
+
 }

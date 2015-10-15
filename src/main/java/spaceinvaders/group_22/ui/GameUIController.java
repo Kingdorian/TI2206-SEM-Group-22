@@ -6,6 +6,8 @@ import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.SinglePlayerGame;
+import spaceinvaders.group_22.ui.UIElementLives;
+import spaceinvaders.group_22.ui.UIElementScore;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import javafx.animation.KeyFrame;
@@ -30,7 +32,7 @@ import javafx.util.Duration;
  *
  */
 @SuppressWarnings("checkstyle:magicnumber")    
-public class GameUIController
+public abstract class GameUIController
     implements Initializable {
 
 	/**
@@ -66,7 +68,7 @@ public class GameUIController
     /**
      * Game object of the current game.
      */
-    private SinglePlayerGame game;
+    private Game game;
     
     /**
      * Label to load the score of the player in.
@@ -79,7 +81,11 @@ public class GameUIController
      */
     @FXML
 	private Label highScoreLabel;
-    
+    /**
+     * Label to display the winning player.
+     */
+    @FXML
+    private Label winningPlayer;
     /**
      * The game over screen.
      */
@@ -103,35 +109,35 @@ public class GameUIController
     /**
      * The drawing of the SpaceShip.
      */
-    private UIElementSpaceShip uiSpaceShip;
+    protected UIElementSpaceShip uiSpaceShip;
     /**
      * The drawing of the Alien.
      */
-    private UIElementAlien uiAlien;
+    protected UIElementAlien uiAlien;
     /**
      * The drawing of the Bullet.
      */
-    private UIElementBullet uiBullet;
+    protected UIElementBullet uiBullet;
     /**
      * The drawing of the Explosion.
      */
-    private UIElementExplosion uiExplosion;
+    protected UIElementExplosion uiExplosion;
     /**
      * The drawing of the PowerUp.
      */
-    private UIElementPowerUp uiPowerUp;
+    protected UIElementPowerUp uiPowerUp;
     /**
      * The drawing of the Barricade.
      */
-    private UIElementBarricade uiBarricade;
+    protected UIElementBarricade uiBarricade;
     /**
      * The drawing of the score.
      */
-    private Score uiScore;
+    protected UIElementScore uiScore;
     /**
      * The drawing of the lives.
      */
-    private Lives uiLives;
+    protected UIElementLives uiLives;
     
     /**
      * Called by the FXMLLoader. 
@@ -140,7 +146,7 @@ public class GameUIController
 	public final void initialize(final URL fxmlFileLocation, final ResourceBundle resources) {
     	initializeStackPaneScreens();
     	// Get the GraphicsContext of the canvas, so you can draw on it.
-    	gc = canvas.getGraphicsContext2D();
+    	setGc(canvas.getGraphicsContext2D());
     	
     	canvasWidth = canvas.getWidth();
     	canvasHeight = canvas.getHeight();
@@ -154,18 +160,7 @@ public class GameUIController
     /**
      * Initializes the UI elements.
      */
-    private void initializeUIElements() {
-    	uiAlien = new UIElementAlien(game, gc);
-    	uiSpaceShip = new UIElementSpaceShip(game, gc);
-    	uiBullet = new UIElementBullet(game, gc);
-    	uiExplosion = new UIElementExplosion(game, gc);
-    	uiBarricade = new UIElementBarricade(game, gc);
-    	uiScore = new Score(game, gc, scoreLabel);
-    	uiLives = new Lives(game, gc);
-    	uiPowerUp = new UIElementPowerUp(game, gc);
-    	
-    	Logger.getInstance().log("UIElements initialized.", LogEvent.Type.INFO);
-    }
+    protected abstract void initializeUIElements();
     
     /**
      * Returns the canvas Width.
@@ -255,7 +250,7 @@ public class GameUIController
 				{
 					public void handle(final ActionEvent ae) {
 						// Clear the canvas.
-						gc.clearRect(0, 0, canvasWidth, canvasHeight);
+						getGc().clearRect(0, 0, canvasWidth, canvasHeight);
 						
 						// If the game is in progress, look if any key is pressed.
 						if (game.isInProgress()) {
@@ -307,7 +302,7 @@ public class GameUIController
 	 * Returns the game.
 	 * @return The game object of the UI.
 	 */
-	public final SinglePlayerGame getGame() {
+	public Game getGame() {
 		return game;
 	}
 	
@@ -316,7 +311,7 @@ public class GameUIController
 	 * @return The graphicsContext of the UI.
 	 */
 	public final GraphicsContext getGC() {
-		return gc;
+		return getGc();
 	}
 	
 	/**
@@ -325,7 +320,7 @@ public class GameUIController
 	 */
 	@FXML
 	public final void handleKeyPressed(final KeyEvent event) {
-        if (event.getCode().equals(KeyCode.S) && game.getPlayer().getLives() > 0) {
+        if (event.getCode().equals(KeyCode.S) && !game.isInProgress()) {
         	Logger.getInstance().log("Player pressed S", LogEvent.Type.DEBUG);
         	screenBeforePlay.toBack();
         	screenPaused.toBack();
@@ -343,7 +338,11 @@ public class GameUIController
             	newGame();
             	game.start();
         	}
-        } else if (!pressedKeys.contains(event.getCode())) {
+        } else if (event.getCode().equals(KeyCode.M)) {
+        	if (game.hasEnded()) {
+        		SpaceInvadersUI.getInstance().loadUIScreen("Menu.fxml");
+        	}
+        }else if (!pressedKeys.contains(event.getCode())) {
 	    	pressedKeys.add(event.getCode());
 	    }
 	}
@@ -358,5 +357,17 @@ public class GameUIController
 	    	pressedKeys.remove(event.getCode());
 	    }
 	}
+	/**
+	 * Returns the Graphiccontext object of this object.
+	 * @return the GraphicsContext
+	 */
+	public GraphicsContext getGc() {
+		return gc;
+	}
+
+	public void setGc(GraphicsContext gc) {
+		this.gc = gc;
+	}
+
 
 }

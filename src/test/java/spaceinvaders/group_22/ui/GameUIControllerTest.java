@@ -33,7 +33,7 @@ public class GameUIControllerTest {
 	@Before
 	public final void setUp() {
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameUI.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SinglePlayerGameUI.fxml"));
 			fxmlLoader.load();
 			gameUIController = fxmlLoader.getController();
 		} catch (IOException e) {

@@ -28,7 +28,7 @@ public class UIElementSpaceShipTest extends UIElementTest {
 	 */
 	@Override
 	public final UIElement createInstance(final SinglePlayerGame newGame, final GraphicsContext gc) {
-		return new UIElementSpaceShip(newGame, gc);
+		return new UIElementSpaceShip(newGame, gc, newGame.getPlayer());
 	}
 
 }
