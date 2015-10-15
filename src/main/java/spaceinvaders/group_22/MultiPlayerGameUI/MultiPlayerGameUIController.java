@@ -24,6 +24,7 @@ public class MultiPlayerGameUIController extends GameUIController {
 	private Label scoreLabelPlayer2;
 	
 	public void MultiPlayerGameUIController() {
+		Logger.getInstance().log("Created MultiPlayerGameUI Objec", LogEvent.Type.DEBUG);
 		
 	}
 	
