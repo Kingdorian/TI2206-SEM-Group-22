@@ -10,7 +10,11 @@ import spaceinvaders.group_22.unit.ShipBullet;
  * @author Dorian
  */
 @SuppressWarnings("checkstyle:magicnumber") 
-public class SpaceShip extends Unit implements MovableUnit {
+public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
+	/**
+	 * Player that controls this spaceship.
+	 */
+	private Player player;
 	/**
 	 * VelX is the velocity in the X direction in pixels per second.
 	 */
@@ -69,15 +73,13 @@ public class SpaceShip extends Unit implements MovableUnit {
 	/**
 	 * Creates a bullet object on the place of the Ship and shoots it upwards.
 	 * @param velocity The speed of the Bullet
-	 * @param player 
 	 * @return The shot Bullet
 	 */
-	public final ShipBullet shootBullet(final double velocity, final Player player) {
+	public final ShipBullet shootBullet(final double velocity) {
 		ShipBullet bullet = new ShipBullet(this.getXCoor(), this.getYCoor(), "spaceshipbullet.png");
 		bullet.setPlayer(player);
 		bullet.setVelY(velocity);
 		return bullet;
-
 	}	
 	
 	/**
@@ -236,5 +238,19 @@ public class SpaceShip extends Unit implements MovableUnit {
 	 */
 	public final Explosion getExplosion() {
 		return explosion;
+	}
+	/**
+	 * Sets the player that controls this spaceship.
+	 * @param setPlayer player to set.
+	 */
+	public final void setPlayer(final Player setPlayer) {
+		player = setPlayer;
+	}
+	/**
+	 * Returns the player that controlls this spaceship.
+	 * @return player of this spaceship.
+	 */
+	public final Player getPlayer() {
+		return player;
 	}
 }

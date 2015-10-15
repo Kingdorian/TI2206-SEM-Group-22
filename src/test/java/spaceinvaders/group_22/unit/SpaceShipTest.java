@@ -34,7 +34,7 @@ public class SpaceShipTest extends UnitTest {
 		float y = 1;
 		SpaceShip spaceship = new SpaceShip(x, y, "testimage.png");
 		Player player = mock(Player.class);
-		Bullet bullet = spaceship.shootBullet(1, player);
+		Bullet bullet = spaceship.shootBullet(1);
 		assertEquals(spaceship.getXCoor(), bullet.getXCoor(), 0.05);
 		assertEquals(spaceship.getYCoor(), bullet.getYCoor(), 0.05);
 		bullet.move(1.0);
