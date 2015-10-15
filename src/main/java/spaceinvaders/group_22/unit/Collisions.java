@@ -50,7 +50,7 @@ public class Collisions {
 			game.getBullets().clear();
 			game.getPlayer().die();
 		}
-		if(!player.isInvurnarable()) {
+		if(!game.getPlayer().isInvulnerable()) {
 			//Checking colissions for spaceship with enemy bullets
 			Unit collidingBullet = checkCollisions(game.getPlayer().getSpaceShip(), alienBullets);
 			if (collidingBullet != null) {
