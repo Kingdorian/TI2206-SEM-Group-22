@@ -1,5 +1,8 @@
 package spaceinvaders.group_22.unit;
 
+import spaceinvaders.group_22.Player;
+import spaceinvaders.group_22.unit.ShipBullet;
+
 /**
  * A SpaceShip in the game extends Unit.
  * 
@@ -7,7 +10,7 @@ package spaceinvaders.group_22.unit;
  * @author Dorian
  */
 @SuppressWarnings("checkstyle:magicnumber") 
-public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
+public class SpaceShip extends Unit implements MovableUnit {
 	/**
 	 * VelX is the velocity in the X direction in pixels per second.
 	 */
@@ -66,10 +69,12 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	/**
 	 * Creates a bullet object on the place of the Ship and shoots it upwards.
 	 * @param velocity The speed of the Bullet
+	 * @param player 
 	 * @return The shot Bullet
 	 */
-	public final Bullet shootBullet(final double velocity) {
-		Bullet bullet = new ShipBullet(this.getXCoor(), this.getYCoor(), "spaceshipbullet.png");
+	public final ShipBullet shootBullet(final double velocity, final Player player) {
+		ShipBullet bullet = new ShipBullet(this.getXCoor(), this.getYCoor(), "spaceshipbullet.png");
+		bullet.setPlayer(player);
 		bullet.setVelY(velocity);
 		return bullet;
 
@@ -226,7 +231,7 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 		explosion = newExplosion;
 	}
 	/**
-	 * Returns the explosion if this spaceship is exploding
+	 * Returns the explosion if this spaceship is exploding.
 	 * @return null if there is no explosion.
 	 */
 	public final Explosion getExplosion() {

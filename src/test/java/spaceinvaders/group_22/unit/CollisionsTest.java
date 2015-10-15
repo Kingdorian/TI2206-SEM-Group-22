@@ -1,6 +1,7 @@
 package spaceinvaders.group_22.unit;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
 
@@ -8,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.Player;
 import spaceinvaders.group_22.SinglePlayerGame;
 
 /**
@@ -18,13 +20,13 @@ import spaceinvaders.group_22.SinglePlayerGame;
 public class CollisionsTest {
 	
 	/**
-	 * Object used to test the collisions.
-	 */
-	private Collisions collisions;
-	/**
 	 * Game object used to test the collisions.
 	 */
 	private Game game;
+	/**
+	 * Player object used for testing.
+	 */
+	private Player player; 
 	
 	/**
 	 * Setup the collisons class.
@@ -33,6 +35,7 @@ public class CollisionsTest {
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void setup() {
 		game = new SinglePlayerGame(700, 1000);
+		player = new Player(game, game.getCanvasWidth() / 2);
 	}
 	
 	/**
@@ -98,6 +101,7 @@ public class CollisionsTest {
 		alienList.add(new ArrayList<Alien>());
 		alienList.get(0).add(alien);
 		ShipBullet bullet = new ShipBullet(5, 6.4, "spaceshipbullet.png");
+		bullet.setPlayer(mock(Player.class));
 		ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 		bullets.add(bullet);
 		game.getAlienController().getAlienWave().setAliens(alienList);

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
+import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.ShipBullet;
 import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
@@ -143,6 +145,14 @@ public class Player {
 	 */
 	public final void setActivePowerUps(final ArrayList<PowerUp> newactivePowerUps) {
 		this.activePowerUps = newactivePowerUps;
+	}
+	/**
+	 * Let this player shoot a bullet.
+	 * @param bulletVelx speed of the bullet
+	 * @return Bullet that is shot.
+	 */
+	public final ShipBullet shootBullet(final double bulletVelx) {
+		return getSpaceShip().shootBullet(bulletVelx, this);
 	}
 	
 }

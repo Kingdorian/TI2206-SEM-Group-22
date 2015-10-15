@@ -9,6 +9,7 @@ import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Collisions;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.Unit;
+import spaceinvaders.group_22.unit.ShipBullet;
 
 /**
  * Controls the Aliens.
@@ -99,7 +100,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
 						collidingUnit.getYCoor(), "explosion1.png"));
 				((Alien) collidingUnit).hit();
-				//todo new shipbullets to have the player where to add the points.
+				((ShipBullet) bullet).getPlayer().addScore(10);
 				game.getBullets().remove(bullet);
 				if (Math.random() > 0.6) {
 					game.getPowerUpController().createPowerUpUnit(bullet.getXCoor(), bullet.getYCoor());

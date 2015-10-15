@@ -79,7 +79,7 @@ public class PowerUpControllerTest {
 	public final void testActivePowerUp() {
 		new SpeedPowerUp(game.getPlayer());
 		controller.checkPowerUps();
-		//assertEquals(game.getPlayer().getActivePowerUps().get(0).getTimeLeft(), 4.0, 0.02);
+		assertEquals(game.getPlayer().getActivePowerUps().get(0).getTimeLeft(), 4.0, 0.02);
 	}
 	
 

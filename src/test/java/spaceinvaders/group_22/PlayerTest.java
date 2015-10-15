@@ -1,9 +1,15 @@
 package spaceinvaders.group_22;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.ShipBullet;
 import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
@@ -116,6 +122,45 @@ public class PlayerTest {
 		player.die();
 		
 		Assert.assertFalse(game.isInProgress());
-		
 	}
+	/**
+	 * Test if the fired bullet is from the player.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
+	public final void testShootBullet() {
+		ShipBullet bullet = (ShipBullet) player.shootBullet(5.0);
+		assertEquals(bullet.getPlayer(), player);
+	}
+	/**
+	 * Test the set active powerups method.
+	 */
+	@Test
+	public final void testSetActivePowerUps() {
+		ArrayList<PowerUp> powerups = new ArrayList<PowerUp>();
+		PowerUp powerup = new ShootPowerUp(player);
+		powerups.add(powerup);
+		player.setActivePowerUps(powerups);
+		assertEquals(player.getActivePowerUps(), powerups);
+	}
+	/**
+	 * Test the add life method.
+	 */
+	@Test
+	public final void testAddLife() {
+		int lives = player.getLives();
+		player.addLife();
+		assertEquals(player.getLives(), lives + 1);
+	}
+	/**
+	 * Test the add life method when the max is reached.
+	 */
+	@Test
+	public final void testMaxAddLife() {
+		player.addLife();
+		player.addLife();
+		player.addLife();
+		assertEquals(player.getLives(), 5);
+	}
+	
 }

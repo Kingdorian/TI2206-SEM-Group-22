@@ -2,11 +2,14 @@ package spaceinvaders.group_22.unit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import spaceinvaders.group_22.Player;
 
 /**
  * Test the abstract unit class.
@@ -123,6 +126,7 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEqualsShipBullet() {
+		Player player = mock(Player.class);
 		Bullet bullet = new ShipBullet(1.2, 3, "testimage.png");
 		bullet.setHeight(5);
 		assertNotEquals(unit, bullet);
