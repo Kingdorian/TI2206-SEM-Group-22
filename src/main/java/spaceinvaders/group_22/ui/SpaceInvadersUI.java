@@ -19,7 +19,7 @@ public class SpaceInvadersUI {
 	/**
 	 * Singleton instance.
 	 */
-	private static SpaceInvadersUI instance;
+	private static volatile SpaceInvadersUI instance;
 	
 	/**
 	 * Stage object, defining the primary Stage of the program.
@@ -35,7 +35,11 @@ public class SpaceInvadersUI {
 	 */
 	public static SpaceInvadersUI getInstance() {
 		if (instance == null) {
-			instance = new SpaceInvadersUI(defaultPrimaryStage);
+			synchronized (Logger.class) {
+				if (instance == null) {
+					instance = new SpaceInvadersUI(defaultPrimaryStage);
+				}
+			}
 		}	
 		return instance; 
 	}
