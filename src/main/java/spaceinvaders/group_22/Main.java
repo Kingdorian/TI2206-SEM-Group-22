@@ -27,7 +27,6 @@ public class Main extends Application {
 	 * @param args command line arguments.
 	 */
 	public static void main(final String[] args) {
-		
 		Logger.getInstance().setLogFileLocation("log.log");
 		Logger.getInstance().setLogLevel(0);
 		
