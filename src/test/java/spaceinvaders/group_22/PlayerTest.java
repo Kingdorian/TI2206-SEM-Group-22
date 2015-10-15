@@ -129,7 +129,7 @@ public class PlayerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testShootBullet() {
-		ShipBullet bullet = (ShipBullet) player.shootBullet(5.0);
+		ShipBullet bullet = (ShipBullet) player.getSpaceShip().shootBullet(5.0);
 		System.out.println(player.getSpaceShip().getPlayer());
 		assertEquals(bullet.getPlayer(), player);
 	}

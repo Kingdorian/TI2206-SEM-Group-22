@@ -141,7 +141,7 @@ public class GameTest {
 	 */
 	@Test
 	public final void testShootingAllowed() {
-		game.getPlayer().shootBullet(0.1);
+		game.getPlayer().getSpaceShip().shootBullet(0.1);
 		game.resetGame();
 		// Bullet list should be emptied when the game resets
 		Assert.assertTrue(game.getShootingAllowed());
@@ -204,7 +204,7 @@ public class GameTest {
 		// Remove all existing bullets from the game.
 		game.resetGame();
 		ArrayList<Bullet> bulletlist = new ArrayList<Bullet>();
-		bulletlist.add(game.getPlayer().shootBullet(10.1));
+		bulletlist.add(game.getPlayer().getSpaceShip().shootBullet(10.1));
 		game.setBullets(bulletlist);
 		Assert.assertEquals(bulletlist, game.getShipBullets());
 	}

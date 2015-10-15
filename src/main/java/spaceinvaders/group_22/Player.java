@@ -147,14 +147,5 @@ public class Player {
 	 */
 	public final void setActivePowerUps(final ArrayList<PowerUp> newactivePowerUps) {
 		this.activePowerUps = newactivePowerUps;
-	}
-	/**
-	 * Let this player shoot a bullet.
-	 * @param bulletVelx speed of the bullet
-	 * @return Bullet that is shot.
-	 */
-	public final ShipBullet shootBullet(final double bulletVelx) {
-		return getSpaceShip().shootBullet(bulletVelx);
-	}
-	
+	}	
 }
