@@ -1,7 +1,5 @@
 package spaceinvaders.group_22;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 
 import org.junit.Assert;
@@ -11,7 +9,7 @@ import org.junit.Test;
 import javafx.scene.input.KeyCode;
 import spaceinvaders.group_22.unit.SpaceShip;
 
-public class SpaceShipControllerTest {
+public abstract class SpaceShipControllerTest {
 
 	/**
 	 * Static game used for testing.
@@ -21,6 +19,8 @@ public class SpaceShipControllerTest {
 	 * Static Controller used for testing.
 	 */
 	private static SpaceShipController controller;
+	
+	
 	
 	/**
 	 * Set up every test with an SpaceShipController.
