@@ -1,15 +1,15 @@
 package spaceinvaders.group_22;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 
 import java.util.ArrayList;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import spaceinvaders.group_22.unit.Alien;
+import spaceinvaders.group_22.unit.ShipBullet;
 
 /**
  * Test for the AlienController.
@@ -83,4 +83,84 @@ public class AlienControllerTest {
 			assertEquals(yValues.get(i) + 8, game.getAlienController().getAliens().get(i).getYCoor(), 0.05);
 		}
 	}
+	/**
+	 * Test the next round method.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")
+	public final void testnextRound() {
+		AlienController.setAlienVelX(5.0);
+		game.getAlienController().nextRound();
+		assertEquals(AlienController.getAlienVelX(), 15.0, 0.2);
+	}
+	/**
+	 * Test the checkallAliensDead method.
+	 */
+	@Test
+	public final void testCheckAllAliensDead() {
+		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
+		game.getAlienController().getAlienWave().setAliens(aliens);
+		game.getAlienController().checkAllAliensDead();
+		assertNotEquals(game.getAlienController().getAliens().size(), 0);
+	}
+	/**
+	 * Test the checkallAliensDead method.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")
+	public final void testRemoveDeadAliens() {
+		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
+		game.getAlienController().getAlienWave().setAliens(aliens);
+		ArrayList<Alien> row = new ArrayList<Alien>();
+		Alien alien = new Alien(20, 20, "testimage.png");
+		alien.hit();
+		alien.hit();
+		alien.hit();
+		row.add(alien);
+		game.getAlienController().getAlienWave().addAlienRow(row);
+		game.getAlienController().removeDeadAliens();
+		assertEquals(game.getAlienController().getAliens().size(), 0);
+	}
+	/**
+	 * Test the checkallAliensDead method with Tick method.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")
+	public final void testRemoveDeadAlienswithTick() {
+		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
+		game.getAlienController().getAlienWave().setAliens(aliens);
+		ArrayList<Alien> row = new ArrayList<Alien>();
+		Alien alien = new Alien(20, 20, "testimage.png");
+		Alien alien2 = new Alien(20, 20, "testimage.png");
+		alien.hit();
+		alien.hit();
+		alien.hit();
+		row.add(alien);
+		row.add(alien2);
+		game.getAlienController().getAlienWave().addAlienRow(row);
+		game.getAlienController().tick();
+		assertEquals(game.getAlienController().getAliens().size(), 1);
+	}
+	
+	/**
+	 * Test the alien collisions method.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")
+	public final void testAlienCollisions() {
+		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
+		game.getAlienController().getAlienWave().setAliens(aliens);
+		ArrayList<Alien> row = new ArrayList<Alien>();
+		Alien alien = new Alien(20, 20, "testimage.png");
+		Alien alien2 = new Alien(50, 80, "testimage.png");
+		alien.hit();
+		alien.hit();
+		row.add(alien);
+		row.add(alien2);
+		game.getAlienController().getAlienWave().addAlienRow(row);
+		game.getBullets().add(new ShipBullet(20,20, "testimage.png"));
+		game.getAlienController().alienCollisions();
+		assertEquals(game.getExplosions().size(), 1);
+	}
+	
 }
