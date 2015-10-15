@@ -16,7 +16,8 @@ import spaceinvaders.group_22.ui.SpaceInvadersUI;
 public class Main extends Application {
 	@Override
 	public final void start(final Stage stage) {
-		SpaceInvadersUI userInterface = new SpaceInvadersUI(stage);
+		SpaceInvadersUI.setDefaultPrimaryStage(stage);
+		SpaceInvadersUI userInterface = SpaceInvadersUI.getInstance();
 		userInterface.loadUIScreen("Menu.fxml");
 		userInterface.launch();
 		

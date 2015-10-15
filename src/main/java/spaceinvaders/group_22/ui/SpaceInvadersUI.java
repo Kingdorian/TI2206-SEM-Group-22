@@ -15,17 +15,34 @@ import spaceinvaders.group_22.logger.Logger;
  *
  */
 public class SpaceInvadersUI {
+	/**
+	 * Singleotn instance.
+	 */
+	private static SpaceInvadersUI instance;
 	
 	/**
 	 * Stage object, defining the primary Stage of the program.
 	 */
 	private Stage primaryStage;
+	/**
+	 * Default primarystage object used when creating a new instance.
+	 */
+	private static Stage defaultPrimaryStage;
 
+	/**
+	 * Creates a new SpaceInvadersUI singleton object.
+	 */
+	public static SpaceInvadersUI getInstance() {
+		if (instance == null) {
+			instance = new SpaceInvadersUI(defaultPrimaryStage);
+		}	
+		return instance; 
+	}
 	/**
 	 * Constructor for a SpaceInvadersUI object.
 	 * @param stage A JavaFX Stage.
 	 */
-	public SpaceInvadersUI(final Stage stage) {
+	private SpaceInvadersUI(final Stage stage) {
 		// Construction the object, setting the title of the application.
 		this.primaryStage = stage;
 		primaryStage.setTitle("Space Invaders");
@@ -63,6 +80,18 @@ public class SpaceInvadersUI {
 	 */
 	public final void launch() {
 		primaryStage.show();
+	}
+	/**
+	 * Sets the stage.
+	 */
+	public final void setStage(Stage s) {
+		primaryStage = s;
+	}
+	/**
+	 * Sets the default primary stage.
+	 */
+	public static final void setDefaultPrimaryStage(Stage s) {
+		defaultPrimaryStage = s;
 	}
 
 }
