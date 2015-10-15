@@ -1,6 +1,7 @@
 package spaceinvaders.group_22;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import spaceinvaders.group_22.unit.SpaceShip;
@@ -11,6 +12,23 @@ import spaceinvaders.group_22.unit.SpaceShip;
  *
  */
 public class PlayerTest {
+	/**
+	 * Player object to test.
+	 */
+	private Player player;
+	/**
+	 * Game object used for testing.
+	 */
+	private SinglePlayerGame game;
+	/**
+	 * Setup the player class for testing.
+	 */
+	@Before
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void setUp() {
+		game = new SinglePlayerGame(200 , 200);
+		 player = new Player(game);
+	}
 	
 	/**
 	 * Test behavior of the getSpaceShip method for the player.
@@ -19,7 +37,7 @@ public class PlayerTest {
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testGetSetSpaceShip() {
 		SpaceShip ship = new SpaceShip(10.0, 10.0, "testimage.png");
-		Player player = new Player(new Game(200 , 200));
+		
 		player.setSpaceShip(ship);
 		Assert.assertEquals(ship, player.getSpaceShip());
 	}
@@ -29,7 +47,6 @@ public class PlayerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testGetScore() {
-		Player player = new Player(new Game(200 , 200));
 		Assert.assertEquals(0, player.getScore());
 	}
 	/**
@@ -38,7 +55,6 @@ public class PlayerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testAddPositiveScore() {
-		Player player = new Player(new Game(200 , 200));
 		player.addScore(10);
 		Assert.assertEquals(10, player.getScore());
 	}
@@ -48,7 +64,6 @@ public class PlayerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testAddNegativeScore() { 
-		Player player = new Player(new Game(200 , 200));
 		player.addScore(-10);
 		Assert.assertEquals(-10, player.getScore());
 	}
@@ -58,7 +73,6 @@ public class PlayerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testGetLives() {
-		Player player = new Player(new Game(200 , 200));
 		Assert.assertEquals(3, player.getLives());
 	}
 	/**
@@ -67,7 +81,6 @@ public class PlayerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testDie() {
-		Player player = new Player(new Game(200 , 200));
 		player.die();
 		Assert.assertEquals(2, player.getLives());
 	}
@@ -77,7 +90,6 @@ public class PlayerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testresetScore() {
-		Player player = new Player(new Game(200 , 200));
 		player.addScore(10);
 		player.resetScore();
 		Assert.assertEquals(0, player.getScore());
@@ -88,8 +100,6 @@ public class PlayerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testRespawn() {
-		Game game = new Game(200 , 200);
-		Player player = new Player(game);
 		player.getSpaceShip().setVelX(20);
 		player.getSpaceShip().move(60.0);
 		player.respawnShip();
@@ -101,9 +111,7 @@ public class PlayerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testDieOutOfLives() {
-		Game game = new Game(200 , 200);
 		game.start();
-		Player player = new Player(game);
 		player.die();
 		player.die();
 		player.die();

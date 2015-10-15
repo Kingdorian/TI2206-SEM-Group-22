@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.SinglePlayerGame;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import javafx.animation.KeyFrame;
@@ -65,7 +66,7 @@ public class GameUIController
     /**
      * Game object of the current game.
      */
-    private Game game;
+    private SinglePlayerGame game;
     
     /**
      * Label to load the score of the player in.
@@ -201,7 +202,7 @@ public class GameUIController
     public final void newGame() {
     	// If the game does not exist, create a new one.
     	if (game == null) {
-        	game = new Game(canvasWidth, canvasHeight);
+        	game = new SinglePlayerGame(canvasWidth, canvasHeight);
         	Logger.getInstance().log("Set canvas width to: " + canvasWidth, LogEvent.Type.INFO);
         	Logger.getInstance().log("Set canvas height to: " + canvasHeight, LogEvent.Type.INFO);
         	Logger.getInstance().log("Show screen Before Play", LogEvent.Type.INFO);
@@ -306,7 +307,7 @@ public class GameUIController
 	 * Returns the game.
 	 * @return The game object of the UI.
 	 */
-	public final Game getGame() {
+	public final SinglePlayerGame getGame() {
 		return game;
 	}
 	

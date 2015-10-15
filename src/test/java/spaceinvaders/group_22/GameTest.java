@@ -24,14 +24,14 @@ public class GameTest {
 	/**
 	 * Static game used for testing.
 	 */
-	private static Game game;
+	private static SinglePlayerGame game;
 
 	/**
 	 * Class to set up a game before each test is executed.
 	 */
 	@Before
 	public final void setUpGame() {
-		game = new Game(200, 200);
+		game = new SinglePlayerGame(200, 200);
 		game.setTickrate(1.0);
 		ArrayList<Alien> row = new ArrayList<Alien>();
 		row.add(new Alien(10, 10, "invader.png"));
@@ -92,7 +92,7 @@ public class GameTest {
 	 */
 	@Test
 	public final void testGetAliens() {
-		Game game = new Game(100, 100);
+		Game game = new SinglePlayerGame(100, 100);
 		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
 		game.getAlienController().getAlienWave().setAliens(aliens);
 		Assert.assertEquals(new ArrayList<ArrayList<Alien>>(), game.getAlienController().getAliens());
@@ -224,7 +224,7 @@ public class GameTest {
 	public final void testShipBounceRight() {
 		game.getPlayer().setSpaceShip(new SpaceShip(game.getCanvasWidth() + 5, 10, "spaceship.png"));
 		game.getPlayer().getSpaceShip().setVelX(10.0);
-		game.getSpaceShipController().moveSpaceShip(new ArrayList<KeyCode>());
+		((SingleSpaceShipController)(game.getSpaceShipController())).moveSpaceShip(new ArrayList<KeyCode>());
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() <= 0);
 	}
 }

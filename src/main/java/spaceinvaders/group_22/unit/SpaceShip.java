@@ -42,6 +42,10 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * A multiplier for the shooting speed used by powerups.
 	 */
 	private double shootingMultiplier = 1.0;
+	/**
+	 * Explosion if this spaceship is exploding.
+	 */
+	private Explosion explosion = null;
 	
 	/**
 	 * Times allowed to shoot per second.
@@ -213,5 +217,19 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 */
 	public static void setMAXVELX(final double newMaxvel) {
 		maxVelx = newMaxvel;
+	}
+	/**
+	 * 
+	 * @param newExplosion to set.
+	 */
+	public final void setExplosion(final Explosion newExplosion) {
+		explosion = newExplosion;
+	}
+	/**
+	 * Returns the explosion if this spaceship is exploding
+	 * @return null if there is no explosion.
+	 */
+	public final Explosion getExplosion() {
+		return explosion;
 	}
 }

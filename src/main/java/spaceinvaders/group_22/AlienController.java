@@ -6,6 +6,9 @@ import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.Collisions;
+import spaceinvaders.group_22.unit.Explosion;
+import spaceinvaders.group_22.unit.Unit;
 
 /**
  * Controls the Aliens.
@@ -70,6 +73,41 @@ public class AlienController extends UnitController implements MovableUnitContro
 			alienWave = alienWaveFactory.createWave();
 		}
 	}
+	/**
+	 * Method to call every tick for the aliens.
+	 */
+	public final void tick() {
+		move();
+		shootAlienBullets();
+		removeDeadAliens();
+		checkAllAliensDead();
+		alienCollisions();
+	}
+	/**
+	 * Method to check for the collisions between aliens and bullets.
+	 */
+	public final void alienCollisions() {
+		//Checking for colissions between player bullets and aliens
+		for (Unit bullet : game.getShipBullets()) {
+			Unit collidingUnit = Collisions.checkCollisions(bullet, 
+					new ArrayList<Unit>(game.getAlienController().getAliens()));
+			if (collidingUnit != null) {
+				String logMessage = "Alien collided bullet at X:" + bullet.getXCoor() 
+						+ " Y: " + bullet.getYCoor();
+				Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
+				
+				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
+						collidingUnit.getYCoor(), "explosion1.png"));
+				((Alien) collidingUnit).hit();
+				//todo new shipbullets to have the player where to add the points.
+				game.getBullets().remove(bullet);
+				if (Math.random() > 0.6) {
+					game.getPowerUpController().createPowerUpUnit(bullet.getXCoor(), bullet.getYCoor());
+				}
+				break;
+			}
+		}
+	}
 	
 	/**
 	 * Method to move all the aliens in the right direction.
@@ -110,11 +148,6 @@ public class AlienController extends UnitController implements MovableUnitContro
 				unit.setVelY(0);
 				unit.setVelX(alienWave.getAlienVelX());
 			}
-
-			//Check if there is an alien at the height of the spaceship.
-			if (unit.getYCoor() + unit.getHeight() > game.getPlayer().getSpaceShip().getYCoor()) {
-				game.gameOver();
-			}
 			unit.move(game.getTickrate());
 		}
 		String velX = String.valueOf(alienWave.getAliens().get(0).getVelX());
@@ -130,7 +163,6 @@ public class AlienController extends UnitController implements MovableUnitContro
 		for (Alien alien : list)  {
 			if (alien.getHealth() <= 0) {
 				alienWave.remove(alien);
-				game.getPlayer().addScore(10);
 				Logger.getInstance().log("Removed Alien", LogEvent.Type.TRACE);
 			}
 		}	

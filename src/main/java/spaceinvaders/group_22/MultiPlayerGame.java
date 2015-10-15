@@ -91,14 +91,14 @@ public class MultiPlayerGame extends Game {
 		tickShipShooting(pressedKeys, KeyCode.SPACE, 0);
 		tickShipShooting(pressedKeys, KeyCode.SHIFT, 1);
 		mpSpaceShipsController.moveSpaceShip(pressedKeys);
-		getAlienController().move();
-		getAlienController().shootAlienBullets();
-		getAlienController().removeDeadAliens();
+		mpSpaceShipsController.tick();
+		getBarricadeController().tick();
+		getAlienController().tick();
 		mpPowerUpController.checkPowerUps();
 		tickBullets();
-		getCollisions().checkCollisions();
-		getBarricadeController().removeDead();
-		getAlienController().checkAllAliensDead();
+		for (Player player: players) {
+			checkAlienHeight(player.getSpaceShip());
+		}
 	}
 	
 	/**
@@ -125,5 +125,15 @@ public class MultiPlayerGame extends Game {
 				countToShootMultiPlayer.set(index, 0);
 			}
 		}
+	}
+
+	@Override
+	public final SpaceShipController getSpaceShipController() {
+		return mpSpaceShipsController;
+	}
+
+	@Override
+	public final PowerUpController getPowerUpController() {
+		return mpPowerUpController;
 	}
 }
