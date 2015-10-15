@@ -45,7 +45,7 @@ public class SinglePlayerGame extends Game {
 		powerUpController = new SinglePlayerPowerUpController(this);
 		spaceShipContr = new SingleSpaceShipController(this);
 		shootingAllowed = true;
-		player = new Player(this);
+		player = new Player(this, getCanvasWidth() / 2);
 	}
 	@Override
 	public final void resetGame() {
@@ -53,7 +53,7 @@ public class SinglePlayerGame extends Game {
 		setExplosions(new ArrayList<Explosion>());
 		getBarricadeController().create();
 		getAlienController().create();
-		player = new Player(this);
+		player = new Player(this, getCanvasWidth() / 2);
 		shootingAllowed = true;
 		countToShoot = 0;
 		Logger.getInstance().log("Recreated game succesfully", LogEvent.Type.INFO);
@@ -70,8 +70,7 @@ public class SinglePlayerGame extends Game {
 	@Override
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
 		tickShipShooting(pressedKeys);
-		spaceShipContr.moveSpaceShip(pressedKeys);
-		spaceShipContr.tick();
+		spaceShipContr.tick(pressedKeys);
 		powerUpController.checkPowerUps();
 		tickBullets();
 		getBarricadeController().tick();

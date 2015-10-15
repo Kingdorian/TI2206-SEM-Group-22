@@ -79,7 +79,7 @@ public class SpaceShipTest extends UnitTest {
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testUpdateMultiplierSpeed() {
 		Game game = new SinglePlayerGame(1000, 750);
-		Player player = new Player(game);
+		Player player = new Player(game, game.getCanvasWidth() / 2);
 		player.getActivePowerUps().add(new SpeedPowerUp(player));
 		player.getSpaceShip().updateMultiplier();
 		assertEquals(625, SpaceShip.getMAXVELX(), 0.f);
@@ -92,7 +92,7 @@ public class SpaceShipTest extends UnitTest {
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testUpdateMultiplierShoot() {
 		Game game = new SinglePlayerGame(1000, 750);
-		Player player = new Player(game);
+		Player player = new Player(game, game.getCanvasWidth() / 2);
 		player.getActivePowerUps().add(new ShootPowerUp(player));
 		player.getSpaceShip().updateMultiplier();
 		assertEquals(2, SpaceShip.getShootTimes(), 0.f);

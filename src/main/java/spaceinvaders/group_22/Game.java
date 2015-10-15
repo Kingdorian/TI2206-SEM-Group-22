@@ -89,7 +89,7 @@ public abstract class Game {
 		barController = new BarricadeController(this);
 		barController.create();
 		alienController = new AlienController(this);
-		alienController.create();
+		alienController.create();			
 		Logger.getInstance().log("Created game succesfully", LogEvent.Type.INFO);
 	}
 
@@ -114,7 +114,6 @@ public abstract class Game {
 		inProgress = false;
 		Logger.getInstance().log("Game stopped", LogEvent.Type.INFO);
 	}
-
 	/**
 	 * Stops the game and marks the game as ended.
 	 */

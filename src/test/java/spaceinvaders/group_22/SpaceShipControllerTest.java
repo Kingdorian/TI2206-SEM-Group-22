@@ -40,7 +40,7 @@ public class SpaceShipControllerTest {
 		game.setTickrate(10.0);
 		game.getPlayer().setSpaceShip(new SpaceShip(-5, 0, "spaceship.png"));
 		game.getPlayer().getSpaceShip().setVelX(-10.0);
-		((SingleSpaceShipController) game.getSpaceShipController()).moveSpaceShip(new ArrayList<KeyCode>());
+		((SingleSpaceShipController) game.getSpaceShipController()).moveSpaceShip(new ArrayList<KeyCode>(), game.getPlayer());
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() >= 0);
 	}
 	/**
@@ -51,7 +51,7 @@ public class SpaceShipControllerTest {
 		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
 		ArrayList<KeyCode> keyList = new ArrayList<KeyCode>();
 		keyList.add(KeyCode.D);
-		((SingleSpaceShipController) game.getSpaceShipController()).moveSpaceShip(keyList);
+		((SingleSpaceShipController) game.getSpaceShipController()).moveSpaceShip(keyList, game.getPlayer());
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() > 0);
 	}
 	/**
@@ -62,7 +62,7 @@ public class SpaceShipControllerTest {
 		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
 		ArrayList<KeyCode> keyList = new ArrayList<KeyCode>();
 		keyList.add(KeyCode.A);
-		((SingleSpaceShipController) controller).moveSpaceShip(keyList);
+		((SingleSpaceShipController) controller).moveSpaceShip(keyList, game.getPlayer());
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() < 0);
 	}
 	/**
@@ -72,7 +72,7 @@ public class SpaceShipControllerTest {
 	public final void testShipFasterThenMaxSpeedRight() {
 		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
 		game.getPlayer().getSpaceShip().setVelX(500);
-		((SingleSpaceShipController) controller).moveSpaceShip(new ArrayList<KeyCode>());
+		((SingleSpaceShipController) controller).moveSpaceShip(new ArrayList<KeyCode>(), game.getPlayer());
 		Assert.assertEquals(250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
 	}
 	/**
@@ -82,7 +82,7 @@ public class SpaceShipControllerTest {
 	public final void testShipFasterThenMaxSpeedLeft() {
 		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
 		game.getPlayer().getSpaceShip().setVelX(-500);
-		((SingleSpaceShipController) controller).moveSpaceShip(new ArrayList<KeyCode>());
+		((SingleSpaceShipController) controller).moveSpaceShip(new ArrayList<KeyCode>(), game.getPlayer());
 		Assert.assertEquals(-250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
 	}
 	

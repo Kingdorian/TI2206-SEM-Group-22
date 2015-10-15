@@ -207,9 +207,8 @@ public class AlienController extends UnitController implements MovableUnitContro
 	}
 
 	@Override
-	public void create() {
-		// TODO Auto-generated method stub
-		
+	public final void create() {
+		alienWave = alienWaveFactory.createWave();	
 	}
 	
 	/**

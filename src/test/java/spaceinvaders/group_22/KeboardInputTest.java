@@ -11,7 +11,6 @@ import org.junit.Test;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.SpaceShip;
-import spaceinvaders.group_22.Game;
 
 /**
  * Test key events.
@@ -35,7 +34,7 @@ public class KeboardInputTest {
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void setup() {
 		game = new SinglePlayerGame(1000.0 , 720.0);
-		game.setPlayer(new Player(game));
+		game.setPlayer(new Player(game, game.getCanvasWidth() / 2));
 		game.setTickrate(60.0);
 		ArrayList<Alien> row = new ArrayList<Alien>();
 		row.add(new Alien(10, 10, "invader.png"));

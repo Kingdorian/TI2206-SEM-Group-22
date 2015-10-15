@@ -1,13 +1,22 @@
 package spaceinvaders.group_22;
 
+
 import spaceinvaders.group_22.unit.PowerUpUnit;
 
+import java.util.ArrayList;
+
 /**
- * 
+ * Controls the powerUps in a Multiplayer game.
  * @author Bryan
  *
  */
 public class MultiPlayerPowerUpController extends PowerUpController {
+	
+	/**
+	 * Multiplayer game object.
+ 	*/
+	private MultiPlayerGame multiPlayerGame;
+
 
 	/**
 	 * The PowerUpController for a MultiPlayerGame.
@@ -15,13 +24,23 @@ public class MultiPlayerPowerUpController extends PowerUpController {
 	 */
 	public MultiPlayerPowerUpController(final MultiPlayerGame newgame) {
 		super(newgame);
-
+		multiPlayerGame = newgame;
 	}
+	
 
 	@Override
-	public void checkMovingPowerUp(PowerUpUnit powerUp) {
-		// TODO Auto-generated method stub
+	public final void checkPowerUps() {	
+		checkMovingPowerUps();
+		for (Player player: multiPlayerGame.getPlayers()) {
+			checkActivationPowerUps(player);
 		
+			//Loop over the active powerups and decrease their time.
+			ArrayList<PowerUp> activepowerups = new ArrayList<PowerUp>();
+			activepowerups.addAll(player.getActivePowerUps());
+			for (PowerUp powerUp : activepowerups) {
+				powerUp.decreaseTimeLeft(getGame().getTickrate());
+			}
+		}
 	}
 
 }

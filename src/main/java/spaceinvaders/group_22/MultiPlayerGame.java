@@ -19,15 +19,15 @@ public class MultiPlayerGame extends Game {
 	/**
 	 * The players in the multiPlayerGame.
 	 */
-	private ArrayList<Player> players;
+	private ArrayList<Player> players = new ArrayList<Player>();
 	/**
 	 * List of shootAllowed of the players.
 	 */
-	private ArrayList<Boolean> shootingAllowedMultiPlayer;
+	private ArrayList<Boolean> shootingAllowedMultiPlayer = new ArrayList<Boolean>();
 	/**
 	 * List of countToShot for the players.
 	 */
-	private ArrayList<Integer> countToShootMultiPlayer;
+	private ArrayList<Integer> countToShootMultiPlayer = new ArrayList<Integer>();
 	/**
 	 * The PowerUpController.
 	 */
@@ -44,7 +44,7 @@ public class MultiPlayerGame extends Game {
 	public MultiPlayerGame(final double width, final double height) {
 		super(width, height);
 		for (int i = 0; i < 2; i++) {
-			Player play = new Player(this);
+			Player play = new Player(this, (i + 1) * getCanvasWidth() / 3);
 			players.add(play);
 			shootingAllowedMultiPlayer.add(true);
 			countToShootMultiPlayer.add(0);
@@ -63,7 +63,7 @@ public class MultiPlayerGame extends Game {
 		getBarricadeController().create();
 		getAlienController().create();
 		for (int i = 0; i < 2; i++) {
-			Player play = new Player(this);
+			Player play = new Player(this, (i + 1) * getCanvasWidth() / 3);
 			players.add(play);
 			shootingAllowedMultiPlayer.add(true);
 			countToShootMultiPlayer.add(0);
@@ -90,8 +90,7 @@ public class MultiPlayerGame extends Game {
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
 		tickShipShooting(pressedKeys, KeyCode.SPACE, 0);
 		tickShipShooting(pressedKeys, KeyCode.SHIFT, 1);
-		mpSpaceShipsController.moveSpaceShip(pressedKeys);
-		mpSpaceShipsController.tick();
+		mpSpaceShipsController.tick(pressedKeys);
 		getBarricadeController().tick();
 		getAlienController().tick();
 		mpPowerUpController.checkPowerUps();
@@ -136,4 +135,15 @@ public class MultiPlayerGame extends Game {
 	public final PowerUpController getPowerUpController() {
 		return mpPowerUpController;
 	}
+
+	/**
+	 * Returns the players of the game.
+	 * @return Players in this game
+	 */
+	public final ArrayList<Player> getPlayers() {
+		return players;
+	}
+
+
+
 }

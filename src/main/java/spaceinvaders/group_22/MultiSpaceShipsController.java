@@ -9,6 +9,11 @@ import javafx.scene.input.KeyCode;
  *
  */
 public class MultiSpaceShipsController extends SpaceShipController {
+	
+	/**
+	 * The game object.
+	 */
+	private MultiPlayerGame game;
 
 	/**
 	 * The SpaceShipController for MultiPlayerGame.
@@ -16,20 +21,27 @@ public class MultiSpaceShipsController extends SpaceShipController {
 	 */
 	public MultiSpaceShipsController(final MultiPlayerGame parentGame) {
 		super(parentGame);
+		game = parentGame;
 	}
-	
 	/**
-	 * Moves the spaceships.
-	 * @param pressedKeys the keys pressed since last tick
+	 * Method to call every tick for the spaceship.
+	 * @param pressedKeys the keys that are pressed.
 	 */
-	@SuppressWarnings("checkstyle:magicnumber") 
-	public final void moveSpaceShip(final ArrayList<KeyCode> pressedKeys) {
-		//todo implement moving of the different spaceships
-	}
-
-	public void tick() {
-		// TODO Auto-generated method stub
-		
+	public final void tick(final ArrayList<KeyCode> pressedKeys) {
+		for (Player player: game.getPlayers()) {
+			spaceShipCollisions(player.getSpaceShip());
+			checkExplosions(player);
+		}
+		moveSpaceShip(pressedKeys, game.getPlayers().get(0));
+		ArrayList<KeyCode> secondShipKeys = new ArrayList<KeyCode>();
+		for (KeyCode key :pressedKeys) {
+			if (key.equals(KeyCode.RIGHT)) {
+				secondShipKeys.add(KeyCode.D);
+			} else if (key.equals(KeyCode.LEFT)) {
+				secondShipKeys.add(KeyCode.A);
+			}
+		}
+		moveSpaceShip(secondShipKeys, game.getPlayers().get(1));
 	}
 
 }

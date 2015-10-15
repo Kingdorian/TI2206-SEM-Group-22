@@ -27,7 +27,7 @@ public class PlayerTest {
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void setUp() {
 		game = new SinglePlayerGame(200 , 200);
-		 player = new Player(game);
+		 player = new Player(game, game.getCanvasWidth() / 2);
 	}
 	
 	/**
@@ -37,7 +37,6 @@ public class PlayerTest {
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testGetSetSpaceShip() {
 		SpaceShip ship = new SpaceShip(10.0, 10.0, "testimage.png");
-		
 		player.setSpaceShip(ship);
 		Assert.assertEquals(ship, player.getSpaceShip());
 	}
@@ -103,7 +102,7 @@ public class PlayerTest {
 		player.getSpaceShip().setVelX(20);
 		player.getSpaceShip().move(60.0);
 		player.respawnShip();
-		Assert.assertEquals(game.getCanvasWidth() / 2, player.getSpaceShip().getXCoor(), 0.05 );
+		Assert.assertEquals(game.getCanvasWidth() / 2, player.getSpaceShip().getXCoor(), 0.05);
 	}
 	/**
 	 * Tests the die method for te player when it has only one live left.

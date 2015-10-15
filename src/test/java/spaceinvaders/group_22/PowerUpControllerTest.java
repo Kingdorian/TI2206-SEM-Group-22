@@ -46,7 +46,7 @@ public class PowerUpControllerTest {
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testcheckMovePowerUps() {
 		controller.createPowerUpUnit(500.0, 100.0);
-		controller.checkMovingPowerUp(game.getPowerUpController().getPowerUps().get(0));
+		controller.checkMovingPowerUps();
 		assertEquals(Double.compare(game.getPowerUpController().getPowerUps().get(0).getYCoor(), 150.00), 0);
 	}
 	
@@ -67,7 +67,7 @@ public class PowerUpControllerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testPowerUpCollided() {
-		controller.createPowerUpUnit(500.0, 630.0);
+		controller.createPowerUpUnit(500.0, 680.0);
 		controller.checkPowerUps();
 		assertEquals(game.getPowerUpController().getPowerUps().size(), 0);
 	}

@@ -2,12 +2,6 @@ package spaceinvaders.group_22;
 
 import java.util.ArrayList;
 
-import spaceinvaders.group_22.logger.LogEvent;
-import spaceinvaders.group_22.logger.Logger;
-import spaceinvaders.group_22.unit.Collisions;
-import spaceinvaders.group_22.unit.PowerUpUnit;
-import spaceinvaders.group_22.unit.Unit;
-
 /**
  * 
  * @author bryan_000
@@ -26,34 +20,18 @@ public class SinglePlayerPowerUpController extends PowerUpController {
 		super(newgame);
 		game = newgame;
 	}
-	
-	/**
-	 * Method to check a not yet active powerUp.
-	 * @param powerUp the powerUp to check
-	 */
-	public final void checkMovingPowerUp(final PowerUpUnit powerUp) {
-		powerUp.move(game.getTickrate());
-		ArrayList<Unit> spaceShiplist = new ArrayList<Unit>();
-		spaceShiplist.add(game.getPlayer().getSpaceShip());
-		if (powerUp.getYCoor() >= game.getCanvasHeight()) {
-			getPowerUps().remove(powerUp);
-			Logger.getInstance().log("Removed PowerUp that was outside screen " , LogEvent.Type.TRACE);
-		} else {
-			getCollisions();
-			if (Collisions.checkCollisions(powerUp, spaceShiplist) != null) {
-				
-				powerUp.activate(game.getPlayer());
-				getPowerUps().remove(powerUp);
-				Logger.getInstance().log("PowerUp collided with spaceship" , LogEvent.Type.TRACE);
-			} else {
-				getCollisions();
-				if (Collisions.checkCollisions(powerUp, 
-						new ArrayList<Unit>(game.getBarricadeController().getBarricades())) != null) {
-					getPowerUps().remove(powerUp);
-					Logger.getInstance().log("PowerUp collided with barricade" , LogEvent.Type.TRACE);
-				}
-			}
-		}  
+	@Override
+	public final void checkPowerUps() {		
+		checkActivationPowerUps(game.getPlayer());
+		checkMovingPowerUps();
+		//Loop over the active powerups and decrease their time.
+		ArrayList<PowerUp> activepowerups = new ArrayList<PowerUp>();
+		activepowerups.addAll(game.getPlayer().getActivePowerUps());
+		for (PowerUp powerUp : activepowerups) {
+			powerUp.decreaseTimeLeft(getGame().getTickrate());
+		}
 	}
+	
+	
 
 }

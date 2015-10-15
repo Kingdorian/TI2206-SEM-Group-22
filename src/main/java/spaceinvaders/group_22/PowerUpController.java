@@ -27,10 +27,6 @@ public abstract class PowerUpController {
 	 */
 	private Game game;
 	/**
-	 * The collisions of units.
-	 */
-	private Collisions collisions;	
-	/**
      * ArrayList of powerUps in the controller.
      */
 	private ArrayList<PowerUpUnit> powerups = new ArrayList<PowerUpUnit>();	
@@ -69,18 +65,44 @@ public abstract class PowerUpController {
 	}
 
 	/**
-	 * Method to check a not yet active powerUp.
-	 * @param powerUp the powerUp to check
+	 * Method to check a not yet active powerUp for screen size and barricade collision.
 	 */
-	public abstract void checkMovingPowerUp(final PowerUpUnit powerUp);
+	public final void checkMovingPowerUps() {
+		ArrayList<PowerUpUnit> list = new ArrayList<PowerUpUnit>();
+		list.addAll(getPowerUps());
+		for (PowerUpUnit powerUp: list) {
+			powerUp.move(getGame().getTickrate());
+			if (powerUp.getYCoor() >= getGame().getCanvasHeight()) {
+				powerups.remove(powerUp);
+				Logger.getInstance().log("Removed PowerUp that was outside screen " , LogEvent.Type.TRACE);
+			} else {
+				if (Collisions.checkCollisions(powerUp, 
+						new ArrayList<Unit>(getGame().getBarricadeController().getBarricades())) != null) {
+					powerups.remove(powerUp);
+					Logger.getInstance().log("PowerUp collided with barricade" , LogEvent.Type.TRACE);
+				}
+			}  
+		}
+	}
+	
 	/**
 	 * Checks all the power ups in the game.
 	 */
-	public final void checkPowerUps() {		
-		for (int i = 0; i < powerups.size(); i++) {
-			checkMovingPowerUp(powerups.get(i));
+	public abstract void checkPowerUps();
+	
+	/**
+	 * Method to check if there is a powerup that has to be activiated.
+	 * @param player to check the powerups for.
+	 */
+	public final void checkActivationPowerUps(final Player player) {
+		ArrayList<Unit> unitlist = new ArrayList<Unit>();
+		unitlist.addAll(getPowerUps());
+		PowerUpUnit powerUpUnit = (PowerUpUnit) Collisions.checkCollisions(player.getSpaceShip(), unitlist);
+		if (powerUpUnit != null) {
+			powerUpUnit.activate(player);
+			getPowerUps().remove(powerUpUnit);
+			Logger.getInstance().log("PowerUp collided with spaceship" , LogEvent.Type.TRACE);
 		}
-
 	}
 	
 	/**
@@ -97,11 +119,13 @@ public abstract class PowerUpController {
 	public final  ArrayList<PowerUpUnit> getPowerUps() {
 		return powerups;
 	}
+
 	/**
-	 * @return Collisions.
+	 * Returns the game object of this controller.
+	 * @return the game to return.
 	 */
-	public final Collisions getCollisions() {
-		return collisions;
+	public final Game getGame() {
+		return game;
 	}
 
 }

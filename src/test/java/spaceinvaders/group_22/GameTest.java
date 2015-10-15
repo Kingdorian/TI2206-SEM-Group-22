@@ -213,7 +213,7 @@ public class GameTest {
 	 */
 	@Test
 	public final void testSetPlayer() {
-		Player player = new Player(game);
+		Player player = new Player(game, game.getCanvasWidth() / 2);
 		game.setPlayer(player);
 		Assert.assertEquals(game.getPlayer(), player);
 	}
@@ -224,7 +224,7 @@ public class GameTest {
 	public final void testShipBounceRight() {
 		game.getPlayer().setSpaceShip(new SpaceShip(game.getCanvasWidth() + 5, 10, "spaceship.png"));
 		game.getPlayer().getSpaceShip().setVelX(10.0);
-		((SingleSpaceShipController)(game.getSpaceShipController())).moveSpaceShip(new ArrayList<KeyCode>());
+		((SingleSpaceShipController)(game.getSpaceShipController())).moveSpaceShip(new ArrayList<KeyCode>(), game.getPlayer());
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() <= 0);
 	}
 }
