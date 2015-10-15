@@ -8,6 +8,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import spaceinvaders.group_22.ui.JavaFXThreadingRule;
+
 /**
  * Test the abstract unit class.
  * 
@@ -18,6 +20,11 @@ import org.junit.rules.ExpectedException;
 public abstract class UnitTest {
 	
 	/**
+	 * Class specifying rule to test JavaFX from GitHub.
+	 */
+	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
+	
+	/**
 	 * The Unit we need to be testing.
 	 */
 	private Unit unit;
@@ -26,7 +33,6 @@ public abstract class UnitTest {
 	 * Method to create an instance of a subclass of the Unit class.
 	 * @param x X Coordinate
 	 * @param y Y Coordinate
-	 * @param spriteFile The filename of the sprite.
 	 * @return The Unit
 	 */
 	public abstract Unit createInstance(double x, double y);
@@ -79,14 +85,6 @@ public abstract class UnitTest {
 	@Test
 	public final void testUnitHeight() {
 		assertEquals(1, unit.getHeight(), 0.05);
-	}
-	
-	/**
-	 * Test the unit height.
-	 */
-	@Test
-	public final void testUnitSprite() {
-		assertEquals("testimage.png", unit.getSprite());
 	}
 	
 	/**
