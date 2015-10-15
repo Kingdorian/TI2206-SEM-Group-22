@@ -61,7 +61,6 @@ public class AlienWaveReader {
 	public final ArrayListWavePattern parseFile(final File wave) throws FileNotFoundException, IOException {
 		Logger.getInstance().log("Reading wave: " + wave.getName(), LogEvent.Type.DEBUG);
 		ArrayListWavePattern pattern = new ArrayListWavePattern();
-		int lineNum = 0; 
 		BufferedReader bReader = new BufferedReader(new FileReader(wave));
 		String line;
 		//Keep track of current line num (For debugging purposes)
@@ -73,7 +72,6 @@ public class AlienWaveReader {
 				lineChars.add(c);
 			}
 			pattern.addRow(lineChars);
-			lineNum++;
 		}
 		bReader.close();
 		Logger.getInstance().log("Read file: " + wave 

@@ -41,7 +41,7 @@ public class UIElementExplosion extends UIElementUnit {
 					if (explosion.getCounter() % 5 == 0) {
 						// Increase the index of the animation sprite, so the next image is shown.
 						explosion.increaseAnimationIndex();
-						explosion.setSprite("explosion" + explosion.getAnimationIndex() + ".png");
+						explosion.setSpriteImage();
 					}
 					if (explosion.getAnimationIndex() == 5) {
 						// If we reach the final animation index, 

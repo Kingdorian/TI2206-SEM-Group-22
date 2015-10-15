@@ -7,8 +7,10 @@ import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
+import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Alien;
 
 /**
@@ -28,6 +30,11 @@ public class AlienControllerTest {
 	private static AlienController controller;
 	
 	/**
+	 * Class specifying rule to test JavaFX from GitHub.
+	 */
+	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
+	
+	/**
 	 * Set up every test with an AlienController.
 	 */
 	@Before
@@ -38,7 +45,7 @@ public class AlienControllerTest {
 		game.setTickrate(0.1);
 		ArrayList<Alien> row = new ArrayList<Alien>();
 		for (int i = 0; i < 10; i++) {
-			row.add(new Alien(500, 350, "invader.png"));
+			row.add(new Alien(500, 350));
 		}
 		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
 		aliens.add(row);

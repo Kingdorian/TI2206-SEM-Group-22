@@ -24,4 +24,7 @@ public class SpawnProtectionPowerup extends PowerUp {
 
 	}
 
+	@Override
+	public void setPowerupGlow() { }
+
 }

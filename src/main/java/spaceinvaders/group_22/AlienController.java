@@ -98,7 +98,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 				Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
 				
 				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
-						collidingUnit.getYCoor(), "explosion1.png"));
+						collidingUnit.getYCoor()));
 				((Alien) collidingUnit).hit();
 				((ShipBullet) bullet).getPlayer().addScore(10);
 				game.getBullets().remove(bullet);

@@ -8,8 +8,8 @@ package spaceinvaders.group_22.unit;
 public class AlienBulletTest extends BulletTest {
 
 	@Override
-	public final Unit createInstance(final double x, final double y, final String spriteFile) {
-		return new AlienBullet(x, y, spriteFile);
+	public final Unit createInstance(final double x, final double y) {
+		return new AlienBullet(x, y);
 	}
 
 }

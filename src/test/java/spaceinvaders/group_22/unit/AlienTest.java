@@ -12,8 +12,8 @@ import org.junit.Test;
 public class AlienTest extends UnitTest {
 
 	@Override
-	public final Unit createInstance(final double x, final double y, final String spriteFile) {
-		return new Alien(x, y, spriteFile);
+	public final Unit createInstance(final double x, final double y) {
+		return new Alien(x, y);
 	}
 	
 	/**
@@ -23,7 +23,7 @@ public class AlienTest extends UnitTest {
 	public final void shootBulletTest() {
 		float x = 1;
 		float y = 1;
-		Alien alien = new Alien(x, y, "testimage.png");
+		Alien alien = new Alien(x, y);
 		Bullet bullet = alien.shootBullet(1);
 		assertEquals(alien.getXCoor(), bullet.getXCoor(), 0.05);
 		assertEquals(alien.getYCoor(), bullet.getYCoor(), 0.05);
@@ -38,7 +38,7 @@ public class AlienTest extends UnitTest {
 	public final void bulletChanceTest() {
 		float x = 1;
 		float y = 1;
-		Alien alien = new Alien(x, y, "testimage.png");
+		Alien alien = new Alien(x, y);
 		alien.increaseShooting();
 		assertEquals(alien.getBulletChance(), 0.25, 0.25);
 	}
@@ -49,7 +49,7 @@ public class AlienTest extends UnitTest {
 	public final void healthTest() {
 		float x = 1;
 		float y = 1;
-		Alien alien = new Alien(x, y, "testimage.png", 2);
+		Alien alien = new Alien(x, y, 2);
 		alien.hit();
 		assertEquals(alien.getHealth(), 1);
 	}

@@ -57,7 +57,7 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 		 // Distance to top of the screen.
         double y = 125;
         // Create alien object to make sure we can get the width and height of aliens
-        Alien testAlien = new Alien(0.0, 0.0, Alien.SPRITE); 
+        Alien testAlien = new Alien(0.0, 0.0); 
         // Drawing lines of Aliens.
         for (int i = 0; i < wavePattern.getHeight(); i++) {
         	ArrayList<Alien> aliens = new ArrayList<Alien>();
@@ -69,7 +69,7 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
             for (int j = 0; j < wavePattern.getLength(i); j++) {
             	switch (wavePattern.getChar(i, j)) {
             		case '*':
-            			Alien alien = new Alien(x, y, "invader.png");
+            			Alien alien = new Alien(x, y);
                     	alien.setVelX(AlienController.getAlienVelX());
                     	aliens.add(alien);
                     	Logger.getInstance().log("Created Alien at location:(" + x + "," + y + ")", 
@@ -77,21 +77,21 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
                       	break;
             		case '#': 
             			Alien bigAlien = new Alien(x + (testAlien.getWidth() / 2), 
-            					y + (testAlien.getWidth() / 2), "invader_large.png");
+            					y + (testAlien.getWidth() / 2));
             			bigAlien.setVelX(AlienController.getAlienVelX());
             			aliens.add(bigAlien);
             			Logger.getInstance().log("Created 2x2 Alien at location:"
             					+ "(" + x + "," + y + ")", LogEvent.Type.TRACE);
             			break;
             		case '%':
-            			Alien redAlien = new Alien(x, y, "invader_health5.png", 5);
+            			Alien redAlien = new Alien(x, y, 5);
             			redAlien.setVelX(AlienController.getAlienVelX());
                     	aliens.add(redAlien);
                     	Logger.getInstance().log("Created red alien Alien at location:"
                     			+ "(" + x + "," + y + ")", LogEvent.Type.TRACE);
                       	break;
             		case 'S':
-            			Alien shooterAlien = new Alien(x, y, "invader_shooter.png");
+            			Alien shooterAlien = new Alien(x, y);
             			shooterAlien.setVelX(AlienController.getAlienVelX());
             			shooterAlien.increaseShooting();
             			aliens.add(shooterAlien);

@@ -44,8 +44,8 @@ public class CollisionsTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")  
 	public final void alienVSbulletTestNotColliding() {
-		ShipBullet bullet = new ShipBullet(100, 200, "spaceshipbullet.png");
-		Alien alien = new Alien(5, 6.2, "invader.png");
+		ShipBullet bullet = new ShipBullet(100, 200);
+		Alien alien = new Alien(5, 6.2);
 		ArrayList<Unit> bullets = new ArrayList<Unit>();
 		bullets.add(bullet);
 		assertEquals(Collisions.checkCollisions(alien, bullets), null);
@@ -57,8 +57,8 @@ public class CollisionsTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")  
 	public final void alienVSbulletTestColliding() {
-		ShipBullet bullet = new ShipBullet(5, 6.4, "spaceshipbullet.png");
-		Alien alien = new Alien(5, 6.2, "invader.png");
+		ShipBullet bullet = new ShipBullet(5, 6.4);
+		Alien alien = new Alien(5, 6.2);
 		ArrayList<Unit> bullets = new ArrayList<Unit>();
 		bullets.add(bullet);
 		assertEquals(Collisions.checkCollisions(alien, bullets), bullet);
@@ -70,8 +70,8 @@ public class CollisionsTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")  
 	public final void shipVSbulletTestNotColliding() {
-		AlienBullet bullet = new AlienBullet(5, 200, "alienbullet.png");
-		SpaceShip spaceship = new SpaceShip(5, 6.2, "spaceship.png");
+		AlienBullet bullet = new AlienBullet(5, 200);
+		SpaceShip spaceship = new SpaceShip(5, 6.2);
 		ArrayList<Unit> bullets = new ArrayList<Unit>();
 		bullets.add(bullet);
 		assertEquals(Collisions.checkCollisions(spaceship, bullets), null);
@@ -83,8 +83,8 @@ public class CollisionsTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")  
 	public final void shipVSbulletTestColliding() {
-		AlienBullet bullet = new AlienBullet(7, 7, "alienbullet.png");
-		SpaceShip spaceship = new SpaceShip(5, 6.2, "spaceship.png");
+		AlienBullet bullet = new AlienBullet(7, 7);
+		SpaceShip spaceship = new SpaceShip(5, 6.2);
 		ArrayList<Unit> bullets = new ArrayList<Unit>();
 		bullets.add(bullet);
 		assertEquals(Collisions.checkCollisions(spaceship, bullets), bullet);
@@ -96,12 +96,13 @@ public class CollisionsTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")  
 	public final void collisionTestAlienHit() {
-		Alien alien = new Alien(5, 6.2, "invader.png");
+		Alien alien = new Alien(5, 6.2);
 		ArrayList<ArrayList<Alien>> alienList = new ArrayList<ArrayList<Alien>>();
 		alienList.add(new ArrayList<Alien>());
 		alienList.get(0).add(alien);
-		ShipBullet bullet = new ShipBullet(5, 6.4, "spaceshipbullet.png");
+		ShipBullet bullet = new ShipBullet(5, 6.4);
 		bullet.setPlayer(mock(Player.class));
+
 		ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 		bullets.add(bullet);
 		game.getAlienController().getAlienWave().setAliens(alienList);
@@ -116,10 +117,10 @@ public class CollisionsTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")  
 	public final void collisionTestBarricadeHit() {
-		Barricade barricade = new Barricade(5, 6.2, "barrier.png");
+		Barricade barricade = new Barricade(5, 6.2);
 		ArrayList<Barricade> barricadeList = new ArrayList<Barricade>();
 		barricadeList.add(barricade);
-		ShipBullet bullet = new ShipBullet(5, 6.4, "spaceshipbullet.png");
+		ShipBullet bullet = new ShipBullet(5, 6.4);
 		ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 		bullets.add(bullet);
 		game.getBarricadeController().setBarricades(barricadeList);

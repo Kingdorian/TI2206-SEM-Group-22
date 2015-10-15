@@ -24,7 +24,7 @@ public class SpeedPowerupFactory implements AbstractPowerupFactory {
  	 * @param y The y position.
 	 */
 	public final SpeedPowerUpUnit create(final double x, final double y) {
-		return new SpeedPowerUpUnit(x, y, "powerup_blue.png");
+		return new SpeedPowerUpUnit(x, y);
 	}
 
 }

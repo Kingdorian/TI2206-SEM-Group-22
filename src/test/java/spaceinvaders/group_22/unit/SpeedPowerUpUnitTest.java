@@ -15,8 +15,8 @@ import spaceinvaders.group_22.SinglePlayerGame;
 public class SpeedPowerUpUnitTest extends PowerUpUnitTest {
 	
 	@Override
-	public final Unit createInstance(final double x, final double y, final String spriteFile) {
-		return new SpeedPowerUpUnit(x, y, spriteFile);
+	public final Unit createInstance(final double x, final double y) {
+		return new SpeedPowerUpUnit(x, y);
 	}
 	/**
 	 * Test the activation of this powerUp.
@@ -24,7 +24,8 @@ public class SpeedPowerUpUnitTest extends PowerUpUnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activatePowerUpTest() {
-		SpeedPowerUpUnit powerUp = new SpeedPowerUpUnit(500, 200, "testimage.png");
+		SpeedPowerUpUnit powerUp = new SpeedPowerUpUnit(500, 200);
+
 		Game game = new SinglePlayerGame(1000, 720);
 		Player player = new Player(game, game.getCanvasWidth() / 2);
 		powerUp.activate(player);

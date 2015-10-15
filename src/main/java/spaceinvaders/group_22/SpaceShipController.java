@@ -42,7 +42,7 @@ public abstract class SpaceShipController extends UnitController implements Mova
 			Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
 					
 			Explosion spaceShipexplosion = new Explosion(ship.getXCoor(),
-							ship.getYCoor(), "explosion1.png");
+							ship.getYCoor());
 			ship.setExplosion(spaceShipexplosion);
 			game.getExplosions().add(spaceShipexplosion);
 			game.getBullets().remove(collidingBullet);

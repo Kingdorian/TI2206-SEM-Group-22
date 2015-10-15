@@ -22,10 +22,9 @@ public abstract class PowerUpUnit extends Unit implements MovableUnit, Activatab
 	 * Creates a power Up.
 	 * @param x X coordinate
 	 * @param y Y coordinate
-	 * @param spriteFile The filename of the sprite.
 	 */
-	public PowerUpUnit(final double x, final double y, final String spriteFile) {
-		super(x, y, spriteFile);
+	public PowerUpUnit(final double x, final double y) {
+		super(x, y);
 	}
 	
 	/**

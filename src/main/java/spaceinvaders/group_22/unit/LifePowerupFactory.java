@@ -24,7 +24,7 @@ public class LifePowerupFactory implements AbstractPowerupFactory {
  	 * @param y The y position.
 	 */
 	public final LifePowerUpUnit create(final double x, final double y) {
-		return new LifePowerUpUnit(x, y, "powerup_red.png");
+		return new LifePowerUpUnit(x, y);
 	}
 
 }

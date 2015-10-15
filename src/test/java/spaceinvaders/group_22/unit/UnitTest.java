@@ -9,6 +9,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.Player;
 
 /**
@@ -21,6 +22,11 @@ import spaceinvaders.group_22.Player;
 public abstract class UnitTest {
 	
 	/**
+	 * Class specifying rule to test JavaFX from GitHub.
+	 */
+	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
+	
+	/**
 	 * The Unit we need to be testing.
 	 */
 	private Unit unit;
@@ -29,10 +35,9 @@ public abstract class UnitTest {
 	 * Method to create an instance of a subclass of the Unit class.
 	 * @param x X Coordinate
 	 * @param y Y Coordinate
-	 * @param spriteFile The filename of the sprite.
 	 * @return The Unit
 	 */
-	public abstract Unit createInstance(double x, double y, String spriteFile);
+	public abstract Unit createInstance(double x, double y);
 	
     /**
      * thrown is the exception which is expected to be thrown during a test.
@@ -47,7 +52,7 @@ public abstract class UnitTest {
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void setup() {
 		// testImage is a 1x1 png image. 
-		unit = createInstance(1.2, 3, "testimage.png");
+		unit = createInstance(1.2, 3);
 		//game.setTickrate(1.0);
 	}
 	
@@ -68,46 +73,14 @@ public abstract class UnitTest {
 	public final void testUnitYCoor() {
 		assertEquals(3, unit.getYCoor(), 0.05);
 	}
-	/**
-	 * Test the unit width.
-	 */
-	@Test
-	public final void testUnitWidth() {
-		assertEquals(1, unit.getWidth(), 0.05);
-	}
 	
-	/**
-	 * Test the unit height.
-	 */
-	@Test
-	public final void testUnitHeight() {
-		assertEquals(1, unit.getHeight(), 0.05);
-	}
-	
-	/**
-	 * Test the unit height.
-	 */
-	@Test
-	public final void testUnitSprite() {
-		assertEquals("testimage.png", unit.getSprite());
-	}
-	
-	/**
-	 * Test creating an object with an invalid sprite().
-	 */
-	@Test
-	@SuppressWarnings("checkstyle:magicnumber")    
-	public final void testInvalidUnitSprite() {
-		thrown.expect(IllegalArgumentException.class);
-		createInstance(1.2, 3, "png.png");
-	}
 	/**
 	 * Test the Equals method.
 	 */
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEquals() {
-		Unit unit2 = createInstance(1.2, 3, "testimage.png");
+		Unit unit2 = createInstance(1.2, 3);
 		assertEquals(unit, unit2);
 	}
 	
@@ -126,8 +99,8 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEqualsShipBullet() {
-		Player player = mock(Player.class);
-		Bullet bullet = new ShipBullet(1.2, 3, "testimage.png");
+		Bullet bullet = new ShipBullet(1.2, 3);
+
 		bullet.setHeight(5);
 		assertNotEquals(unit, bullet);
 	}
@@ -137,7 +110,7 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEqualsAlienBullet() {
-		Bullet bullet = new AlienBullet(1.2, 3, "testimage.png");
+		Bullet bullet = new AlienBullet(1.2, 3);
 		bullet.setHeight(5);
 		assertNotEquals(unit, bullet);
 	}
@@ -147,7 +120,7 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEqualsXcoordinate() {
-		Unit unit2 = createInstance(1.3, 3, "testimage.png");
+		Unit unit2 = createInstance(1.3, 3);
 		assertNotEquals(unit, unit2);
 	}
 	/**
@@ -156,7 +129,7 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEqualsYcoordinate() {
-		Unit unit2 = createInstance(1.2, 4, "testimage.png");
+		Unit unit2 = createInstance(1.2, 4);
 		assertNotEquals(unit, unit2);
 	}
 	/**
@@ -165,7 +138,7 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEqualsWidth() {
-		Unit unit2 = createInstance(1.2, 3, "testimage.png");
+		Unit unit2 = createInstance(1.2, 3);
 		unit2.setWidth(12);
 		assertNotEquals(unit, unit2);
 	}
@@ -175,7 +148,7 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEqualsHeight() {
-		Unit unit2 = createInstance(1.2, 3, "testimage.png");
+		Unit unit2 = createInstance(1.2, 3);
 		unit2.setHeight(12);
 		assertNotEquals(unit, unit2);
 	}

@@ -6,6 +6,7 @@ import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.MultiPlayerGame;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
+import spaceinvaders.group_22.ui.SpriteLoader;
 import spaceinvaders.group_22.ui.UIElement;
 
 /**
@@ -28,7 +29,7 @@ public class Lives extends spaceinvaders.group_22.ui.UIElementLives {
 
 	@Override
 	public final void draw() {
-		Image heartImage = getSprites().get("heart.png");
+		Image heartImage = SpriteLoader.getInstance().getHeart();
 		//Change lives for player 1
 		for (int i = 1; i <= ((MultiPlayerGame)getGame()).getPlayers().get(0).getLives(); i++) {
         	getGC().drawImage(heartImage, getGame().getCanvasWidth() + 10 + heartImage.getWidth() * i, 10);

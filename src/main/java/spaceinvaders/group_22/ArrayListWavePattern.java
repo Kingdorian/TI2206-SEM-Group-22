@@ -148,6 +148,15 @@ public class ArrayListWavePattern implements WavePattern {
 		}
 		return false;
 	}
+	
+	/**
+	 * HashCode method.
+	 * @return hashcode of this object
+	 */
+	public final int hashCode() {
+		  return 0;
+	}
+	
 	/**
 	 * Returns a string representation of this AlienWave.
 	 * @return String representation of this alienWave.

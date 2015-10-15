@@ -2,6 +2,7 @@ package spaceinvaders.group_22.unit;
 
 import spaceinvaders.group_22.Player;
 import spaceinvaders.group_22.SpeedPowerUp;
+import spaceinvaders.group_22.ui.SpriteLoader;
 /**
  * Speed power Up class which extends the Power Up class.
  * @author Bryan
@@ -17,10 +18,9 @@ public class SpeedPowerUpUnit extends PowerUpUnit {
 	 * Creates a speed power Up.
 	 * @param x X coordinate
 	 * @param y Y coordinate
-	 * @param spriteFile The filename of the sprite.
 	 */
-	public SpeedPowerUpUnit(final double x, final double y, final String spriteFile) {
-		super(x, y, spriteFile);
+	public SpeedPowerUpUnit(final double x, final double y) {
+		super(x, y);
 	}
 
 	@Override
@@ -35,5 +35,12 @@ public class SpeedPowerUpUnit extends PowerUpUnit {
 	 */
 	public static double getMAXVELY() {
 		return MAXVELY;
+	}
+	
+	/**
+	 * Sets the right sprite image.
+	 */
+	public final void setSpriteImage() {
+		setSprite(SpriteLoader.getInstance().getSpeedPowerUp());
 	}
 }

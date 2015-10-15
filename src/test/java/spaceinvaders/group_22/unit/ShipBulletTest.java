@@ -11,8 +11,8 @@ import static org.mockito.Mockito.mock;
 public class ShipBulletTest extends BulletTest {
 
 	@Override
-	public final Unit createInstance(final double x, final double y, final String spriteFile) {
-		return new ShipBullet(x, y, spriteFile);
+	public final Unit createInstance(final double x, final double y) {
+		return new ShipBullet(x, y);
 	}
 
 }

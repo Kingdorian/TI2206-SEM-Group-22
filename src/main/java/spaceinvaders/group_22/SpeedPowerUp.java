@@ -1,5 +1,7 @@
 package spaceinvaders.group_22;
 
+import spaceinvaders.group_22.ui.SpriteLoader;
+
 /**
  * Active Speed Power Up class.
  * @author Bryan
@@ -19,7 +21,6 @@ public class SpeedPowerUp extends PowerUp {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public SpeedPowerUp(final Player setPlayer) {
 		super(setPlayer);
-		this.setGlow("glow_blue.png");
 		super.getPlayer().getActivePowerUps().add(this);
 		setTimeLeft(DURATION);
 	}
@@ -37,5 +38,13 @@ public class SpeedPowerUp extends PowerUp {
 	protected final void activate() {
 		getPlayer().getSpaceShip().setVelMultiplier(2.5);
 		getPlayer().getSpaceShip().updateMultiplier();
+	}
+	
+	/**
+	 * Sets the correct glow sprite for this powerup.
+	 */
+	@Override
+	public final void setPowerupGlow() {
+		setGlow(SpriteLoader.getInstance().getSpeedPowerUpGlow());
 	}
 }

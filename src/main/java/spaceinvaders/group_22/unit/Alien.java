@@ -1,11 +1,14 @@
 package spaceinvaders.group_22.unit;
 
+import spaceinvaders.group_22.ui.SpriteLoader;
+
 /**
  * An alien in the game, extends Unit.
  * 
  * @author Ege de Bruin
  */
 
+@SuppressWarnings("checkstyle:magicnumber") 
 public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	
 	/**
@@ -21,10 +24,12 @@ public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	 * velY is the velocity in the Y direction in pixels per second.
 	 */
 	private double velY;
+	
 	/**
 	 * Chance this aliens shoots a bullet.
 	 */
 	private double bulletChance = 0.025;
+	
 	/**
 	 * Variable that keeps track of the health left for this alien.
 	 */
@@ -33,23 +38,21 @@ public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	 * Creates an Alien with default health.
 	 * @param x X coordinate
 	 * @param y Y coordinate
-	 * @param spriteFile The filename of the sprite.
 	 */
-	public Alien(final double x, final double y, final String spriteFile) {
-		super(x, y, spriteFile);
+	public Alien(final double x, final double y) {
+		super(x, y);
 	}
 	/**
 	 * Creates an Alien with specified health.
 	 * @param x X coordinate
 	 * @param y Y coordinate
-	 * @param spriteFile The filename of the sprite.
 	 * @param sethealth health this alien has.
 	 */
-	public Alien(final double x, final double y, final String spriteFile, final int sethealth) {
-		super(x, y, spriteFile);
+	public Alien(final double x, final double y, final int sethealth) {
+		super(x, y);
 		if (sethealth >= 1) {
 			health = sethealth;
-			setSprite();
+			setSpriteImage();
 		}
 	}
 	
@@ -59,7 +62,7 @@ public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	 * @return The shot Bullet
 	 */
 	public final Bullet shootBullet(final double velocity) {
-		Bullet bullet = new AlienBullet(this.getXCoor(), this.getYCoor(), "alienbullet.png");
+		Bullet bullet = new AlienBullet(this.getXCoor(), this.getYCoor());
 		bullet.setVelY(velocity);
 		return bullet;
 	}
@@ -146,7 +149,7 @@ public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	 */
 	public final void increaseShooting() {
 		this.bulletChance = 0.25;
-		setSprite();
+		setSpriteImage();
 	}
 
 	/**
@@ -155,21 +158,26 @@ public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	public final int getHealth() {
 		return health;
 	}
+	
 	/**
-	 * Sets the right sprite by the health and bullet chance.
+	 * Sets the right sprite image by the health and bullet chance.
 	 */
-	public final void setSprite() {
-		String sprite = "invader_health" + health + ".png";
+	public final void setSpriteImage() {
 		if (getBulletChance() > 0.025) {
-			sprite = "invader_shooter.png";
+			setSprite(SpriteLoader.getInstance().getAlienShooter());
+
+		} else {
+			setSprite(SpriteLoader.getInstance().getAlienWithHealth(health));
+
 		}
-		setSprite(sprite);
+		
 	}
+	
 	/**
 	 * When alien is hit decrease health.
 	 */
 	public final void hit() {
 		health--;
-		setSprite();
+		setSpriteImage();
 	}
 }

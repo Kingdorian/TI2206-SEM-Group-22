@@ -1,5 +1,7 @@
 package spaceinvaders.group_22.unit;
 
+import spaceinvaders.group_22.ui.SpriteLoader;
+
 /**
  * An Explosion in the game, extends Unit.
  * @author Jochem
@@ -21,11 +23,10 @@ public class Explosion extends Unit {
 	 * Creates an Explosion.
 	 * @param x X Coordinate
 	 * @param y Y Coordinate
-	 * @param spriteFile filename of the sprite of this unit.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")    
-	public Explosion(final double x, final double y, final String spriteFile) {
-		super(x, y, spriteFile);
+	public Explosion(final double x, final double y) {
+		super(x, y);
 		this.counter = 0;
 		this.animationIndex = 0;
 	}
@@ -81,6 +82,13 @@ public class Explosion extends Unit {
 	 */
 	public final int hashCode() {
 		  return 0;
+	}
+	
+	/**
+	 * Sets the right sprite image.
+	 */
+	public final void setSpriteImage() {
+		setSprite(SpriteLoader.getInstance().getExplosionWithFrame(animationIndex));
 	}
 
 }

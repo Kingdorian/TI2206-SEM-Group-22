@@ -29,7 +29,7 @@ public abstract class UIElementUnit extends UIElement {
 	 * @param unit The unit to draw.
 	 */
 	public final void drawUnit(final Unit unit) {
-		Image spriteImage = getSprites().get(unit.getSprite());
+		Image spriteImage = unit.getSprite();
 
 		if (spriteImage != null) {
 			getGC().drawImage(spriteImage, calculateXposition(unit), calculateYposition(unit));			

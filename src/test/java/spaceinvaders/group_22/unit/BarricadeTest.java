@@ -12,8 +12,8 @@ import org.junit.Test;
 public class BarricadeTest extends UnitTest {
 	
 	@Override
-	public final Unit createInstance(final double x, final double y, final String spriteFile) {
-		return new Barricade(x, y, spriteFile);
+	public final Unit createInstance(final double x, final double y) {
+		return new Barricade(x, y);
 	}
 	
 	/**
@@ -22,8 +22,8 @@ public class BarricadeTest extends UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEqualsHealth() {
-		Barricade bar1 = new Barricade(1.2, 3, "testimage.png");
-		Barricade bar2 = new Barricade(1.2, 3, "testimage.png");
+		Barricade bar1 = new Barricade(1.2, 3);
+		Barricade bar2 = new Barricade(1.2, 3);
 		bar2.hit();
 		assertNotEquals(bar1, bar2);
 	}

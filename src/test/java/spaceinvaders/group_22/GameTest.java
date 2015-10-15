@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import javafx.scene.input.KeyCode;
+import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Explosion;
@@ -22,9 +24,12 @@ import spaceinvaders.group_22.unit.SpaceShip;
 public class GameTest {
 	
 	/**
-	 * Static game used for testing.
+	 * Class specifying rule to test JavaFX from GitHub.
 	 */
+	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
+
 	private static SinglePlayerGame game;
+
 
 	/**
 	 * Class to set up a game before each test is executed.
@@ -34,7 +39,7 @@ public class GameTest {
 		game = new SinglePlayerGame(200, 200);
 		game.setTickrate(1.0);
 		ArrayList<Alien> row = new ArrayList<Alien>();
-		row.add(new Alien(10, 10, "invader.png"));
+		row.add(new Alien(10, 10));
 		game.getAlienController().getAlienWave().addAlienRow(row);
 	}
 	
@@ -121,7 +126,7 @@ public class GameTest {
 	 */
 	@Test
 	public final void testResetBullets() {
-		game.getBullets().add(new ShipBullet(1.0, 1.0, "invader.png"));
+		game.getBullets().add(new ShipBullet(1.0, 1.0));
 		game.resetGame();
 		// Bullet list should be emptied when the game resets
 		Assert.assertEquals(0, game.getBullets().size());
@@ -131,7 +136,7 @@ public class GameTest {
 	 */
 	@Test
 	public final void testResetExplosions() {
-		game.getExplosions().add(new Explosion(1.0, 1.0, "explosion1.png"));
+		game.getExplosions().add(new Explosion(1.0, 1.0));
 		game.resetGame();
 		// Bullet list should be emptied when the game resets
 		Assert.assertEquals(0, game.getExplosions().size());
@@ -222,7 +227,7 @@ public class GameTest {
 	 */
 	@Test
 	public final void testShipBounceRight() {
-		game.getPlayer().setSpaceShip(new SpaceShip(game.getCanvasWidth() + 5, 10, "spaceship.png"));
+		game.getPlayer().setSpaceShip(new SpaceShip(game.getCanvasWidth() + 5, 10));
 		game.getPlayer().getSpaceShip().setVelX(10.0);
 		((SingleSpaceShipController)(game.getSpaceShipController())).moveSpaceShip(new ArrayList<KeyCode>(), game.getPlayer());
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() <= 0);
