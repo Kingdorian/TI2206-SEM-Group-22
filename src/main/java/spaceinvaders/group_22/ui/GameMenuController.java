@@ -15,5 +15,8 @@ public class GameMenuController {
 	}
 	public void quit() {
 		Logger.getInstance().log("Quitting game", LogEvent.Type.DEBUG);
+		//Make sure everything in the buffer of the logger is written to the file
+		Logger.getInstance().writeLog();
+		SpaceInvadersUI.getInstance().quit();
 	}
 }

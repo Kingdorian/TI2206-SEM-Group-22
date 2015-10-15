@@ -2,6 +2,7 @@ package spaceinvaders.group_22.ui;
 
 import java.io.IOException;
 
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -73,6 +74,12 @@ public class SpaceInvadersUI {
 			e.printStackTrace();
 		}
 		
+	}
+	/**
+	 * Closes the UI and exit the app.
+	 */
+	public void quit() {
+	  System.exit(1);
 	}
 	
 	/**
