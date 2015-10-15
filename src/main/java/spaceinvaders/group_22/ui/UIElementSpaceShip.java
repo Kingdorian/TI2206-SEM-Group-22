@@ -3,7 +3,9 @@ package spaceinvaders.group_22.ui;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.Player;
 import spaceinvaders.group_22.PowerUp;
+import spaceinvaders.group_22.SinglePlayerGame;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.SpaceShip;
@@ -15,18 +17,25 @@ import spaceinvaders.group_22.unit.SpaceShip;
  */
 public class UIElementSpaceShip extends UIElementUnit {
 	
+	Game game;
+	
+	Player player;
+	
 	/**
 	 * The constructor.
 	 * @param newGame the Game
-	 * @param gc the GraphicsContext to draw on.	 
+	 * @param gc the GraphicsContext to draw on.
+	 * @param p the player that controls this SpaceShip	 
 	 */
-	public UIElementSpaceShip(final Game newGame, final GraphicsContext gc) {	
+	public UIElementSpaceShip(final Game newGame, final GraphicsContext gc, final Player p) {	
 		super(newGame, gc);
+		game = newGame;
+		player = p;
 	}
 
 	@Override
 	public final void draw() {
-		SpaceShip spaceShip = getGame().getPlayerSpaceship();
+		SpaceShip spaceShip = player.getSpaceShip();
 		drawPowerupGlow();
         // Position the player in the middle, on the bottom of the screen.
 		drawUnit(spaceShip);
@@ -37,7 +46,7 @@ public class UIElementSpaceShip extends UIElementUnit {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")    
 	private void drawPowerupGlow() {
-		for (PowerUp powerup : getGame().getPlayer().getActivePowerUps()) {
+		for (PowerUp powerup : player.getActivePowerUps()) {
 	        // Draw the player glow.
 			Image glowImage = getSprites().get(powerup.getGlow());
 			if (glowImage != null) {
@@ -45,8 +54,10 @@ public class UIElementSpaceShip extends UIElementUnit {
 				Double opacity = powerup.getTimeLeft() / PowerUp.getDuration();
 				getGC().setGlobalAlpha(opacity);
 				getGC().drawImage(glowImage, 
-						getGame().getPlayerSpaceship().getXCoor() - 0.5 * glowImage.getWidth(),
-						getGame().getPlayerSpaceship().getYCoor() - 0.5 * glowImage.getHeight());	
+						
+						player.getSpaceShip().getXCoor() - 0.5 * glowImage.getWidth(),
+						player.getSpaceShip().getYCoor() - 0.5 * glowImage.getHeight());	
+
 				getGC().setGlobalAlpha(1);
 			}
 		}

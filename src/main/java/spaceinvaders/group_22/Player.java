@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
+import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.ShipBullet;
 import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
@@ -43,11 +45,13 @@ public class Player {
 	/**
 	 * Creates new Player object.
 	 * @param parentgame the game where the object is part of.
+	 * @param shipX X coordinate of the ship.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
-	public Player(final Game parentgame) {
+	public Player(final Game parentgame, final double shipX) {
 		game = parentgame;
-		ship = new SpaceShip(game.getCanvasWidth() / 2, game.getCanvasHeight() - 40, "spaceship.png");
+		ship = new SpaceShip(shipX, game.getCanvasHeight() - 40, "spaceship.png");
+		ship.setPlayer(this);
 		Logger.getInstance().log("Created spaceship for player", LogEvent.Type.DEBUG);
 		score  = 0;
 		lives = 3;
@@ -95,6 +99,7 @@ public class Player {
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void respawnShip() {
 		ship = new SpaceShip(game.getCanvasWidth() / 2, ship.getYCoor(), "spaceship.png");
+		ship.setPlayer(this);
 		ArrayList<PowerUp> powerups = new ArrayList<PowerUp>();
 		powerups.addAll(getActivePowerUps());
 		for (PowerUp powerup : powerups) {
@@ -142,6 +147,5 @@ public class Player {
 	 */
 	public final void setActivePowerUps(final ArrayList<PowerUp> newactivePowerUps) {
 		this.activePowerUps = newactivePowerUps;
-	}
-	
+	}	
 }
