@@ -1,5 +1,7 @@
 package spaceinvaders.group_22;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 
 import org.junit.Assert;
@@ -7,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javafx.scene.input.KeyCode;
+import spaceinvaders.group_22.unit.AlienBullet;
 import spaceinvaders.group_22.unit.SpaceShip;
 /**
  * Test for the single spaceship controller.
@@ -98,5 +101,16 @@ public final class SingleSpaceShipControllerTest {
 		keyList.add(KeyCode.D);
 		controller.tick(keyList);
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() > 0);
+	}
+	/**
+	 * Test the checkexplosion method in the spaceshipcontroller.
+	 */
+	@Test
+	public final void testCheckExplosions() {
+		SpaceShip ship = game.getPlayer().getSpaceShip();
+		game.getBullets().add(new AlienBullet(ship.getXCoor(), ship.getYCoor(),  "testimage.png"));
+		controller.tick(new ArrayList<KeyCode>());
+		controller.checkExplosions(game.getPlayer());
+		assertEquals(game.getExplosions().size(), 1);
 	}
 }
