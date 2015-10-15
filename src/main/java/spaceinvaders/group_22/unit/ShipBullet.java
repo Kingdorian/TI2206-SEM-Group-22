@@ -1,11 +1,17 @@
 package spaceinvaders.group_22.unit;
 
+import spaceinvaders.group_22.Player;
+
 /**
  * An alienBullet in the game, extends Bullet.
  * @author Ege de Bruin
  */
 
 public class ShipBullet extends Bullet {
+	/**
+	 * Owner of this bullet.
+	 */
+	private Player player;
 
 	/**
 	 * Creates a ShipBullet.
@@ -28,6 +34,20 @@ public class ShipBullet extends Bullet {
 			return 	super.equals(other);
 		}
 		return false;
+	}
+
+	/**
+	 * @return the ship
+	 */
+	public final Player getPlayer() {
+		return player;
+	}
+	/**
+	 * Method to set the player who shoot this bullet.
+	 * @param setPlayer player that shot this bullet.
+	 */
+	public final void setPlayer(final Player setPlayer) {
+		player = setPlayer;
 	}
 
 }

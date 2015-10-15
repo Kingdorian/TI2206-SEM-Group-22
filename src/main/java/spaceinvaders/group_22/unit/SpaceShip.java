@@ -1,5 +1,8 @@
 package spaceinvaders.group_22.unit;
 
+import spaceinvaders.group_22.Player;
+import spaceinvaders.group_22.unit.ShipBullet;
+
 /**
  * A SpaceShip in the game extends Unit.
  * 
@@ -8,6 +11,10 @@ package spaceinvaders.group_22.unit;
  */
 @SuppressWarnings("checkstyle:magicnumber") 
 public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
+	/**
+	 * Player that controls this spaceship.
+	 */
+	private Player player;
 	/**
 	 * VelX is the velocity in the X direction in pixels per second.
 	 */
@@ -68,11 +75,11 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * @param velocity The speed of the Bullet
 	 * @return The shot Bullet
 	 */
-	public final Bullet shootBullet(final double velocity) {
-		Bullet bullet = new ShipBullet(this.getXCoor(), this.getYCoor(), "spaceshipbullet.png");
+	public final ShipBullet shootBullet(final double velocity) {
+		ShipBullet bullet = new ShipBullet(this.getXCoor(), this.getYCoor(), "spaceshipbullet.png");
+		bullet.setPlayer(player);
 		bullet.setVelY(velocity);
 		return bullet;
-
 	}	
 	
 	/**
@@ -226,10 +233,24 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 		explosion = newExplosion;
 	}
 	/**
-	 * Returns the explosion if this spaceship is exploding
+	 * Returns the explosion if this spaceship is exploding.
 	 * @return null if there is no explosion.
 	 */
 	public final Explosion getExplosion() {
 		return explosion;
+	}
+	/**
+	 * Sets the player that controls this spaceship.
+	 * @param setPlayer player to set.
+	 */
+	public final void setPlayer(final Player setPlayer) {
+		player = setPlayer;
+	}
+	/**
+	 * Returns the player that controlls this spaceship.
+	 * @return player of this spaceship.
+	 */
+	public final Player getPlayer() {
+		return player;
 	}
 }
