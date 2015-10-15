@@ -33,9 +33,9 @@ public class MovableUnitTest {
 	
 	@Before
 	public void setUp() throws  IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException {
-		Constructor constructor = movableUnitClass.getConstructor(new Class[]{double.class, double.class, String.class});
-		movableUnit = (MovableUnit)constructor.newInstance(new Object[] {1.2, 3.0, "testimage.png"});
-		movableUnit2 = (MovableUnit)constructor.newInstance(new Object[] {1.2, 3.0, "testimage.png"});
+		Constructor constructor = movableUnitClass.getConstructor(new Class[]{double.class, double.class});
+		movableUnit = (MovableUnit)constructor.newInstance(new Object[] {1.2, 3.0});
+		movableUnit2 = (MovableUnit)constructor.newInstance(new Object[] {1.2, 3.0});
 	}
 
 	/**
