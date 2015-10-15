@@ -71,21 +71,6 @@ public abstract class UnitTest {
 	public final void testUnitYCoor() {
 		assertEquals(3, unit.getYCoor(), 0.05);
 	}
-	/**
-	 * Test the unit width.
-	 */
-	@Test
-	public final void testUnitWidth() {
-		assertEquals(1, unit.getWidth(), 0.05);
-	}
-	
-	/**
-	 * Test the unit height.
-	 */
-	@Test
-	public final void testUnitHeight() {
-		assertEquals(1, unit.getHeight(), 0.05);
-	}
 	
 	/**
 	 * Test the Equals method.
