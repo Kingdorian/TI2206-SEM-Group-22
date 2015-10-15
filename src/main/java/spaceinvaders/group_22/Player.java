@@ -39,6 +39,10 @@ public class Player {
 	 * Game the player "lives" in.
 	 */
 	private Game game;
+	/**
+	 * Indicates if player can get damaged by bullets.
+	 */
+	private boolean invulnerable = false;
 	
 	/**
 	 * Creates new Player object.
@@ -100,6 +104,7 @@ public class Player {
 		for (PowerUp powerup : powerups) {
 			powerup.deactivate();
 		}
+		powerups.add(new SpawnProtectionPowerup(this));
 		Logger.getInstance().log("Ship respawned", LogEvent.Type.TRACE);
 	}
 	/**
@@ -142,6 +147,10 @@ public class Player {
 	 */
 	public final void setActivePowerUps(final ArrayList<PowerUp> newactivePowerUps) {
 		this.activePowerUps = newactivePowerUps;
+	}
+
+	public void setInvulnerable(boolean b) {
+		invulnerable = b;
 	}
 	
 }
