@@ -50,17 +50,19 @@ public class Collisions {
 			game.getBullets().clear();
 			game.getPlayer().die();
 		}
-		//Checking colissions for spaceship with enemy bullets
-		Unit collidingBullet = checkCollisions(game.getPlayer().getSpaceShip(), alienBullets);
-		if (collidingBullet != null) {
-			String logMessage = "Player collided bullet at X:" + game.getPlayer().getSpaceShip().getXCoor() 
-					+ " Y: " + game.getPlayer().getSpaceShip().getYCoor();
-			Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
-			
-			spaceShipexplosion = new Explosion(game.getPlayer().getSpaceShip().getXCoor(),
-					game.getPlayer().getSpaceShip().getYCoor(), "explosion1.png");
-			game.getExplosions().add(spaceShipexplosion);
-			game.getBullets().remove(collidingBullet);
+		if(!player.isInvurnarable()) {
+			//Checking colissions for spaceship with enemy bullets
+			Unit collidingBullet = checkCollisions(game.getPlayer().getSpaceShip(), alienBullets);
+			if (collidingBullet != null) {
+				String logMessage = "Player collided bullet at X:" + game.getPlayer().getSpaceShip().getXCoor() 
+						+ " Y: " + game.getPlayer().getSpaceShip().getYCoor();
+				Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
+				
+				spaceShipexplosion = new Explosion(game.getPlayer().getSpaceShip().getXCoor(),
+						game.getPlayer().getSpaceShip().getYCoor(), "explosion1.png");
+				game.getExplosions().add(spaceShipexplosion);
+				game.getBullets().remove(collidingBullet);
+			}
 		}
 		//Checking for colissions between player bullets and aliens
 		for (Unit bullet : shipBullets) {

@@ -150,9 +150,20 @@ public class Player {
 	public final void setActivePowerUps(final ArrayList<PowerUp> newactivePowerUps) {
 		this.activePowerUps = newactivePowerUps;
 	}
-
+	/**
+	 * Sets if the player is invulnerable.
+	 * @param b boolean if the player is invulnerable.
+	 */
 	public void setInvulnerable(boolean b) {
 		invulnerable = b;
 	}
+	/**
+	 * Returns player invulnerability.
+	 * 
+	 */
+	public boolean isInvulnerable() {
+		return invulnerable;
+	}
+	
 	
 }
