@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Barricade;
+import spaceinvaders.group_22.unit.Collisions;
+import spaceinvaders.group_22.unit.Explosion;
+import spaceinvaders.group_22.unit.Unit;
 
 /**
  * Class for creating and controlling barricades.
@@ -77,6 +80,32 @@ public class BarricadeController extends UnitController {
 				barricades.remove(i);
 				Logger.getInstance().log("Removed barricade", LogEvent.Type.TRACE);
 				i--;
+			}
+		}
+	}
+	/**
+	 * Method to call every tick for the barricades.
+	 */
+	public final void tick() {
+		removeDead();
+		barricadeCollisions();
+	}
+	/**
+	 * Method to check the collisions on barricades.
+	 */
+	public final void barricadeCollisions() {
+		// Checking for colissions between bullets and barricades
+		for (Barricade bar : game.getBarricadeController().getBarricades()) {
+			Unit collidingUnit = Collisions.checkCollisions(bar, new ArrayList<Unit>(game.getBullets()));
+			if (collidingUnit != null) {
+				String logMessage = "Barricade collided bullet at X:" + bar.getXCoor() 
+						+ " Y: " + bar.getYCoor();
+				Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
+						
+				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
+						collidingUnit.getYCoor()));
+				game.getBullets().remove(collidingUnit);
+				bar.hit();
 			}
 		}
 	}

@@ -27,7 +27,7 @@ public class BarricadeControllerTest {
 	@Before
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void setUpBarControler() {
-		barController = new BarricadeController(new Game(100, 100));
+		barController = new BarricadeController(new SinglePlayerGame(100, 100));
 	}
 	/**
 	 * Tests if the getBarricades method works correctly.

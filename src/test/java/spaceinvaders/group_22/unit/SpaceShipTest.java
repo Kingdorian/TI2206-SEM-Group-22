@@ -2,12 +2,14 @@ package spaceinvaders.group_22.unit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.mockito.Mockito.mock;
 
 import org.junit.Test;
 
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.Player;
 import spaceinvaders.group_22.ShootPowerUp;
+import spaceinvaders.group_22.SinglePlayerGame;
 import spaceinvaders.group_22.SpeedPowerUp;
 
 /**
@@ -31,6 +33,9 @@ public class SpaceShipTest extends UnitTest {
 		float x = 1;
 		float y = 1;
 		SpaceShip spaceship = new SpaceShip(x, y);
+
+		Player player = mock(Player.class);
+
 		Bullet bullet = spaceship.shootBullet(1);
 		assertEquals(spaceship.getXCoor(), bullet.getXCoor(), 0.05);
 		assertEquals(spaceship.getYCoor(), bullet.getYCoor(), 0.05);
@@ -77,8 +82,8 @@ public class SpaceShipTest extends UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testUpdateMultiplierSpeed() {
-		Game game = new Game(1000, 750);
-		Player player = new Player(game);
+		Game game = new SinglePlayerGame(1000, 750);
+		Player player = new Player(game, game.getCanvasWidth() / 2);
 		player.getActivePowerUps().add(new SpeedPowerUp(player));
 		player.getSpaceShip().updateMultiplier();
 		assertEquals(625, SpaceShip.getMAXVELX(), 0.f);
@@ -90,8 +95,8 @@ public class SpaceShipTest extends UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testUpdateMultiplierShoot() {
-		Game game = new Game(1000, 750);
-		Player player = new Player(game);
+		Game game = new SinglePlayerGame(1000, 750);
+		Player player = new Player(game, game.getCanvasWidth() / 2);
 		player.getActivePowerUps().add(new ShootPowerUp(player));
 		player.getSpaceShip().updateMultiplier();
 		assertEquals(2, SpaceShip.getShootTimes(), 0.f);

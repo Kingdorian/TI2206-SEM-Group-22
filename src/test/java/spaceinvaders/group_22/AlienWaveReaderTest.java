@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 
 import org.junit.Assert;
@@ -27,7 +26,7 @@ public class AlienWaveReaderTest {
 	@Before
 	public void init() {
 		// We need the logger
-		Game game = new Game(10.0, 10.0);
+		Game game = new SinglePlayerGame(10.0, 10.0);
 		waveReader = new AlienWaveReader();
 	}
 	@Test

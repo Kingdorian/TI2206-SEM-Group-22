@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.Player;
+import spaceinvaders.group_22.SinglePlayerGame;
 
 /**
  * Test for Speed Power Up, extends PowerUpTest Test.
@@ -25,7 +26,8 @@ public class LifePowerUpUnitTest extends PowerUpUnitTest {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activatePowerUpTest() {
 		LifePowerUpUnit powerUp = new LifePowerUpUnit(500, 200);
-		Player player = new Player(new Game(1000, 720));
+		Game game = new SinglePlayerGame(1000, 720);
+		Player player = new Player(game, game.getCanvasWidth() / 2);
 		powerUp.activate(player);
 		assertEquals(player.getLives(), 4);
 	}
@@ -36,7 +38,9 @@ public class LifePowerUpUnitTest extends PowerUpUnitTest {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activateTwoTimesPowerUpTest() {
 		LifePowerUpUnit powerUp = new LifePowerUpUnit(500, 200);
-		Player player = new Player(new Game(1000, 720));
+		Game game = new SinglePlayerGame(1000, 720);
+		Player player = new Player(game, game.getCanvasWidth() / 2);
+
 		powerUp.activate(player);
 		powerUp.activate(player);
 		assertEquals(player.getLives(), 5);
@@ -48,7 +52,10 @@ public class LifePowerUpUnitTest extends PowerUpUnitTest {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activateThreeTimesPowerUpTest() {
 		LifePowerUpUnit powerUp = new LifePowerUpUnit(500, 200);
-		Player player = new Player(new Game(1000, 720));
+
+		Game game = new SinglePlayerGame(1000, 720);
+		Player player = new Player(game, game.getCanvasWidth() / 2);
+
 		powerUp.activate(player);
 		powerUp.activate(player);
 		powerUp.activate(player);

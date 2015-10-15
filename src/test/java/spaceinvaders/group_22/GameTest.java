@@ -24,21 +24,19 @@ import spaceinvaders.group_22.unit.SpaceShip;
 public class GameTest {
 	
 	/**
-	 * Static game used for testing.
-	 */
-	private static Game game;
-	
-	/**
 	 * Class specifying rule to test JavaFX from GitHub.
 	 */
 	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
+
+	private static SinglePlayerGame game;
+
 
 	/**
 	 * Class to set up a game before each test is executed.
 	 */
 	@Before
 	public final void setUpGame() {
-		game = new Game(200, 200);
+		game = new SinglePlayerGame(200, 200);
 		game.setTickrate(1.0);
 		ArrayList<Alien> row = new ArrayList<Alien>();
 		row.add(new Alien(10, 10));
@@ -99,7 +97,7 @@ public class GameTest {
 	 */
 	@Test
 	public final void testGetAliens() {
-		Game game = new Game(100, 100);
+		Game game = new SinglePlayerGame(100, 100);
 		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
 		game.getAlienController().getAlienWave().setAliens(aliens);
 		Assert.assertEquals(new ArrayList<ArrayList<Alien>>(), game.getAlienController().getAliens());
@@ -110,7 +108,7 @@ public class GameTest {
 	@Test
 	public final void testResetBarricades() {
 		game.getBarricadeController().getBarricades().get(0).hit();
-		game.reset();
+		game.resetGame();
 		Assert.assertEquals(10, game.getBarricadeController().getBarricades().get(0).getHealth());
 	}
 	/**
@@ -119,7 +117,7 @@ public class GameTest {
 	@Test
 	public final void testResetPlayer() {
 		game.getPlayer().addScore(111);
-		game.reset();
+		game.resetGame();
 		// Player should be resetted so his score should be 0
 		Assert.assertEquals(0, game.getPlayer().getScore());
 	}
@@ -129,7 +127,7 @@ public class GameTest {
 	@Test
 	public final void testResetBullets() {
 		game.getBullets().add(new ShipBullet(1.0, 1.0));
-		game.reset();
+		game.resetGame();
 		// Bullet list should be emptied when the game resets
 		Assert.assertEquals(0, game.getBullets().size());
 	}
@@ -139,7 +137,7 @@ public class GameTest {
 	@Test
 	public final void testResetExplosions() {
 		game.getExplosions().add(new Explosion(1.0, 1.0));
-		game.reset();
+		game.resetGame();
 		// Bullet list should be emptied when the game resets
 		Assert.assertEquals(0, game.getExplosions().size());
 	}
@@ -149,7 +147,7 @@ public class GameTest {
 	@Test
 	public final void testShootingAllowed() {
 		game.getPlayer().getSpaceShip().shootBullet(0.1);
-		game.reset();
+		game.resetGame();
 		// Bullet list should be emptied when the game resets
 		Assert.assertTrue(game.getShootingAllowed());
 	}
@@ -197,7 +195,7 @@ public class GameTest {
 	@Test
 	public final void testGetNoShipBullets() {
 		// Remove all existing bullets from the game.
-		game.reset();
+		game.resetGame();
 		ArrayList<Bullet> bulletlist = new ArrayList<Bullet>();
 		bulletlist.add(game.getAlienController().getAliens().get(0).shootBullet(1));
 		game.setBullets(bulletlist);
@@ -209,7 +207,7 @@ public class GameTest {
 	@Test
 	public final void testGetShipBullets() {
 		// Remove all existing bullets from the game.
-		game.reset();
+		game.resetGame();
 		ArrayList<Bullet> bulletlist = new ArrayList<Bullet>();
 		bulletlist.add(game.getPlayer().getSpaceShip().shootBullet(10.1));
 		game.setBullets(bulletlist);
@@ -220,7 +218,7 @@ public class GameTest {
 	 */
 	@Test
 	public final void testSetPlayer() {
-		Player player = new Player(game);
+		Player player = new Player(game, game.getCanvasWidth() / 2);
 		game.setPlayer(player);
 		Assert.assertEquals(game.getPlayer(), player);
 	}
@@ -231,7 +229,7 @@ public class GameTest {
 	public final void testShipBounceRight() {
 		game.getPlayer().setSpaceShip(new SpaceShip(game.getCanvasWidth() + 5, 10));
 		game.getPlayer().getSpaceShip().setVelX(10.0);
-		game.getSpaceShipController().moveSpaceShip(new ArrayList<KeyCode>());
+		((SingleSpaceShipController)(game.getSpaceShipController())).moveSpaceShip(new ArrayList<KeyCode>(), game.getPlayer());
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() <= 0);
 	}
 }

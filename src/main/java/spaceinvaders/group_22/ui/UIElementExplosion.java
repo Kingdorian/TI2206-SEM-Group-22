@@ -33,8 +33,7 @@ public class UIElementExplosion extends UIElementUnit {
 				
 				// For every explosion, draw the explosion.
 				for (Explosion explosion : explosionList) {
-					drawUnit(explosion.getXCoor(), explosion.getYCoor(), 
-							explosion.getWidth(), explosion.getHeight(), explosion.getSprite(), getGC());
+					drawUnit(explosion);
 					
 					// Increase the counter maintaining the time one frame of the animation is visible.
 					explosion.increaseCounter();
@@ -50,7 +49,6 @@ public class UIElementExplosion extends UIElementUnit {
 						getGame().getExplosions().remove(explosion);
 					}
 				}
-				Logger.getInstance().log("Drawn explosions", LogEvent.Type.TRACE);
 	}
 
 }

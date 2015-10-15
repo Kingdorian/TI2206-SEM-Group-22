@@ -31,8 +31,8 @@ public class SpeedPowerUpTest extends PowerUpTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void deactivatedTest() {
-		Game game = new Game(1000, 750);
-		Player player = new Player(game);
+		Game game = new SinglePlayerGame(1000, 750);
+		Player player = new Player(game, game.getCanvasWidth() / 2);
 		PowerUp powerup = new SpeedPowerUp(player);
 		powerup.deactivate();
 		assertEquals(player.getSpaceShip().getVelMultiplier(), 1.0, 0.f);

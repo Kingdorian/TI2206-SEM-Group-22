@@ -188,4 +188,5 @@ public abstract class Unit {
 	 * It should load the correct sprite from the SpriteLoader.
 	 */
 	public abstract void setSpriteImage();
+
 }

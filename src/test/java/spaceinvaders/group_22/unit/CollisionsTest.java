@@ -1,6 +1,7 @@
 package spaceinvaders.group_22.unit;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
 
@@ -8,6 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.Player;
+import spaceinvaders.group_22.SinglePlayerGame;
 
 /**
  * Class to test the collisons between units.
@@ -17,13 +20,13 @@ import spaceinvaders.group_22.Game;
 public class CollisionsTest {
 	
 	/**
-	 * Object used to test the collisions.
-	 */
-	private Collisions collisions;
-	/**
 	 * Game object used to test the collisions.
 	 */
 	private Game game;
+	/**
+	 * Player object used for testing.
+	 */
+	private Player player; 
 	
 	/**
 	 * Setup the collisons class.
@@ -31,8 +34,8 @@ public class CollisionsTest {
 	@Before
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void setup() {
-		game = new Game(700, 1000);
-		collisions = new Collisions(game);
+		game = new SinglePlayerGame(700, 1000);
+		player = new Player(game, game.getCanvasWidth() / 2);
 	}
 	
 	/**
@@ -45,7 +48,7 @@ public class CollisionsTest {
 		Alien alien = new Alien(5, 6.2);
 		ArrayList<Unit> bullets = new ArrayList<Unit>();
 		bullets.add(bullet);
-		assertEquals(collisions.checkCollisions(alien, bullets), null);
+		assertEquals(Collisions.checkCollisions(alien, bullets), null);
 	}
 	
 	/**
@@ -58,7 +61,7 @@ public class CollisionsTest {
 		Alien alien = new Alien(5, 6.2);
 		ArrayList<Unit> bullets = new ArrayList<Unit>();
 		bullets.add(bullet);
-		assertEquals(collisions.checkCollisions(alien, bullets), bullet);
+		assertEquals(Collisions.checkCollisions(alien, bullets), bullet);
 	}
 	
 	/**
@@ -71,7 +74,7 @@ public class CollisionsTest {
 		SpaceShip spaceship = new SpaceShip(5, 6.2);
 		ArrayList<Unit> bullets = new ArrayList<Unit>();
 		bullets.add(bullet);
-		assertEquals(collisions.checkCollisions(spaceship, bullets), null);
+		assertEquals(Collisions.checkCollisions(spaceship, bullets), null);
 	}
 	
 	/**
@@ -84,7 +87,7 @@ public class CollisionsTest {
 		SpaceShip spaceship = new SpaceShip(5, 6.2);
 		ArrayList<Unit> bullets = new ArrayList<Unit>();
 		bullets.add(bullet);
-		assertEquals(collisions.checkCollisions(spaceship, bullets), bullet);
+		assertEquals(Collisions.checkCollisions(spaceship, bullets), bullet);
 	}
 	
 	/**
@@ -98,11 +101,13 @@ public class CollisionsTest {
 		alienList.add(new ArrayList<Alien>());
 		alienList.get(0).add(alien);
 		ShipBullet bullet = new ShipBullet(5, 6.4);
+		bullet.setPlayer(mock(Player.class));
+
 		ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 		bullets.add(bullet);
 		game.getAlienController().getAlienWave().setAliens(alienList);
 		game.setBullets(bullets);
-		collisions.checkCollisions();
+		game.getAlienController().alienCollisions();
 		assertEquals(alien.getHealth(), 0);
 	}
 	
@@ -120,7 +125,7 @@ public class CollisionsTest {
 		bullets.add(bullet);
 		game.getBarricadeController().setBarricades(barricadeList);
 		game.setBullets(bullets);
-		collisions.checkCollisions();
+		game.getBarricadeController().barricadeCollisions();
 		assertEquals(game.getBarricadeController().getBarricades().get(0).getHealth(), 9);
 	}
 

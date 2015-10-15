@@ -40,7 +40,7 @@ public class AlienControllerTest {
 	@Before
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void setUpController() {
-		game = new Game(1000, 720);
+		game = new SinglePlayerGame(1000, 720);
 		controller = game.getAlienController();
 		game.setTickrate(0.1);
 		ArrayList<Alien> row = new ArrayList<Alien>();

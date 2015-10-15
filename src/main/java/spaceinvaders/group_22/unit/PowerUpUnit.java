@@ -37,6 +37,34 @@ public abstract class PowerUpUnit extends Unit implements MovableUnit, Activatab
 	}
 	
 	/**
+	 * Compares two objects and returns if they are equal.
+	 * @return true if both objects are the same.
+	 * @param obj the object to compare.
+	 */
+	@Override
+	public final boolean equals(final Object obj) {
+	      if (!super.equals(obj)) {
+	         return false;
+	      }
+	      PowerUpUnit other = (PowerUpUnit) obj;
+	      if (this.velX != other.velX) {
+	    	 return false;
+	      }
+	      if (this.velY != other.velY) {
+	    	 return false;
+	      }	      
+	      return true;
+	}
+	
+	/**
+	 * HashCode method.
+	 * @return hashcode of this object
+	 */
+	public final int hashCode() {
+		  return 0;
+	}
+	
+	/**
 	 * Activates the powerup for player.
 	 * @param newplayer the player this powerup has effect on.
 	 * 

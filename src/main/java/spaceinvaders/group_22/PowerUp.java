@@ -1,6 +1,10 @@
 package spaceinvaders.group_22;
 
+
 import javafx.scene.image.Image;
+
+import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 
 /**
  * Abstract clas for an active power Up.
@@ -57,6 +61,7 @@ public abstract class PowerUp {
 		this.timeLeft = this.timeLeft - timePast;
 		activate();
 		if (timeLeft <= 0) {
+			Logger.getInstance().log("Time left for powerup: " + timeLeft, LogEvent.Type.DEBUG);
 			deactivate();
 		}
 	}

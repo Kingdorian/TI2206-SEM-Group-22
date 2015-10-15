@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.SinglePlayerGame;
 import spaceinvaders.group_22.unit.Unit;
 
 /**
@@ -42,21 +43,21 @@ public abstract class UIElementTest {
 	 * @param gc the GraphicsContext.
 	 * @return The UIElement subclass to test.
 	 */
-	public abstract UIElement createInstance(final Game newGame, final GraphicsContext gc);
+	public abstract UIElement createInstance(final SinglePlayerGame newGame, final GraphicsContext gc);
 	
 	/**
 	 * Prepares the test.
 	 */
 	@Before
 	public final void setUp() {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameUI.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SinglePlayerGameUI.fxml"));
 		try {
 			fxmlLoader.load();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		GameUIController gameUIController = fxmlLoader.getController();
-		uiElement = createInstance(gameUIController.getGame(), gameUIController.getGC());
+		uiElement = createInstance((SinglePlayerGame) gameUIController.getGame(), gameUIController.getGC());
 	}
 
 }
