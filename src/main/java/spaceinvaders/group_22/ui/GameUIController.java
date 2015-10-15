@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
-import spaceinvaders.group_22.ui.Lives;
-import spaceinvaders.group_22.ui.Score;
+import spaceinvaders.group_22.ui.UIElementLives;
+import spaceinvaders.group_22.ui.UIElementScore;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import javafx.animation.KeyFrame;
@@ -132,11 +132,11 @@ public abstract class GameUIController
     /**
      * The drawing of the score.
      */
-    protected Score uiScore;
+    protected UIElementScore uiScore;
     /**
      * The drawing of the lives.
      */
-    protected Lives uiLives;
+    protected UIElementLives uiLives;
     
     /**
      * Called by the FXMLLoader. 

@@ -12,14 +12,14 @@ import spaceinvaders.group_22.ui.UIElement;
  * @author Dorian
  *
  */   
-public abstract class Lives extends UIElement {
+public abstract class UIElementLives extends UIElement {
 	
 	/**
 	 * The constructor.
 	 * @param newGame the Game
 	 * @param gc the GraphicsContext to draw on.	 
 	 */
-	public Lives(final Game newGame, final GraphicsContext gc) {
+	public UIElementLives(final Game newGame, final GraphicsContext gc) {
 		super(newGame, gc);
 	}
 

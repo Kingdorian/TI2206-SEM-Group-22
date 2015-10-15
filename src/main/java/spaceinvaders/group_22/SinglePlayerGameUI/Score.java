@@ -13,7 +13,7 @@ import spaceinvaders.group_22.ui.UIElement;
  *
  */
 @SuppressWarnings("checkstyle:magicnumber")  
-public class Score extends spaceinvaders.group_22.ui.Score {
+public class Score extends spaceinvaders.group_22.ui.UIElementScore {
 	
 	/**
 	 * The constructor.

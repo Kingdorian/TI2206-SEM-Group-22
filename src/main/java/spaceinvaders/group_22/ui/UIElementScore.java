@@ -13,7 +13,7 @@ import spaceinvaders.group_22.ui.UIElement;
  * @author Dorian
  *
  */ 
-public abstract class Score extends UIElement {
+public abstract class UIElementScore extends UIElement {
 	
 	/**
 	 * The label to draw the score on.
@@ -26,7 +26,7 @@ public abstract class Score extends UIElement {
 	 * @param gc the GraphicsContext to draw on.	
 	 * @param scoreLabel The label on which the score should be drawn. 
 	 */
-	public Score(final Game newGame, final GraphicsContext gc, final Label scoreLabel) {
+	public UIElementScore(final Game newGame, final GraphicsContext gc, final Label scoreLabel) {
 		super(newGame, gc);
 		label = scoreLabel;
 	}
