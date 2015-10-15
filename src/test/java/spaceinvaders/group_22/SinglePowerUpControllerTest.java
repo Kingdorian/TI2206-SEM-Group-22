@@ -8,7 +8,7 @@ import org.junit.Test;
  * @author Bryan
  *
  */
-public class PowerUpControllerTest {
+public class SinglePowerUpControllerTest {
 	
 	/**
 	 * Static game used for testing.
