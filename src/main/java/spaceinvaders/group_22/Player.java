@@ -105,7 +105,7 @@ public class Player {
 			powerup.deactivate();
 		}
 		SpawnProtectionPowerup spawnprotection = new SpawnProtectionPowerup(this);
-		spawnprotection.setTimeLeft(2.0);
+		spawnprotection.setTimeLeft(1.0);
 		activePowerUps.add(spawnprotection);
 		Logger.getInstance().log("Ship respawned", LogEvent.Type.TRACE);
 	}
@@ -119,7 +119,6 @@ public class Player {
 		if (lives <= 0) {
 			game.gameOver();
 		}
-		game.getBullets();
 	}
 	/**
 	 * Get the amount of lives the player has left.

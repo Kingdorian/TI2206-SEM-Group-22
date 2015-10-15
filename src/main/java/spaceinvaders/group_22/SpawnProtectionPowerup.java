@@ -7,12 +7,14 @@ public class SpawnProtectionPowerup extends PowerUp {
 
 	public SpawnProtectionPowerup(Player setplayer) {
 		super(setplayer);
+		this.activate();
 	}
 
 	@Override
 	protected void deactivate() {
 		Logger.getInstance().log("Deacitvating spawn protection", LogEvent.Type.DEBUG);
 		getPlayer().setInvulnerable(false);
+		super.getPlayer().getActivePowerUps().remove(this);
 	}
 
 	@Override

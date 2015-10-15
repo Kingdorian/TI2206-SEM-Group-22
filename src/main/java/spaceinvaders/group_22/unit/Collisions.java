@@ -47,7 +47,6 @@ public class Collisions {
 		}
 		if (spaceShipexplosion != null && spaceShipexplosion.getCounter() == 24) {
 			Logger.getInstance().log("Spaceship hit by bullet" , LogEvent.Type.INFO);
-			game.getBullets().clear();
 			game.getPlayer().die();
 		}
 		if(!game.getPlayer().isInvulnerable()) {
