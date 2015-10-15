@@ -17,7 +17,7 @@ import spaceinvaders.group_22.logger.Logger;
  */
 public class SpaceInvadersUI {
 	/**
-	 * Singleotn instance.
+	 * Singleton instance.
 	 */
 	private static SpaceInvadersUI instance;
 	
