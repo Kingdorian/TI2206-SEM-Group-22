@@ -38,7 +38,7 @@ public class KeboardInputTest {
 		game.setPlayer(new Player(game));
 		game.setTickrate(60.0);
 		ArrayList<Alien> row = new ArrayList<Alien>();
-		row.add(new Alien(10, 10, "invader.png"));
+		row.add(new Alien(10, 10));
 		game.getAlienController().getAlienWave().addAlienRow(row);
 		// Create simulated events
 		simulEvents = new ArrayList<KeyCode>();
@@ -75,7 +75,7 @@ public class KeboardInputTest {
 		game.getBarricadeController().setBarricades(new ArrayList<Barricade>());
 		simulEvents.add(KeyCode.SPACE);
 		ArrayList<Alien> alienList = new ArrayList<Alien>();
-		Alien alien = new Alien(0, 0, "invader.png");
+		Alien alien = new Alien(0, 0);
 		alienList.add(alien);
 		game.getAlienController().getAlienWave().setAlienRow(0, alienList);
 		game.tick(simulEvents);	

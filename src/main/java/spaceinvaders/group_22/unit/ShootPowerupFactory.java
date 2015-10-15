@@ -24,7 +24,7 @@ public class ShootPowerupFactory implements AbstractPowerupFactory {
  	 * @param y The y position.
 	 */
 	public final ShootPowerUpUnit create(final double x, final double y) {
-		return new ShootPowerUpUnit(x, y, "powerup_orange.png");
+		return new ShootPowerUpUnit(x, y);
 	}
 
 }

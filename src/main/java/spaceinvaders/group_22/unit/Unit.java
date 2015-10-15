@@ -6,6 +6,7 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
+import javafx.scene.image.Image;
 import spaceinvaders.group_22.logger.Logger;
 
 /**
@@ -39,29 +40,17 @@ public abstract class Unit {
 	/**
 	 * an Image object containing the sprite.
 	 */
-	private String sprite;
+	private Image sprite;
 
 	/**
 	 * Creates a unit at Location X, Y with velocity 0 and direction north.
 	 * @param x Coordinate of this unit.
 	 * @param y Coordinate of this unit.
-	 * @param spriteFile filename of the sprite of this unit.
 	 */
-	public Unit(final double x, final double y, final String spriteFile) {
+	public Unit(final double x, final double y) {
 		this.setXCoor(x);
 		this.setYCoor(y);
-		this.setSprite(spriteFile);
-		
-		try {
-			InputStream inputStream = 
-					getClass().getClassLoader().getResourceAsStream("spaceinvaders/group_22/images/" + spriteFile);
-			BufferedImage spriteImage = ImageIO.read(inputStream);
-			this.setHeight(spriteImage.getHeight());
-			this.setWidth(spriteImage.getWidth());	
-		} catch (IOException e) {
-			Logger.getInstance().log("Unit sprite image name invalid", e);
-			e.printStackTrace();
-		}
+		this.setSpriteImage();
 	}
 	/**
 	 * Compares two objects and returns if they are equal.
@@ -184,17 +173,24 @@ public abstract class Unit {
 	}
 	
 	/**
-	 * Get the filename of the sprite of this unit.
-	 * @return the filename of the sprite of this unit.
+	 * Get the Image of the sprite of this unit.
+	 * @return the Image of the sprite of this unit.
 	 */
-	public final String getSprite() {
+	public final Image getSprite() {
 		return sprite;
 	}
+	
 	/**
-	 * Sets the filename of the sprite of this unit.
-	 * @param newSprite the filename to set.
+	 * Sets the Image of the sprite.
+	 * @param newSprite The new sprite Image of this unit.
 	 */
-	public final void setSprite(final String newSprite) {
-		this.sprite = newSprite;
-	}	
+	public final void setSprite(final Image newSprite) {
+		sprite = newSprite;
+	}
+	
+	/**
+	 * Sets the Image of the sprite of this unit.
+	 * It should load the correct sprite from the SpriteLoader.
+	 */
+	public abstract void setSpriteImage();
 }

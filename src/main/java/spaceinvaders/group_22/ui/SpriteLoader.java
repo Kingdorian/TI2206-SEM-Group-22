@@ -42,14 +42,12 @@ public class SpriteLoader {
 		
 		addSprite("alienbullet.png");
 		addSprite("spaceshipbullet.png");
-		addSprite("alien.png");
 		addSprite("alien_shooter.png");
 		addSprite("alien_health1.png");
 		addSprite("alien_health2.png");
 		addSprite("alien_health3.png");
 		addSprite("alien_health4.png");
 		addSprite("alien_health5.png");
-		addSprite("alien_shooter.png");
 		addSprite("alien_large.png");
 		addSprite("spaceship.png");
 		addSprite("heart.png");
@@ -112,19 +110,19 @@ public class SpriteLoader {
     }
     
     /**
-     * Getter method for the alien sprite.
-     * @return The alien sprite Image.
-     */
-    public final Image getAlien() {
-    	return sprites.get("alienhealth1.png");
-    }
-    
-    /**
      * Getter method for the large alien sprite.
      * @return The large alien sprite Image.
      */
     public final Image getAlienLarge() {
     	return sprites.get("alien_large.png");
+    }
+    
+    /**
+     * Getter method for the shooter alien sprite.
+     * @return The shooter alien sprite Image.
+     */
+    public final Image getAlienShooter() {
+    	return sprites.get("alien_shooter.png");
     }
 
     /**
@@ -136,7 +134,7 @@ public class SpriteLoader {
     	if (health > 0 && health <= ALIEN_MAXHEALTH) {
     		return sprites.get("alienhealth" + Integer.toString(health) + ".png");
     	} else {
-    		return getAlien();
+    		return sprites.get("alienhealth1.png");
     	}
     }
     

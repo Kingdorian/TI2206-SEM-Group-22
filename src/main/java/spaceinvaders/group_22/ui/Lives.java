@@ -26,7 +26,8 @@ public class Lives extends UIElement {
 
 	@Override
 	public final void draw() {
-		Image heartImage = getSprites().get("heart.png");
+		Image heartImage = SpriteLoader.getInstance().getHeart();
+		
     	for (int i = 1; i <= getGame().getPlayer().getLives(); i++) {
         	getGC().drawImage(heartImage, getGame().getCanvasWidth() - 10 - heartImage.getWidth() * i, 10);
     	}

@@ -42,7 +42,7 @@ public class BarricadeController extends UnitController {
 		int interval = (int) game.getCanvasWidth() / (barricadeCount + 1);
 		barricades.clear();
 		for (int i = 1; i <= barricadeCount; i++) {
-			barricades.add(new Barricade(interval * i, game.getCanvasHeight() - bottomOfset, "barrier.png"));
+			barricades.add(new Barricade(interval * i, game.getCanvasHeight() - bottomOfset));
 		}
 		Logger.getInstance().log("Created all barricades", LogEvent.Type.DEBUG);
 	}

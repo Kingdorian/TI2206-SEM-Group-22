@@ -1,4 +1,7 @@
 package spaceinvaders.group_22.unit;
+
+import spaceinvaders.group_22.ui.SpriteLoader;
+
 /**
  * Class for the baricade units that protect the player.
  * @author dorian
@@ -17,8 +20,8 @@ public class Barricade extends Unit {
 	 * @param y Y-coordinate of the barricade
 	 * @param spriteFile 
 	 */
-	public Barricade(final double x, final double y, final String spriteFile) {
-		super(x, y, spriteFile);
+	public Barricade(final double x, final double y) {
+		super(x, y);
 	}
 	/**
 	 * When barricade is hit decrease health. 
@@ -53,6 +56,7 @@ public class Barricade extends Unit {
 		}
 		return true;
 	}
+	
 	@Override
 	public final int hashCode() {
 		final int prime = 31;
@@ -61,5 +65,11 @@ public class Barricade extends Unit {
 		return result;
 	}
 	
-
+	/**
+	 * Sets the right sprite image.
+	 */
+	public final void setSpriteImage() {
+		setSprite(SpriteLoader.getInstance().getBarrier());
+	}
+	
 }

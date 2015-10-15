@@ -41,7 +41,7 @@ public class UIElementSpaceShip extends UIElementUnit {
 	private void drawPowerupGlow() {
 		for (PowerUp powerup : getGame().getPlayer().getActivePowerUps()) {
 	        // Draw the player glow.
-			Image glowImage = getSprites().get(powerup.getGlow());
+			Image glowImage = powerup.getGlow();
 			if (glowImage != null) {
 				//Calculate opacity on base of the time left for this powerUp.
 				Double opacity = powerup.getTimeLeft() / PowerUp.getDuration();

@@ -47,7 +47,7 @@ public class Player {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public Player(final Game parentgame) {
 		game = parentgame;
-		ship = new SpaceShip(game.getCanvasWidth() / 2, game.getCanvasHeight() - 40, "spaceship.png");
+		ship = new SpaceShip(game.getCanvasWidth() / 2, game.getCanvasHeight() - 40);
 		Logger.getInstance().log("Created spaceship for player", LogEvent.Type.DEBUG);
 		score  = 0;
 		lives = 3;
@@ -94,7 +94,7 @@ public class Player {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void respawnShip() {
-		ship = new SpaceShip(game.getCanvasWidth() / 2, ship.getYCoor(), "spaceship.png");
+		ship = new SpaceShip(game.getCanvasWidth() / 2, ship.getYCoor());
 		ArrayList<PowerUp> powerups = new ArrayList<PowerUp>();
 		powerups.addAll(getActivePowerUps());
 		for (PowerUp powerup : powerups) {

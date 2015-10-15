@@ -29,7 +29,7 @@ public class BarricadeControllerTest {
 	public final void testGetBarricades() {
 		ArrayList<Barricade> barricades = new ArrayList<Barricade>();
 		BarricadeController barricadeController = new BarricadeController(null);
-		Barricade barricade = new  Barricade(10, 10, "testimage.png");
+		Barricade barricade = new  Barricade(10, 10);
 		barricades.add(barricade);
 		barricadeController.setBarricades(barricades);
 		Assert.assertEquals(barricade, barricadeController.getBarricades().get(0));
@@ -43,7 +43,7 @@ public class BarricadeControllerTest {
 	public final void testAddBarricade() {
 		barController.setBarricades(new ArrayList<Barricade>());
 		ArrayList<Barricade> barricades = new ArrayList<Barricade>();
-		Barricade barricade = new Barricade(10, 10, "testimage.png");
+		Barricade barricade = new Barricade(10, 10);
 		barricades.add(barricade);
 		barController.setBarricades(new ArrayList<Barricade>());
 		barController.addBarricade(barricade);

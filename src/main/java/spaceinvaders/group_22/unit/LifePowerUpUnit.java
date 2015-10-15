@@ -1,6 +1,7 @@
 package spaceinvaders.group_22.unit;
 
 import spaceinvaders.group_22.Player;
+import spaceinvaders.group_22.ui.SpriteLoader;
 
 /**
  * Life powerup class which extends the abstact powerup class.
@@ -19,8 +20,8 @@ public class LifePowerUpUnit extends PowerUpUnit {
 	 * @param y Y coordinate
 	 * @param spriteFile The filename of the sprite.
 	 */
-	public LifePowerUpUnit(final double x, final double y, final String spriteFile) {
-		super(x, y, spriteFile);
+	public LifePowerUpUnit(final double x, final double y) {
+		super(x, y);
 	}
 
 	/**
@@ -61,5 +62,12 @@ public class LifePowerUpUnit extends PowerUpUnit {
 	 */
 	public static double getMaxVely() {
 		return MAXVELY;
+	}
+	
+	/**
+	 * Sets the right sprite image.
+	 */
+	public final void setSpriteImage() {
+		setSprite(SpriteLoader.getInstance().getLifePowerUp());
 	}
 }

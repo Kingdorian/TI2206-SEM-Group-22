@@ -1,5 +1,7 @@
 package spaceinvaders.group_22.unit;
 
+import spaceinvaders.group_22.ui.SpriteLoader;
+
 /**
  * A SpaceShip in the game extends Unit.
  * 
@@ -51,10 +53,9 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * Creates a SpaceShip.
 	 * @param x X Coordinate
 	 * @param y Y Coordinate
-	 * @param spriteFile filename of the sprite of this unit.
 	 */
-	public SpaceShip(final double x, final double y, final String spriteFile) {
-		super(x, y, spriteFile);
+	public SpaceShip(final double x, final double y) {
+		super(x, y);
 		setShootTimes(defaultShootSpeed * shootingMultiplier);
 		setMAXVELX(defaultVel * velMultiplier);
 	}
@@ -65,7 +66,7 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * @return The shot Bullet
 	 */
 	public final Bullet shootBullet(final double velocity) {
-		Bullet bullet = new ShipBullet(this.getXCoor(), this.getYCoor(), "spaceshipbullet.png");
+		Bullet bullet = new ShipBullet(this.getXCoor(), this.getYCoor());
 		bullet.setVelY(velocity);
 		return bullet;
 
@@ -213,5 +214,12 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 */
 	public static void setMAXVELX(final double newMaxvel) {
 		maxVelx = newMaxvel;
+	}
+	
+	/**
+	 * Sets the right sprite image.
+	 */
+	public final void setSpriteImage() {
+		setSprite(SpriteLoader.getInstance().getSpaceShip());
 	}
 }

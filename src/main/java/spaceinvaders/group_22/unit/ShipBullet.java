@@ -1,5 +1,7 @@
 package spaceinvaders.group_22.unit;
 
+import spaceinvaders.group_22.ui.SpriteLoader;
+
 /**
  * An alienBullet in the game, extends Bullet.
  * @author Ege de Bruin
@@ -13,8 +15,8 @@ public class ShipBullet extends Bullet {
 	 * @param y Y Coordinate
 	 * @param spriteFile filename of the sprite of this unit.
 	 */
-	public ShipBullet(final double x, final double y, final String spriteFile) {
-		super(x, y, spriteFile);
+	public ShipBullet(final double x, final double y) {
+		super(x, y);
 	}
 	
 	/**
@@ -28,6 +30,13 @@ public class ShipBullet extends Bullet {
 			return 	super.equals(other);
 		}
 		return false;
+	}
+	
+	/**
+	 * Sets the right sprite image.
+	 */
+	public final void setSpriteImage() {
+		setSprite(SpriteLoader.getInstance().getBulletSpaceShip());
 	}
 
 }

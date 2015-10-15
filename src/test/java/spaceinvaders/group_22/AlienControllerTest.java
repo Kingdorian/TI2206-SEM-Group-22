@@ -38,7 +38,7 @@ public class AlienControllerTest {
 		game.setTickrate(0.1);
 		ArrayList<Alien> row = new ArrayList<Alien>();
 		for (int i = 0; i < 10; i++) {
-			row.add(new Alien(500, 350, "invader.png"));
+			row.add(new Alien(500, 350));
 		}
 		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
 		aliens.add(row);

@@ -38,7 +38,7 @@ public class SpaceShipControllerTest {
 	@Test
 	public final void testShipBounceLeft() {
 		game.setTickrate(10.0);
-		game.getPlayer().setSpaceShip(new SpaceShip(-5, 0, "spaceship.png"));
+		game.getPlayer().setSpaceShip(new SpaceShip(-5, 0));
 		game.getPlayer().getSpaceShip().setVelX(-10.0);
 		game.getSpaceShipController().moveSpaceShip(new ArrayList<KeyCode>());
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() >= 0);
@@ -48,7 +48,7 @@ public class SpaceShipControllerTest {
 	 */
 	@Test
 	public final void testShipMovingRight() {
-		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
+		game.getPlayer().setSpaceShip(new SpaceShip(100, 100));
 		ArrayList keyList = new ArrayList<KeyCode>();
 		keyList.add(KeyCode.D);
 		game.getSpaceShipController().moveSpaceShip(keyList);
@@ -59,7 +59,7 @@ public class SpaceShipControllerTest {
 	 */
 	@Test
 	public final void testShipMovingLeft() {
-		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
+		game.getPlayer().setSpaceShip(new SpaceShip(100, 100));
 		ArrayList keyList = new ArrayList<KeyCode>();
 		keyList.add(KeyCode.A);
 		controller.moveSpaceShip(keyList);
@@ -70,7 +70,7 @@ public class SpaceShipControllerTest {
 	 */
 	@Test
 	public final void testShipFasterThenMaxSpeedRight() {
-		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
+		game.getPlayer().setSpaceShip(new SpaceShip(100, 100));
 		game.getPlayer().getSpaceShip().setVelX(500);
 		controller.moveSpaceShip(new ArrayList<KeyCode>());
 		Assert.assertEquals(250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
@@ -80,7 +80,7 @@ public class SpaceShipControllerTest {
 	 */
 	@Test
 	public final void testShipFasterThenMaxSpeedLeft() {
-		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
+		game.getPlayer().setSpaceShip(new SpaceShip(100, 100));
 		game.getPlayer().getSpaceShip().setVelX(-500);
 		controller.moveSpaceShip(new ArrayList<KeyCode>());
 		Assert.assertEquals(-250, game.getPlayer().getSpaceShip().getVelX(), 0.05);

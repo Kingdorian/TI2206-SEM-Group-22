@@ -29,7 +29,7 @@ public abstract class UnitTest {
 	 * @param spriteFile The filename of the sprite.
 	 * @return The Unit
 	 */
-	public abstract Unit createInstance(double x, double y, String spriteFile);
+	public abstract Unit createInstance(double x, double y);
 	
     /**
      * thrown is the exception which is expected to be thrown during a test.
@@ -44,7 +44,7 @@ public abstract class UnitTest {
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void setup() {
 		// testImage is a 1x1 png image. 
-		unit = createInstance(1.2, 3, "testimage.png");
+		unit = createInstance(1.2, 3);
 		//game.setTickrate(1.0);
 	}
 	
@@ -90,21 +90,12 @@ public abstract class UnitTest {
 	}
 	
 	/**
-	 * Test creating an object with an invalid sprite().
-	 */
-	@Test
-	@SuppressWarnings("checkstyle:magicnumber")    
-	public final void testInvalidUnitSprite() {
-		thrown.expect(IllegalArgumentException.class);
-		createInstance(1.2, 3, "png.png");
-	}
-	/**
 	 * Test the Equals method.
 	 */
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEquals() {
-		Unit unit2 = createInstance(1.2, 3, "testimage.png");
+		Unit unit2 = createInstance(1.2, 3);
 		assertEquals(unit, unit2);
 	}
 	
@@ -123,7 +114,7 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEqualsShipBullet() {
-		Bullet bullet = new ShipBullet(1.2, 3, "testimage.png");
+		Bullet bullet = new ShipBullet(1.2, 3);
 		bullet.setHeight(5);
 		assertNotEquals(unit, bullet);
 	}
@@ -133,7 +124,7 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEqualsAlienBullet() {
-		Bullet bullet = new AlienBullet(1.2, 3, "testimage.png");
+		Bullet bullet = new AlienBullet(1.2, 3);
 		bullet.setHeight(5);
 		assertNotEquals(unit, bullet);
 	}
@@ -143,7 +134,7 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEqualsXcoordinate() {
-		Unit unit2 = createInstance(1.3, 3, "testimage.png");
+		Unit unit2 = createInstance(1.3, 3);
 		assertNotEquals(unit, unit2);
 	}
 	/**
@@ -152,7 +143,7 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEqualsYcoordinate() {
-		Unit unit2 = createInstance(1.2, 4, "testimage.png");
+		Unit unit2 = createInstance(1.2, 4);
 		assertNotEquals(unit, unit2);
 	}
 	/**
@@ -161,7 +152,7 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEqualsWidth() {
-		Unit unit2 = createInstance(1.2, 3, "testimage.png");
+		Unit unit2 = createInstance(1.2, 3);
 		unit2.setWidth(12);
 		assertNotEquals(unit, unit2);
 	}
@@ -171,7 +162,7 @@ public abstract class UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testEqualsHeight() {
-		Unit unit2 = createInstance(1.2, 3, "testimage.png");
+		Unit unit2 = createInstance(1.2, 3);
 		unit2.setHeight(12);
 		assertNotEquals(unit, unit2);
 	}

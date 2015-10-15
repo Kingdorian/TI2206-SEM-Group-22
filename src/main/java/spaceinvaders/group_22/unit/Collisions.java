@@ -58,7 +58,7 @@ public class Collisions {
 			Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
 			
 			spaceShipexplosion = new Explosion(game.getPlayer().getSpaceShip().getXCoor(),
-					game.getPlayer().getSpaceShip().getYCoor(), "explosion1.png");
+					game.getPlayer().getSpaceShip().getYCoor());
 			game.getExplosions().add(spaceShipexplosion);
 			game.getBullets().remove(collidingBullet);
 		}
@@ -71,7 +71,7 @@ public class Collisions {
 				Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
 				
 				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
-						collidingUnit.getYCoor(), "explosion1.png"));
+						collidingUnit.getYCoor()));
 				((Alien) collidingUnit).hit();
 				game.getBullets().remove(bullet);
 				if (Math.random() > 0.6) {
@@ -89,7 +89,7 @@ public class Collisions {
 				Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
 				
 				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
-						collidingUnit.getYCoor(), "explosion1.png"));
+						collidingUnit.getYCoor()));
 				game.getBullets().remove(collidingUnit);
 				bar.hit();
 			}
