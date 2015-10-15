@@ -31,10 +31,9 @@ public class UIElementBarricade extends UIElementUnit {
 			//Calculate opacity on base of the health of the barricade
 			Double opacity = bar.getHealth() * 0.1;
 			getGC().setGlobalAlpha(opacity);
-			drawUnit(bar.getXCoor(), bar.getYCoor(), bar.getWidth(), bar.getHeight(), bar.getSprite(), getGC());
+			drawUnit(bar);
 			getGC().setGlobalAlpha(1);
 		}
-		Logger.getInstance().log("Drawn barricades", LogEvent.Type.TRACE);
 		
 	}
 

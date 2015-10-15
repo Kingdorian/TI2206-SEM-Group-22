@@ -116,6 +116,15 @@ public class SinglePlayerGame extends Game {
 	public final Player getPlayer() {
 		return player;
 	}
+	
+	/**
+	 * Gets the spaceship of the player that is playing this game. 
+	 * @return the spaceship of the player that is playing this game.
+	 */
+	public final SpaceShip getPlayerSpaceship() {
+		return player.getSpaceShip();
+	}
+	
 	/**
 	 * Returns if the player is allowed to shoot at the moment or still in
 	 * cooldown.

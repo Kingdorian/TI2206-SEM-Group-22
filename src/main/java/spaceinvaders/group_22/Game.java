@@ -268,7 +268,7 @@ public abstract class Game {
 	public final ArrayList<Explosion> getExplosions() {
 		return explosions;
 	}
-
+	
 	/**
 	 * Returns the highscore.
 	 * 

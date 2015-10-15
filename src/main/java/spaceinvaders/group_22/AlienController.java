@@ -149,6 +149,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 				unit.setVelY(0);
 				unit.setVelX(alienWave.getAlienVelX());
 			}
+
 			unit.move(game.getTickrate());
 		}
 		String velX = String.valueOf(alienWave.getAliens().get(0).getVelX());

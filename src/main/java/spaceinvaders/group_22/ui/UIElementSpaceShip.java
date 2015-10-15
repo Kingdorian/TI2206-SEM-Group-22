@@ -35,11 +35,10 @@ public class UIElementSpaceShip extends UIElementUnit {
 
 	@Override
 	public final void draw() {
+		SpaceShip spaceShip = player.getSpaceShip();
 		drawPowerupGlow();
         // Position the player in the middle, on the bottom of the screen.
-		drawUnit(player.getSpaceShip().getXCoor(), player.getSpaceShip().getYCoor(), player.getSpaceShip().getWidth(), 
-				player.getSpaceShip().getHeight(), player.getSpaceShip().getSprite(), getGC());
-		Logger.getInstance().log("Drawn spaceship", LogEvent.Type.TRACE);
+		drawUnit(spaceShip);
 	}
 	
 	/**
@@ -55,8 +54,10 @@ public class UIElementSpaceShip extends UIElementUnit {
 				Double opacity = powerup.getTimeLeft() / PowerUp.getDuration();
 				getGC().setGlobalAlpha(opacity);
 				getGC().drawImage(glowImage, 
+						
 						player.getSpaceShip().getXCoor() - 0.5 * glowImage.getWidth(),
 						player.getSpaceShip().getYCoor() - 0.5 * glowImage.getHeight());	
+
 				getGC().setGlobalAlpha(1);
 			}
 		}
