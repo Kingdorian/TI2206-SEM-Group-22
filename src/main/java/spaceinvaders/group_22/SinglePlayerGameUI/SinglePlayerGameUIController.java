@@ -52,6 +52,7 @@ public class SinglePlayerGameUIController extends GameUIController {
     	} else {
         	game.resetGame();    		
     	}
+    	initializeUIElements();
     	startAnimation();
     }
     

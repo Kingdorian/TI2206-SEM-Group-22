@@ -2,23 +2,36 @@ package spaceinvaders.group_22;
 
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
-
+/**
+ * Powerup to protect the ship when spawning.
+ * @author Dorian
+ *
+ */
 public class SpawnProtectionPowerup extends PowerUp {
-
-	public SpawnProtectionPowerup(Player setplayer) {
+	
+	/**
+	 * Indicates the duration of this powerUP in seconds.
+	 */
+	static final double DURATION = 2.0; 
+	/**
+	 * Creator of the spawn protection power up.
+	 * @param setplayer of this powerup.
+	 */
+	public SpawnProtectionPowerup(final Player setplayer) {
 		super(setplayer);
+		setTimeLeft(DURATION);
 		this.activate();
 	}
 
 	@Override
-	protected void deactivate() {
+	protected final void deactivate() {
 		Logger.getInstance().log("Deacitvating spawn protection", LogEvent.Type.DEBUG);
 		getPlayer().setInvulnerable(false);
 		super.getPlayer().getActivePowerUps().remove(this);
 	}
 
 	@Override
-	protected void activate() {
+	protected final void activate() {
 		Logger.getInstance().log("Activating spawn protection", LogEvent.Type.DEBUG);
 		getPlayer().setInvulnerable(true);
 
