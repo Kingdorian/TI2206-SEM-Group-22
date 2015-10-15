@@ -56,9 +56,13 @@ In the table the responsibilities and collaborations are presented for every cla
   \hline
     Class & Responsibility & Collaborates with & Super & Sub \\ \hline
    MultiPlayerGame & Players  & & Game & \\ \hline
-   MultiPlayerGameUIController & Key control & MultiPlayerGame  & GameUIController  & \\ \hline
+   GameUIController & drawing the UI elements & MultiPlayerGame  & GameUIController  & \\ \hline
+ MultiPlayerGameUIController & Key control & MultiPlayerGame  & GameUIController  & \\ \hline
+ SinglePlayerGameUIController & Key control & Game  & GameUIController  & \\ \hline
    MenuUIController& Conrol menu & MultiPlayerGameUI- Controller  &   &  \\ \hline
    UiElementMultiSpaceShips& draw multiple spaceShips & MultiPlayerGameUI- Controller  &  &  \\ \hline
+ MultiGameScore & score display multiple players &  MultiPlayerGame  &  Score  & \\ \hline
+ MultiGameLives &  lives display multiple players & MultiPlayerGame  & Lives  & \\ \hline
  MultiSpaceShipsController& Control multiple spaceships & SpaceShip  & SpaceShipController &  \\ \hline
  MultiPlayerPowerUpController& Control powerups for multiple players & MultiPlayerGame   & PowerUpController &  \\ \hline
  MultiPlayerCollisions & Collisions in a multiplayer game & MultiPlayerGame   & Collisions&  \\ \hline
@@ -69,7 +73,8 @@ In the table the responsibilities and collaborations are presented for every cla
 
 Furthermore we have to replace the check if the alien is at the same height as a spaceship from AlienController to the SpaceshipController. \newline
 And replace the score add call to the multiplayercollisions.
-
+\newpage
+\subsection{Multiplayer UML}
 The UML is as following:
 \begin{figure}[ht!]
 	\centering
@@ -84,5 +89,4 @@ The UML is as following:
 	\label{fig:1-1MultiGameGame}
 \end{figure}
 
-\subsection{Multiplayer UML}
 \end{document}
