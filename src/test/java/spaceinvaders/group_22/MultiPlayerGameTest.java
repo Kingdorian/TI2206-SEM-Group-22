@@ -9,8 +9,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import spaceinvaders.group_22.unit.Alien;
-import spaceinvaders.group_22.unit.ShipBullet;
+import spaceinvaders.group_22.unit.Bullet;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import spaceinvaders.group_22.unit.SpaceShip;
+import static org.mockito.Mockito.times;
 
 /**
  * Multi Player game test.
@@ -80,6 +83,12 @@ public class MultiPlayerGameTest extends GameTest {
 		pressedKeys.add(KeyCode.SHIFT);
 		multiGame.getBullets().clear();	
 		multiGame.getShootingAllowed().set(1, true);
+		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
+		multiGame.getAlienController().getAlienWave().setAliens(aliens);
+		ArrayList<Alien> row = new ArrayList<Alien>();
+		Alien alien = new Alien(20, 20, "testimage.png");
+		row.add(alien);
+		multiGame.getAlienController().getAlienWave().addAlienRow(row);
 		multiGame.tick(pressedKeys);
 		Assert.assertEquals(multiGame.getBullets().size(), 1);
 	}
