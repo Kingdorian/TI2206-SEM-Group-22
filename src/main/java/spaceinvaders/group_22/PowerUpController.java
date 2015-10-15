@@ -20,7 +20,7 @@ import spaceinvaders.group_22.unit.Unit;
  *
  */
 @SuppressWarnings("checkstyle:magicnumber")
-public class PowerUpController {
+public abstract class PowerUpController {
 	
 	/**
 	 * The game object for which the controller has to control the powerups.
@@ -41,7 +41,6 @@ public class PowerUpController {
 	 */
 	public PowerUpController(final Game newgame) {
 		game = newgame;
-		collisions = new Collisions(game);
 	}
 
 	/**
@@ -73,25 +72,7 @@ public class PowerUpController {
 	 * Method to check a not yet active powerUp.
 	 * @param powerUp the powerUp to check
 	 */
-	public final void checkMovingPowerUp(final PowerUpUnit powerUp) {
-		powerUp.move(game.getTickrate());
-		ArrayList<Unit> spaceShiplist = new ArrayList<Unit>();
-		spaceShiplist.add(game.getPlayer().getSpaceShip());
-		if (powerUp.getYCoor() >= game.getCanvasHeight()) {
-			powerups.remove(powerUp);
-			Logger.getInstance().log("Removed PowerUp that was outside screen " , LogEvent.Type.TRACE);
-		} else if (collisions.checkCollisions(powerUp, spaceShiplist) != null) {
-			
-			powerUp.activate(game.getPlayer());
-			powerups.remove(powerUp);
-			Logger.getInstance().log("PowerUp collided with spaceship" , LogEvent.Type.TRACE);
-		}  else if (collisions.checkCollisions(powerUp, 
-				new ArrayList<Unit>(game.getBarricadeController().getBarricades())) != null) {
-			powerups.remove(powerUp);
-			Logger.getInstance().log("PowerUp collided with barricade" , LogEvent.Type.TRACE);
-		}  
-	}
-	
+	public abstract void checkMovingPowerUp(final PowerUpUnit powerUp);
 	/**
 	 * Checks all the power ups in the game.
 	 */
@@ -99,11 +80,7 @@ public class PowerUpController {
 		for (int i = 0; i < powerups.size(); i++) {
 			checkMovingPowerUp(powerups.get(i));
 		}
-		//Loop over the active power ups for the player
-		for (int i = 0; i < game.getPlayer().getActivePowerUps().size(); i++) {
-			
-			game.getPlayer().getActivePowerUps().get(i).decreaseTimeLeft(game.getTickrate());
-		}
+
 	}
 	
 	/**
@@ -119,6 +96,12 @@ public class PowerUpController {
 	 */
 	public final  ArrayList<PowerUpUnit> getPowerUps() {
 		return powerups;
+	}
+	/**
+	 * @return Collisions.
+	 */
+	public final Collisions getCollisions() {
+		return collisions;
 	}
 
 }

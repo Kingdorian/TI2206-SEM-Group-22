@@ -8,6 +8,7 @@ import org.junit.Test;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.Player;
 import spaceinvaders.group_22.ShootPowerUp;
+import spaceinvaders.group_22.SinglePlayerGame;
 import spaceinvaders.group_22.SpeedPowerUp;
 
 /**
@@ -77,7 +78,7 @@ public class SpaceShipTest extends UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testUpdateMultiplierSpeed() {
-		Game game = new Game(1000, 750);
+		Game game = new SinglePlayerGame(1000, 750);
 		Player player = new Player(game);
 		player.getActivePowerUps().add(new SpeedPowerUp(player));
 		player.getSpaceShip().updateMultiplier();
@@ -90,7 +91,7 @@ public class SpaceShipTest extends UnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testUpdateMultiplierShoot() {
-		Game game = new Game(1000, 750);
+		Game game = new SinglePlayerGame(1000, 750);
 		Player player = new Player(game);
 		player.getActivePowerUps().add(new ShootPowerUp(player));
 		player.getSpaceShip().updateMultiplier();

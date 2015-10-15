@@ -23,7 +23,7 @@ public class KeboardInputTest {
 	/**
 	 * Game object used to test.
 	 */
-	private Game game;
+	private SinglePlayerGame game;
 	/**
 	 * 
 	 */
@@ -34,7 +34,7 @@ public class KeboardInputTest {
 	@Before
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void setup() {
-		game = new Game(1000.0 , 720.0);
+		game = new SinglePlayerGame(1000.0 , 720.0);
 		game.setPlayer(new Player(game));
 		game.setTickrate(60.0);
 		ArrayList<Alien> row = new ArrayList<Alien>();

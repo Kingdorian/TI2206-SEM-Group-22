@@ -22,7 +22,7 @@ public class ShootPowerUpTest extends PowerUpTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void deactivatedTest() {
-		Game game = new Game(1000, 750);
+		Game game = new SinglePlayerGame(1000, 750);
 		Player player = new Player(game);
 		PowerUp powerup = new ShootPowerUp(player);
 		powerup.deactivate();

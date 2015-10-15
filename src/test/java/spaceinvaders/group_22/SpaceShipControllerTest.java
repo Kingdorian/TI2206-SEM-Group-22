@@ -16,7 +16,7 @@ public class SpaceShipControllerTest {
 	/**
 	 * Static game used for testing.
 	 */
-	private static Game game;
+	private static SinglePlayerGame game;
 	/**
 	 * Static Controller used for testing.
 	 */
@@ -28,7 +28,7 @@ public class SpaceShipControllerTest {
 	@Before
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void setUpController() {
-		game = new Game(1000, 720);
+		game = new SinglePlayerGame(1000, 720);
 		controller = game.getSpaceShipController();
 		game.setTickrate(1.0);
 	}
@@ -40,7 +40,7 @@ public class SpaceShipControllerTest {
 		game.setTickrate(10.0);
 		game.getPlayer().setSpaceShip(new SpaceShip(-5, 0, "spaceship.png"));
 		game.getPlayer().getSpaceShip().setVelX(-10.0);
-		game.getSpaceShipController().moveSpaceShip(new ArrayList<KeyCode>());
+		((SingleSpaceShipController) game.getSpaceShipController()).moveSpaceShip(new ArrayList<KeyCode>());
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() >= 0);
 	}
 	/**
@@ -49,9 +49,9 @@ public class SpaceShipControllerTest {
 	@Test
 	public final void testShipMovingRight() {
 		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
-		ArrayList keyList = new ArrayList<KeyCode>();
+		ArrayList<KeyCode> keyList = new ArrayList<KeyCode>();
 		keyList.add(KeyCode.D);
-		game.getSpaceShipController().moveSpaceShip(keyList);
+		((SingleSpaceShipController) game.getSpaceShipController()).moveSpaceShip(keyList);
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() > 0);
 	}
 	/**
@@ -60,9 +60,9 @@ public class SpaceShipControllerTest {
 	@Test
 	public final void testShipMovingLeft() {
 		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
-		ArrayList keyList = new ArrayList<KeyCode>();
+		ArrayList<KeyCode> keyList = new ArrayList<KeyCode>();
 		keyList.add(KeyCode.A);
-		controller.moveSpaceShip(keyList);
+		((SingleSpaceShipController) controller).moveSpaceShip(keyList);
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() < 0);
 	}
 	/**
@@ -72,7 +72,7 @@ public class SpaceShipControllerTest {
 	public final void testShipFasterThenMaxSpeedRight() {
 		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
 		game.getPlayer().getSpaceShip().setVelX(500);
-		controller.moveSpaceShip(new ArrayList<KeyCode>());
+		((SingleSpaceShipController) controller).moveSpaceShip(new ArrayList<KeyCode>());
 		Assert.assertEquals(250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
 	}
 	/**
@@ -82,7 +82,7 @@ public class SpaceShipControllerTest {
 	public final void testShipFasterThenMaxSpeedLeft() {
 		game.getPlayer().setSpaceShip(new SpaceShip(100, 100, "spaceship.png"));
 		game.getPlayer().getSpaceShip().setVelX(-500);
-		controller.moveSpaceShip(new ArrayList<KeyCode>());
+		((SingleSpaceShipController) controller).moveSpaceShip(new ArrayList<KeyCode>());
 		Assert.assertEquals(-250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
 	}
 	
