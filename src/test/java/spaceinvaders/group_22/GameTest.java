@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import javafx.scene.input.KeyCode;
+import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Explosion;
@@ -25,6 +27,11 @@ public class GameTest {
 	 * Static game used for testing.
 	 */
 	private static Game game;
+	
+	/**
+	 * Class specifying rule to test JavaFX from GitHub.
+	 */
+	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 
 	/**
 	 * Class to set up a game before each test is executed.

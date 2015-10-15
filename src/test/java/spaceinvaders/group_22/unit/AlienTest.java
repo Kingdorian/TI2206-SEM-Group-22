@@ -49,7 +49,7 @@ public class AlienTest extends UnitTest {
 	public final void healthTest() {
 		float x = 1;
 		float y = 1;
-		Alien alien = new Alien(x, y);
+		Alien alien = new Alien(x, y, 2);
 		alien.hit();
 		assertEquals(alien.getHealth(), 1);
 	}

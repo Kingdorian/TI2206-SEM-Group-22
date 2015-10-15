@@ -7,8 +7,10 @@ import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
+import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Alien;
 
 /**
@@ -26,6 +28,11 @@ public class AlienControllerTest {
 	 * Static Controller used for testing.
 	 */
 	private static AlienController controller;
+	
+	/**
+	 * Class specifying rule to test JavaFX from GitHub.
+	 */
+	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 	
 	/**
 	 * Set up every test with an AlienController.

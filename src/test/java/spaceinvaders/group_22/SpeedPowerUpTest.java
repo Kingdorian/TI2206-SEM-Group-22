@@ -2,8 +2,10 @@ package spaceinvaders.group_22;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Rule;
 import org.junit.Test;
 
+import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
@@ -13,6 +15,11 @@ import spaceinvaders.group_22.unit.SpaceShip;
  */
 public class SpeedPowerUpTest extends PowerUpTest {
 
+	/**
+	 * Class specifying rule to test JavaFX from GitHub.
+	 */
+	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
+	
 	@Override
 	public final PowerUp createInstance(final Player setplayer) {
 		return new SpeedPowerUp(setplayer);

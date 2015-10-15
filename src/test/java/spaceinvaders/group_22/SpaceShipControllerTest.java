@@ -6,13 +6,20 @@ import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import javafx.scene.input.KeyCode;
+import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.SpaceShip;
 
 public class SpaceShipControllerTest {
 
+	/**
+	 * Class specifying rule to test JavaFX from GitHub.
+	 */
+	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
+	
 	/**
 	 * Static game used for testing.
 	 */

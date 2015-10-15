@@ -2,10 +2,18 @@ package spaceinvaders.group_22;
 
 import static org.junit.Assert.*;
 
+import org.junit.Rule;
 import org.junit.Test;
+
+import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 
 public class DefaultAlienWaveFactoryTest {
 
+	/**
+	 * Class specifying rule to test JavaFX from GitHub.
+	 */
+	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
+	
 	@Test
 	public void testCreateWave() {
 		DefaultAlienWaveFactory factory = new DefaultAlienWaveFactory(new Game(1000, 720));

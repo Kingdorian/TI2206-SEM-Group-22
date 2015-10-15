@@ -1,8 +1,10 @@
 package spaceinvaders.group_22;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
 
+import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
@@ -11,6 +13,11 @@ import spaceinvaders.group_22.unit.SpaceShip;
  *
  */
 public class PlayerTest {
+	
+	/**
+	 * Class specifying rule to test JavaFX from GitHub.
+	 */
+	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 	
 	/**
 	 * Test behavior of the getSpaceShip method for the player.
