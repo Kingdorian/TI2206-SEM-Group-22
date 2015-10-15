@@ -337,7 +337,11 @@ public abstract class GameUIController
             	newGame();
             	game.start();
         	}
-        } else if (!pressedKeys.contains(event.getCode())) {
+        } else if (event.getCode().equals(KeyCode.M)) {
+        	if (game.hasEnded()) {
+        		SpaceInvadersUI.getInstance().loadUIScreen("Menu.fxml");
+        	}
+        }else if (!pressedKeys.contains(event.getCode())) {
 	    	pressedKeys.add(event.getCode());
 	    }
 	}
