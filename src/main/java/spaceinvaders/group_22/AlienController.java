@@ -149,10 +149,11 @@ public class AlienController extends UnitController implements MovableUnitContro
 				unit.setVelX(alienWave.getAlienVelX());
 			}
 			unit.move(game.getTickrate());
+			String velX = String.valueOf(alienWave.getAliens().get(0).getVelX());
+			String velY = String.valueOf(alienWave.getAliens().get(0).getVelY());
+			Logger.getInstance().log("Aliens moved X: " + velX + "\tY: " + velY, LogEvent.Type.TRACE);
 		}
-		String velX = String.valueOf(alienWave.getAliens().get(0).getVelX());
-		String velY = String.valueOf(alienWave.getAliens().get(0).getVelY());
-		Logger.getInstance().log("Aliens moved X: " + velX + "\tY: " + velY, LogEvent.Type.TRACE);
+		
 	}
 	/**
 	 * Remove dead aliens.

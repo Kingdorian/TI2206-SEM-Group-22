@@ -23,7 +23,7 @@ public class MultiPlayerGame extends Game {
 	/**
 	 * List of shootAllowed of the players.
 	 */
-	private ArrayList<Boolean> shootingAllowedMultiPlayer = new ArrayList<Boolean>();
+	private ArrayList<Boolean> shootingAllowed = new ArrayList<Boolean>();
 	/**
 	 * List of countToShot for the players.
 	 */
@@ -46,7 +46,7 @@ public class MultiPlayerGame extends Game {
 		for (int i = 0; i < 2; i++) {
 			Player play = new Player(this, (i + 1) * getCanvasWidth() / 3);
 			players.add(play);
-			shootingAllowedMultiPlayer.add(true);
+			shootingAllowed.add(true);
 			countToShootMultiPlayer.add(0);
 		}
 		mpSpaceShipsController = new MultiSpaceShipsController(this);
@@ -62,10 +62,11 @@ public class MultiPlayerGame extends Game {
 		setExplosions(new ArrayList<Explosion>());
 		getBarricadeController().create();
 		getAlienController().create();
+		players.clear();
 		for (int i = 0; i < 2; i++) {
 			Player play = new Player(this, (i + 1) * getCanvasWidth() / 3);
 			players.add(play);
-			shootingAllowedMultiPlayer.add(true);
+			shootingAllowed.add(true);
 			countToShootMultiPlayer.add(0);
 		}
 		Logger.getInstance().log("Recreated game succesfully", LogEvent.Type.INFO);
@@ -107,20 +108,21 @@ public class MultiPlayerGame extends Game {
 	 * @param index playerIndex
 	 */
 	public final void tickShipShooting(final ArrayList<KeyCode> pressedKeys, final KeyCode needKey, final int index) {
-		if (pressedKeys.contains(needKey) && shootingAllowedMultiPlayer.get(index)) {
+		if (pressedKeys.contains(needKey) && shootingAllowed.get(index)) {
 			Logger.getInstance().log("Player pressed " + needKey, LogEvent.Type.DEBUG);
 			Bullet bullet = players.get(index).getSpaceShip().shootBullet(-getShipBulletVelX());
 			getBullets().add(bullet);
-			shootingAllowedMultiPlayer.set(index, false);
+			System.out.println(getBullets().size());
+			shootingAllowed.set(index, false);
 			String logMessage = "Player shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
 			Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
 		}
-		if (!shootingAllowedMultiPlayer.get(index)) {
+		if (!shootingAllowed.get(index)) {
 			if (countToShootMultiPlayer.get(index) < ((1 / getTickrate()) / SpaceShip.getShootTimes())) {
 				countToShootMultiPlayer.set(index, countToShootMultiPlayer.get(index) + 1);
 			} else if (Double.compare((double) countToShootMultiPlayer.get(index), 
 									 ((1 / getTickrate()) / SpaceShip.getShootTimes())) >= 0) {
-				shootingAllowedMultiPlayer.set(index, false);
+				shootingAllowed.set(index, false);
 				countToShootMultiPlayer.set(index, 0);
 			}
 		}
@@ -142,6 +144,13 @@ public class MultiPlayerGame extends Game {
 	 */
 	public final ArrayList<Player> getPlayers() {
 		return players;
+	}
+	/**
+	 * returns the shootingallowed boolean for every player.
+	 * @return arraylist of booleans with shootingallowed.
+	 */
+	public final ArrayList<Boolean> getShootingAllowed() {
+		return shootingAllowed;
 	}
 
 
