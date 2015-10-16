@@ -34,16 +34,6 @@ public class MultiPlayerGameUIController extends GameUIController {
      */
     @FXML
 	private Label scoreLabelPlayer2;
-    /**
-     * Label to display the winning player.
-     */
-    @FXML
-    private Label gameOverLabel;
-    /**
-     * Highscore label.
-     */
-    @FXML 
-    private Label highScoreLabel;
 	
     /**
      * Constructor for a new MultiPlayerGameUIController.
@@ -104,18 +94,18 @@ public class MultiPlayerGameUIController extends GameUIController {
 		int p1Score = ((MultiPlayerGame) getGame()).getPlayers().get(0).getScore();
 		int p2Score = ((MultiPlayerGame) getGame()).getPlayers().get(1).getScore();
 		if (p1Score > p2Score) {
-			gameOverLabel.setText("Winner: player 1");
+			getGameOverLabel().setText("Winner: player 1");
 		} else if (p1Score < p2Score) {
-			gameOverLabel.setText("Winner: player 2");
+			getGameOverLabel().setText("Winner: player 2");
 		// IF both players have equal score.
 		} else if (((MultiPlayerGame) getGame()).getPlayers().get(0).getLives() == 0) {
-			gameOverLabel.setText("Winner: player 2");
+			getGameOverLabel().setText("Winner: player 2");
 		} else if (((MultiPlayerGame) getGame()).getPlayers().get(1).getLives() == 0) {
-			gameOverLabel.setText("Winner: player 1");
+			getGameOverLabel().setText("Winner: player 1");
 		} else {
-			gameOverLabel.setText("Draw");
+			getGameOverLabel().setText("Draw");
 		}
-		highScoreLabel.setText("Highscore: " + getGame().getHighScore());
+		getHighscoreLabel().setText("Highscore: " + getGame().getHighScore());
 		
 	}
 }
