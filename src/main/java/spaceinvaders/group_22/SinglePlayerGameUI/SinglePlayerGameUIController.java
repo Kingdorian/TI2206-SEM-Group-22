@@ -1,9 +1,12 @@
 package spaceinvaders.group_22.SinglePlayerGameUI;
 
+import java.util.ArrayList;
+
 import spaceinvaders.group_22.SinglePlayerGame;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.ui.GameUIController;
+import spaceinvaders.group_22.ui.UIElement;
 import spaceinvaders.group_22.ui.UIElementAlien;
 import spaceinvaders.group_22.ui.UIElementSpaceShip;
 import spaceinvaders.group_22.ui.UIElementBullet;
@@ -57,5 +60,31 @@ public class SinglePlayerGameUIController extends GameUIController {
     	initializeUIElements();
     	startAnimation();
     }
+    
+	/**
+	 * Returns all UI elements in this class.
+	 * @return The UIElements in this class
+	 */
+	public final ArrayList<UIElement> getUIElements() {
+		ArrayList<UIElement> list = new ArrayList<UIElement>();
+		list.add(getUIElementSpaceShip());
+		list.add(getUIElementAlien());
+		list.add(getUIElementBullet());
+		list.add(getUIElementBarricade());
+		list.add(getUIElementExplosion());
+		list.add(getUIElementPowerUp());
+		// Draw the lives and score on the screen.
+		list.add(getUIElementLives());
+		list.add(getUIElementScore());
+		return list;
+	}
+    
+	/**
+	 * Sets the values for the game over screen.
+	 */
+	public final void setGameOverScreen() {
+		getGameOverLabel().setText("Game Over");
+		getHighscoreLabel().setText("Highscore: " + getGame().getHighScore());
+	}
  
 }

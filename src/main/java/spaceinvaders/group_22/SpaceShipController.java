@@ -33,7 +33,7 @@ public abstract class SpaceShipController extends UnitController implements Mova
 	 * @param ship to check the collisions on.
 	 */
 	public final void spaceShipCollisions(final SpaceShip ship) {
-		if(!ship.getPlayer().isInvulnerable()) {
+		if (!ship.getPlayer().isInvulnerable()) {
 			//Checking colissions for spaceship with enemy bullets
 			ArrayList<Unit> list = new ArrayList<Unit>();
 			list.addAll(game.getAlienBullets());
