@@ -1,7 +1,5 @@
 package spaceinvaders.group_22.unit;
 
-import spaceinvaders.group_22.ui.SpriteLoader;
-
 /**
  * An alien in the game, extends Unit.
  * 

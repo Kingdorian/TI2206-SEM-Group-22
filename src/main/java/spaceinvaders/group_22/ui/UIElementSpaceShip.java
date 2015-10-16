@@ -5,9 +5,6 @@ import javafx.scene.image.Image;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.Player;
 import spaceinvaders.group_22.PowerUp;
-import spaceinvaders.group_22.SinglePlayerGame;
-import spaceinvaders.group_22.logger.LogEvent;
-import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.SpaceShip;
 
 /**

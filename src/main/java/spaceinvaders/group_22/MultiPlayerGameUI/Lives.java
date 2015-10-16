@@ -6,6 +6,7 @@ import spaceinvaders.group_22.MultiPlayerGame;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.ui.SpriteLoader;
+import spaceinvaders.group_22.ui.UIElementLives;
 
 /**
  * The drawing of the lives.
@@ -13,7 +14,7 @@ import spaceinvaders.group_22.ui.SpriteLoader;
  *
  */
 @SuppressWarnings("checkstyle:magicnumber")    
-public class Lives extends spaceinvaders.group_22.ui.UIElementLives {
+public class Lives extends UIElementLives {
 	
 	/**
 	 * The constructor.

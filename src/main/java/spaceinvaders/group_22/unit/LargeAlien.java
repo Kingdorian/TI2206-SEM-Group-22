@@ -6,6 +6,8 @@ import spaceinvaders.group_22.ui.SpriteLoader;
  * @author Bryan
  *
  */
+
+@SuppressWarnings("checkstyle:magicnumber") 
 public class LargeAlien extends Alien {
 	/**
 	 * Creates a alien with health 5.
