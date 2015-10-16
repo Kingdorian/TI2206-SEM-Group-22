@@ -14,6 +14,7 @@ import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.ShipBullet;
 import spaceinvaders.group_22.unit.SpaceShip;
+import spaceinvaders.group_22.unit.Unit;
 
 /**
  * Test for the game class.
@@ -21,14 +22,21 @@ import spaceinvaders.group_22.unit.SpaceShip;
  *
  */
 @SuppressWarnings("checkstyle:magicnumber")   
-public class GameTest {
+public abstract class GameTest {
 	
 	/**
 	 * Class specifying rule to test JavaFX from GitHub.
 	 */
 	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 
-	private static SinglePlayerGame game;
+	private static Game game;
+	/**
+	 * Method to create a subclass of the game class.
+	 * @param width of the canvas.
+	 * @param height of the canvas.
+	 * @return game object to test.
+	 */
+	public abstract Game createInstance(double width, double height);
 
 
 	/**
@@ -36,7 +44,7 @@ public class GameTest {
 	 */
 	@Before
 	public final void setUpGame() {
-		game = new SinglePlayerGame(200, 200);
+		game = createInstance(200, 200);
 		game.setTickrate(1.0);
 		ArrayList<Alien> row = new ArrayList<Alien>();
 		row.add(new Alien(10, 10));
@@ -111,16 +119,7 @@ public class GameTest {
 		game.resetGame();
 		Assert.assertEquals(10, game.getBarricadeController().getBarricades().get(0).getHealth());
 	}
-	/**
-	 * Tests if the reset method works correctly for resetting the player.
-	 */
-	@Test
-	public final void testResetPlayer() {
-		game.getPlayer().addScore(111);
-		game.resetGame();
-		// Player should be resetted so his score should be 0
-		Assert.assertEquals(0, game.getPlayer().getScore());
-	}
+	
 	/**
 	 * Tests if the reset method works correctly for resetting the bullet list.
 	 */
@@ -141,16 +140,7 @@ public class GameTest {
 		// Bullet list should be emptied when the game resets
 		Assert.assertEquals(0, game.getExplosions().size());
 	}
-	/**
-	 * Tests if the reset method works correctly for resetting .
-	 */
-	@Test
-	public final void testShootingAllowed() {
-		game.getPlayer().getSpaceShip().shootBullet(0.1);
-		game.resetGame();
-		// Bullet list should be emptied when the game resets
-		Assert.assertTrue(game.getShootingAllowed());
-	}
+	
 	/**
 	 * Test gameOver method stops the game.
 	 */
@@ -159,27 +149,7 @@ public class GameTest {
 		game.gameOver();
 		Assert.assertFalse(game.isInProgress());
 	}
-	/**
-	 * Test gameOver method when the player has a new highscore.
-	 */
-	@Test
-	public final void testGameOverNewHighScore() {
-		// Making sure the player has at least 1 point more then the current highscore
-		game.getPlayer().addScore(game.getHighScore() + 1);
-		game.gameOver();
-		Assert.assertEquals(1, game.getHighScore());
-	}
-	/**
-	 * Test gameover method when the player has no new highscore.
-	 */
-	@Test
-	public final void testGameOverNoNewHighscore() {
-		game.setHighScore(1);
-		//Make sure score is 0
-		game.getPlayer().resetScore();
-		game.gameOver();
-		Assert.assertEquals(1, game.getHighScore());
-	}
+
 	/**
 	 * Tests the getTickRate method in game.
 	 */
@@ -209,27 +179,8 @@ public class GameTest {
 		// Remove all existing bullets from the game.
 		game.resetGame();
 		ArrayList<Bullet> bulletlist = new ArrayList<Bullet>();
-		bulletlist.add(game.getPlayer().getSpaceShip().shootBullet(10.1));
+		bulletlist.add(new ShipBullet(50, 10));
 		game.setBullets(bulletlist);
 		Assert.assertEquals(bulletlist, game.getShipBullets());
-	}
-	/**
-	 * Tests the setPlayer method in game.
-	 */
-	@Test
-	public final void testSetPlayer() {
-		Player player = new Player(game, game.getCanvasWidth() / 2);
-		game.setPlayer(player);
-		Assert.assertEquals(game.getPlayer(), player);
-	}
-	/**
-	 * Tests the moveSpaceShip method for bouncing spaceship to the right border.
-	 */
-	@Test
-	public final void testShipBounceRight() {
-		game.getPlayer().setSpaceShip(new SpaceShip(game.getCanvasWidth() + 5, 10));
-		game.getPlayer().getSpaceShip().setVelX(10.0);
-		((SingleSpaceShipController)(game.getSpaceShipController())).moveSpaceShip(new ArrayList<KeyCode>(), game.getPlayer());
-		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() <= 0);
 	}
 }

@@ -12,7 +12,7 @@ import spaceinvaders.group_22.ui.JavaFXThreadingRule;
  * @author Bryan
  *
  */
-public class PowerUpControllerTest {
+public class SinglePowerUpControllerTest {
 	
 	/**
 	 * Class specifying rule to test JavaFX from GitHub.

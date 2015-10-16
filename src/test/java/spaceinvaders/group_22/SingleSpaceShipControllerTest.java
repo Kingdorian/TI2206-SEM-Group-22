@@ -1,6 +1,6 @@
 package spaceinvaders.group_22;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
@@ -11,9 +11,14 @@ import org.junit.Test;
 
 import javafx.scene.input.KeyCode;
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
+import spaceinvaders.group_22.unit.AlienBullet;
 import spaceinvaders.group_22.unit.SpaceShip;
-
-public class SpaceShipControllerTest {
+/**
+ * Test for the single spaceship controller.
+ * @author Bryan
+ *
+ */
+public final class SingleSpaceShipControllerTest {
 
 	/**
 	 * Class specifying rule to test JavaFX from GitHub.
@@ -27,7 +32,7 @@ public class SpaceShipControllerTest {
 	/**
 	 * Static Controller used for testing.
 	 */
-	private static SpaceShipController controller;
+	private static SingleSpaceShipController controller;
 	
 	/**
 	 * Set up every test with an SpaceShipController.
@@ -36,7 +41,7 @@ public class SpaceShipControllerTest {
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void setUpController() {
 		game = new SinglePlayerGame(1000, 720);
-		controller = game.getSpaceShipController();
+		controller = (SingleSpaceShipController) game.getSpaceShipController();
 		game.setTickrate(1.0);
 	}
 	/**
@@ -47,7 +52,7 @@ public class SpaceShipControllerTest {
 		game.setTickrate(10.0);
 		game.getPlayer().setSpaceShip(new SpaceShip(-5, 0));
 		game.getPlayer().getSpaceShip().setVelX(-10.0);
-		((SingleSpaceShipController) game.getSpaceShipController()).moveSpaceShip(new ArrayList<KeyCode>(), game.getPlayer());
+		controller.moveSpaceShip(new ArrayList<KeyCode>(), game.getPlayer());
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() >= 0);
 	}
 	/**
@@ -59,7 +64,7 @@ public class SpaceShipControllerTest {
 		ArrayList<KeyCode> keyList = new ArrayList<KeyCode>();
 
 		keyList.add(KeyCode.D);
-		((SingleSpaceShipController) game.getSpaceShipController()).moveSpaceShip(keyList, game.getPlayer());
+		controller.moveSpaceShip(keyList, game.getPlayer());
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() > 0);
 	}
 	/**
@@ -71,7 +76,7 @@ public class SpaceShipControllerTest {
 		ArrayList<KeyCode> keyList = new ArrayList<KeyCode>();
 
 		keyList.add(KeyCode.A);
-		((SingleSpaceShipController) controller).moveSpaceShip(keyList, game.getPlayer());
+		controller.moveSpaceShip(keyList, game.getPlayer());
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() < 0);
 	}
 	/**
@@ -81,7 +86,7 @@ public class SpaceShipControllerTest {
 	public final void testShipFasterThenMaxSpeedRight() {
 		game.getPlayer().setSpaceShip(new SpaceShip(100, 100));
 		game.getPlayer().getSpaceShip().setVelX(500);
-		((SingleSpaceShipController) controller).moveSpaceShip(new ArrayList<KeyCode>(), game.getPlayer());
+		controller.moveSpaceShip(new ArrayList<KeyCode>(), game.getPlayer());
 		Assert.assertEquals(250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
 	}
 	/**
@@ -91,9 +96,30 @@ public class SpaceShipControllerTest {
 	public final void testShipFasterThenMaxSpeedLeft() {
 		game.getPlayer().setSpaceShip(new SpaceShip(100, 100));
 		game.getPlayer().getSpaceShip().setVelX(-500);
-		((SingleSpaceShipController) controller).moveSpaceShip(new ArrayList<KeyCode>(), game.getPlayer());
+		controller.moveSpaceShip(new ArrayList<KeyCode>(), game.getPlayer());
 		Assert.assertEquals(-250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
 	}
 	
-	
+	/**
+	 * Tests the ship moving normally to the left when A is pressed and tick is called. 
+	 */
+	@Test
+	public final void testTick() {
+		game.getPlayer().setSpaceShip(new SpaceShip(100, 100));
+		ArrayList<KeyCode> keyList = new ArrayList<KeyCode>();
+		keyList.add(KeyCode.D);
+		controller.tick(keyList);
+		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() > 0);
+	}
+	/**
+	 * Test the checkexplosion method in the spaceshipcontroller.
+	 */
+	@Test
+	public final void testCheckExplosions() {
+		SpaceShip ship = game.getPlayer().getSpaceShip();
+		game.getBullets().add(new AlienBullet(ship.getXCoor(), ship.getYCoor()));
+		controller.tick(new ArrayList<KeyCode>());
+		controller.checkExplosions(game.getPlayer());
+		assertEquals(game.getExplosions().size(), 1);
+	}
 }
