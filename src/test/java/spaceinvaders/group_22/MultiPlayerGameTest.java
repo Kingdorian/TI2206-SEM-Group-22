@@ -92,7 +92,7 @@ public class MultiPlayerGameTest extends GameTest {
 		row.add(alien);
 		multiGame.getAlienController().getAlienWave().addAlienRow(row);
 		multiGame.tick(pressedKeys);
-		Assert.assertEquals(1, multiGame.getBullets().size() );
+		Assert.assertEquals(1, multiGame.getShipBullets().size() );
 	}
 
 }
