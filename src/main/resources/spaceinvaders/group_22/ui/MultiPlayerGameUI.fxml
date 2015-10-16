@@ -117,7 +117,7 @@
                         <Font name="Impact" size="36.0" />
                      </font>
                   </Label>
-                  <Label fx:id="scoreLabelPlayer2" layoutX="930.0" prefHeight="77.0" prefWidth="200.0" textAlignment="RIGHT" textFill="WHITE">
+                  <Label fx:id="scoreLabelPlayer2" alignment="CENTER_RIGHT" layoutX="930.0" prefHeight="77.0" prefWidth="200.0" textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="Impact" size="36.0" />
                      </font>
