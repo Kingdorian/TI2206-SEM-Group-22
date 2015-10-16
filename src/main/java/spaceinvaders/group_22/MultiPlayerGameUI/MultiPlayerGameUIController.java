@@ -43,6 +43,11 @@ public class MultiPlayerGameUIController extends GameUIController {
      */
     @FXML
     private Label gameOverLabel;
+    /**
+     * Highscore label
+     */
+    @FXML 
+    private Label highScoreLabel;
 	
 	public MultiPlayerGameUIController() {
 		Logger.getInstance().log("Created MultiPlayerGameUI Object", LogEvent.Type.DEBUG);
@@ -130,6 +135,7 @@ public class MultiPlayerGameUIController extends GameUIController {
 		}else {
 			gameOverLabel.setText("Draw");
 		}
+		highScoreLabel.setText("Highscore: " + getGame().getHighScore());
 		
 	}
 }
