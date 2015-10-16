@@ -14,7 +14,7 @@ public class Collisions {
 	 * @param unitList the list of units to check colission against.
 	 * @return The unit the checkingUnit colides with, null if there are no colissions.
 	 */
-	public static final Unit checkCollisions(final Unit checkingUnit, final ArrayList<Unit> unitList) {
+	public final Unit checkCollisions(final Unit checkingUnit, final ArrayList<Unit> unitList) {
 		double checkX = checkingUnit.getXCoor();
 		double checkY = checkingUnit.getYCoor();
 		for (Unit unit : unitList) {

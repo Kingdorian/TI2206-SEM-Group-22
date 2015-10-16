@@ -36,7 +36,7 @@ public abstract class SpaceShipController extends UnitController implements Mova
 		//Checking colissions for spaceship with enemy bullets
 		ArrayList<Unit> list = new ArrayList<Unit>();
 		list.addAll(game.getAlienBullets());
-		Unit collidingBullet = Collisions.checkCollisions(ship, list);
+		Unit collidingBullet = new Collisions().checkCollisions(ship, list);
 		if (collidingBullet != null) {
 			String logMessage = "Player collided bullet at X:" + ship.getXCoor() 
 						+ " Y: " + ship.getYCoor();

@@ -48,7 +48,7 @@ public class CollisionsTest {
 		Alien alien = new NormalAlien(5, 6.2);
 		ArrayList<Unit> bullets = new ArrayList<Unit>();
 		bullets.add(bullet);
-		assertEquals(Collisions.checkCollisions(alien, bullets), null);
+		assertEquals(new Collisions().checkCollisions(alien, bullets), null);
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class CollisionsTest {
 		Alien alien = new NormalAlien(5, 6.2);
 		ArrayList<Unit> bullets = new ArrayList<Unit>();
 		bullets.add(bullet);
-		assertEquals(Collisions.checkCollisions(alien, bullets), bullet);
+		assertEquals(new Collisions().checkCollisions(alien, bullets), bullet);
 	}
 	
 	/**
@@ -74,7 +74,7 @@ public class CollisionsTest {
 		SpaceShip spaceship = new SpaceShip(5, 6.2);
 		ArrayList<Unit> bullets = new ArrayList<Unit>();
 		bullets.add(bullet);
-		assertEquals(Collisions.checkCollisions(spaceship, bullets), null);
+		assertEquals(new Collisions().checkCollisions(spaceship, bullets), null);
 	}
 	
 	/**
@@ -87,7 +87,7 @@ public class CollisionsTest {
 		SpaceShip spaceship = new SpaceShip(5, 6.2);
 		ArrayList<Unit> bullets = new ArrayList<Unit>();
 		bullets.add(bullet);
-		assertEquals(Collisions.checkCollisions(spaceship, bullets), bullet);
+		assertEquals(new Collisions().checkCollisions(spaceship, bullets), bullet);
 	}
 	
 	/**

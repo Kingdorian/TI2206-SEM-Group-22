@@ -90,7 +90,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 	public final void alienCollisions() {
 		//Checking for colissions between player bullets and aliens
 		for (Unit bullet : game.getShipBullets()) {
-			Unit collidingUnit = Collisions.checkCollisions(bullet, 
+			Unit collidingUnit = new Collisions().checkCollisions(bullet, 
 					new ArrayList<Unit>(game.getAlienController().getAliens()));
 			if (collidingUnit != null) {
 				String logMessage = "Alien collided bullet at X:" + bullet.getXCoor() 
