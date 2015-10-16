@@ -68,7 +68,7 @@ public class MultiPlayerGameUIController extends GameUIController {
     	} else {
         	getGame().resetGame();    		
     	}
-
+    	initializeUIElements();
     	startAnimation();
     }
 	
@@ -78,6 +78,7 @@ public class MultiPlayerGameUIController extends GameUIController {
     @Override
     protected void initializeUIElements() {
     	super.uiAlien = new UIElementAlien(getGame(), getGc());
+    	UIspaceShips.clear();
     	UIspaceShips.add(new UIElementSpaceShip(getGame(), getGc(), getGame().getPlayers().get(0)));
     	UIspaceShips.add(new UIElementSpaceShip(getGame(), getGc(), getGame().getPlayers().get(1)));
     	uiBullet = new UIElementBullet(getGame(), getGc());
