@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Alien;
+import spaceinvaders.group_22.unit.HealthAlien;
+import spaceinvaders.group_22.unit.LargeAlien;
+import spaceinvaders.group_22.unit.ShootAlien;
 
 /**
  * Class for creating an alienwave.
@@ -76,7 +79,7 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
                     			LogEvent.Type.TRACE);
                       	break;
             		case '#': 
-            			Alien bigAlien = new Alien(x + (testAlien.getWidth() / 2), 
+            			Alien bigAlien = new LargeAlien(x + (testAlien.getWidth() / 2), 
             					y + (testAlien.getWidth() / 2));
             			bigAlien.setVelX(AlienController.getAlienVelX());
             			aliens.add(bigAlien);
@@ -84,14 +87,14 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
             					+ "(" + x + "," + y + ")", LogEvent.Type.TRACE);
             			break;
             		case '%':
-            			Alien redAlien = new Alien(x, y, 5);
+            			Alien redAlien = new HealthAlien(x, y);
             			redAlien.setVelX(AlienController.getAlienVelX());
                     	aliens.add(redAlien);
                     	Logger.getInstance().log("Created red alien Alien at location:"
                     			+ "(" + x + "," + y + ")", LogEvent.Type.TRACE);
                       	break;
             		case 'S':
-            			Alien shooterAlien = new Alien(x, y);
+            			Alien shooterAlien = new ShootAlien(x, y);
             			shooterAlien.setVelX(AlienController.getAlienVelX());
             			shooterAlien.increaseShooting();
             			aliens.add(shooterAlien);

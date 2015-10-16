@@ -12,10 +12,6 @@ import spaceinvaders.group_22.ui.SpriteLoader;
 public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	
 	/**
-	 * Location of the sprite of the aliens.
-	 */
-	public static final String SPRITE = "invader.png";
-	/**
 	 * VelX is the velocity in the X direction in pixels per second.
 	 */
 	private double velX;
@@ -41,19 +37,6 @@ public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	 */
 	public Alien(final double x, final double y) {
 		super(x, y);
-	}
-	/**
-	 * Creates an Alien with specified health.
-	 * @param x X coordinate
-	 * @param y Y coordinate
-	 * @param sethealth health this alien has.
-	 */
-	public Alien(final double x, final double y, final int sethealth) {
-		super(x, y);
-		if (sethealth >= 1) {
-			health = sethealth;
-			setSpriteImage();
-		}
 	}
 	
 	/**
@@ -149,7 +132,6 @@ public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	 */
 	public final void increaseShooting() {
 		this.bulletChance = 0.25;
-		setSpriteImage();
 	}
 
 	/**
@@ -158,19 +140,13 @@ public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	public final int getHealth() {
 		return health;
 	}
-	
 	/**
-	 * Sets the right sprite image by the health and bullet chance.
+	 * Method to set the health of this alien.
+	 * @param setHealth to set.
 	 */
-	public final void setSpriteImage() {
-		if (getBulletChance() > 0.025) {
-			setSprite(SpriteLoader.getInstance().getAlienShooter());
-
-		} else {
-			setSprite(SpriteLoader.getInstance().getAlienWithHealth(health));
-
-		}
-		
+	public final void setHealth(final int setHealth) {
+		health = setHealth;
+		setSpriteImage();
 	}
 	
 	/**
@@ -179,5 +155,10 @@ public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	public final void hit() {
 		health--;
 		setSpriteImage();
+	}
+
+	@Override
+	public void setSpriteImage() {
+		setSprite(SpriteLoader.getInstance().getAlienWithHealth(health));	
 	}
 }
