@@ -300,19 +300,7 @@ public abstract class GameUIController
 	 * Returns all UI elements in this class.
 	 * @return The UIElements in this class
 	 */
-	public final ArrayList<UIElement> getUIElements() {
-		ArrayList<UIElement> list = new ArrayList<UIElement>();
-		list.add(getUIElementLives());
-		list.add(getUIElementAlien());
-		list.add(getUIElementBullet());
-		list.add(getUIElementBarricade());
-		list.add(getUIElementExplosion());
-		list.add(getUIElementPowerUp());
-		// Draw the lives and score on the screen.
-		list.add(uiLives);
-		list.add(uiScore);
-		return list;
-	}
+	public abstract ArrayList<UIElement> getUIElements();
 	/**
 	 * Sets game to provided game.
 	 * @param g game to set game to
