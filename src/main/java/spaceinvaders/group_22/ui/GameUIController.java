@@ -249,7 +249,7 @@ public abstract class GameUIController
 						}
 						
 						// Draw the various units on the screen.
-						for(UIElement uiE : getUIElements()) {
+						for (UIElement uiE : getUIElements()) {
 							uiE.draw();
 						}
 					
@@ -299,10 +299,8 @@ public abstract class GameUIController
 	}
 	
 	/**
-<<<<<<< HEAD
-	 * Sets game to provided game.
-=======
 	 * Returns all UI elements in this class.
+	 * @return The UIElements in this class
 	 */
 	public ArrayList<UIElement> getUIElements() {
 		ArrayList<UIElement> list = new ArrayList<UIElement>();
@@ -318,8 +316,7 @@ public abstract class GameUIController
 		return list;
 	}
 	/**
-	 * Sets game to provided game
->>>>>>> develop
+	 * Sets game to provided game.
 	 * @param g game to set game to
 	 */
 	public final void setGame(final Game g) {

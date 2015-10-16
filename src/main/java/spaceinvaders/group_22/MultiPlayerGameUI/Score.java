@@ -17,7 +17,7 @@ import spaceinvaders.group_22.ui.UIElementScore;
 public class Score extends UIElementScore {
 	
 	/**
-	 * Store player of which this object draws the score.=
+	 * Store player of which this object draws the score.
 	 */
 	private Player player;
 	/**
@@ -39,7 +39,7 @@ public class Score extends UIElementScore {
 	public final void draw() {
     	String scoreString = Integer.toString((player.getScore()));
 		int digits = 8 - scoreString.length();
-    	for (int i = 0; i < digits; i ++) {
+    	for (int i = 0; i < digits; i++) {
     		scoreString = "0" + scoreString;
     	}
     	getLabel().setText(scoreString);

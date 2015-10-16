@@ -13,7 +13,6 @@ import spaceinvaders.group_22.ui.UIElementBullet;
 import spaceinvaders.group_22.ui.UIElementExplosion;
 import spaceinvaders.group_22.ui.UIElementBarricade;
 import spaceinvaders.group_22.ui.UIElementPowerUp;
-import spaceinvaders.group_22.ui.UIElementScore;
 import java.util.ArrayList;
 
 /**
@@ -25,7 +24,7 @@ public class MultiPlayerGameUIController extends GameUIController {
 	/**
 	 * The Label for the other player.
 	 */
-    private ArrayList<UIElementSpaceShip> UIspaceShips = new ArrayList<UIElementSpaceShip>();
+    private ArrayList<UIElementSpaceShip> uIspaceShips = new ArrayList<UIElementSpaceShip>();
 	/**
 	 * The Label for the other player.
 	 */
@@ -42,7 +41,7 @@ public class MultiPlayerGameUIController extends GameUIController {
     @FXML
     private Label gameOverLabel;
     /**
-     * Highscore label
+     * Highscore label.
      */
     @FXML 
     private Label highScoreLabel;
@@ -78,9 +77,9 @@ public class MultiPlayerGameUIController extends GameUIController {
      */
     protected final void initializeUIElements() {
     	setUIElementAlien(new UIElementAlien(getGame(), getGc()));
-    	UIspaceShips.clear();
-    	UIspaceShips.add(new UIElementSpaceShip(getGame(), getGc(), ((MultiPlayerGame) getGame()).getPlayers().get(0)));
-    	UIspaceShips.add(new UIElementSpaceShip(getGame(), getGc(), ((MultiPlayerGame) getGame()).getPlayers().get(1)));
+    	uIspaceShips.clear();
+    	uIspaceShips.add(new UIElementSpaceShip(getGame(), getGc(), ((MultiPlayerGame) getGame()).getPlayers().get(0)));
+    	uIspaceShips.add(new UIElementSpaceShip(getGame(), getGc(), ((MultiPlayerGame) getGame()).getPlayers().get(1)));
     	setUIElementBullet(new UIElementBullet(getGame(), getGc()));
     	setUIElementExplosion(new UIElementExplosion(getGame(), getGc()));
     	setUIElementBarricade(new UIElementBarricade(getGame(), getGc()));
@@ -95,7 +94,7 @@ public class MultiPlayerGameUIController extends GameUIController {
     }
     
     /**
-     * Shows gameOverscreen
+     * Shows gameOverscreen.
      */
     public void showGameOverScreen() {
 
@@ -104,9 +103,9 @@ public class MultiPlayerGameUIController extends GameUIController {
 	 * Returns all UI elements in this class.
 	 */
     @Override
-	public ArrayList<UIElement> getUIElements() {
+	public final ArrayList<UIElement> getUIElements() {
 		ArrayList<UIElement> list = new ArrayList<UIElement>();
-		list.addAll(UIspaceShips);
+		list.addAll(uIspaceShips);
 		list.addAll(scores);
 		list.add(getUIElementLives());
 		list.add(getUIElementAlien());
@@ -116,21 +115,21 @@ public class MultiPlayerGameUIController extends GameUIController {
 		list.add(getUIElementPowerUp());
 		return list;
 	}
-
+    
 	@Override
-	public void setGameOverScreen() {
+	public final void setGameOverScreen() {
 		int p1Score = ((MultiPlayerGame) getGame()).getPlayers().get(0).getScore();
 		int p2Score = ((MultiPlayerGame) getGame()).getPlayers().get(1).getScore();
-		if(p1Score > p2Score) {
+		if (p1Score > p2Score) {
 			gameOverLabel.setText("Winner: player 1");
 		} else if (p1Score < p2Score) {
 			gameOverLabel.setText("Winner: player 2");
 		// IF both players have equal score.
-		}else if( ((MultiPlayerGame) getGame()).getPlayers().get(0).getLives()==0){
+		} else if (((MultiPlayerGame) getGame()).getPlayers().get(0).getLives() == 0) {
 			gameOverLabel.setText("Winner: player 2");
-		}else if ( ((MultiPlayerGame) getGame()).getPlayers().get(1).getLives()==0 ) {
+		} else if (((MultiPlayerGame) getGame()).getPlayers().get(1).getLives() == 0) {
 			gameOverLabel.setText("Winner: player 1");
-		}else {
+		} else {
 			gameOverLabel.setText("Draw");
 		}
 		highScoreLabel.setText("Highscore: " + getGame().getHighScore());
