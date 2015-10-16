@@ -3,6 +3,7 @@ package spaceinvaders.group_22.SinglePlayerGameUI;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.MultiPlayerGame;
 import spaceinvaders.group_22.SinglePlayerGame;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
@@ -30,13 +31,15 @@ public class Score extends spaceinvaders.group_22.ui.UIElementScore {
 	 * Draws the score on the screen.
 	 */
 	public final void draw() {
-		int digits = 8;
     	String scoreString = Integer.toString(((SinglePlayerGame)getGame()).getPlayer().getScore());
-    	for (int i = 0; i < digits  - scoreString.length(); i++) {
+		int digits = 8 - scoreString.length();
+		Logger.getInstance().log(scoreString, LogEvent.Type.DEBUG);
+    	// Loop in "reverse" because the length of score string obviously encreases every loop
+    	for (int i = 0; i < digits; i ++) {
     		scoreString = "0" + scoreString;
     	}
     	getLabel().setText(scoreString);
-    	Logger.getInstance().log("Formatted score to UI", LogEvent.Type.TRACE);		
+    	Logger.getInstance().log("Formatted score to UI", LogEvent.Type.TRACE);			
 	}
 
 }

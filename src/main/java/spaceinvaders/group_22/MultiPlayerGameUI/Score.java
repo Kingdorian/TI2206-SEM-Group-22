@@ -30,10 +30,13 @@ public class Score extends spaceinvaders.group_22.ui.UIElementScore {
 	/**
 	 * Draws the score on the screen.
 	 */
+	@Override
 	public final void draw() {
-		int digits = 8;
     	String scoreString = Integer.toString(((MultiPlayerGame)getGame()).getPlayers().get(0).getScore());
-    	for (int i = 0; i < digits  - scoreString.length(); i++) {
+		int digits = 8 - scoreString.length();
+		Logger.getInstance().log(scoreString, LogEvent.Type.DEBUG);
+    	// Loop in "reverse" because the length of score string obviously encreases every loop
+    	for (int i = 0; i < digits; i ++) {
     		scoreString = "0" + scoreString;
     	}
     	getLabel().setText(scoreString);
