@@ -84,19 +84,19 @@ public abstract class SpaceShipController extends UnitController implements Mova
 		if (player.getSpaceShip().getXCoor() - 0.5 * player.getSpaceShip().getWidth() > 0 
 				&& pressedKeys.contains(KeyCode.A)) {
 			Logger.getInstance().log("Player pressed A", LogEvent.Type.DEBUG);
-			velX = velX - SpaceShip.getMAXVELX() * game.getTickrate() * 2;
+			velX = velX - player.getSpaceShip().getMAXVELX() * game.getTickrate() * 2;
 		}
 		if (player.getSpaceShip().getXCoor() 
 				+ 0.5 * player.getSpaceShip().getWidth() < game.getCanvasWidth()
 				&& pressedKeys.contains(KeyCode.D)) {
 			Logger.getInstance().log("Player pressed D", LogEvent.Type.DEBUG);
-			velX = velX + SpaceShip.getMAXVELX() * game.getTickrate() * 2;
+			velX = velX + player.getSpaceShip().getMAXVELX() * game.getTickrate() * 2;
 		}
 
-		if (velX > SpaceShip.getMAXVELX()) {
-			velX = SpaceShip.getMAXVELX();
-		} else if (velX < -SpaceShip.getMAXVELX()) {
-			velX = -SpaceShip.getMAXVELX();
+		if (velX > player.getSpaceShip().getMAXVELX()) {
+			velX = player.getSpaceShip().getMAXVELX();
+		} else if (velX < -player.getSpaceShip().getMAXVELX()) {
+			velX = -player.getSpaceShip().getMAXVELX();
 		}
 		player.getSpaceShip().setVelX(velX);
 		player.getSpaceShip().move(game.getTickrate());
