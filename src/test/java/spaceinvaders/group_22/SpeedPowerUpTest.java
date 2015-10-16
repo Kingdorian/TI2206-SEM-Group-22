@@ -6,7 +6,6 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
-import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
  * Speed Power Up test extends the Power Up test.

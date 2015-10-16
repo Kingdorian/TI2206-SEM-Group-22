@@ -5,8 +5,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import spaceinvaders.group_22.unit.Unit;
-
 /**
  * Test the abstract powerUp class.
  * 
@@ -51,8 +49,9 @@ public abstract class PowerUpTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void testDecreaseTimeLeft() {
+		Double time = powerup.getTimeLeft();
 		powerup.decreaseTimeLeft(1.0);
-		assertEquals(powerup.getTimeLeft(), 4.0, 0.001);
+		assertEquals(powerup.getTimeLeft(), time - 1, 0.001);
 	}
 	
 	/**
