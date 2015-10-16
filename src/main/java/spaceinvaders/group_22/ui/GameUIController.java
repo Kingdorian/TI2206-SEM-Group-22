@@ -286,7 +286,7 @@ public abstract class GameUIController
 	/**
 	 * Sets the values for the game over screen.
 	 */
-	public void setGameOverScreen() {
+	public final void setGameOverScreen() {
 		gameOverLabel.setText("Game Over");
 		highScoreLabel.setText("Highscore: " + getGame().getHighScore());
 	}
@@ -302,7 +302,7 @@ public abstract class GameUIController
 	 * Returns all UI elements in this class.
 	 * @return The UIElements in this class
 	 */
-	public ArrayList<UIElement> getUIElements() {
+	public final ArrayList<UIElement> getUIElements() {
 		ArrayList<UIElement> list = new ArrayList<UIElement>();
 		list.add(uiSpaceShip);
 		list.add(uiAlien);
