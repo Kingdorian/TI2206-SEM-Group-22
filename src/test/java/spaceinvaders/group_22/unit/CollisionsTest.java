@@ -45,7 +45,7 @@ public class CollisionsTest {
 	@SuppressWarnings("checkstyle:magicnumber")  
 	public final void alienVSbulletTestNotColliding() {
 		ShipBullet bullet = new ShipBullet(100, 200);
-		Alien alien = new Alien(5, 6.2);
+		Alien alien = new NormalAlien(5, 6.2);
 		ArrayList<Unit> bullets = new ArrayList<Unit>();
 		bullets.add(bullet);
 		assertEquals(Collisions.checkCollisions(alien, bullets), null);
@@ -58,7 +58,7 @@ public class CollisionsTest {
 	@SuppressWarnings("checkstyle:magicnumber")  
 	public final void alienVSbulletTestColliding() {
 		ShipBullet bullet = new ShipBullet(5, 6.4);
-		Alien alien = new Alien(5, 6.2);
+		Alien alien = new NormalAlien(5, 6.2);
 		ArrayList<Unit> bullets = new ArrayList<Unit>();
 		bullets.add(bullet);
 		assertEquals(Collisions.checkCollisions(alien, bullets), bullet);
@@ -96,7 +96,7 @@ public class CollisionsTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")  
 	public final void collisionTestAlienHit() {
-		Alien alien = new Alien(5, 6.2);
+		Alien alien = new NormalAlien(5, 6.2);
 		ArrayList<ArrayList<Alien>> alienList = new ArrayList<ArrayList<Alien>>();
 		alienList.add(new ArrayList<Alien>());
 		alienList.get(0).add(alien);

@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Alien;
+import spaceinvaders.group_22.unit.NormalAlien;
 
 /**
  * Test for the AlienController.
@@ -45,7 +46,7 @@ public class AlienControllerTest {
 		game.setTickrate(0.1);
 		ArrayList<Alien> row = new ArrayList<Alien>();
 		for (int i = 0; i < 10; i++) {
-			row.add(new Alien(500, 350));
+			row.add(new NormalAlien(500, 350));
 		}
 		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
 		aliens.add(row);

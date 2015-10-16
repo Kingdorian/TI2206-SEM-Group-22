@@ -12,6 +12,7 @@ import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Explosion;
+import spaceinvaders.group_22.unit.NormalAlien;
 import spaceinvaders.group_22.unit.ShipBullet;
 import spaceinvaders.group_22.unit.SpaceShip;
 
@@ -39,7 +40,7 @@ public class GameTest {
 		game = new SinglePlayerGame(200, 200);
 		game.setTickrate(1.0);
 		ArrayList<Alien> row = new ArrayList<Alien>();
-		row.add(new Alien(10, 10));
+		row.add(new NormalAlien(10, 10));
 		game.getAlienController().getAlienWave().addAlienRow(row);
 	}
 	

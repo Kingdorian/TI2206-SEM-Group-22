@@ -29,7 +29,8 @@ public abstract class Alien extends Unit implements MovableUnit, ShootingUnit {
 	/**
 	 * Variable that keeps track of the health left for this alien.
 	 */
-	private int health = 1;
+	private int health;
+	
 	/**
 	 * Creates an Alien with default health.
 	 * @param x X coordinate
@@ -155,10 +156,5 @@ public abstract class Alien extends Unit implements MovableUnit, ShootingUnit {
 	public final void hit() {
 		health--;
 		setSpriteImage();
-	}
-
-	@Override
-	public void setSpriteImage() {
-		setSprite(SpriteLoader.getInstance().getAlienWithHealth(health));	
 	}
 }

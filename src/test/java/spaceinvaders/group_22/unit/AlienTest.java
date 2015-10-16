@@ -13,7 +13,7 @@ public class AlienTest extends UnitTest {
 
 	@Override
 	public final Unit createInstance(final double x, final double y) {
-		return new Alien(x, y);
+		return new NormalAlien(x, y);
 	}
 	
 	/**
@@ -23,7 +23,7 @@ public class AlienTest extends UnitTest {
 	public final void shootBulletTest() {
 		float x = 1;
 		float y = 1;
-		Alien alien = new Alien(x, y);
+		Alien alien = new NormalAlien(x, y);
 		Bullet bullet = alien.shootBullet(1);
 		assertEquals(alien.getXCoor(), bullet.getXCoor(), 0.05);
 		assertEquals(alien.getYCoor(), bullet.getYCoor(), 0.05);
@@ -38,7 +38,7 @@ public class AlienTest extends UnitTest {
 	public final void bulletChanceTest() {
 		float x = 1;
 		float y = 1;
-		Alien alien = new Alien(x, y);
+		Alien alien = new NormalAlien(x, y);
 		alien.increaseShooting();
 		assertEquals(alien.getBulletChance(), 0.25, 0.25);
 	}
