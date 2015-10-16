@@ -19,10 +19,6 @@ import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 
 @RunWith(Parameterized.class)
 public class MovableUnitTest {
-	/**
-	 * Class specifying rule to test JavaFX from GitHub.
-	 */
-	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 	
 	public static Class movableUnitClass;
 	
