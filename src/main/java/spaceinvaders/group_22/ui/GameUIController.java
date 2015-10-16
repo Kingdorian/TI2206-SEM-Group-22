@@ -85,7 +85,7 @@ public abstract class GameUIController
      * Label to display the winning player.
      */
     @FXML
-    private Label winningPlayer;
+    private Label gameOverLabel;
     /**
      * The game over screen.
      */
@@ -244,16 +244,10 @@ public abstract class GameUIController
 						}
 						
 						// Draw the various units on the screen.
-						uiSpaceShip.draw();
-						uiAlien.draw();
-						uiBullet.draw();
-						uiBarricade.draw();
-						uiExplosion.draw();
-						uiPowerUp.draw();
-						
-						// Draw the lives and score on the screen.
-						uiLives.draw();
-						uiScore.draw();
+						for(UIElement uiE : getUIElements()) {
+							uiE.draw();
+						}
+					
 						
 						if (pressedKeys.contains(KeyCode.SPACE)) {
 					    	pressedKeys.remove(KeyCode.SPACE);
@@ -262,7 +256,7 @@ public abstract class GameUIController
 						// If the game has ended, put the Game Over screen to the front.
 						if (getGame().hasEnded()) {
 							screenGameOver.toFront();
-							highScoreLabel.setText("Highscore: " + getGame().getHighScore());
+							setGameOverScreen();
 							gameLoop.stop();
 							Logger.getInstance().log("Show screen Game Over", LogEvent.Type.INFO);
 						} else {
@@ -285,11 +279,34 @@ public abstract class GameUIController
 	}
 	
 	/**
+	 * Sets the values for the game over screen.
+	 */
+	public void setGameOverScreen() {
+		gameOverLabel.setText("Game Over");
+		highScoreLabel.setText("Highscore: " + getGame().getHighScore());
+	}
+	/**
 	 * Returns the game.
 	 * @return The game object of the UI.
 	 */
 	public Game getGame() {
 		return game;
+	}
+	/**
+	 * Returns all UI elements in this class.
+	 */
+	public ArrayList<UIElement> getUIElements() {
+		ArrayList<UIElement> list = new ArrayList<UIElement>();
+		list.add(uiSpaceShip);
+		list.add(uiAlien);
+		list.add(uiBullet);
+		list.add(uiBarricade);
+		list.add(uiExplosion);
+		list.add(uiPowerUp);
+		// Draw the lives and score on the screen.
+		list.add(uiLives);
+		list.add(uiScore);
+		return list;
 	}
 	/**
 	 * Sets game to provided game
@@ -333,6 +350,7 @@ public abstract class GameUIController
         	}
         } else if (event.getCode().equals(KeyCode.M)) {
         	if (getGame().hasEnded()) {
+        		getGame().stop();
         		SpaceInvadersUI.getInstance().loadUIScreen("Menu.fxml");
         	}
         }else if (!pressedKeys.contains(event.getCode())) {
