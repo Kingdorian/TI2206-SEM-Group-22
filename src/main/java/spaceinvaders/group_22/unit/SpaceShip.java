@@ -29,7 +29,7 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	/**
 	 * Indicates the max speed at which a spaceship can travel.
 	 */
-	private static double maxVelx;
+	private double maxVelx;
 	
 	/**
 	 * The default speed at which a spaceship can travel.
@@ -214,7 +214,7 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * Get the maximum movement speed.
 	 * @return the maximum movement speed.
 	 */
-	public static double getMAXVELX() {
+	public final double getMAXVELX() {
 		return maxVelx;
 	}
 
@@ -222,7 +222,7 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * Set the maximum movement speed.
 	 * @param newMaxvel the new maximum movement speed.
 	 */
-	public static void setMAXVELX(final double newMaxvel) {
+	public final void setMAXVELX(final double newMaxvel) {
 		maxVelx = newMaxvel;
 	}
 	

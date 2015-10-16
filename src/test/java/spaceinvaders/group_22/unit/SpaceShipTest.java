@@ -86,7 +86,7 @@ public class SpaceShipTest extends UnitTest {
 		Player player = new Player(game, game.getCanvasWidth() / 2);
 		player.getActivePowerUps().add(new SpeedPowerUp(player));
 		player.getSpaceShip().updateMultiplier();
-		assertEquals(625, SpaceShip.getMAXVELX(), 0.f);
+		assertEquals(625, player.getSpaceShip().getMAXVELX(), 0.f);
 	}
 	
 	/**
