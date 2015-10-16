@@ -95,15 +95,13 @@ public class BarricadeController extends UnitController {
 	 */
 	public final void barricadeCollisions() {
 		// Checking for colissions between bullets and barricades
-		for (Barricade bar : game.getBarricadeController().getBarricades()) {
-			Unit collidingUnit = Collisions.checkCollisions(bar, new ArrayList<Unit>(game.getBullets()));
+		for (Barricade bar : barricades) {
+			Unit collidingUnit = new Collisions().checkCollisions(bar, new ArrayList<Unit>(game.getBullets()));
 			if (collidingUnit != null) {
-				String logMessage = "Barricade collided bullet at X:" + bar.getXCoor() 
-						+ " Y: " + bar.getYCoor();
+				String logMessage = "Barricade collided bullet at X:" + bar.getXCoor() + " Y: " + bar.getYCoor();
 				Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
 						
-				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
-						collidingUnit.getYCoor()));
+				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(), collidingUnit.getYCoor()));
 				game.getBullets().remove(collidingUnit);
 				bar.hit();
 			}

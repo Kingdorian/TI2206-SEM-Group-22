@@ -2,12 +2,11 @@ package spaceinvaders.group_22.MultiPlayerGameUI;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.MultiPlayerGame;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.ui.SpriteLoader;
-import spaceinvaders.group_22.ui.UIElement;
+import spaceinvaders.group_22.ui.UIElementLives;
 
 /**
  * The drawing of the lives.
@@ -15,7 +14,7 @@ import spaceinvaders.group_22.ui.UIElement;
  *
  */
 @SuppressWarnings("checkstyle:magicnumber")    
-public class Lives extends spaceinvaders.group_22.ui.UIElementLives {
+public class Lives extends UIElementLives {
 	
 	/**
 	 * The constructor.
@@ -31,12 +30,12 @@ public class Lives extends spaceinvaders.group_22.ui.UIElementLives {
 	public final void draw() {
 		Image heartImage = SpriteLoader.getInstance().getHeart();
 		//Change lives for player 1
-		for (int i = 1; i <= ((MultiPlayerGame)getGame()).getPlayers().get(0).getLives(); i++) {
+		for (int i = 1; i <= ((MultiPlayerGame) getGame()).getPlayers().get(0).getLives(); i++) {
 			Logger.getInstance().log("Drawing player 2 lives",  LogEvent.Type.DEBUG);
         	getGC().drawImage(heartImage, 10 + (heartImage.getWidth() * (i - 1)), 50);
     	}
     	// Draw lives for player 2
-		for (int i = 1; i <= ((MultiPlayerGame)getGame()).getPlayers().get(1).getLives(); i++) {
+		for (int i = 1; i <= ((MultiPlayerGame) getGame()).getPlayers().get(1).getLives(); i++) {
 			Logger.getInstance().log("Drawing player 1 lives",  LogEvent.Type.DEBUG);
         	getGC().drawImage(heartImage, (getGame().getCanvasWidth() - 10) - heartImage.getWidth() * i, 50);
     	}

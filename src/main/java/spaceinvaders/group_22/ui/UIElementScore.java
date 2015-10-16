@@ -3,9 +3,6 @@ package spaceinvaders.group_22.ui;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import spaceinvaders.group_22.Game;
-import spaceinvaders.group_22.logger.LogEvent;
-import spaceinvaders.group_22.logger.Logger;
-import spaceinvaders.group_22.ui.UIElement;
 
 /**
  * The drawing of the Score.
@@ -34,7 +31,11 @@ public abstract class UIElementScore extends UIElement {
 	@Override
 	public abstract void draw();
 	
-	public Label getLabel() {
+	/**
+	 * Returns the score label.
+	 * @return a Label for the score.
+	 */
+	public final Label getLabel() {
 		return label;
 	}
 

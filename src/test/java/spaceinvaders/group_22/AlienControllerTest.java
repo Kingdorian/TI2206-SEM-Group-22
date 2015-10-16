@@ -12,6 +12,8 @@ import org.junit.Test;
 
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Alien;
+
+import spaceinvaders.group_22.unit.NormalAlien;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.ShipBullet;
 
@@ -48,7 +50,7 @@ public class AlienControllerTest {
 		game.setTickrate(0.1);
 		ArrayList<Alien> row = new ArrayList<Alien>();
 		for (int i = 0; i < 10; i++) {
-			row.add(new Alien(500, 350));
+			row.add(new NormalAlien(500, 350));
 		}
 		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
 		aliens.add(row);
@@ -122,7 +124,7 @@ public class AlienControllerTest {
 		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
 		game.getAlienController().getAlienWave().setAliens(aliens);
 		ArrayList<Alien> row = new ArrayList<Alien>();
-		Alien alien = new Alien(20, 20);
+		Alien alien = new NormalAlien(20, 20);
 		alien.hit();
 		alien.hit();
 		alien.hit();
@@ -140,8 +142,8 @@ public class AlienControllerTest {
 		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
 		game.getAlienController().getAlienWave().setAliens(aliens);
 		ArrayList<Alien> row = new ArrayList<Alien>();
-		Alien alien = new Alien(20, 20);
-		Alien alien2 = new Alien(20, 20);
+		Alien alien = new NormalAlien(20, 20);
+		Alien alien2 = new NormalAlien(20, 20);
 		alien.hit();
 		alien.hit();
 		alien.hit();
@@ -161,8 +163,8 @@ public class AlienControllerTest {
 		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
 		game.getAlienController().getAlienWave().setAliens(aliens);
 		ArrayList<Alien> row = new ArrayList<Alien>();
-		Alien alien = new Alien(20, 20);
-		Alien alien2 = new Alien(50, 80);
+		Alien alien = new NormalAlien(20, 20);
+		Alien alien2 = new NormalAlien(50, 80);
 		alien.hit();
 		alien.hit();
 		row.add(alien);

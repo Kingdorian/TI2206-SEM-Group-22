@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import spaceinvaders.group_22.unit.Alien;
+import spaceinvaders.group_22.unit.NormalAlien;
 import spaceinvaders.group_22.unit.SpaceShip;
 /**
  * Single player game test extends the game Test.
@@ -34,7 +35,7 @@ public class SinglePlayerGameTest extends GameTest {
 		singleGame = new SinglePlayerGame(200, 200);
 		singleGame.setTickrate(1.0);
 		ArrayList<Alien> row = new ArrayList<Alien>();
-		row.add(new Alien(10, 10));
+		row.add(new NormalAlien(10, 10));
 		singleGame.getAlienController().getAlienWave().addAlienRow(row);
 	}
 	

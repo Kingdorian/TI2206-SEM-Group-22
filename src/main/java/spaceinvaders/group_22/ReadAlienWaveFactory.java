@@ -7,6 +7,7 @@ import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.HealthAlien;
 import spaceinvaders.group_22.unit.LargeAlien;
+import spaceinvaders.group_22.unit.NormalAlien;
 import spaceinvaders.group_22.unit.ShootAlien;
 
 /**
@@ -60,7 +61,7 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 		 // Distance to top of the screen.
         double y = 125;
         // Create alien object to make sure we can get the width and height of aliens
-        Alien testAlien = new Alien(0.0, 0.0); 
+        Alien testAlien = new NormalAlien(0.0, 0.0); 
         // Drawing lines of Aliens.
         for (int i = 0; i < wavePattern.getHeight(); i++) {
         	ArrayList<Alien> aliens = new ArrayList<Alien>();
@@ -72,7 +73,7 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
             for (int j = 0; j < wavePattern.getLength(i); j++) {
             	switch (wavePattern.getChar(i, j)) {
             		case '*':
-            			Alien alien = new Alien(x, y);
+            			Alien alien = new NormalAlien(x, y);
                     	alien.setVelX(AlienController.getAlienVelX());
                     	aliens.add(alien);
                     	Logger.getInstance().log("Created Alien at location:(" + x + "," + y + ")", 

@@ -1,6 +1,5 @@
 package spaceinvaders.group_22.SinglePlayerGameUI;
 
-import spaceinvaders.group_22.MultiPlayerGame;
 import spaceinvaders.group_22.SinglePlayerGame;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
@@ -12,28 +11,31 @@ import spaceinvaders.group_22.ui.UIElementExplosion;
 import spaceinvaders.group_22.ui.UIElementBarricade;
 import spaceinvaders.group_22.ui.UIElementPowerUp;
 
+
+/**
+ * Controller for a SinglePlayerGameUI.
+ *
+ */
 public class SinglePlayerGameUIController extends GameUIController {
-    /**
-     * Game object of the current game.
-     */
-    private SinglePlayerGame game;
-	
     
+    /**
+     * Constructor for a new SinglePlayerGameUIController.
+     */
 	public SinglePlayerGameUIController() {
 		Logger.getInstance().log("Created MultiPlayerGameUI Objec", LogEvent.Type.DEBUG);
 	}
     /**
      * Initializes the UI elements.
      */
-    protected void initializeUIElements() {
-    	super.uiAlien = new UIElementAlien(getGame(), getGc());
-    	super.uiSpaceShip = new UIElementSpaceShip(getGame(), getGc(), ((SinglePlayerGame)getGame()).getPlayer());
-    	uiBullet = new UIElementBullet(getGame(), getGc());
-    	uiExplosion = new UIElementExplosion(getGame(), getGc());
-    	uiBarricade = new UIElementBarricade(getGame(), getGc());
-    	uiScore = new Score((SinglePlayerGame)getGame(), getGc(), getScoreLabel());
-    	uiLives = new Lives((SinglePlayerGame)getGame(), getGc());
-    	uiPowerUp = new UIElementPowerUp(getGame(), getGc());
+    protected final void initializeUIElements() {
+    	setUIElementAlien(new UIElementAlien(getGame(), getGc()));
+    	setUIElementSpaceShip(new UIElementSpaceShip(getGame(), getGc(), ((SinglePlayerGame) getGame()).getPlayer()));
+    	setUIElementBullet(new UIElementBullet(getGame(), getGc()));
+    	setUIElementExplosion(new UIElementExplosion(getGame(), getGc()));
+    	setUIElementBarricade(new UIElementBarricade(getGame(), getGc()));
+    	setUIElementScore(new Score((SinglePlayerGame) getGame(), getGc(), getScoreLabel()));
+    	setUIElementLives(new Lives((SinglePlayerGame) getGame(), getGc()));
+    	setUIElementPowerUp(new UIElementPowerUp(getGame(), getGc()));
     	
     	Logger.getInstance().log("UIElements initialized.", LogEvent.Type.INFO);
     }
@@ -43,21 +45,17 @@ public class SinglePlayerGameUIController extends GameUIController {
      */
     public final void newGame() {
     	// If the game does not exist, create a new one.
-    	if (game == null) {
-        	game = new SinglePlayerGame(getCanvasWidth(), getCanvasHeight());
+    	if (getGame() == null) {
+        	setGame(new SinglePlayerGame(getCanvasWidth(), getCanvasHeight()));
         	Logger.getInstance().log("Set canvas width to: " + getCanvasWidth(), LogEvent.Type.INFO);
         	Logger.getInstance().log("Set canvas height to: " +  getCanvasHeight(), LogEvent.Type.INFO);
         	Logger.getInstance().log("Show screen Before Play", LogEvent.Type.INFO);
         // Else reset the existing game.
     	} else {
-        	game.resetGame();    		
+        	getGame().resetGame();    		
     	}
     	initializeUIElements();
     	startAnimation();
     }
-    
-    @Override
-    public SinglePlayerGame getGame() {
-    	return game;
-    }
+ 
 }

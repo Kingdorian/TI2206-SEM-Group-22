@@ -5,9 +5,6 @@ import javafx.scene.image.Image;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.Player;
 import spaceinvaders.group_22.PowerUp;
-import spaceinvaders.group_22.SinglePlayerGame;
-import spaceinvaders.group_22.logger.LogEvent;
-import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
@@ -15,11 +12,13 @@ import spaceinvaders.group_22.unit.SpaceShip;
  * @author Ege
  *
  */
+@SuppressWarnings("checkstyle:magicnumber")
 public class UIElementSpaceShip extends UIElementUnit {
 	
-	Game game;
-	
-	Player player;
+	/**
+	 * The currnet player.
+	 */
+	private Player player;
 	
 	/**
 	 * The constructor.
@@ -29,7 +28,6 @@ public class UIElementSpaceShip extends UIElementUnit {
 	 */
 	public UIElementSpaceShip(final Game newGame, final GraphicsContext gc, final Player p) {	
 		super(newGame, gc);
-		game = newGame;
 		player = p;
 	}
 

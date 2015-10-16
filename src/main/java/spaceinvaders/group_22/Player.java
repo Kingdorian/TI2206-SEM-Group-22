@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
-import spaceinvaders.group_22.unit.Bullet;
-import spaceinvaders.group_22.unit.ShipBullet;
 import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
@@ -160,14 +158,15 @@ public class Player {
 	 * Sets if the player is invulnerable.
 	 * @param b boolean if the player is invulnerable.
 	 */
-	public void setInvulnerable(boolean b) {
+	public final void setInvulnerable(final boolean b) {
 		invulnerable = b;
 	}
 	/**
 	 * Returns player invulnerability.
+	 * @return A boolean representng invulnerability.
 	 * 
 	 */
-	public boolean isInvulnerable() {
+	public final boolean isInvulnerable() {
 		return invulnerable;
 	}
 	

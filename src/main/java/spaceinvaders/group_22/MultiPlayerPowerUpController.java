@@ -1,8 +1,5 @@
 package spaceinvaders.group_22;
 
-
-import spaceinvaders.group_22.unit.PowerUpUnit;
-
 import java.util.ArrayList;
 
 /**

@@ -68,11 +68,6 @@ public abstract class Game {
 	private AlienController alienController;
 
 	/**
-	 * The collisions of units.
-	 */
-	private Collisions collisions;
-
-	/**
 	 * Creates a new instance of game.
 	 * 
 	 * @param width

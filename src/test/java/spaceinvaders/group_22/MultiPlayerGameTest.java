@@ -10,6 +10,8 @@ import org.junit.Test;
 
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.NormalAlien;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import spaceinvaders.group_22.unit.SpaceShip;
@@ -40,7 +42,7 @@ public class MultiPlayerGameTest extends GameTest {
 		multiGame = new MultiPlayerGame(1280, 720);
 		multiGame.setTickrate(1.0);
 		ArrayList<Alien> row = new ArrayList<Alien>();
-		row.add(new Alien(10, 10));
+		row.add(new NormalAlien(10, 10));
 		multiGame.getAlienController().getAlienWave().addAlienRow(row);
 	}
 	
@@ -86,7 +88,7 @@ public class MultiPlayerGameTest extends GameTest {
 		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
 		multiGame.getAlienController().getAlienWave().setAliens(aliens);
 		ArrayList<Alien> row = new ArrayList<Alien>();
-		Alien alien = new Alien(20, 20);
+		Alien alien = new NormalAlien(20, 20);
 		row.add(alien);
 		multiGame.getAlienController().getAlienWave().addAlienRow(row);
 		multiGame.tick(pressedKeys);

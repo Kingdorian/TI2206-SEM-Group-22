@@ -2,12 +2,11 @@ package spaceinvaders.group_22.SinglePlayerGameUI;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.SinglePlayerGame;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.ui.SpriteLoader;
-import spaceinvaders.group_22.ui.UIElement;
+import spaceinvaders.group_22.ui.UIElementLives;
 
 /**
  * The drawing of the lives.
@@ -15,9 +14,7 @@ import spaceinvaders.group_22.ui.UIElement;
  *
  */
 @SuppressWarnings("checkstyle:magicnumber")    
-public class Lives extends spaceinvaders.group_22.ui.UIElementLives {
-	
-	SinglePlayerGame game;
+public class Lives extends UIElementLives {
 	
 	/**
 	 * The constructor.
@@ -26,14 +23,13 @@ public class Lives extends spaceinvaders.group_22.ui.UIElementLives {
 	 */
 	public Lives(final SinglePlayerGame newGame, final GraphicsContext gc) {
 		super(newGame, gc);
-		game = newGame;
 	}
 
 
 	@Override
 	public final void draw() {
 		Image heartImage = SpriteLoader.getInstance().getHeart();
-    	for (int i = 1; i <= game.getPlayer().getLives(); i++) {
+    	for (int i = 1; i <= ((SinglePlayerGame) getGame()).getPlayer().getLives(); i++) {
 
         	getGC().drawImage(heartImage, getGame().getCanvasWidth() - 10 - heartImage.getWidth() * i, 10);
     	}

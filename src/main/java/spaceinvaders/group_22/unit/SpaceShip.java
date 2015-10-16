@@ -247,6 +247,17 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	public final Explosion getExplosion() {
 		return explosion;
 	}
+	
+	/**
+	 * Returns the counter of the explosion of the spaceship.
+	 * @return An integer value.
+	 */
+	public final int getExplosionCounter() {
+		if (explosion != null) {
+			return explosion.getCounter();
+		} 
+		return 0;
+	}
 	/**
 	 * Sets the player that controls this spaceship.
 	 * @param setPlayer player to set.

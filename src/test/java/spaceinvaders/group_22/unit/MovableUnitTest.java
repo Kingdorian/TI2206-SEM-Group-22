@@ -31,7 +31,8 @@ public class MovableUnitTest {
 	
 	@Parameters
 	public static Collection parameters() {
-		Class[] data = new Class[]{SpaceShip.class, ShipBullet.class, AlienBullet.class, Alien.class};
+		Class[] data = new Class[]{SpaceShip.class, ShipBullet.class, 
+				AlienBullet.class, NormalAlien.class, LargeAlien.class, ShootAlien.class, HealthAlien.class};
 		return Arrays.asList(data);
 	}
 	
@@ -42,8 +43,8 @@ public class MovableUnitTest {
 	@Before
 	public void setUp() throws  IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException {
 		Constructor constructor = movableUnitClass.getConstructor(new Class[]{double.class, double.class});
-		movableUnit = (MovableUnit)constructor.newInstance(new Object[] {1.2, 3.0});
-		movableUnit2 = (MovableUnit)constructor.newInstance(new Object[] {1.2, 3.0});
+		movableUnit = (MovableUnit) constructor.newInstance(new Object[] {1.2, 3.0});
+		movableUnit2 = (MovableUnit) constructor.newInstance(new Object[] {1.2, 3.0});
 	}
 
 	/**

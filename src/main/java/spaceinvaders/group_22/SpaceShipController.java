@@ -14,6 +14,7 @@ import spaceinvaders.group_22.unit.Unit;
  * Class for controlling the spaceship.
  * @author Dorian
  */
+@SuppressWarnings("checkstyle:magicnumber")
 public abstract class SpaceShipController extends UnitController implements MovableUnitController {
 	/**
 	 * Game object of this controller.
@@ -37,7 +38,7 @@ public abstract class SpaceShipController extends UnitController implements Mova
 			ArrayList<Unit> list = new ArrayList<Unit>();
 			list.addAll(game.getAlienBullets());
 			
-			Unit collidingBullet = Collisions.checkCollisions(ship, list);
+			Unit collidingBullet = new Collisions().checkCollisions(ship, list);
 			
 			if (collidingBullet != null) {
 				String logMessage = "Player collided bullet at X:" + ship.getXCoor() 
@@ -55,10 +56,10 @@ public abstract class SpaceShipController extends UnitController implements Mova
 	
 	/**
 	 * Check if there is a explosion on a spaceship and if he is dead.
+	 * @param player The player to check explosions for.
 	 */
 	public final void checkExplosions(final Player player) {
-		if (player.getSpaceShip().getExplosion() != null 
-				&& player.getSpaceShip().getExplosion().getCounter() == 24) {
+		if (player.getSpaceShip().getExplosionCounter() == 24) {
 			Logger.getInstance().log("Spaceship hit by bullet" , LogEvent.Type.INFO);
 			player.die();
 		}

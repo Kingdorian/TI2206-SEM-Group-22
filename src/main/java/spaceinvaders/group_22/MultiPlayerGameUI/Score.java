@@ -2,12 +2,11 @@ package spaceinvaders.group_22.MultiPlayerGameUI;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
-import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.MultiPlayerGame;
 import spaceinvaders.group_22.Player;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
-import spaceinvaders.group_22.ui.UIElement;
+import spaceinvaders.group_22.ui.UIElementScore;
 
 /**
  * The drawing of the Score.
@@ -15,7 +14,7 @@ import spaceinvaders.group_22.ui.UIElement;
  *
  */
 @SuppressWarnings("checkstyle:magicnumber")  
-public class Score extends spaceinvaders.group_22.ui.UIElementScore {
+public class Score extends UIElementScore {
 	
 	/**
 	 * Store player of which this object draws the score.=
@@ -25,7 +24,7 @@ public class Score extends spaceinvaders.group_22.ui.UIElementScore {
 	 * The constructor.
 	 * @param newGame the Game
 	 * @param gc the GraphicsContext to draw on.	
-	 * @param scoreLabelPlayer1 The label on which the score of the first player should be drawn. 
+	 * @param scoreLabelPlayer The label on which the score of the second player should be drawn.
 	 * @param p of wich this score object represents the score.
 	 */
 	public Score(final MultiPlayerGame newGame, final GraphicsContext gc, 

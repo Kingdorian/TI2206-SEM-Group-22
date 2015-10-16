@@ -1,7 +1,5 @@
 package spaceinvaders.group_22.unit;
 
-import spaceinvaders.group_22.ui.SpriteLoader;
-
 /**
  * An alien in the game, extends Unit.
  * 
@@ -9,7 +7,7 @@ import spaceinvaders.group_22.ui.SpriteLoader;
  */
 
 @SuppressWarnings("checkstyle:magicnumber") 
-public class Alien extends Unit implements MovableUnit, ShootingUnit {
+public abstract class Alien extends Unit implements MovableUnit, ShootingUnit {
 	
 	/**
 	 * VelX is the velocity in the X direction in pixels per second.
@@ -29,7 +27,8 @@ public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	/**
 	 * Variable that keeps track of the health left for this alien.
 	 */
-	private int health = 1;
+	private int health;
+	
 	/**
 	 * Creates an Alien with default health.
 	 * @param x X coordinate
@@ -155,10 +154,5 @@ public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	public final void hit() {
 		health--;
 		setSpriteImage();
-	}
-
-	@Override
-	public void setSpriteImage() {
-		setSprite(SpriteLoader.getInstance().getAlienWithHealth(health));	
 	}
 }

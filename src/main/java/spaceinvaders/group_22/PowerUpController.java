@@ -76,7 +76,7 @@ public abstract class PowerUpController {
 				powerups.remove(powerUp);
 				Logger.getInstance().log("Removed PowerUp that was outside screen " , LogEvent.Type.TRACE);
 			} else {
-				if (Collisions.checkCollisions(powerUp, 
+				if (new Collisions().checkCollisions(powerUp, 
 						new ArrayList<Unit>(getGame().getBarricadeController().getBarricades())) != null) {
 					powerups.remove(powerUp);
 					Logger.getInstance().log("PowerUp collided with barricade" , LogEvent.Type.TRACE);
@@ -97,7 +97,7 @@ public abstract class PowerUpController {
 	public final void checkActivationPowerUps(final Player player) {
 		ArrayList<Unit> unitlist = new ArrayList<Unit>();
 		unitlist.addAll(getPowerUps());
-		PowerUpUnit powerUpUnit = (PowerUpUnit) Collisions.checkCollisions(player.getSpaceShip(), unitlist);
+		PowerUpUnit powerUpUnit = (PowerUpUnit) new Collisions().checkCollisions(player.getSpaceShip(), unitlist);
 		if (powerUpUnit != null) {
 			powerUpUnit.activate(player);
 			getPowerUps().remove(powerUpUnit);
