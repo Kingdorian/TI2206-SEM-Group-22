@@ -34,8 +34,6 @@ public class Score extends spaceinvaders.group_22.ui.UIElementScore {
 	public final void draw() {
     	String scoreString = Integer.toString(((MultiPlayerGame)getGame()).getPlayers().get(0).getScore());
 		int digits = 8 - scoreString.length();
-		Logger.getInstance().log(scoreString, LogEvent.Type.DEBUG);
-    	// Loop in "reverse" because the length of score string obviously encreases every loop
     	for (int i = 0; i < digits; i ++) {
     		scoreString = "0" + scoreString;
     	}

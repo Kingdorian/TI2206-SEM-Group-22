@@ -40,7 +40,7 @@ public class MultiPlayerGameUIController extends GameUIController {
 	private Label scoreLabelPlayer2;
 	
 	public MultiPlayerGameUIController() {
-		Logger.getInstance().log("Created MultiPlayerGameUI Objec", LogEvent.Type.DEBUG);
+		Logger.getInstance().log("Created MultiPlayerGameUI Object", LogEvent.Type.DEBUG);
 	}
 	
     /**
@@ -87,6 +87,7 @@ public class MultiPlayerGameUIController extends GameUIController {
 		ArrayList<UIElement> list = new ArrayList<UIElement>();
 		list.addAll(UIspaceShips);
 		list.addAll(scores);
+		list.add(uiLives);
 		list.add(uiAlien);
 		list.add(uiBullet);
 		list.add(uiBarricade);
