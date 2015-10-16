@@ -8,12 +8,15 @@ import spaceinvaders.group_22.SinglePlayerGame;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.ui.GameUIController;
+import spaceinvaders.group_22.ui.UIElement;
 import spaceinvaders.group_22.ui.UIElementAlien;
 import spaceinvaders.group_22.ui.UIElementSpaceShip;
 import spaceinvaders.group_22.ui.UIElementBullet;
 import spaceinvaders.group_22.ui.UIElementExplosion;
 import spaceinvaders.group_22.ui.UIElementBarricade;
 import spaceinvaders.group_22.ui.UIElementPowerUp;
+import spaceinvaders.group_22.ui.UIElementScore;
+import java.util.ArrayList;
 
 public class MultiPlayerGameUIController extends GameUIController {
 	
@@ -24,6 +27,11 @@ public class MultiPlayerGameUIController extends GameUIController {
 	/**
 	 * The Label for the other player.
 	 */
+    private ArrayList<UIElementSpaceShip> spaceShips = new ArrayList<UIElementSpaceShip>();
+    /**
+     * The drawing of the score.
+     */
+    protected UIElementScore secondPlayerScore;
     /**
      * Label to load the score of the player in.
      */
@@ -55,10 +63,11 @@ public class MultiPlayerGameUIController extends GameUIController {
     /**
      * Initializes the UI elements.
      */
+    @Override
     protected void initializeUIElements() {
     	super.uiAlien = new UIElementAlien(getGame(), getGc());
-    	super.uiSpaceShip = new UIElementSpaceShip(getGame(), getGc(), getGame().getPlayers().get(0));
-    	super.uiSpaceShip = new UIElementSpaceShip(getGame(), getGc(), getGame().getPlayers().get(1));
+    	spaceShips.add(new UIElementSpaceShip(getGame(), getGc(), getGame().getPlayers().get(0)));
+    	spaceShips.add(new UIElementSpaceShip(getGame(), getGc(), getGame().getPlayers().get(1)));
     	uiBullet = new UIElementBullet(getGame(), getGc());
     	uiExplosion = new UIElementExplosion(getGame(), getGc());
     	uiBarricade = new UIElementBarricade(getGame(), getGc());
@@ -68,6 +77,20 @@ public class MultiPlayerGameUIController extends GameUIController {
     	
     	Logger.getInstance().log("UIElements initialized.", LogEvent.Type.INFO);
     }
+	/**
+	 * Returns all UI elements in this class.
+	 */
+    @Override
+	public ArrayList<UIElement> getUIElements() {
+		ArrayList<UIElement> list = new ArrayList<UIElement>();
+		list.addAll(spaceShips);
+		list.add(uiAlien);
+		list.add(uiBullet);
+		list.add(uiBarricade);
+		list.add(uiExplosion);
+		list.add(uiPowerUp);
+		return list;
+	}
     
     @Override
     public MultiPlayerGame getGame() {

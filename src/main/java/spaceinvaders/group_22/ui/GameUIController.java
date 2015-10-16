@@ -244,12 +244,9 @@ public abstract class GameUIController
 						}
 						
 						// Draw the various units on the screen.
-						uiSpaceShip.draw();
-						uiAlien.draw();
-						uiBullet.draw();
-						uiBarricade.draw();
-						uiExplosion.draw();
-						uiPowerUp.draw();
+						for(UIElement uiE : getUIElements()) {
+							uiE.draw();
+						}
 						
 						// Draw the lives and score on the screen.
 						uiLives.draw();
@@ -290,6 +287,19 @@ public abstract class GameUIController
 	 */
 	public Game getGame() {
 		return game;
+	}
+	/**
+	 * Returns all UI elements in this class.
+	 */
+	public ArrayList<UIElement> getUIElements() {
+		ArrayList<UIElement> list = new ArrayList<UIElement>();
+		list.add(uiSpaceShip);
+		list.add(uiAlien);
+		list.add(uiBullet);
+		list.add(uiBarricade);
+		list.add(uiExplosion);
+		list.add(uiPowerUp);
+		return list;
 	}
 	/**
 	 * Sets game to provided game
