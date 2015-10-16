@@ -85,7 +85,7 @@ public abstract class GameUIController
      * Label to display the winning player.
      */
     @FXML
-    private Label winningPlayer;
+    private Label gameOverLabel;
     /**
      * The game over screen.
      */
@@ -256,7 +256,7 @@ public abstract class GameUIController
 						// If the game has ended, put the Game Over screen to the front.
 						if (getGame().hasEnded()) {
 							screenGameOver.toFront();
-							highScoreLabel.setText("Highscore: " + getGame().getHighScore());
+							setGameOverScreen();
 							gameLoop.stop();
 							Logger.getInstance().log("Show screen Game Over", LogEvent.Type.INFO);
 						} else {
@@ -278,6 +278,13 @@ public abstract class GameUIController
 		return scoreLabel;
 	}
 	
+	/**
+	 * Sets the values for the game over screen.
+	 */
+	public void setGameOverScreen() {
+		gameOverLabel.setText("Game Over");
+		highScoreLabel.setText("Highscore: " + getGame().getHighScore());
+	}
 	/**
 	 * Returns the game.
 	 * @return The game object of the UI.
@@ -343,6 +350,7 @@ public abstract class GameUIController
         	}
         } else if (event.getCode().equals(KeyCode.M)) {
         	if (getGame().hasEnded()) {
+        		getGame().stop();
         		SpaceInvadersUI.getInstance().loadUIScreen("Menu.fxml");
         	}
         }else if (!pressedKeys.contains(event.getCode())) {

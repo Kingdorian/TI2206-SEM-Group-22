@@ -38,6 +38,11 @@ public class MultiPlayerGameUIController extends GameUIController {
      */
     @FXML
 	private Label scoreLabelPlayer2;
+    /**
+     * Label to display the winning player.
+     */
+    @FXML
+    private Label gameOverLabel;
 	
 	public MultiPlayerGameUIController() {
 		Logger.getInstance().log("Created MultiPlayerGameUI Object", LogEvent.Type.DEBUG);
@@ -46,6 +51,7 @@ public class MultiPlayerGameUIController extends GameUIController {
     /**
      * Creates a new game.
      */
+	@Override
     public final void newGame() {
     	// If the game does not exist, create a new one.
     	if (getGame() == null) {
@@ -72,12 +78,19 @@ public class MultiPlayerGameUIController extends GameUIController {
     	uiBullet = new UIElementBullet(getGame(), getGc());
     	uiExplosion = new UIElementExplosion(getGame(), getGc());
     	uiBarricade = new UIElementBarricade(getGame(), getGc());
-    	scores.add(new Score(getGame(), getGc(), getScoreLabel()));
-    	scores.add(new Score(getGame(), getGc(), scoreLabelPlayer2));
+    	scores.add(new Score(getGame(), getGc(), getScoreLabel(), getGame().getPlayers().get(0)));
+    	scores.add(new Score(getGame(), getGc(), scoreLabelPlayer2, getGame().getPlayers().get(1)));
     	uiLives = new Lives(getGame(), getGc());
     	uiPowerUp = new UIElementPowerUp(getGame(), getGc());
     	
     	Logger.getInstance().log("UIElements initialized.", LogEvent.Type.INFO);
+    }
+    
+    /**
+     * Shows gameOverscreen
+     */
+    public void showGameOverScreen() {
+
     }
 	/**
 	 * Returns all UI elements in this class.
@@ -100,4 +113,23 @@ public class MultiPlayerGameUIController extends GameUIController {
     public MultiPlayerGame getGame() {
     	return game;
     }
+
+	@Override
+	public void setGameOverScreen() {
+		int p1Score = getGame().getPlayers().get(0).getScore();
+		int p2Score = getGame().getPlayers().get(1).getScore();
+		if(p1Score > p2Score) {
+			gameOverLabel.setText("Winner: player 1");
+		} else if (p1Score < p2Score) {
+			gameOverLabel.setText("Winner: player 2");
+		// IF both players have equal score.
+		}else if( getGame().getPlayers().get(0).getLives()==0){
+			gameOverLabel.setText("Winner: player 2");
+		}else if ( getGame().getPlayers().get(1).getLives()==0 ) {
+			gameOverLabel.setText("Winner: player 1");
+		}else {
+			gameOverLabel.setText("Draw");
+		}
+		
+	}
 }
