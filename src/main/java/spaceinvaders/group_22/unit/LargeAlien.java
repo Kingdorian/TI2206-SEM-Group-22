@@ -12,6 +12,7 @@ public class LargeAlien extends Alien {
 	 * @param x location to create the alien on.
 	 * @param y location to create the alien on.
 	 */
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public LargeAlien(final double x, final double y) {
 		super(x, y);
 		setHealth(5);

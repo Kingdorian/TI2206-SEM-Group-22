@@ -94,7 +94,9 @@ public final class SingleSpaceShipControllerTest {
 	 */
 	@Test
 	public final void testShipFasterThenMaxSpeedLeft() {
-		game.getPlayer().setSpaceShip(new SpaceShip(100, 100));
+		SpaceShip spaceship = new SpaceShip(100, 100);
+		spaceship.setPlayer(game.getPlayer());
+		game.getPlayer().setSpaceShip(spaceship);
 		game.getPlayer().getSpaceShip().setVelX(-500);
 		controller.moveSpaceShip(new ArrayList<KeyCode>(), game.getPlayer());
 		Assert.assertEquals(-250, game.getPlayer().getSpaceShip().getVelX(), 0.05);
@@ -105,7 +107,9 @@ public final class SingleSpaceShipControllerTest {
 	 */
 	@Test
 	public final void testTick() {
-		game.getPlayer().setSpaceShip(new SpaceShip(100, 100));
+		SpaceShip spaceship = new SpaceShip(100, 100);
+		spaceship.setPlayer(game.getPlayer());
+		game.getPlayer().setSpaceShip(spaceship);
 		ArrayList<KeyCode> keyList = new ArrayList<KeyCode>();
 		keyList.add(KeyCode.D);
 		controller.tick(keyList);

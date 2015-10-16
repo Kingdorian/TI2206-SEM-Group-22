@@ -1,16 +1,12 @@
 package spaceinvaders.group_22.unit;
 
 import java.util.ArrayList;
-
-import spaceinvaders.group_22.Game;
-import spaceinvaders.group_22.logger.LogEvent;
-import spaceinvaders.group_22.logger.Logger;
 /**
  * 
  * @author Bryan
  *
  */
-public class Collisions {
+public final class Collisions {
 	
 	/**
 	 * Checks collisions between an unit and a an ArrayList of other units.
@@ -18,7 +14,7 @@ public class Collisions {
 	 * @param unitList the list of units to check colission against.
 	 * @return The unit the checkingUnit colides with, null if there are no colissions.
 	 */
-	public final static Unit checkCollisions(final Unit checkingUnit, final ArrayList<Unit> unitList) {
+	public static final Unit checkCollisions(final Unit checkingUnit, final ArrayList<Unit> unitList) {
 		double checkX = checkingUnit.getXCoor();
 		double checkY = checkingUnit.getYCoor();
 		for (Unit unit : unitList) {
