@@ -67,8 +67,8 @@ public class MultiPlayerGame extends Game {
 		for (int i = 0; i < 2; i++) {
 			Player play = new Player(this, (i + 1) * getCanvasWidth() / 3);
 			players.add(play);
-			shootingAllowed.add(true);
-			countToShootMultiPlayer.add(0);
+			shootingAllowed.set(i, true);
+			countToShootMultiPlayer.set(i, 0);
 		}
 		Logger.getInstance().log("Recreated game succesfully", LogEvent.Type.INFO);
 	}
