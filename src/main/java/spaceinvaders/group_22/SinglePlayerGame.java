@@ -144,11 +144,12 @@ public class SinglePlayerGame extends Game {
 	public final PowerUpController getPowerUpController() {
 		return powerUpController;
 	}
+	
 	/**
-	 * Returns true if player is alive
+	 * Returns true if player is alive.
 	 * @return true if player is alive
 	 */
-	public boolean playerAlive() {
+	public final boolean playerAlive() {
 		return player.getLives() > 0;
 	}
 

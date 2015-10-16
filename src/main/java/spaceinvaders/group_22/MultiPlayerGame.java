@@ -14,6 +14,7 @@ import spaceinvaders.group_22.unit.SpaceShip;
  * @author Ege
  *
  */
+@SuppressWarnings("checkstyle:magicnumber")
 public class MultiPlayerGame extends Game {
 	
 	/**
@@ -145,10 +146,10 @@ public class MultiPlayerGame extends Game {
 	}
 
 	@Override
-	public boolean playerAlive() {
+	public final boolean playerAlive() {
 		boolean aPlayerAlive = false;
-		for(Player p : players) {
-			if(p.getLives()>0) {
+		for (Player p : players) {
+			if (p.getLives() > 0) {
 				return true;
 			}
 		}

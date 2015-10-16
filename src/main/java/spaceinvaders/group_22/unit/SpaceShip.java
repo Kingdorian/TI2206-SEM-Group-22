@@ -3,7 +3,6 @@ package spaceinvaders.group_22.unit;
 import spaceinvaders.group_22.ui.SpriteLoader;
 
 import spaceinvaders.group_22.Player;
-import spaceinvaders.group_22.unit.ShipBullet;
 
 /**
  * A SpaceShip in the game extends Unit.

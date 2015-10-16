@@ -30,7 +30,7 @@ public class AlienWaveReaderTest {
 		waveReader = new AlienWaveReader();
 	}
 	@Test
-	public void testReadEmptyFile() throws FileNotFoundException, IOException{
+	public void testReadEmptyFile() throws FileNotFoundException, IOException {
 		String sep = System.getProperty("file.separator");
 		File file = new File("src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "emptytestwave.wave");
@@ -96,7 +96,7 @@ public class AlienWaveReaderTest {
 		ArrayList<ArrayListWavePattern> otherExpPattern = new ArrayList<ArrayListWavePattern>();
 		otherExpPattern.add(expectedFile2);
 		otherExpPattern.add(expectedFile1);
-		assertTrue(expectedPatterns.equals(waveReader.read(file))||otherExpPattern.equals(waveReader.read(file)));
+		assertTrue(expectedPatterns.equals(waveReader.read(file)) || otherExpPattern.equals(waveReader.read(file)));
 		
 	}
 

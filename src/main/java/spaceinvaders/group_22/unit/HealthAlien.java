@@ -7,7 +7,14 @@ import spaceinvaders.group_22.ui.SpriteLoader;
  * @author Bryan
  *
  */
+
 public class HealthAlien extends Alien {
+	
+	/**
+	 * The maximum health.
+	 */
+	public static final int MAXHEALTH = 5;
+	
 	/**
 	 * Creates a alien with health 5.
 	 * @param x location to create the alien on.
@@ -15,10 +22,12 @@ public class HealthAlien extends Alien {
 	 */
 	public HealthAlien(final double x, final double y) {
 		super(x, y);
-		setHealth(5);
+		setHealth(MAXHEALTH);
 	}
 	
-	@Override
+	/**
+	 * Method to set the sprite image of the Alien.
+	 */
 	public final void setSpriteImage() {
 		setSprite(SpriteLoader.getInstance().getAlienWithHealth(getHealth()));	
 	}

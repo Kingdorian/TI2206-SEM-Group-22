@@ -9,7 +9,7 @@ import spaceinvaders.group_22.ui.SpriteLoader;
  */
 
 @SuppressWarnings("checkstyle:magicnumber") 
-public class Alien extends Unit implements MovableUnit, ShootingUnit {
+public abstract class Alien extends Unit implements MovableUnit, ShootingUnit {
 	
 	/**
 	 * VelX is the velocity in the X direction in pixels per second.

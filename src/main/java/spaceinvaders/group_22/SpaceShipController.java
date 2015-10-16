@@ -14,6 +14,7 @@ import spaceinvaders.group_22.unit.Unit;
  * Class for controlling the spaceship.
  * @author Dorian
  */
+@SuppressWarnings("checkstyle:magicnumber")
 public abstract class SpaceShipController extends UnitController implements MovableUnitController {
 	/**
 	 * Game object of this controller.
@@ -51,6 +52,7 @@ public abstract class SpaceShipController extends UnitController implements Mova
 	
 	/**
 	 * Check if there is a explosion on a spaceship and if he is dead.
+	 * @param player The player to check explosions for.
 	 */
 	public final void checkExplosions(final Player player) {
 		if (player.getSpaceShip().getExplosion() != null 

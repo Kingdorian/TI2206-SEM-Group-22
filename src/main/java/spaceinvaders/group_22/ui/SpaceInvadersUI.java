@@ -2,7 +2,6 @@ package spaceinvaders.group_22.ui;
 
 import java.io.IOException;
 
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,7 +14,7 @@ import spaceinvaders.group_22.logger.Logger;
  * @author Jochem
  *
  */
-public class SpaceInvadersUI {
+public final class SpaceInvadersUI {
 	/**
 	 * Singleton instance.
 	 */
@@ -32,6 +31,7 @@ public class SpaceInvadersUI {
 
 	/**
 	 * Creates a new SpaceInvadersUI singleton object.
+	 * @return the singleton instance of SpaceInvadersUI
 	 */
 	public static SpaceInvadersUI getInstance() {
 		if (instance == null) {
@@ -69,7 +69,7 @@ public class SpaceInvadersUI {
 	 * Load a User Interface fxml file into the root layout.
 	 * @param fxmlFile Filename of the FXML file containing the layout.
 	 */
-	public final void loadUIScreen(final String fxmlFile) {
+	public void loadUIScreen(final String fxmlFile) {
 		try {
 			Parent screen = FXMLLoader.load(getClass().getResource(fxmlFile));
 			primaryStage.getScene().setRoot(screen);
@@ -89,19 +89,21 @@ public class SpaceInvadersUI {
 	/**
 	 * Launch the User Interface.
 	 */
-	public final void launch() {
+	public void launch() {
 		primaryStage.show();
 	}
 	/**
 	 * Sets the stage.
+	 * @param s The stage to set.
 	 */
-	public final void setStage(Stage s) {
+	public void setStage(final Stage s) {
 		primaryStage = s;
 	}
 	/**
 	 * Sets the default primary stage.
+	 * @param s The defaultPrimaryStage to set.
 	 */
-	public static final void setDefaultPrimaryStage(Stage s) {
+	public static void setDefaultPrimaryStage(final Stage s) {
 		defaultPrimaryStage = s;
 	}
 

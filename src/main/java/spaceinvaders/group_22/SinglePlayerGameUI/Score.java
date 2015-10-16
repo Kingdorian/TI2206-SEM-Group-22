@@ -31,7 +31,7 @@ public class Score extends spaceinvaders.group_22.ui.UIElementScore {
 	 */
 	public final void draw() {
 		int digits = 8;
-    	String scoreString = Integer.toString(((SinglePlayerGame)getGame()).getPlayer().getScore());
+    	String scoreString = Integer.toString(((SinglePlayerGame) getGame()).getPlayer().getScore());
     	for (int i = 0; i < digits  - scoreString.length(); i++) {
     		scoreString = "0" + scoreString;
     	}

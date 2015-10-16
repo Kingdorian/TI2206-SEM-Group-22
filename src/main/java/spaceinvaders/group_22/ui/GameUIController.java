@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import spaceinvaders.group_22.Game;
-import spaceinvaders.group_22.SinglePlayerGame;
-import spaceinvaders.group_22.ui.UIElementLives;
-import spaceinvaders.group_22.ui.UIElementScore;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import javafx.animation.KeyFrame;
@@ -96,7 +93,6 @@ public abstract class GameUIController
      */
     private Node screenBeforePlay;
     
-    
     /**
      * The paused screen.
      */
@@ -105,39 +101,48 @@ public abstract class GameUIController
     /**
      * The graphicscontext of the Canvas.
      */
+    
     private GraphicsContext gc;
     /**
      * The drawing of the SpaceShip.
      */
-    protected UIElementSpaceShip uiSpaceShip;
+    
+    private UIElementSpaceShip uiSpaceShip;
     /**
      * The drawing of the Alien.
      */
-    protected UIElementAlien uiAlien;
+    
+    private UIElementAlien uiAlien;
     /**
      * The drawing of the Bullet.
      */
-    protected UIElementBullet uiBullet;
+    
+    private UIElementBullet uiBullet;
     /**
      * The drawing of the Explosion.
      */
-    protected UIElementExplosion uiExplosion;
+    
+    private UIElementExplosion uiExplosion;
     /**
      * The drawing of the PowerUp.
      */
-    protected UIElementPowerUp uiPowerUp;
+    
+    private UIElementPowerUp uiPowerUp;
     /**
      * The drawing of the Barricade.
      */
-    protected UIElementBarricade uiBarricade;
+    
+    private UIElementBarricade uiBarricade;
+    
     /**
      * The drawing of the score.
      */
-    protected UIElementScore uiScore;
+    private UIElementScore uiScore;
+    
     /**
      * The drawing of the lives.
      */
-    protected UIElementLives uiLives;
+    private UIElementLives uiLives;
     
     /**
      * Called by the FXMLLoader. 
@@ -288,14 +293,15 @@ public abstract class GameUIController
 	 * Returns the game.
 	 * @return The game object of the UI.
 	 */
-	public Game getGame() {
+	public final Game getGame() {
 		return game;
 	}
+	
 	/**
-	 * Sets game to provided game
+	 * Sets game to provided game.
 	 * @param g game to set game to
 	 */
-	public void setGame(Game g) {
+	public final void setGame(final Game g) {
 		game = g;
 	}
 	
@@ -335,7 +341,7 @@ public abstract class GameUIController
         	if (getGame().hasEnded()) {
         		SpaceInvadersUI.getInstance().loadUIScreen("Menu.fxml");
         	}
-        }else if (!pressedKeys.contains(event.getCode())) {
+        } else if (!pressedKeys.contains(event.getCode())) {
 	    	pressedKeys.add(event.getCode());
 	    }
 	}
@@ -350,16 +356,149 @@ public abstract class GameUIController
 	    	pressedKeys.remove(event.getCode());
 	    }
 	}
+	
 	/**
 	 * Returns the Graphiccontext object of this object.
 	 * @return the GraphicsContext
 	 */
-	public GraphicsContext getGc() {
+	public final GraphicsContext getGc() {
 		return gc;
 	}
 
-	public void setGc(GraphicsContext gc) {
-		this.gc = gc;
+	/**
+	 * Sets the current graphicscontext to draw on.
+	 * @param newGC The graphicscontext to draw on.
+	 */
+	public final void setGc(final GraphicsContext newGC) {
+		this.gc = newGC;
+	}
+	
+	/**
+	 * Returns the UIElement object for the spaceship.
+	 * @return a UIElement for the spaceship.
+	 */
+	public final UIElementSpaceShip getUIElementSpaceShip() {
+		return uiSpaceShip;
+	}
+	
+	/**
+	 * Sets the UIElement object for the spaceship.
+	 * @param newUIElement UIElement for the spaceship.
+	 */
+	public final void setUIElementSpaceShip(final UIElementSpaceShip newUIElement) {
+		this.uiSpaceShip = newUIElement;
+	}
+	
+	/**
+	 * Returns the UIElement object for the alien.
+	 * @return a UIElement for the alien.
+	 */
+	public final UIElementAlien getUIElementAlien() {
+		return uiAlien;
+	}
+		
+	/**
+	 * Sets the UIElement object for the alien.
+	 * @param newUIElement UIElement for the alien.
+	 */
+	public final void setUIElementAlien(final UIElementAlien newUIElement) {
+		this.uiAlien = newUIElement;
+	}
+	
+	/**
+	 * Returns the UIElement object for the bullet.
+	 * @return a UIElement for the bullet.
+	 */
+	public final UIElementBullet getUIElementBullet() {
+		return uiBullet;
+	}
+	
+	/**
+	 * Sets the UIElement object for the bullet.
+	 * @param newUIElement UIElement for the bullet.
+	 */
+	public final void setUIElementBullet(final UIElementBullet newUIElement) {
+		this.uiBullet = newUIElement;
+	}
+	
+	/**
+	 * Returns the UIElement object for the explosion.
+	 * @return a UIElement for the explosion.
+	 */
+	public final UIElementExplosion getUIElementExplosion() {
+		return uiExplosion;
+	}
+	
+	/**
+	 * Sets the UIElement object for the explosion.
+	 * @param newUIElement UIElement for the explosion.
+	 */
+	public final void setUIElementExplosion(final UIElementExplosion newUIElement) {
+		this.uiExplosion = newUIElement;
+	}
+	
+	/**
+	 * Returns the UIElement object for the powerup.
+	 * @return a UIElement for the powerup.
+	 */
+	public final UIElementPowerUp getUIElementPowerUp() {
+		return uiPowerUp;
+	}
+	
+	/**
+	 * Sets the UIElement object for the powerup.
+	 * @param newUIElement UIElement for the powerup.
+	 */
+	public final void setUIElementPowerUp(final UIElementPowerUp newUIElement) {
+		this.uiPowerUp = newUIElement;
+	}
+	
+	/**
+	 * Returns the UIElement object for the barricade.
+	 * @return a UIElement for the barricade.
+	 */
+	public final UIElementBarricade getUIElementBarricade() {
+		return uiBarricade;
+	}
+	
+	/**
+	 * Sets the UIElement object for the barricade.
+	 * @param newUIElement UIElement for the barricade.
+	 */
+	public final void setUIElementBarricade(final UIElementBarricade newUIElement) {
+		this.uiBarricade = newUIElement;
+	}
+
+	/**
+	 * Returns the UIElement object for the score.
+	 * @return a UIElement for the score.
+	 */
+	public final UIElementScore getUIElementScore() {
+		return uiScore;
+	}
+	
+	/**
+	 * Sets the UIElement object for the score.
+	 * @param newUIElement UIElement for the score.
+	 */
+	public final void setUIElementScore(final UIElementScore newUIElement) {
+		this.uiScore = newUIElement;
+	}
+
+	/**
+	 * Returns the UIElement object for the lives.
+	 * @return a UIElement for the lives.
+	 */
+	public final UIElementLives getUIElementLives() {
+		return uiLives;
+	}
+
+	/**
+	 * Sets the UIElement object for the lives.
+	 * @param newUIElement UIElement for the lives.
+	 */
+	public final void setUIElementLives(final UIElementLives newUIElement) {
+		this.uiLives = newUIElement;
 	}
 
 
