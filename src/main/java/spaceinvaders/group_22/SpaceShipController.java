@@ -33,20 +33,24 @@ public abstract class SpaceShipController extends UnitController implements Mova
 	 * @param ship to check the collisions on.
 	 */
 	public final void spaceShipCollisions(final SpaceShip ship) {
-		//Checking colissions for spaceship with enemy bullets
-		ArrayList<Unit> list = new ArrayList<Unit>();
-		list.addAll(game.getAlienBullets());
-		Unit collidingBullet = new Collisions().checkCollisions(ship, list);
-		if (collidingBullet != null) {
-			String logMessage = "Player collided bullet at X:" + ship.getXCoor() 
-						+ " Y: " + ship.getYCoor();
-			Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
-					
-			Explosion spaceShipexplosion = new Explosion(ship.getXCoor(),
-							ship.getYCoor());
-			ship.setExplosion(spaceShipexplosion);
-			game.getExplosions().add(spaceShipexplosion);
-			game.getBullets().remove(collidingBullet);
+		if(!ship.getPlayer().isInvulnerable()) {
+			//Checking colissions for spaceship with enemy bullets
+			ArrayList<Unit> list = new ArrayList<Unit>();
+			list.addAll(game.getAlienBullets());
+			
+			Unit collidingBullet = new Collisions().checkCollisions(ship, list);
+			
+			if (collidingBullet != null) {
+				String logMessage = "Player collided bullet at X:" + ship.getXCoor() 
+							+ " Y: " + ship.getYCoor();
+				Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
+						
+				Explosion spaceShipexplosion = new Explosion(ship.getXCoor(),
+								ship.getYCoor());
+				ship.setExplosion(spaceShipexplosion);
+				game.getExplosions().add(spaceShipexplosion);
+				game.getBullets().remove(collidingBullet);
+			}
 		}
 	}
 	

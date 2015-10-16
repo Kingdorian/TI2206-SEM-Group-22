@@ -31,13 +31,14 @@ public class Lives extends UIElementLives {
 		Image heartImage = SpriteLoader.getInstance().getHeart();
 		//Change lives for player 1
 		for (int i = 1; i <= ((MultiPlayerGame) getGame()).getPlayers().get(0).getLives(); i++) {
-        	getGC().drawImage(heartImage, getGame().getCanvasWidth() + 10 + heartImage.getWidth() * i, 10);
+			Logger.getInstance().log("Drawing player 2 lives",  LogEvent.Type.DEBUG);
+        	getGC().drawImage(heartImage, 10 + (heartImage.getWidth() * (i - 1)), 50);
     	}
     	// Draw lives for player 2
 		for (int i = 1; i <= ((MultiPlayerGame) getGame()).getPlayers().get(1).getLives(); i++) {
-        	getGC().drawImage(heartImage, getGame().getCanvasWidth() - 10 - heartImage.getWidth() * i, 10);
+			Logger.getInstance().log("Drawing player 1 lives",  LogEvent.Type.DEBUG);
+        	getGC().drawImage(heartImage, (getGame().getCanvasWidth() - 10) - heartImage.getWidth() * i, 50);
     	}
-    	
     	Logger.getInstance().log("Formatted hearts to UI", LogEvent.Type.TRACE);
 	}
 

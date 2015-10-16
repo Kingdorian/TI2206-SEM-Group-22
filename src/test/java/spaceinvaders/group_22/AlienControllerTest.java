@@ -1,18 +1,21 @@
 package spaceinvaders.group_22;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.Assert.assertNotEquals;
 
 import java.util.ArrayList;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Alien;
+
 import spaceinvaders.group_22.unit.NormalAlien;
+import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.ShipBullet;
 
 /**
  * Test for the AlienController.
@@ -24,7 +27,7 @@ public class AlienControllerTest {
 	/**
 	 * Static game used for testing.
 	 */
-	private static Game game;
+	private static SinglePlayerGame game;
 	/**
 	 * Static Controller used for testing.
 	 */
@@ -42,6 +45,7 @@ public class AlienControllerTest {
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void setUpController() {
 		game = new SinglePlayerGame(1000, 720);
+		game.setPlayer(new Player(game, 20.0));
 		controller = game.getAlienController();
 		game.setTickrate(0.1);
 		ArrayList<Alien> row = new ArrayList<Alien>();
@@ -91,4 +95,86 @@ public class AlienControllerTest {
 			assertEquals(yValues.get(i) + 8, game.getAlienController().getAliens().get(i).getYCoor(), 0.05);
 		}
 	}
+	/**
+	 * Test the next round method.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")
+	public final void testnextRound() {
+		AlienController.setAlienVelX(5.0);
+		game.getAlienController().nextRound();
+		assertEquals(AlienController.getAlienVelX(), 15.0, 0.2);
+	}
+	/**
+	 * Test the checkallAliensDead method.
+	 */
+	@Test
+	public final void testCheckAllAliensDead() {
+		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
+		game.getAlienController().getAlienWave().setAliens(aliens);
+		game.getAlienController().checkAllAliensDead();
+		assertNotEquals(game.getAlienController().getAliens().size(), 0);
+	}
+	/**
+	 * Test the checkallAliensDead method.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")
+	public final void testRemoveDeadAliens() {
+		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
+		game.getAlienController().getAlienWave().setAliens(aliens);
+		ArrayList<Alien> row = new ArrayList<Alien>();
+		Alien alien = new NormalAlien(20, 20);
+		alien.hit();
+		alien.hit();
+		alien.hit();
+		row.add(alien);
+		game.getAlienController().getAlienWave().addAlienRow(row);
+		game.getAlienController().removeDeadAliens();
+		assertEquals(game.getAlienController().getAliens().size(), 0);
+	}
+	/**
+	 * Test the checkallAliensDead method with Tick method.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")
+	public final void testRemoveDeadAlienswithTick() {
+		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
+		game.getAlienController().getAlienWave().setAliens(aliens);
+		ArrayList<Alien> row = new ArrayList<Alien>();
+		Alien alien = new NormalAlien(20, 20);
+		Alien alien2 = new NormalAlien(20, 20);
+		alien.hit();
+		alien.hit();
+		alien.hit();
+		row.add(alien);
+		row.add(alien2);
+		game.getAlienController().getAlienWave().addAlienRow(row);
+		game.getAlienController().tick();
+		assertEquals(game.getAlienController().getAliens().size(), 1);
+	}
+	
+	/**
+	 * Test the alien collisions method.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")
+	public final void testAlienCollisions() {
+		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
+		game.getAlienController().getAlienWave().setAliens(aliens);
+		ArrayList<Alien> row = new ArrayList<Alien>();
+		Alien alien = new NormalAlien(20, 20);
+		Alien alien2 = new NormalAlien(50, 80);
+		alien.hit();
+		alien.hit();
+		row.add(alien);
+		row.add(alien2);
+		game.getAlienController().getAlienWave().addAlienRow(row);
+		ShipBullet b = new ShipBullet(20,20); 
+		b.setPlayer(game.getPlayer());
+		game.getBullets().add(b);
+		game.getAlienController().alienCollisions();
+		assertEquals(game.getExplosions().size(), 1);
+	}
+	
 }

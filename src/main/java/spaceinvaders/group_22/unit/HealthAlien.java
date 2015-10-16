@@ -20,6 +20,7 @@ public class HealthAlien extends Alien {
 	 * @param x location to create the alien on.
 	 * @param y location to create the alien on.
 	 */
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public HealthAlien(final double x, final double y) {
 		super(x, y);
 		setHealth(MAXHEALTH);

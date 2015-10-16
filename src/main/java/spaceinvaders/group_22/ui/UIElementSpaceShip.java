@@ -31,6 +31,10 @@ public class UIElementSpaceShip extends UIElementUnit {
 		player = p;
 	}
 
+	/**
+	 * Draws the spaceship on the canvas.
+	 */
+	@SuppressWarnings("checkstyle:magicnumber")
 	@Override
 	public final void draw() {
 		SpaceShip spaceShip = player.getSpaceShip();

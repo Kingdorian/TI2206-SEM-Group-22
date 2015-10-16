@@ -69,6 +69,19 @@ public class CollisionsTest {
 	 */
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")  
+	public final void shipVSbulletSpawnProtectionTest() {
+		AlienBullet bullet = new AlienBullet(5, 200);
+		SpaceShip spaceship = new SpaceShip(5, 6.2);
+		ArrayList<Unit> bullets = new ArrayList<Unit>();
+		bullets.add(bullet);
+		player.die();
+		assertEquals(new Collisions().checkCollisions(spaceship, bullets), null);
+	}
+	/**
+	 * Tests the collisions between a ship and a bullet  when the player has spawnprotection.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber")  
 	public final void shipVSbulletTestNotColliding() {
 		AlienBullet bullet = new AlienBullet(5, 200);
 		SpaceShip spaceship = new SpaceShip(5, 6.2);
@@ -76,6 +89,7 @@ public class CollisionsTest {
 		bullets.add(bullet);
 		assertEquals(new Collisions().checkCollisions(spaceship, bullets), null);
 	}
+	
 	
 	/**
 	 * Tests the collisions between a ship and a bullet.
