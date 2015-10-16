@@ -99,7 +99,7 @@ public class SpaceShipTest extends UnitTest {
 		Player player = new Player(game, game.getCanvasWidth() / 2);
 		player.getActivePowerUps().add(new ShootPowerUp(player));
 		player.getSpaceShip().updateMultiplier();
-		assertEquals(2, SpaceShip.getShootTimes(), 0.f);
+		assertEquals(2, player.getSpaceShip().getShootTimes(), 0.f);
 
 	}
 }

@@ -58,7 +58,7 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	/**
 	 * Times allowed to shoot per second.
 	 */
-	private static double shootTimes;
+	private double shootTimes;
 	/**
 	 * Creates a SpaceShip.
 	 * @param x X Coordinate
@@ -198,7 +198,7 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * Get the shooting speed.
 	 * @return the shooting speed.
 	 */
-	public static double getShootTimes() {
+	public final double getShootTimes() {
 		return shootTimes;
 	}
 
@@ -206,8 +206,8 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * Set the shooting speed.
 	 * @param newShootTimes the new shooting speed.
 	 */
-	public static void setShootTimes(final double newShootTimes) {
-		SpaceShip.shootTimes = newShootTimes;
+	public final void setShootTimes(final double newShootTimes) {
+		this.shootTimes = newShootTimes;
 	}
 
 	/**
