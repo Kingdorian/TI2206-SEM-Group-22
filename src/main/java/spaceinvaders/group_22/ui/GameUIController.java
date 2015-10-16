@@ -286,10 +286,8 @@ public abstract class GameUIController
 	/**
 	 * Sets the values for the game over screen.
 	 */
-	public final void setGameOverScreen() {
-		gameOverLabel.setText("Game Over");
-		highScoreLabel.setText("Highscore: " + getGame().getHighScore());
-	}
+	public abstract void setGameOverScreen();
+	
 	/**
 	 * Returns the game.
 	 * @return The game object of the UI.
@@ -304,12 +302,12 @@ public abstract class GameUIController
 	 */
 	public final ArrayList<UIElement> getUIElements() {
 		ArrayList<UIElement> list = new ArrayList<UIElement>();
-		list.add(uiSpaceShip);
-		list.add(uiAlien);
-		list.add(uiBullet);
-		list.add(uiBarricade);
-		list.add(uiExplosion);
-		list.add(uiPowerUp);
+		list.add(getUIElementLives());
+		list.add(getUIElementAlien());
+		list.add(getUIElementBullet());
+		list.add(getUIElementBarricade());
+		list.add(getUIElementExplosion());
+		list.add(getUIElementPowerUp());
 		// Draw the lives and score on the screen.
 		list.add(uiLives);
 		list.add(uiScore);
@@ -518,6 +516,22 @@ public abstract class GameUIController
 	 */
 	public final void setUIElementLives(final UIElementLives newUIElement) {
 		this.uiLives = newUIElement;
+	}
+	
+	/**
+	 * Returns the highscorelabel.
+	 * @return a Label containing highscore.
+	 */
+	public final Label getHighscoreLabel() {
+		return highScoreLabel;
+	}
+	
+	/**
+	 * Returns the gameoverLabel.
+	 * @return a Label containing game over..
+	 */
+	public final Label getGameOverLabel() {
+		return gameOverLabel;
 	}
 
 

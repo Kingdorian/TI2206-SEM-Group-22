@@ -57,5 +57,13 @@ public class SinglePlayerGameUIController extends GameUIController {
     	initializeUIElements();
     	startAnimation();
     }
+    
+	/**
+	 * Sets the values for the game over screen.
+	 */
+	public final void setGameOverScreen() {
+		getGameOverLabel().setText("Game Over");
+		getHighscoreLabel().setText("Highscore: " + getGame().getHighScore());
+	}
  
 }

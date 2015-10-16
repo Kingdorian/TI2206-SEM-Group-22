@@ -6,7 +6,6 @@ import spaceinvaders.group_22.MultiPlayerGame;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.ui.GameUIController;
-import spaceinvaders.group_22.ui.UIElement;
 import spaceinvaders.group_22.ui.UIElementAlien;
 import spaceinvaders.group_22.ui.UIElementSpaceShip;
 import spaceinvaders.group_22.ui.UIElementBullet;
@@ -99,22 +98,6 @@ public class MultiPlayerGameUIController extends GameUIController {
     public void showGameOverScreen() {
 
     }
-	/**
-	 * Returns all UI elements in this class.
-	 */
-    @Override
-	public final ArrayList<UIElement> getUIElements() {
-		ArrayList<UIElement> list = new ArrayList<UIElement>();
-		list.addAll(uIspaceShips);
-		list.addAll(scores);
-		list.add(getUIElementLives());
-		list.add(getUIElementAlien());
-		list.add(getUIElementBullet());
-		list.add(getUIElementBarricade());
-		list.add(getUIElementExplosion());
-		list.add(getUIElementPowerUp());
-		return list;
-	}
     
 	@Override
 	public final void setGameOverScreen() {
