@@ -91,7 +91,7 @@ public class MultiPlayerGame extends Game {
 	@Override
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
 		tickShipShooting(pressedKeys, KeyCode.SPACE, 0);
-		tickShipShooting(pressedKeys, KeyCode.SHIFT, 1);
+		tickShipShooting(pressedKeys, KeyCode.ENTER, 1);
 		mpSpaceShipsController.tick(pressedKeys);
 		getBarricadeController().tick();
 		getAlienController().tick();
@@ -123,7 +123,7 @@ public class MultiPlayerGame extends Game {
 				countToShootMultiPlayer.set(index, countToShootMultiPlayer.get(index) + 1);
 			} else if (Double.compare((double) countToShootMultiPlayer.get(index), 
 									 ((1 / getTickrate()) / SpaceShip.getShootTimes())) >= 0) {
-				shootingAllowed.set(index, false);
+				shootingAllowed.set(index, true);
 				countToShootMultiPlayer.set(index, 0);
 			}
 		}
