@@ -1,6 +1,6 @@
 
 \section{Exercise 2 - Software Metrics }
-
+The inCode tool is used to find design flaws, the resulting analysis file can be found in the sprint4 map in the deliverables map in the git resository.
 The first design flaw was encountered in AlienController, with a Cumulative Severity of 5. 
 AlienController contained Message Chains in the move() method leading to extensive calls to external accessors. It is caused by calling a method, which returns an object, calling a method on that object and so on. This method contains a chain of method calls to obtain the spaceship. This chain can be reduced by delegating this 'chain' to the Game class, so AlienController needs less knowledge about how to obtain the spaceship from the player. This was done by creating a new method, getPlayerSpaceship() which returns the Spaceship obtained from the player.
 
