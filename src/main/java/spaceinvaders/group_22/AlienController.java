@@ -100,8 +100,11 @@ public class AlienController extends UnitController implements MovableUnitContro
 				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(),
 						collidingUnit.getYCoor()));
 				((Alien) collidingUnit).hit();
-				((ShipBullet) bullet).getPlayer().addScore(10);
+				if (((Alien) collidingUnit).getHealth() <= 0) {
+					((ShipBullet) bullet).getPlayer().addScore(10);
+				}
 				game.getBullets().remove(bullet);
+
 				if (Math.random() > 0.6) {
 					game.getPowerUpController().createPowerUpUnit(bullet.getXCoor(), bullet.getYCoor());
 				}

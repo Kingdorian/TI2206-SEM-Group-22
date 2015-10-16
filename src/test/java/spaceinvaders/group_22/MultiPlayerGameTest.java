@@ -80,7 +80,7 @@ public class MultiPlayerGameTest extends GameTest {
 	@Test
 	public final void testTick() {
 		ArrayList<KeyCode> pressedKeys = new ArrayList<KeyCode>();
-		pressedKeys.add(KeyCode.SHIFT);
+		pressedKeys.add(KeyCode.ENTER);
 		multiGame.getBullets().clear();	
 		multiGame.getShootingAllowed().set(1, true);
 		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
@@ -90,7 +90,7 @@ public class MultiPlayerGameTest extends GameTest {
 		row.add(alien);
 		multiGame.getAlienController().getAlienWave().addAlienRow(row);
 		multiGame.tick(pressedKeys);
-		Assert.assertEquals(multiGame.getBullets().size(), 1);
+		Assert.assertEquals(1, multiGame.getBullets().size() );
 	}
 
 }
