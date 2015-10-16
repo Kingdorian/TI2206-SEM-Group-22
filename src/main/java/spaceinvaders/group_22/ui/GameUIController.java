@@ -247,10 +247,7 @@ public abstract class GameUIController
 						for(UIElement uiE : getUIElements()) {
 							uiE.draw();
 						}
-						
-						// Draw the lives and score on the screen.
-						uiLives.draw();
-						uiScore.draw();
+					
 						
 						if (pressedKeys.contains(KeyCode.SPACE)) {
 					    	pressedKeys.remove(KeyCode.SPACE);
@@ -299,6 +296,9 @@ public abstract class GameUIController
 		list.add(uiBarricade);
 		list.add(uiExplosion);
 		list.add(uiPowerUp);
+		// Draw the lives and score on the screen.
+		list.add(uiLives);
+		list.add(uiScore);
 		return list;
 	}
 	/**

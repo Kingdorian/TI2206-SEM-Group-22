@@ -24,7 +24,7 @@ public class Score extends spaceinvaders.group_22.ui.UIElementScore {
 	 * @param ScoreLabelPlayer2 The label on which the score of the second player should be drawn.
 	 */
 	public Score(final MultiPlayerGame newGame, final GraphicsContext gc, 
-			final Label scoreLabelPlayer1, final Label scoreLabelPlayer) {
+			final Label scoreLabelPlayer) {
 		super(newGame, gc, scoreLabelPlayer);
 	}
 	/**

@@ -27,11 +27,12 @@ public class MultiPlayerGameUIController extends GameUIController {
 	/**
 	 * The Label for the other player.
 	 */
-    private ArrayList<UIElementSpaceShip> spaceShips = new ArrayList<UIElementSpaceShip>();
-    /**
-     * The drawing of the score.
-     */
-    protected UIElementScore secondPlayerScore;
+    private ArrayList<UIElementSpaceShip> UIspaceShips = new ArrayList<UIElementSpaceShip>();
+	/**
+	 * The Label for the other player.
+	 */
+    private ArrayList<Score> scores = new ArrayList<Score>();
+
     /**
      * Label to load the score of the player in.
      */
@@ -66,12 +67,13 @@ public class MultiPlayerGameUIController extends GameUIController {
     @Override
     protected void initializeUIElements() {
     	super.uiAlien = new UIElementAlien(getGame(), getGc());
-    	spaceShips.add(new UIElementSpaceShip(getGame(), getGc(), getGame().getPlayers().get(0)));
-    	spaceShips.add(new UIElementSpaceShip(getGame(), getGc(), getGame().getPlayers().get(1)));
+    	UIspaceShips.add(new UIElementSpaceShip(getGame(), getGc(), getGame().getPlayers().get(0)));
+    	UIspaceShips.add(new UIElementSpaceShip(getGame(), getGc(), getGame().getPlayers().get(1)));
     	uiBullet = new UIElementBullet(getGame(), getGc());
     	uiExplosion = new UIElementExplosion(getGame(), getGc());
     	uiBarricade = new UIElementBarricade(getGame(), getGc());
-    	uiScore = new Score(getGame(), getGc(), getScoreLabel(), scoreLabelPlayer2);
+    	scores.add(new Score(getGame(), getGc(), getScoreLabel()));
+    	scores.add(new Score(getGame(), getGc(), scoreLabelPlayer2));
     	uiLives = new Lives(getGame(), getGc());
     	uiPowerUp = new UIElementPowerUp(getGame(), getGc());
     	
@@ -83,7 +85,8 @@ public class MultiPlayerGameUIController extends GameUIController {
     @Override
 	public ArrayList<UIElement> getUIElements() {
 		ArrayList<UIElement> list = new ArrayList<UIElement>();
-		list.addAll(spaceShips);
+		list.addAll(UIspaceShips);
+		list.addAll(scores);
 		list.add(uiAlien);
 		list.add(uiBullet);
 		list.add(uiBarricade);
