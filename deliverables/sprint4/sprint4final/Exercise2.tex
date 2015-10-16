@@ -1,0 +1,12 @@
+
+\section{Exercise 2 - Software Metrics }
+The inCode tool is used to find design flaws, the resulting analysis file can be found in the sprint4 map in the deliverables map in the git resository.
+The first design flaw was encountered in AlienController, with a Cumulative Severity of 5. 
+AlienController contained Message Chains in the move() method leading to extensive calls to external accessors. It is caused by calling a method, which returns an object, calling a method on that object and so on. This method contains a chain of method calls to obtain the spaceship. This chain can be reduced by delegating this 'chain' to the Game class, so AlienController needs less knowledge about how to obtain the spaceship from the player. This was done by creating a new method, getPlayerSpaceship() which returns the Spaceship obtained from the player.\\
+
+The second and third design flaw were encountered in Collisions and SpaceShipController. These methods also contain Message Chaining, caused by the same message chain as in AlienController. This could be solved by calling the method delegated to the Game class instead of the message chain.\\
+
+Because the first three design flaws were relatively easy to fix, other design flaws were also fixed. 
+UIElementSpaceShip was also affected by the same chain of messages, this was resolved by calling the method created in the Game class. SpeedPowerUpUnit, ShootPowerUpUnit and LifePowerUpUnit contained feature envy in the equals methods. This was resolved by moving the duplicate equals code to the superclass and extending it correctly. UIElementBullet contained a feature envy in draw(). This was resolved by moving duplicate code to the superclass UIElement and splitting the calculation of x and y positions into two separate methods.\\
+
+Because of the merge of the features implemented in Exercise 1, all inCode errors have now been resolved.
