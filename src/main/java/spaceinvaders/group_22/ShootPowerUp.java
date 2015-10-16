@@ -1,5 +1,7 @@
 package spaceinvaders.group_22;
 
+import spaceinvaders.group_22.ui.SpriteLoader;
+
 /**
  * Active Shoot power up class.
  * @author Bryan
@@ -19,7 +21,6 @@ public class ShootPowerUp extends PowerUp {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public ShootPowerUp(final Player setPlayer) {
 		super(setPlayer);
-		this.setGlow("glow_orange.png");
 		getPlayer().getActivePowerUps().add(this);
 		setTimeLeft(DURATION);
 	}
@@ -37,6 +38,14 @@ public class ShootPowerUp extends PowerUp {
 	protected final void activate() {
 		getPlayer().getSpaceShip().setShootingMultiplier(2.0);
 		getPlayer().getSpaceShip().updateMultiplier();
+	}
+	
+	/**
+	 * Sets the correct glow sprite for this powerup.
+	 */
+	@Override
+	public final void setPowerupGlow() {
+		setGlow(SpriteLoader.getInstance().getShootPowerUpGlow());
 	}
 
 }

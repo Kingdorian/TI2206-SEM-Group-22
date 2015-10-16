@@ -1,5 +1,11 @@
 package spaceinvaders.group_22;
 
+
+import javafx.scene.image.Image;
+
+import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
+
 /**
  * Abstract clas for an active power Up.
  * @author Bryan
@@ -22,9 +28,9 @@ public abstract class PowerUp {
 	private Player player;
 	
 	/**
-	 * The filename of the glow that has to be applied.
+	 * The Image of the glow that has to be applied.
 	 */
-	private String glow;
+	private Image glow;
 	
 	/**
 	 * Makes a power up for this player.
@@ -32,6 +38,7 @@ public abstract class PowerUp {
 	 */
 	public PowerUp(final Player setplayer) {
 		setPlayer(setplayer);
+		setPowerupGlow();
 		activate();
 	}
 	
@@ -54,6 +61,7 @@ public abstract class PowerUp {
 		this.timeLeft = this.timeLeft - timePast;
 		activate();
 		if (timeLeft <= 0) {
+			Logger.getInstance().log("Time left for powerup: " + timeLeft, LogEvent.Type.DEBUG);
 			deactivate();
 		}
 	}
@@ -94,14 +102,14 @@ public abstract class PowerUp {
 	 * Returns the glow of this power up.
 	 * @return the glow filename of this powerup.
 	 */
-	public final String getGlow() {
+	public final Image getGlow() {
 		return glow;
 	}
 	/**
 	 * Sets the glow of this power up.
 	 * @param setglow The glow to set.
 	 */
-	public final void setGlow(final String setglow) {
+	public final void setGlow(final Image setglow) {
 		this.glow = setglow;
 	}
 
@@ -112,5 +120,11 @@ public abstract class PowerUp {
 	public static double getDuration() {
 		return DURATION;
 	}
+	
+	/**
+	 * Sets the Image of the glow of this powerup.
+	 * It should load the correct sprite from the SpriteLoader.
+	 */
+	public abstract void setPowerupGlow();
 
 }

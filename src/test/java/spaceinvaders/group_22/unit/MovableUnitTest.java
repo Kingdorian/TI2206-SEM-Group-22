@@ -8,14 +8,22 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
+import spaceinvaders.group_22.ui.JavaFXThreadingRule;
+
 @RunWith(Parameterized.class)
 public class MovableUnitTest {
+	
+	/**
+	 * Class specifying rule to test JavaFX from GitHub.
+	 */
+	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 	
 	public static Class movableUnitClass;
 	
@@ -23,7 +31,8 @@ public class MovableUnitTest {
 	
 	@Parameters
 	public static Collection parameters() {
-		Class[] data = new Class[]{SpaceShip.class, ShipBullet.class, AlienBullet.class, Alien.class};
+		Class[] data = new Class[]{SpaceShip.class, ShipBullet.class, 
+				AlienBullet.class, NormalAlien.class, LargeAlien.class, ShootAlien.class, HealthAlien.class};
 		return Arrays.asList(data);
 	}
 	
@@ -33,9 +42,9 @@ public class MovableUnitTest {
 	
 	@Before
 	public void setUp() throws  IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException {
-		Constructor constructor = movableUnitClass.getConstructor(new Class[]{double.class, double.class, String.class});
-		movableUnit = (MovableUnit)constructor.newInstance(new Object[] {1.2, 3.0, "testimage.png"});
-		movableUnit2 = (MovableUnit)constructor.newInstance(new Object[] {1.2, 3.0, "testimage.png"});
+		Constructor constructor = movableUnitClass.getConstructor(new Class[]{double.class, double.class});
+		movableUnit = (MovableUnit) constructor.newInstance(new Object[] {1.2, 3.0});
+		movableUnit2 = (MovableUnit) constructor.newInstance(new Object[] {1.2, 3.0});
 	}
 
 	/**

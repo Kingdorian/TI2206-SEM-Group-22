@@ -21,11 +21,10 @@ public abstract class Bullet extends Unit implements MovableUnit {
 	 * Creates a Bullet.
 	 * @param x X Coordinate
 	 * @param y Y Coordinate
-	 * @param spriteFile filename of the sprite of this unit.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")    
-	public Bullet(final double x, final double y, final String spriteFile) {
-		super(x, y, spriteFile);
+	public Bullet(final double x, final double y) {
+		super(x, y);
 	}
 	/**
 	 * Move the unit in the direction of this unit and with his velocity.
@@ -89,9 +88,8 @@ public abstract class Bullet extends Unit implements MovableUnit {
 	 * @return true if both objects are the same.
 	 * @param other the object to compare.
 	 */
-	@SuppressWarnings("checkstyle:designforextension")
 	@Override
-	public boolean equals(final Object other) {
+	public final boolean equals(final Object other) {
 		if (other != null && other instanceof Bullet) {
 			Bullet that = (Bullet) other;
 			return 	super.equals(that)

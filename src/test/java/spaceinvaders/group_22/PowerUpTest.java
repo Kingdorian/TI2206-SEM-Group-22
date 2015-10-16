@@ -5,8 +5,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import spaceinvaders.group_22.unit.Unit;
-
 /**
  * Test the abstract powerUp class.
  * 
@@ -25,7 +23,7 @@ public abstract class PowerUpTest {
 	/**
 	 * Game to test the power up in.
 	 */
-	private Game game;
+	private SinglePlayerGame game;
 	
 	/**
 	 * Method to create an instance of a subclass of the powerUp class.
@@ -40,8 +38,8 @@ public abstract class PowerUpTest {
 	@Before
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void setup() {
-		game = new Game(1000, 750);
-		player = new Player(game);
+		game = new SinglePlayerGame(1000, 750);
+		player = new Player(game, game.getCanvasWidth() / 2);
 		powerup = createInstance(player);
 	}
 	
@@ -51,8 +49,9 @@ public abstract class PowerUpTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void testDecreaseTimeLeft() {
+		Double time = powerup.getTimeLeft();
 		powerup.decreaseTimeLeft(1.0);
-		assertEquals(powerup.getTimeLeft(), 4.0, 0.001);
+		assertEquals(powerup.getTimeLeft(), time - 1, 0.001);
 	}
 	
 	/**

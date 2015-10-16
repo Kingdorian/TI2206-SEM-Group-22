@@ -1,8 +1,10 @@
 package spaceinvaders.group_22.ui;
 
 import org.junit.Rule;
+
 import javafx.scene.canvas.GraphicsContext;
 import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.SinglePlayerGame;
 
 /**
  * Unit tests for the GameUIController class.
@@ -25,8 +27,8 @@ public class UIElementSpaceShipTest extends UIElementTest {
 	 * @return The UIElement subclass to test.
 	 */
 	@Override
-	public final UIElement createInstance(final Game newGame, final GraphicsContext gc) {
-		return new UIElementSpaceShip(newGame, gc);
+	public final UIElement createInstance(final SinglePlayerGame newGame, final GraphicsContext gc) {
+		return new UIElementSpaceShip(newGame, gc, newGame.getPlayer());
 	}
 
 }

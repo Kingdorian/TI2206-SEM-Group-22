@@ -6,12 +6,9 @@ package spaceinvaders.group_22.unit;
  * @author Ege de Bruin
  */
 
-public class Alien extends Unit implements MovableUnit, ShootingUnit {
+@SuppressWarnings("checkstyle:magicnumber") 
+public abstract class Alien extends Unit implements MovableUnit, ShootingUnit {
 	
-	/**
-	 * Location of the sprite of the aliens.
-	 */
-	public static final String SPRITE = "invader.png";
 	/**
 	 * VelX is the velocity in the X direction in pixels per second.
 	 */
@@ -21,36 +18,24 @@ public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	 * velY is the velocity in the Y direction in pixels per second.
 	 */
 	private double velY;
+	
 	/**
 	 * Chance this aliens shoots a bullet.
 	 */
 	private double bulletChance = 0.025;
+	
 	/**
 	 * Variable that keeps track of the health left for this alien.
 	 */
-	private int health = 1;
+	private int health;
+	
 	/**
 	 * Creates an Alien with default health.
 	 * @param x X coordinate
 	 * @param y Y coordinate
-	 * @param spriteFile The filename of the sprite.
 	 */
-	public Alien(final double x, final double y, final String spriteFile) {
-		super(x, y, spriteFile);
-	}
-	/**
-	 * Creates an Alien with specified health.
-	 * @param x X coordinate
-	 * @param y Y coordinate
-	 * @param spriteFile The filename of the sprite.
-	 * @param sethealth health this alien has.
-	 */
-	public Alien(final double x, final double y, final String spriteFile, final int sethealth) {
-		super(x, y, spriteFile);
-		if (sethealth >= 1) {
-			health = sethealth;
-			setSprite();
-		}
+	public Alien(final double x, final double y) {
+		super(x, y);
 	}
 	
 	/**
@@ -59,7 +44,7 @@ public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	 * @return The shot Bullet
 	 */
 	public final Bullet shootBullet(final double velocity) {
-		Bullet bullet = new AlienBullet(this.getXCoor(), this.getYCoor(), "alienbullet.png");
+		Bullet bullet = new AlienBullet(this.getXCoor(), this.getYCoor());
 		bullet.setVelY(velocity);
 		return bullet;
 	}
@@ -146,7 +131,6 @@ public class Alien extends Unit implements MovableUnit, ShootingUnit {
 	 */
 	public final void increaseShooting() {
 		this.bulletChance = 0.25;
-		setSprite();
 	}
 
 	/**
@@ -156,20 +140,19 @@ public class Alien extends Unit implements MovableUnit, ShootingUnit {
 		return health;
 	}
 	/**
-	 * Sets the right sprite by the health and bullet chance.
+	 * Method to set the health of this alien.
+	 * @param setHealth to set.
 	 */
-	public final void setSprite() {
-		String sprite = "invader_health" + health + ".png";
-		if (getBulletChance() > 0.025) {
-			sprite = "invader_shooter.png";
-		}
-		setSprite(sprite);
+	public final void setHealth(final int setHealth) {
+		health = setHealth;
+		setSpriteImage();
 	}
+	
 	/**
 	 * When alien is hit decrease health.
 	 */
 	public final void hit() {
 		health--;
-		setSprite();
+		setSpriteImage();
 	}
 }

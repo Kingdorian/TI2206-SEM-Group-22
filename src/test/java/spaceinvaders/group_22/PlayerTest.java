@@ -1,8 +1,17 @@
 package spaceinvaders.group_22;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
+import spaceinvaders.group_22.ui.JavaFXThreadingRule;
+
+import spaceinvaders.group_22.unit.ShipBullet;
 import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
@@ -11,6 +20,28 @@ import spaceinvaders.group_22.unit.SpaceShip;
  *
  */
 public class PlayerTest {
+	/**
+	 * Player object to test.
+	 */
+	private Player player;
+	/**
+	 * Game object used for testing.
+	 */
+	private SinglePlayerGame game;
+	/**
+	 * Setup the player class for testing.
+	 */
+	@Before
+	@SuppressWarnings("checkstyle:magicnumber")   
+	public final void setUp() {
+		game = new SinglePlayerGame(200 , 200);
+		 player = new Player(game, game.getCanvasWidth() / 2);
+	}
+	
+	/**
+	 * Class specifying rule to test JavaFX from GitHub.
+	 */
+	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 	
 	/**
 	 * Test behavior of the getSpaceShip method for the player.
@@ -18,8 +49,7 @@ public class PlayerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testGetSetSpaceShip() {
-		SpaceShip ship = new SpaceShip(10.0, 10.0, "testimage.png");
-		Player player = new Player(new Game(200 , 200));
+		SpaceShip ship = new SpaceShip(10.0, 10.0);
 		player.setSpaceShip(ship);
 		Assert.assertEquals(ship, player.getSpaceShip());
 	}
@@ -29,7 +59,6 @@ public class PlayerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testGetScore() {
-		Player player = new Player(new Game(200 , 200));
 		Assert.assertEquals(0, player.getScore());
 	}
 	/**
@@ -38,7 +67,6 @@ public class PlayerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testAddPositiveScore() {
-		Player player = new Player(new Game(200 , 200));
 		player.addScore(10);
 		Assert.assertEquals(10, player.getScore());
 	}
@@ -48,7 +76,6 @@ public class PlayerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testAddNegativeScore() { 
-		Player player = new Player(new Game(200 , 200));
 		player.addScore(-10);
 		Assert.assertEquals(-10, player.getScore());
 	}
@@ -58,7 +85,6 @@ public class PlayerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testGetLives() {
-		Player player = new Player(new Game(200 , 200));
 		Assert.assertEquals(3, player.getLives());
 	}
 	/**
@@ -67,7 +93,6 @@ public class PlayerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testDie() {
-		Player player = new Player(new Game(200 , 200));
 		player.die();
 		Assert.assertEquals(2, player.getLives());
 	}
@@ -77,7 +102,6 @@ public class PlayerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testresetScore() {
-		Player player = new Player(new Game(200 , 200));
 		player.addScore(10);
 		player.resetScore();
 		Assert.assertEquals(0, player.getScore());
@@ -88,12 +112,10 @@ public class PlayerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testRespawn() {
-		Game game = new Game(200 , 200);
-		Player player = new Player(game);
 		player.getSpaceShip().setVelX(20);
 		player.getSpaceShip().move(60.0);
 		player.respawnShip();
-		Assert.assertEquals(game.getCanvasWidth() / 2, player.getSpaceShip().getXCoor(), 0.05 );
+		Assert.assertEquals(game.getCanvasWidth() / 2, player.getSpaceShip().getXCoor(), 0.05);
 	}
 	/**
 	 * Tests the die method for te player when it has only one live left.
@@ -101,14 +123,52 @@ public class PlayerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void testDieOutOfLives() {
-		Game game = new Game(200 , 200);
 		game.start();
-		Player player = new Player(game);
 		player.die();
 		player.die();
 		player.die();
 		
 		Assert.assertFalse(game.isInProgress());
-		
 	}
+	/**
+	 * Test if the fired bullet is from the player.
+	 */
+	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
+	public final void testShootBullet() {
+		ShipBullet bullet = (ShipBullet) player.getSpaceShip().shootBullet(5.0);
+		System.out.println(player.getSpaceShip().getPlayer());
+		assertEquals(bullet.getPlayer(), player);
+	}
+	/**
+	 * Test the set active powerups method.
+	 */
+	@Test
+	public final void testSetActivePowerUps() {
+		ArrayList<PowerUp> powerups = new ArrayList<PowerUp>();
+		PowerUp powerup = new ShootPowerUp(player);
+		powerups.add(powerup);
+		player.setActivePowerUps(powerups);
+		assertEquals(player.getActivePowerUps(), powerups);
+	}
+	/**
+	 * Test the add life method.
+	 */
+	@Test
+	public final void testAddLife() {
+		int lives = player.getLives();
+		player.addLife();
+		assertEquals(player.getLives(), lives + 1);
+	}
+	/**
+	 * Test the add life method when the max is reached.
+	 */
+	@Test
+	public final void testMaxAddLife() {
+		player.addLife();
+		player.addLife();
+		player.addLife();
+		assertEquals(player.getLives(), 5);
+	}
+	
 }

@@ -29,7 +29,7 @@ import javafx.util.Duration;
  *
  */
 @SuppressWarnings("checkstyle:magicnumber")    
-public class GameUIController
+public abstract class GameUIController
     implements Initializable {
 
 	/**
@@ -78,7 +78,11 @@ public class GameUIController
      */
     @FXML
 	private Label highScoreLabel;
-    
+    /**
+     * Label to display the winning player.
+     */
+    @FXML
+    private Label gameOverLabel;
     /**
      * The game over screen.
      */
@@ -89,7 +93,6 @@ public class GameUIController
      */
     private Node screenBeforePlay;
     
-    
     /**
      * The paused screen.
      */
@@ -98,39 +101,48 @@ public class GameUIController
     /**
      * The graphicscontext of the Canvas.
      */
+    
     private GraphicsContext gc;
     /**
      * The drawing of the SpaceShip.
      */
+    
     private UIElementSpaceShip uiSpaceShip;
     /**
      * The drawing of the Alien.
      */
+    
     private UIElementAlien uiAlien;
     /**
      * The drawing of the Bullet.
      */
+    
     private UIElementBullet uiBullet;
     /**
      * The drawing of the Explosion.
      */
+    
     private UIElementExplosion uiExplosion;
     /**
      * The drawing of the PowerUp.
      */
+    
     private UIElementPowerUp uiPowerUp;
     /**
      * The drawing of the Barricade.
      */
+    
     private UIElementBarricade uiBarricade;
+    
     /**
      * The drawing of the score.
      */
-    private Score uiScore;
+    private UIElementScore uiScore;
+    
     /**
      * The drawing of the lives.
      */
-    private Lives uiLives;
+    private UIElementLives uiLives;
     
     /**
      * Called by the FXMLLoader. 
@@ -139,8 +151,7 @@ public class GameUIController
 	public final void initialize(final URL fxmlFileLocation, final ResourceBundle resources) {
     	initializeStackPaneScreens();
     	// Get the GraphicsContext of the canvas, so you can draw on it.
-    	gc = canvas.getGraphicsContext2D();
-    	
+    	setGc(canvas.getGraphicsContext2D());
     	canvasWidth = canvas.getWidth();
     	canvasHeight = canvas.getHeight();
     	
@@ -153,18 +164,7 @@ public class GameUIController
     /**
      * Initializes the UI elements.
      */
-    private void initializeUIElements() {
-    	uiAlien = new UIElementAlien(game, gc);
-    	uiSpaceShip = new UIElementSpaceShip(game, gc);
-    	uiBullet = new UIElementBullet(game, gc);
-    	uiExplosion = new UIElementExplosion(game, gc);
-    	uiBarricade = new UIElementBarricade(game, gc);
-    	uiScore = new Score(game, gc, scoreLabel);
-    	uiLives = new Lives(game, gc);
-    	uiPowerUp = new UIElementPowerUp(game, gc);
-    	
-    	Logger.getInstance().log("UIElements initialized.", LogEvent.Type.INFO);
-    }
+    protected abstract void initializeUIElements();
     
     /**
      * Returns the canvas Width.
@@ -198,20 +198,7 @@ public class GameUIController
     /**
      * Creates a new game.
      */
-    public final void newGame() {
-    	// If the game does not exist, create a new one.
-    	if (game == null) {
-        	game = new Game(canvasWidth, canvasHeight);
-        	Logger.getInstance().log("Set canvas width to: " + canvasWidth, LogEvent.Type.INFO);
-        	Logger.getInstance().log("Set canvas height to: " + canvasHeight, LogEvent.Type.INFO);
-        	Logger.getInstance().log("Show screen Before Play", LogEvent.Type.INFO);
-        // Else reset the existing game.
-    	} else {
-        	game.resetGame();    		
-    	}
-
-    	startAnimation();
-    }
+    public abstract void newGame();
     
     /**
      * Method to set the framerate of the animation.
@@ -245,7 +232,7 @@ public class GameUIController
 		
     	// Set the animation framerate.
     	setFramerate(60);
-    	game.setTickrate(framerate);
+    	getGame().setTickrate(framerate);
     	
     	// Create each frame.
 		KeyFrame frame = new KeyFrame(
@@ -254,33 +241,27 @@ public class GameUIController
 				{
 					public void handle(final ActionEvent ae) {
 						// Clear the canvas.
-						gc.clearRect(0, 0, canvasWidth, canvasHeight);
+						getGc().clearRect(0, 0, canvasWidth, canvasHeight);
 						
 						// If the game is in progress, look if any key is pressed.
-						if (game.isInProgress()) {
-							game.tick(pressedKeys);
+						if (getGame().isInProgress()) {
+							getGame().tick(pressedKeys);
 						}
 						
 						// Draw the various units on the screen.
-						uiSpaceShip.draw();
-						uiAlien.draw();
-						uiBullet.draw();
-						uiBarricade.draw();
-						uiExplosion.draw();
-						uiPowerUp.draw();
-						
-						// Draw the lives and score on the screen.
-						uiLives.draw();
-						uiScore.draw();
+						for (UIElement uiE : getUIElements()) {
+							uiE.draw();
+						}
+					
 						
 						if (pressedKeys.contains(KeyCode.SPACE)) {
 					    	pressedKeys.remove(KeyCode.SPACE);
 					    }
 						
 						// If the game has ended, put the Game Over screen to the front.
-						if (game.hasEnded()) {
+						if (getGame().hasEnded()) {
 							screenGameOver.toFront();
-							highScoreLabel.setText("Highscore: " + game.getHighScore());
+							setGameOverScreen();
 							gameLoop.stop();
 							Logger.getInstance().log("Show screen Game Over", LogEvent.Type.INFO);
 						} else {
@@ -303,6 +284,11 @@ public class GameUIController
 	}
 	
 	/**
+	 * Sets the values for the game over screen.
+	 */
+	public abstract void setGameOverScreen();
+	
+	/**
 	 * Returns the game.
 	 * @return The game object of the UI.
 	 */
@@ -311,11 +297,24 @@ public class GameUIController
 	}
 	
 	/**
+	 * Returns all UI elements in this class.
+	 * @return The UIElements in this class
+	 */
+	public abstract ArrayList<UIElement> getUIElements();
+	/**
+	 * Sets game to provided game.
+	 * @param g game to set game to
+	 */
+	public final void setGame(final Game g) {
+		game = g;
+	}
+	
+	/**
 	 * Returns the graphicsContext.
 	 * @return The graphicsContext of the UI.
 	 */
 	public final GraphicsContext getGC() {
-		return gc;
+		return getGc();
 	}
 	
 	/**
@@ -324,23 +323,28 @@ public class GameUIController
 	 */
 	@FXML
 	public final void handleKeyPressed(final KeyEvent event) {
-        if (event.getCode().equals(KeyCode.S) && game.getPlayer().getLives() > 0) {
+        if (event.getCode().equals(KeyCode.S) && !getGame().isInProgress()) {
         	Logger.getInstance().log("Player pressed S", LogEvent.Type.DEBUG);
         	screenBeforePlay.toBack();
         	screenPaused.toBack();
-        	game.start();
+        	getGame().start();
         } else if (event.getCode().equals(KeyCode.P)) {
-        	if (game.isInProgress()) {
+        	if (getGame().isInProgress()) {
         		Logger.getInstance().log("Player pressed P", LogEvent.Type.DEBUG);
             	screenPaused.toFront();
             	Logger.getInstance().log("Show screen Paused", LogEvent.Type.INFO);
-            	game.stop();
+            	getGame().stop();
         	}
         } else if (event.getCode().equals(KeyCode.R)) {
         	Logger.getInstance().log("Player pressed R", LogEvent.Type.DEBUG);
-        	if (game.hasEnded()) {
+        	if (getGame().hasEnded()) {
             	newGame();
-            	game.start();
+            	getGame().start();
+        	}
+        } else if (event.getCode().equals(KeyCode.M)) {
+        	if (getGame().hasEnded()) {
+        		getGame().stop();
+        		SpaceInvadersUI.getInstance().loadUIScreen("Menu.fxml");
         	}
         } else if (!pressedKeys.contains(event.getCode())) {
 	    	pressedKeys.add(event.getCode());
@@ -357,5 +361,166 @@ public class GameUIController
 	    	pressedKeys.remove(event.getCode());
 	    }
 	}
+	
+	/**
+	 * Returns the Graphiccontext object of this object.
+	 * @return the GraphicsContext
+	 */
+	public final GraphicsContext getGc() {
+		return gc;
+	}
+
+	/**
+	 * Sets the current graphicscontext to draw on.
+	 * @param newGC The graphicscontext to draw on.
+	 */
+	public final void setGc(final GraphicsContext newGC) {
+		this.gc = newGC;
+	}
+	
+	/**
+	 * Returns the UIElement object for the spaceship.
+	 * @return a UIElement for the spaceship.
+	 */
+	public final UIElementSpaceShip getUIElementSpaceShip() {
+		return uiSpaceShip;
+	}
+	
+	/**
+	 * Sets the UIElement object for the spaceship.
+	 * @param newUIElement UIElement for the spaceship.
+	 */
+	public final void setUIElementSpaceShip(final UIElementSpaceShip newUIElement) {
+		this.uiSpaceShip = newUIElement;
+	}
+	
+	/**
+	 * Returns the UIElement object for the alien.
+	 * @return a UIElement for the alien.
+	 */
+	public final UIElementAlien getUIElementAlien() {
+		return uiAlien;
+	}
+		
+	/**
+	 * Sets the UIElement object for the alien.
+	 * @param newUIElement UIElement for the alien.
+	 */
+	public final void setUIElementAlien(final UIElementAlien newUIElement) {
+		this.uiAlien = newUIElement;
+	}
+	
+	/**
+	 * Returns the UIElement object for the bullet.
+	 * @return a UIElement for the bullet.
+	 */
+	public final UIElementBullet getUIElementBullet() {
+		return uiBullet;
+	}
+	
+	/**
+	 * Sets the UIElement object for the bullet.
+	 * @param newUIElement UIElement for the bullet.
+	 */
+	public final void setUIElementBullet(final UIElementBullet newUIElement) {
+		this.uiBullet = newUIElement;
+	}
+	
+	/**
+	 * Returns the UIElement object for the explosion.
+	 * @return a UIElement for the explosion.
+	 */
+	public final UIElementExplosion getUIElementExplosion() {
+		return uiExplosion;
+	}
+	
+	/**
+	 * Sets the UIElement object for the explosion.
+	 * @param newUIElement UIElement for the explosion.
+	 */
+	public final void setUIElementExplosion(final UIElementExplosion newUIElement) {
+		this.uiExplosion = newUIElement;
+	}
+	
+	/**
+	 * Returns the UIElement object for the powerup.
+	 * @return a UIElement for the powerup.
+	 */
+	public final UIElementPowerUp getUIElementPowerUp() {
+		return uiPowerUp;
+	}
+	
+	/**
+	 * Sets the UIElement object for the powerup.
+	 * @param newUIElement UIElement for the powerup.
+	 */
+	public final void setUIElementPowerUp(final UIElementPowerUp newUIElement) {
+		this.uiPowerUp = newUIElement;
+	}
+	
+	/**
+	 * Returns the UIElement object for the barricade.
+	 * @return a UIElement for the barricade.
+	 */
+	public final UIElementBarricade getUIElementBarricade() {
+		return uiBarricade;
+	}
+	
+	/**
+	 * Sets the UIElement object for the barricade.
+	 * @param newUIElement UIElement for the barricade.
+	 */
+	public final void setUIElementBarricade(final UIElementBarricade newUIElement) {
+		this.uiBarricade = newUIElement;
+	}
+
+	/**
+	 * Returns the UIElement object for the score.
+	 * @return a UIElement for the score.
+	 */
+	public final UIElementScore getUIElementScore() {
+		return uiScore;
+	}
+	
+	/**
+	 * Sets the UIElement object for the score.
+	 * @param newUIElement UIElement for the score.
+	 */
+	public final void setUIElementScore(final UIElementScore newUIElement) {
+		this.uiScore = newUIElement;
+	}
+
+	/**
+	 * Returns the UIElement object for the lives.
+	 * @return a UIElement for the lives.
+	 */
+	public final UIElementLives getUIElementLives() {
+		return uiLives;
+	}
+
+	/**
+	 * Sets the UIElement object for the lives.
+	 * @param newUIElement UIElement for the lives.
+	 */
+	public final void setUIElementLives(final UIElementLives newUIElement) {
+		this.uiLives = newUIElement;
+	}
+	
+	/**
+	 * Returns the highscorelabel.
+	 * @return a Label containing highscore.
+	 */
+	public final Label getHighscoreLabel() {
+		return highScoreLabel;
+	}
+	
+	/**
+	 * Returns the gameoverLabel.
+	 * @return a Label containing game over..
+	 */
+	public final Label getGameOverLabel() {
+		return gameOverLabel;
+	}
+
 
 }

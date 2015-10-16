@@ -1,7 +1,5 @@
 package spaceinvaders.group_22;
 	
-import java.util.Arrays;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import spaceinvaders.group_22.logger.Logger;
@@ -16,8 +14,9 @@ import spaceinvaders.group_22.ui.SpaceInvadersUI;
 public class Main extends Application {
 	@Override
 	public final void start(final Stage stage) {
-		SpaceInvadersUI userInterface = new SpaceInvadersUI(stage);
-		userInterface.loadUIScreen("GameUI.fxml");
+		SpaceInvadersUI.setDefaultPrimaryStage(stage);
+		SpaceInvadersUI userInterface = SpaceInvadersUI.getInstance();
+		userInterface.loadUIScreen("Menu.fxml");
 		userInterface.launch();
 		
 	}
@@ -27,7 +26,6 @@ public class Main extends Application {
 	 * @param args command line arguments.
 	 */
 	public static void main(final String[] args) {
-		
 		Logger.getInstance().setLogFileLocation("log.log");
 		Logger.getInstance().setLogLevel(0);
 		

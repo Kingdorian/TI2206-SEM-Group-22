@@ -19,7 +19,7 @@ public class LifePowerupFactoryTest extends AbstractPowerupFactoryTest {
 	@Override
 	@Test
 	public final void testCreate() {
-		Unit outputUnit = new LifePowerUpUnit(1, 1, "powerup_red.png");
+		Unit outputUnit = new LifePowerUpUnit(1, 1);
 		Unit actualUnit = factory.create(1, 1);
 		
 		assertEquals(outputUnit, actualUnit);		

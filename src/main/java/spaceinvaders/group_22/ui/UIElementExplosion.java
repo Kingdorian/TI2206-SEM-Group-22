@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
 import spaceinvaders.group_22.Game;
-import spaceinvaders.group_22.logger.LogEvent;
-import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Explosion;
 
 /**
@@ -33,8 +31,7 @@ public class UIElementExplosion extends UIElementUnit {
 				
 				// For every explosion, draw the explosion.
 				for (Explosion explosion : explosionList) {
-					drawUnit(explosion.getXCoor(), explosion.getYCoor(), 
-							explosion.getWidth(), explosion.getHeight(), explosion.getSprite(), getGC());
+					drawUnit(explosion);
 					
 					// Increase the counter maintaining the time one frame of the animation is visible.
 					explosion.increaseCounter();
@@ -42,7 +39,7 @@ public class UIElementExplosion extends UIElementUnit {
 					if (explosion.getCounter() % 5 == 0) {
 						// Increase the index of the animation sprite, so the next image is shown.
 						explosion.increaseAnimationIndex();
-						explosion.setSprite("explosion" + explosion.getAnimationIndex() + ".png");
+						explosion.setSpriteImage();
 					}
 					if (explosion.getAnimationIndex() == 5) {
 						// If we reach the final animation index, 
@@ -50,7 +47,6 @@ public class UIElementExplosion extends UIElementUnit {
 						getGame().getExplosions().remove(explosion);
 					}
 				}
-				Logger.getInstance().log("Drawn explosions", LogEvent.Type.TRACE);
 	}
 
 }

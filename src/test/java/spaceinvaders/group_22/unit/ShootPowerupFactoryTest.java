@@ -19,7 +19,7 @@ public class ShootPowerupFactoryTest extends AbstractPowerupFactoryTest {
 	@Override
 	@Test
 	public final void testCreate() {
-		Unit outputUnit = new ShootPowerUpUnit(1, 1, "powerup_orange.png");
+		Unit outputUnit = new ShootPowerUpUnit(1, 1);
 		Unit actualUnit = factory.create(1, 1);
 		
 		assertEquals(outputUnit, actualUnit);		

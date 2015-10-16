@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.Player;
+import spaceinvaders.group_22.SinglePlayerGame;
 
 /**
  * Test for Shoot Power Up, extends PowerUpTest Test.
@@ -14,8 +14,8 @@ import spaceinvaders.group_22.Player;
 public class ShootPowerUpUnitTest extends PowerUpUnitTest {
 	
 	@Override
-	public final Unit createInstance(final double x, final double y, final String spriteFile) {
-		return new ShootPowerUpUnit(x, y, spriteFile);
+	public final Unit createInstance(final double x, final double y) {
+		return new ShootPowerUpUnit(x, y);
 	}
 	/**
 	 * Test the activation of this powerUp.
@@ -23,8 +23,11 @@ public class ShootPowerUpUnitTest extends PowerUpUnitTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void activatePowerUpTest() {
-		ShootPowerUpUnit powerUp = new ShootPowerUpUnit(500, 200, "testimage.png");
-		Player player = new Player(new Game(1000, 720));
+		ShootPowerUpUnit powerUp = new ShootPowerUpUnit(500, 200);
+
+		SinglePlayerGame game = new SinglePlayerGame(1000, 720);
+		Player player = new Player(game, game.getCanvasWidth() / 2);
+
 		powerUp.activate(player);
 		
 		assertEquals(player.getSpaceShip().getShootingMultiplier(), 2.0, 0.f);

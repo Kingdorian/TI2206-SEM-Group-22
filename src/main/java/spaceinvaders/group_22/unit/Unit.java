@@ -1,12 +1,6 @@
 package spaceinvaders.group_22.unit;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-
-import javax.imageio.ImageIO;
-
-import spaceinvaders.group_22.logger.Logger;
+import javafx.scene.image.Image;
 
 /**
  * A unit in the game that has a position and velocity.
@@ -29,39 +23,29 @@ public abstract class Unit {
 	/**
 	 * height of this unit.
 	 */
-	private int height;
+	private double height;
 	
 	/**
 	 * width of this unit.
 	 */
-	private int width;
+	private double width;
 	
 	/**
 	 * an Image object containing the sprite.
 	 */
-	private String sprite;
+	private Image sprite;
 
 	/**
 	 * Creates a unit at Location X, Y with velocity 0 and direction north.
 	 * @param x Coordinate of this unit.
 	 * @param y Coordinate of this unit.
-	 * @param spriteFile filename of the sprite of this unit.
 	 */
-	public Unit(final double x, final double y, final String spriteFile) {
+	public Unit(final double x, final double y) {
 		this.setXCoor(x);
 		this.setYCoor(y);
-		this.setSprite(spriteFile);
-		
-		try {
-			InputStream inputStream = 
-					getClass().getClassLoader().getResourceAsStream("spaceinvaders/group_22/images/" + spriteFile);
-			BufferedImage spriteImage = ImageIO.read(inputStream);
-			this.setHeight(spriteImage.getHeight());
-			this.setWidth(spriteImage.getWidth());	
-		} catch (IOException e) {
-			Logger.getInstance().log("Unit sprite image name invalid", e);
-			e.printStackTrace();
-		}
+		this.setSpriteImage();
+		this.setWidth(sprite.getWidth());
+		this.setHeight(sprite.getHeight());
 	}
 	/**
 	 * Compares two objects and returns if they are equal.
@@ -112,9 +96,9 @@ public abstract class Unit {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + height;
+		result = (int) (prime * result + height);
 		result = prime * result + ((sprite == null) ? 0 : sprite.hashCode());
-		result = prime * result + width;
+		result = (int) (prime * result + width);
 		long temp;
 		temp = Double.doubleToLongBits(xCoor);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -158,43 +142,51 @@ public abstract class Unit {
 	 * Get the width of this unit.
 	 * @return the width of this unit.
 	 */
-	public final int getWidth() {
+	public final double getWidth() {
 		return width;
 	}
 	/**
 	 * Sets the width of this unit.
-	 * @param newWidth to set as width.
+	 * @param d to set as width.
 	 */
-	public final void setWidth(final int newWidth) {
-		this.width = newWidth;
+	public final void setWidth(final double d) {
+		this.width = d;
 	}
 	/**
 	 * Get the height of this unit.
 	 * @return the height of this unit.
 	 */
-	public final int getHeight() {
+	public final double getHeight() {
 		return height;
 	}
 	/**
 	 * Sets the height of this unit.
 	 * @param newheight the height to set.
 	 */
-	public final void setHeight(final int newheight) {
+	public final void setHeight(final double newheight) {
 		this.height = newheight;
 	}
 	
 	/**
-	 * Get the filename of the sprite of this unit.
-	 * @return the filename of the sprite of this unit.
+	 * Get the Image of the sprite of this unit.
+	 * @return the Image of the sprite of this unit.
 	 */
-	public final String getSprite() {
+	public final Image getSprite() {
 		return sprite;
 	}
+	
 	/**
-	 * Sets the filename of the sprite of this unit.
-	 * @param newSprite the filename to set.
+	 * Sets the Image of the sprite.
+	 * @param newSprite The new sprite Image of this unit.
 	 */
-	public final void setSprite(final String newSprite) {
-		this.sprite = newSprite;
-	}	
+	public final void setSprite(final Image newSprite) {
+		sprite = newSprite;
+	}
+	
+	/**
+	 * Sets the Image of the sprite of this unit.
+	 * It should load the correct sprite from the SpriteLoader.
+	 */
+	public abstract void setSpriteImage();
+
 }

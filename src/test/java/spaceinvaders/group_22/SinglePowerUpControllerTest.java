@@ -2,21 +2,27 @@ package spaceinvaders.group_22;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
-import spaceinvaders.group_22.unit.PowerUpUnit;
-import spaceinvaders.group_22.unit.SpeedPowerUpUnit;
+import spaceinvaders.group_22.ui.JavaFXThreadingRule;
+
 /**
  * Test for the Power Up controller.
  * @author Bryan
  *
  */
-public class PowerUpControllerTest {
+public class SinglePowerUpControllerTest {
+	
+	/**
+	 * Class specifying rule to test JavaFX from GitHub.
+	 */
+	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 	
 	/**
 	 * Static game used for testing.
 	 */
-	private static Game game;
+	private static SinglePlayerGame game;
 	/**
 	 * Static Controller used for testing.
 	 */
@@ -28,7 +34,7 @@ public class PowerUpControllerTest {
 	@Before
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void setUpController() {
-		game = new Game(1000, 720);
+		game = new SinglePlayerGame(1000, 720);
 		controller = game.getPowerUpController();
 		game.setTickrate(1.0);
 	}
@@ -49,7 +55,7 @@ public class PowerUpControllerTest {
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testcheckMovePowerUps() {
 		controller.createPowerUpUnit(500.0, 100.0);
-		controller.checkMovingPowerUp(game.getPowerUpController().getPowerUps().get(0));
+		controller.checkMovingPowerUps();
 		assertEquals(Double.compare(game.getPowerUpController().getPowerUps().get(0).getYCoor(), 150.00), 0);
 	}
 	
@@ -70,7 +76,7 @@ public class PowerUpControllerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testPowerUpCollided() {
-		controller.createPowerUpUnit(500.0, 630.0);
+		controller.createPowerUpUnit(500.0, 680.0);
 		controller.checkPowerUps();
 		assertEquals(game.getPowerUpController().getPowerUps().size(), 0);
 	}

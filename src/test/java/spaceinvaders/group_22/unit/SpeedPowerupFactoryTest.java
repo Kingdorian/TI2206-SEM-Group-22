@@ -19,7 +19,7 @@ public class SpeedPowerupFactoryTest extends AbstractPowerupFactoryTest {
 	@Override
 	@Test
 	public final void testCreate() {
-		Unit outputUnit = new SpeedPowerUpUnit(1, 1, "powerup_blue.png");
+		Unit outputUnit = new SpeedPowerUpUnit(1, 1);
 		Unit actualUnit = factory.create(1, 1);
 		
 		assertEquals(outputUnit, actualUnit);		

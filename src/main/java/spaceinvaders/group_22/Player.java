@@ -39,15 +39,23 @@ public class Player {
 	 * Game the player "lives" in.
 	 */
 	private Game game;
+	/**
+	 * Indicates if player can get damaged by bullets.
+	 */
+	private boolean invulnerable = false;
 	
 	/**
 	 * Creates new Player object.
 	 * @param parentgame the game where the object is part of.
+	 * @param shipX X coordinate of the ship.
 	 */
 	@SuppressWarnings("checkstyle:magicnumber")
-	public Player(final Game parentgame) {
+	public Player(final Game parentgame, final double shipX) {
 		game = parentgame;
-		ship = new SpaceShip(game.getCanvasWidth() / 2, game.getCanvasHeight() - 40, "spaceship.png");
+
+		ship = new SpaceShip(shipX, game.getCanvasHeight() - 40);
+		ship.setPlayer(this);
+
 		Logger.getInstance().log("Created spaceship for player", LogEvent.Type.DEBUG);
 		score  = 0;
 		lives = 3;
@@ -94,12 +102,16 @@ public class Player {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void respawnShip() {
-		ship = new SpaceShip(game.getCanvasWidth() / 2, ship.getYCoor(), "spaceship.png");
+		ship = new SpaceShip(game.getCanvasWidth() / 2, ship.getYCoor());
+		ship.setPlayer(this);
+
 		ArrayList<PowerUp> powerups = new ArrayList<PowerUp>();
 		powerups.addAll(getActivePowerUps());
 		for (PowerUp powerup : powerups) {
 			powerup.deactivate();
 		}
+		SpawnProtectionPowerup spawnprotection = new SpawnProtectionPowerup(this);
+		activePowerUps.add(spawnprotection);
 		Logger.getInstance().log("Ship respawned", LogEvent.Type.TRACE);
 	}
 	/**
@@ -112,7 +124,6 @@ public class Player {
 		if (lives <= 0) {
 			game.gameOver();
 		}
-		game.getBullets();
 	}
 	/**
 	 * Get the amount of lives the player has left.
@@ -142,6 +153,21 @@ public class Player {
 	 */
 	public final void setActivePowerUps(final ArrayList<PowerUp> newactivePowerUps) {
 		this.activePowerUps = newactivePowerUps;
+	}
+	/**
+	 * Sets if the player is invulnerable.
+	 * @param b boolean if the player is invulnerable.
+	 */
+	public final void setInvulnerable(final boolean b) {
+		invulnerable = b;
+	}
+	/**
+	 * Returns player invulnerability.
+	 * @return A boolean representng invulnerability.
+	 * 
+	 */
+	public final boolean isInvulnerable() {
+		return invulnerable;
 	}
 	
 }

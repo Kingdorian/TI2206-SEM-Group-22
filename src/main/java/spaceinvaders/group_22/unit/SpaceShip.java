@@ -1,5 +1,9 @@
 package spaceinvaders.group_22.unit;
 
+import spaceinvaders.group_22.ui.SpriteLoader;
+
+import spaceinvaders.group_22.Player;
+
 /**
  * A SpaceShip in the game extends Unit.
  * 
@@ -8,6 +12,10 @@ package spaceinvaders.group_22.unit;
  */
 @SuppressWarnings("checkstyle:magicnumber") 
 public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
+	/**
+	 * Player that controls this spaceship.
+	 */
+	private Player player;
 	/**
 	 * VelX is the velocity in the X direction in pixels per second.
 	 */
@@ -21,7 +29,7 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	/**
 	 * Indicates the max speed at which a spaceship can travel.
 	 */
-	private static double maxVelx;
+	private double maxVelx;
 	
 	/**
 	 * The default speed at which a spaceship can travel.
@@ -42,19 +50,22 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * A multiplier for the shooting speed used by powerups.
 	 */
 	private double shootingMultiplier = 1.0;
+	/**
+	 * Explosion if this spaceship is exploding.
+	 */
+	private Explosion explosion = null;
 	
 	/**
 	 * Times allowed to shoot per second.
 	 */
-	private static double shootTimes;
+	private double shootTimes;
 	/**
 	 * Creates a SpaceShip.
 	 * @param x X Coordinate
 	 * @param y Y Coordinate
-	 * @param spriteFile filename of the sprite of this unit.
 	 */
-	public SpaceShip(final double x, final double y, final String spriteFile) {
-		super(x, y, spriteFile);
+	public SpaceShip(final double x, final double y) {
+		super(x, y);
 		setShootTimes(defaultShootSpeed * shootingMultiplier);
 		setMAXVELX(defaultVel * velMultiplier);
 	}
@@ -65,10 +76,10 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * @return The shot Bullet
 	 */
 	public final Bullet shootBullet(final double velocity) {
-		Bullet bullet = new ShipBullet(this.getXCoor(), this.getYCoor(), "spaceshipbullet.png");
+		ShipBullet bullet = new ShipBullet(this.getXCoor(), this.getYCoor());
+		bullet.setPlayer(player);
 		bullet.setVelY(velocity);
 		return bullet;
-
 	}	
 	
 	/**
@@ -187,7 +198,7 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * Get the shooting speed.
 	 * @return the shooting speed.
 	 */
-	public static double getShootTimes() {
+	public final double getShootTimes() {
 		return shootTimes;
 	}
 
@@ -195,15 +206,15 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * Set the shooting speed.
 	 * @param newShootTimes the new shooting speed.
 	 */
-	public static void setShootTimes(final double newShootTimes) {
-		SpaceShip.shootTimes = newShootTimes;
+	public final void setShootTimes(final double newShootTimes) {
+		this.shootTimes = newShootTimes;
 	}
 
 	/**
 	 * Get the maximum movement speed.
 	 * @return the maximum movement speed.
 	 */
-	public static double getMAXVELX() {
+	public final double getMAXVELX() {
 		return maxVelx;
 	}
 
@@ -211,7 +222,54 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * Set the maximum movement speed.
 	 * @param newMaxvel the new maximum movement speed.
 	 */
-	public static void setMAXVELX(final double newMaxvel) {
+	public final void setMAXVELX(final double newMaxvel) {
 		maxVelx = newMaxvel;
+	}
+	
+	/**
+	 * Sets the right sprite image.
+	 */
+	public final void setSpriteImage() {
+		setSprite(SpriteLoader.getInstance().getSpaceShip());
+	}
+	
+	/**
+	 * 
+	 * @param newExplosion to set.
+	 */
+	public final void setExplosion(final Explosion newExplosion) {
+		explosion = newExplosion;
+	}
+	/**
+	 * Returns the explosion if this spaceship is exploding.
+	 * @return null if there is no explosion.
+	 */
+	public final Explosion getExplosion() {
+		return explosion;
+	}
+	
+	/**
+	 * Returns the counter of the explosion of the spaceship.
+	 * @return An integer value.
+	 */
+	public final int getExplosionCounter() {
+		if (explosion != null) {
+			return explosion.getCounter();
+		} 
+		return 0;
+	}
+	/**
+	 * Sets the player that controls this spaceship.
+	 * @param setPlayer player to set.
+	 */
+	public final void setPlayer(final Player setPlayer) {
+		player = setPlayer;
+	}
+	/**
+	 * Returns the player that controlls this spaceship.
+	 * @return player of this spaceship.
+	 */
+	public final Player getPlayer() {
+		return player;
 	}
 }

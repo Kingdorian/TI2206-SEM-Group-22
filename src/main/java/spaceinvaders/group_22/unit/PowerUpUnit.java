@@ -22,10 +22,9 @@ public abstract class PowerUpUnit extends Unit implements MovableUnit, Activatab
 	 * Creates a power Up.
 	 * @param x X coordinate
 	 * @param y Y coordinate
-	 * @param spriteFile The filename of the sprite.
 	 */
-	public PowerUpUnit(final double x, final double y, final String spriteFile) {
-		super(x, y, spriteFile);
+	public PowerUpUnit(final double x, final double y) {
+		super(x, y);
 	}
 	
 	/**
@@ -35,6 +34,34 @@ public abstract class PowerUpUnit extends Unit implements MovableUnit, Activatab
 	public final void move(final double tickrate) {
 		setXCoor(this.getXCoor() + (this.getVelX() * tickrate));
 		setYCoor(this.getYCoor() + (this.getVelY() * tickrate));
+	}
+	
+	/**
+	 * Compares two objects and returns if they are equal.
+	 * @return true if both objects are the same.
+	 * @param obj the object to compare.
+	 */
+	@Override
+	public final boolean equals(final Object obj) {
+	      if (!super.equals(obj)) {
+	         return false;
+	      }
+	      PowerUpUnit other = (PowerUpUnit) obj;
+	      if (this.velX != other.velX) {
+	    	 return false;
+	      }
+	      if (this.velY != other.velY) {
+	    	 return false;
+	      }	      
+	      return true;
+	}
+	
+	/**
+	 * HashCode method.
+	 * @return hashcode of this object
+	 */
+	public final int hashCode() {
+		  return 0;
 	}
 	
 	/**

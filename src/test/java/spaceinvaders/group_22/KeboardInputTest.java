@@ -6,12 +6,15 @@ import javafx.scene.input.KeyCode;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Barricade;
+import spaceinvaders.group_22.unit.NormalAlien;
 import spaceinvaders.group_22.unit.SpaceShip;
 import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 
 /**
  * Test key events.
@@ -23,22 +26,28 @@ public class KeboardInputTest {
 	/**
 	 * Game object used to test.
 	 */
-	private Game game;
+	private SinglePlayerGame game;
 	/**
 	 * 
 	 */
 	private ArrayList<KeyCode> simulEvents; 
+	
+	/**
+	 * Class specifying rule to test JavaFX from GitHub.
+	 */
+	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
+	
 	/**
 	 * Setup variables before running the tests.
 	 */
 	@Before
 	@SuppressWarnings("checkstyle:magicnumber")   
 	public final void setup() {
-		game = new Game(1000.0 , 720.0);
-		game.setPlayer(new Player(game));
+		game = new SinglePlayerGame(1000.0 , 720.0);
+		game.setPlayer(new Player(game, game.getCanvasWidth() / 2));
 		game.setTickrate(60.0);
 		ArrayList<Alien> row = new ArrayList<Alien>();
-		row.add(new Alien(10, 10, "invader.png"));
+		row.add(new NormalAlien(10, 10));
 		game.getAlienController().getAlienWave().addAlienRow(row);
 		// Create simulated events
 		simulEvents = new ArrayList<KeyCode>();
@@ -52,7 +61,8 @@ public class KeboardInputTest {
 	public final void testPressA() {
 		simulEvents.add(KeyCode.A);
 		game.tick(simulEvents);
-		Assert.assertEquals(-SpaceShip.getMAXVELX(), game.getPlayer().getSpaceShip().getVelX(), 0.05);
+		Assert.assertEquals(-game.getPlayer().getSpaceShip().getMAXVELX(),
+				game.getPlayer().getSpaceShip().getVelX(), 0.05);
 	}
 	/**
 	 * Test if the speed of the spaceship correctly gets updated when the D key gets pressed.
@@ -63,7 +73,8 @@ public class KeboardInputTest {
 	public final void testPressD() {
 		simulEvents.add(KeyCode.D);
 		game.tick(simulEvents);
-		Assert.assertEquals(SpaceShip.getMAXVELX(), game.getPlayer().getSpaceShip().getVelX(), 0.05);
+		Assert.assertEquals(game.getPlayer().getSpaceShip().getMAXVELX(),
+				game.getPlayer().getSpaceShip().getVelX(), 0.05);
 	}
 	/**
 	 * Test if a bullet is correctly launched when the player presses the space button. 
@@ -75,7 +86,7 @@ public class KeboardInputTest {
 		game.getBarricadeController().setBarricades(new ArrayList<Barricade>());
 		simulEvents.add(KeyCode.SPACE);
 		ArrayList<Alien> alienList = new ArrayList<Alien>();
-		Alien alien = new Alien(0, 0, "invader.png");
+		Alien alien = new NormalAlien(0, 0);
 		alienList.add(alien);
 		game.getAlienController().getAlienWave().setAlienRow(0, alienList);
 		game.tick(simulEvents);	

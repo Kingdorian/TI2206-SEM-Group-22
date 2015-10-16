@@ -2,8 +2,6 @@ package spaceinvaders.group_22.ui;
 
 import javafx.scene.canvas.GraphicsContext;
 import spaceinvaders.group_22.Game;
-import spaceinvaders.group_22.logger.LogEvent;
-import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.PowerUpUnit;
 
 /**
@@ -26,10 +24,8 @@ public class UIElementPowerUp extends UIElementUnit {
 	@Override
 	public final void draw() {
 		for (PowerUpUnit powerup : getGame().getPowerUpController().getPowerUps()) {
-			drawUnit(powerup.getXCoor(), powerup.getYCoor(), powerup.getWidth(),
-					powerup.getHeight(), powerup.getSprite(), getGC());		
+			drawUnit(powerup);	
 		}
-		Logger.getInstance().log("Drawn powerups", LogEvent.Type.TRACE);	
 	}
 
 }

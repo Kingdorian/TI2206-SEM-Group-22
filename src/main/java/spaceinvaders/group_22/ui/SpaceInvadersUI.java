@@ -14,18 +14,40 @@ import spaceinvaders.group_22.logger.Logger;
  * @author Jochem
  *
  */
-public class SpaceInvadersUI {
+public final class SpaceInvadersUI {
+	/**
+	 * Singleton instance.
+	 */
+	private static volatile SpaceInvadersUI instance;
 	
 	/**
 	 * Stage object, defining the primary Stage of the program.
 	 */
 	private Stage primaryStage;
+	/**
+	 * Default primarystage object used when creating a new instance.
+	 */
+	private static Stage defaultPrimaryStage;
 
+	/**
+	 * Creates a new SpaceInvadersUI singleton object.
+	 * @return the singleton instance of SpaceInvadersUI
+	 */
+	public static SpaceInvadersUI getInstance() {
+		if (instance == null) {
+			synchronized (Logger.class) {
+				if (instance == null) {
+					instance = new SpaceInvadersUI(defaultPrimaryStage);
+				}
+			}
+		}	
+		return instance; 
+	}
 	/**
 	 * Constructor for a SpaceInvadersUI object.
 	 * @param stage A JavaFX Stage.
 	 */
-	public SpaceInvadersUI(final Stage stage) {
+	private SpaceInvadersUI(final Stage stage) {
 		// Construction the object, setting the title of the application.
 		this.primaryStage = stage;
 		primaryStage.setTitle("Space Invaders");
@@ -47,7 +69,7 @@ public class SpaceInvadersUI {
 	 * Load a User Interface fxml file into the root layout.
 	 * @param fxmlFile Filename of the FXML file containing the layout.
 	 */
-	public final void loadUIScreen(final String fxmlFile) {
+	public void loadUIScreen(final String fxmlFile) {
 		try {
 			Parent screen = FXMLLoader.load(getClass().getResource(fxmlFile));
 			primaryStage.getScene().setRoot(screen);
@@ -57,12 +79,32 @@ public class SpaceInvadersUI {
 		}
 		
 	}
+	/**
+	 * Closes the UI and exit the app.
+	 */
+	public void quit() {
+	  System.exit(1);
+	}
 	
 	/**
 	 * Launch the User Interface.
 	 */
-	public final void launch() {
+	public void launch() {
 		primaryStage.show();
+	}
+	/**
+	 * Sets the stage.
+	 * @param s The stage to set.
+	 */
+	public void setStage(final Stage s) {
+		primaryStage = s;
+	}
+	/**
+	 * Sets the default primary stage.
+	 * @param s The defaultPrimaryStage to set.
+	 */
+	public static void setDefaultPrimaryStage(final Stage s) {
+		defaultPrimaryStage = s;
 	}
 
 }

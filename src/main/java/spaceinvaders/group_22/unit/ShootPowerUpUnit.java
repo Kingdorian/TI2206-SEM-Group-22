@@ -2,6 +2,7 @@ package spaceinvaders.group_22.unit;
 
 import spaceinvaders.group_22.Player;
 import spaceinvaders.group_22.ShootPowerUp;
+import spaceinvaders.group_22.ui.SpriteLoader;
 
 /**
  * Shoot power up class extends the power Up class.
@@ -17,41 +18,14 @@ public class ShootPowerUpUnit extends PowerUpUnit {
 	 * Creates a shoot power Up.
 	 * @param x X coordinate
 	 * @param y Y coordinate
-	 * @param spriteFile The filename of the sprite.
 	 */
-	public ShootPowerUpUnit(final double x, final double y, final String spriteFile) {
-		super(x, y, spriteFile);
+	public ShootPowerUpUnit(final double x, final double y) {
+		super(x, y);
 	}
 
 	@Override
 	public final void activate(final Player newplayer) {
 		new ShootPowerUp(newplayer);
-	}
-
-	/**
-	 * Compares two objects and returns if they are equal.
-	 * @return true if both objects are the same.
-	 * @param other the object to compare.
-	 */
-	@Override
-	public final boolean equals(final Object other) {
-		if (other != null && other instanceof ShootPowerUpUnit) {
-			ShootPowerUpUnit that = (ShootPowerUpUnit) other;
-			return this.getXCoor() == that.getXCoor()
-					&& this.getYCoor() == that.getYCoor()
-					&& this.getVelX() == that.getVelX()
-					&& this.getVelY() == that.getVelY()
-					&& this.getHeight() == that.getHeight()
-					&& this.getWidth() == that.getWidth();
-		}
-		return false;
-	}
-	/**
-	 * HashCode method.
-	 * @return hashcode of this object
-	 */
-	public final int hashCode() {
-		  return 0;
 	}
 	
 	/**
@@ -60,6 +34,13 @@ public class ShootPowerUpUnit extends PowerUpUnit {
 	 */
 	public static double getMaxVely() {
 		return MAXVELY;
+	}
+	
+	/**
+	 * Sets the right sprite image.
+	 */
+	public final void setSpriteImage() {
+		setSprite(SpriteLoader.getInstance().getShootPowerUp());
 	}
 
 }

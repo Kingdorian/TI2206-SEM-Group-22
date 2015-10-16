@@ -5,25 +5,32 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+
+import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 
 public class AlienWaveReaderTest {
 	
 	private AlienWaveReader waveReader;
 	
+	/**
+	 * Class specifying rule to test JavaFX from GitHub.
+	 */
+	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
+	
 	@Before
 	public void init() {
 		// We need the logger
-		Game game = new Game(10.0, 10.0);
+		Game game = new SinglePlayerGame(10.0, 10.0);
 		waveReader = new AlienWaveReader();
 	}
 	@Test
-	public void testReadEmptyFile() throws FileNotFoundException, IOException{
+	public void testReadEmptyFile() throws FileNotFoundException, IOException {
 		String sep = System.getProperty("file.separator");
 		File file = new File("src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "emptytestwave.wave");
@@ -89,7 +96,7 @@ public class AlienWaveReaderTest {
 		ArrayList<ArrayListWavePattern> otherExpPattern = new ArrayList<ArrayListWavePattern>();
 		otherExpPattern.add(expectedFile2);
 		otherExpPattern.add(expectedFile1);
-		assertTrue(expectedPatterns.equals(waveReader.read(file))||otherExpPattern.equals(waveReader.read(file)));
+		assertTrue(expectedPatterns.equals(waveReader.read(file)) || otherExpPattern.equals(waveReader.read(file)));
 		
 	}
 

@@ -2,8 +2,6 @@ package spaceinvaders.group_22.ui;
 
 import javafx.scene.canvas.GraphicsContext;
 import spaceinvaders.group_22.Game;
-import spaceinvaders.group_22.logger.LogEvent;
-import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Bullet;
 
 /**
@@ -26,11 +24,8 @@ public class UIElementBullet extends UIElementUnit {
 	@Override
 	public final void draw() {
 		for (Bullet bullet : getGame().getBullets()) {
-			drawUnit(bullet.getXCoor(), bullet.getYCoor(), 
-					bullet.getWidth(), bullet.getHeight(), bullet.getSprite(), getGC());
-		}
-		Logger.getInstance().log("Drawn bullets", LogEvent.Type.TRACE);
-		
+			drawUnit(bullet);
+		}		
 	}
 
 }
