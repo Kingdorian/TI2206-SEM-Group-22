@@ -21,32 +21,20 @@ public final class SoundController implements Observer {
 		/**
 		 * Start game sound.
 		 */
-		START_GAME(SoundLoader.getInstance().getStartGame()),
+		START_GAME { public void play() { 
+			SoundLoader.getInstance().getStartGame().play(); } },
+		
 		
 		/**
 		 * Stop game sound.
 		 */
-		STOP_GAME(SoundLoader.getInstance().getEndGame());
-		
-		/**
-		 * AudioClip containing the actual sound of this Sound.
-		 */
-		private final AudioClip soundclip;
-		
-		/**
-		 * Creates a new Sound.
-		 * @param clip AudioClip for this sound.
-		 */
-		Sound(final AudioClip clip) {
-			soundclip = clip;
-		}
+		STOP_GAME { public void play() { 
+			SoundLoader.getInstance().getEndGame().play(); } };
 		
 		/**
 		 * Plays the AudioClip value.
 		 */
-		public void play() {
-			soundclip.play();;
-		}
+		public abstract void play();
 	}
 	
 	
