@@ -9,6 +9,8 @@ import java.util.List;
  *
  */
 public abstract class Observable {
+	
+	
 		
 	/**
 	 * List containing the observers subscribed to this observable.

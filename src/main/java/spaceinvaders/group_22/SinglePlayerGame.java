@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.scene.input.KeyCode;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
+import spaceinvaders.group_22.sound.SoundController;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.SpaceShip;
@@ -65,6 +66,7 @@ public class SinglePlayerGame extends Game {
 			setHighScore(player.getScore());
 		}
 		setHasEnded(true);
+		SoundController.Sound.STOP_GAME.play();
 		Logger.getInstance().log("Game is over", LogEvent.Type.DEBUG);
 	}
 	@Override

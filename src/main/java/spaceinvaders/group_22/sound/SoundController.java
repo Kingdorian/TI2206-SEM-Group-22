@@ -1,6 +1,7 @@
 package spaceinvaders.group_22.sound;
 
 
+import javafx.scene.media.AudioClip;
 import spaceinvaders.group_22.Observer;
 import spaceinvaders.group_22.unit.Soundable;
 
@@ -11,6 +12,44 @@ import spaceinvaders.group_22.unit.Soundable;
  */
 public final class SoundController implements Observer {
 
+	/**
+	 * Enum for various sounds which can be triggered from other classes.
+	 * @author Jochem
+	 *
+	 */
+	public static enum Sound {
+		/**
+		 * Start game sound.
+		 */
+		START_GAME(SoundLoader.getInstance().getStartGame()),
+		
+		/**
+		 * Stop game sound.
+		 */
+		STOP_GAME(SoundLoader.getInstance().getEndGame());
+		
+		/**
+		 * AudioClip containing the actual sound of this Sound.
+		 */
+		private final AudioClip soundclip;
+		
+		/**
+		 * Creates a new Sound.
+		 * @param clip AudioClip for this sound.
+		 */
+		Sound(final AudioClip clip) {
+			soundclip = clip;
+		}
+		
+		/**
+		 * Plays the AudioClip value.
+		 */
+		public void play() {
+			soundclip.play();;
+		}
+	}
+	
+	
 	/**
 	 * The singleton unique instance of SoundController.
 	 */

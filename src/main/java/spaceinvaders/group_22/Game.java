@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
+import spaceinvaders.group_22.sound.SoundController;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.AlienBullet;
 import spaceinvaders.group_22.unit.Bullet;
