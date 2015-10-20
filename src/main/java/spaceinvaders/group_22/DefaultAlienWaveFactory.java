@@ -59,4 +59,9 @@ public class DefaultAlienWaveFactory implements AlienWaveFactoryInterface {
         
         return wave;
 	}
+	@Override
+	public AlienWave createBossWave() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
