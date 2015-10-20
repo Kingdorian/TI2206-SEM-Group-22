@@ -1,8 +1,8 @@
 package spaceinvaders.group_22.unit;
 
-import java.util.Observable;
 
 import javafx.scene.image.Image;
+import spaceinvaders.group_22.Observable;
 import spaceinvaders.group_22.sound.SoundController;
 
 /**
@@ -45,7 +45,7 @@ public abstract class Unit extends Observable {
 	 */
 	public Unit(final double x, final double y) {
 		//Add the soundcontroller as an observer.
-		addObserver(SoundController.getInstance());
+		registerObserver(SoundController.getInstance());
 		
 		this.setXCoor(x);
 		this.setYCoor(y);

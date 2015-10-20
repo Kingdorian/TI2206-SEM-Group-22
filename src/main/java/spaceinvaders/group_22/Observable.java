@@ -36,9 +36,9 @@ public abstract class Observable {
 	/**
 	 * Notifies the observers about a change.
 	 */
-	final void notifyObservers() {
+	protected final void notifyObservers() {
 		for (Observer o : observers) {
-			o.update(o);
+			o.update(this);
 		}
 	}
 }

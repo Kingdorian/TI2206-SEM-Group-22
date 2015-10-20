@@ -1,8 +1,7 @@
 package spaceinvaders.group_22.sound;
 
-import java.util.Observable;
-import java.util.Observer;
 
+import spaceinvaders.group_22.Observer;
 import spaceinvaders.group_22.unit.Soundable;
 
 /**
@@ -38,11 +37,10 @@ public final class SoundController implements Observer {
 	}
 
 	@Override
-	public void update(final Observable o, final Object arg) {
+	public void update(final Object o) {
 		if (o instanceof Soundable) {
 			((Soundable) o).getAudioClip().play();
 		}
-		
 	}
 
 }

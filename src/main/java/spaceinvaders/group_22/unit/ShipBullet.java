@@ -24,7 +24,7 @@ public class ShipBullet extends Bullet implements Soundable {
 	 */
 	public ShipBullet(final double x, final double y) {
 		super(x, y);
-		setChanged();
+		notifyObservers();
 	}
 
 	/**

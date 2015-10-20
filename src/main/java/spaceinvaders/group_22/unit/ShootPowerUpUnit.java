@@ -1,7 +1,9 @@
 package spaceinvaders.group_22.unit;
 
+import javafx.scene.media.AudioClip;
 import spaceinvaders.group_22.Player;
 import spaceinvaders.group_22.ShootPowerUp;
+import spaceinvaders.group_22.sound.SoundLoader;
 import spaceinvaders.group_22.ui.SpriteLoader;
 
 /**
@@ -26,6 +28,7 @@ public class ShootPowerUpUnit extends PowerUpUnit {
 	@Override
 	public final void activate(final Player newplayer) {
 		new ShootPowerUp(newplayer);
+		notifyObservers();
 	}
 	
 	/**
@@ -41,6 +44,11 @@ public class ShootPowerUpUnit extends PowerUpUnit {
 	 */
 	public final void setSpriteImage() {
 		setSprite(SpriteLoader.getInstance().getShootPowerUp());
+	}
+	
+	@Override
+	public final AudioClip getAudioClip() {
+		return SoundLoader.getInstance().getShootPowerUp();
 	}
 
 }
