@@ -33,7 +33,7 @@ public class Logger {
 	 * 4 Errors, Warnings, Info and Debug
 	 * 5 Errors, Warnings, Info, Debug and Trace 
 	 */
-	private int logLevel;
+	private static int logLevel;
 	
 	/**
 	 * Creates a new logger object.
@@ -137,6 +137,12 @@ public class Logger {
 	 */
 	public final void setLogLevel(final int newLogLevel) {
 		logLevel = newLogLevel;
+	}
+	/**
+	 * Clears the logger.
+	 */
+	public final void clear() {
+		allEvents.clear();
 	}
 
 	

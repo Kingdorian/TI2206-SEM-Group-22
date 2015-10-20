@@ -16,9 +16,12 @@ public class LoggerTest {
 	@Test
 	public final void testLogEventException() {
 		Logger logger = Logger.getInstance();
+		logger.setLogLevel(5);
+		logger.clear();
 		LogEvent event = new LogEvent(new Exception(), "A test Exception occurred"); 
 		logger.log("A test Exception occurred", new Exception());
 		Assert.assertEquals(event, logger.getAllEvents().get(0));
+		logger.setLogLevel(1);
 	}
 	/**
 	 * Tests the log class for LogEvent.Type as a parameter.
@@ -44,9 +47,11 @@ public class LoggerTest {
 	@Test
 	public final void testLogEventExceptionLowerLogLevel() {
 		Logger logger = Logger.getInstance();
-		LogEvent event = new LogEvent(new Exception(), "A test Exception occurred"); 
+		logger.setLogLevel(0);
+		logger.clear();
 		logger.log("A test Exception occurred", new Exception());
 		Assert.assertEquals(new ArrayList<LogEvent>(), logger.getAllEvents());
+		logger.setLogLevel(1);
 	}
 	/**
 	 * Tests the log class for LogEvent.Type as a parameter when loglevel is lower then type.
@@ -54,7 +59,7 @@ public class LoggerTest {
 	@Test
 	public final void testLogEventLowerLogLevel() {
 		Logger logger = Logger.getInstance();
-		LogEvent event = new LogEvent(LogEvent.Type.INFO, "A test"); 
+		logger.clear();
 		logger.log("A test", LogEvent.Type.INFO);
 		// Since the loglevel is lower then the level of the added logEvent
 		// the LogEventlist should be an empty arrayList.
