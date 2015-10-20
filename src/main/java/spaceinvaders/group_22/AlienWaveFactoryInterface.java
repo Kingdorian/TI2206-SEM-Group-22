@@ -13,4 +13,6 @@ public interface AlienWaveFactoryInterface {
 	 * @throws Exception 
 	 */
 	AlienWave createWave();
+	
+	AlienWave createBossWave();
 }

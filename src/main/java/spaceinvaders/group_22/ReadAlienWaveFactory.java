@@ -30,8 +30,9 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 	 */
 	private ArrayList<WavePattern> patternList;
 	/**
-	 * WaveP
+	 * List of all boss patterns that are read from files.
 	 */
+	private ArrayList<WavePattern> bossPatternList;
 	/**
 	 * Constructor of the alien wave factory.
 	 * @param setgame game to set for this factory.
@@ -43,10 +44,17 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 		String sep = System.getProperty("file.separator");
 		patternList = waveReader.read("src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "waves" + sep);
+		bossPatternList = waveReader.read("src" + sep + "main" + sep + "resources" + sep
+				+ "spaceinvaders" + sep + "group_22" + sep + "bossWaves" + sep);
 	}
 	@Override
 	public final AlienWave createWave() {
 		return createWaveFromPattern(patternList.get((int) (Math.random() * patternList.size())));
+	}
+	
+	@Override
+	public final AlienWave createBossWave() {
+		return createBossWaveFromPattern(bossPatternList.get((int) (Math.random() * bossPatternList.size())));
 	}
 	/**
 	 * Creates a new alienwave according to the supplied pattern.
@@ -113,5 +121,10 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
         }
 
         return wave;
+	}
+	
+	public final AlienWave createBossWaveFromPattern(final WavePattern wavePattern){
+		ConcreteAlienWave wave = new ConcreteAlienWave();
+		return wave;
 	}
 }
