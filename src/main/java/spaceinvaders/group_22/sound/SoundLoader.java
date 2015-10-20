@@ -44,8 +44,6 @@ public final class SoundLoader {
     	addSoundFile("shoot.wav");
     	addSoundFile("start.wav");
     	
-    	sounds.get("start.wav").play();
-    	
     	Logger.getInstance().log("Initialized " + getClass().getName(), LogEvent.Type.INFO);
 	}
 	
@@ -89,6 +87,14 @@ public final class SoundLoader {
      */
     public AudioClip getExplosion() {
     	return sounds.get("explosion.wav");
+    }
+    
+    /**
+     * Getter method for a shooting spaceship sound.
+     * @return An AudioClip.
+     */
+    public AudioClip getShot() {
+    	return sounds.get("shoot.wav");
     }
     
     /**

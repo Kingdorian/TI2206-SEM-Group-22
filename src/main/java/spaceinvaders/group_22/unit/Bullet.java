@@ -25,6 +25,7 @@ public abstract class Bullet extends Unit implements MovableUnit {
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public Bullet(final double x, final double y) {
 		super(x, y);
+		setChanged();
 	}
 	/**
 	 * Move the unit in the direction of this unit and with his velocity.

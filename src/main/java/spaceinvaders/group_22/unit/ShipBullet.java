@@ -1,7 +1,9 @@
 package spaceinvaders.group_22.unit;
 
 import spaceinvaders.group_22.ui.SpriteLoader;
+import javafx.scene.media.AudioClip;
 import spaceinvaders.group_22.Player;
+import spaceinvaders.group_22.sound.SoundLoader;
 
 
 /**
@@ -9,7 +11,7 @@ import spaceinvaders.group_22.Player;
  * @author Ege de Bruin
  */
 
-public class ShipBullet extends Bullet {
+public class ShipBullet extends Bullet implements Soundable {
 	/**
 	 * Owner of this bullet.
 	 */
@@ -22,6 +24,7 @@ public class ShipBullet extends Bullet {
 	 */
 	public ShipBullet(final double x, final double y) {
 		super(x, y);
+		notifyObservers();
 	}
 
 	/**
@@ -43,6 +46,11 @@ public class ShipBullet extends Bullet {
 	 */
 	public final void setPlayer(final Player setPlayer) {
 		player = setPlayer;
+	}
+
+	@Override
+	public final AudioClip getAudioClip() {
+		return SoundLoader.getInstance().getShot();
 	}
 
 }
