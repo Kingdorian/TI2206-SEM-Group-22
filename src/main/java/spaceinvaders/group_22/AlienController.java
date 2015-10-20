@@ -104,10 +104,6 @@ public class AlienController extends UnitController implements MovableUnitContro
 					((ShipBullet) bullet).getPlayer().addScore(10);
 				}
 				game.getBullets().remove(bullet);
-
-				if (Math.random() > 0.6) {
-					game.getPowerUpController().createPowerUpUnit(bullet.getXCoor(), bullet.getYCoor());
-				}
 				break;
 			}
 		}
@@ -169,6 +165,11 @@ public class AlienController extends UnitController implements MovableUnitContro
 		for (Alien alien : list)  {
 			if (alien.getHealth() <= 0) {
 				alienWave.remove(alien);
+
+				//generate at random a powerup.
+				if (Math.random() > 0.6) {
+					game.getPowerUpController().createPowerUpUnit(alien.getXCoor(), alien.getYCoor());
+				}
 				Logger.getInstance().log("Removed Alien", LogEvent.Type.TRACE);
 			}
 		}	
