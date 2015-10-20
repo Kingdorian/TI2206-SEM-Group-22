@@ -40,7 +40,7 @@ public class Logger {
 	 * @param logLocation the location of the log file
 	 * @param level the scope of logging between 0-5.
 	 */
-	public Logger(final String logLocation, final int level) {
+	private Logger(final String logLocation, final int level) {
 		logLevel = level;
 		String folder = System.getProperty("user.dir");
 		new File(folder).mkdirs();
