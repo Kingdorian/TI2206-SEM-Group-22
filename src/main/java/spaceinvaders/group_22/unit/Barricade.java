@@ -1,5 +1,7 @@
 package spaceinvaders.group_22.unit;
 
+import java.util.Random;
+
 import spaceinvaders.group_22.ui.SpriteLoader;
 
 /**
@@ -9,11 +11,15 @@ import spaceinvaders.group_22.ui.SpriteLoader;
  */
 
 @SuppressWarnings("checkstyle:magicnumber")
-public class Barricade extends Unit {
+public class Barricade extends Unit implements Crumbling {
 	/**
 	 * Var that keeps track of damage taken by this barricade.
 	 */
 	private int health  = 10;
+	/**
+	 * 2d array with booleans for wich part of the barricade are already destroyed.
+	 */
+	boolean[][] damage = new boolean[15][5];
 	/**
 	 * Creates new Barricade object.
 	 * @param x X-coordinate of the barricade
@@ -69,6 +75,27 @@ public class Barricade extends Unit {
 	 */
 	public final void setSpriteImage() {
 		setSprite(SpriteLoader.getInstance().getBarrier());
+	}
+	/**
+	 * Crumbles part of the barricade at the given x and y coordinate.
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 */
+	@Override
+	public void crumble(double x, double y) {
+		int partWidthIndex = (int)(x/getWidth()/damage.length);
+		int partHeightIndex = (int)(y/getHeight()/damage[0].length);
+		int totalParts = damage.length*damage[0].length;
+		int brokenParts = 0;
+		Random randomizer = new Random();
+		while(brokenParts < 10) {
+			double randValue = randomizer.nextGaussian();
+			while(Math.abs(randValue) > 3 ) {
+				randValue = randomizer.nextGaussian();
+			}
+			randValue = damage.length*(randValue/6);
+			damage[(int)randValue][0] = false;
+		}
 	}
 	
 }
