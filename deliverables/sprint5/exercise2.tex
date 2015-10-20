@@ -1,5 +1,18 @@
 \section{Exercise 2 - Design patterns }
-\subsection{Singleton}
-\subsection{Observer}
+\subsection{Exercise 2.1 - Singleton}
+Before this sprint iteration, the project already contained an implementation of the singleton design pattern. The implementation of the singleton pattern is in the logger class. The singleton pattern ensures a class has only one instance. The singleton pattern also gives a global point to access this instance. The advantage of using a singleton pattern, is that you ensure that not two of the same objects are created. This could be important for object that only could have one instance. This is for example as used in this project the logger class, but could also be another class from which only one instance should be created.  The singleton pattern is implemented by making the constructor of this class private and creating a seperate getInstance mathod. This way you can ensure there is always one unique object of this class. The getInstance method and the logger instance variable are static, because they are used in a static way. Problems that could occur with this pattern is that you still can create two instances with singleton. This can happen when you use conccurent programming. By adding the volatile keyword it is ensured that threads handle the unique instance variable correctly when it is being initialized to the singleton instance.
+Another way to prevent this problem is by adding the synchronized keyword to the getInstance method. This forces every thread to wait its turn before it can enter the method.
+\subsection{Exercise 2.2 - Singleton}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=5cm]{logger.jpg}
+\caption{Singleton UML Class Diagram}
+\label{fig:2-2singleton}
+\end{figure}
+
+Figure \ref{fig:2-2singleton} contains the UML Class diagram for the singleton design pattern.
+\subsection{Exercise 2.3 - Singleton}
+Figure ..... contains the UML Sequence diagram for the singleton design pattern in the logger.
+\subsection{Exercise 2.1 - Observer}
 The Observer pattern is implemented in the sound effects.
 
