@@ -20,7 +20,7 @@ public class LoggerTest {
 		logger.clear();
 		LogEvent event = new LogEvent(new Exception(), "A test Exception occurred"); 
 		logger.log("A test Exception occurred", new Exception());
-		Assert.assertEquals(event, logger.getAllEvents().get(0));
+		Assert.assertTrue(logger.getAllEvents().contains(event));
 		logger.setLogLevel(1);
 	}
 	/**
@@ -50,7 +50,8 @@ public class LoggerTest {
 		logger.setLogLevel(0);
 		logger.clear();
 		logger.log("A test Exception occurred", new Exception());
-		Assert.assertEquals(new ArrayList<LogEvent>(), logger.getAllEvents());
+		LogEvent event = new LogEvent(new Exception(), "A test Exception occurred"); 
+		Assert.assertFalse(logger.getAllEvents().contains(event));
 		logger.setLogLevel(1);
 	}
 	/**
@@ -61,8 +62,9 @@ public class LoggerTest {
 		Logger logger = Logger.getInstance();
 		logger.clear();
 		logger.log("A test", LogEvent.Type.INFO);
+		LogEvent event = new LogEvent(LogEvent.Type.INFO, "A test"); 
 		// Since the loglevel is lower then the level of the added logEvent
 		// the LogEventlist should be an empty arrayList.
-		Assert.assertEquals(new ArrayList<LogEvent>(), logger.getAllEvents());
+		Assert.assertFalse(logger.getAllEvents().contains(event));
 	}
 }
