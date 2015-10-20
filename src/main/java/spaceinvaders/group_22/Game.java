@@ -65,6 +65,10 @@ public abstract class Game {
 	 * The controller of the Aliens.
 	 */
 	private AlienController alienController;
+	/**
+	 * The counter for the waves.
+	 */
+	private int waveCounter;
 
 	/**
 	 * Creates a new instance of game.
@@ -83,7 +87,8 @@ public abstract class Game {
 		barController = new BarricadeController(this);
 		barController.create();
 		alienController = new AlienController(this);
-		alienController.create();			
+		alienController.create();
+		waveCounter = 0;
 		Logger.getInstance().log("Created game succesfully", LogEvent.Type.INFO);
 	}
 
@@ -212,6 +217,14 @@ public abstract class Game {
 	 */
 	public final void setHasEnded(final boolean ended) {
 		hasEnded = ended;
+	}
+	
+	/**
+	 * Sets the waveCounter.
+	 * @param counter the new waveCounter
+	 */
+	public final void setWaveCounter(final int counter) {
+		waveCounter = counter;
 	}
 
 	// ONLY GETTERS BELOW
@@ -344,10 +357,17 @@ public abstract class Game {
 	
 	/**
 	 * Returns the ShipBullet velocity.
-	 * @return the ShipBulelt velocity
+	 * @return the ShipBullet velocity
 	 */
 	public final double getShipBulletVelX() {
 		return spaceShipBulletVelX;
 	}
 
+	/**
+	 * Returns the waveCounter.
+	 * @return the waveCounter
+	 */
+	public final int getWaveCounter() {
+		return waveCounter;
+	}
 }
