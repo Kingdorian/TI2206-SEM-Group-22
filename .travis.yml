@@ -9,7 +9,9 @@ notifications:
 addons:
   apt:
     packages:
-    - libglib2.0-dev
+    - libgtk2.0-dev
+    - libavcodec53
+    - libavformat53
 before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
