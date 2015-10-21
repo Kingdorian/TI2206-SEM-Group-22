@@ -25,7 +25,7 @@ Figure \ref{fig:2-3singleton} contains the UML Sequence diagram for the singleto
 \end{figure}
 
 \subsection{Exercise 2.1 - Observer}
-In this sprint sound effects were created, for this new feature the observer pattern is used. The observer pattern ensures, when an observable object is changed the observer is notified. In the implementation for the sound effects is the soundcontroller the observer and the objects that could generate a sound by change the observables. This are for example the explosion objects which should generate an explosion sound. To implement this roles as observer and observable the interfaces observable and observer are implemented. An advantage of using the observer pattern instead of adding a method call to the soundcontroller in the  the explosion class is that this way objects are loosely coupled. The objects can interact with each other but have very little knowledge of each other. It is also easy to add new observers withoud changing the observable class. 
+In this sprint sound effects were created, for this new feature the observer pattern is used. The observer pattern ensures, when an observable object is changed the observer is notified. In the implementation for the sound effects is the soundcontroller the observer and the objects that could generate a sound by change the observables. This are for example the explosion objects which should generate an explosion sound. To implement this roles the observer interface and the Observable abstract method is used. An advantage of using the observer pattern instead of adding a method call to the soundcontroller in the  the explosion class is that this way objects are loosely coupled. The objects can interact with each other but have very little knowledge of each other. It is also easy to add new observers withoud changing the observable class, so also other classes can be notified on a change. 
 
 \newpage
 
@@ -33,4 +33,10 @@ In this sprint sound effects were created, for this new feature the observer pat
 Figure \ref{fig:1-2sounds} contains the UML Class diagram for the observer design pattern concerning the sound effects.
 
 \subsection{Exercise 2.3 - Observer}
-Figure .... contains the UML sequence diagram for the observer design pattern concerning the sound effects.
+Figure \ref{fig:2-3sounds} contains the UML sequence diagram for the observer design pattern concerning the sound effects.
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=13cm]{soundsSequence.jpg}
+\caption{Sounds UML Sequence Diagram}
+\label{fig:2-3sounds}
+\end{figure}
