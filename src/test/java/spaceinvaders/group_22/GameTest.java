@@ -120,7 +120,7 @@ public abstract class GameTest {
 		bullet.setVelY(-10);
 		game.getBarricadeController().getBarricades().get(0).hit(bullet);
 		game.resetGame();
-		Assert.assertEquals(68, game.getBarricadeController().getBarricades().get(0).getHealth());
+		Assert.assertEquals(75, game.getBarricadeController().getBarricades().get(0).getHealth());
 	}
 	
 	/**

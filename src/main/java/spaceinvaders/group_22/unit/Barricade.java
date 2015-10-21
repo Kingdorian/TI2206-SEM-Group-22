@@ -3,6 +3,8 @@ package spaceinvaders.group_22.unit;
 import java.util.Arrays;
 import java.util.Random;
 
+import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.ui.SpriteLoader;
 
 /**
@@ -32,8 +34,6 @@ public class Barricade extends Unit implements Crumbling {
 			Arrays.fill(array, true);
 		}
 		health = damage.length * damage[0].length;
-		System.out.println(Arrays.toString(damage[1]));
-		this.crumble(50, 10);
 
 	}
 	/**
@@ -42,9 +42,20 @@ public class Barricade extends Unit implements Crumbling {
 	public final void hit(final Bullet hittingBullet) {
 		// Calculate hit location.
 		double hitterDir = hittingBullet.getVelY()/Math.abs(hittingBullet.getVelY());
-		double hitLocX = hittingBullet.getXCoor() + (hittingBullet.getWidth()/2);
-		double hitLocY = hittingBullet.getYCoor() 
-					+ (hittingBullet.getHeight()/2) + hittingBullet.getHeight()* hitterDir;
+		double hitLocX = hittingBullet.getXCoor() + (hittingBullet.getWidth()/2) - getXCoor();
+		double hitLocY = hittingBullet.getYCoor() + (hittingBullet.getHeight()/2) 
+				- (hittingBullet.getHeight()* hitterDir) - getYCoor();
+		// If the tip of the bullet does not hit the barricade
+		if(hitLocX < 0) {
+			hitLocX = 0;
+		}else if(hitLocX > getWidth() ) {
+			hitLocX = getWidth();
+		}
+		if(hitLocY < 0) { 
+			hitLocY = 0;
+		}else if(hitLocY > getHeight() ) {
+			hitLocY = getHeight();
+		}
 		if(health>(damage.length*damage[0].length)/10)  {
 			crumble(hitLocX, hitLocY);
 		}
@@ -99,21 +110,21 @@ public class Barricade extends Unit implements Crumbling {
 	 */
 	@Override
 	public void crumble(double x, double y) {
-		int partWidthIndex = (int)(x/getWidth()/damage.length);
-		int partHeightIndex = (int)(y/getHeight()/damage[0].length);
 		int totalParts = damage.length*damage[0].length;
 		int brokenParts = 0;
+		Logger.getInstance().log("Barricade hit at loc: (" + x + "," + y + ")", LogEvent.Type.DEBUG);
 		Random randomizer = new Random();
 		while(brokenParts < totalParts/10) {
 			double randX, randY;
 			do {
-				randX = randomizer.nextGaussian();
-				randX = partWidthIndex + damage.length*(randX/6);
-			} while((int)randX < 0 || (int)randX >= damage.length);
+				randX = (randomizer.nextGaussian() * (getWidth()/18)) + x;
+			} while(randX < 0 || randX > getWidth());
 			do {
-				randY = randomizer.nextGaussian();
-				randY = partHeightIndex + damage[0].length*(randY/6);
-			} while((int)randY < 0 || (int)randY >= damage[0].length);
+				randY = (randomizer.nextGaussian() * (getHeight()/18)) + y;
+			} while(randY < 0 || randY > getHeight());
+			// Map the (x,y) to a part of the grid 
+			randX = (randX * damage.length) / getWidth();
+			randY = (randY * damage[0].length) / getHeight();
 			if(damage[(int)randX][(int)randY]) {
 				damage[(int)randX][(int)randY] = false;
 				brokenParts++;
