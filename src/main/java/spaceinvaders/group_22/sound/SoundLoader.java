@@ -64,7 +64,9 @@ public final class SoundLoader {
 		if (uniqueInstance == null) {
 			synchronized (SoundLoader.class) {
 				if (uniqueInstance == null) {
-					uniqueInstance = new SoundLoader("spaceinvaders/group_22/sound/");
+					String sep = System.getProperty("file.separator");
+
+					uniqueInstance = new SoundLoader("spaceinvaders" +  sep + "group_22" + sep	+ "sound" + sep);
 		       }
 			}	
 		}
