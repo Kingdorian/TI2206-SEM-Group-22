@@ -1,5 +1,6 @@
 package spaceinvaders.group_22.unit;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import spaceinvaders.group_22.ui.SpriteLoader;
@@ -27,6 +28,10 @@ public class Barricade extends Unit implements Crumbling {
 	 */
 	public Barricade(final double x, final double y) {
 		super(x, y);
+		for(boolean[] array : damage) {
+			Arrays.fill(array, true);
+		}
+		System.out.println(Arrays.toString(damage[1]));
 	}
 	/**
 	 * When barricade is hit decrease health. 
@@ -88,14 +93,28 @@ public class Barricade extends Unit implements Crumbling {
 		int totalParts = damage.length*damage[0].length;
 		int brokenParts = 0;
 		Random randomizer = new Random();
-		while(brokenParts < 10) {
-			double randValue = randomizer.nextGaussian();
-			while(Math.abs(randValue) > 3 ) {
-				randValue = randomizer.nextGaussian();
+		while(brokenParts < totalParts/10) {
+			double randX, randY;
+			do {
+				randX = randomizer.nextGaussian();
+				randX = damage.length*(randX/6);
+			} while((int)randX < 0 || (int)randX >= damage.length);
+			do {
+				randY = randomizer.nextGaussian();
+				randY = damage[0].length*(randY/6);
+			} while((int)randY < 0 || (int)randY >= damage[0].length);
+			if(damage[(int)randX][(int)randY]) {
+				damage[(int)randX][(int)randY] = false;
+				brokenParts++;
 			}
-			randValue = damage.length*(randValue/6);
-			damage[(int)randValue][0] = false;
 		}
+	}
+	/**
+	 * Returns the damage to the barricade.
+	 * @return boolean[][] with false for damaged parts
+	 */
+	public boolean[][] getDamage() {
+		return damage;
 	}
 	
 }

@@ -2,6 +2,8 @@ package spaceinvaders.group_22.unit;
 
 import static org.junit.Assert.assertNotEquals;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 /**
@@ -27,5 +29,16 @@ public class BarricadeTest extends UnitTest {
 		bar2.hit();
 		assertNotEquals(bar1, bar2);
 	}
-
+	
+	/**
+	 * Tests the crumble method.
+	 */
+	@Test
+	public final void testCrumble() {
+		Barricade bar = new Barricade(0, 0);
+		bar.crumble(20, 5);
+		for(boolean[] row : bar.getDamage()) {
+			System.out.println(Arrays.toString(row));
+		}
+	}
 }
