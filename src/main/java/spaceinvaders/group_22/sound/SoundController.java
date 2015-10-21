@@ -55,7 +55,7 @@ public final class SoundController implements Observer {
 				/**
 				 * The fade of this ENUM.
 				 */
-				private static final double FADE = 8000;
+				private static final double FADE = 10000;
 				
 				@Override
 				public void play() { 

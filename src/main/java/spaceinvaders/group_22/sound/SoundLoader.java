@@ -52,7 +52,7 @@ public final class SoundLoader {
     	addSoundFile("powerup_speed.wav");
     	addSoundFile("shoot.wav");
     	addSoundFile("start.wav");  
-    	addBGMFile("bgm.mp3");
+    	addBGMFile("bgm.wav");
     	Logger.getInstance().log("Initialized " + getClass().getName(), LogEvent.Type.INFO);
 	}
 	
@@ -160,7 +160,7 @@ public final class SoundLoader {
      * @return A MediaPlayer containing the background music.
      */
     public MediaPlayer getBGMMusicPlayer() {
-    	return bgmsounds.get("bgm.mp3");
+    	return bgmsounds.get("bgm.wav");
     }
     
     /**
