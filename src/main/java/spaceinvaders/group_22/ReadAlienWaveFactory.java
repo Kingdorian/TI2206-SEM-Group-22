@@ -59,7 +59,7 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 		
 		
 		 // Distance to top of the screen.
-        double y = 128;
+        double y = 125;
         // Create alien object to make sure we can get the width and height of aliens
         Alien testAlien = new NormalAlien(0.0, 0.0); 
         // Drawing lines of Aliens.
