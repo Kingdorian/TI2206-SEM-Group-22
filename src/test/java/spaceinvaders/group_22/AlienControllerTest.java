@@ -178,6 +178,9 @@ public class AlienControllerTest {
 		assertEquals(game.getExplosions().size(), 1);
 	}
 	
+	/**
+	 * Test if there comes a Boss Wave in the thirs round.
+	 */
 	@Test
 	public final void testThirdRoundToBossWave() {
 		game.getAlienController().nextRound();
