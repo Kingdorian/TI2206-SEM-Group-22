@@ -98,7 +98,8 @@ public final class SoundLoader {
 				bgmsounds.put(filename, new MediaPlayer(new Media(resource.toString())));
 				Logger.getInstance().log("Loaded Sound " + filename, LogEvent.Type.DEBUG);
 			} catch (MediaException e) {
-				bgmsounds.put(filename, new MediaPlayer(null));
+				Logger.getInstance().log("Media cannot be loaded, set to null.", LogEvent.Type.WARNING);
+				bgmsounds.put(filename, null);
 			}
 		}
 	}
