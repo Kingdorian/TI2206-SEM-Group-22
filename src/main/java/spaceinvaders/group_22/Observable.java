@@ -10,8 +10,6 @@ import java.util.List;
  */
 public abstract class Observable {
 	
-	
-		
 	/**
 	 * List containing the observers subscribed to this observable.
 	 */
@@ -21,7 +19,7 @@ public abstract class Observable {
 	 * Registers a new observer to the observable object.
 	 * @param o Observer
 	 */
-	protected final void registerObserver(final Observer o) {
+	public final void registerObserver(final Observer o) {
 		observers.add(o);
 	}
 	
@@ -29,7 +27,7 @@ public abstract class Observable {
 	 * Removes an observer to the observable object.
 	 * @param o Observer to remove
 	 */
-	protected final void removeObserver(final Observer o) {
+	public final void removeObserver(final Observer o) {
 		if (observers.contains(o)) {
 			observers.remove(o);
 		}
@@ -38,9 +36,17 @@ public abstract class Observable {
 	/**
 	 * Notifies the observers about a change.
 	 */
-	protected final void notifyObservers() {
+	public final void notifyObservers() {
 		for (Observer o : observers) {
 			o.update(this);
 		}
+	}
+	
+	/**
+	 * Getter method for the observers of this observable.
+	 * @return The list of observers of this object.
+	 */
+	public final List<Observer> getObservers() {
+		return observers;
 	}
 }
