@@ -1,9 +1,7 @@
 package spaceinvaders.group_22.ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.StackPane;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.sound.SoundController;
@@ -15,8 +13,14 @@ import spaceinvaders.group_22.sound.SoundController;
  */
 public class GameMenuController {
 
+	/**
+	 * Button toggling sound effects.
+	 */
     @FXML private ToggleButton toggleSFX;
 
+    /**
+     * Button toggling background music.
+     */
     @FXML private ToggleButton toggleBGM;
 	
 	/**

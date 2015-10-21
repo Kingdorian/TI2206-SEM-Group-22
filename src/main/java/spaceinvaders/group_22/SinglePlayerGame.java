@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javafx.scene.input.KeyCode;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
-import spaceinvaders.group_22.sound.SoundController;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.SpaceShip;
@@ -94,7 +93,8 @@ public class SinglePlayerGame extends Game {
 		if (!shootingAllowed) {
 			if (countToShoot < ((1 / getTickrate()) / player.getSpaceShip().getShootTimes())) {
 				countToShoot++;
-			} else if (Double.compare((double) countToShoot, ((1 / getTickrate()) / player.getSpaceShip().getShootTimes())) >= 0) {
+			} else if (Double.compare((double) countToShoot, 
+					((1 / getTickrate()) / player.getSpaceShip().getShootTimes())) >= 0) {
 				shootingAllowed = true;
 				countToShoot = 0;
 			}
