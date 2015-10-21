@@ -22,7 +22,7 @@ public class Barricade extends Unit implements Crumbling {
 	/**
 	 * 2d array with booleans for wich part of the barricade are already destroyed.
 	 */
-	boolean[][] damage = new boolean[15][5];
+	boolean[][] damage = new boolean[10][5];
 	/**
 	 * Creates new Barricade object.
 	 * @param x X-coordinate of the barricade
@@ -40,11 +40,12 @@ public class Barricade extends Unit implements Crumbling {
 	 * When barricade is hit decrease health. 
 	 */
 	public final void hit(final Bullet hittingBullet) {
+		Logger.getInstance().log("Calculating bullet impact location", LogEvent.Type.DEBUG);
 		// Calculate hit location.
 		double hitterDir = hittingBullet.getVelY()/Math.abs(hittingBullet.getVelY());
-		double hitLocX = hittingBullet.getXCoor() + (hittingBullet.getWidth()/2) - getXCoor();
+		double hitLocX = hittingBullet.getXCoor() - (getXCoor()-(0.5*getWidth()));
 		double hitLocY = hittingBullet.getYCoor() + (hittingBullet.getHeight()/2) 
-				- (hittingBullet.getHeight()* hitterDir) - getYCoor();
+				- (hittingBullet.getHeight()* hitterDir) - getYCoor()+(0.5*getHeight());
 		// If the tip of the bullet does not hit the barricade
 		if(hitLocX < 0) {
 			hitLocX = 0;
@@ -59,7 +60,9 @@ public class Barricade extends Unit implements Crumbling {
 		if(health>(damage.length*damage[0].length)/10)  {
 			crumble(hitLocX, hitLocY);
 		}
-		else health = 0;
+		else{
+			health = 0;
+		}
 	}
 	/**
 	 * Return the amount of health the barricade has left.

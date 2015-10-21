@@ -140,7 +140,7 @@ public class CollisionsTest {
 		game.getBarricadeController().setBarricades(barricadeList);
 		game.setBullets(bullets);
 		game.getBarricadeController().barricadeCollisions();
-		assertEquals(68, game.getBarricadeController().getBarricades().get(0).getHealth());
+		assertEquals(45, game.getBarricadeController().getBarricades().get(0).getHealth());
 	}
 
 }

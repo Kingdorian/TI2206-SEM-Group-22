@@ -99,20 +99,19 @@ public class BarricadeController extends UnitController {
 		for (Barricade bar : barricades) {
 			Collisions collider = new Collisions();
 			if(collider.checkCollisions(bar, new ArrayList<Unit>(game.getBullets())) != null) {
-				System.out.print("Checking colissions");
 				boolean[][] damage = bar.getDamage();
 				outerloop : for(int i = 0; i < damage.length; i++) {
 					for(int j = 0; j < damage[i].length; j++) {
+						Logger.getInstance().log("Calculating collisions for barricade Part at :" + i + " " + j, LogEvent.Type.TRACE);
 						if(damage[i][j]) {
-							Barricade barPart = new Barricade(bar.getXCoor() + i*(bar.getWidth()/damage.length),  
-												bar.getYCoor() + j*(bar.getHeight())/damage[0].length);
+							Barricade barPart = new Barricade(bar.getXCoor()-(0.5*bar.getWidth()) + i*(bar.getWidth()/damage.length),  
+												bar.getYCoor()-(0.5*bar.getHeight()) + j*(bar.getHeight()/damage[0].length));
 							barPart.setWidth(bar.getWidth()/damage.length);
 							barPart.setHeight(bar.getHeight()/damage[0].length);
-							System.out.println("testing collissions");
 							Unit collidingUnit = new Collisions().checkCollisions(barPart, new ArrayList<Unit>(game.getBullets()));
 							if (collidingUnit != null) {
-								String logMessage = "Barricade collided bullet at X:" + bar.getXCoor() + " Y: " + bar.getYCoor();
-								Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
+								String logMessage = "Barricade collided bullet at X:" + barPart.getXCoor() + " Y: " + barPart.getYCoor();
+								Logger.getInstance().log(logMessage, LogEvent.Type.DEBUG);
 										
 								game.getExplosions().add(new Explosion(collidingUnit.getXCoor(), collidingUnit.getYCoor()));
 								game.getBullets().remove(collidingUnit);
