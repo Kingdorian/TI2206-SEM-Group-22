@@ -20,6 +20,7 @@ public class BossAlien extends Alien {
 	public BossAlien(final double x, final double y) {
 		super(x, y);
 		setHealth(20);
+		increaseShooting();
 	}
 
 	@Override
