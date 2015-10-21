@@ -1,6 +1,5 @@
 package spaceinvaders.group_22.sound;
 
-import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 

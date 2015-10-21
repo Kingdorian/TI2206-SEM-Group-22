@@ -87,7 +87,6 @@ public class MultiPlayerGame extends Game {
 			}
 		}
 		setHasEnded(true);
-		SoundController.Sound.STOP_GAME.play();
 		Logger.getInstance().log("Game is over", LogEvent.Type.DEBUG);
 	}
 	
@@ -122,7 +121,8 @@ public class MultiPlayerGame extends Game {
 			Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
 		}
 		if (!shootingAllowed.get(index)) {
-			if (countToShootMultiPlayer.get(index) < ((1 / getTickrate()) / players.get(index).getSpaceShip().getShootTimes())) {
+			if (countToShootMultiPlayer.get(index) 
+					< ((1 / getTickrate()) / players.get(index).getSpaceShip().getShootTimes())) {
 				countToShootMultiPlayer.set(index, countToShootMultiPlayer.get(index) + 1);
 			} else if (Double.compare((double) countToShootMultiPlayer.get(index), 
 									 ((1 / getTickrate()) / players.get(index).getSpaceShip().getShootTimes())) >= 0) {

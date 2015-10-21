@@ -355,6 +355,7 @@ public abstract class GameUIController
             	newGame();
             	
         		SoundController.Sound.START_GAME.play();
+        		SoundController.Sound.BGM.play();
             	getGame().start();
         	}
         } else if (event.getCode().equals(KeyCode.M)) {

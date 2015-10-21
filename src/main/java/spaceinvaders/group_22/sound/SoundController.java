@@ -23,38 +23,54 @@ public final class SoundController implements Observer {
 		/**
 		 * Start game sound.
 		 */
-		START_GAME { public void play() { 
-			MediaPlayer player = SoundLoader.getInstance().getBGMMusicPlayer();
-			player.stop();
-			
-			SoundLoader.getInstance().getStartGame().play(); 
-			
-			musicFadeIn(player, 6500);
-		
-		} },
-		
+		START_GAME {
+				@Override
+				public void play() { 
+					SoundLoader.getInstance().getStartGame().play(); 
+				} 
+				@Override
+				public void stop() {
+					SoundLoader.getInstance().getStartGame().stop(); 
+				} },
 		
 		/**
 		 * Stop game sound.
 		 */
-		STOP_GAME { public void play() { 
-			MediaPlayer player = SoundLoader.getInstance().getBGMMusicPlayer();
-			player.stop();
-			
-			SoundLoader.getInstance().getEndGame().play(); } },
-		
+		STOP_GAME { 
+				@Override
+				public void play() { 
+					SoundLoader.getInstance().getEndGame().play(); 
+				} 
+				@Override
+				public void stop() {
+					SoundLoader.getInstance().getStartGame().stop(); 
+				} },
 		/**
 		 * Sets the background music.
 		 */
-		BGM { public void play() { 
-			MediaPlayer player = SoundLoader.getInstance().getBGMMusicPlayer();
-			player.setCycleCount(MediaPlayer.INDEFINITE);
-			player.play(); } };
+		BGM { 
+				@Override
+				public void play() { 
+					MediaPlayer player = SoundLoader.getInstance().getBGMMusicPlayer();
+					player.setCycleCount(MediaPlayer.INDEFINITE);
+					musicFadeIn(player, 8000); 
+				} 
+				@Override
+				public void stop() {
+					MediaPlayer player = SoundLoader.getInstance().getBGMMusicPlayer();
+					player.stop();
+				} }; 
+		
 		
 		/**
-		 * Plays the AudioClip value.
+		 * Plays the ENUM value.
 		 */
 		public abstract void play();
+		
+		/**
+		 * Stops the ENUM value.
+		 */
+		public abstract void stop();
 		
 		/**
 		 * Fades music on play.

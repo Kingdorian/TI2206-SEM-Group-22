@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import spaceinvaders.group_22.MultiPlayerGame;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
+import spaceinvaders.group_22.sound.SoundController;
 import spaceinvaders.group_22.ui.GameUIController;
 import spaceinvaders.group_22.ui.UIElement;
 import spaceinvaders.group_22.ui.UIElementAlien;
@@ -110,6 +111,9 @@ public class MultiPlayerGameUIController extends GameUIController {
     
 	@Override
 	public final void setGameOverScreen() {
+		SoundController.Sound.STOP_GAME.play();
+		SoundController.Sound.BGM.stop();
+		
 		int p1Score = ((MultiPlayerGame) getGame()).getPlayers().get(0).getScore();
 		int p2Score = ((MultiPlayerGame) getGame()).getPlayers().get(1).getScore();
 		if (p1Score > p2Score) {

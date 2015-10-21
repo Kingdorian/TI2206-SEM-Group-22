@@ -66,7 +66,6 @@ public class SinglePlayerGame extends Game {
 			setHighScore(player.getScore());
 		}
 		setHasEnded(true);
-		SoundController.Sound.STOP_GAME.play();
 		Logger.getInstance().log("Game is over", LogEvent.Type.DEBUG);
 	}
 	@Override
