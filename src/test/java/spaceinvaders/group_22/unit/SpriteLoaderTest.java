@@ -24,7 +24,7 @@ public class SpriteLoaderTest {
 	private SpriteLoader loader;
 	
 	/**
-	 * Setup the collisons class.
+	 * Setup the spriteloader class.
 	 */
 	@Before
 	public final void setup() {

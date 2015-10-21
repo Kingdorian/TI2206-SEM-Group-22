@@ -1,5 +1,7 @@
 package spaceinvaders.group_22.sound;
 
+import java.io.File;
+import java.net.URL;
 import java.util.HashMap;
 
 import javafx.scene.media.AudioClip;
@@ -42,8 +44,7 @@ public final class SoundLoader {
     	addSoundFile("powerup_shoot.wav");
     	addSoundFile("powerup_speed.wav");
     	addSoundFile("shoot.wav");
-    	addSoundFile("start.wav");
-    	
+    	addSoundFile("start.wav");    	
     	Logger.getInstance().log("Initialized " + getClass().getName(), LogEvent.Type.INFO);
 	}
 	
@@ -66,11 +67,14 @@ public final class SoundLoader {
 	 * Method to load and add sound files to the sounds hashmap.
 	 * @param filename A sound filename.
 	 */
-	private void addSoundFile(final String filename) {
-		sounds.put(filename, 
-				new AudioClip(getClass().getClassLoader()
-						.getResource(soundFolderPath + filename).toString()));
-		Logger.getInstance().log("Loaded Sound " + filename, LogEvent.Type.DEBUG);
+	public void addSoundFile(final String filename) {
+		URL resource = getClass().getClassLoader().getResource(soundFolderPath + filename);
+		
+		if (resource != null) { 
+			sounds.put(filename, 
+					new AudioClip(resource.toString()));
+			Logger.getInstance().log("Loaded Sound " + filename, LogEvent.Type.DEBUG);
+		}
 	}
 	
     /**
@@ -127,6 +131,14 @@ public final class SoundLoader {
      */
     public AudioClip getStartGame() {
     	return sounds.get("start.wav");
+    }
+    
+    /**
+     * Returns the hashmap containing all sounds.
+     * @return HashMap<String, AudioClip> containing sounds referenced by key.
+     */
+    public HashMap<String, AudioClip> getSoundHashMap() {
+    	return sounds;
     }
     
 

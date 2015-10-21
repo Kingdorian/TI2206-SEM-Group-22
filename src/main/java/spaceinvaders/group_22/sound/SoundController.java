@@ -1,7 +1,6 @@
 package spaceinvaders.group_22.sound;
 
 
-import javafx.scene.media.AudioClip;
 import spaceinvaders.group_22.Observer;
 import spaceinvaders.group_22.unit.Soundable;
 
