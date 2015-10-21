@@ -108,7 +108,7 @@ public class Player {
 	public final void respawnShip() {
 		ship = new SpaceShip(game.getCanvasWidth() / 2, ship.getYCoor());
 		ship.setPlayer(this);
-
+		ship.setSpriteImage();
 		ArrayList<PowerUp> powerups = new ArrayList<PowerUp>();
 		powerups.addAll(getActivePowerUps());
 		for (PowerUp powerup : powerups) {
