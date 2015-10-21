@@ -6,6 +6,13 @@ jdk:
 notifications:
   webhooks:
     - http://octopull.rmhartog.me/api/travis/webhook
+addons:
+  apt:
+    packages:
+    - libgtk2.0-dev
+    - libavcodec53
+    - libavformat53
+    - libavutil51
 before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
