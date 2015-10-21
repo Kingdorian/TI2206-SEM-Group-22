@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Alien;
+import spaceinvaders.group_22.unit.BossAlien;
 import spaceinvaders.group_22.unit.HealthAlien;
 import spaceinvaders.group_22.unit.LargeAlien;
 import spaceinvaders.group_22.unit.NormalAlien;
@@ -66,7 +67,7 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 		ConcreteAlienWave wave = new ConcreteAlienWave();
 		
 		
-		 // Distance to top of the screen.
+		// Distance to top of the screen.
         double y = 125;
         // Create alien object to make sure we can get the width and height of aliens
         Alien testAlien = new NormalAlien(0.0, 0.0); 
@@ -123,8 +124,39 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
         return wave;
 	}
 	
-	public final AlienWave createBossWaveFromPattern(final WavePattern wavePattern){
+	public final AlienWave createBossWaveFromPattern(final WavePattern wavePattern) {
 		ConcreteAlienWave wave = new ConcreteAlienWave();
-		return wave;
+		// Distance to top of the screen.
+        double y = 125;
+        // Create alien object to make sure we can get the width and height of aliens
+        Alien testAlien = new NormalAlien(0.0, 0.0); 
+        // Drawing lines of Aliens.
+        for (int i = 0; i < wavePattern.getHeight(); i++) {
+        	ArrayList<Alien> aliens = new ArrayList<Alien>();
+        	 double interval = ((game.getCanvasWidth() 
+        			 - (2 * AlienController.ALIENBORDERMARGIN
+        					 * game.getCanvasWidth()))
+						- (wavePattern.getLength(i) * testAlien.getWidth())) / (wavePattern.getLength(i) + 1);  
+            double x = AlienController.ALIENBORDERMARGIN * game.getCanvasWidth() + 0.5 * testAlien.getWidth();
+            for (int j = 0; j < wavePattern.getLength(i); j++) {
+            	switch (wavePattern.getChar(i, j)) {
+            		case 'B':
+            			Alien alien = new BossAlien(x, y);
+                    	alien.setVelX(AlienController.getAlienVelX());
+                    	aliens.add(alien);
+                    	Logger.getInstance().log("Created Alien at location:(" + x + "," + y + ")", 
+                    			LogEvent.Type.TRACE);
+                      	break;
+            		default:
+            			
+            			break;
+            	}
+            	x += testAlien.getWidth() + interval;
+            }
+            y += 1.1 * testAlien.getHeight();
+            wave.addAlienRow(aliens);
+        }
+
+        return wave;
 	}
 }

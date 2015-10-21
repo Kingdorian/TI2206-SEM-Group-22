@@ -195,10 +195,10 @@ public class AlienController extends UnitController implements MovableUnitContro
 		Logger.getInstance().log("proceding to next round", LogEvent.Type.INFO);
 		alienVelX += ALIENVELXINCREASE;
 		alienWave.setAlienVelX(Math.abs(alienWave.getAlienVelX()) + AlienController.ALIENVELXINCREASE);
-		if(game.getWaveCounter() % 3 == 0){
-			alienWave = alienWaveFactory.createWave();
-		}
-		else{
+		game.setWaveCounter(game.getWaveCounter() + 1);
+		if (game.getWaveCounter() % 3 == 0) {
+			alienWave = alienWaveFactory.createBossWave();
+		} else {
 			alienWave = alienWaveFactory.createWave();
 		}
 	}

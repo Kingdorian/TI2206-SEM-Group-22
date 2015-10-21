@@ -53,6 +53,7 @@ public class SinglePlayerGame extends Game {
 		setExplosions(new ArrayList<Explosion>());
 		getBarricadeController().create();
 		getAlienController().create();
+		setWaveCounter(0);
 		player = new Player(this, getCanvasWidth() / 2);
 		shootingAllowed = true;
 		countToShoot = 0;

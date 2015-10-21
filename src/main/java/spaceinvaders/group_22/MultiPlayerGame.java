@@ -64,6 +64,7 @@ public class MultiPlayerGame extends Game {
 		setExplosions(new ArrayList<Explosion>());
 		getBarricadeController().create();
 		getAlienController().create();
+		setWaveCounter(0);
 		players.clear();
 		for (int i = 0; i < 2; i++) {
 			Player play = new Player(this, (i + 1) * getCanvasWidth() / 3);

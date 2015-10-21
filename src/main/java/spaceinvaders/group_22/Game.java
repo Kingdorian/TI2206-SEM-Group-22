@@ -88,7 +88,7 @@ public abstract class Game {
 		barController.create();
 		alienController = new AlienController(this);
 		alienController.create();
-		waveCounter = 0;
+		waveCounter = 1;
 		Logger.getInstance().log("Created game succesfully", LogEvent.Type.INFO);
 	}
 

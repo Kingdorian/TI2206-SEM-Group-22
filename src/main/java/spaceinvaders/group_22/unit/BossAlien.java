@@ -1,5 +1,7 @@
 package spaceinvaders.group_22.unit;
 
+import spaceinvaders.group_22.ui.SpriteLoader;
+
 public class BossAlien extends Alien{
 
 	public BossAlien(double x, double y) {
@@ -9,8 +11,7 @@ public class BossAlien extends Alien{
 
 	@Override
 	public void setSpriteImage() {
-		// TODO Auto-generated method stub
-		
+		setSprite(SpriteLoader.getInstance().getAlienLarge());	
 	}
 
 }
