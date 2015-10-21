@@ -124,6 +124,12 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
         return wave;
 	}
 	
+	/**
+	 * Creates a new boss wave according to the supplied pattern.
+	 * @param wavePattern the pattern to create the aliens from
+	 * @return to create a wave pattern
+	 */
+	@SuppressWarnings("checkstyle:magicnumber")
 	public final AlienWave createBossWaveFromPattern(final WavePattern wavePattern) {
 		ConcreteAlienWave wave = new ConcreteAlienWave();
 		// Distance to top of the screen.
