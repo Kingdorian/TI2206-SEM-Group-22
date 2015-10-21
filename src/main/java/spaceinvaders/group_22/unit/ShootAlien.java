@@ -16,6 +16,7 @@ public class ShootAlien extends Alien {
 	public ShootAlien(final double x, final double y) {
 		super(x, y);
 		increaseShooting();
+		setHealth(1);
 	}
 	
 	@Override
