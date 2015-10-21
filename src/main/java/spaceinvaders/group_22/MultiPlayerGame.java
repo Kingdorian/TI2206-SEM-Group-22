@@ -63,6 +63,7 @@ public class MultiPlayerGame extends Game {
 		setExplosions(new ArrayList<Explosion>());
 		getBarricadeController().create();
 		getAlienController().create();
+		setWaveCounter(0);
 		players.clear();
 		for (int i = 0; i < 2; i++) {
 			Player play = new Player(this, (i + 1) * getCanvasWidth() / 3);
@@ -112,15 +113,17 @@ public class MultiPlayerGame extends Game {
 	public final void tickShipShooting(final ArrayList<KeyCode> pressedKeys, final KeyCode needKey, final int index) {
 		if (pressedKeys.contains(needKey) && shootingAllowed.get(index)) {
 			Logger.getInstance().log("Player pressed " + needKey, LogEvent.Type.DEBUG);
-			Bullet bullet = players.get(index).getSpaceShip().shootBullet(-getShipBulletVelX());
-			getBullets().add(bullet);
+			ArrayList<Bullet> list = players.get(index).getSpaceShip().shootBullet(-getShipBulletVelX());
+			for (Bullet bullet : list) {
+				getBullets().add(bullet);
+				String logMessage = "Player shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
+				Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
+			}
 			shootingAllowed.set(index, false);
-			String logMessage = "Player shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
-			Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
 		}
 		if (!shootingAllowed.get(index)) {
-			if (countToShootMultiPlayer.get(index) < ((1 / getTickrate())
-					/ players.get(index).getSpaceShip().getShootTimes())) {
+			if (countToShootMultiPlayer.get(index) 
+					< ((1 / getTickrate()) / players.get(index).getSpaceShip().getShootTimes())) {
 				countToShootMultiPlayer.set(index, countToShootMultiPlayer.get(index) + 1);
 			} else if (Double.compare((double) countToShootMultiPlayer.get(index), 
 									 ((1 / getTickrate()) / players.get(index).getSpaceShip().getShootTimes())) >= 0) {
