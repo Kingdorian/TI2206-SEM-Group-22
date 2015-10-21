@@ -43,6 +43,10 @@ public class Player {
 	 * Indicates if player can get damaged by bullets.
 	 */
 	private boolean invulnerable = false;
+	/**
+	 * Number of this player.
+	 */
+	private int playerNumber = 1;
 	
 	/**
 	 * Creates new Player object.
@@ -168,6 +172,21 @@ public class Player {
 	 */
 	public final boolean isInvulnerable() {
 		return invulnerable;
+	}
+
+	/**
+	 * @return the playerNumber
+	 */
+	public final int getPlayerNumber() {
+		return playerNumber;
+	}
+
+	/**
+	 * @param playerNr the playerNumber to set
+	 */
+	public final void setPlayerNumber(final int playerNr) {
+		this.playerNumber = playerNr;
+		ship.setSpriteImage();
 	}
 	
 }

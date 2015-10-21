@@ -112,12 +112,22 @@
                      </image>
                   </ImageView>
                   <Canvas fx:id="canvas" height="720.0" layoutX="140.0" onKeyPressed="#handleKeyPressed" onKeyReleased="#handleKeyReleased" styleClass="canvas" width="1000.0" />
-                  <Label fx:id="scoreLabel" layoutX="150.0" prefHeight="50.0" prefWidth="200.0" textFill="WHITE">
+                  <Label text="Player 1" layoutX="150.0" prefHeight="50.0" prefWidth="200.0" textFill="#8d90ff">
+                     <font>
+                        <Font name="Impact" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="scoreLabel" layoutY="30.0" layoutX="150.0" prefHeight="50.0" prefWidth="200.0" textFill="WHITE">
                      <font>
                         <Font name="Impact" size="36.0" />
                      </font>
                   </Label>
-                  <Label fx:id="scoreLabelPlayer2" alignment="CENTER_RIGHT" layoutX="930.0" prefHeight="50.0" prefWidth="200.0" textAlignment="RIGHT" textFill="WHITE">
+                   <Label text="Player 2" alignment="CENTER_RIGHT" layoutX="930.0" prefHeight="50.0" prefWidth="200.0" textAlignment="RIGHT" textFill="#ee6275">
+                     <font>
+                        <Font name="Impact" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="scoreLabelPlayer2" alignment="CENTER_RIGHT" layoutY="30.0" layoutX="930.0" prefHeight="50.0" prefWidth="200.0" textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="Impact" size="36.0" />
                      </font>

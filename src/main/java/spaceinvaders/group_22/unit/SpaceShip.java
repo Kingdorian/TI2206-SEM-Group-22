@@ -230,7 +230,11 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * Sets the right sprite image.
 	 */
 	public final void setSpriteImage() {
-		setSprite(SpriteLoader.getInstance().getSpaceShip());
+		if (player != null) {
+			setSprite(SpriteLoader.getInstance().getSpaceShip(player.getPlayerNumber()));
+		} else {
+			setSprite(SpriteLoader.getInstance().getSpaceShip(1));
+		}
 	}
 	
 	/**

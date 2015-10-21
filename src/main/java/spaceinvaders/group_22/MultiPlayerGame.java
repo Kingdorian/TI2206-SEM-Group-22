@@ -45,7 +45,7 @@ public class MultiPlayerGame extends Game {
 		super(width, height);
 		for (int i = 0; i < 2; i++) {
 			Player play = new Player(this, (i + 1) * getCanvasWidth() / 3);
-			
+			play.setPlayerNumber(i + 1);
 			players.add(play);
 			shootingAllowed.add(true);
 			countToShootMultiPlayer.add(0);

@@ -156,7 +156,7 @@ public class SpriteLoaderTest {
 		
 		Image expected = new Image(getClass().getClassLoader()
 				.getResource("spaceinvaders/group_22/images/" + filename).toString());
-		assertTrue(equalsImage(expected, loader.getSpaceShip()));
+		assertTrue(equalsImage(expected, loader.getSpaceShip(1)));
 	}
 	
 	/**
