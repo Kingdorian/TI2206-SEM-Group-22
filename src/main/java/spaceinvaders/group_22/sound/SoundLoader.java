@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
+import javafx.scene.media.MediaPlayer;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 
@@ -31,12 +33,18 @@ public final class SoundLoader {
 	private HashMap<String, AudioClip> sounds;
 	
 	/**
+	 * Hashmap containing all background music fragments.
+	 */
+	private HashMap<String, MediaPlayer> bgmsounds;
+	
+	/**
 	 * Constructor for a SoundLoader.
 	 * @param sFP the path to the sound folder.
 	 */
 	private SoundLoader(final String sFP) {
 		soundFolderPath = sFP;
     	sounds = new HashMap<String, AudioClip>();
+    	bgmsounds = new HashMap<String, MediaPlayer>();
     	
     	addSoundFile("end.wav");
     	addSoundFile("explosion.wav");
@@ -45,7 +53,7 @@ public final class SoundLoader {
     	addSoundFile("powerup_speed.wav");
     	addSoundFile("shoot.wav");
     	addSoundFile("start.wav");  
-    	addSoundFile("bgm.mp3");
+    	addBGMFile("bgm.mp3");
     	Logger.getInstance().log("Initialized " + getClass().getName(), LogEvent.Type.INFO);
 	}
 	
@@ -57,9 +65,7 @@ public final class SoundLoader {
 		if (uniqueInstance == null) {
 			synchronized (SoundLoader.class) {
 				if (uniqueInstance == null) {
-					String sep = System.getProperty("file.separator");
-
-					uniqueInstance = new SoundLoader("spaceinvaders" + sep + "group_22" + sep + "sound" + sep);
+					uniqueInstance = new SoundLoader("spaceinvaders/group_22/sound/");
 		       }
 			}	
 		}
@@ -77,7 +83,27 @@ public final class SoundLoader {
 			sounds.put(filename, new AudioClip(resource.toString()));
 			Logger.getInstance().log("Loaded Sound " + filename, LogEvent.Type.DEBUG);
 		}
-	}	
+	}
+	
+	/**
+	 * Method to load and add background music files to the sounds hashmap.
+	 * @param filename A background music filename.
+	 */
+	public void addBGMFile(final String filename) {
+		URL resource = getClass().getClassLoader().getResource(soundFolderPath + filename);
+	
+		if (resource != null) { 
+			
+			try {
+				bgmsounds.put(filename, new MediaPlayer(new Media(resource.toString())));
+				Logger.getInstance().log("Loaded Sound " + filename, LogEvent.Type.DEBUG);
+			} catch (MediaException e) {
+				bgmsounds.put(filename, new MediaPlayer(null));
+			}
+		}
+	}
+	
+	
 	
     /**
      * Getter method for the end game sound.
@@ -133,6 +159,14 @@ public final class SoundLoader {
      */
     public AudioClip getStartGame() {
     	return sounds.get("start.wav");
+    }
+    
+    /**
+     * Getter method for the background music.
+     * @return A MediaPlayer containing the background music.
+     */
+    public MediaPlayer getBGMMusicPlayer() {
+    	return bgmsounds.get("bgm.mp3");
     }
     
     /**

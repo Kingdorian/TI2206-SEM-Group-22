@@ -336,7 +336,7 @@ public abstract class GameUIController
         	
         	if (!paused) {
         		SoundController.Sound.START_GAME.play();
-        		//SoundController.Sound.BGM.play();
+        		SoundController.Sound.BGM.play();
         	}
         	
         	paused = false;
@@ -355,7 +355,7 @@ public abstract class GameUIController
             	newGame();
             	
         		SoundController.Sound.START_GAME.play();
-        		//SoundController.Sound.BGM.play();
+        		SoundController.Sound.BGM.play();
             	getGame().start();
         	}
         } else if (event.getCode().equals(KeyCode.M)) {
