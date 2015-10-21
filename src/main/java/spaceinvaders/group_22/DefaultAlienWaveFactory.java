@@ -38,8 +38,8 @@ public class DefaultAlienWaveFactory implements AlienWaveFactoryInterface {
         // Create alien object to make sure we can get the width and height of aliens
         Alien testAlien = new NormalAlien(0.0, 0.0); 
         double interval = 
-    		((game.getCanvasWidth() - (2 * AlienController.ALIENBORDERMARGIN * game.getCanvasWidth()))
-				- (AlienController.ALIENS_PER_ROW * testAlien.getWidth())) / (AlienController.ALIENS_PER_ROW + 1);  
+    		game.getCanvasWidth() - 2 * AlienController.ALIENBORDERMARGIN * game.getCanvasWidth()
+				- AlienController.ALIENS_PER_ROW * testAlien.getWidth() / AlienController.ALIENS_PER_ROW + 1;  
 
         // Drawing lines of Aliens.
         for (int i = 0; i < AlienController.AMOUNT_ALIEN_ROWS; i++) {

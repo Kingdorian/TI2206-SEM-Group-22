@@ -124,7 +124,7 @@ public class MultiPlayerGame extends Game {
 					/ players.get(index).getSpaceShip().getShootTimes())) {
 				countToShootMultiPlayer.set(index, countToShootMultiPlayer.get(index) + 1);
 			} else if (Double.compare((double) countToShootMultiPlayer.get(index), 
-									 ((1 / getTickrate()) / players.get(index).getSpaceShip().getShootTimes())) >= 0) {
+									 (1 / getTickrate()) / players.get(index).getSpaceShip().getShootTimes()) >= 0) {
 				shootingAllowed.set(index, true);
 				countToShootMultiPlayer.set(index, 0);
 			}

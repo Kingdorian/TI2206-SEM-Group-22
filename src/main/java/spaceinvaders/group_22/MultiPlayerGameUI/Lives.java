@@ -37,7 +37,7 @@ public class Lives extends UIElementLives {
     	// Draw lives for player 2
 		for (int i = 1; i <= ((MultiPlayerGame) getGame()).getPlayers().get(1).getLives(); i++) {
 			Logger.getInstance().log("Drawing player 1 lives",  LogEvent.Type.DEBUG);
-        	getGC().drawImage(heartImage, (getGame().getCanvasWidth() - 10) - heartImage.getWidth() * i, 50);
+        	getGC().drawImage(heartImage, getGame().getCanvasWidth() - 10 - heartImage.getWidth() * i, 50);
     	}
     	Logger.getInstance().log("Formatted hearts to UI", LogEvent.Type.TRACE);
 	}

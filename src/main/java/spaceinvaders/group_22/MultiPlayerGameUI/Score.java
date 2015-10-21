@@ -37,7 +37,7 @@ public class Score extends UIElementScore {
 	 */
 	@Override
 	public final void draw() {
-    	String scoreString = Integer.toString((player.getScore()));
+    	String scoreString = Integer.toString(player.getScore());
 		int digits = 7 - scoreString.length();
     	for (int i = 0; i < digits; i++) {
     		scoreString = "0" + scoreString;
