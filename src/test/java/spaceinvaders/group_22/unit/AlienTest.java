@@ -56,5 +56,40 @@ public class AlienTest extends UnitTest {
 		alien.hit();
 		assertEquals(alien.getHealth(), 4);
 	}
+	/**
+	 * Test the health of a BossAlien.
+	 */
+	@Test
+	public final void bossHealthTest() {
+		float x = 1;
+		float y = 1;
+		Alien alien = new BossAlien(x, y);
+		alien.hit();
+		assertEquals(alien.getHealth(), 19);
+	}
+	/**
+	 * Test the shoot method for a BossAlien.
+	 */
+	@Test
+	public final void bossShootTest() {
+		float x = 1;
+		float y = 1;
+		Alien alien = new BossAlien(x, y);
+		ArrayList<Bullet> list = alien.shootBullet(1);
+		assertEquals(list.size(), 6);
+	}
+	/**
+	 * Test moving for a BossAlien
+	 */
+	@Test
+	public final void bossMoveTest() {
+		float x = 1;
+		float y = 1;
+		Alien alien = new BossAlien(x, y);
+		alien.setVelX(1);
+		alien.setVelY(1);
+		alien.move(1);
+		assertEquals(alien.getYCoor(), 1, 0);
+	}
 
 }

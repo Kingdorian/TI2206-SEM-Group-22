@@ -184,4 +184,13 @@ public abstract class GameTest {
 		game.setBullets(bulletlist);
 		Assert.assertEquals(bulletlist, game.getShipBullets());
 	}
+	
+	/**
+	 * Tests the waveCounter.
+	 */
+	@Test
+	public final void testWaveCounter() {
+		game.getAlienController().nextRound();
+		Assert.assertEquals(2, game.getWaveCounter());
+	}
 }
