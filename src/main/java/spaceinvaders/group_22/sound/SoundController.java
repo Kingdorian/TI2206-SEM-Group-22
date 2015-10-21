@@ -23,49 +23,35 @@ public final class SoundController implements Observer {
 		/**
 		 * Start game sound.
 		 */
-		START_GAME {
-				/**
-				 * AudioClip for this ENUM.
-				 */
-				private AudioClip clip = SoundLoader.getInstance().getStartGame();
+		START_GAME(SoundLoader.getInstance().getStartGame()) {
 				
 				@Override
 				public void play() { 
-					playSFX(clip); 
+					playSFX(getClip()); 
 				} 
 				
 				@Override
 				public void stop() {
-					clip.stop(); 
+					getClip().stop(); 
 				} },
 		
 		/**
 		 * Stop game sound.
 		 */
-		STOP_GAME {
-				/**
-				 * AudioClip for this ENUM.
-				 */
-				private AudioClip clip = SoundLoader.getInstance().getEndGame();	
-					
+		STOP_GAME(SoundLoader.getInstance().getEndGame()) {
 					
 				@Override
 				public void play() { 
-					playSFX(clip); 
+					playSFX(getClip()); 
 				} 
 				@Override
 				public void stop() {
-					clip.stop(); 
+					getClip().stop(); 
 				} },
 		/**
 		 * Sets the background music.
 		 */
-		BGM { 
-				/**
-				 * MediaPlayer for this ENUM.
-				 */
-				private MediaPlayer player = SoundLoader.getInstance().getBGMMusicPlayer();	
-					
+		BGM(SoundLoader.getInstance().getBGMMusicPlayer()) { 	
 				/**
 				 * The fade of this ENUM.
 				 */
@@ -73,13 +59,54 @@ public final class SoundController implements Observer {
 				
 				@Override
 				public void play() { 
-					playBGM(player, FADE);
+					playBGM(getPlayer(), FADE);
 				} 
 				@Override
 				public void stop() {
-					player.stop();
+					getPlayer().stop();
 				} }; 
 		
+		/**
+		 * An AudioClip for this enum.
+		 */
+		private AudioClip clip;
+		
+		/**
+		 * A MediaPlayer for this enum.
+		 */
+		private MediaPlayer player;
+		
+		/**
+		 * Constructor for a sound enum with a mediaplayer.
+		 * @param mediaPlayer a MediaPlayer object.
+		 */
+		Sound(final MediaPlayer mediaPlayer) {
+			player = mediaPlayer;
+		}
+		
+		/**
+		 * Constructor for a sound enum with an AudioClip.
+		 * @param soundClip an AudioClip object.
+		 */
+		Sound(final AudioClip soundClip) {
+			clip = soundClip;
+		}
+		
+		/**
+		 * Returns the audioclip of the enum.
+		 * @return an AudioClip
+		 */
+		public AudioClip getClip() {
+			return clip;
+		}
+		
+		/**
+		 * Returns the player of the enum.
+		 * @return a MediaPlayer
+		 */
+		public MediaPlayer getPlayer() {
+			return player;
+		}
 		
 		/**
 		 * Plays the ENUM value.
@@ -93,39 +120,39 @@ public final class SoundController implements Observer {
 		
 		/**
 		 * Plays the SFX if sfx is enabled.
-		 * @param clip The clip to play the music for.
+		 * @param audioClip The clip to play the music for.
 		 */
-		public void playSFX(final AudioClip clip) {
+		public void playSFX(final AudioClip audioClip) {
 			if (SoundController.getInstance().getSFXEnabled()) {
-				clip.play();
+				audioClip.play();
 			}
 		};
 		
 		/**
 		 * Plays the BGM if bgm is enabled.
-		 * @param player The musicPlayer to play the music for.
+		 * @param mediaPlayer The musicPlayer to play the music for.
 		 * @param fade The time the fade should take to fade the backgroundmusic in.
 		 */
-		public void playBGM(final MediaPlayer player, final double fade) {
+		public void playBGM(final MediaPlayer mediaPlayer, final double fade) {
 			if (SoundController.getInstance().getBGMEnabled()) {
-				player.setCycleCount(MediaPlayer.INDEFINITE);
-				musicFadeIn(player, fade); 
+				mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+				musicFadeIn(mediaPlayer, fade); 
 			}
 		};
 		
 		/**
 		 * Fades music on play.
-		 * @param player The musicplayer to fade in.
+		 * @param mediaPlayer The musicplayer to fade in.
 		 * @param fadetime The time for the fade to occur.
 		 */
-		public void musicFadeIn(final MediaPlayer player, final double fadetime) {
-			player.setVolume(0);
+		public void musicFadeIn(final MediaPlayer mediaPlayer, final double fadetime) {
+			mediaPlayer.setVolume(0);
 			
-			player.setOnReady(new Runnable() {
+			mediaPlayer.setOnReady(new Runnable() {
 
 			      @Override
 			      public void run() {
-			        player.play();
+			    	  mediaPlayer.play();
 			        new Transition() {
 			          {
 			            setCycleDuration(Duration.millis(fadetime));
@@ -133,7 +160,7 @@ public final class SoundController implements Observer {
 			          
 			          @Override
 			          protected void interpolate(final double frac) {
-			            player.setVolume(frac);
+			        	  mediaPlayer.setVolume(frac);
 			          }
 			        }.play();
 			      }
