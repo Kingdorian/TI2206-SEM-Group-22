@@ -1,6 +1,9 @@
 package spaceinvaders.group_22.sound;
 
 
+import javafx.animation.Transition;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import spaceinvaders.group_22.Observer;
 import spaceinvaders.group_22.unit.Soundable;
 
@@ -21,19 +24,65 @@ public final class SoundController implements Observer {
 		 * Start game sound.
 		 */
 		START_GAME { public void play() { 
-			SoundLoader.getInstance().getStartGame().play(); } },
+			MediaPlayer player = SoundLoader.getInstance().getBGMMusicPlayer();
+			player.stop();
+			
+			SoundLoader.getInstance().getStartGame().play(); 
+			
+			musicFadeIn(player, 6500);
+		
+		} },
 		
 		
 		/**
 		 * Stop game sound.
 		 */
 		STOP_GAME { public void play() { 
-			SoundLoader.getInstance().getEndGame().play(); } };
+			MediaPlayer player = SoundLoader.getInstance().getBGMMusicPlayer();
+			player.stop();
+			
+			SoundLoader.getInstance().getEndGame().play(); } },
+		
+		/**
+		 * Sets the background music.
+		 */
+		BGM { public void play() { 
+			MediaPlayer player = SoundLoader.getInstance().getBGMMusicPlayer();
+			player.setCycleCount(MediaPlayer.INDEFINITE);
+			player.play(); } };
 		
 		/**
 		 * Plays the AudioClip value.
 		 */
 		public abstract void play();
+		
+		/**
+		 * Fades music on play.
+		 * @param player The musicplayer to fade in.
+		 * @param fadetime The time for the fade to occur.
+		 */
+		public void musicFadeIn(final MediaPlayer player, final double fadetime) {
+			player.setVolume(0);
+			
+			player.setOnReady(new Runnable() {
+
+			      @Override
+			      public void run() {
+			        player.play();
+			        new Transition() {
+			          {
+			            setCycleDuration(Duration.millis(fadetime));
+			          }
+			          
+			          @Override
+			          protected void interpolate(final double frac) {
+			            player.setVolume(frac);
+			          }
+			        }.play();
+			      }
+			    });
+			
+		}
 	}
 	
 	

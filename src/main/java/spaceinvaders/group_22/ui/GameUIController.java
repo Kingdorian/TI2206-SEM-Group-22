@@ -336,6 +336,7 @@ public abstract class GameUIController
         	
         	if (!paused) {
         		SoundController.Sound.START_GAME.play();
+        		SoundController.Sound.BGM.play();
         	}
         	
         	paused = false;
