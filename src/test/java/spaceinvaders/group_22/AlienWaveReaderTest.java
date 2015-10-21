@@ -1,6 +1,6 @@
 package spaceinvaders.group_22;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,32 +13,49 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
-
+/**
+ * Test the Alien wave reader.
+ * @author Dorian
+ *
+ */
 public class AlienWaveReaderTest {
-	
+	/**
+	 * Alien Wave Reader object used for testing.
+	 */
 	private AlienWaveReader waveReader;
 	
 	/**
 	 * Class specifying rule to test JavaFX from GitHub.
 	 */
 	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
-	
+	/**
+	 * Setup the reader for testing.
+	 */
 	@Before
-	public void init() {
+	public final void init() {
 		// We need the logger
-		Game game = new SinglePlayerGame(10.0, 10.0);
 		waveReader = new AlienWaveReader();
 	}
+	/**
+	 * Test the read method for an empty file.
+	 * @throws FileNotFoundException when file not found.
+	 * @throws IOException when exception is thrown.
+	 */
 	@Test
-	public void testReadEmptyFile() throws FileNotFoundException, IOException {
+	public final void testReadEmptyFile() throws FileNotFoundException, IOException {
 		String sep = System.getProperty("file.separator");
 		File file = new File("src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "emptytestwave.wave");
 		ArrayListWavePattern pattern =  waveReader.parseFile(file);
 		Assert.assertEquals(0, pattern.size());
 	}
+	/**
+	 * Test the read method for only one line.
+	 * @throws FileNotFoundException  When the file is not found.
+	 * @throws IOException thrown when file can't be read.
+	 */
 	@Test
-	public void testReadOneLineFile() throws FileNotFoundException, IOException {
+	public final void testReadOneLineFile() throws FileNotFoundException, IOException {
 		String sep = System.getProperty("file.separator");
 		File file = new File("src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "oneline.wave");
@@ -50,8 +67,13 @@ public class AlienWaveReaderTest {
 		expectedPattern.addRow(tempList);
 		Assert.assertEquals(expectedPattern, pattern);
 	}
+	/**
+	 * Test the read method for multiple lines.
+	 * @throws FileNotFoundException  When the file is not found.
+	 * @throws IOException thrown when file can't be read.
+	 */
 	@Test
-	public void testReadMultiLineFile() throws FileNotFoundException, IOException {
+	public final void testReadMultiLineFile() throws FileNotFoundException, IOException {
 		String sep = System.getProperty("file.separator");
 		File file = new File("src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "multiline.wave");
@@ -63,19 +85,28 @@ public class AlienWaveReaderTest {
 		expectedPattern.addRow(chars2);
 		Assert.assertEquals(expectedPattern, pattern);
 	}
+	/**
+	 * Test the read method when the file is not found.
+	 * @throws FileNotFoundException  When the file is not found.
+	 * @throws IOException thrown when file can't be read.
+	 */
 	@Test(expected = FileNotFoundException.class)  
-	public void testTriggerFileNotFound() throws FileNotFoundException, IOException {
+	public final void testTriggerFileNotFound() throws FileNotFoundException, IOException {
 		String sep = System.getProperty("file.separator");
 		File file = new File("src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "notExistingFile.wave");
 		waveReader.parseFile(file);
 	}
+	/**
+	 * Test the read method for multiple files.
+	 * @throws FileNotFoundException  When the file is not found.
+	 * @throws IOException thrown when file can't be read.
+	 */
 	@Test
-	public void testReadMultipleFiles() throws  FileNotFoundException, IOException {
+	public final void testReadMultipleFiles() throws  FileNotFoundException, IOException {
 		String sep = System.getProperty("file.separator");
 		String file = "src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "testwaves" + sep + "2testfiles" + sep;
-		ArrayList<WavePattern> charPatterns = waveReader.read(file);
 		ArrayList<WavePattern> expectedPatterns = new ArrayList<WavePattern>();
 		ArrayListWavePattern expectedFile1 = new ArrayListWavePattern();
 		ArrayList<Character> expectedLine1 = new ArrayList<Character>();
@@ -96,8 +127,6 @@ public class AlienWaveReaderTest {
 		ArrayList<ArrayListWavePattern> otherExpPattern = new ArrayList<ArrayListWavePattern>();
 		otherExpPattern.add(expectedFile2);
 		otherExpPattern.add(expectedFile1);
-		assertTrue(expectedPatterns.equals(waveReader.read(file)) || otherExpPattern.equals(waveReader.read(file)));
-		
+		assertTrue(expectedPatterns.equals(waveReader.read(file)) || otherExpPattern.equals(waveReader.read(file)));		
 	}
-
 }
