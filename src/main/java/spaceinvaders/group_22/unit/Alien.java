@@ -46,12 +46,7 @@ public abstract class Alien extends Unit implements MovableUnit, ShootingUnit {
 	 * @return The shot Bullet
 	 */
 	public abstract ArrayList<Bullet> shootBullet(final double velocity);
-//		ArrayList<Bullet> list = new ArrayList<Bullet>();
-//		Bullet bullet = new AlienBullet(this.getXCoor(), this.getYCoor());
-//		bullet.setVelY(velocity);
-//		list.add(bullet);
-//		return list;
-//	}
+
 	/**
 	 * HashCode method.
 	 * @return hashcode of this object
@@ -84,14 +79,13 @@ public abstract class Alien extends Unit implements MovableUnit, ShootingUnit {
 		}
 		return false;
 	}	
+	
 	/**
 	 * Move the unit in the direction of this unit and with his velocity.
 	 * @param tickrate The rate at which the game ticks.
 	 */
 	public abstract void move(final double tickrate);
-//		setXCoor(this.getXCoor() + (this.getVelX() * tickrate));
-//		setYCoor(this.getYCoor() + (this.getVelY() * tickrate));
-//	}
+
 	/**
 	 * Returns the current velocity in the X direction.
 	 * @return the current velocity in the X direction in pixels per second.

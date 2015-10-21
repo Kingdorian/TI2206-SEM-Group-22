@@ -7,7 +7,6 @@ import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Explosion;
-import spaceinvaders.group_22.unit.SpaceShip;
 
 /**
  * 
@@ -123,7 +122,8 @@ public class MultiPlayerGame extends Game {
 			shootingAllowed.set(index, false);
 		}
 		if (!shootingAllowed.get(index)) {
-			if (countToShootMultiPlayer.get(index) < ((1 / getTickrate()) / players.get(index).getSpaceShip().getShootTimes())) {
+			if (countToShootMultiPlayer.get(index) 
+					< ((1 / getTickrate()) / players.get(index).getSpaceShip().getShootTimes())) {
 				countToShootMultiPlayer.set(index, countToShootMultiPlayer.get(index) + 1);
 			} else if (Double.compare((double) countToShootMultiPlayer.get(index), 
 									 ((1 / getTickrate()) / players.get(index).getSpaceShip().getShootTimes())) >= 0) {
