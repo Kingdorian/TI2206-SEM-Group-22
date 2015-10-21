@@ -85,11 +85,13 @@ public class SinglePlayerGame extends Game {
 	public final void tickShipShooting(final ArrayList<KeyCode> pressedKeys) {
 		if (pressedKeys.contains(KeyCode.SPACE) && shootingAllowed) {
 			Logger.getInstance().log("Player pressed Space", LogEvent.Type.DEBUG);
-			Bullet bullet = player.getSpaceShip().shootBullet(-getShipBulletVelX());
-			getBullets().add(bullet);
+			ArrayList<Bullet> list = player.getSpaceShip().shootBullet(-getShipBulletVelX());
+			for (Bullet bullet : list) {
+				getBullets().add(bullet);
+				String logMessage = "Player shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
+				Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
+			}
 			shootingAllowed = false;
-			String logMessage = "Player shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
-			Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
 		}
 		if (!shootingAllowed) {
 			if (countToShoot < ((1 / getTickrate()) / player.getSpaceShip().getShootTimes())) {

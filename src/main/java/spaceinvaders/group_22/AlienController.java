@@ -181,10 +181,12 @@ public class AlienController extends UnitController implements MovableUnitContro
 	public final void shootAlienBullets() {
 		for (Alien alien : alienWave.getAliens()) {
 			if (Math.random() < (alien.getBulletChance() * game.getTickrate()))   {
-				Bullet bullet = alien.shootBullet(60);
-				game.getBullets().add(bullet);
-				String logMessage = "Alien shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
-				Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
+				ArrayList<Bullet> list = alien.shootBullet(60);
+				for (Bullet bullet : list) {
+					game.getBullets().add(bullet);
+					String logMessage = "Alien shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
+					Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
+				}
 			}	
 		}
 	}
