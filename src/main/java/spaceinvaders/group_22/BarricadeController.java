@@ -103,7 +103,7 @@ public class BarricadeController extends UnitController {
 						
 				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(), collidingUnit.getYCoor()));
 				game.getBullets().remove(collidingUnit);
-				bar.hit();
+				bar.hit(collidingUnit);
 			}
 		}
 	}

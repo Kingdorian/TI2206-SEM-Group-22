@@ -26,7 +26,7 @@ public class BarricadeTest extends UnitTest {
 	public final void testEqualsHealth() {
 		Barricade bar1 = new Barricade(1.2, 3);
 		Barricade bar2 = new Barricade(1.2, 3);
-		bar2.hit();
+		bar2.hit(new AlienBullet(1, 2));
 		assertNotEquals(bar1, bar2);
 	}
 	

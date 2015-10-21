@@ -16,7 +16,7 @@ public class Barricade extends Unit implements Crumbling {
 	/**
 	 * Var that keeps track of damage taken by this barricade.
 	 */
-	private int health  = 10;
+	private int health;
 	/**
 	 * 2d array with booleans for wich part of the barricade are already destroyed.
 	 */
@@ -31,6 +31,7 @@ public class Barricade extends Unit implements Crumbling {
 		for(boolean[] array : damage) {
 			Arrays.fill(array, true);
 		}
+		health = damage.length * damage[0].length;
 		System.out.println(Arrays.toString(damage[1]));
 		this.crumble(50, 10);
 
@@ -38,8 +39,16 @@ public class Barricade extends Unit implements Crumbling {
 	/**
 	 * When barricade is hit decrease health. 
 	 */
-	public final void hit() {
-		health--;
+	public final void hit(final Bullet hittingBullet) {
+		// Calculate hit location.
+		double hitterDir = hittingBullet.getVelY()/Math.abs(hittingBullet.getVelY());
+		double hitLocX = hittingBullet.getXCoor() + (hittingBullet.getWidth()/2);
+		double hitLocY = hittingBullet.getYCoor() 
+					+ (hittingBullet.getHeight()/2) + hittingBullet.getHeight()* hitterDir;
+		if(health>(damage.length*damage[0].length)/10)  {
+			crumble(hitLocX, hitLocY);
+		}
+		else health = 0;
 	}
 	/**
 	 * Return the amount of health the barricade has left.
@@ -109,6 +118,7 @@ public class Barricade extends Unit implements Crumbling {
 				damage[(int)randX][(int)randY] = false;
 				brokenParts++;
 			}
+			health--;
 		}
 	}
 	/**
