@@ -64,7 +64,7 @@ public class UIElementBarricade extends UIElementUnit {
             	if (damage[(int)(x/xInterval)][(int)(y/yInterval)]) {
             		color = pixelReader.getColor(x, y);
             	} else {
-            		color = new Color(0, 0, 0, 1.0);
+            		color = new Color(1, 1, 1, 0);
             	}
             	pixelWriter.setColor(x, y, color);
             }

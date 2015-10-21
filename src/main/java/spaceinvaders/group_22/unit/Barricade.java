@@ -32,6 +32,8 @@ public class Barricade extends Unit implements Crumbling {
 			Arrays.fill(array, true);
 		}
 		System.out.println(Arrays.toString(damage[1]));
+		this.crumble(50, 10);
+
 	}
 	/**
 	 * When barricade is hit decrease health. 
@@ -97,11 +99,11 @@ public class Barricade extends Unit implements Crumbling {
 			double randX, randY;
 			do {
 				randX = randomizer.nextGaussian();
-				randX = damage.length*(randX/6);
+				randX = partWidthIndex + damage.length*(randX/6);
 			} while((int)randX < 0 || (int)randX >= damage.length);
 			do {
 				randY = randomizer.nextGaussian();
-				randY = damage[0].length*(randY/6);
+				randY = partHeightIndex + damage[0].length*(randY/6);
 			} while((int)randY < 0 || (int)randY >= damage[0].length);
 			if(damage[(int)randX][(int)randY]) {
 				damage[(int)randX][(int)randY] = false;
