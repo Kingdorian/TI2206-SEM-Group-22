@@ -207,10 +207,8 @@ public final class SoundController implements Observer {
 
 	@Override
 	public void update(final Object o) {
-		if (o instanceof Soundable) {
-			if (sfxEnabled) {
-				((Soundable) o).getAudioClip().play();				
-			}
+		if (o instanceof Soundable && sfxEnabled) {
+			((Soundable) o).getAudioClip().play();				
 		}
 	}
 	
