@@ -1,7 +1,12 @@
 package spaceinvaders.group_22.ui;
 
+import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.StackPane;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
+import spaceinvaders.group_22.sound.SoundController;
 
 /**
  * Controller for the Game Menu.
@@ -9,6 +14,10 @@ import spaceinvaders.group_22.logger.Logger;
  *
  */
 public class GameMenuController {
+
+    @FXML private ToggleButton toggleSFX;
+
+    @FXML private ToggleButton toggleBGM;
 	
 	/**
 	 * Method to start a single player game.
@@ -34,5 +43,31 @@ public class GameMenuController {
 		//Make sure everything in the buffer of the logger is written to the file
 		Logger.getInstance().writeLog();
 		SpaceInvadersUI.getInstance().quit();
+	}
+	
+	/**
+	 * Toggles sound effects.
+	 */
+	public final void toggleSFX() {
+		SoundController controller = SoundController.getInstance();
+		
+		if (toggleSFX.isSelected()) {
+			controller.setSFXEnabled(false);
+		} else {
+			controller.setSFXEnabled(true);
+		}
+	}
+	
+	/**
+	 * Toggles background music.
+	 */
+	public final void toggleBGM() {
+		SoundController controller = SoundController.getInstance();
+		
+		if (toggleBGM.isSelected()) {
+			controller.setBGMEnabled(false);
+		} else {
+			controller.setBGMEnabled(true);
+		}
 	}
 }

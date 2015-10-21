@@ -11,3 +11,23 @@
  	-fx-font-color: white;
  	-fx-text-alignment: center;
 }
+
+.toggle-button {
+	-fx-font-family: Impact;
+	-fx-font-size: 24px;
+	-fx-font-color: #FFFFFF;
+	-fx-background-color: #4F4F4F;
+	-fx-opacity: 0.8;
+}
+
+.toggle-button:selected {
+	-fx-font-family: Impact;
+	-fx-font-size: 24px;
+	-fx-font-color: #4F4F4F;
+	-fx-background-color: #FFFFFF;
+	-fx-opacity: 0.8;
+}
+
+.toggle-button:selected .text {
+	-fx-strikethrough: true;
+} 
