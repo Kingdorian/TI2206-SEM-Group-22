@@ -112,8 +112,8 @@ public class SoundLoaderTest {
 	 */
 	@Test
 	public final void testAddBGMSoundFile() {
-		loader.addSoundFile("bgm.wav");
-		assertNotNull(loader.getSoundHashMap().get("bgm.wav"));		
+		loader.addSoundFile("bgm.mp3");
+		assertNotNull(loader.getSoundHashMap().get("bgm.mp3"));		
 	}
 	
 	/**
@@ -121,8 +121,8 @@ public class SoundLoaderTest {
 	 */
 	@Test
 	public final void testAddNonExistentBGMSoundFile() {
-		loader.addSoundFile("nonexistentbgm.wav");
-		assertNull(loader.getSoundHashMap().get("nonexistentbgm.wav"));		
+		loader.addSoundFile("nonexistentbgm.mp3");
+		assertNull(loader.getSoundHashMap().get("nonexistentbgm.mp3"));		
 	}
 
 }
