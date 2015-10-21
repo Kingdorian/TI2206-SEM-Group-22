@@ -112,7 +112,7 @@ public class MultiPlayerGameUIController extends GameUIController {
 	@Override
 	public final void setGameOverScreen() {
 		SoundController.Sound.STOP_GAME.play();
-		SoundController.Sound.BGM.stop();
+		//SoundController.Sound.BGM.stop();
 		
 		int p1Score = ((MultiPlayerGame) getGame()).getPlayers().get(0).getScore();
 		int p2Score = ((MultiPlayerGame) getGame()).getPlayers().get(1).getScore();
