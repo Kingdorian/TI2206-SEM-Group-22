@@ -168,7 +168,7 @@ public abstract class GameTest {
 		// Remove all existing bullets from the game.
 		game.resetGame();
 		ArrayList<Bullet> bulletlist = new ArrayList<Bullet>();
-		bulletlist.add(game.getAlienController().getAliens().get(0).shootBullet(1));
+		bulletlist.add(game.getAlienController().getAliens().get(0).shootBullet(1).get(0));
 		game.setBullets(bulletlist);
 		Assert.assertEquals(new ArrayList<Bullet>(), game.getShipBullets());
 	}
@@ -183,5 +183,14 @@ public abstract class GameTest {
 		bulletlist.add(new ShipBullet(50, 10));
 		game.setBullets(bulletlist);
 		Assert.assertEquals(bulletlist, game.getShipBullets());
+	}
+	
+	/**
+	 * Tests the waveCounter.
+	 */
+	@Test
+	public final void testWaveCounter() {
+		game.getAlienController().nextRound();
+		Assert.assertEquals(2, game.getWaveCounter());
 	}
 }

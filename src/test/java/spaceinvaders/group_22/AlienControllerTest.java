@@ -3,6 +3,7 @@ package spaceinvaders.group_22;
 import static org.junit.Assert.assertEquals;
 
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import org.junit.Test;
 
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Alien;
-
+import spaceinvaders.group_22.unit.BossAlien;
 import spaceinvaders.group_22.unit.NormalAlien;
 import spaceinvaders.group_22.unit.ShipBullet;
 
@@ -174,6 +175,16 @@ public class AlienControllerTest {
 		game.getBullets().add(b);
 		game.getAlienController().alienCollisions();
 		assertEquals(game.getExplosions().size(), 1);
+	}
+	
+	/**
+	 * Test if there comes a Boss Wave in the thirs round.
+	 */
+	@Test
+	public final void testThirdRoundToBossWave() {
+		game.getAlienController().nextRound();
+		game.getAlienController().nextRound();
+		assertTrue(game.getAlienController().getAliens().get(0) instanceof BossAlien);
 	}
 	
 }
