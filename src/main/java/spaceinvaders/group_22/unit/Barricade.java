@@ -117,8 +117,8 @@ public class Barricade extends Unit implements Crumbling {
 			if(damage[(int)randX][(int)randY]) {
 				damage[(int)randX][(int)randY] = false;
 				brokenParts++;
+				health--;
 			}
-			health--;
 		}
 	}
 	/**

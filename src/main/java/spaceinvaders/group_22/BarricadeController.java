@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Barricade;
+import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Collisions;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.Unit;
@@ -103,7 +104,7 @@ public class BarricadeController extends UnitController {
 						
 				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(), collidingUnit.getYCoor()));
 				game.getBullets().remove(collidingUnit);
-				bar.hit(collidingUnit);
+				bar.hit((Bullet)collidingUnit);
 			}
 		}
 	}
