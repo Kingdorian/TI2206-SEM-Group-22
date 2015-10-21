@@ -168,7 +168,7 @@ public abstract class GameTest {
 		// Remove all existing bullets from the game.
 		game.resetGame();
 		ArrayList<Bullet> bulletlist = new ArrayList<Bullet>();
-		bulletlist.add(game.getAlienController().getAliens().get(0).shootBullet(1));
+		bulletlist.add(game.getAlienController().getAliens().get(0).shootBullet(1).get(0));
 		game.setBullets(bulletlist);
 		Assert.assertEquals(new ArrayList<Bullet>(), game.getShipBullets());
 	}

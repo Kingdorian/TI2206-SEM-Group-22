@@ -2,6 +2,8 @@ package spaceinvaders.group_22.unit;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 /**
@@ -24,7 +26,8 @@ public class AlienTest extends UnitTest {
 		float x = 1;
 		float y = 1;
 		Alien alien = new NormalAlien(x, y);
-		Bullet bullet = alien.shootBullet(1);
+		ArrayList<Bullet> list = alien.shootBullet(1);
+		Bullet bullet = list.get(0);
 		assertEquals(alien.getXCoor(), bullet.getXCoor(), 0.05);
 		assertEquals(alien.getYCoor(), bullet.getYCoor(), 0.05);
 		bullet.move(1.0);
