@@ -1,9 +1,6 @@
 package spaceinvaders.group_22.sound;
 
-import javafx.animation.Transition;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 import spaceinvaders.group_22.Observer;
 import spaceinvaders.group_22.unit.Soundable;
 
@@ -47,42 +44,12 @@ public final class SoundController implements Observer {
 				@Override
 				public void stop() {
 					getClip().stop(); 
-				} },
-		/**
-		 * Sets the background music.
-		 */
-		BGM(SoundLoader.getInstance().getBGMMusicPlayer()) { 	
-				/**
-				 * The fade of this ENUM.
-				 */
-				private static final double FADE = 10000;
-				
-				@Override
-				public void play() { 
-					playBGM(getPlayer(), FADE);
-				} 
-				@Override
-				public void stop() {
-					getPlayer().stop();
-				} }; 
+				} };
 		
 		/**
 		 * An AudioClip for this enum.
 		 */
 		private AudioClip clip;
-		
-		/**
-		 * A MediaPlayer for this enum.
-		 */
-		private MediaPlayer player;
-		
-		/**
-		 * Constructor for a sound enum with a mediaplayer.
-		 * @param mediaPlayer a MediaPlayer object.
-		 */
-		Sound(final MediaPlayer mediaPlayer) {
-			player = mediaPlayer;
-		}
 		
 		/**
 		 * Constructor for a sound enum with an AudioClip.
@@ -98,14 +65,6 @@ public final class SoundController implements Observer {
 		 */
 		public AudioClip getClip() {
 			return clip;
-		}
-		
-		/**
-		 * Returns the player of the enum.
-		 * @return a MediaPlayer
-		 */
-		public MediaPlayer getPlayer() {
-			return player;
 		}
 		
 		/**
@@ -127,46 +86,6 @@ public final class SoundController implements Observer {
 				audioClip.play();
 			}
 		};
-		
-		/**
-		 * Plays the BGM if bgm is enabled.
-		 * @param mediaPlayer The musicPlayer to play the music for.
-		 * @param fade The time the fade should take to fade the backgroundmusic in.
-		 */
-		public void playBGM(final MediaPlayer mediaPlayer, final double fade) {
-			if (SoundController.getInstance().getBGMEnabled()) {
-				mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-				musicFadeIn(mediaPlayer, fade); 
-			}
-		};
-		
-		/**
-		 * Fades music on play.
-		 * @param mediaPlayer The musicplayer to fade in.
-		 * @param fadetime The time for the fade to occur.
-		 */
-		public void musicFadeIn(final MediaPlayer mediaPlayer, final double fadetime) {
-			mediaPlayer.setVolume(0);
-			
-			mediaPlayer.setOnReady(new Runnable() {
-
-			      @Override
-			      public void run() {
-			    	  mediaPlayer.play();
-			        new Transition() {
-			          {
-			            setCycleDuration(Duration.millis(fadetime));
-			          }
-			          
-			          @Override
-			          protected void interpolate(final double frac) {
-			        	  mediaPlayer.setVolume(frac);
-			          }
-			        }.play();
-			      }
-			    });
-			
-		}
 	}
 	
 	

@@ -85,7 +85,7 @@ public class SinglePlayerGameUIController extends GameUIController {
 	 */
 	public final void setGameOverScreen() {
 		SoundController.Sound.STOP_GAME.play();
-		SoundController.Sound.BGM.stop();
+		//SoundController.Sound.BGM.stop();
 
 		getGameOverLabel().setText("Game Over");
 		getHighscoreLabel().setText("Highscore: " + getGame().getHighScore());

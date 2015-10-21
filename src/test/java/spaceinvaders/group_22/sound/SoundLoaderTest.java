@@ -106,23 +106,5 @@ public class SoundLoaderTest {
 		loader.addSoundFile("nonexistent.wav");
 		assertNull(loader.getSoundHashMap().get("nonexistent.wav"));		
 	}
-	
-	/**
-	 * Test if a soundfile is added to the hashmap.
-	 */
-	@Test
-	public final void testAddBGMSoundFile() {
-		loader.addSoundFile("bgm.mp3");
-		assertNotNull(loader.getSoundHashMap().get("bgm.mp3"));		
-	}
-	
-	/**
-	 * Test if a soundfile is not added to the hashmap if it does not exist.
-	 */
-	@Test
-	public final void testAddNonExistentBGMSoundFile() {
-		loader.addSoundFile("nonexistentbgm.mp3");
-		assertNull(loader.getSoundHashMap().get("nonexistentbgm.mp3"));		
-	}
 
 }
