@@ -79,7 +79,7 @@ public class AlienTest extends UnitTest {
 		assertEquals(list.size(), 6);
 	}
 	/**
-	 * Test moving for a BossAlien
+	 * Test moving for a BossAlien.
 	 */
 	@Test
 	public final void bossMoveTest() {
