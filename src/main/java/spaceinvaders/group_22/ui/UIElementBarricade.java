@@ -35,16 +35,13 @@ public class UIElementBarricade extends UIElementUnit {
 	public final void draw() {
 		// Loop over all the barricades 
 		for (Barricade bar : getGame().getBarricadeController().getBarricades()) {
-			//Calculate opacity on base of the health of the barricade
-			Double opacity = bar.getHealth() * 0.1;
-			getGC().setGlobalAlpha(opacity);
 			drawUnit(bar);
-			getGC().setGlobalAlpha(1);
 		}
 		
 	}
 	@Override
 	public final void drawUnit(final Unit barricade) { 
+		Logger.getInstance().log("Drawing a barricade", LogEvent.Type.TRACE);
 		Image spriteImage = barricade.getSprite();
 		if(spriteImage == null) {
 			Logger.getInstance().log("Error reading spriteImage barricade", LogEvent.Type.TRACE);
@@ -59,12 +56,12 @@ public class UIElementBarricade extends UIElementUnit {
 		WritableImage finalSprite = 
 				new WritableImage(width, height);
 		PixelWriter pixelWriter = finalSprite.getPixelWriter();
-		double xInterval = bar.getWidth()/damage.length;
-		double yInterval = bar.getHeight()/damage[0].length;
+		double xInterval = bar.getWidth()/(damage.length);
+		double yInterval = bar.getHeight()/(damage[0].length);
 	    for (int y = 0; y < height; y++){
             for (int x = 0; x < width; x++){
             	Color color;
-            	if (damage[(int)(y/yInterval)][(int)(x/xInterval)]) {
+            	if (damage[(int)(x/xInterval)][(int)(y/yInterval)]) {
             		color = pixelReader.getColor(x, y);
             	} else {
             		color = new Color(0, 0, 0, 1.0);
