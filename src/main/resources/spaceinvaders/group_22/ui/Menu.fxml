@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spaceinvaders.group_22.ui.GameMenuController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spaceinvaders.group_22.ui.GameMenuController">
    <children>
       <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0">
          <children>
@@ -21,6 +21,8 @@
             <Button fx:id="startsingleplayer" layoutX="448.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#startSinglePlayer" prefHeight="96.0" prefWidth="384.0" stylesheets="@Menu.css" text="Singleplayer" />
             <Button layoutX="448.0" layoutY="424.0" mnemonicParsing="false" onMouseClicked="#startMultiPlayer" prefHeight="96.0" prefWidth="384.0" stylesheets="@Menu.css" text="Multiplayer" />
             <Button layoutX="448.0" layoutY="568.0" mnemonicParsing="false" onMouseClicked="#quit" prefHeight="96.0" prefWidth="384.0" stylesheets="@Menu.css" text="Quit" />
+            <ToggleButton id="toggleBGM" fx:id="toggleBGM" layoutX="961.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#toggleBGM" stylesheets="@Menu.css" text="BGM" />
+            <ToggleButton id="toggleSFX" fx:id="toggleSFX" layoutX="1051.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#toggleSFX" stylesheets="@Menu.css" text="SFX" />
          </children>
       </Pane>
    </children>

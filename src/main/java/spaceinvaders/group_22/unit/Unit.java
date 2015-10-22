@@ -1,6 +1,9 @@
 package spaceinvaders.group_22.unit;
 
+
 import javafx.scene.image.Image;
+import spaceinvaders.group_22.Observable;
+import spaceinvaders.group_22.sound.SoundController;
 
 /**
  * A unit in the game that has a position and velocity.
@@ -8,7 +11,7 @@ import javafx.scene.image.Image;
  * @author Bryan van Wijk
  */
 
-public abstract class Unit {
+public abstract class Unit extends Observable {
 	
 	/**
 	 * The X Coordinate of this unit.
@@ -41,6 +44,9 @@ public abstract class Unit {
 	 * @param y Coordinate of this unit.
 	 */
 	public Unit(final double x, final double y) {
+		//Add the soundcontroller as an observer.
+		registerObserver(SoundController.getInstance());
+		
 		this.setXCoor(x);
 		this.setYCoor(y);
 		this.setSpriteImage();
