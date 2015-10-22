@@ -48,6 +48,8 @@ public abstract class SpaceShipController extends UnitController implements Mova
 				Explosion spaceShipexplosion = new Explosion(ship.getXCoor(),
 								ship.getYCoor());
 				ship.setExplosion(spaceShipexplosion);
+				SpawnProtectionPowerup spawnprotection = new SpawnProtectionPowerup(ship.getPlayer());
+				ship.getPlayer().getActivePowerUps().add(spawnprotection);
 				game.getExplosions().add(spaceShipexplosion);
 				game.getBullets().remove(collidingBullet);
 			}
