@@ -13,4 +13,9 @@ public interface AlienWaveFactoryInterface {
 	 * @throws Exception 
 	 */
 	AlienWave createWave();
+	/**
+	 * Method to create a list of bossAlienWaves.
+	 * @return new BossAlienWave
+	 */
+	AlienWave createBossWave();
 }

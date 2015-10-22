@@ -2,6 +2,8 @@ package spaceinvaders.group_22.unit;
 
 import spaceinvaders.group_22.ui.SpriteLoader;
 
+import java.util.ArrayList;
+
 import spaceinvaders.group_22.Player;
 
 /**
@@ -75,11 +77,13 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * @param velocity The speed of the Bullet
 	 * @return The shot Bullet
 	 */
-	public final Bullet shootBullet(final double velocity) {
+	public final ArrayList<Bullet> shootBullet(final double velocity) {
+		ArrayList<Bullet> list = new ArrayList<Bullet>();
 		ShipBullet bullet = new ShipBullet(this.getXCoor(), this.getYCoor());
 		bullet.setPlayer(player);
 		bullet.setVelY(velocity);
-		return bullet;
+		list.add(bullet);
+		return list;
 	}	
 	
 	/**
