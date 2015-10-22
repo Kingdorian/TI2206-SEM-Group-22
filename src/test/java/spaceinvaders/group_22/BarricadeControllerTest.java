@@ -11,6 +11,8 @@ import org.junit.Test;
 
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Barricade;
+import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.ShipBullet;
 
 public class BarricadeControllerTest {
 	
@@ -57,4 +59,25 @@ public class BarricadeControllerTest {
 		barController.addBarricade(barricade);
 		//Assert.assertEquals(barricades, game.getBarricades());
 	}
+	/**
+	 * Tests if the returned colission value is correct when a bullet hits a barricade from below.
+	 */
+	@Test
+	public final void testCollision() {
+		Barricade bar = new Barricade(10, 10);
+		ArrayList<Barricade> barricades = new ArrayList<Barricade>();
+		barricades.add(bar);
+		barController.setBarricades(barricades);
+		Bullet b = new ShipBullet(15, 15);
+		ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+		bullets.add(b);
+		barController.getGame().setBullets(bullets);
+		barController.barricadeCollisions();
+		ArrayList<Barricade> testBarricades = new ArrayList<Barricade>();
+		Barricade testBar = new Barricade(10, 10);
+		testBar.hit(b);
+		testBarricades.add(testBar);
+		assertEquals(testBarricades, barController.getBarricades());
+	}
+
 }
