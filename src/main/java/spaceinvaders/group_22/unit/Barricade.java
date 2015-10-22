@@ -117,13 +117,17 @@ public class Barricade extends Unit implements Crumbling {
 		int brokenParts = 0;
 		Logger.getInstance().log("Barricade hit at loc: (" + x + "," + y + ")", LogEvent.Type.DEBUG);
 		Random randomizer = new Random();
+		double sigmaX = getWidth() / 6;
+		double sigmaY = getHeight() / 6;
 		while (brokenParts < totalParts / 10) {
 			double randX, randY;
 			do {
-				randX = randomizer.nextGaussian() * (getWidth() / 6) + x;
+				randX = randomizer.nextGaussian() * sigmaX + x;
+				sigmaX+= sigmaX/600;
 			} while(randX < 0 || randX > getWidth());
 			do {
-				randY = randomizer.nextGaussian() * (getHeight() / 6) + y;
+				randY = randomizer.nextGaussian() * sigmaY + y;
+				sigmaY+= sigmaY/600;
 			} while(randY < 0 || randY > getHeight());
 			// Map the (x,y) to a part of the grid 
 			randX = (randX * damage.length) / getWidth();
