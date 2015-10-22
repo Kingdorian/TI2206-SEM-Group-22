@@ -45,7 +45,7 @@ public class MultiPlayerGame extends Game {
 		super(width, height);
 		for (int i = 0; i < 2; i++) {
 			Player play = new Player(this, (i + 1) * getCanvasWidth() / 3);
-			
+			play.setPlayerNumber(i + 1);
 			players.add(play);
 			shootingAllowed.add(true);
 			countToShootMultiPlayer.add(0);
@@ -67,6 +67,7 @@ public class MultiPlayerGame extends Game {
 		players.clear();
 		for (int i = 0; i < 2; i++) {
 			Player play = new Player(this, (i + 1) * getCanvasWidth() / 3);
+			play.setPlayerNumber(i + 1);
 			players.add(play);
 			shootingAllowed.set(i, true);
 			countToShootMultiPlayer.set(i, 0);
@@ -126,7 +127,7 @@ public class MultiPlayerGame extends Game {
 					< ((1 / getTickrate()) / players.get(index).getSpaceShip().getShootTimes())) {
 				countToShootMultiPlayer.set(index, countToShootMultiPlayer.get(index) + 1);
 			} else if (Double.compare((double) countToShootMultiPlayer.get(index), 
-									 ((1 / getTickrate()) / players.get(index).getSpaceShip().getShootTimes())) >= 0) {
+									 (1 / getTickrate()) / players.get(index).getSpaceShip().getShootTimes()) >= 0) {
 				shootingAllowed.set(index, true);
 				countToShootMultiPlayer.set(index, 0);
 			}

@@ -74,9 +74,9 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
         // Drawing lines of Aliens.
         for (int i = 0; i < wavePattern.getHeight(); i++) {
         	ArrayList<Alien> aliens = new ArrayList<Alien>();
-        	 double interval = ((game.getCanvasWidth() 
+        	 double interval = (game.getCanvasWidth() 
         			 - (2 * AlienController.ALIENBORDERMARGIN
-        					 * game.getCanvasWidth()))
+        					 * game.getCanvasWidth())
 						- (wavePattern.getLength(i) * testAlien.getWidth())) / (wavePattern.getLength(i) + 1);  
             double x = AlienController.ALIENBORDERMARGIN * game.getCanvasWidth() + 0.5 * testAlien.getWidth();
             for (int j = 0; j < wavePattern.getLength(i); j++) {
