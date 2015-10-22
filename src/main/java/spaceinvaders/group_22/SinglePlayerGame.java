@@ -94,7 +94,7 @@ public class SinglePlayerGame extends Game {
 			if (countToShoot < ((1 / getTickrate()) / player.getSpaceShip().getShootTimes())) {
 				countToShoot++;
 			} else if (Double.compare((double) countToShoot, 
-						((1 / getTickrate()) / player.getSpaceShip().getShootTimes())) >= 0) {
+						(1 / getTickrate()) / player.getSpaceShip().getShootTimes()) >= 0) {
 				shootingAllowed = true;
 				countToShoot = 0;
 			}
