@@ -121,15 +121,4 @@ public final class SingleSpaceShipControllerTest {
 		controller.tick(keyList);
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() > 0);
 	}
-	/**
-	 * Test the checkexplosion method in the spaceshipcontroller.
-	 */
-	@Test
-	public void testCheckExplosions() {
-		SpaceShip ship = game.getPlayer().getSpaceShip();
-		game.getBullets().add(new AlienBullet(ship.getXCoor(), ship.getYCoor()));
-		controller.tick(new ArrayList<KeyCode>());
-		controller.checkExplosions(game.getPlayer());
-		assertEquals(game.getExplosions().size(), 1);
-	}
 }
