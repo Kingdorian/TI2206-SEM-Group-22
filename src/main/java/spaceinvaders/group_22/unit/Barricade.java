@@ -89,8 +89,7 @@ public class Barricade extends Unit implements Crumbling {
 		if (health != other.health) {
 			return false;
 		}
-
-		return true;
+		return Arrays.deepEquals(damage, other.getDamage());
 	}
 	
 	@Override
