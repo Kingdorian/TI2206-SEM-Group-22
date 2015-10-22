@@ -31,6 +31,7 @@ public class SinglePlayerGameTest extends GameTest {
 	 * Class to set up a game before each test is executed.
 	 */
 	@Before
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void setUp() {
 		singleGame = new SinglePlayerGame(200, 200);
 		singleGame.setTickrate(1.0);

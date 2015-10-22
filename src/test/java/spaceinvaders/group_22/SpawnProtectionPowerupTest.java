@@ -1,9 +1,6 @@
 package spaceinvaders.group_22;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Rule;
-import org.junit.Test;
 
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 

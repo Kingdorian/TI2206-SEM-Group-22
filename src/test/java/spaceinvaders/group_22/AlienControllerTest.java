@@ -14,7 +14,6 @@ import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Alien;
 
 import spaceinvaders.group_22.unit.NormalAlien;
-import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.ShipBullet;
 
 /**
@@ -170,7 +169,7 @@ public class AlienControllerTest {
 		row.add(alien);
 		row.add(alien2);
 		game.getAlienController().getAlienWave().addAlienRow(row);
-		ShipBullet b = new ShipBullet(20,20); 
+		ShipBullet b = new ShipBullet(20, 20); 
 		b.setPlayer(game.getPlayer());
 		game.getBullets().add(b);
 		game.getAlienController().alienCollisions();

@@ -27,19 +27,30 @@ public class JavaFXThreadingRule implements TestRule {
     private static boolean jfxIsSetup;
 
     @Override
-    public Statement apply(Statement statement, Description description) {
+    public final Statement apply(final Statement statement, final Description description) {
         
         return new OnJFXThreadStatement(statement);
     }
-
+    /**
+     * JFX statement for JUnit.
+     * @author Jochem
+     *
+     */
     private static class OnJFXThreadStatement extends Statement {
-        
+        /**
+         * Used for testing.
+         */
         private final Statement statement;
-
-        public OnJFXThreadStatement(Statement aStatement) {
+        /**
+         * 
+         * @param aStatement statement of JFX.
+         */
+        public OnJFXThreadStatement(final Statement aStatement) {
             statement = aStatement;
         }
-
+        /**
+         * Exception that could be thrown.
+         */
         private Throwable rethrownException = null;
         
         @Override
@@ -75,7 +86,7 @@ public class JavaFXThreadingRule implements TestRule {
 
         /**
          * Set up JavaFX, so testing is enabled for JFX elements.
-         * @throws InterruptedException
+         * @throws InterruptedException that could be thrown.
          */
         protected void setupJavaFX() throws InterruptedException {
             

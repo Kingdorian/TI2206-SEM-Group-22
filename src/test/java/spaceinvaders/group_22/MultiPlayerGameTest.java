@@ -9,13 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import spaceinvaders.group_22.unit.Alien;
-import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.NormalAlien;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import spaceinvaders.group_22.unit.SpaceShip;
-import static org.mockito.Mockito.times;
 
 /**
  * Multi Player game test.
@@ -38,6 +33,7 @@ public class MultiPlayerGameTest extends GameTest {
 	 * Class to set up a game before each test is executed.
 	 */
 	@Before
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void setUp() {
 		multiGame = new MultiPlayerGame(1280, 720);
 		multiGame.setTickrate(1.0);
@@ -50,6 +46,7 @@ public class MultiPlayerGameTest extends GameTest {
 	 * Tests if the reset method works correctly for resetting the player.
 	 */
 	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testResetPlayer() {
 		multiGame.getPlayers().get(0).addScore(111);
 		multiGame.resetGame();
@@ -61,6 +58,7 @@ public class MultiPlayerGameTest extends GameTest {
 	 * Tests the moveSpaceShip method for bouncing spaceship to the right border.
 	 */
 	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testShipBounceRight() {
 		multiGame.getPlayers().get(1).setSpaceShip(new SpaceShip(multiGame.getCanvasWidth() + 5, 10));
 		multiGame.getPlayers().get(1).getSpaceShip().setVelX(10.0);
@@ -71,6 +69,7 @@ public class MultiPlayerGameTest extends GameTest {
 	 * Tests if the shooting allowd method works correctly.
 	 */
 	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testShootingAllowed() {
 		multiGame.getPlayers().get(1).getSpaceShip().shootBullet(0.1);
 		multiGame.resetGame();
@@ -80,6 +79,7 @@ public class MultiPlayerGameTest extends GameTest {
 	 * Test the tick method for the multiplayer.
 	 */
 	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testTick() {
 		ArrayList<KeyCode> pressedKeys = new ArrayList<KeyCode>();
 		pressedKeys.add(KeyCode.ENTER);
@@ -92,7 +92,7 @@ public class MultiPlayerGameTest extends GameTest {
 		row.add(alien);
 		multiGame.getAlienController().getAlienWave().addAlienRow(row);
 		multiGame.tick(pressedKeys);
-		Assert.assertEquals(1, multiGame.getShipBullets().size() );
+		Assert.assertEquals(1, multiGame.getShipBullets().size());
 	}
 
 }
