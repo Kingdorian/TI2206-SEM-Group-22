@@ -8,7 +8,7 @@ import spaceinvaders.group_22.ui.SpriteLoader;
  *
  */
 
-public class HealthAlien extends Alien {
+public class HealthAlien extends DefaultAlien {
 	
 	/**
 	 * The maximum health.

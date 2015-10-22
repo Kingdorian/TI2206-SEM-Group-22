@@ -1,22 +1,12 @@
 package spaceinvaders.group_22.ui;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.Test;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.SinglePlayerGame;
-import spaceinvaders.group_22.unit.Unit;
 
 /**
  * Unit tests for the GameUIController class.

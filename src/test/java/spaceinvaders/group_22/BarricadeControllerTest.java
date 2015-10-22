@@ -1,7 +1,5 @@
 package spaceinvaders.group_22;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 
 import org.junit.Assert;
@@ -11,10 +9,16 @@ import org.junit.Test;
 
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Barricade;
-
+/**
+ * Test the barricade controller.
+ * @author Bryan
+ *
+ */
 public class BarricadeControllerTest {
-	
-	public BarricadeController barController;
+	/**
+	 * The barricade controller to test.
+	 */
+	private BarricadeController barController;
 	
 	/**
 	 * Class specifying rule to test JavaFX from GitHub.
@@ -55,6 +59,6 @@ public class BarricadeControllerTest {
 		barricades.add(barricade);
 		barController.setBarricades(new ArrayList<Barricade>());
 		barController.addBarricade(barricade);
-		//Assert.assertEquals(barricades, game.getBarricades());
+		Assert.assertEquals(barricades, barController.getBarricades());
 	}
 }

@@ -87,6 +87,26 @@
                         <Font name="Impact" size="36.0" />
                      </font>
                   </Label>  
+                   <Label  contentDisplay="RIGHT" layoutX="1000.0" layoutY="412.0" prefHeight="79.0" prefWidth="450.0" text="Controls" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Impact" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label contentDisplay="RIGHT" layoutX="940.0" layoutY="463.0" prefHeight="79.0" prefWidth="450.0" text="D: Move Right" textFill="#c3c1c1">
+                     <font>
+                        <Font name="Impact" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label contentDisplay="RIGHT" layoutX="960.0" layoutY="510.0" prefHeight="79.0" prefWidth="450.0" text="A: Move Left" textFill="#c3c1c1">
+                     <font>
+                        <Font name="Impact" size="30.0" />
+                     </font>
+                  </Label>   
+                   <Label contentDisplay="RIGHT" layoutX="945.0" layoutY="557.0" prefHeight="79.0" prefWidth="450.0" text="SPACE: Shoot" textFill="#c3c1c1">
+                     <font>
+                        <Font name="Impact" size="30.0" />
+                     </font>
+                  </Label>  
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0">

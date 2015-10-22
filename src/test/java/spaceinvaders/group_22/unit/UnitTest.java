@@ -3,7 +3,7 @@ package spaceinvaders.group_22.unit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
+
 
 import java.util.List;
 
@@ -15,7 +15,6 @@ import org.mockito.Mockito;
 
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.Observer;
-import spaceinvaders.group_22.Player;
 
 /**
  * Test the abstract unit class.

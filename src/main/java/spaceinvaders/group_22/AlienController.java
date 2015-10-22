@@ -104,10 +104,6 @@ public class AlienController extends UnitController implements MovableUnitContro
 					((ShipBullet) bullet).getPlayer().addScore(10);
 				}
 				game.getBullets().remove(bullet);
-
-				if (Math.random() > 0.6) {
-					game.getPowerUpController().createPowerUpUnit(bullet.getXCoor(), bullet.getYCoor());
-				}
 				break;
 			}
 		}
@@ -169,6 +165,11 @@ public class AlienController extends UnitController implements MovableUnitContro
 		for (Alien alien : list)  {
 			if (alien.getHealth() <= 0) {
 				alienWave.remove(alien);
+
+				//generate at random a powerup.
+				if (Math.random() > 0.6) {
+					game.getPowerUpController().createPowerUpUnit(alien.getXCoor(), alien.getYCoor());
+				}
 				Logger.getInstance().log("Removed Alien", LogEvent.Type.TRACE);
 			}
 		}	
@@ -181,10 +182,12 @@ public class AlienController extends UnitController implements MovableUnitContro
 	public final void shootAlienBullets() {
 		for (Alien alien : alienWave.getAliens()) {
 			if (Math.random() < (alien.getBulletChance() * game.getTickrate()))   {
-				Bullet bullet = alien.shootBullet(60);
-				game.getBullets().add(bullet);
-				String logMessage = "Alien shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
-				Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
+				ArrayList<Bullet> list = alien.shootBullet(60);
+				for (Bullet bullet : list) {
+					game.getBullets().add(bullet);
+					String logMessage = "Alien shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
+					Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
+				}
 			}	
 		}
 	}
@@ -195,7 +198,12 @@ public class AlienController extends UnitController implements MovableUnitContro
 		Logger.getInstance().log("proceding to next round", LogEvent.Type.INFO);
 		alienVelX += ALIENVELXINCREASE;
 		alienWave.setAlienVelX(Math.abs(alienWave.getAlienVelX()) + AlienController.ALIENVELXINCREASE);
-		alienWave = alienWaveFactory.createWave();
+		game.setWaveCounter(game.getWaveCounter() + 1);
+		if (game.getWaveCounter() % 3 == 0) {
+			alienWave = alienWaveFactory.createBossWave();
+		} else {
+			alienWave = alienWaveFactory.createWave();
+		}
 	}
 	
 	/**

@@ -50,6 +50,7 @@ public final class SpriteLoader {
 		addSprite("alien_health5.png");
 		addSprite("alien_large.png");
 		addSprite("spaceship.png");
+		addSprite("spaceship2.png");
 		addSprite("heart.png");
 		addSprite("barrier.png");
 		addSprite("explosion1.png");
@@ -141,9 +142,14 @@ public final class SpriteLoader {
     /**
      * Getter method for the spaceShip sprite.
      * @return The alien sprite Image.
+     * @param playerNr number of player to get the spaceShip for.
      */
-    public Image getSpaceShip() {
-    	return sprites.get("spaceship.png");
+    public Image getSpaceShip(final int playerNr) {
+    	if (playerNr > 1) {
+    		return sprites.get("spaceship" + Integer.toString(playerNr) + ".png");
+    	} else {
+    		return sprites.get("spaceship.png");
+    	}
     }
     
     /**
