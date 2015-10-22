@@ -22,7 +22,7 @@ public class Barricade extends Unit implements Crumbling {
 	/**
 	 * 2d array with booleans for wich part of the barricade are already destroyed.
 	 */
-	boolean[][] damage = new boolean[10][5];
+	private boolean[][] damage = new boolean[10][5];
 	/**
 	 * Creates new Barricade object.
 	 * @param x X-coordinate of the barricade
@@ -30,7 +30,7 @@ public class Barricade extends Unit implements Crumbling {
 	 */
 	public Barricade(final double x, final double y) {
 		super(x, y);
-		for(boolean[] array : damage) {
+		for (boolean[] array : damage) {
 			Arrays.fill(array, true);
 		}
 		health = damage.length * damage[0].length;
@@ -38,29 +38,29 @@ public class Barricade extends Unit implements Crumbling {
 	}
 	/**
 	 * When barricade is hit decrease health. 
+	 * @param hittingBullet the bullet that hits the barricade.
 	 */
 	public final void hit(final Bullet hittingBullet) {
 		Logger.getInstance().log("Calculating bullet impact location", LogEvent.Type.DEBUG);
 		// Calculate hit location.
-		double hitterDir = hittingBullet.getVelY()/Math.abs(hittingBullet.getVelY());
-		double hitLocX = hittingBullet.getXCoor() - (getXCoor()-(0.5*getWidth()));
-		double hitLocY = hittingBullet.getYCoor() + (hittingBullet.getHeight()/2) 
-				- (hittingBullet.getHeight()* hitterDir) - getYCoor()+(0.5*getHeight());
+		double hitterDir = hittingBullet.getVelY() / Math.abs(hittingBullet.getVelY());
+		double hitLocX = hittingBullet.getXCoor() - (getXCoor() - (0.5 * getWidth()));
+		double hitLocY = hittingBullet.getYCoor() + (hittingBullet.getHeight() / 2) 
+				- (hittingBullet.getHeight() * hitterDir) - getYCoor() + (0.5 *  getHeight());
 		// If the tip of the bullet does not hit the barricade
-		if(hitLocX < 0) {
+		if (hitLocX < 0) {
 			hitLocX = 0;
-		}else if(hitLocX > getWidth() ) {
+		} else if (hitLocX > getWidth()) {
 			hitLocX = getWidth();
 		}
-		if(hitLocY < 0) { 
+		if (hitLocY < 0) { 
 			hitLocY = 0;
-		}else if(hitLocY > getHeight() ) {
+		} else if (hitLocY > getHeight()) {
 			hitLocY = getHeight();
 		}
-		if(health>(damage.length*damage[0].length)/10)  {
+		if (health > (damage.length * damage[0].length) / 10)  {
 			crumble(hitLocX, hitLocY);
-		}
-		else{
+		} else {
 			health = 0;
 		}
 	}
@@ -112,24 +112,24 @@ public class Barricade extends Unit implements Crumbling {
 	 * @param y the y coordinate
 	 */
 	@Override
-	public void crumble(double x, double y) {
-		int totalParts = damage.length*damage[0].length;
+	public final void crumble(final double x, final double y) {
+		int totalParts = damage.length * damage[0].length;
 		int brokenParts = 0;
 		Logger.getInstance().log("Barricade hit at loc: (" + x + "," + y + ")", LogEvent.Type.DEBUG);
 		Random randomizer = new Random();
-		while(brokenParts < totalParts/10) {
+		while (brokenParts < totalParts / 10) {
 			double randX, randY;
 			do {
-				randX = (randomizer.nextGaussian() * (getWidth()/6)) + x;
+				randX = (randomizer.nextGaussian() * (getWidth() / 6)) + x;
 			} while(randX < 0 || randX > getWidth());
 			do {
-				randY = (randomizer.nextGaussian() * (getHeight()/6)) + y;
+				randY = (randomizer.nextGaussian() * (getHeight() / 6)) + y;
 			} while(randY < 0 || randY > getHeight());
 			// Map the (x,y) to a part of the grid 
 			randX = (randX * damage.length) / getWidth();
 			randY = (randY * damage[0].length) / getHeight();
-			if(damage[(int)randX][(int)randY]) {
-				damage[(int)randX][(int)randY] = false;
+			if (damage[(int) randX][(int) randY]) {
+				damage[(int) randX][(int) randY] = false;
 				brokenParts++;
 				health--;
 			}
@@ -139,7 +139,7 @@ public class Barricade extends Unit implements Crumbling {
 	 * Returns the damage to the barricade.
 	 * @return boolean[][] with false for damaged parts
 	 */
-	public boolean[][] getDamage() {
+	public final boolean[][] getDamage() {
 		return damage;
 	}
 	

@@ -6,8 +6,7 @@ import javafx.scene.input.KeyCode;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Bullet;
-import spaceinvaders.group_22.unit.Explosion;
-import spaceinvaders.group_22.unit.SpaceShip;
+import spaceinvaders.group_22.unit.Explosion;;
 
 /**
  * 
@@ -120,7 +119,8 @@ public class MultiPlayerGame extends Game {
 			Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
 		}
 		if (!shootingAllowed.get(index)) {
-			if (countToShootMultiPlayer.get(index) < ((1 / getTickrate()) / players.get(index).getSpaceShip().getShootTimes())) {
+			if (countToShootMultiPlayer.get(index) 
+					< ((1 / getTickrate()) / players.get(index).getSpaceShip().getShootTimes())) {
 				countToShootMultiPlayer.set(index, countToShootMultiPlayer.get(index) + 1);
 			} else if (Double.compare((double) countToShootMultiPlayer.get(index), 
 									 ((1 / getTickrate()) / players.get(index).getSpaceShip().getShootTimes())) >= 0) {

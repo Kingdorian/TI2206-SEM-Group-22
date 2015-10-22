@@ -7,8 +7,8 @@ package spaceinvaders.group_22.unit;
 public interface Crumbling {
 	/**
 	 * Crumbles part of the object from the x and y location where it is hit.
-	 * @param x
-	 * @param y
+	 * @param x the x location where the crumbling starts
+	 * @param y the y location where the crumbling starts
 	 */
-	abstract void crumble(double x, double y);
+	void crumble(double x, double y);
 }

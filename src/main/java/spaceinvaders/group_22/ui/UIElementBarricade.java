@@ -6,7 +6,6 @@ import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
@@ -43,25 +42,25 @@ public class UIElementBarricade extends UIElementUnit {
 	public final void drawUnit(final Unit barricade) { 
 		Logger.getInstance().log("Drawing a barricade", LogEvent.Type.TRACE);
 		Image spriteImage = barricade.getSprite();
-		if(spriteImage == null) {
+		if (spriteImage == null) {
 			Logger.getInstance().log("Error reading spriteImage barricade", LogEvent.Type.TRACE);
 			return;
 		}
-		Barricade bar = (Barricade)barricade;
+		Barricade bar = (Barricade) barricade;
 		final boolean[][] damage = bar.getDamage();
 
-		int width = (int)spriteImage.getWidth();
-		int height =  (int)spriteImage.getHeight();
+		int width = (int) spriteImage.getWidth();
+		int height =  (int) spriteImage.getHeight();
 		PixelReader pixelReader = spriteImage.getPixelReader();
 		WritableImage finalSprite = 
 				new WritableImage(width, height);
 		PixelWriter pixelWriter = finalSprite.getPixelWriter();
-		double xInterval = bar.getWidth()/(damage.length);
-		double yInterval = bar.getHeight()/(damage[0].length);
-	    for (int y = 0; y < height; y++){
-            for (int x = 0; x < width; x++){
+		double xInterval = bar.getWidth() / (damage.length);
+		double yInterval = bar.getHeight() / (damage[0].length);
+	    for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
             	Color color;
-            	if (damage[(int)(x/xInterval)][(int)(y/yInterval)]) {
+            	if (damage[(int) (x / xInterval)][(int) (y / yInterval)]) {
             		color = pixelReader.getColor(x, y);
             	} else {
             		color = new Color(1, 1, 1, 0);
