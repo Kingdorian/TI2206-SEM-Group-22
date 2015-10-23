@@ -1,19 +1,26 @@
 package spaceinvaders.group_22;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.ShipBullet;
 
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Barricade;
+
 /**
  * Test the barricade controller.
- * @author Bryan
+ * @author Bryan, Dorian
  *
  */
+
 public class BarricadeControllerTest {
 	/**
 	 * The barricade controller to test.
@@ -61,4 +68,47 @@ public class BarricadeControllerTest {
 		barController.addBarricade(barricade);
 		Assert.assertEquals(barricades, barController.getBarricades());
 	}
+	/**
+	 * Tests if the returned colission value is correct when a bullet hits a barricade from below.
+	 */
+	@Test
+	public final void testCollisionAbove() {
+		Barricade bar = new Barricade(10, 10);
+		ArrayList<Barricade> barricades = new ArrayList<Barricade>();
+		barricades.add(bar);
+		barController.setBarricades(barricades);
+		Bullet b = new ShipBullet(15, 15);
+		b.setVelY(10);
+		ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+		bullets.add(b);
+		barController.getGame().setBullets(bullets);
+		barController.barricadeCollisions();
+		ArrayList<Barricade> testBarricades = new ArrayList<Barricade>();
+		Barricade testBar = new Barricade(10, 10);
+		testBar.hit(b);
+		testBarricades.add(testBar);
+		assertEquals(testBarricades.get(0).getHealth(), barController.getBarricades().get(0).getHealth());
+	}
+	/**
+	 * Tests if the returned colission value is correct when a bullet hits a barricade from below.
+	 */
+	@Test
+	public final void testCollisionBelow() {
+		Barricade bar = new Barricade(10, 10);
+		ArrayList<Barricade> barricades = new ArrayList<Barricade>();
+		barricades.add(bar);
+		barController.setBarricades(barricades);
+		Bullet b = new ShipBullet(15, 15);
+		b.setVelY(-10);
+		ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+		bullets.add(b);
+		barController.getGame().setBullets(bullets);
+		barController.barricadeCollisions();
+		ArrayList<Barricade> testBarricades = new ArrayList<Barricade>();
+		Barricade testBar = new Barricade(10, 10);
+		testBar.hit(b);
+		testBarricades.add(testBar);
+		assertEquals(testBarricades.get(0).getHealth(), barController.getBarricades().get(0).getHealth());
+	}
+
 }

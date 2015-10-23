@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Barricade;
+import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Collisions;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.Unit;
@@ -93,17 +94,41 @@ public class BarricadeController extends UnitController {
 	/**
 	 * Method to check the collisions on barricades.
 	 */
+	@SuppressWarnings("checkstyle:magicnumber")
 	public final void barricadeCollisions() {
 		// Checking for colissions between bullets and barricades
 		for (Barricade bar : barricades) {
-			Unit collidingUnit = new Collisions().checkCollisions(bar, new ArrayList<Unit>(game.getBullets()));
-			if (collidingUnit != null) {
-				String logMessage = "Barricade collided bullet at X:" + bar.getXCoor() + " Y: " + bar.getYCoor();
-				Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
-						
-				game.getExplosions().add(new Explosion(collidingUnit.getXCoor(), collidingUnit.getYCoor()));
-				game.getBullets().remove(collidingUnit);
-				bar.hit();
+			Collisions collider = new Collisions();
+			if (collider.checkCollisions(bar, new ArrayList<Unit>(game.getBullets())) != null) {
+				boolean[][] damage = bar.getDamage();
+				outerloop : for (int i = 0; i < damage.length; i++) {
+					for (int j = 0; j < damage[i].length; j++) {
+						String logMessage = "Calculating collisions for barricade Part at :" + i + " " + j;
+						Logger.getInstance().log(logMessage, LogEvent.Type.TRACE);
+						if (damage[i][j]) {
+							double newBarX = bar.getXCoor() - (0.5 * bar.getWidth()) 
+												+ i * (bar.getWidth() / damage.length);
+							double newBarY = bar.getYCoor() - (0.5 * bar.getHeight()) + j 
+																			* (bar.getHeight() / damage[0].length);
+							Barricade barPart = new Barricade(newBarX, newBarY);
+							barPart.setWidth(bar.getWidth() / damage.length);
+							barPart.setHeight(bar.getHeight() / damage[0].length);
+							Unit collidingUnit = new Collisions().checkCollisions(
+															barPart, new ArrayList<Unit>(game.getBullets()));
+							if (collidingUnit != null) {
+								logMessage = "Barricade collided bullet at X:" 
+														+ barPart.getXCoor() + " Y: " + barPart.getYCoor();
+								Logger.getInstance().log(logMessage, LogEvent.Type.DEBUG);
+										
+								game.getExplosions().add(
+										new Explosion(collidingUnit.getXCoor(), collidingUnit.getYCoor()));
+								game.getBullets().remove(collidingUnit);
+								bar.hit((Bullet) collidingUnit);
+								break outerloop;
+							}
+						}
+					}
+				}
 			}
 		}
 	}
