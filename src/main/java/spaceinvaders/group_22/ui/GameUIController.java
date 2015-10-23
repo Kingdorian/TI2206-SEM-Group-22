@@ -361,6 +361,7 @@ public abstract class GameUIController
         } else if (event.getCode().equals(KeyCode.M)) {
         	if (getGame().hasEnded()) {
         		getGame().stop();
+        		SoundController.Sound.BGM.stop();
         		SpaceInvadersUI.getInstance().loadUIScreen("Menu.fxml");
         	}
         } else if (!pressedKeys.contains(event.getCode())) {
