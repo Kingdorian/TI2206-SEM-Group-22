@@ -25,7 +25,9 @@ public class BossAlien extends Alien {
 
 	@Override
 	public final void setSpriteImage() {
-		setSprite(SpriteLoader.getInstance().getAlienLarge());	
+		setSprite(SpriteLoader.getInstance().getBossSpaceShip());
+		// Set the location of impact close to the center instead of on the border.
+		this.setHeight(0.75 * SpriteLoader.getInstance().getBossSpaceShip().getHeight());
 	}
 
 	@Override

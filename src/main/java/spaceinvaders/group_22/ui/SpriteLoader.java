@@ -63,6 +63,8 @@ public final class SpriteLoader {
 		addSprite("powerup_red.png");
 		addSprite("glow_blue.png");
 		addSprite("glow_orange.png");
+		addSprite("bossspaceship.png");
+
 		
     	Logger.getInstance().log("Initialized " + getClass().getName(), LogEvent.Type.INFO);
 
@@ -220,5 +222,13 @@ public final class SpriteLoader {
      */
     public Image getLifePowerUp() {
     	return sprites.get("powerup_red.png");
+    }
+    
+    /**
+     * Getter method for the boss spaceship sprite.
+     * @return The boss spaceship sprite Image.
+     */
+    public Image getBossSpaceShip() {
+    	return sprites.get("bossspaceship.png");
     }
 }
