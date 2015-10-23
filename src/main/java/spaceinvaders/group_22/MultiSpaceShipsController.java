@@ -30,7 +30,6 @@ public class MultiSpaceShipsController extends SpaceShipController {
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
 		for (Player player: game.getPlayers()) {
 			spaceShipCollisions(player.getSpaceShip());
-			checkExplosions(player);
 		}
 		moveSpaceShip(pressedKeys, game.getPlayers().get(0));
 		ArrayList<KeyCode> secondShipKeys = new ArrayList<KeyCode>();

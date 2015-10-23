@@ -7,15 +7,12 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import javafx.scene.input.KeyCode;
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.Explosion;
 import spaceinvaders.group_22.unit.NormalAlien;
 import spaceinvaders.group_22.unit.ShipBullet;
-import spaceinvaders.group_22.unit.SpaceShip;
-import spaceinvaders.group_22.unit.Unit;
 
 /**
  * Test for the game class.
@@ -29,7 +26,9 @@ public abstract class GameTest {
 	 * Class specifying rule to test JavaFX from GitHub.
 	 */
 	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
-
+	/**
+	 * Game object used for testing purposes.
+	 */
 	private static Game game;
 	/**
 	 * Method to create a subclass of the game class.
@@ -105,8 +104,9 @@ public abstract class GameTest {
 	 * Tests if getAliens gets the ArrayList of aliens correctly.
 	 */
 	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testGetAliens() {
-		Game game = new SinglePlayerGame(100, 100);
+		game = new SinglePlayerGame(100, 100);
 		ArrayList<ArrayList<Alien>> aliens = new ArrayList<ArrayList<Alien>>();
 		game.getAlienController().getAlienWave().setAliens(aliens);
 		Assert.assertEquals(new ArrayList<ArrayList<Alien>>(), game.getAlienController().getAliens());
@@ -116,9 +116,11 @@ public abstract class GameTest {
 	 */
 	@Test
 	public final void testResetBarricades() {
-		game.getBarricadeController().getBarricades().get(0).hit();
+		ShipBullet bullet = new ShipBullet(10.0, 10.0);
+		bullet.setVelY(-10);
+		game.getBarricadeController().getBarricades().get(0).hit(bullet);
 		game.resetGame();
-		Assert.assertEquals(10, game.getBarricadeController().getBarricades().get(0).getHealth());
+		Assert.assertEquals(50, game.getBarricadeController().getBarricades().get(0).getHealth());
 	}
 	
 	/**
@@ -168,7 +170,7 @@ public abstract class GameTest {
 		// Remove all existing bullets from the game.
 		game.resetGame();
 		ArrayList<Bullet> bulletlist = new ArrayList<Bullet>();
-		bulletlist.add(game.getAlienController().getAliens().get(0).shootBullet(1));
+		bulletlist.add(game.getAlienController().getAliens().get(0).shootBullet(1).get(0));
 		game.setBullets(bulletlist);
 		Assert.assertEquals(new ArrayList<Bullet>(), game.getShipBullets());
 	}
@@ -183,5 +185,14 @@ public abstract class GameTest {
 		bulletlist.add(new ShipBullet(50, 10));
 		game.setBullets(bulletlist);
 		Assert.assertEquals(bulletlist, game.getShipBullets());
+	}
+	
+	/**
+	 * Tests the waveCounter.
+	 */
+	@Test
+	public final void testWaveCounter() {
+		game.getAlienController().nextRound();
+		Assert.assertEquals(2, game.getWaveCounter());
 	}
 }

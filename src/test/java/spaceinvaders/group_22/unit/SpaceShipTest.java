@@ -2,7 +2,8 @@ package spaceinvaders.group_22.unit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.mockito.Mockito.mock;
+
+import java.util.ArrayList;
 
 import org.junit.Test;
 
@@ -34,9 +35,8 @@ public class SpaceShipTest extends UnitTest {
 		float y = 1;
 		SpaceShip spaceship = new SpaceShip(x, y);
 
-		Player player = mock(Player.class);
-
-		Bullet bullet = spaceship.shootBullet(1);
+		ArrayList<Bullet> list = spaceship.shootBullet(1);
+		Bullet bullet = list.get(0);
 		assertEquals(spaceship.getXCoor(), bullet.getXCoor(), 0.05);
 		assertEquals(spaceship.getYCoor(), bullet.getYCoor(), 0.05);
 		bullet.move(1.0);

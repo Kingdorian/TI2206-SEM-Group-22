@@ -8,7 +8,7 @@ import spaceinvaders.group_22.ui.SpriteLoader;
  */
 
 @SuppressWarnings("checkstyle:magicnumber") 
-public class LargeAlien extends Alien {
+public class LargeAlien extends DefaultAlien {
 	/**
 	 * Creates a alien with health 5.
 	 * @param x location to create the alien on.

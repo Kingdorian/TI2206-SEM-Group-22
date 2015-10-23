@@ -24,7 +24,7 @@ public class SpriteLoaderTest {
 	private SpriteLoader loader;
 	
 	/**
-	 * Setup the collisons class.
+	 * Setup the spriteloader class.
 	 */
 	@Before
 	public final void setup() {
@@ -53,7 +53,7 @@ public class SpriteLoaderTest {
 	 * @param thatimage Image 2
 	 * @return If the image is equal or not.
 	 */
-	public final boolean equalsImage(Image thisimage, Image thatimage) {
+	public final boolean equalsImage(final Image thisimage, final Image thatimage) {
 		for (int i = 0; i < thisimage.getWidth(); i++) {
 		  for (int j = 0; j < thisimage.getHeight(); j++) {
 		    if (!thisimage.getPixelReader().getColor(i, j).equals(thatimage.getPixelReader().getColor(i, j))) {
@@ -156,7 +156,7 @@ public class SpriteLoaderTest {
 		
 		Image expected = new Image(getClass().getClassLoader()
 				.getResource("spaceinvaders/group_22/images/" + filename).toString());
-		assertTrue(equalsImage(expected, loader.getSpaceShip()));
+		assertTrue(equalsImage(expected, loader.getSpaceShip(1)));
 	}
 	
 	/**
@@ -277,5 +277,17 @@ public class SpriteLoaderTest {
 		Image expected = new Image(getClass().getClassLoader()
 				.getResource("spaceinvaders/group_22/images/" + filename).toString());
 		assertTrue(equalsImage(expected, loader.getLifePowerUp()));
+	}
+	
+	/**
+	 * Test if getLifePowerUp() returns the correct image.
+	 */
+	@Test
+	public final void testGetBossSpaceShip() {
+		String filename = "bossspaceship.png";
+		
+		Image expected = new Image(getClass().getClassLoader()
+				.getResource("spaceinvaders/group_22/images/" + filename).toString());
+		assertTrue(equalsImage(expected, loader.getBossSpaceShip()));
 	}
 }

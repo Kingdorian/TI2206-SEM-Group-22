@@ -30,7 +30,6 @@ public class Score extends UIElementScore {
 	public final void draw() {
     	String scoreString = Integer.toString(((SinglePlayerGame) getGame()).getPlayer().getScore());
 		int digits = 8 - scoreString.length();
-		Logger.getInstance().log(scoreString, LogEvent.Type.DEBUG);
     	for (int i = 0; i < digits; i++) {
     		scoreString = "0" + scoreString;
     	}

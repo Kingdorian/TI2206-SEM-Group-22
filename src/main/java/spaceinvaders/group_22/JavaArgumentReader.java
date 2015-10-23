@@ -20,7 +20,7 @@ public class JavaArgumentReader {
 	 * @param arguments The arguments to be read.
 	 */
 	public JavaArgumentReader(final String[] arguments) {
-		args = arguments;
+		args = arguments.clone();
 	}
 
 	/**

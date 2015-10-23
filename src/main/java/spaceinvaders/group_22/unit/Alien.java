@@ -1,5 +1,7 @@
 package spaceinvaders.group_22.unit;
 
+import java.util.ArrayList;
+
 /**
  * An alien in the game, extends Unit.
  * 
@@ -43,11 +45,8 @@ public abstract class Alien extends Unit implements MovableUnit, ShootingUnit {
 	 * @param velocity The speed of the Bullet
 	 * @return The shot Bullet
 	 */
-	public final Bullet shootBullet(final double velocity) {
-		Bullet bullet = new AlienBullet(this.getXCoor(), this.getYCoor());
-		bullet.setVelY(velocity);
-		return bullet;
-	}
+	public abstract ArrayList<Bullet> shootBullet(final double velocity);
+
 	/**
 	 * HashCode method.
 	 * @return hashcode of this object
@@ -80,14 +79,13 @@ public abstract class Alien extends Unit implements MovableUnit, ShootingUnit {
 		}
 		return false;
 	}	
+	
 	/**
 	 * Move the unit in the direction of this unit and with his velocity.
 	 * @param tickrate The rate at which the game ticks.
 	 */
-	public final void move(final double tickrate) {
-		setXCoor(this.getXCoor() + (this.getVelX() * tickrate));
-		setYCoor(this.getYCoor() + (this.getVelY() * tickrate));
-	}
+	public abstract void move(final double tickrate);
+
 	/**
 	 * Returns the current velocity in the X direction.
 	 * @return the current velocity in the X direction in pixels per second.

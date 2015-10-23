@@ -2,15 +2,19 @@ package spaceinvaders.group_22.unit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.mockito.Mockito.mock;
+import static org.junit.Assert.assertTrue;
+
+
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mockito.Mockito;
 
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
-import spaceinvaders.group_22.Player;
+import spaceinvaders.group_22.Observer;
 
 /**
  * Test the abstract unit class.
@@ -30,6 +34,11 @@ public abstract class UnitTest {
 	 * The Unit we need to be testing.
 	 */
 	private Unit unit;
+	
+	/**
+	 * The Unit we need to be testing.
+	 */
+	private Observer mockedObserver = Mockito.mock(Observer.class);
 	
 	/**
 	 * Method to create an instance of a subclass of the Unit class.
@@ -151,6 +160,52 @@ public abstract class UnitTest {
 		Unit unit2 = createInstance(1.2, 3);
 		unit2.setHeight(12);
 		assertNotEquals(unit, unit2);
+	}
+	
+	/**
+	 * Test registering an Observer.
+	 */
+	@Test
+	public final void testRegisterObserver() {
+		List<Observer> observers = unit.getObservers();
+		unit.registerObserver(mockedObserver);
+		
+		assertTrue(observers.contains(mockedObserver));
+	}
+	
+	/**
+	 * Test removing an Observer.
+	 */
+	@Test
+	public final void testRemoveObserver() {
+		List<Observer> observers = unit.getObservers();
+		unit.registerObserver(mockedObserver);
+		
+		unit.removeObserver(mockedObserver);
+		assertTrue(!observers.contains(mockedObserver));
+	}
+	
+	/**
+	 * Test removing an Observer which is not registred.
+	 */
+	@Test
+	public final void testRemoveObserverNotRegistered() {
+		List<Observer> observers = unit.getObservers();
+		
+		unit.removeObserver(mockedObserver);
+		assertTrue(observers.equals(unit.getObservers()));
+	}
+	
+	/**
+	 * Test notifying an observer.
+	 */
+	@Test
+	public final void testNotifyObservers() {
+		unit.registerObserver(mockedObserver);
+		unit.notifyObservers();
+		
+		Mockito.verify(mockedObserver).update(unit);
+		
 	}
 
 }

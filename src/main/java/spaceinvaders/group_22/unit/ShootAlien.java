@@ -7,7 +7,7 @@ import spaceinvaders.group_22.ui.SpriteLoader;
  * @author Bryan
  *
  */
-public class ShootAlien extends Alien {
+public class ShootAlien extends DefaultAlien {
 	/**
 	 * Creates a Shooting Alien.
 	 * @param x coordinate of the new alien.
@@ -16,6 +16,7 @@ public class ShootAlien extends Alien {
 	public ShootAlien(final double x, final double y) {
 		super(x, y);
 		increaseShooting();
+		setHealth(1);
 	}
 	
 	@Override
