@@ -29,7 +29,6 @@ public class SingleSpaceShipController extends SpaceShipController {
 	public final void tick(final ArrayList<KeyCode> pressedKeys) {
 		moveSpaceShip(pressedKeys, game.getPlayer());
 		spaceShipCollisions(game.getPlayer().getSpaceShip());
-		checkExplosions(game.getPlayer());
 	}
 	
 	
