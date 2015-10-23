@@ -1,6 +1,7 @@
 package spaceinvaders.group_22.logger;
 
 import java.util.ArrayList;
+
 import org.junit.Assert;
 import org.junit.Test;
 /**
@@ -15,49 +16,38 @@ public class LoggerTest {
 	 */
 	@Test
 	public final void testLogEventException() {
-		Logger logger = new Logger("testlog.log", 5);
+		Logger logger = Logger.getInstance();
+		logger.setLogLevel(5);
+		logger.clear();
 		LogEvent event = new LogEvent(new Exception(), "A test Exception occurred"); 
 		logger.log("A test Exception occurred", new Exception());
-		Assert.assertEquals(event, logger.getAllEvents().get(0));
+		Assert.assertTrue(logger.getAllEvents().contains(event));
+		logger.setLogLevel(1);
 	}
-	/**
-	 * Tests the log class for LogEvent.Type as a parameter.
-	 */
-/*	@Test
-	public void testLogEvent() {
-		Logger logger = new Logger("testlog.log", 5);
-		
-		logger.log("A test", LogEvent.Type.INFO);
-		LogEvent event = new LogEvent( LogEvent.Type.INFO, "A test" );
-		try (BufferedReader br = new BufferedReader(new FileReader(logger.getLogFileLocation()))) {
-		    String line = br.readLine();
-		    Assert.assertTrue(event.toString().contains("[INFO] A test"));
-		} catch (IOException e) {
-			e.printStackTrace();
-			fail("error reading file");
-		}
-
-	}*/
 	/**
 	 * Tests the log method with an Exception with low loglevel.
 	 */
 	@Test
 	public final void testLogEventExceptionLowerLogLevel() {
-		Logger logger = new Logger("testlog.log", 0);
-		LogEvent event = new LogEvent(new Exception(), "A test Exception occurred"); 
+		Logger logger = Logger.getInstance();
+		logger.setLogLevel(0);
+		logger.clear();
 		logger.log("A test Exception occurred", new Exception());
-		Assert.assertEquals(new ArrayList<LogEvent>(), logger.getAllEvents());
+		LogEvent event = new LogEvent(new Exception(), "A test Exception occurred"); 
+		Assert.assertFalse(logger.getAllEvents().contains(event));
+		logger.setLogLevel(1);
 	}
 	/**
 	 * Tests the log class for LogEvent.Type as a parameter when loglevel is lower then type.
 	 */
 	@Test
 	public final void testLogEventLowerLogLevel() {
-		Logger logger = new Logger("testlog.log", 1);
-		LogEvent event = new LogEvent(LogEvent.Type.INFO, "A test"); 
+		Logger logger = Logger.getInstance();
+		logger.clear();
 		logger.log("A test", LogEvent.Type.INFO);
+		LogEvent event = new LogEvent(LogEvent.Type.INFO, "A test"); 
 		// Since the loglevel is lower then the level of the added logEvent
 		// the LogEventlist should be an empty arrayList.
-		Assert.assertEquals(new ArrayList<LogEvent>(), logger.getAllEvents());
+		Assert.assertFalse(logger.getAllEvents().contains(event));
 	}
 }

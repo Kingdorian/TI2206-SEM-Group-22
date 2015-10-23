@@ -39,7 +39,7 @@ public final class SingleSpaceShipControllerTest {
 	 */
 	@Before
 	@SuppressWarnings("checkstyle:magicnumber") 
-	public final void setUpController() {
+	public void setUpController() {
 		game = new SinglePlayerGame(1000, 720);
 		controller = (SingleSpaceShipController) game.getSpaceShipController();
 		game.setTickrate(1.0);
@@ -48,7 +48,8 @@ public final class SingleSpaceShipControllerTest {
 	 * Tests the moveSpaceShip method for bouncing spaceship to the left border.
 	 */
 	@Test
-	public final void testShipBounceLeft() {
+	@SuppressWarnings("checkstyle:magicnumber") 
+	public void testShipBounceLeft() {
 		game.setTickrate(10.0);
 		game.getPlayer().setSpaceShip(new SpaceShip(-5, 0));
 		game.getPlayer().getSpaceShip().setVelX(-10.0);
@@ -59,7 +60,8 @@ public final class SingleSpaceShipControllerTest {
 	 * Tests the ship moving normally to the right when D is pressed. 
 	 */
 	@Test
-	public final void testShipMovingRight() {
+	@SuppressWarnings("checkstyle:magicnumber") 
+	public void testShipMovingRight() {
 		game.getPlayer().setSpaceShip(new SpaceShip(100, 100));
 		ArrayList<KeyCode> keyList = new ArrayList<KeyCode>();
 
@@ -71,7 +73,8 @@ public final class SingleSpaceShipControllerTest {
 	 * Tests the ship moving normally to the left when A is pressed. 
 	 */
 	@Test
-	public final void testShipMovingLeft() {
+	@SuppressWarnings("checkstyle:magicnumber") 
+	public void testShipMovingLeft() {
 		game.getPlayer().setSpaceShip(new SpaceShip(100, 100));
 		ArrayList<KeyCode> keyList = new ArrayList<KeyCode>();
 
@@ -80,10 +83,11 @@ public final class SingleSpaceShipControllerTest {
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() < 0);
 	}
 	/**
-	 * Test
+	 * Test when the ship goes faster then the max speed.
 	 */
 	@Test
-	public final void testShipFasterThenMaxSpeedRight() {
+	@SuppressWarnings("checkstyle:magicnumber") 
+	public void testShipFasterThenMaxSpeedRight() {
 		game.getPlayer().setSpaceShip(new SpaceShip(100, 100));
 		game.getPlayer().getSpaceShip().setVelX(500);
 		controller.moveSpaceShip(new ArrayList<KeyCode>(), game.getPlayer());
@@ -93,7 +97,8 @@ public final class SingleSpaceShipControllerTest {
 	 * Tests the ship moving normally to the left when A is pressed. 
 	 */
 	@Test
-	public final void testShipFasterThenMaxSpeedLeft() {
+	@SuppressWarnings("checkstyle:magicnumber") 
+	public void testShipFasterThenMaxSpeedLeft() {
 		SpaceShip spaceship = new SpaceShip(100, 100);
 		spaceship.setPlayer(game.getPlayer());
 		game.getPlayer().setSpaceShip(spaceship);
@@ -106,7 +111,8 @@ public final class SingleSpaceShipControllerTest {
 	 * Tests the ship moving normally to the left when A is pressed and tick is called. 
 	 */
 	@Test
-	public final void testTick() {
+	@SuppressWarnings("checkstyle:magicnumber") 
+	public void testTick() {
 		SpaceShip spaceship = new SpaceShip(100, 100);
 		spaceship.setPlayer(game.getPlayer());
 		game.getPlayer().setSpaceShip(spaceship);
@@ -114,16 +120,5 @@ public final class SingleSpaceShipControllerTest {
 		keyList.add(KeyCode.D);
 		controller.tick(keyList);
 		Assert.assertTrue(game.getPlayer().getSpaceShip().getVelX() > 0);
-	}
-	/**
-	 * Test the checkexplosion method in the spaceshipcontroller.
-	 */
-	@Test
-	public final void testCheckExplosions() {
-		SpaceShip ship = game.getPlayer().getSpaceShip();
-		game.getBullets().add(new AlienBullet(ship.getXCoor(), ship.getYCoor()));
-		controller.tick(new ArrayList<KeyCode>());
-		controller.checkExplosions(game.getPlayer());
-		assertEquals(game.getExplosions().size(), 1);
 	}
 }

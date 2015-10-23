@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import spaceinvaders.group_22.Game;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
+import spaceinvaders.group_22.sound.SoundController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -143,6 +144,11 @@ public abstract class GameUIController
      * The drawing of the lives.
      */
     private UIElementLives uiLives;
+    
+    /**
+     * Boolean indicating if the paused screen is open.
+     */
+    private boolean paused = false;
     
     /**
      * Called by the FXMLLoader. 
@@ -327,23 +333,35 @@ public abstract class GameUIController
         	Logger.getInstance().log("Player pressed S", LogEvent.Type.DEBUG);
         	screenBeforePlay.toBack();
         	screenPaused.toBack();
+        	
+        	if (!paused) {
+        		SoundController.Sound.START_GAME.play();
+        		SoundController.Sound.BGM.play();
+        	}
+        	
+        	paused = false;
         	getGame().start();
         } else if (event.getCode().equals(KeyCode.P)) {
         	if (getGame().isInProgress()) {
         		Logger.getInstance().log("Player pressed P", LogEvent.Type.DEBUG);
             	screenPaused.toFront();
             	Logger.getInstance().log("Show screen Paused", LogEvent.Type.INFO);
+            	paused = true;
             	getGame().stop();
         	}
         } else if (event.getCode().equals(KeyCode.R)) {
         	Logger.getInstance().log("Player pressed R", LogEvent.Type.DEBUG);
         	if (getGame().hasEnded()) {
             	newGame();
+            	
+        		SoundController.Sound.START_GAME.play();
+        		SoundController.Sound.BGM.play();
             	getGame().start();
         	}
         } else if (event.getCode().equals(KeyCode.M)) {
         	if (getGame().hasEnded()) {
         		getGame().stop();
+        		SoundController.Sound.BGM.stop();
         		SpaceInvadersUI.getInstance().loadUIScreen("Menu.fxml");
         	}
         } else if (!pressedKeys.contains(event.getCode())) {

@@ -2,6 +2,8 @@ package spaceinvaders.group_22.unit;
 
 import spaceinvaders.group_22.ui.SpriteLoader;
 
+import java.util.ArrayList;
+
 import spaceinvaders.group_22.Player;
 
 /**
@@ -50,10 +52,6 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * A multiplier for the shooting speed used by powerups.
 	 */
 	private double shootingMultiplier = 1.0;
-	/**
-	 * Explosion if this spaceship is exploding.
-	 */
-	private Explosion explosion = null;
 	
 	/**
 	 * Times allowed to shoot per second.
@@ -75,11 +73,13 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * @param velocity The speed of the Bullet
 	 * @return The shot Bullet
 	 */
-	public final Bullet shootBullet(final double velocity) {
+	public final ArrayList<Bullet> shootBullet(final double velocity) {
+		ArrayList<Bullet> list = new ArrayList<Bullet>();
 		ShipBullet bullet = new ShipBullet(this.getXCoor(), this.getYCoor());
 		bullet.setPlayer(player);
 		bullet.setVelY(velocity);
-		return bullet;
+		list.add(bullet);
+		return list;
 	}	
 	
 	/**
@@ -230,33 +230,11 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * Sets the right sprite image.
 	 */
 	public final void setSpriteImage() {
-		setSprite(SpriteLoader.getInstance().getSpaceShip());
-	}
-	
-	/**
-	 * 
-	 * @param newExplosion to set.
-	 */
-	public final void setExplosion(final Explosion newExplosion) {
-		explosion = newExplosion;
-	}
-	/**
-	 * Returns the explosion if this spaceship is exploding.
-	 * @return null if there is no explosion.
-	 */
-	public final Explosion getExplosion() {
-		return explosion;
-	}
-	
-	/**
-	 * Returns the counter of the explosion of the spaceship.
-	 * @return An integer value.
-	 */
-	public final int getExplosionCounter() {
-		if (explosion != null) {
-			return explosion.getCounter();
-		} 
-		return 0;
+		if (player != null) {
+			setSprite(SpriteLoader.getInstance().getSpaceShip(player.getPlayerNumber()));
+		} else {
+			setSprite(SpriteLoader.getInstance().getSpaceShip(1));
+		}
 	}
 	/**
 	 * Sets the player that controls this spaceship.

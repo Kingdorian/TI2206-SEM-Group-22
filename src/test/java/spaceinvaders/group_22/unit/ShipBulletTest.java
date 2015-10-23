@@ -1,8 +1,5 @@
 package spaceinvaders.group_22.unit;
 
-import spaceinvaders.group_22.Player;
-import static org.mockito.Mockito.mock;
-
 /**
  * Test for ShipBullet, extends BulletTest.
  * @author Ege

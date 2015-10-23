@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Alien;
+import spaceinvaders.group_22.unit.BossAlien;
 import spaceinvaders.group_22.unit.HealthAlien;
 import spaceinvaders.group_22.unit.LargeAlien;
 import spaceinvaders.group_22.unit.NormalAlien;
@@ -30,8 +31,9 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 	 */
 	private ArrayList<WavePattern> patternList;
 	/**
-	 * WaveP
+	 * List of all boss patterns that are read from files.
 	 */
+	private ArrayList<WavePattern> bossPatternList;
 	/**
 	 * Constructor of the alien wave factory.
 	 * @param setgame game to set for this factory.
@@ -43,10 +45,17 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 		String sep = System.getProperty("file.separator");
 		patternList = waveReader.read("src" + sep	+ "main" + sep + "resources" + sep
 				+ "spaceinvaders" +  sep + "group_22" + sep	+ "waves" + sep);
+		bossPatternList = waveReader.read("src" + sep + "main" + sep + "resources" + sep
+				+ "spaceinvaders" + sep + "group_22" + sep + "bossWaves" + sep);
 	}
 	@Override
 	public final AlienWave createWave() {
 		return createWaveFromPattern(patternList.get((int) (Math.random() * patternList.size())));
+	}
+	
+	@Override
+	public final AlienWave createBossWave() {
+		return createBossWaveFromPattern(bossPatternList.get((int) (Math.random() * bossPatternList.size())));
 	}
 	/**
 	 * Creates a new alienwave according to the supplied pattern.
@@ -58,16 +67,16 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
 		ConcreteAlienWave wave = new ConcreteAlienWave();
 		
 		
-		 // Distance to top of the screen.
+		// Distance to top of the screen.
         double y = 125;
         // Create alien object to make sure we can get the width and height of aliens
         Alien testAlien = new NormalAlien(0.0, 0.0); 
         // Drawing lines of Aliens.
         for (int i = 0; i < wavePattern.getHeight(); i++) {
         	ArrayList<Alien> aliens = new ArrayList<Alien>();
-        	 double interval = ((game.getCanvasWidth() 
+        	 double interval = (game.getCanvasWidth() 
         			 - (2 * AlienController.ALIENBORDERMARGIN
-        					 * game.getCanvasWidth()))
+        					 * game.getCanvasWidth())
 						- (wavePattern.getLength(i) * testAlien.getWidth())) / (wavePattern.getLength(i) + 1);  
             double x = AlienController.ALIENBORDERMARGIN * game.getCanvasWidth() + 0.5 * testAlien.getWidth();
             for (int j = 0; j < wavePattern.getLength(i); j++) {
@@ -102,6 +111,48 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
             			Logger.getInstance().log("Created fast shooting alien Alien at location:"
             					+ "(" + x + "," + y + ")", LogEvent.Type.TRACE);
             			break;
+            		default:
+            			
+            			break;
+            	}
+            	x += testAlien.getWidth() + interval;
+            }
+            y += 1.1 * testAlien.getHeight();
+            wave.addAlienRow(aliens);
+        }
+
+        return wave;
+	}
+	
+	/**
+	 * Creates a new boss wave according to the supplied pattern.
+	 * @param wavePattern the pattern to create the aliens from
+	 * @return to create a wave pattern
+	 */
+	@SuppressWarnings("checkstyle:magicnumber")
+	public final AlienWave createBossWaveFromPattern(final WavePattern wavePattern) {
+		ConcreteAlienWave wave = new ConcreteAlienWave();
+		// Distance to top of the screen.
+        double y = 125;
+        // Create alien object to make sure we can get the width and height of aliens
+        Alien testAlien = new NormalAlien(0.0, 0.0); 
+        // Drawing lines of Aliens.
+        for (int i = 0; i < wavePattern.getHeight(); i++) {
+        	ArrayList<Alien> aliens = new ArrayList<Alien>();
+        	 double interval = ((game.getCanvasWidth() 
+        			 - (2 * AlienController.ALIENBORDERMARGIN
+        					 * game.getCanvasWidth()))
+						- (wavePattern.getLength(i) * testAlien.getWidth())) / (wavePattern.getLength(i) + 1);  
+            double x = AlienController.ALIENBORDERMARGIN * game.getCanvasWidth() + 0.5 * testAlien.getWidth();
+            for (int j = 0; j < wavePattern.getLength(i); j++) {
+            	switch (wavePattern.getChar(i, j)) {
+            		case 'B':
+            			Alien alien = new BossAlien(x, y);
+                    	alien.setVelX(AlienController.getAlienVelX());
+                    	aliens.add(alien);
+                    	Logger.getInstance().log("Created Alien at location:(" + x + "," + y + ")", 
+                    			LogEvent.Type.TRACE);
+                      	break;
             		default:
             			
             			break;

@@ -1,8 +1,16 @@
 package spaceinvaders.group_22.ui;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
 import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Barricade;
+import spaceinvaders.group_22.unit.Unit;
 
 /**
  * The drawing of the barricades.
@@ -26,13 +34,46 @@ public class UIElementBarricade extends UIElementUnit {
 	public final void draw() {
 		// Loop over all the barricades 
 		for (Barricade bar : getGame().getBarricadeController().getBarricades()) {
-			//Calculate opacity on base of the health of the barricade
-			Double opacity = bar.getHealth() * 0.1;
-			getGC().setGlobalAlpha(opacity);
-			drawUnit(bar);
-			getGC().setGlobalAlpha(1);
+			drawBarricadeUnit(bar);
 		}
 		
+	}
+	/**
+	 * Draws the barricade on the screen.
+	 * @param barricade the barricade to draw.
+	 */
+	public final void drawBarricadeUnit(final Unit barricade) { 
+		Logger.getInstance().log("Drawing a barricade", LogEvent.Type.TRACE);
+		Image spriteImage = barricade.getSprite();
+		if (spriteImage == null) {
+			Logger.getInstance().log("Error reading spriteImage barricade", LogEvent.Type.TRACE);
+			return;
+		}
+		Barricade bar = (Barricade) barricade;
+		final boolean[][] damage = bar.getDamage();
+
+		int width = (int) spriteImage.getWidth();
+		int height =  (int) spriteImage.getHeight();
+		PixelReader pixelReader = spriteImage.getPixelReader();
+		WritableImage finalSprite = 
+				new WritableImage(width, height);
+		PixelWriter pixelWriter = finalSprite.getPixelWriter();
+		double xInterval = bar.getWidth() / (damage.length);
+		double yInterval = bar.getHeight() / (damage[0].length);
+	    for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+            	Color color;
+            	if (damage[(int) (x / xInterval)][(int) (y / yInterval)]) {
+            		color = pixelReader.getColor(x, y);
+            	} else {
+            		color = new Color(1, 1, 1, 0);
+            	}
+            	pixelWriter.setColor(x, y, color);
+            }
+        }
+		getGC().drawImage(finalSprite, calculateXposition(bar), calculateYposition(bar));	
+			
+		Logger.getInstance().log("Drawn " + bar.getClass().getName(), LogEvent.Type.TRACE);
 	}
 
 }

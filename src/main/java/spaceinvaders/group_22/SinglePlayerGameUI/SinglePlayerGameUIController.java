@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import spaceinvaders.group_22.SinglePlayerGame;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
+import spaceinvaders.group_22.sound.SoundController;
 import spaceinvaders.group_22.ui.GameUIController;
 import spaceinvaders.group_22.ui.UIElement;
 import spaceinvaders.group_22.ui.UIElementAlien;
@@ -83,6 +84,9 @@ public class SinglePlayerGameUIController extends GameUIController {
 	 * Sets the values for the game over screen.
 	 */
 	public final void setGameOverScreen() {
+		SoundController.Sound.STOP_GAME.play();
+		SoundController.Sound.BGM.stop();
+
 		getGameOverLabel().setText("Game Over");
 		getHighscoreLabel().setText("Highscore: " + getGame().getHighScore());
 	}

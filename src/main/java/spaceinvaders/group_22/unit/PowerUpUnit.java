@@ -6,7 +6,7 @@ import spaceinvaders.group_22.Player;
  * Abstract powerup class extends the unit class.
  * @author Bryan
  */
-public abstract class PowerUpUnit extends Unit implements MovableUnit, ActivatableUnit {
+public abstract class PowerUpUnit extends Unit implements MovableUnit, ActivatableUnit, Soundable {
 	
 	/**
 	 * VelX is the velocity in the X direction in pixels per second.

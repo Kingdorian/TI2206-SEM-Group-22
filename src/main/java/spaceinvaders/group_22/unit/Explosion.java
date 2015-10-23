@@ -1,5 +1,7 @@
 package spaceinvaders.group_22.unit;
 
+import javafx.scene.media.AudioClip;
+import spaceinvaders.group_22.sound.SoundLoader;
 import spaceinvaders.group_22.ui.SpriteLoader;
 
 /**
@@ -7,7 +9,7 @@ import spaceinvaders.group_22.ui.SpriteLoader;
  * @author Jochem
  */
 
-public class Explosion extends Unit {
+public class Explosion extends Unit implements Soundable {
 	
 	/**
 	 * Counts the amount of cycles the explosion has been drawn.
@@ -27,6 +29,7 @@ public class Explosion extends Unit {
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public Explosion(final double x, final double y) {
 		super(x, y);
+		notifyObservers();
 		this.counter = 0;
 		this.animationIndex = 0;
 	}
@@ -89,6 +92,11 @@ public class Explosion extends Unit {
 	 */
 	public final void setSpriteImage() {
 		setSprite(SpriteLoader.getInstance().getExplosionWithFrame(animationIndex));
+	}
+
+	@Override
+	public final AudioClip getAudioClip() {
+		return SoundLoader.getInstance().getExplosion();
 	}
 
 }

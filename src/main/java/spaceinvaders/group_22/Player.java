@@ -43,6 +43,14 @@ public class Player {
 	 * Indicates if player can get damaged by bullets.
 	 */
 	private boolean invulnerable = false;
+	/**
+	 * Number of this player.
+	 */
+	private int playerNumber = 1;
+	/**
+	 * Starting x coordinate of the ship.
+	 */
+	private Double startShipX;
 	
 	/**
 	 * Creates new Player object.
@@ -52,7 +60,7 @@ public class Player {
 	@SuppressWarnings("checkstyle:magicnumber")
 	public Player(final Game parentgame, final double shipX) {
 		game = parentgame;
-
+		startShipX = shipX;
 		ship = new SpaceShip(shipX, game.getCanvasHeight() - 40);
 		ship.setPlayer(this);
 
@@ -102,9 +110,9 @@ public class Player {
 	 */
 	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void respawnShip() {
-		ship = new SpaceShip(game.getCanvasWidth() / 2, ship.getYCoor());
+		ship = new SpaceShip(startShipX, ship.getYCoor());
 		ship.setPlayer(this);
-
+		ship.setSpriteImage();
 		ArrayList<PowerUp> powerups = new ArrayList<PowerUp>();
 		powerups.addAll(getActivePowerUps());
 		for (PowerUp powerup : powerups) {
@@ -168,6 +176,21 @@ public class Player {
 	 */
 	public final boolean isInvulnerable() {
 		return invulnerable;
+	}
+
+	/**
+	 * @return the playerNumber
+	 */
+	public final int getPlayerNumber() {
+		return playerNumber;
+	}
+
+	/**
+	 * @param playerNr the playerNumber to set
+	 */
+	public final void setPlayerNumber(final int playerNr) {
+		this.playerNumber = playerNr;
+		ship.setSpriteImage();
 	}
 	
 }
