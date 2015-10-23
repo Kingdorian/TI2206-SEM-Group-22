@@ -284,7 +284,7 @@ public class SpriteLoaderTest {
 	 */
 	@Test
 	public final void testGetBossSpaceShip() {
-		String filename = "spaceshipbullet.png";
+		String filename = "bossspaceship.png";
 		
 		Image expected = new Image(getClass().getClassLoader()
 				.getResource("spaceinvaders/group_22/images/" + filename).toString());
