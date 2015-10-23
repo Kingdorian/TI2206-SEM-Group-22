@@ -34,12 +34,15 @@ public class UIElementBarricade extends UIElementUnit {
 	public final void draw() {
 		// Loop over all the barricades 
 		for (Barricade bar : getGame().getBarricadeController().getBarricades()) {
-			drawUnit(bar);
+			drawBarricadeUnit(bar);
 		}
 		
 	}
-	@Override
-	public final void drawUnit(final Unit barricade) { 
+	/**
+	 * Draws the barricade on the screen.
+	 * @param barricade the barricade to draw.
+	 */
+	public final void drawBarricadeUnit(final Unit barricade) { 
 		Logger.getInstance().log("Drawing a barricade", LogEvent.Type.TRACE);
 		Image spriteImage = barricade.getSprite();
 		if (spriteImage == null) {

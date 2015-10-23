@@ -28,7 +28,7 @@ public abstract class UIElementUnit extends UIElement {
 	 * Method to draw the Units.
 	 * @param unit The unit to draw.
 	 */
-	public void drawUnit(final Unit unit) {
+	public final void drawUnit(final Unit unit) {
 		Image spriteImage = unit.getSprite();
 
 		if (spriteImage != null) {
