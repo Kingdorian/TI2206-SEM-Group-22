@@ -278,4 +278,16 @@ public class SpriteLoaderTest {
 				.getResource("spaceinvaders/group_22/images/" + filename).toString());
 		assertTrue(equalsImage(expected, loader.getLifePowerUp()));
 	}
+	
+	/**
+	 * Test if getLifePowerUp() returns the correct image.
+	 */
+	@Test
+	public final void testGetBossSpaceShip() {
+		String filename = "spaceshipbullet.png";
+		
+		Image expected = new Image(getClass().getClassLoader()
+				.getResource("spaceinvaders/group_22/images/" + filename).toString());
+		assertTrue(equalsImage(expected, loader.getBossSpaceShip()));
+	}
 }
