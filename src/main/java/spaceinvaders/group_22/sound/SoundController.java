@@ -153,8 +153,9 @@ public final class SoundController implements Observer {
 		 */
 		public void musicFadeIn(final MediaPlayer mediaPlayer, final double fadetime) {
 			mediaPlayer.setVolume(0);
+			mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 			
-			mediaPlayer.setOnReady(new Runnable() {
+			Runnable fadeRunner = new Runnable() {
 
 			      @Override
 			      public void run() {
@@ -170,7 +171,10 @@ public final class SoundController implements Observer {
 			          }
 			        }.play();
 			      }
-			    });
+			    };
+			
+			mediaPlayer.setOnReady(fadeRunner);
+			mediaPlayer.setOnStopped(fadeRunner);
 			
 		}
 	}

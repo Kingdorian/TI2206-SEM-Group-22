@@ -33,14 +33,14 @@ public class Logger {
 	 * 4 Errors, Warnings, Info and Debug
 	 * 5 Errors, Warnings, Info, Debug and Trace 
 	 */
-	private int logLevel;
+	private static int logLevel;
 	
 	/**
 	 * Creates a new logger object.
 	 * @param logLocation the location of the log file
 	 * @param level the scope of logging between 0-5.
 	 */
-	public Logger(final String logLocation, final int level) {
+	private Logger(final String logLocation, final int level) {
 		logLevel = level;
 		String folder = System.getProperty("user.dir");
 		new File(folder).mkdirs();
@@ -137,6 +137,12 @@ public class Logger {
 	 */
 	public final void setLogLevel(final int newLogLevel) {
 		logLevel = newLogLevel;
+	}
+	/**
+	 * Clears the logger.
+	 */
+	public final void clear() {
+		allEvents.clear();
 	}
 
 	

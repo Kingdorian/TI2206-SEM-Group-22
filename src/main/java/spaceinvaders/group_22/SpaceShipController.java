@@ -47,21 +47,10 @@ public abstract class SpaceShipController extends UnitController implements Mova
 						
 				Explosion spaceShipexplosion = new Explosion(ship.getXCoor(),
 								ship.getYCoor());
-				ship.setExplosion(spaceShipexplosion);
 				game.getExplosions().add(spaceShipexplosion);
 				game.getBullets().remove(collidingBullet);
+				ship.getPlayer().die();
 			}
-		}
-	}
-	
-	/**
-	 * Check if there is a explosion on a spaceship and if he is dead.
-	 * @param player The player to check explosions for.
-	 */
-	public final void checkExplosions(final Player player) {
-		if (player.getSpaceShip().getExplosionCounter() == 24) {
-			Logger.getInstance().log("Spaceship hit by bullet" , LogEvent.Type.INFO);
-			player.die();
 		}
 	}
 	
@@ -107,14 +96,12 @@ public abstract class SpaceShipController extends UnitController implements Mova
 		
 	@Override
 	public void move() {
-		// TODO Auto-generated method stub
 		
 	}
 	
 
 	@Override
 	public void create() {
-		// TODO Auto-generated method stub
 		
 	}
 

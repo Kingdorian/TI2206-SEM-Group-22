@@ -116,9 +116,11 @@ public abstract class GameTest {
 	 */
 	@Test
 	public final void testResetBarricades() {
-		game.getBarricadeController().getBarricades().get(0).hit();
+		ShipBullet bullet = new ShipBullet(10.0, 10.0);
+		bullet.setVelY(-10);
+		game.getBarricadeController().getBarricades().get(0).hit(bullet);
 		game.resetGame();
-		Assert.assertEquals(10, game.getBarricadeController().getBarricades().get(0).getHealth());
+		Assert.assertEquals(50, game.getBarricadeController().getBarricades().get(0).getHealth());
 	}
 	
 	/**

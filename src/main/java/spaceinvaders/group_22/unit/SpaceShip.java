@@ -52,10 +52,6 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * A multiplier for the shooting speed used by powerups.
 	 */
 	private double shootingMultiplier = 1.0;
-	/**
-	 * Explosion if this spaceship is exploding.
-	 */
-	private Explosion explosion = null;
 	
 	/**
 	 * Times allowed to shoot per second.
@@ -239,32 +235,6 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 		} else {
 			setSprite(SpriteLoader.getInstance().getSpaceShip(1));
 		}
-	}
-	
-	/**
-	 * 
-	 * @param newExplosion to set.
-	 */
-	public final void setExplosion(final Explosion newExplosion) {
-		explosion = newExplosion;
-	}
-	/**
-	 * Returns the explosion if this spaceship is exploding.
-	 * @return null if there is no explosion.
-	 */
-	public final Explosion getExplosion() {
-		return explosion;
-	}
-	
-	/**
-	 * Returns the counter of the explosion of the spaceship.
-	 * @return An integer value.
-	 */
-	public final int getExplosionCounter() {
-		if (explosion != null) {
-			return explosion.getCounter();
-		} 
-		return 0;
 	}
 	/**
 	 * Sets the player that controls this spaceship.
