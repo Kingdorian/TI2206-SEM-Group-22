@@ -8,6 +8,9 @@ import org.junit.Test;
 
 import javafx.fxml.FXMLLoader;
 import spaceinvaders.group_22.ui.GameUIController;
+import spaceinvaders.group_22.ui.singleplayergameui.SinglePlayerGameUIController;
+import spaceinvaders.group_22.unit.NormalAlien;
+import spaceinvaders.group_22.unit.Unit;
 
 /**
  * Unit tests for the GameUIController class.
@@ -16,7 +19,7 @@ import spaceinvaders.group_22.ui.GameUIController;
  *
  */
 @SuppressWarnings("checkstyle:magicnumber")    
-public class GameUIControllerTest {
+public abstract class GameUIControllerTest {
 	
 	/**
 	 * The gameUIController to test.
@@ -29,17 +32,17 @@ public class GameUIControllerTest {
 	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 
 	/**
+	 * Create an instance of a GameUIController.
+	 * @return GameUIController object.
+	 */
+	public abstract GameUIController createInstance();
+	
+	/**
 	 * Prepares the test.
 	 */
 	@Before
 	public final void setUp() {
-		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SinglePlayerGameUI.fxml"));
-			fxmlLoader.load();
-			gameUIController = fxmlLoader.getController();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		gameUIController = createInstance();
 	}
 	
 	/**
