@@ -149,21 +149,21 @@ public class LogEvent {
 	 * Returns the description of this LogEvent.
 	 * @return the description of this LogEvent.
 	 */
-	final String getDescription() {
+	public final String getDescription() {
 		return description;
 	}
 	/**
 	 * Returns the exception that this logEvent reports.
 	 * @return the exception that this logEvent reports.
 	 */
-	final Exception getException() {
+	public final Exception getException() {
 		return exception;
 	}
 	/**
 	 * Return the the type of LogEvent.
 	 * @return the type of logEvent
 	 */
-	final Type getType() {
+	public final Type getType() {
 		return type;
 	}
 	/**

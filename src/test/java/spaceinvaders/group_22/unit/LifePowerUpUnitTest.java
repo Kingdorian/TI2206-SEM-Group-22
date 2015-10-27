@@ -7,6 +7,8 @@ import org.junit.Test;
 import spaceinvaders.group_22.game.Game;
 import spaceinvaders.group_22.game.Player;
 import spaceinvaders.group_22.game.SinglePlayerGame;
+import spaceinvaders.group_22.unit.LifePowerUpUnit;
+import spaceinvaders.group_22.unit.Unit;
 
 /**
  * Test for Speed Power Up, extends PowerUpTest Test.

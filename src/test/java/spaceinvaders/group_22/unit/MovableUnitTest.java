@@ -16,6 +16,15 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
+import spaceinvaders.group_22.unit.AlienBullet;
+import spaceinvaders.group_22.unit.HealthAlien;
+import spaceinvaders.group_22.unit.LargeAlien;
+import spaceinvaders.group_22.unit.MovableUnit;
+import spaceinvaders.group_22.unit.NormalAlien;
+import spaceinvaders.group_22.unit.ShipBullet;
+import spaceinvaders.group_22.unit.ShootAlien;
+import spaceinvaders.group_22.unit.SpaceShip;
+import spaceinvaders.group_22.unit.Unit;
 
 @RunWith(Parameterized.class)
 public class MovableUnitTest {

@@ -7,6 +7,10 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
+import spaceinvaders.group_22.unit.AlienBullet;
+import spaceinvaders.group_22.unit.Barricade;
+import spaceinvaders.group_22.unit.Unit;
+
 /**
  * Test for barricades, extends Unit Test.
  * @author Bryan

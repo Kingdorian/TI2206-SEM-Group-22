@@ -7,6 +7,8 @@ import org.junit.Rule;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.canvas.GraphicsContext;
 import spaceinvaders.group_22.game.SinglePlayerGame;
+import spaceinvaders.group_22.ui.GameUIController;
+import spaceinvaders.group_22.ui.UIElement;
 
 /**
  * Unit tests for the GameUIController class.

@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import spaceinvaders.group_22.sound.SoundLoader;
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 
 /**

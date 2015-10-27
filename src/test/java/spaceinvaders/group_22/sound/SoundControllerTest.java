@@ -8,6 +8,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import spaceinvaders.group_22.sound.SoundController;
+import spaceinvaders.group_22.sound.SoundLoader;
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Soundable;
 

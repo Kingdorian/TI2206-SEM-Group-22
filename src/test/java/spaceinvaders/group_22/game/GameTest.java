@@ -1,4 +1,4 @@
-package spaceinvaders.group_22;
+package spaceinvaders.group_22.game;
 
 import java.util.ArrayList;
 

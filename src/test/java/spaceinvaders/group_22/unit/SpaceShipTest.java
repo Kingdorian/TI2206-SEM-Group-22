@@ -12,6 +12,9 @@ import spaceinvaders.group_22.game.Player;
 import spaceinvaders.group_22.game.SinglePlayerGame;
 import spaceinvaders.group_22.game.powerup.ShootPowerUp;
 import spaceinvaders.group_22.game.powerup.SpeedPowerUp;
+import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.SpaceShip;
+import spaceinvaders.group_22.unit.Unit;
 
 /**
  * Test for the SpaceShip class which extends UnitTest.

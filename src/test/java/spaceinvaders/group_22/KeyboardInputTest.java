@@ -21,7 +21,7 @@ import spaceinvaders.group_22.ui.JavaFXThreadingRule;
  * @author Dorian
  *
  */
-public class KeboardInputTest {
+public class KeyboardInputTest {
 	
 	/**
 	 * Game object used to test.

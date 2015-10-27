@@ -5,6 +5,8 @@ import org.junit.Rule;
 import javafx.scene.canvas.GraphicsContext;
 import spaceinvaders.group_22.game.Game;
 import spaceinvaders.group_22.game.SinglePlayerGame;
+import spaceinvaders.group_22.ui.UIElement;
+import spaceinvaders.group_22.ui.UIElementSpaceShip;
 
 /**
  * Unit tests for the GameUIController class.
