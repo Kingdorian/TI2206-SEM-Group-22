@@ -3,8 +3,6 @@ package spaceinvaders.group_22.unit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-import java.util.Arrays;
-
 import org.junit.Test;
 
 /**
