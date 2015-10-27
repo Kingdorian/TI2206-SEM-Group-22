@@ -82,7 +82,7 @@ public final class SoundController implements Observer {
 		/**
 		 * Sets if the mediaplayer is playing.
 		 */
-		private boolean playing = false;
+		private boolean playing;
 		
 		/**
 		 * Constructor for a sound enum with a mediaplayer.

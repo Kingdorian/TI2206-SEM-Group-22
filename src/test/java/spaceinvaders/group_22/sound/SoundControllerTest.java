@@ -51,6 +51,8 @@ public class SoundControllerTest {
 	@Before
 	public final void setup() {
 		controller = SoundController.getInstance();
+		controller.setSFXEnabled(true);
+		controller.setBGMEnabled(true);
 	}
 	
 	/**
@@ -142,8 +144,6 @@ public class SoundControllerTest {
 		SoundController.getInstance().setSFXEnabled(true);
 		
 		AudioClip clip = SoundController.Sound.START_GAME.getClip();
-		clip.play();
-		clip.stop();
 		SoundController.Sound.START_GAME.playSFX(clip);
 		
 		assertTrue(clip.isPlaying());
@@ -157,7 +157,6 @@ public class SoundControllerTest {
 		SoundController.getInstance().setSFXEnabled(false);
 		
 		AudioClip clip = SoundController.Sound.START_GAME.getClip();
-		clip.play();
 		clip.stop();
 		SoundController.Sound.START_GAME.playSFX(clip);
 		
@@ -170,7 +169,6 @@ public class SoundControllerTest {
 	@Test
 	public final void testEnumSoundPlayStartGame() {
 		AudioClip clip = SoundController.Sound.START_GAME.getClip();
-		clip.play();
 		SoundController.Sound.START_GAME.play();
 		
 		assertTrue(clip.isPlaying());
@@ -182,7 +180,6 @@ public class SoundControllerTest {
 	@Test
 	public final void testEnumSoundPlayStopGame() {
 		AudioClip clip = SoundController.Sound.STOP_GAME.getClip();
-		clip.play();
 		SoundController.Sound.STOP_GAME.play();
 		
 		assertTrue(clip.isPlaying());
@@ -255,9 +252,7 @@ public class SoundControllerTest {
 	 * Checks if play works on endGame.
 	 */
 	@Test
-	public final void testEnumSoundStopBGM() {
-		MediaPlayer player = SoundController.Sound.BGM.getPlayer();
-		
+	public final void testEnumSoundStopBGM() {		
 		SoundController.Sound.BGM.play();
 		SoundController.Sound.BGM.stop();
 		
