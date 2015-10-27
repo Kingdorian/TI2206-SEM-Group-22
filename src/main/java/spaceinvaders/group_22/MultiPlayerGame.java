@@ -114,7 +114,7 @@ public class MultiPlayerGame extends Game {
 	public final void tickShipShooting(final ArrayList<KeyCode> pressedKeys, final KeyCode needKey, final int index) {
 		if (pressedKeys.contains(needKey) && shootingAllowed.get(index)) {
 			Logger.getInstance().log("Player pressed " + needKey, LogEvent.Type.DEBUG);
-			ArrayList<Bullet> list = players.get(index).getSpaceShip().shootBullet(-getShipBulletVelX());
+			ArrayList<Bullet> list = players.get(index).getSpaceShip().shootBullet(-getShipBulletVelY());
 			for (Bullet bullet : list) {
 				getBullets().add(bullet);
 				String logMessage = "Player shot bullet at X: " + bullet.getXCoor() + "\tY: " + bullet.getYCoor();
