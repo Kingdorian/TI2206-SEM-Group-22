@@ -21,35 +21,16 @@ public final class SoundController implements Observer {
 	 * @author Jochem
 	 *
 	 */
-	public static enum Sound {
+	public enum Sound {
 		/**
 		 * Start game sound.
 		 */
-		START_GAME(SoundLoader.getInstance().getStartGame()) {
-				
-				@Override
-				public void play() { 
-					playSFX(getClip()); 
-				} 
-				
-				@Override
-				public void stop() {
-					getClip().stop(); 
-				} },
+		START_GAME(SoundLoader.getInstance().getStartGame()),
 		
 		/**
 		 * Stop game sound.
 		 */
-		STOP_GAME(SoundLoader.getInstance().getEndGame()) {
-					
-				@Override
-				public void play() { 
-					playSFX(getClip()); 
-				} 
-				@Override
-				public void stop() {
-					getClip().stop(); 
-				} },
+		STOP_GAME(SoundLoader.getInstance().getEndGame()),
 		/**
 		 * Sets the background music.
 		 */
@@ -135,12 +116,16 @@ public final class SoundController implements Observer {
 		/**
 		 * Plays the ENUM value.
 		 */
-		public abstract void play();
+		public void play() {
+			playSFX(getClip()); 
+		}
 		
 		/**
 		 * Stops the ENUM value.
 		 */
-		public abstract void stop();
+		public void stop() {
+			getClip().stop(); 
+		}
 		
 		/**
 		 * Plays the SFX if sfx is enabled.
