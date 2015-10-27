@@ -76,7 +76,7 @@ public final class Logger {
 	 * @param description the description of this log item.
 	 * @param exception the exception to log.
 	 */
-	public final void log(final String description, final Exception exception) {
+	public void log(final String description, final Exception exception) {
 		if (logLevel >= LogEvent.Type.WARNING.getValue()) {
 			LogEvent event = new LogEvent(exception, description);
 			System.out.println(event.toString());
@@ -89,7 +89,7 @@ public final class Logger {
 	 * @param description the description of this log item.
 	 * @param type the type of this log item.
 	 */
-	public final void log(final String description, final LogEvent.Type type) {
+	public void log(final String description, final LogEvent.Type type) {
 		if (logLevel >= type.getValue()) {
 			LogEvent event = new LogEvent(type, description);
 			System.out.println(event.toString());
@@ -100,7 +100,7 @@ public final class Logger {
 	/**
 	 * Writes the log to a file.
 	 */
-	public final void writeLog() {
+	public void writeLog() {
 		ArrayList<LogEvent> tempList = new ArrayList<LogEvent>(allEvents);
 		LogWriter logWriter = new LogWriter(logFileLoc, tempList);
 		//logWriter.run();
@@ -111,7 +111,7 @@ public final class Logger {
 	 * Returns all events logged untill this point.
 	 * @return the events logged untill this point.
 	 */
-	public final ArrayList<LogEvent> getAllEvents() {
+	public ArrayList<LogEvent> getAllEvents() {
 		return allEvents;
 	}
 	
@@ -119,7 +119,7 @@ public final class Logger {
 	 * Returns the location of the logfile.
 	 * @return the location of the logfile.
 	 */
-	public final String getLogFileLocation() {
+	public String getLogFileLocation() {
 		return logFileLoc;
 	}
 	
@@ -127,7 +127,7 @@ public final class Logger {
 	 * Sets the log file location to another file.
 	 * @param newLoc The new location of the logger file.
 	 */
-	public final void setLogFileLocation(final String newLoc) {
+	public void setLogFileLocation(final String newLoc) {
 		logFileLoc = newLoc;
 	}
 	
@@ -135,13 +135,13 @@ public final class Logger {
 	 * Sets the log level to a different level.
 	 * @param newLogLevel The new level of the logger.
 	 */
-	public final void setLogLevel(final int newLogLevel) {
+	public void setLogLevel(final int newLogLevel) {
 		logLevel = newLogLevel;
 	}
 	/**
 	 * Clears the logger.
 	 */
-	public final void clear() {
+	public void clear() {
 		allEvents.clear();
 	}
 
