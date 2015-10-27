@@ -104,7 +104,7 @@ public class SoundControllerTest {
 	}
 	
 	/**
-	 * Checks is getClip() returns the correct effect for starting a game.
+	 * Checks if getClip() returns the correct effect for starting a game.
 	 */
 	@Test
 	public final void testEnumSoundGetClipStartGame() {
@@ -115,7 +115,7 @@ public class SoundControllerTest {
 	}
 	
 	/**
-	 * Checks is getClip() returns the correct effect for starting a game.
+	 * Checks if getClip() returns the correct effect for starting a game.
 	 */
 	@Test
 	public final void testEnumSoundGetClipEndGame() {
@@ -126,7 +126,7 @@ public class SoundControllerTest {
 	}
 	
 	/**
-	 * Checks is getPlayer() returns the correct effect for starting a game.
+	 * Checks if getPlayer() returns the correct effect for starting a game.
 	 */
 	@Test
 	public final void testEnumSoundGetPlayerBGM() {
