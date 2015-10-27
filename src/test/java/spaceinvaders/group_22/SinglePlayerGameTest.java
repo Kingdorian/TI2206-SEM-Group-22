@@ -8,6 +8,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import spaceinvaders.group_22.game.Game;
+import spaceinvaders.group_22.game.SinglePlayerGame;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.NormalAlien;
 import spaceinvaders.group_22.unit.SpaceShip;

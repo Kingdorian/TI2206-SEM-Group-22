@@ -4,6 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import spaceinvaders.group_22.game.MultiPlayerGame;
+import spaceinvaders.group_22.game.controller.MultiPlayerPowerUpController;
+import spaceinvaders.group_22.game.powerup.SpeedPowerUp;
 /**
  * Test the multiplayer powerupcontroller.
  * @author Bryan

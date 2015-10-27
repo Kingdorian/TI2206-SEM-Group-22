@@ -5,6 +5,10 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import spaceinvaders.group_22.game.Player;
+import spaceinvaders.group_22.game.SinglePlayerGame;
+import spaceinvaders.group_22.game.powerup.PowerUp;
+
 /**
  * Test the abstract powerUp class.
  * 

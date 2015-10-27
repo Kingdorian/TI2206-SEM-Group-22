@@ -1,8 +1,8 @@
 package spaceinvaders.group_22.unit;
 
 import javafx.scene.media.AudioClip;
-import spaceinvaders.group_22.Player;
-import spaceinvaders.group_22.SpeedPowerUp;
+import spaceinvaders.group_22.game.Player;
+import spaceinvaders.group_22.game.powerup.SpeedPowerUp;
 import spaceinvaders.group_22.sound.SoundLoader;
 import spaceinvaders.group_22.ui.SpriteLoader;
 /**

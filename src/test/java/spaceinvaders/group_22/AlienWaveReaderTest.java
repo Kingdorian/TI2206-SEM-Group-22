@@ -13,6 +13,9 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
+import spaceinvaders.group_22.wave.AlienWaveReader;
+import spaceinvaders.group_22.wave.ArrayListWavePattern;
+import spaceinvaders.group_22.wave.WavePattern;
 /**
  * Test the Alien wave reader.
  * @author Dorian

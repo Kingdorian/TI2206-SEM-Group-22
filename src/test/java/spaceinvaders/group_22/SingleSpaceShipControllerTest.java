@@ -10,6 +10,8 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import javafx.scene.input.KeyCode;
+import spaceinvaders.group_22.game.SinglePlayerGame;
+import spaceinvaders.group_22.game.controller.SingleSpaceShipController;
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.AlienBullet;
 import spaceinvaders.group_22.unit.SpaceShip;

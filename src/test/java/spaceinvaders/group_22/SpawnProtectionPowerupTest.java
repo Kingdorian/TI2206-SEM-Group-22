@@ -2,6 +2,9 @@ package spaceinvaders.group_22;
 
 import org.junit.Rule;
 
+import spaceinvaders.group_22.game.Player;
+import spaceinvaders.group_22.game.powerup.PowerUp;
+import spaceinvaders.group_22.game.powerup.SpawnProtectionPowerup;
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 
 /**

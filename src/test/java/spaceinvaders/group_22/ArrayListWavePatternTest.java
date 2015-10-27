@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import spaceinvaders.group_22.wave.ArrayListWavePattern;
 /**
  * Test the arraylist implementation of the wave pattern.
  * @author Dorian

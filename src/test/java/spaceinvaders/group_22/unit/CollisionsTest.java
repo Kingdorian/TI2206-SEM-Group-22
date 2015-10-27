@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import spaceinvaders.group_22.Game;
-import spaceinvaders.group_22.Player;
-import spaceinvaders.group_22.SinglePlayerGame;
+import spaceinvaders.group_22.game.Game;
+import spaceinvaders.group_22.game.Player;
+import spaceinvaders.group_22.game.SinglePlayerGame;
 
 /**
  * Class to test the collisons between units.

@@ -11,6 +11,9 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import spaceinvaders.group_22.game.Player;
+import spaceinvaders.group_22.game.SinglePlayerGame;
+import spaceinvaders.group_22.game.controller.AlienController;
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.BossAlien;

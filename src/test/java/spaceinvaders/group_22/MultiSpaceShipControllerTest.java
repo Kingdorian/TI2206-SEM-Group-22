@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javafx.scene.input.KeyCode;
+import spaceinvaders.group_22.game.MultiPlayerGame;
+import spaceinvaders.group_22.game.controller.MultiSpaceShipsController;
 import spaceinvaders.group_22.unit.SpaceShip;
 /**
  * Test for the Multi spaceship controller.

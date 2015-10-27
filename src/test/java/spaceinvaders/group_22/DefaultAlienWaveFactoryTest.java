@@ -4,7 +4,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
+import spaceinvaders.group_22.game.SinglePlayerGame;
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
+import spaceinvaders.group_22.wave.AlienWave;
+import spaceinvaders.group_22.wave.AlienWaveReader;
+import spaceinvaders.group_22.wave.DefaultAlienWaveFactory;
+import spaceinvaders.group_22.wave.ReadAlienWaveFactory;
 /**
  * Test the default alien wave factory.
  * @author Dorian

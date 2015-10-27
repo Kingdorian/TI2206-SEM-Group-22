@@ -5,6 +5,9 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import spaceinvaders.group_22.game.SinglePlayerGame;
+import spaceinvaders.group_22.game.controller.PowerUpController;
+import spaceinvaders.group_22.game.powerup.SpeedPowerUp;
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 
 /**

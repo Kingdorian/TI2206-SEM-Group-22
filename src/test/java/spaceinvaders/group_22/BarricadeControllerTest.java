@@ -11,7 +11,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.ShipBullet;
-
+import spaceinvaders.group_22.game.SinglePlayerGame;
+import spaceinvaders.group_22.game.controller.BarricadeController;
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Barricade;
 

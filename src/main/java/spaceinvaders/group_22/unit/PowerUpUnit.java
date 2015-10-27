@@ -1,6 +1,6 @@
 package spaceinvaders.group_22.unit;
 
-import spaceinvaders.group_22.Player;
+import spaceinvaders.group_22.game.Player;
 
 /**
  * Abstract powerup class extends the unit class.

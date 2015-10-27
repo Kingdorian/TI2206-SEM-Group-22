@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import spaceinvaders.group_22.Game;
-import spaceinvaders.group_22.Player;
-import spaceinvaders.group_22.ShootPowerUp;
-import spaceinvaders.group_22.SinglePlayerGame;
-import spaceinvaders.group_22.SpeedPowerUp;
+import spaceinvaders.group_22.game.Game;
+import spaceinvaders.group_22.game.Player;
+import spaceinvaders.group_22.game.SinglePlayerGame;
+import spaceinvaders.group_22.game.powerup.ShootPowerUp;
+import spaceinvaders.group_22.game.powerup.SpeedPowerUp;
 
 /**
  * Test for the SpaceShip class which extends UnitTest.

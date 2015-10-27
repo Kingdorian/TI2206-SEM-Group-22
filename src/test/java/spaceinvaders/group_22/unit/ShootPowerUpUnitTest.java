@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import spaceinvaders.group_22.Player;
-import spaceinvaders.group_22.SinglePlayerGame;
+import spaceinvaders.group_22.game.Player;
+import spaceinvaders.group_22.game.SinglePlayerGame;
 
 /**
  * Test for Shoot Power Up, extends PowerUpTest Test.

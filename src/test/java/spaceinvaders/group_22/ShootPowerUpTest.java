@@ -5,6 +5,11 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Rule;
 import org.junit.Test;
 
+import spaceinvaders.group_22.game.Game;
+import spaceinvaders.group_22.game.Player;
+import spaceinvaders.group_22.game.SinglePlayerGame;
+import spaceinvaders.group_22.game.powerup.PowerUp;
+import spaceinvaders.group_22.game.powerup.ShootPowerUp;
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 
 /**

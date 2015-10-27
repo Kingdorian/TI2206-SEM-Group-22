@@ -12,6 +12,8 @@ import org.junit.Test;
 import spaceinvaders.group_22.unit.Alien;
 import spaceinvaders.group_22.unit.Barricade;
 import spaceinvaders.group_22.unit.NormalAlien;
+import spaceinvaders.group_22.game.Player;
+import spaceinvaders.group_22.game.SinglePlayerGame;
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 
 /**

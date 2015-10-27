@@ -1,10 +1,9 @@
 package spaceinvaders.group_22.unit;
 
+import spaceinvaders.group_22.game.Player;
 import spaceinvaders.group_22.ui.SpriteLoader;
 
 import java.util.ArrayList;
-
-import spaceinvaders.group_22.Player;
 
 /**
  * A SpaceShip in the game extends Unit.
