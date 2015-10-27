@@ -142,6 +142,7 @@ public class SoundControllerTest {
 		SoundController.getInstance().setSFXEnabled(true);
 		
 		AudioClip clip = SoundController.Sound.START_GAME.getClip();
+		clip.play();
 		clip.stop();
 		SoundController.Sound.START_GAME.playSFX(clip);
 		
@@ -156,6 +157,7 @@ public class SoundControllerTest {
 		SoundController.getInstance().setSFXEnabled(false);
 		
 		AudioClip clip = SoundController.Sound.START_GAME.getClip();
+		clip.play();
 		clip.stop();
 		SoundController.Sound.START_GAME.playSFX(clip);
 		
@@ -167,11 +169,11 @@ public class SoundControllerTest {
 	 */
 	@Test
 	public final void testEnumSoundPlayStartGame() {
-		SoundController.Sound soundEnum = Mockito.spy(SoundController.Sound.START_GAME);
-		AudioClip clip = soundEnum.getClip();
-		soundEnum.play();
+		AudioClip clip = SoundController.Sound.START_GAME.getClip();
+		clip.play();
+		SoundController.Sound.START_GAME.play();
 		
-		Mockito.verify(soundEnum).playSFX(clip);
+		assertTrue(clip.isPlaying());
 	}
 	
 	/**
@@ -179,11 +181,11 @@ public class SoundControllerTest {
 	 */
 	@Test
 	public final void testEnumSoundPlayStopGame() {
-		SoundController.Sound soundEnum = Mockito.spy(SoundController.Sound.STOP_GAME);
-		AudioClip clip = soundEnum.getClip();
-		soundEnum.play();
+		AudioClip clip = SoundController.Sound.STOP_GAME.getClip();
+		clip.play();
+		SoundController.Sound.STOP_GAME.play();
 		
-		Mockito.verify(soundEnum).playSFX(clip);
+		assertTrue(clip.isPlaying());
 	}
 	
 	/**
@@ -192,12 +194,11 @@ public class SoundControllerTest {
 	@Test
 	public final void testEnumSoundPlayBGMEnabled() {
 		SoundController.getInstance().setBGMEnabled(true);
+
+		SoundController.Sound.BGM.stop();
+		SoundController.Sound.BGM.play();
 		
-		SoundController.Sound soundEnum = Mockito.spy(SoundController.Sound.BGM);
-		MediaPlayer player = soundEnum.getPlayer();
-		soundEnum.play();
-		
-		Mockito.verify(soundEnum).playBGM(player, 10000);
+		assertTrue(SoundController.Sound.BGM.getPlaying());
 	}
 	
 	/**
@@ -206,11 +207,11 @@ public class SoundControllerTest {
 	@Test
 	public final void testEnumSoundPlayBGMDisabled() {
 		SoundController.getInstance().setBGMEnabled(false);
-
-		SoundController.Sound soundEnum = Mockito.spy(SoundController.Sound.BGM);
-		soundEnum.play();
 		
-		assertFalse(soundEnum.getPlaying());
+		SoundController.Sound.BGM.stop();
+		SoundController.Sound.BGM.play();
+		
+		assertFalse(SoundController.Sound.BGM.getPlaying());
 	}
 	
 	/**
@@ -220,10 +221,9 @@ public class SoundControllerTest {
 	public final void testEnumSoundPlayBGMPlayerNull() {
 		SoundController.getInstance().setBGMEnabled(true);
 
-		SoundController.Sound soundEnum = Mockito.spy(SoundController.Sound.BGM);
-		soundEnum.playBGM(null, 0);
+		SoundController.Sound.BGM.playBGM(null, 0);
 		
-		assertFalse(soundEnum.getPlaying());
+		assertFalse(SoundController.Sound.BGM.getPlaying());
 	}
 	
 	/**
@@ -231,12 +231,11 @@ public class SoundControllerTest {
 	 */
 	@Test
 	public final void testEnumSoundStopStartGame() {
-		SoundController.Sound soundEnum = Mockito.spy(SoundController.Sound.START_GAME);
+		AudioClip clip = SoundController.Sound.START_GAME.getClip();
+		SoundController.Sound.START_GAME.play();
+		SoundController.Sound.START_GAME.stop();
 		
-		soundEnum.play();
-		soundEnum.stop();
-		
-		assertFalse(soundEnum.getClip().isPlaying());
+		assertFalse(clip.isPlaying());
 	}
 	
 	/**
@@ -244,12 +243,12 @@ public class SoundControllerTest {
 	 */
 	@Test
 	public final void testEnumSoundStopStopGame() {
-		SoundController.Sound soundEnum = Mockito.spy(SoundController.Sound.STOP_GAME);
+		AudioClip clip = SoundController.Sound.STOP_GAME.getClip();
 		
-		soundEnum.play();
-		soundEnum.stop();
+		SoundController.Sound.STOP_GAME.play();
+		SoundController.Sound.STOP_GAME.stop();
 		
-		assertFalse(soundEnum.getClip().isPlaying());
+		assertFalse(clip.isPlaying());
 	}
 	
 	/**
@@ -257,12 +256,12 @@ public class SoundControllerTest {
 	 */
 	@Test
 	public final void testEnumSoundStopBGM() {
-		SoundController.Sound soundEnum = Mockito.spy(SoundController.Sound.BGM);
+		MediaPlayer player = SoundController.Sound.BGM.getPlayer();
 		
-		soundEnum.play();
-		soundEnum.stop();
+		SoundController.Sound.BGM.play();
+		SoundController.Sound.BGM.stop();
 		
-		assertFalse(soundEnum.getPlaying());
+		assertFalse(SoundController.Sound.BGM.getPlaying());
 	}
 
 }

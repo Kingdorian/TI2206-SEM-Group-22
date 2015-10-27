@@ -25,12 +25,31 @@ public final class SoundController implements Observer {
 		/**
 		 * Start game sound.
 		 */
-		START_GAME(SoundLoader.getInstance().getStartGame()),
+		START_GAME(SoundLoader.getInstance().getStartGame()) {
+				
+				@Override
+				public void play() { 
+					playSFX(getClip()); 
+				} 
+				
+				@Override
+				public void stop() {
+					getClip().stop(); 
+				} },
 		
 		/**
 		 * Stop game sound.
 		 */
-		STOP_GAME(SoundLoader.getInstance().getEndGame()),
+		STOP_GAME(SoundLoader.getInstance().getEndGame()) {
+					
+				@Override
+				public void play() { 
+					playSFX(getClip()); 
+				} 
+				@Override
+				public void stop() {
+					getClip().stop(); 
+				} },
 		/**
 		 * Sets the background music.
 		 */
@@ -116,16 +135,12 @@ public final class SoundController implements Observer {
 		/**
 		 * Plays the ENUM value.
 		 */
-		public void play() {
-			playSFX(getClip()); 
-		}
+		public abstract void play();
 		
 		/**
 		 * Stops the ENUM value.
 		 */
-		public void stop() {
-			getClip().stop(); 
-		}
+		public abstract void stop();
 		
 		/**
 		 * Plays the SFX if sfx is enabled.
@@ -146,6 +161,7 @@ public final class SoundController implements Observer {
 		public void playBGM(final MediaPlayer mediaPlayer, final double fade) {
 			if (SoundController.getInstance().getBGMEnabled()) {
 				if (mediaPlayer != null) {
+					setPlaying(true);
 					mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 					musicFadeIn(mediaPlayer, fade); 	
 				} else {
@@ -164,7 +180,6 @@ public final class SoundController implements Observer {
 			mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 			
 			mediaPlayer.play();
-			playing = true;
 
 			Runnable fadeRunner = new Runnable() {
 
