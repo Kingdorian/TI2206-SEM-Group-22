@@ -21,7 +21,8 @@ public class SinglePlayerGameScore extends UIElementScore {
 	 * @param gc the GraphicsContext to draw on.	
 	 * @param scoreLabelPlayer The label on which the score of the first player should be drawn. 
 	 */
-	public SinglePlayerGameScore(final SinglePlayerGame newGame, final GraphicsContext gc,	final Label scoreLabelPlayer) {
+	public SinglePlayerGameScore(
+			final SinglePlayerGame newGame, final GraphicsContext gc,	final Label scoreLabelPlayer) {
 		super(newGame, gc, scoreLabelPlayer);
 	}
 	/**

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author Dorian
  *
  */
-public class Logger {
+public final class Logger {
 	
 	/**
 	 * The singleton unique instance of Logger.

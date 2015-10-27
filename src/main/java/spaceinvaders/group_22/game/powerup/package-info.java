@@ -1,8 +1,5 @@
 /**
- * 
- */
-/**
- * Package containing powerups 
+ * Package containing powerups. 
  * @author Jochem
  *
  */
