@@ -150,20 +150,6 @@ public class SoundControllerTest {
 	}
 	
 	/**
-	 * Checks if PlaySFX works if sfx is disabled.
-	 */
-	@Test
-	public final void testEnumSoundPlaySFXDisabled() {
-		SoundController.getInstance().setSFXEnabled(false);
-		
-		AudioClip clip = SoundController.Sound.START_GAME.getClip();
-		clip.stop();
-		SoundController.Sound.START_GAME.playSFX(clip);
-		
-		assertFalse(clip.isPlaying());
-	}
-	
-	/**
 	 * Checks if play works on startGame.
 	 */
 	@Test
@@ -189,72 +175,10 @@ public class SoundControllerTest {
 	 * Checks if play works on background music.
 	 */
 	@Test
-	public final void testEnumSoundPlayBGMEnabled() {
-		SoundController.getInstance().setBGMEnabled(true);
-
-		SoundController.Sound.BGM.stop();
-		SoundController.Sound.BGM.play();
-		
-		assertTrue(SoundController.Sound.BGM.getPlaying());
-	}
-	
-	/**
-	 * Checks if play works on background music.
-	 */
-	@Test
-	public final void testEnumSoundPlayBGMDisabled() {
-		SoundController.getInstance().setBGMEnabled(false);
-		
-		SoundController.Sound.BGM.stop();
-		SoundController.Sound.BGM.play();
-		
-		assertFalse(SoundController.Sound.BGM.getPlaying());
-	}
-	
-	/**
-	 * Checks if play works on background music.
-	 */
-	@Test
 	public final void testEnumSoundPlayBGMPlayerNull() {
 		SoundController.getInstance().setBGMEnabled(true);
 
 		SoundController.Sound.BGM.playBGM(null, 0);
-		
-		assertFalse(SoundController.Sound.BGM.getPlaying());
-	}
-	
-	/**
-	 * Checks if stop works on startGame.
-	 */
-	@Test
-	public final void testEnumSoundStopStartGame() {
-		AudioClip clip = SoundController.Sound.START_GAME.getClip();
-		SoundController.Sound.START_GAME.play();
-		SoundController.Sound.START_GAME.stop();
-		
-		assertFalse(clip.isPlaying());
-	}
-	
-	/**
-	 * Checks if stop works on endGame.
-	 */
-	@Test
-	public final void testEnumSoundStopStopGame() {
-		AudioClip clip = SoundController.Sound.STOP_GAME.getClip();
-		
-		SoundController.Sound.STOP_GAME.play();
-		SoundController.Sound.STOP_GAME.stop();
-		
-		assertFalse(clip.isPlaying());
-	}
-	
-	/**
-	 * Checks if play works on endGame.
-	 */
-	@Test
-	public final void testEnumSoundStopBGM() {		
-		SoundController.Sound.BGM.play();
-		SoundController.Sound.BGM.stop();
 		
 		assertFalse(SoundController.Sound.BGM.getPlaying());
 	}
