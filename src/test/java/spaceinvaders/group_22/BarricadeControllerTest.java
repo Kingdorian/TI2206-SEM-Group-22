@@ -3,15 +3,14 @@ package spaceinvaders.group_22;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+
 import spaceinvaders.group_22.unit.Bullet;
 import spaceinvaders.group_22.unit.ShipBullet;
-
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Barricade;
 
@@ -72,6 +71,7 @@ public class BarricadeControllerTest {
 	 * Tests if the returned colission value is correct when a bullet hits a barricade from below.
 	 */
 	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testCollisionAbove() {
 		Barricade bar = new Barricade(10, 10);
 		ArrayList<Barricade> barricades = new ArrayList<Barricade>();
@@ -93,6 +93,7 @@ public class BarricadeControllerTest {
 	 * Tests if the returned colission value is correct when a bullet hits a barricade from below.
 	 */
 	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testCollisionBelow() {
 		Barricade bar = new Barricade(10, 10);
 		ArrayList<Barricade> barricades = new ArrayList<Barricade>();

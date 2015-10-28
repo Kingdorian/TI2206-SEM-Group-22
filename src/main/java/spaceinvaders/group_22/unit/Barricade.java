@@ -144,7 +144,7 @@ public class Barricade extends Unit implements Crumbling {
 	 * @return boolean[][] with false for damaged parts
 	 */
 	public final boolean[][] getDamage() {
-		return damage;
+		return damage.clone();
 	}
 	
 }

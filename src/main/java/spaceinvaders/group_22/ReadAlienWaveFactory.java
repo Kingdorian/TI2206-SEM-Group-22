@@ -83,7 +83,7 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
             	switch (wavePattern.getChar(i, j)) {
             		case '*':
             			Alien alien = new NormalAlien(x, y);
-                    	alien.setVelX(AlienController.getAlienVelX());
+                    	alien.setVelX(game.getAlienController().getAlienVelX());
                     	aliens.add(alien);
                     	Logger.getInstance().log("Created Alien at location:(" + x + "," + y + ")", 
                     			LogEvent.Type.TRACE);
@@ -91,21 +91,21 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
             		case '#': 
             			Alien bigAlien = new LargeAlien(x + (testAlien.getWidth() / 2), 
             					y + (testAlien.getWidth() / 2));
-            			bigAlien.setVelX(AlienController.getAlienVelX());
+            			bigAlien.setVelX(game.getAlienController().getAlienVelX());
             			aliens.add(bigAlien);
             			Logger.getInstance().log("Created 2x2 Alien at location:"
             					+ "(" + x + "," + y + ")", LogEvent.Type.TRACE);
             			break;
             		case '%':
             			Alien redAlien = new HealthAlien(x, y);
-            			redAlien.setVelX(AlienController.getAlienVelX());
+            			redAlien.setVelX(game.getAlienController().getAlienVelX());
                     	aliens.add(redAlien);
                     	Logger.getInstance().log("Created red alien Alien at location:"
                     			+ "(" + x + "," + y + ")", LogEvent.Type.TRACE);
                       	break;
             		case 'S':
             			Alien shooterAlien = new ShootAlien(x, y);
-            			shooterAlien.setVelX(AlienController.getAlienVelX());
+            			shooterAlien.setVelX(game.getAlienController().getAlienVelX());
             			shooterAlien.increaseShooting();
             			aliens.add(shooterAlien);
             			Logger.getInstance().log("Created fast shooting alien Alien at location:"
@@ -148,7 +148,7 @@ public class ReadAlienWaveFactory implements AlienWaveFactoryInterface {
             	switch (wavePattern.getChar(i, j)) {
             		case 'B':
             			Alien alien = new BossAlien(x, y);
-                    	alien.setVelX(AlienController.getAlienVelX());
+                    	alien.setVelX(game.getAlienController().getAlienVelX());
                     	aliens.add(alien);
                     	Logger.getInstance().log("Created Alien at location:(" + x + "," + y + ")", 
                     			LogEvent.Type.TRACE);

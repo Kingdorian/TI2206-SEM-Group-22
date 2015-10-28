@@ -49,7 +49,7 @@ public class DefaultAlienWaveFactory implements AlienWaveFactoryInterface {
             for (int j = 0; j < AlienController.ALIENS_PER_ROW; j++) {
             	Alien alien = new NormalAlien(startPosition, distance);
             	Logger.getInstance().log("Created Alien", LogEvent.Type.TRACE);
-            	alien.setVelX(AlienController.getAlienVelX());
+            	alien.setVelX(game.getAlienController().getAlienVelX());
             	aliens.add(alien);
             	startPosition += testAlien.getWidth() + interval;
             	

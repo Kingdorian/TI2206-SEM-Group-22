@@ -2,10 +2,12 @@ package spaceinvaders.group_22;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 
@@ -34,14 +36,17 @@ public class AlienWaveReader {
 	public final ArrayList<WavePattern> read(final String fileName) throws FileNotFoundException, IOException {
 		File dir = new File(fileName);
 	    ArrayList<WavePattern> alienWaves = new ArrayList<WavePattern>();
-		if (!dir.exists()) {
+	    File[] files = dir.listFiles();
+	    if (files == null) {
+			return null;
+		} else if (!dir.exists()) {
 			Logger.getInstance().log("The wave directory:\"" + fileName + "\" does not exist", LogEvent.Type.WARNING);
 			return null;
-		} else if (dir.listFiles().length == 0) {
+		} else if (files.length == 0) {
 			Logger.getInstance().log("The wave directory:\"" + fileName + "\" is empty", LogEvent.Type.WARNING);
 			return null;
-		}
-		for (final File wave : dir.listFiles()) {
+		}	
+		for (final File wave : files) {
 			// Check if file is a wave file.
 			String[] nameSplit = wave.getName().split("\\.");
 			if (nameSplit[nameSplit.length - 1].equals("wave")) {
@@ -61,7 +66,7 @@ public class AlienWaveReader {
 	public final ArrayListWavePattern parseFile(final File wave) throws FileNotFoundException, IOException {
 		Logger.getInstance().log("Reading wave: " + wave.getName(), LogEvent.Type.DEBUG);
 		ArrayListWavePattern pattern = new ArrayListWavePattern();
-		BufferedReader bReader = new BufferedReader(new FileReader(wave));
+		BufferedReader bReader = new BufferedReader(new InputStreamReader(new FileInputStream(wave), "UTF-8"));
 		String line;
 		//Keep track of current line num (For debugging purposes)
 		while ((line = bReader.readLine()) != null) {

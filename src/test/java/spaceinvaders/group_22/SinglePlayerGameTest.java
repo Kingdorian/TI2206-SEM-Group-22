@@ -44,6 +44,7 @@ public class SinglePlayerGameTest extends GameTest {
 	 * Tests if the reset method works correctly for resetting the player.
 	 */
 	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testResetPlayer() {
 		singleGame.getPlayer().addScore(111);
 		singleGame.resetGame();
@@ -55,6 +56,7 @@ public class SinglePlayerGameTest extends GameTest {
 	 * Tests the moveSpaceShip method for bouncing spaceship to the right border.
 	 */
 	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testShipBounceRight() {
 		singleGame.getPlayer().setSpaceShip(new SpaceShip(singleGame.getCanvasWidth() + 5, 10));
 		singleGame.getPlayer().getSpaceShip().setVelX(10.0);
@@ -65,6 +67,7 @@ public class SinglePlayerGameTest extends GameTest {
 	 * Tests if the reset method works correctly for resetting .
 	 */
 	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testShootingAllowed() {
 		singleGame.getPlayer().getSpaceShip().shootBullet(0.1);
 		singleGame.resetGame();

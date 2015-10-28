@@ -38,7 +38,7 @@ public class AlienController extends UnitController implements MovableUnitContro
 	/**
 	 * Speed of the aliens in the X direction in pixels per second.
 	 */
-	private static double alienVelX;
+	private double alienVelX;
 	 /**
      * If 0 the aliens don't have to move any frame down.
      */
@@ -66,12 +66,11 @@ public class AlienController extends UnitController implements MovableUnitContro
 		game = getGame();
 		try {
 			alienWaveFactory = new ReadAlienWaveFactory(newGame);
-			alienWave = alienWaveFactory.createWave();
 		} catch (Exception e) {
+			e.printStackTrace();
 			Logger.getInstance().log("Failed reading alienWaves from file now using default alien factory"
 					, e);
 			alienWaveFactory = new DefaultAlienWaveFactory(newGame);
-			alienWave = alienWaveFactory.createWave();
 		}
 	}
 	/**
@@ -243,14 +242,14 @@ public class AlienController extends UnitController implements MovableUnitContro
 	 * Returns alienVelX for this ALiencontroller.
 	 * @return alienVelX the alienvelx
 	 */
-	public static double getAlienVelX() {
+	public final double getAlienVelX() {
 		return alienVelX;
 	}
 	/**
 	 * Sets the alienVelX for this alienController.
 	 * @param newVelX the new alienvelX
 	 */
-	public static void setAlienVelX(final double newVelX) {
+	public final void setAlienVelX(final double newVelX) {
 		alienVelX = newVelX;
 	}
 }
