@@ -94,7 +94,10 @@ public final class Logger {
 			LogEvent event = new LogEvent(type, description);
 			System.out.println(event.toString());
 			allEvents.add(event);
-			writeLog();
+			// Only write when its a critical error.
+			if(logLevel <= LogEvent.Type.INFO.getValue()) {
+				writeLog();
+			}
 		}
 	}
 	/**
