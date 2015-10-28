@@ -7,12 +7,9 @@ import spaceinvaders.group_22.game.Player;
 import spaceinvaders.group_22.logger.LogEvent;
 import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.unit.Collisions;
-import spaceinvaders.group_22.unit.LifePowerUpUnit;
 import spaceinvaders.group_22.unit.LifePowerupFactory;
 import spaceinvaders.group_22.unit.PowerUpUnit;
-import spaceinvaders.group_22.unit.ShootPowerUpUnit;
 import spaceinvaders.group_22.unit.ShootPowerupFactory;
-import spaceinvaders.group_22.unit.SpeedPowerUpUnit;
 import spaceinvaders.group_22.unit.SpeedPowerupFactory;
 import spaceinvaders.group_22.unit.Unit;
 
