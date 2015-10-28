@@ -123,11 +123,11 @@ public class Barricade extends Unit implements Crumbling {
 			double randX, randY;
 			do {
 				randX = randomizer.nextGaussian() * sigmaX + x;
-				sigmaX += sigmaX / 600;
+				sigmaX += sigmaX / 100;
 			} while(randX < 0 || randX > getWidth());
 			do {
 				randY = randomizer.nextGaussian() * sigmaY + y;
-				sigmaY += sigmaY / 600;
+				sigmaY += sigmaY / 100;
 			} while(randY < 0 || randY > getHeight());
 			// Map the (x,y) to a part of the grid 
 			randX = (randX * damage.length) / getWidth();
