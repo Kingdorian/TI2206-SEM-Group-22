@@ -2,6 +2,9 @@ package spaceinvaders.group_22.logger;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 /**
  * Test class for the spaceinvaders.group_22.logger.Logger class.
  * @author Dorian

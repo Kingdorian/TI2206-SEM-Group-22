@@ -15,6 +15,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
+
 /**
  * Test the movable units.
  * @author Dorian

@@ -6,6 +6,13 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import spaceinvaders.group_22.unit.Alien;
+import spaceinvaders.group_22.unit.BossAlien;
+import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.HealthAlien;
+import spaceinvaders.group_22.unit.NormalAlien;
+import spaceinvaders.group_22.unit.Unit;
+
 /**
  * Test for Alien, extends UnitTest.
  * @author Ege de Bruin

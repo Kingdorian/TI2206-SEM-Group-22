@@ -1,6 +1,6 @@
 package spaceinvaders.group_22.unit;
 
-import spaceinvaders.group_22.Player;
+import spaceinvaders.group_22.game.Player;
 
 /**
  * Interface for Subclasses of the Unit class that can be activated on

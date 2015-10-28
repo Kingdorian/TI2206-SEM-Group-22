@@ -8,13 +8,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.MediaPlayer;
-import spaceinvaders.group_22.logger.LogEvent;
-import spaceinvaders.group_22.logger.Logger;
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Soundable;
 

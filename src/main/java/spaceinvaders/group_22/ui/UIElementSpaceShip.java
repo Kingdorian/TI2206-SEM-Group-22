@@ -2,9 +2,9 @@ package spaceinvaders.group_22.ui;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import spaceinvaders.group_22.Game;
-import spaceinvaders.group_22.Player;
-import spaceinvaders.group_22.PowerUp;
+import spaceinvaders.group_22.game.Game;
+import spaceinvaders.group_22.game.Player;
+import spaceinvaders.group_22.game.powerup.PowerUp;
 import spaceinvaders.group_22.unit.SpaceShip;
 
 /**

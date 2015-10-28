@@ -4,6 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import spaceinvaders.group_22.unit.AbstractPowerupFactory;
+import spaceinvaders.group_22.unit.ShootPowerUpUnit;
+import spaceinvaders.group_22.unit.ShootPowerupFactory;
+import spaceinvaders.group_22.unit.Unit;
+
 /**
  * Test class responsible for testing the ShootPowerupFactory.
  * @author Jochem

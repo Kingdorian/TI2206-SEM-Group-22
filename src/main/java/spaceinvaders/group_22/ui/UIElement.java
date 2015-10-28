@@ -2,7 +2,7 @@
 package spaceinvaders.group_22.ui;
 
 import javafx.scene.canvas.GraphicsContext;
-import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.game.Game;
 
 /**
  * The drawing of all the elements.
