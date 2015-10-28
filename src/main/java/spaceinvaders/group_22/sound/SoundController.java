@@ -21,7 +21,7 @@ public final class SoundController implements Observer {
 	 * @author Jochem
 	 *
 	 */
-	public static enum Sound {
+	public enum Sound {
 		/**
 		 * Start game sound.
 		 */
@@ -66,6 +66,7 @@ public final class SoundController implements Observer {
 				@Override
 				public void stop() {
 					getPlayer().stop();
+					setPlaying(false);
 				} }; 
 		
 		/**
@@ -77,6 +78,11 @@ public final class SoundController implements Observer {
 		 * A MediaPlayer for this enum.
 		 */
 		private MediaPlayer player;
+		
+		/**
+		 * Sets if the mediaplayer is playing.
+		 */
+		private boolean playing;
 		
 		/**
 		 * Constructor for a sound enum with a mediaplayer.
@@ -111,6 +117,22 @@ public final class SoundController implements Observer {
 		}
 		
 		/**
+		 * Returns if the mediaplayer is playing.
+		 * @return a boolean.
+		 */
+		public boolean getPlaying() {
+			return playing;
+		}
+		
+		/**
+		 * Sets if the mediaplayer is playing.
+		 * @param b true if playing, false else.
+		 */
+		public void setPlaying(final boolean b) {
+			this.playing = b;
+		}
+		
+		/**
 		 * Plays the ENUM value.
 		 */
 		public abstract void play();
@@ -127,6 +149,7 @@ public final class SoundController implements Observer {
 		public void playSFX(final AudioClip audioClip) {
 			if (SoundController.getInstance().getSFXEnabled()) {
 				audioClip.play();
+				setPlaying(true);
 			}
 		};
 		
@@ -138,6 +161,7 @@ public final class SoundController implements Observer {
 		public void playBGM(final MediaPlayer mediaPlayer, final double fade) {
 			if (SoundController.getInstance().getBGMEnabled()) {
 				if (mediaPlayer != null) {
+					setPlaying(true);
 					mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 					musicFadeIn(mediaPlayer, fade); 	
 				} else {
@@ -155,11 +179,12 @@ public final class SoundController implements Observer {
 			mediaPlayer.setVolume(0);
 			mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 			
+			mediaPlayer.play();
+
 			Runnable fadeRunner = new Runnable() {
 
 			      @Override
 			      public void run() {
-			    	  mediaPlayer.play();
 			        new Transition() {
 			          {
 			            setCycleDuration(Duration.millis(fadetime));
