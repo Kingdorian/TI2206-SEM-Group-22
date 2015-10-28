@@ -101,9 +101,9 @@ public class AlienControllerTest {
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")
 	public final void testnextRound() {
-		AlienController.setAlienVelX(5.0);
+		game.getAlienController().setAlienVelX(5.0);
 		game.getAlienController().nextRound();
-		assertEquals(AlienController.getAlienVelX(), 15.0, 0.2);
+		assertEquals(game.getAlienController().getAlienVelX(), 15.0, 0.2);
 	}
 	/**
 	 * Test the checkallAliensDead method.

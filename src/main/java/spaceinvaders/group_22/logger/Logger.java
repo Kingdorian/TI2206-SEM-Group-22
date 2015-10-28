@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author Dorian
  *
  */
-public class Logger {
+public final class Logger {
 	
 	/**
 	 * The singleton unique instance of Logger.
@@ -38,12 +38,12 @@ public class Logger {
 	/**
 	 * Creates a new logger object.
 	 * @param logLocation the location of the log file
-	 * @param level the scope of logging between 0-5.
 	 */
-	private Logger(final String logLocation, final int level) {
-		logLevel = level;
+	private Logger(final String logLocation) {
 		String folder = System.getProperty("user.dir");
-		new File(folder).mkdirs();
+		if (new File(folder).mkdirs()) {
+			log("Create new directories", LogEvent.Type.INFO);
+		}
 		File file = new File(folder, logLocation);
 		try {
 			file.createNewFile();
@@ -64,7 +64,7 @@ public class Logger {
 		if (uniqueInstance == null) {
 			synchronized (Logger.class) {
 				if (uniqueInstance == null) {
-					uniqueInstance = new Logger("log.log", 1);
+					uniqueInstance = new Logger("log.log");
 		       }
 			}	
 		}
@@ -76,7 +76,7 @@ public class Logger {
 	 * @param description the description of this log item.
 	 * @param exception the exception to log.
 	 */
-	public final void log(final String description, final Exception exception) {
+	public void log(final String description, final Exception exception) {
 		if (logLevel >= LogEvent.Type.WARNING.getValue()) {
 			LogEvent event = new LogEvent(exception, description);
 			System.out.println(event.toString());
@@ -89,29 +89,30 @@ public class Logger {
 	 * @param description the description of this log item.
 	 * @param type the type of this log item.
 	 */
-	public final void log(final String description, final LogEvent.Type type) {
+	public void log(final String description, final LogEvent.Type type) {
 		if (logLevel >= type.getValue()) {
 			LogEvent event = new LogEvent(type, description);
 			System.out.println(event.toString());
 			allEvents.add(event);
-			writeLog();
+			// Only write when its a critical error.
+			if(logLevel <= LogEvent.Type.INFO.getValue()) {
+				writeLog();
+			}
 		}
 	}
 	/**
 	 * Writes the log to a file.
 	 */
-	public final void writeLog() {
+	public void writeLog() {
 		ArrayList<LogEvent> tempList = new ArrayList<LogEvent>(allEvents);
 		LogWriter logWriter = new LogWriter(logFileLoc, tempList);
-		//logWriter.run();
 		new Thread(logWriter).start();
-		//allEvents.clear();
 	}
 	/**
 	 * Returns all events logged untill this point.
 	 * @return the events logged untill this point.
 	 */
-	public final ArrayList<LogEvent> getAllEvents() {
+	public ArrayList<LogEvent> getAllEvents() {
 		return allEvents;
 	}
 	
@@ -119,7 +120,7 @@ public class Logger {
 	 * Returns the location of the logfile.
 	 * @return the location of the logfile.
 	 */
-	public final String getLogFileLocation() {
+	public String getLogFileLocation() {
 		return logFileLoc;
 	}
 	
@@ -127,7 +128,7 @@ public class Logger {
 	 * Sets the log file location to another file.
 	 * @param newLoc The new location of the logger file.
 	 */
-	public final void setLogFileLocation(final String newLoc) {
+	public void setLogFileLocation(final String newLoc) {
 		logFileLoc = newLoc;
 	}
 	
@@ -135,15 +136,13 @@ public class Logger {
 	 * Sets the log level to a different level.
 	 * @param newLogLevel The new level of the logger.
 	 */
-	public final void setLogLevel(final int newLogLevel) {
+	public static void setLogLevel(final int newLogLevel) {
 		logLevel = newLogLevel;
 	}
 	/**
 	 * Clears the logger.
 	 */
-	public final void clear() {
+	public void clear() {
 		allEvents.clear();
-	}
-
-	
+	}	
 }
