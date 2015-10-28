@@ -17,6 +17,11 @@ public abstract class PowerUpUnit extends Unit implements MovableUnit, Activatab
 	 * velY is the velocity in the Y direction in pixels per second.
 	 */
 	private double velY;
+	
+	/**
+	 * Indicates the velocity in the Y direction of this powerup type.
+	 */
+	static final double MAXVELY = 150.0;
 
 	/**
 	 * Creates a power Up.
@@ -101,6 +106,14 @@ public abstract class PowerUpUnit extends Unit implements MovableUnit, Activatab
 	 */
 	public final void setVelY(final double alienVelY) {
 		this.velY = alienVelY;
+	}
+	
+	/**
+	 * Returns the velocity in the Y direction.
+	 * @return The velocity in the Y direction.
+	 */
+	public static double getMaxVely() {
+		return MAXVELY;
 	}
 	
 }
