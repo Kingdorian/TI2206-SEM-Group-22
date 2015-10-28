@@ -1,7 +1,5 @@
 package spaceinvaders.group_22.game.controller;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.ArrayList;
 
 import org.junit.Assert;
@@ -13,7 +11,6 @@ import javafx.scene.input.KeyCode;
 import spaceinvaders.group_22.game.SinglePlayerGame;
 import spaceinvaders.group_22.game.controller.SingleSpaceShipController;
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
-import spaceinvaders.group_22.unit.AlienBullet;
 import spaceinvaders.group_22.unit.SpaceShip;
 /**
  * Test for the single spaceship controller.

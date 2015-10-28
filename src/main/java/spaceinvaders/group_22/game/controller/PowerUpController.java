@@ -52,13 +52,13 @@ public abstract class PowerUpController {
 		
 		if (random < 0.07) {
 			newPowerUp = new LifePowerupFactory().create(x, y);
-			newPowerUp.setVelY(LifePowerUpUnit.getMaxVely());
+			newPowerUp.setVelY(PowerUpUnit.getMaxVely());
 		} else if (random >= 0.07 && random < 0.535) {
 			newPowerUp = new SpeedPowerupFactory().create(x, y);
-			newPowerUp.setVelY(SpeedPowerUpUnit.getMAXVELY());
+			newPowerUp.setVelY(PowerUpUnit.getMaxVely());
 		} else if (random >= 0.535) {
 			newPowerUp = new ShootPowerupFactory().create(x, y);
-			newPowerUp.setVelY(ShootPowerUpUnit.getMaxVely());
+			newPowerUp.setVelY(PowerUpUnit.getMaxVely());
 		}
 		
 		if (newPowerUp != null) {

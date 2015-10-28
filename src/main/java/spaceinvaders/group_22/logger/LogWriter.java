@@ -1,9 +1,12 @@
 package spaceinvaders.group_22.logger;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 /**
  * Class used to write logs to a file.
@@ -34,7 +37,8 @@ public class LogWriter  implements Runnable {
 	 */
 	public final void clearLogFile() {
 		try {
-			FileWriter writer = new FileWriter(logLocation, false);
+			PrintWriter writer = new PrintWriter(new OutputStreamWriter(
+					new FileOutputStream(new File(logLocation)), "UTF-8"));
 			writer.write("");
 			writer.close();
 		} catch (IOException e) {
@@ -48,8 +52,8 @@ public class LogWriter  implements Runnable {
 	public final void run() {
 		BufferedWriter writer;
 		try {
-			FileWriter fstream = new FileWriter(logLocation, true);
-			writer = new BufferedWriter(fstream);
+			writer = new BufferedWriter(new OutputStreamWriter(
+					new FileOutputStream(new File(logLocation)), "UTF-8"));
 			for (LogEvent event : eventList) {
 				writer.write(event.toString());
 				writer.newLine();

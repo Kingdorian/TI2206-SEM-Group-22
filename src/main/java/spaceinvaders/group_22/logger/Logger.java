@@ -38,12 +38,12 @@ public final class Logger {
 	/**
 	 * Creates a new logger object.
 	 * @param logLocation the location of the log file
-	 * @param level the scope of logging between 0-5.
 	 */
-	private Logger(final String logLocation, final int level) {
-		logLevel = level;
+	private Logger(final String logLocation) {
 		String folder = System.getProperty("user.dir");
-		new File(folder).mkdirs();
+		if (new File(folder).mkdirs()) {
+			log("Create new directories", LogEvent.Type.INFO);
+		}
 		File file = new File(folder, logLocation);
 		try {
 			file.createNewFile();
@@ -64,7 +64,7 @@ public final class Logger {
 		if (uniqueInstance == null) {
 			synchronized (Logger.class) {
 				if (uniqueInstance == null) {
-					uniqueInstance = new Logger("log.log", 1);
+					uniqueInstance = new Logger("log.log");
 		       }
 			}	
 		}
@@ -94,7 +94,10 @@ public final class Logger {
 			LogEvent event = new LogEvent(type, description);
 			System.out.println(event.toString());
 			allEvents.add(event);
-			writeLog();
+			// Only write when its a critical error.
+			if(logLevel <= LogEvent.Type.INFO.getValue()) {
+				writeLog();
+			}
 		}
 	}
 	/**
@@ -103,9 +106,7 @@ public final class Logger {
 	public void writeLog() {
 		ArrayList<LogEvent> tempList = new ArrayList<LogEvent>(allEvents);
 		LogWriter logWriter = new LogWriter(logFileLoc, tempList);
-		//logWriter.run();
 		new Thread(logWriter).start();
-		//allEvents.clear();
 	}
 	/**
 	 * Returns all events logged untill this point.
@@ -135,7 +136,7 @@ public final class Logger {
 	 * Sets the log level to a different level.
 	 * @param newLogLevel The new level of the logger.
 	 */
-	public void setLogLevel(final int newLogLevel) {
+	public static void setLogLevel(final int newLogLevel) {
 		logLevel = newLogLevel;
 	}
 	/**
@@ -143,7 +144,5 @@ public final class Logger {
 	 */
 	public void clear() {
 		allEvents.clear();
-	}
-
-	
+	}	
 }

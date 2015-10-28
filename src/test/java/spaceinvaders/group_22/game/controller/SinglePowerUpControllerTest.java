@@ -59,7 +59,7 @@ public class SinglePowerUpControllerTest {
 	public final void testcheckMovePowerUps() {
 		controller.createPowerUpUnit(500.0, 100.0);
 		controller.checkMovingPowerUps();
-		assertEquals(Double.compare(game.getPowerUpController().getPowerUps().get(0).getYCoor(), 150.00), 0);
+		assertEquals(Double.compare(game.getPowerUpController().getPowerUps().get(0).getYCoor(), 250.00), 0);
 	}
 	
 	/**

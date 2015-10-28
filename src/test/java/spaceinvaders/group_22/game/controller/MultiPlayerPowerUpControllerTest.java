@@ -3,17 +3,22 @@ package spaceinvaders.group_22.game.controller;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import spaceinvaders.group_22.game.MultiPlayerGame;
-import spaceinvaders.group_22.game.controller.MultiPlayerPowerUpController;
 import spaceinvaders.group_22.game.powerup.SpeedPowerUp;
+import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 /**
  * Test the multiplayer powerupcontroller.
  * @author Bryan
  *
  */
 public class MultiPlayerPowerUpControllerTest {
+	/**
+	 * Class specifying rule to test JavaFX from GitHub.
+	 */
+	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 	/**
 	 * Static game used for testing.
 	 */

@@ -130,6 +130,7 @@ public class AlienWaveReaderTest {
 		ArrayList<ArrayListWavePattern> otherExpPattern = new ArrayList<ArrayListWavePattern>();
 		otherExpPattern.add(expectedFile2);
 		otherExpPattern.add(expectedFile1);
-		assertTrue(expectedPatterns.equals(waveReader.read(file)) || otherExpPattern.equals(waveReader.read(file)));		
+		assertTrue(expectedPatterns.equals(waveReader.read(file)) 
+				|| otherExpPattern.equals(waveReader.read(file)));		
 	}
 }

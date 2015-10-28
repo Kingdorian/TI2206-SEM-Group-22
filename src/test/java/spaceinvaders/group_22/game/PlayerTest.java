@@ -169,6 +169,7 @@ public class PlayerTest {
 	 * Test the add life method when the max is reached.
 	 */
 	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testMaxAddLife() {
 		player.addLife();
 		player.addLife();

@@ -27,11 +27,11 @@ public class Main extends Application {
 	 */
 	public static void main(final String[] args) {
 		Logger.getInstance().setLogFileLocation("log.log");
-		Logger.getInstance().setLogLevel(0);
+		Logger.setLogLevel(0);
 		
 		JavaArgumentReader argumentreader = new JavaArgumentReader(args);
 		
-		Logger.getInstance().setLogLevel(argumentreader.parseLogLevel());
+		Logger.setLogLevel(argumentreader.parseLogLevel());
 
 		launch(args);
 	}

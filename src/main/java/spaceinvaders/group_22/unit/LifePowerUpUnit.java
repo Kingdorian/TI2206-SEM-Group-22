@@ -12,11 +12,6 @@ import spaceinvaders.group_22.ui.SpriteLoader;
 public class LifePowerUpUnit extends PowerUpUnit {
 	
 	/**
-	 * Indicates the velocity in the Y direction of this powerup type.
-	 */
-	private static final double MAXVELY = 50.0;
-	
-	/**
 	 * Creates a life power Up.
 	 * @param x X coordinate
 	 * @param y Y coordinate
@@ -29,14 +24,6 @@ public class LifePowerUpUnit extends PowerUpUnit {
 	public final void activate(final Player newplayer) {
 		newplayer.addLife();
 		notifyObservers();
-	}
-
-	/**
-	 * Returns the velocity in the Y direction.
-	 * @return The velocity in the Y direction.
-	 */
-	public static double getMaxVely() {
-		return MAXVELY;
 	}
 	
 	/**

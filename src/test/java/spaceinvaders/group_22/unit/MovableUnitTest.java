@@ -1,7 +1,7 @@
 package spaceinvaders.group_22.unit;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -12,46 +12,61 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
-import spaceinvaders.group_22.unit.AlienBullet;
-import spaceinvaders.group_22.unit.HealthAlien;
-import spaceinvaders.group_22.unit.LargeAlien;
-import spaceinvaders.group_22.unit.MovableUnit;
-import spaceinvaders.group_22.unit.NormalAlien;
-import spaceinvaders.group_22.unit.ShipBullet;
-import spaceinvaders.group_22.unit.ShootAlien;
-import spaceinvaders.group_22.unit.SpaceShip;
-import spaceinvaders.group_22.unit.Unit;
 
+/**
+ * Test the movable units.
+ * @author Dorian
+ *
+ */
 @RunWith(Parameterized.class)
+@SuppressWarnings("checkstyle:magicnumber") 
 public class MovableUnitTest {
 	
 	/**
 	 * Class specifying rule to test JavaFX from GitHub.
 	 */
 	@Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
-	
-	public static Class movableUnitClass;
-	
-	public static MovableUnit movableUnit, movableUnit2;
-	
+	/**
+	 * Unit to test.
+	 */
+	private static Class<Unit> movableUnitClass;
+	/**
+	 * Movable unit class to test.
+	 */
+	private static MovableUnit movableUnit, movableUnit2;
+	/**
+	 * Create parameters.
+	 * @return parameters
+	 */
 	@Parameters
-	public static Collection parameters() {
-		Class[] data = new Class[]{SpaceShip.class, ShipBullet.class, 
+	public static Collection<Class<Unit>> parameters() {
+		Class<Unit>[] data = new Class[]{SpaceShip.class, ShipBullet.class, 
 				AlienBullet.class, NormalAlien.class, LargeAlien.class, ShootAlien.class, HealthAlien.class};
 		return Arrays.asList(data);
 	}
-	
-	public MovableUnitTest(Class cl) {
+	/**
+	 * Test movable unit.
+	 * @param cl object to test.
+	 */
+	public MovableUnitTest(final Class<Unit> cl) {
 		movableUnitClass = cl;
 	}
-	
+	/**
+	 * Set up the test.
+	 * @throws IllegalArgumentException Exception that could be thrown.
+	 * @throws InvocationTargetException Exception that could be thrown.
+	 * @throws NoSuchMethodException Exception that could be thrown.
+	 * @throws SecurityException Exception that could be thrown.
+	 * @throws InstantiationException Exception that could be thrown.
+	 * @throws IllegalAccessException Exception that could be thrown.
+	 */
 	@Before
-	public void setUp() throws  IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException {
-		Constructor constructor = movableUnitClass.getConstructor(new Class[]{double.class, double.class});
+	public final void setUp() throws  IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
+								SecurityException, InstantiationException, IllegalAccessException {
+		Constructor<Unit> constructor = movableUnitClass.getConstructor(new Class[]{double.class, double.class});
 		movableUnit = (MovableUnit) constructor.newInstance(new Object[] {1.2, 3.0});
 		movableUnit2 = (MovableUnit) constructor.newInstance(new Object[] {1.2, 3.0});
 	}
@@ -78,7 +93,7 @@ public class MovableUnitTest {
 	@SuppressWarnings("checkstyle:magicnumber")    
 	public final void testMoveUnitVelocity0() {
 		movableUnit.move(60.0);
-		Unit unit = (Unit)movableUnit;
+		Unit unit = (Unit) movableUnit;
 		assertEquals(1.2, unit.getXCoor(), 0.05);
 		assertEquals(3, unit.getYCoor(), 0.05);
 	}
@@ -88,10 +103,10 @@ public class MovableUnitTest {
 	 */
 	@Test
 	@SuppressWarnings("checkstyle:magicnumber")    
-	public void testMoveUnit() {
+	public final void testMoveUnit() {
 		movableUnit.setVelX(1);
 		movableUnit.move(1.0);
-		Unit unit = (Unit)movableUnit;
+		Unit unit = (Unit) movableUnit;
 		assertEquals(2.2, unit.getXCoor(), 0.05);
 		assertEquals(3.0, unit.getYCoor(), 0.05);
 	}
