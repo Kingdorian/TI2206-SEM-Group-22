@@ -3,8 +3,6 @@ package spaceinvaders.group_22.unit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-import java.util.Arrays;
-
 import org.junit.Test;
 
 /**
@@ -35,13 +33,14 @@ public class BarricadeTest extends UnitTest {
 	 * Tests the crumble method.
 	 */
 	@Test
+	@SuppressWarnings("checkstyle:magicnumber") 
 	public final void testCrumble() {
 		Barricade bar = new Barricade(0, 0);
 		bar.crumble(20, 5);
 		int damagedParts = 0;
-		for(boolean[] row : bar.getDamage()) {
-			for(int i = 0; i < row.length; i++) {
-				if(!row[i]){ 
+		for (boolean[] row : bar.getDamage()) {
+			for (int i = 0; i < row.length; i++) {
+				if (!row[i]) { 
 					damagedParts++;
 				}
 			}

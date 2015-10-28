@@ -52,7 +52,11 @@ public abstract class Game {
 	/**
 	 * Velocity of the bullets of the spaceShip in pixels per second.
 	 */
-	private double spaceShipBulletVelX = 80;
+	private double spaceShipBulletVelY = 400;
+	/**
+	 * Velocity of the bullets of the Alien in pixels per second.
+	 */
+	private double alienBulletVelY = 150;
 	/**
 	 * The tickrate of the animation.
 	 */
@@ -320,6 +324,15 @@ public abstract class Game {
 	public final double getTickrate() {
 		return tickrate;
 	}
+	
+	/**
+	 * Returns the velocity of an alienbullet.
+	 * 
+	 * @return the velocity
+	 */
+	public final double getAlienBulletVelY() {
+		return alienBulletVelY;
+	}
 
 	/**
 	 * Sets the bullet list.
@@ -359,8 +372,8 @@ public abstract class Game {
 	 * Returns the ShipBullet velocity.
 	 * @return the ShipBullet velocity
 	 */
-	public final double getShipBulletVelX() {
-		return spaceShipBulletVelX;
+	public final double getShipBulletVelY() {
+		return spaceShipBulletVelY;
 	}
 
 	/**

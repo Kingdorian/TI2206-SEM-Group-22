@@ -26,8 +26,24 @@ public abstract class Bullet extends Unit implements MovableUnit {
 	public Bullet(final double x, final double y) {
 		super(x, y);
 	}
+	
 	/**
-	 * Move the unit in the direction of this unit and with his velocity.
+	 * Returns the current velocity in the X direction of this bullet.
+	 * @return the current velocity in the X direction in pixels per second.
+	 */
+	public final double getVelX() {
+		return velX;
+	}
+	
+	/**
+	 * Sets the current velocity in the X direction of this bullet.
+	 * @param newvelX the velocity in the X direction to set in pixels per second.
+	 */
+	public final void setVelX(final double newvelX) {
+		this.velX = newvelX;
+	}
+	/**
+	 * Move the Bullet in the direction of this unit and with his velocity.
 	 * @param tickrate The rate at which the game ticks.
 	 */
 	public final void move(final double tickrate) {
@@ -36,23 +52,7 @@ public abstract class Bullet extends Unit implements MovableUnit {
 	}
 	
 	/**
-	 * Returns the current velocity in the X direction.
-	 * @return the current velocity in the X direction in pixels per second.
-	 */
-	public final double getVelX() {
-		return velX;
-	}
-	
-	/**
-	 * Sets the current velocity in the X direction.
-	 * @param newvelX the velocity in the X direction to set in pixels per second.
-	 */
-	public final void setVelX(final double newvelX) {
-		this.velX = newvelX;
-	}
-	
-	/**
-	 * Returns the current velocity in the Y direction.
+	 * Returns the current velocity in the Y direction of this bullet.
 	 * @return the current velocity in the Y direction in pixels per second.
 	 */
 	public final double getVelY() {
@@ -60,7 +60,7 @@ public abstract class Bullet extends Unit implements MovableUnit {
 	}
 	
 	/**
-	 * Sets the current velocity in the Y direction.
+	 * Sets the current velocity in the Y direction of this bullet.
 	 * @param alienVelY the velocity in the Y direction to set in pixels per second.
 	 */
 	public final void setVelY(final double alienVelY) {
