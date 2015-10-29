@@ -34,7 +34,7 @@ public class BossAlien extends Alien {
 	public final ArrayList<Bullet> shootBullet(final double velocity) {
 		ArrayList<Bullet> list = new ArrayList<Bullet>();
 		for (int i = 0; i < 6; i++) {
-			Bullet bullet = new AlienBullet((this.getXCoor() + 40 * i) - 100, this.getYCoor());
+			Bullet bullet = new AlienBullet(this.getXCoor() + 40 * i - 100, this.getYCoor());
 			bullet.setVelY(velocity);
 			list.add(bullet);
 		}
