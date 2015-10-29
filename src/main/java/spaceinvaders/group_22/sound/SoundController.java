@@ -128,7 +128,7 @@ public final class SoundController implements Observer {
 		 * Sets if the mediaplayer is playing.
 		 * @param b true if playing, false else.
 		 */
-		public void setPlaying(final boolean b) {
+		protected void setPlaying(final boolean b) {
 			this.playing = b;
 		}
 		
