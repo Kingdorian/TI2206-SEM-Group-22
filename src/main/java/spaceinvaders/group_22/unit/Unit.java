@@ -185,7 +185,7 @@ public abstract class Unit extends Observable {
 	 * Sets the Image of the sprite.
 	 * @param newSprite The new sprite Image of this unit.
 	 */
-	public final void setSprite(final Image newSprite) {
+	protected final void setSprite(final Image newSprite) {
 		sprite = newSprite;
 	}
 	
