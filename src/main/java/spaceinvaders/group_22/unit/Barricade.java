@@ -147,4 +147,21 @@ public class Barricade extends Unit implements Crumbling {
 		return damage.clone();
 	}
 	
+	/**
+	 * Calculates a new barricade when it is hit.
+	 * @param i the width it is hit
+	 * @param j the height it is hit
+	 * @return the new barricade
+	 */
+	public final Barricade calculateNewBar(final int i, final int j) {
+		double newBarX = this.getXCoor() - (0.5 * this.getWidth()) 
+					+ i * (this.getWidth() / damage.length);
+		double newBarY = this.getYCoor() - (0.5 * this.getHeight()) 
+					+ j * (this.getHeight() / damage[0].length);
+		Barricade barPart = new Barricade(newBarX, newBarY);
+		barPart.setWidth(this.getWidth() / damage.length);
+		barPart.setHeight(this.getHeight() / damage[0].length);
+		return barPart;
+	}
+	
 }
