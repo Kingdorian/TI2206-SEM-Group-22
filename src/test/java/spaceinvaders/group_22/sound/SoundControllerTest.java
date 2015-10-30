@@ -1,13 +1,17 @@
 package spaceinvaders.group_22.sound;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.MediaPlayer;
 import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 import spaceinvaders.group_22.unit.Soundable;
 
@@ -44,6 +48,8 @@ public class SoundControllerTest {
 	@Before
 	public final void setup() {
 		controller = SoundController.getInstance();
+		controller.setSFXEnabled(true);
+		controller.setBGMEnabled(true);
 	}
 	
 	/**
@@ -66,11 +72,24 @@ public class SoundControllerTest {
 	 * Checks if the update method succesfully plays a sound if an object is soundable.
 	 */
 	@Test
-	public final void testUpdate() {
+	public final void testUpdateSFXEnabled() {
+		SoundController.getInstance().setSFXEnabled(true);
 		Mockito.when(soundMock.getAudioClip()).thenReturn(SoundLoader.getInstance().getStartGame());
 		controller.update(soundMock);
 		Mockito.verify(soundMock).getAudioClip();
 	}
+	
+	/**
+	 * Checks if the update method succesfully plays a sound if an object is soundable.
+	 */
+	@Test
+	public final void testUpdateSFXDisabled() {
+		SoundController.getInstance().setSFXEnabled(false);
+		Mockito.when(soundMock.getAudioClip()).thenReturn(SoundLoader.getInstance().getStartGame());
+		controller.update(soundMock);
+		Mockito.verifyZeroInteractions(soundMock);
+	}
+	
 	
 	/**
 	 * Checks if the update method does nothing if an object is not Soundable.
@@ -81,6 +100,84 @@ public class SoundControllerTest {
 		Mockito.verifyZeroInteractions(objectMock);
 	}
 	
+	/**
+	 * Checks if getClip() returns the correct effect for starting a game.
+	 */
+	@Test
+	public final void testEnumSoundGetClipStartGame() {
+		AudioClip expected = SoundLoader.getInstance().getStartGame();
+		AudioClip actual = SoundController.Sound.START_GAME.getClip();
+		
+		assertEquals(expected, actual);
+	}
 	
+	/**
+	 * Checks if getClip() returns the correct effect for starting a game.
+	 */
+	@Test
+	public final void testEnumSoundGetClipEndGame() {
+		AudioClip expected = SoundLoader.getInstance().getEndGame();
+		AudioClip actual = SoundController.Sound.STOP_GAME.getClip();
+		
+		assertEquals(expected, actual);
+	}
+	
+	/**
+	 * Checks if getPlayer() returns the correct effect for starting a game.
+	 */
+	@Test
+	public final void testEnumSoundGetPlayerBGM() {
+		MediaPlayer expected = SoundLoader.getInstance().getBGMMusicPlayer();
+		MediaPlayer actual = SoundController.Sound.BGM.getPlayer();
+		
+		assertEquals(expected, actual);
+	}
+	
+	/**
+	 * Checks if PlaySFX works if sfx is enabled.
+	 */
+	@Test
+	public final void testEnumSoundPlaySFXEnabled() {
+		SoundController.getInstance().setSFXEnabled(true);
+		
+		AudioClip clip = SoundController.Sound.START_GAME.getClip();
+		SoundController.Sound.START_GAME.playSFX(clip);
+		
+		assertTrue(clip.isPlaying());
+	}
+	
+	/**
+	 * Checks if play works on startGame.
+	 */
+	@Test
+	public final void testEnumSoundPlayStartGame() {
+		AudioClip clip = SoundController.Sound.START_GAME.getClip();
+		SoundController.Sound.START_GAME.play();
+		
+		assertTrue(clip.isPlaying());
+	}
+	
+	/**
+	 * Checks if play works on endGame.
+	 */
+	@Test
+	public final void testEnumSoundPlayStopGame() {
+		AudioClip clip = SoundController.Sound.STOP_GAME.getClip();
+		SoundController.Sound.STOP_GAME.play();
+		
+		assertTrue(clip.isPlaying());
+	}
+	
+	/**
+	 * Checks if play works on background music.
+	 */
+	@Test
+	public final void testEnumSoundPlayBGMPlayerNull() {
+		SoundController.getInstance().setBGMEnabled(true);
+
+		SoundController.Sound.BGM.playBGM(null, 0);
+		
+		assertFalse(SoundController.Sound.BGM.getPlaying());
+	}
 
 }

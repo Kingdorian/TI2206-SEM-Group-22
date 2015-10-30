@@ -1,9 +1,10 @@
 package spaceinvaders.group_22.logger;
 
-import java.util.ArrayList;
-
 import org.junit.Assert;
 import org.junit.Test;
+
+import spaceinvaders.group_22.logger.LogEvent;
+import spaceinvaders.group_22.logger.Logger;
 /**
  * Test class for the spaceinvaders.group_22.logger.Logger class.
  * @author Dorian
@@ -17,12 +18,12 @@ public class LoggerTest {
 	@Test
 	public final void testLogEventException() {
 		Logger logger = Logger.getInstance();
-		logger.setLogLevel(5);
+		Logger.setLogLevel(5);
 		logger.clear();
 		LogEvent event = new LogEvent(new Exception(), "A test Exception occurred"); 
 		logger.log("A test Exception occurred", new Exception());
 		Assert.assertTrue(logger.getAllEvents().contains(event));
-		logger.setLogLevel(1);
+		Logger.setLogLevel(1);
 	}
 	/**
 	 * Tests the log method with an Exception with low loglevel.
@@ -30,12 +31,12 @@ public class LoggerTest {
 	@Test
 	public final void testLogEventExceptionLowerLogLevel() {
 		Logger logger = Logger.getInstance();
-		logger.setLogLevel(0);
+		Logger.setLogLevel(0);
 		logger.clear();
 		logger.log("A test Exception occurred", new Exception());
 		LogEvent event = new LogEvent(new Exception(), "A test Exception occurred"); 
 		Assert.assertFalse(logger.getAllEvents().contains(event));
-		logger.setLogLevel(1);
+		Logger.setLogLevel(1);
 	}
 	/**
 	 * Tests the log class for LogEvent.Type as a parameter when loglevel is lower then type.

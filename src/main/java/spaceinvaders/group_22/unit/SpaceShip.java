@@ -1,10 +1,9 @@
 package spaceinvaders.group_22.unit;
 
+import spaceinvaders.group_22.game.Player;
 import spaceinvaders.group_22.ui.SpriteLoader;
 
 import java.util.ArrayList;
-
-import spaceinvaders.group_22.Player;
 
 /**
  * A SpaceShip in the game extends Unit.
@@ -206,7 +205,7 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * Set the shooting speed.
 	 * @param newShootTimes the new shooting speed.
 	 */
-	public final void setShootTimes(final double newShootTimes) {
+	private final void setShootTimes(final double newShootTimes) {
 		this.shootTimes = newShootTimes;
 	}
 
@@ -222,7 +221,7 @@ public class SpaceShip extends Unit implements MovableUnit, ShootingUnit {
 	 * Set the maximum movement speed.
 	 * @param newMaxvel the new maximum movement speed.
 	 */
-	public final void setMAXVELX(final double newMaxvel) {
+	private final void setMAXVELX(final double newMaxvel) {
 		maxVelx = newMaxvel;
 	}
 	

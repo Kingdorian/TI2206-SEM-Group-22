@@ -3,6 +3,9 @@ package spaceinvaders.group_22.unit;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import spaceinvaders.group_22.unit.Explosion;
+import spaceinvaders.group_22.unit.Unit;
+
 /**
  * Test for explosion class extends unitTest.
  * @author Bryan

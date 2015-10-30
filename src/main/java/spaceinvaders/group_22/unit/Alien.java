@@ -57,9 +57,9 @@ public abstract class Alien extends Unit implements MovableUnit, ShootingUnit {
 		final int prime = 31;
 		int result = super.hashCode();
 		long temp;
-		temp = Double.doubleToLongBits(velX);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
 		temp = Double.doubleToLongBits(velY);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(velX);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}

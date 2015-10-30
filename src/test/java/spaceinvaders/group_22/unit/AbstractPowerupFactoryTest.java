@@ -3,6 +3,8 @@ package spaceinvaders.group_22.unit;
 import org.junit.Before;
 import org.junit.Test;
 
+import spaceinvaders.group_22.unit.AbstractPowerupFactory;
+
 /**
  * Template for tests regarding AbstractPowerupFactory and its subclasses.
  * @author Jochem

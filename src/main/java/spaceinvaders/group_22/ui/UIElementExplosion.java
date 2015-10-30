@@ -3,7 +3,7 @@ package spaceinvaders.group_22.ui;
 import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
-import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.game.Game;
 import spaceinvaders.group_22.unit.Explosion;
 
 /**

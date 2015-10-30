@@ -2,7 +2,7 @@ package spaceinvaders.group_22.ui;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
-import spaceinvaders.group_22.Game;
+import spaceinvaders.group_22.game.Game;
 
 /**
  * The drawing of the Score.

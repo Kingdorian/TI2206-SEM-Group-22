@@ -123,11 +123,11 @@ public class Barricade extends Unit implements Crumbling {
 			double randX, randY;
 			do {
 				randX = randomizer.nextGaussian() * sigmaX + x;
-				sigmaX += sigmaX / 600;
+				sigmaX += sigmaX / 100;
 			} while(randX < 0 || randX > getWidth());
 			do {
 				randY = randomizer.nextGaussian() * sigmaY + y;
-				sigmaY += sigmaY / 600;
+				sigmaY += sigmaY / 100;
 			} while(randY < 0 || randY > getHeight());
 			// Map the (x,y) to a part of the grid 
 			randX = (randX * damage.length) / getWidth();
@@ -144,7 +144,24 @@ public class Barricade extends Unit implements Crumbling {
 	 * @return boolean[][] with false for damaged parts
 	 */
 	public final boolean[][] getDamage() {
-		return damage;
+		return damage.clone();
+	}
+	
+	/**
+	 * Calculates a new barricade when it is hit.
+	 * @param i the width it is hit
+	 * @param j the height it is hit
+	 * @return the new barricade
+	 */
+	public final Barricade calculateNewBar(final int i, final int j) {
+		double newBarX = this.getXCoor() - (0.5 * this.getWidth()) 
+					+ i * (this.getWidth() / damage.length);
+		double newBarY = this.getYCoor() - (0.5 * this.getHeight()) 
+					+ j * (this.getHeight() / damage[0].length);
+		Barricade barPart = new Barricade(newBarX, newBarY);
+		barPart.setWidth(this.getWidth() / damage.length);
+		barPart.setHeight(this.getHeight() / damage[0].length);
+		return barPart;
 	}
 	
 }

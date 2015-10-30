@@ -1,5 +1,8 @@
 package spaceinvaders.group_22.unit;
 
+import spaceinvaders.group_22.unit.ShipBullet;
+import spaceinvaders.group_22.unit.Unit;
+
 /**
  * Test for ShipBullet, extends BulletTest.
  * @author Ege

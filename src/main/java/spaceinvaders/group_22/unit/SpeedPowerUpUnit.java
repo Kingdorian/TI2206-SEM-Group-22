@@ -1,8 +1,8 @@
 package spaceinvaders.group_22.unit;
 
 import javafx.scene.media.AudioClip;
-import spaceinvaders.group_22.Player;
-import spaceinvaders.group_22.SpeedPowerUp;
+import spaceinvaders.group_22.game.Player;
+import spaceinvaders.group_22.game.powerup.SpeedPowerUp;
 import spaceinvaders.group_22.sound.SoundLoader;
 import spaceinvaders.group_22.ui.SpriteLoader;
 /**
@@ -10,11 +10,6 @@ import spaceinvaders.group_22.ui.SpriteLoader;
  * @author Bryan
  */
 public class SpeedPowerUpUnit extends PowerUpUnit {
-
-	/**
-	 * Indicates the velocity in the Y direction of this powerup type.
-	 */
-	static final double MAXVELY = 50.0;
 	
 	/**
 	 * Creates a speed power Up.
@@ -30,14 +25,6 @@ public class SpeedPowerUpUnit extends PowerUpUnit {
 	public final void activate(final Player newplayer) {
 		new SpeedPowerUp(newplayer);
 		notifyObservers();
-	}
-
-	/**
-	 * Get the maximum moving speed.
-	 * @return The maximum moving speed.
-	 */
-	public static double getMAXVELY() {
-		return MAXVELY;
 	}
 	
 	/**

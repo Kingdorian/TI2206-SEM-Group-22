@@ -13,8 +13,12 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
-import spaceinvaders.group_22.ui.JavaFXThreadingRule;
+import spaceinvaders.group_22.unit.AlienBullet;
+import spaceinvaders.group_22.unit.Bullet;
+import spaceinvaders.group_22.unit.ShipBullet;
+import spaceinvaders.group_22.unit.Unit;
 import spaceinvaders.group_22.Observer;
+import spaceinvaders.group_22.ui.JavaFXThreadingRule;
 
 /**
  * Test the abstract unit class.
